@@ -3,9 +3,11 @@ import re
 import json
 from aiohttp import web
 
-from prompts import SYSTEM_PROMPT, build_rule_prompt
+from prompts import RULE_ANALYSIS_SYSTEM_PROMPT, build_rule_prompt
 from rule_loader import get_rule
 from ai_client import analyze_rule
+from reasoning import handle_reasoning_query
+
 
 PORT = int(os.getenv("PORT", "8001"))
 
@@ -27,7 +29,7 @@ async def handle_rule_id(rule_id: str):
     user_prompt = build_rule_prompt(rule_text)
 
     try:
-        result = analyze_rule(SYSTEM_PROMPT, user_prompt)
+        result = analyze_rule(RULE_ANALYSIS_SYSTEM_PROMPT, user_prompt)
 
         try:
             result_json = json.loads(result)
@@ -63,18 +65,18 @@ async def handle_rule_id(rule_id: str):
 
 
 # ----------------------------
-# Placeholder reasoning handler
+# Reasoning handler
 # ----------------------------
 async def handle_natural_language(text: str):
-    return {
-        "status": "ok",
-        "route": "reasoning",
-        "reply": (
-            "Natural-language reasoning path selected.\n"
-            "This is where QRadar docs / internal knowledge / future RAG logic will go.\n"
-            f"Input received: {text}"
-        )
-    }, 200
+    try:
+        result = handle_reasoning_query(text)
+        return result, 200
+    except Exception as e:
+        return {
+            "status": "error",
+            "route": "reasoning",
+            "message": f"Reasoning failed: {str(e)}"
+        }, 500
 
 
 # ----------------------------
