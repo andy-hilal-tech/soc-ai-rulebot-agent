@@ -222,3 +222,12 @@ Instructions:
 - Do not fabricate QRadar-specific facts.
 - Respond clearly and practically as a SOC QRadar assistant.
 """.strip()
+
+def build_offense_input_message() -> str:
+    return f"""
+Offense analysis requested.
+
+Please provide the offense/event details using this template:
+
+{build_offense_input_template()}
+""".strip()

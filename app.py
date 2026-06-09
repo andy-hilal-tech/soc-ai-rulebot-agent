@@ -4,6 +4,7 @@ import json
 from aiohttp import web
 
 from prompts import RULE_ANALYSIS_SYSTEM_PROMPT, build_rule_prompt
+from prompts import build_offense_input_message
 from rule_loader import get_rule
 from ai_client import analyze_rule
 from reasoning import handle_reasoning_query
@@ -84,10 +85,24 @@ async def handle_natural_language(text: str):
 # ----------------------------
 def classify_message(text: str) -> str:
     text = text.strip()
+    lowered = text.lower()
 
     # Simple deterministic route for obvious numeric lookups
     if re.fullmatch(r"\d+", text):
         return "rule_id"
+
+    # Offense / event intake trigger phrases
+    offense_triggers = [
+        "new offense",
+        "new event",
+        "new alert",
+        "offense analysis",
+        "analyze offense",
+        "analyze event",
+    ]
+
+    if any(trigger in lowered for trigger in offense_triggers):
+        return "offense_intake"
 
     return "reasoning"
 
@@ -152,6 +167,10 @@ async def message(request):
         result, status = await handle_rule_id(text)
         return web.json_response(result, status=status)
 
+    if route == "offense_intake":
+        result, status = await handle_offense_intake()
+        return web.json_response(result, status=status)
+
     result, status = await handle_natural_language(text)
     return web.json_response(result, status=status)
 
@@ -164,3 +183,10 @@ app.router.add_post("/message", message)
 
 if __name__ == "__main__":
     web.run_app(app, host="0.0.0.0", port=PORT)
+
+async def handle_offense_intake():
+    return {
+        "status": "ok",
+        "route": "offense_intake",
+        "reply": build_offense_input_message()
+    }, 200
