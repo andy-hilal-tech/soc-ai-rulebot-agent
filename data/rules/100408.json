@@ -1,0 +1,40 @@
+{
+  "uuid": "26dc44c4-be9c-42a7-8a84-7cd5264f3bdb",
+  "id": "100408",
+  "name": "Remote: Long Duration Flow Detected",
+  "notes": "Detects a flow communicating to the Internet with a sustained duration of more than 48 hours.  This is not typical behavior for most applications.  Investigate the host for potential malware infections.",
+  "response_qid": "67500057",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500057"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when the flow duration is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>48</a> <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>hours</a>",
+    "when the source IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>192.168.51.124, 172.21.1.183, 192.168.51.121, 172.28.60.40, 192.168.100.151, 172.21.1.181, 192.168.107.6, 192.168.51.122, 172.28.60.31, 192.168.51.123, 192.168.100.152</a>",
+    "when the destination IP is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>192.168.100.152, 192.168.51.123, 192.168.51.122, 172.28.60.31, 192.168.107.6, 172.21.1.181, 192.168.100.151, 172.28.60.40, 192.168.51.121, 172.21.1.183, 192.168.51.124</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Remote: Long Duration Flow Detected on flows which are detected by the LOCAL system",
+    "AND NOT when the flow context is Local to Local",
+    "AND when the flow duration is greater than 48 hours",
+    "AND NOT when the source IP is one of the following 192.168.51.124, 172.21.1.183, 192.168.51.121, 172.28.60.40, 192.168.100.151, 172.21.1.181, 192.168.107.6, 192.168.51.122, 172.28.60.31, 192.168.51.123, 192.168.100.152",
+    "AND NOT when the destination IP is one of the following 192.168.100.152, 192.168.51.123, 192.168.51.122, 172.28.60.31, 192.168.107.6, 172.21.1.181, 192.168.100.151, 172.28.60.40, 192.168.51.121, 172.21.1.183, 192.168.51.124"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Long Duration Flow Detected",
+    "Event description: Detects a flow communicating to the Internet with a sustained duration of more than 48 hours.  This is not typical behavior for most applications.  Investigate the host for potential malware infections.",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Misc Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

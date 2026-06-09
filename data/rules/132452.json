@@ -1,0 +1,52 @@
+{
+  "uuid": "bf19c997-2317-4c8d-b2cd-1fdf4dc721b3",
+  "id": "132452",
+  "name": "High Number of Emails From Unauthorized Users",
+  "notes": "This rule triggers when an email that is not included in the whitelist sends numerous emails. This behaviour can reveal a tentative of massive infection. In most cases, only a limited number of entities are meant to send mass emailing.\n\nNote: The \"Whitelisted Email Admins\" reference set must be populated with email addresses allowed to send large amount of emails at once.",
+  "response_qid": "67500928",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500928"
+  ],
+  "rule_refs": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail"
+  ],
+  "db_fields_used": [
+    "Sender"
+  ],
+  "reference_sets": [
+    "206"
+  ],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application.Mail Receive</a>",
+    "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Sender (custom)</a> are contained in <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Whitelisted Email Admins - AlphaNumeric</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Sender (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Sender (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY High Number of Emails From Unauthorized Users on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Mail",
+    "AND when the event category for the event is one of the following Application.Mail Receive",
+    "AND NOT when any of Sender (custom) are contained in any of Whitelisted Email Admins - AlphaNumeric",
+    "AND when at least 100 events are seen with the same Sender (custom) in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: High Number of Emails From Unauthorized Users",
+    "Event description: Detects when an email that is not a part of the whitelist sends numerous emails from within the organization. ",
+    "Severity: 6, Credibility: 6, Relevance: 6",
+    "High-Level Category: \"Application\"",
+    "Low-Level Category: \"Mail Receive\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "uuid": "163d5e8a-c980-4653-a71a-a699104169a3",
+  "id": "137502",
+  "name": "BB:BehaviorDefinition: Admin Privileges Removed (Windows)",
+  "notes": "This Building Block detects permission removed from a Superuser group. An adversary may strip off high privileges to prevent mitigation actions from administrators.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Admin Privileges Removed (Windows) on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Group Member Removed</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Group Name (custom) is any of Administrators</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Admin Privileges Removed (Windows) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Authentication.Group Member Removed",
+    "AND when the event matches Group Name (custom) is any of Administrators"
+  ],
+  "RED_list": []
+}

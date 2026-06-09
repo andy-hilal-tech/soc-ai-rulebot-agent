@@ -1,0 +1,36 @@
+{
+  "uuid": "9441c619-921a-4586-9022-9883380ac0d7",
+  "id": "162272",
+  "name": "Exchange Set OabVirtualDirectory ExternalUrl Property",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Jose Rodriguez @Cyb3rPandaH\nSIGMA Title: Exchange Set OabVirtualDirectory ExternalUrl Property\nSIGMA Description: Rule to detect an adversary setting OabVirtualDirectory External URL property to a script in Exchange Management log\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Office 365, Microsoft Azure Platform, Microsoft 365 Defender, Microsoft Defender for Cloud</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(LOWER(UTF8(payload)) LIKE '%set-oabvirtualdirectory%' OR LOWER(UTF8(payload)) LIKE '%externalurl%' OR LOWER(UTF8(payload)) LIKE '%page_load%' OR LOWER(UTF8(payload)) LIKE '%script%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Exchange Set OabVirtualDirectory ExternalUrl Property on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365, Microsoft Azure Platform, Microsoft 365 Defender, Microsoft Defender for Cloud",
+    "AND when the event matches (LOWER(UTF8(payload)) LIKE '%set-oabvirtualdirectory%' OR LOWER(UTF8(payload)) LIKE '%externalurl%' OR LOWER(UTF8(payload)) LIKE '%page_load%' OR LOWER(UTF8(payload)) LIKE '%script%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Exchange Set OabVirtualDirectory ExternalUrl Property",
+    "Event description: Converted from SIGMA Rule.  Original Author: Jose Rodriguez @Cyb3rPandaH SIGMA Title: Exchange Set OabVirtualDirectory ExternalUrl Property SIGMA Description: Rule to detect an adversary setting OabVirtualDirectory External URL property to a script in Exchange Management log  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+  "id": "110002",
+  "name": "UBA : User Geography Change",
+  "notes": "A match indicates that a user logged in remotely from a country that is different from the country of the user’s last remote login. This rule might also indicate an account compromise, particularly if the rule matches occurred closely in time.",
+  "response_qid": "67500361",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500361"
+  ],
+  "rule_refs": [
+    "5ee6fcf9-2c17-4c59-8797-533542c06992",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Excluded Geographic Locations"
+  ],
+  "db_fields_used": [
+    "sourceGeographic",
+    "userName"
+  ],
+  "reference_sets": [
+    "64"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "5ee6fcf9-2c17-4c59-8797-533542c06992"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations</a>",
+    "when <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"5\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"5\", \"4\")' class='dynamic'>UBA : User Geography Change - AlphaNumeric (Ignore Case)</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Username</a> is the key and <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source Geographic Country/Region</a> is the value in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>UBA : Users Last Country - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Geography Change on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations",
+    "AND when any of Username are contained in any of UBA : User Geography Change - AlphaNumeric (Ignore Case)",
+    "AND NOT when any of Username is the key and any of Source Geographic Country/Region is the value in any of UBA : Users Last Country - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Geography Change",
+    "Event description: senseValue=5,senseDesc='The user logged in from a country that is different from their last.',usecase_id='06bd0239-ae61-4846-8685-6f48bbe760db'",
+    "Severity: 3, Credibility: 3, Relevance: 3",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Geography\""
+  ]
+}

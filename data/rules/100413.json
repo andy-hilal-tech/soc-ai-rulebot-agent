@@ -1,0 +1,43 @@
+{
+  "uuid": "12e8f7df-b94a-4a41-b876-5b9c7b437f2d",
+  "id": "100413",
+  "name": "Devices with High Event Rates",
+  "notes": "Monitors devices for high event rates.  The default threshold is set very low for most network devices and should be adjusted before the rule is enabled.  To configure which devices will be monitored edit the building block \"BB:DeviceDefinition: Devices to Monitor for High Event Rates\"",
+  "response_qid": "67500004",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500004"
+  ],
+  "rule_refs": [
+    "SYSTEM-1300"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Devices to Monitor for High Event Rates",
+    "BB:DeviceDefinition: Devices to Monitor for High Event Rates with the same log source more than 500 times"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1300"
+  ],
+  "conditions_text": [
+    "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:DeviceDefinition: Devices to Monitor for High Event Rates</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>log source</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>500</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:DeviceDefinition: Devices to Monitor for High Event Rates</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>log source</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>500</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Devices with High Event Rates on events which are detected by the LOCAL system",
+    "AND when any of these BB:DeviceDefinition: Devices to Monitor for High Event Rates with the same log source more than 500 times, across more than 0 destination IP within 1 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Device generating a high number of events",
+    "Event description: A device has been detected generating more events than the threshold set in the rule \"Devices with High Event Rates\". ",
+    "Severity: 1, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"System Informational\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

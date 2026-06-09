@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1204",
+  "id": "100118",
+  "name": "BB:CategoryDefinition: Exploits Backdoors and Trojans",
+  "notes": "Edit this BB to include all events that are typically exploits, backdoor, or trojans. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Exploits Backdoors and Trojans on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Exploit, Malware.Backdoor Detected, Malware.Trojan Detected, Potential Exploit, Malware.Hostile Mail Attachment, Malware.Hostile Software Download, Malware.Keylogger, Malware.Malicious Software, Malware.Misc Malware, Malware.Virus Detected, Suspicious Activity.Potential Database Vulnerability, Suspicious Activity.Potential DNS Vulnerability, Suspicious Activity.Potential FTP Vulnerability, Suspicious Activity.Potential Mail Vulnerability, Suspicious Activity.Potential NFS Vulnerability, Suspicious Activity.Potential NNTP Vulnerability, Suspicious Activity.Potential RPC Vulnerability, Suspicious Activity.Potential SMB Vulnerability, Suspicious Activity.Potential SNMP Vulnerability, Suspicious Activity.Potential SSH Vulnerability, Suspicious Activity.Potential Telnet Vulnerability, Suspicious Activity.Potential Version Vulnerability, Suspicious Activity.Potential VoIP Vulnerability, Suspicious Activity.Potential Web Vulnerability</a>",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Custom Rule Engine</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Exploits Backdoors and Trojans on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Exploit, Malware.Backdoor Detected, Malware.Trojan Detected, Potential Exploit, Malware.Hostile Mail Attachment, Malware.Hostile Software Download, Malware.Keylogger, Malware.Malicious Software, Malware.Misc Malware, Malware.Virus Detected, Suspicious Activity.Potential Database Vulnerability, Suspicious Activity.Potential DNS Vulnerability, Suspicious Activity.Potential FTP Vulnerability, Suspicious Activity.Potential Mail Vulnerability, Suspicious Activity.Potential NFS Vulnerability, Suspicious Activity.Potential NNTP Vulnerability, Suspicious Activity.Potential RPC Vulnerability, Suspicious Activity.Potential SMB Vulnerability, Suspicious Activity.Potential SNMP Vulnerability, Suspicious Activity.Potential SSH Vulnerability, Suspicious Activity.Potential Telnet Vulnerability, Suspicious Activity.Potential Version Vulnerability, Suspicious Activity.Potential VoIP Vulnerability, Suspicious Activity.Potential Web Vulnerability",
+    "AND NOT when the event(s) were detected by one or more of Custom Rule Engine"
+  ],
+  "RED_list": []
+}

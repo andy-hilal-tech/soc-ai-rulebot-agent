@@ -1,0 +1,33 @@
+{
+  "uuid": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a",
+  "id": "146052",
+  "name": "BB:BehaviorDefinition: Hiding Files with Attrib.exe",
+  "notes": "This Building Block detects usage of attrib.exe to hide files from users.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Sami Ruohonen\nSIGMA Title: Hiding Files with Attrib.exe\nSIGMA Description: Detects usage of attrib.exe to hide files from users.\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Hiding Files with Attrib.exe on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) == 'attrib.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% +h %'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%_desktop.ini %' or (LOWER(&quot;Parent Process Full Full Name&quot;) LIKE '%cmd.exe' and LOWER(&quot;Command&quot;) LIKE '+r +h +s +a \\\\%.cui' and LOWER(&quot;Parent Command&quot;) LIKE 'c:\\\\windows\\\\system32\\\\%.bat')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Hiding Files with Attrib.exe on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Process Full Full Name\") == 'attrib.exe' AQL filter query",
+    "AND when the event matches LOWER(\"Command\") LIKE '% +h %' AQL filter query",
+    "AND NOT when the event matches ((LOWER(\"Command\") LIKE '%_desktop.ini %' or (LOWER(\"Parent Process Full Full Name\") LIKE '%cmd.exe' and LOWER(\"Command\") LIKE '+r +h +s +a \\\\%.cui' and LOWER(\"Parent Command\") LIKE 'c:\\\\windows\\\\system32\\\\%.bat'))) AQL filter query"
+  ],
+  "RED_list": []
+}

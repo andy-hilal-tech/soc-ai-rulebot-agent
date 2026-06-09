@@ -1,0 +1,34 @@
+{
+  "uuid": "ce978620-f34c-4118-a63c-16129299ab39",
+  "id": "162334",
+  "name": "Remove Immutable File Attribute - Auditd",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Jakob Weinzettl, oscd.community\nSIGMA Title: Remove Immutable File Attribute - Auditd\nSIGMA Description: Detects removing immutable file attribute.\n\nFalse positives:\n- Administrator interacting with immutable files (e.g. for instance backups).\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%chattr%' AND LOWER(Command) LIKE '%a1%-i%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Remove Immutable File Attribute - Auditd on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%chattr%' AND LOWER(Command) LIKE '%a1%-i%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remove Immutable File Attribute - Auditd",
+    "Event description: Converted from SIGMA Rule.  Original Author: Jakob Weinzettl, oscd.community SIGMA Title: Remove Immutable File Attribute - Auditd SIGMA Description: Detects removing immutable file attribute.  False positives: - Administrator interacting with immutable files (e.g. for instance backups).  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

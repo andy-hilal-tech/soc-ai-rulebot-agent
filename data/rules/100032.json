@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1232",
+  "id": "100032",
+  "name": "BB:PortDefinition: Windows Ports",
+  "notes": "Edit this BB to include all common ports used by Windows servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: Windows Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>135, 137, 138, 139, 445, 593</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: Windows Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 135, 137, 138, 139, 445, 593"
+  ],
+  "RED_list": []
+}

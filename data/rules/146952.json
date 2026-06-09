@@ -1,0 +1,35 @@
+{
+  "uuid": "669a91a0-dc59-435a-a525-89d1f9c9c9b0",
+  "id": "146952",
+  "name": "BB:BehaviorDefinition: Crutch File Staging",
+  "notes": "This building block detects when a Crutch file staging under C:\\AMD\\Temp location.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Crutch File Staging on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Attempt, Audit.Object Access Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;File Directory&quot;) in ('c:\\amd\\temp')</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>20</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>20</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Crutch File Staging on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Attempt, Audit.Object Access Success",
+    "AND when the event matches LOWER(\"File Directory\") in ('c:\\amd\\temp') AQL filter query",
+    "AND when at least 20 events are seen with the same Machine Identifier (custom) in 24 hour(s)"
+  ],
+  "RED_list": []
+}

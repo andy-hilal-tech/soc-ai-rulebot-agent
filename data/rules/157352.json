@@ -1,0 +1,38 @@
+{
+  "uuid": "1f5ac77f-5e33-4244-8527-0d2baefe3f12",
+  "id": "157352",
+  "name": "Malicious Use of Control Panel",
+  "notes": "This rule detects malicious use of control panel items.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Kyaw Min Thein, Furkan Caliskan (@caliskanfurkan_)\nSIGMA Title: Control Panel Items\nSIGMA Description: Detects the malicious use of a control panel item\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501640",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501640"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>( \t( \t\tLOWER(&quot;Process Full Full Name&quot;) == 'reg.exe' OR LOWER(&quot;Filename&quot;) == 'reg.exe' \t) \tAND  \t( \t\tLOWER(&quot;Command&quot;) LIKE '%add%' \t\tAND LOWER(&quot;Command&quot;) LIKE '%currentversion\\control panel\\cpls%' \t) ) OR ( \t( \t\tLOWER(&quot;Command&quot;) LIKE '%.cpl' \t) \tAND  \t( \t\tLOWER(&quot;Command&quot;) NOT LIKE '%\\system32\\%' \t\tAND LOWER(&quot;Command&quot;) NOT MATCHES '.*?(%system32%).*?' \t) \tAND  \t( \t\tLOWER(&quot;Command&quot;) NOT LIKE '%regsvr32%' \t\tAND LOWER(&quot;Command&quot;) NOT LIKE '% /s %' \t\tAND LOWER(&quot;Command&quot;) NOT LIKE '%igfxcpl.cpl%' \t) )</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Malicious Use of Control Panel on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches ( \t( \t\tLOWER(\"Process Full Full Name\") == 'reg.exe' OR LOWER(\"Filename\") == 'reg.exe' \t) \tAND  \t( \t\tLOWER(\"Command\") LIKE '%add%' \t\tAND LOWER(\"Command\") LIKE '%currentversion\\control panel\\cpls%' \t) ) OR ( \t( \t\tLOWER(\"Command\") LIKE '%.cpl' \t) \tAND  \t( \t\tLOWER(\"Command\") NOT LIKE '%\\system32\\%' \t\tAND LOWER(\"Command\") NOT MATCHES '.*?(%system32%).*?' \t) \tAND  \t( \t\tLOWER(\"Command\") NOT LIKE '%regsvr32%' \t\tAND LOWER(\"Command\") NOT LIKE '% /s %' \t\tAND LOWER(\"Command\") NOT LIKE '%igfxcpl.cpl%' \t) ) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Malicious Use of Control Panel",
+    "Event description: Detects malicious use of control panel items.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "uuid": "SYSTEM-1612",
+  "id": "100047",
+  "name": "AssetExclusion: Exclude DNS Name By NetBIOS Name",
+  "notes": "Blacklists a DNS Name that has been associated with N different NetBIOS names over a given period of time.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "identityHostName",
+    "identityNetBiosName"
+  ],
+  "reference_sets": [
+    "4",
+    "8"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Has Identity is True</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Identity Host Name</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Asset Reconciliation DNS Whitelist - AlphaNumeric (Ignore Case), Asset Reconciliation DNS Blacklist - AlphaNumeric (Ignore Case)</a>",
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Identity Host Name</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Identity Net Bios Name</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Identity Host Name</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Identity Net Bios Name</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY AssetExclusion: Exclude DNS Name By NetBIOS Name on events which are detected by the LOCAL system",
+    "AND when the event matches Has Identity is True",
+    "AND NOT when any of Identity Host Name are contained in any of Asset Reconciliation DNS Whitelist - AlphaNumeric (Ignore Case), Asset Reconciliation DNS Blacklist - AlphaNumeric (Ignore Case)",
+    "AND when at least 3 events are seen with the same Identity Host Name and different Identity Net Bios Name in 2 hour(s)"
+  ],
+  "RED_list": [
+    "Add the \"identityHostName\" of the event or flow payload to the Reference Set \"Asset Reconciliation DNS Blacklist\""
+  ]
+}

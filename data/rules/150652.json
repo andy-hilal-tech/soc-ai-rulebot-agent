@@ -1,0 +1,31 @@
+{
+  "uuid": "0f9a12ed-2dc3-4d59-a64c-59f5a0850373",
+  "id": "150652",
+  "name": "BB:BehaviorDefinition: Sysinternals SDelete File Deletion",
+  "notes": "This Building Block detects the deletion of files by Sysinternals SDelete.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)\nSIGMA Title: File Deleted Via Sysinternals SDelete\nSIGMA Description: Detects the deletion of files by the Sysinternals SDelete utility. It looks for the common name pattern used to rename files.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Sysinternals SDelete File Deletion on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Deleted</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Extension (custom) is any of [AAA or ZZZ]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Directory (custom) is any of \\Wireshark\\radius\\dictionary.alcatel-lucent.aaa</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Sysinternals SDelete File Deletion on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Deleted",
+    "AND when the event matches File Extension (custom) is any of [AAA or ZZZ]",
+    "AND NOT when the event matches File Directory (custom) is any of \\Wireshark\\radius\\dictionary.alcatel-lucent.aaa"
+  ],
+  "RED_list": []
+}

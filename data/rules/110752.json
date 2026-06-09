@@ -1,0 +1,40 @@
+{
+  "uuid": "d5e3cece-244f-4e28-af33-8cb75b6cb97a",
+  "id": "110752",
+  "name": "Suspicious Access to lsass Process From Unknown Call Trace",
+  "notes": "This rule triggers when a suspicious access to lsass is initiated from an unknown call trace.",
+  "response_qid": "67500449",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500449"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001829) ProcessAccess</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Target Process Name&quot; IMATCHES 'lsass\\.exe' and &quot;Granted Access&quot; IMATCHES '(0x1010)|(0x1410)|(0x143A)|(0x1400)|(0x147a)|(0x143a)'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Call Trace&quot; IMATCHES '.*\\\\Windows\\\\system32\\\\KERNELBASE\\.dll\\+\\w+\\|UNKNOWN.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Access to lsass Process From Unknown Call Trace on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001829) ProcessAccess",
+    "AND when the event matches \"Target Process Name\" IMATCHES 'lsass\\.exe' and \"Granted Access\" IMATCHES '(0x1010)|(0x1410)|(0x143A)|(0x1400)|(0x147a)|(0x143a)' AQL filter query",
+    "AND when the event matches \"Call Trace\" IMATCHES '.*\\\\Windows\\\\system32\\\\KERNELBASE\\.dll\\+\\w+\\|UNKNOWN.*' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detected a Malicious Access to lsass Process from Unknown Call Trace",
+    "Event description: Detected a Malicious Access to lsass Process from Unknown Call Trace",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

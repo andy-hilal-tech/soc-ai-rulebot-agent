@@ -1,0 +1,29 @@
+{
+  "uuid": "23b8d254-b3a9-4f88-a81c-d332bafbbf95",
+  "id": "135902",
+  "name": "BB:BehaviorDefinition: Cobalt Strike Inbound Traffic",
+  "notes": "This Building Block triggers when a TLS fingerprint known to be a communication from a Cobalt Strike server is detected.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Cobalt Strike Inbound Traffic on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the source is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>",
+    "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>TLS JA3S Hash is not N/A</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>TLS JA3S Hash is any of [b742b407517bac9536a77a7b0fee28e9 or ae4edc6faf64d08308082ad26be60767 or 649d6810e8392f63dc311eecb6b7098b]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Cobalt Strike Inbound Traffic on flows which are detected by the LOCAL system",
+    "AND when the source is Remote",
+    "AND when the flow matches TLS JA3S Hash is not N/A",
+    "AND when the flow matches TLS JA3S Hash is any of [b742b407517bac9536a77a7b0fee28e9 or ae4edc6faf64d08308082ad26be60767 or 649d6810e8392f63dc311eecb6b7098b]"
+  ],
+  "RED_list": []
+}

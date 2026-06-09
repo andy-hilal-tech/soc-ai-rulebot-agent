@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1203",
+  "id": "100191",
+  "name": "BB:FalsePositive: Windows Server False Positive Events",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from Windows servers that are defined in the BB:HostDefinition: Windows Servers building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "7164b6e2-ef35-40e8-a731-84e63a80a1ca",
+    "SYSTEM-1216"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: Windows Server False Positive Events on events which are detected by the LOCAL system",
+    "BB:HostDefinition: Windows Servers",
+    "BB:HostReference: Windows Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1216",
+    "7164b6e2-ef35-40e8-a731-84e63a80a1ca"
+  ],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6752880) HTTP: ASN.1 Bitstring Processing Heap Overflow, (2518668) DELETED SPECIFIC-THREATS Microsoft SPNEGO ASN.1 library heap corruption overflow attempt, (5751094) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (13255327) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2503392) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode asn1 overflow attempt, (2503393) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP andx asn1 overflow attempt, (2503394) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode andx asn1 overflow attempt, (2503395) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode asn1 overflow attempt, (2503396) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP andx asn1 overflow attempt, (2503397) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode andx asn1 overflow attempt, (13252932) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2502741) NETBIOS SMB-DS Session Setup unicode andx username overflow attempt, (2502717) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP asn1 overflow attempt, (2502718) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP asn1 overflow attempt</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Windows Servers, BB:HostReference: Windows Servers</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Windows Server False Positive Events on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (6752880) HTTP: ASN.1 Bitstring Processing Heap Overflow, (2518668) DELETED SPECIFIC-THREATS Microsoft SPNEGO ASN.1 library heap corruption overflow attempt, (5751094) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (13255327) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2503392) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode asn1 overflow attempt, (2503393) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP andx asn1 overflow attempt, (2503394) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode andx asn1 overflow attempt, (2503395) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode asn1 overflow attempt, (2503396) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP andx asn1 overflow attempt, (2503397) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode andx asn1 overflow attempt, (13252932) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2502741) NETBIOS SMB-DS Session Setup unicode andx username overflow attempt, (2502717) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP asn1 overflow attempt, (2502718) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP asn1 overflow attempt",
+    "AND when an event matches any of the following BB:HostDefinition: Windows Servers, BB:HostReference: Windows Servers"
+  ],
+  "RED_list": []
+}

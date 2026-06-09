@@ -1,0 +1,50 @@
+{
+  "uuid": "7e83a53f-a73a-4773-9cce-32510819ddd1",
+  "id": "129802",
+  "name": "Exploit Attempt Followed By Cryptocurrency Mining Activity",
+  "notes": "This rule triggers when an exploit or attack type activity is followed by cryptocurrency mining activity on the same host. This could indicate a machine infected by a malware or a misuse of a corporate asset.",
+  "response_qid": "67500860",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500860"
+  ],
+  "rule_refs": [
+    "0a163b4f-ca45-4bbb-aa2c-42703f08372c",
+    "29915876-f0e8-49d9-a816-c1a497b9de81",
+    "6adeed8f-f743-410a-945a-13fbf07233a3",
+    "SYSTEM-1204",
+    "c172587a-0d59-446c-9bcf-02af6dc71d85"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Exploits Backdoors and Trojans"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1204",
+    "6adeed8f-f743-410a-945a-13fbf07233a3",
+    "29915876-f0e8-49d9-a816-c1a497b9de81",
+    "c172587a-0d59-446c-9bcf-02af6dc71d85",
+    "0a163b4f-ca45-4bbb-aa2c-42703f08372c"
+  ],
+  "conditions_text": [
+    "when a subset of at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source IP</a> followed by a subset of at least <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>Successful Communication to Cryptocurrency Mining Host, Cryptocurrency Mining File Hash, Cryptocurrency Mining Threat Name, In-Browser Cryptojacking - JavaScript Filename</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>in any</a> order <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>destination IP</a> from the previous sequence, within <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when a subset of at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source IP</a> followed by a subset of at least <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>Successful Communication to Cryptocurrency Mining Host, Cryptocurrency Mining File Hash, Cryptocurrency Mining Threat Name, In-Browser Cryptojacking - JavaScript Filename</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>in any</a> order <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>destination IP</a> from the previous sequence, within <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Exploit Attempt Followed By Cryptocurrency Mining Activity on events which are detected by the LOCAL system",
+    "AND when a subset of at least 1 of these BB:CategoryDefinition: Exploits Backdoors and Trojans, in any order, with the same source IP followed by a subset of at least 1 of these Successful Communication to Cryptocurrency Mining Host, Cryptocurrency Mining File Hash, Cryptocurrency Mining Threat Name, In-Browser Cryptojacking - JavaScript Filename in any order from the same destination IP from the previous sequence, within 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Exploit Attempt Followed By Cryptocurrency Mining Activity",
+    "Event description: Exploit activity followed by cryptocurrency mining activity on the same host",
+    "Severity: 8, Credibility: 9, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Cryptomining Activity Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "uuid": "be79748f-01c4-4527-b527-f02e550d445b",
+  "id": "140002",
+  "name": "Detection of Malicious IOC in Flows",
+  "notes": "This rule triggers when an IOC is categorized as malicious in a reference set collection.\n\nNote: The rules Malware as a Service Hash IOC in Flows, Ransomware: Ryuk IOC in Flows have been excluded from this rule to avoid repetition, their purpose is to have a dedicated rule response.",
+  "response_qid": "67501103",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501103"
+  ],
+  "rule_refs": [
+    "2ebb64bd-ba64-4e1b-ab10-8c8e0ef0c1e6",
+    "b34301f3-7dd8-464a-8221-1f611e864445"
+  ],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "2ebb64bd-ba64-4e1b-ab10-8c8e0ef0c1e6",
+    "b34301f3-7dd8-464a-8221-1f611e864445"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Malware as a Service Hash IOC in Flows, Ransomware: Ryuk IOC in Flows</a>",
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>File Hash is not N/A</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Malware Hashes MD5', &quot;File Hash&quot;) OR REFERENCESETCONTAINS('Malware Hashes SHA', &quot;File Hash&quot;)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Detection of Malicious IOC in Flows on flows which are detected by the LOCAL system",
+    "AND NOT when a flow matches any of the following Malware as a Service Hash IOC in Flows, Ransomware: Ryuk IOC in Flows",
+    "AND when the flow matches File Hash is not N/A",
+    "AND when the flow matches REFERENCESETCONTAINS('Malware Hashes MD5', \"File Hash\") OR REFERENCESETCONTAINS('Malware Hashes SHA', \"File Hash\") AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detection of Malicious IOC",
+    "Event description: Detects when an IOC is categorized as malicious in a reference set collection.",
+    "Severity: 8, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Bad Content\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

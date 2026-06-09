@@ -1,0 +1,29 @@
+{
+  "uuid": "9179b8ae-bf84-452c-a4b8-aa9dc9043584",
+  "id": "133802",
+  "name": "BB:BehaviorDefinition: Windows Firewall Stopped",
+  "notes": "This building block detects Windows firewall stopped.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Windows Firewall Stopped on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001031) Success Audit: A Windows Firewall setting has changed</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Attribute New Value&quot;) LIKE 'no'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Windows Firewall Stopped on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001031) Success Audit: A Windows Firewall setting has changed",
+    "AND when the event matches LOWER(\"Attribute New Value\") LIKE 'no' AQL filter query"
+  ],
+  "RED_list": []
+}

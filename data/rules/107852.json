@@ -1,0 +1,25 @@
+{
+  "uuid": "bdb7814a-60d8-41b5-94e6-4235d6ca6aee",
+  "id": "107852",
+  "name": "BB:UBA : Application or Service Installed",
+  "notes": "This BB detects events around application/service installed.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Application or Service Installed on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(25000054) Instant Messaging Installed, (25000082) Antivirus Installed, (25000089) Applications Installed, (25000190) Peer-to-peer Installed, (25000196) Microsoft Applications Installed, (25000208) Windows Services Installed, (5000515) Failure Audit: A service was installed in the system, (5001613) A service was installed in a system</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Application or Service Installed on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (25000054) Instant Messaging Installed, (25000082) Antivirus Installed, (25000089) Applications Installed, (25000190) Peer-to-peer Installed, (25000196) Microsoft Applications Installed, (25000208) Windows Services Installed, (5000515) Failure Audit: A service was installed in the system, (5001613) A service was installed in a system"
+  ],
+  "RED_list": []
+}

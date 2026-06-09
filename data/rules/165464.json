@@ -1,0 +1,42 @@
+{
+  "uuid": "0095b14d-c4f5-40c8-b197-58f593184c8e",
+  "id": "165464",
+  "name": "MSSP - OS - MS - 20 - M - User Account Created during Non-Business Hour- Weekdays",
+  "notes": "",
+  "response_qid": "67501855",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501855"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Account Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4720</a>",
+    "when the event(s) occur between <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>18:00</a> and <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>08:00</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY MSSP - OS - MS - 20 - M - User Account Created during Non-Business Hour- Weekdays on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event matches Event ID is any of 4720",
+    "AND when the event(s) occur between 18:00 and 08:00",
+    "AND when at least 1 events are seen with the same Account Name (custom) in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: User Account Created during Non-Business Hour",
+    "Event description: On weekdays",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Access Denied\""
+  ]
+}

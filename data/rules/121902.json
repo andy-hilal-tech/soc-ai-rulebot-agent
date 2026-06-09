@@ -1,0 +1,34 @@
+{
+  "uuid": "14f6f4a3-b514-4285-a8c7-f3aab124ebf9",
+  "id": "121902",
+  "name": "BB:Threats: HTTP Server Status",
+  "notes": "This Building Block detects when the malformed web server request.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Web Servers",
+    "BB:Threats: HTTP Server Status on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Web Servers</a>",
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application.Malformed Server Request</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: HTTP Server Status on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Web Servers",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when the event category for the event is one of the following Application.Malformed Server Request"
+  ],
+  "RED_list": []
+}

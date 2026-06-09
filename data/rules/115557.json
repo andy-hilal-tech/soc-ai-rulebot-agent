@@ -1,0 +1,32 @@
+{
+  "uuid": "f3ca31e2-54df-430b-93f3-7cd2de103176",
+  "id": "115557",
+  "name": "Process Baselining: Process Name to Parent Process",
+  "notes": "Enable this rule to create a baseline for process names found in your environment and their corresponding parent process.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [
+    "77"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) NOT IN ('smss.exe', 'wininit.exe', 'taskhost.exe', 'lsass.exe', 'winlogon.exe', 'explorer.exe', 'lsm.exe', 'svchost.exe', 'services.exe', 'csrss.exe')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Process Baselining: Process Name to Parent Process on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when the event matches LOWER(\"Process Name\") NOT IN ('smss.exe', 'wininit.exe', 'taskhost.exe', 'lsass.exe', 'winlogon.exe', 'explorer.exe', 'lsm.exe', 'svchost.exe', 'services.exe', 'csrss.exe') AQL filter query"
+  ],
+  "RED_list": [
+    "Add the \"Process Name\" of the event or flow payload to the Reference Set \"ProcesstoParentProcessPathRefMapKeys\"",
+    "Add \"Parent Process Path\" to Reference Map Of Sets: \"ProcessMaptoProcessParentPath\" with key \"Process Name\""
+  ]
+}

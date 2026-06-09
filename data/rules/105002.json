@@ -1,0 +1,40 @@
+{
+  "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+  "id": "105002",
+  "name": "UBA : Browsed to Scam/Questionable/Illegal Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500240",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500240"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%scam%' OR &quot;Web Category&quot; ilike '%questionable%' OR &quot;Web Category&quot; ilike '%illegal%' OR &quot;Web Category&quot; ilike '%hacking%' OR &quot;Web Category&quot; ilike '%copyright infringement%' OR &quot;Web Category&quot; ilike '%cheating%' OR &quot;Web Category&quot; ilike '%plagarism%' OR &quot;Web Category&quot; ilike '%child abuse%' OR &quot;Web Category&quot; ilike '%piracy%' OR &quot;Web Category&quot; ilike '%copyright concern%' OR &quot;Web Category&quot; ilike '%consumer protection%' OR &quot;Web Category&quot; ilike '%historical revisionism%' OR &quot;Web Category&quot; ilike '%criminal%' OR &quot;Web Category&quot; in (15, 80)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Scam/Questionable/Illegal Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%scam%' OR \"Web Category\" ilike '%questionable%' OR \"Web Category\" ilike '%illegal%' OR \"Web Category\" ilike '%hacking%' OR \"Web Category\" ilike '%copyright infringement%' OR \"Web Category\" ilike '%cheating%' OR \"Web Category\" ilike '%plagarism%' OR \"Web Category\" ilike '%child abuse%' OR \"Web Category\" ilike '%piracy%' OR \"Web Category\" ilike '%copyright concern%' OR \"Web Category\" ilike '%consumer protection%' OR \"Web Category\" ilike '%historical revisionism%' OR \"Web Category\" ilike '%criminal%' OR \"Web Category\" in (15, 80) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Scam/Questionable/Illegal Website",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

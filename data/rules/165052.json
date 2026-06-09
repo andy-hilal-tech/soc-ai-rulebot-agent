@@ -1,0 +1,38 @@
+{
+  "uuid": "1253dd0d-e7a0-4f50-a009-c67eab2b097b",
+  "id": "165052",
+  "name": "TI-IOC Match - Malicious File Hash Detected",
+  "notes": "",
+  "response_qid": "67501790",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501790"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "File Hash, SHA256 Hash"
+  ],
+  "reference_sets": [
+    "323"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>File Hash (custom), SHA256 Hash (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>(Shared) OpenCTI - SHA256 File Hashes - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY TI-IOC Match - Malicious File Hash Detected on events which are detected by the LOCAL system",
+    "AND when any of File Hash (custom), SHA256 Hash (custom) are contained in any of (Shared) OpenCTI - SHA256 File Hashes - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: TI-IOC Match - Malicious File Hash Detected",
+    "Event description: Detects any matching IOCs of hash files.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

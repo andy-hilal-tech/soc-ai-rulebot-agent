@@ -1,0 +1,47 @@
+{
+  "uuid": "a0c1712a-c382-4834-a579-f23f31c8d852",
+  "id": "118252",
+  "name": "Multiple Failed API Requests From Same Source IP (AWS)",
+  "notes": "This rule triggers when at least 10 failed API requests have been initiated from the same Source IP in two minutes.",
+  "response_qid": "67500599",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500599"
+  ],
+  "rule_refs": [
+    "9b015b6f-d277-476e-9d81-2068997eba5b"
+  ],
+  "bb_references": [
+    "BB: AWS Cloud: API Request Has Been Denied",
+    "BB: AWS Cloud: API Request Has Been Denied match at least 10 times with the same Source IP in 2 minutes"
+  ],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "9b015b6f-d277-476e-9d81-2068997eba5b"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Amazon AWS CloudTrail</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB: AWS Cloud: API Request Has Been Denied</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB: AWS Cloud: API Request Has Been Denied</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Multiple Failed API Requests From Same Source IP (AWS) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Amazon AWS CloudTrail",
+    "AND when BB: AWS Cloud: API Request Has Been Denied match at least 10 times with the same Source IP in 2 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Failed API Requests From Same Source IP (AWS)",
+    "Event description: This rule triggers when at least 10 failed API requests have been initiated from the same Source IP in two minutes.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Misc Suspicious Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

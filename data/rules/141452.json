@@ -1,0 +1,31 @@
+{
+  "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+  "id": "141452",
+  "name": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File",
+  "notes": "This Building Block detects new processes created from shortcut (lnk) files. Processes typically used by adversaries, such as powershell, cmd, mshta should be monitored.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Audit.Object Access Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;File Extension&quot;) MATCHES '.*?\\.lnk$'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) MATCHES '.*?powershell.*' OR LOWER(&quot;Process Name&quot;) MATCHES '.*?cmd.*' OR LOWER(&quot;Process Name&quot;) MATCHES '.*?mshta.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Object Access Success",
+    "AND when the event matches LOWER(\"File Extension\") MATCHES '.*?\\.lnk$' AQL filter query",
+    "AND when the event matches LOWER(\"Process Name\") MATCHES '.*?powershell.*' OR LOWER(\"Process Name\") MATCHES '.*?cmd.*' OR LOWER(\"Process Name\") MATCHES '.*?mshta.*' AQL filter query"
+  ],
+  "RED_list": []
+}

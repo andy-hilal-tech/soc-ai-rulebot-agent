@@ -1,0 +1,40 @@
+{
+  "uuid": "8ab7903e-56f6-4b21-8453-0e8de6551e22",
+  "id": "104502",
+  "name": "UBA : Browsed to Government Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n   http://sitereview.bluecoat.com/categories.jsp",
+  "response_qid": "67500230",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500230"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%goverment%' OR &quot;Web Category&quot; ilike '%military%' OR &quot;Web Category&quot; ilike '%politic%' OR &quot;Web Category&quot; ilike '%society%' OR &quot;Web Category&quot; ilike '%social science' OR &quot;Web Category&quot; ilike '%non-profit%' OR &quot;Web Category&quot; ilike '%charitable organization%' OR &quot;Web Category&quot; in (4, 11, 72, 73, 122, 123, 124, 125, 208)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Government Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%goverment%' OR \"Web Category\" ilike '%military%' OR \"Web Category\" ilike '%politic%' OR \"Web Category\" ilike '%society%' OR \"Web Category\" ilike '%social science' OR \"Web Category\" ilike '%non-profit%' OR \"Web Category\" ilike '%charitable organization%' OR \"Web Category\" in (4, 11, 72, 73, 122, 123, 124, 125, 208) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Government Website",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "uuid": "2132eafb-37ed-463d-8d57-2b842e54f783",
+  "id": "154152",
+  "name": "Encrypted Channel Activity",
+  "notes": "This rule detects encrypted channel.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Suspicious SSL Connection\nSIGMA Description: Adversaries may employ a known encryption algorithm to conceal command and control traffic rather than relying on any inherent protections provided by a communication protocol.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501596",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501596"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%system.net.security.sslstream%' AND LOWER(&quot;Command&quot;) LIKE '%net.security.remotecertificatevalidationcallback%' AND LOWER(&quot;Command&quot;) LIKE '%.authenticateasclient%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Encrypted Channel Activity on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches LOWER(\"Command\") LIKE '%system.net.security.sslstream%' AND LOWER(\"Command\") LIKE '%net.security.remotecertificatevalidationcallback%' AND LOWER(\"Command\") LIKE '%.authenticateasclient%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Encrypted Channel Activity",
+    "Event description: Detects encrypted channel.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "uuid": "4d74e362-f6e7-4403-90ee-a506f814a1f6",
+  "id": "130402",
+  "name": "BB:Threats: Cryptocurrency Mining Threat Name Patterns",
+  "notes": "This Building Block triggers when a cryptocurrency mining threat name is detected.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "104e953f-c94f-455d-8c50-9e39aa97bbac",
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "SYSTEM-1321"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: AV/AM",
+    "BB:DeviceDefinition: IDS / IPS",
+    "BB:Threats: Cryptocurrency Mining Threat Name Patterns on events which are detected by the LOCAL system",
+    "BB:Threats: Cryptocurrency Mining Threat Names"
+  ],
+  "db_fields_used": [
+    "Threat Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "SYSTEM-1321",
+    "104e953f-c94f-455d-8c50-9e39aa97bbac"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: IDS / IPS</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Threat Names</a>",
+    "when any of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Threat Name (custom)</a> match <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>.*?(?i)mine|coin|bit|btc|crypto.*?</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Threat Name Patterns on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: IDS / IPS",
+    "AND NOT when an event matches any of the following BB:Threats: Cryptocurrency Mining Threat Names",
+    "AND when any of Threat Name (custom) match .*?(?i)mine|coin|bit|btc|crypto.*?"
+  ],
+  "RED_list": []
+}

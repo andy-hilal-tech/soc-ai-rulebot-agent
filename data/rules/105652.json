@@ -1,0 +1,50 @@
+{
+  "uuid": "575bd52f-2a1d-4190-bee4-0296882f1476",
+  "id": "105652",
+  "name": "UBA : Internal User Failed Mailbox Login Followed by Success",
+  "notes": "Detects several mailbox login failures before a successful login from an internal user. ",
+  "response_qid": "67500264",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500264"
+  ],
+  "rule_refs": [
+    "0d8e19bb-e162-468a-b752-2a61a139e0cc",
+    "a6576d1c-c75d-4fa3-8110-bead4002ee75",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Mailbox Login Success",
+    "BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "a6576d1c-c75d-4fa3-8110-bead4002ee75",
+    "0d8e19bb-e162-468a-b752-2a61a139e0cc"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when all of these <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time, BB:UBA : Mailbox Login Success</a>, <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>in</a> order, from <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>username</a>  to  <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"3\", \"7\")' class='dynamic'>destination IP</a>, over <a href='javascript:editParameter(\"3\", \"8\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"3\", \"9\")' class='dynamic'>hours</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>ExternalAccess (custom) is any of false</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Internal User Failed Mailbox Login Followed by Success on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when all of these BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time, BB:UBA : Mailbox Login Success, in order, from the same username  to  the same destination IP, over 1 hours",
+    "AND when the event matches ExternalAccess (custom) is any of false"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Internal User Failed Mailbox Login Followed by Success",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "uuid": "43e9ccc0-0fda-415f-993b-f98a465e188e",
+  "id": "129752",
+  "name": "BB:Threats: Cryptocurrency Mining Process Name Patterns",
+  "notes": "This Building Block triggers when a cryptocurrency mining process starts.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "e2f4d703-db54-4e2f-bf92-4aae98edd66f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System",
+    "BB:Threats: Cryptocurrency Mining Process Name Patterns on events which are detected by the LOCAL system",
+    "BB:Threats: Cryptocurrency Mining Process Names"
+  ],
+  "db_fields_used": [
+    "Process Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "e2f4d703-db54-4e2f-bf92-4aae98edd66f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Process Names</a>",
+    "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom)</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>(?i).*(miner|coin|crypt).*</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Process Name Patterns on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND NOT when an event matches any of the following BB:Threats: Cryptocurrency Mining Process Names",
+    "AND when any of Process Name (custom) match (?i).*(miner|coin|crypt).*"
+  ],
+  "RED_list": []
+}

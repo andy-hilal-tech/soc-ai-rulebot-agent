@@ -1,0 +1,50 @@
+{
+  "uuid": "acbb1cf7-c6f3-4bcb-99a9-451ef633b32c",
+  "id": "125452",
+  "name": "Login Shell Overridden",
+  "notes": "This rule detects when a login shell gets overridden. Adversaries may override a login shell to achieve persistence.\n\nNote: The Login Shell Filename reference set is pre-populated with Shell Filenames, and can be tuned.",
+  "response_qid": "67500774",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500774"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Filename"
+  ],
+  "reference_sets": [
+    "182"
+  ],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful File Modification</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Directory (custom) is any of [/usr/sbin or /bin or /usr/bin]</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Filename (custom)</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Login Shell Filename - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Login Shell Overridden on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Successful File Modification",
+    "AND when the event matches File Directory (custom) is any of [/usr/sbin or /bin or /usr/bin]",
+    "AND when any of Filename (custom) are contained in any of Login Shell Filename - AlphaNumeric"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Login Shell Overridden",
+    "Event description: Detects when a login shell is overridden.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

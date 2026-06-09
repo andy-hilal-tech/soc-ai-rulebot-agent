@@ -1,0 +1,48 @@
+{
+  "uuid": "0d8d7e61-3fac-45d6-a427-b72e51ece372",
+  "id": "117002",
+  "name": "Potential Privilege Escalation via Instance Profile (AWS)",
+  "notes": "This rule triggers when an admin action is performed after AWS instance profile has changed. A user may change AWS instance profile to assign a different role. If an admin activity follows after such activity, there is a potential this is a privilege escalation event.",
+  "response_qid": "67500586",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500586"
+  ],
+  "rule_refs": [
+    "a3928e1a-66f1-4e1d-acb2-1e4f08afa112",
+    "ef204064-681d-4908-b904-cb99185284d5"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Regular Virtualization Administration",
+    "BB:BehaviorDefinition: Regular Virtualization Administration match at least 1 times with the same Profile (custom) in 1 hour(s) after BB:BehaviourDefinition: Modification in Instance Profile (AWS) match",
+    "BB:BehaviourDefinition: Modification in Instance Profile (AWS)"
+  ],
+  "db_fields_used": [
+    "Profile"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "a3928e1a-66f1-4e1d-acb2-1e4f08afa112",
+    "ef204064-681d-4908-b904-cb99185284d5"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Regular Virtualization Administration</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Profile (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Modification in Instance Profile (AWS)</a> match"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Regular Virtualization Administration</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Profile (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Modification in Instance Profile (AWS)</a> match"
+  ],
+  "TD_list": [
+    "APPLY Potential Privilege Escalation via Instance Profile (AWS) on events which are detected by the LOCAL system",
+    "AND when BB:BehaviorDefinition: Regular Virtualization Administration match at least 1 times with the same Profile (custom) in 1 hour(s) after BB:BehaviourDefinition: Modification in Instance Profile (AWS) match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Privilege Escalation via Instance Profile (AWS)",
+    "Event description: Detects when an admin action is performed after AWS instance profile has changed.",
+    "Severity: 8, Credibility: 7, Relevance: 9",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Profile (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "uuid": "SYSTEM-1004",
+  "id": "100216",
+  "name": "Context is Local to Remote",
+  "notes": "Raise the relevance of flows and events when there is local to remote communication.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Context is Local to Remote on events which are detected by the LOCAL system",
+    "AND when the context is Local to Remote"
+  ],
+  "RED_list": []
+}

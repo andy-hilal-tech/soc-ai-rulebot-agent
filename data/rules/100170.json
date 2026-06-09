@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1205",
+  "id": "100170",
+  "name": "BB:FalsePositive: Global False Positive Events",
+  "notes": "Edit this BB to include any event QIDs that you wish to ignore. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:FalsePositive: Global False Positive Events on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1000082) DDOS shaft client login to handler, (1004923) ATTACK-RESPONSES 403 Forbidden, (1001335) WEB-MISC PCT Client_Hello overflow attempt</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Global False Positive Events on events which are detected by the undefined system",
+    "AND the event QID is one of the following (1000082) DDOS shaft client login to handler, (1004923) ATTACK-RESPONSES 403 Forbidden, (1001335) WEB-MISC PCT Client_Hello overflow attempt"
+  ],
+  "RED_list": []
+}

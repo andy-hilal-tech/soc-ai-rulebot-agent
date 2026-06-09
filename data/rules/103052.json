@@ -1,0 +1,25 @@
+{
+  "uuid": "84fc557e-f26e-47a2-86da-e80927528a60",
+  "id": "103052",
+  "name": "BB:UBA : Authentication User or Group or Policy Added",
+  "notes": "This building block detects account, group, or policy additions.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Authentication User or Group or Policy Added on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Added, Authentication.Group Added, Authentication.Policy Added, Authentication.User Account Added</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Authentication User or Group or Policy Added on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.Computer Account Added, Authentication.Group Added, Authentication.Policy Added, Authentication.User Account Added"
+  ],
+  "RED_list": []
+}

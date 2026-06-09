@@ -1,0 +1,40 @@
+{
+  "uuid": "c72ed449-4151-4f4e-a076-d4f1064fbcfb",
+  "id": "145602",
+  "name": "GAC DLL Loaded Via Office Application",
+  "notes": "This rule detects any GAC DLL being loaded by an Office Product\n\nCovered from SIGMA Rule.\n\nOriginal Author: Antonlovesdnb\nSIGMA Title: GAC DLL Loaded Via Office Applications\nSIGMA Description: Detects any GAC DLL being loaded by an Office Product\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501498",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501498"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001844) Image loaded</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES '(excel|mspub|onenote|onenoteim|outlook|powerpnt|winword)\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;File Directory&quot;) MATCHES 'c:\\\\windows\\\\microsoft\\.net\\\\assembly\\\\gac_msil.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY GAC DLL Loaded Via Office Application on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001844) Image loaded",
+    "AND when the event matches LOWER(\"Process Full Full Name\") MATCHES '(excel|mspub|onenote|onenoteim|outlook|powerpnt|winword)\\.exe' AQL filter query",
+    "AND when the event matches LOWER(\"File Directory\") MATCHES 'c:\\\\windows\\\\microsoft\\.net\\\\assembly\\\\gac_msil.*' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: GAC DLL Loaded Via Office Application",
+    "Event description: Detects any GAC DLL being loaded by an Office Product",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Bad Content\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

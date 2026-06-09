@@ -1,0 +1,40 @@
+{
+  "uuid": "e8bfe413-9726-4a5e-88c6-49280e1417d2",
+  "id": "104752",
+  "name": "UBA : Browsed to Job Search Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500235",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500235"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%job search%' OR &quot;Web Category&quot; ilike '%professional networking%' OR &quot;Web Category&quot; in (16, 1501, 1503, 1504, 1527)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Job Search Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%job search%' OR \"Web Category\" ilike '%professional networking%' OR \"Web Category\" in (16, 1501, 1503, 1504, 1527) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Job Search Website",
+    "Event description: senseValue=15,senseDesc='User access to Risky Resource Category - Job Search',usecase_id='e8bfe413-9726-4a5e-88c6-49280e1417d2'",
+    "Severity: 7, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

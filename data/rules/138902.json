@@ -1,0 +1,56 @@
+{
+  "uuid": "e932e293-86d3-4f88-876c-a031e8c7c549",
+  "id": "138902",
+  "name": "Suspicious PSExec Module Usage Detected",
+  "notes": "This rule triggers when a usage of the PSExec module is detected.",
+  "response_qid": "67501085",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501085"
+  ],
+  "rule_refs": [
+    "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+    "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+    "a138d39e-431a-4911-8db4-8e0966a628a9",
+    "a8da84b4-884c-492e-aa86-bc61aa4301c4"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Administrative Share Accessed",
+    "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account",
+    "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account match at least 4 times with the same Destination IP in 5 minutes"
+  ],
+  "db_fields_used": [
+    "destinationIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+    "a8da84b4-884c-492e-aa86-bc61aa4301c4",
+    "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+    "a138d39e-431a-4911-8db4-8e0966a628a9"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>System.Successful Registry Modification, Audit.Object Access Success, System.Process Creation Success, System.Service Installed</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Service Configured to Use Powershell, Encoded Command Malicious Usage in a Programming Environment, BB:BehaviorDefinition: Administrative Share Accessed, BB:BehaviorDefinition: Programming Environment Started with a Privileged Account</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>4</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Service Configured to Use Powershell, Encoded Command Malicious Usage in a Programming Environment, BB:BehaviorDefinition: Administrative Share Accessed, BB:BehaviorDefinition: Programming Environment Started with a Privileged Account</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>4</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious PSExec Module Usage Detected on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification, Audit.Object Access Success, System.Process Creation Success, System.Service Installed",
+    "AND when Service Configured to Use Powershell, Encoded Command Malicious Usage in a Programming Environment, BB:BehaviorDefinition: Administrative Share Accessed, BB:BehaviorDefinition: Programming Environment Started with a Privileged Account match at least 4 times with the same Destination IP in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious PSExec Module Usage Detected",
+    "Event description: Detects when a usage of the PSExec module is observed.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

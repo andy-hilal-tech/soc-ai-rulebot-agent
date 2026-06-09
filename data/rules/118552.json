@@ -1,0 +1,25 @@
+{
+  "uuid": "d82c4f1c-0b2e-424f-abe6-e34403436682",
+  "id": "118552",
+  "name": "BB:CategoryDefinition: Object Upload Events",
+  "notes": "Edit this Building Block to include all object (file, folder, etc) upload related event categories.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Object Upload Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.File Upload Attempt, Audit.File Upload Failure, Audit.File Upload Success, Audit.Object Upload Attempt, Audit.Object Upload Failure, Audit.Object Upload Success</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Object Upload Events on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Audit.File Upload Attempt, Audit.File Upload Failure, Audit.File Upload Success, Audit.Object Upload Attempt, Audit.Object Upload Failure, Audit.Object Upload Success"
+  ],
+  "RED_list": []
+}

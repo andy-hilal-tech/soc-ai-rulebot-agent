@@ -1,0 +1,48 @@
+{
+  "uuid": "61d67e4f-ce8e-4e71-bafa-394902e22860",
+  "id": "163552",
+  "name": "UBA : AWS Console Accessed by Unauthorized User",
+  "notes": "Detects an unauthorized attempt to access the Amazon Web Services (AWS) console by a user that is oustide the authorized list in the 'AWS - Standard Users' reference set.",
+  "response_qid": "67500269",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500269"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [
+    "52"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Amazon AWS CloudTrail</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(88750854) Console Login</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>AWS - Standard Users - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : AWS Console Accessed by Unauthorized User on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Amazon AWS CloudTrail",
+    "AND when the event QID is one of the following (88750854) Console Login",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND NOT when any of Username are contained in any of AWS - Standard Users - AlphaNumeric"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : AWS Console Accessed by Unauthorized User",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

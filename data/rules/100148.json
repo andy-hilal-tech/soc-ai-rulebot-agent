@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1016",
+  "id": "100148",
+  "name": "BB:Flowshape: Inbound Only",
+  "notes": "This Building Block will match flows that are inbound only.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Flowshape: Inbound Only on flows which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow bias is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>inbound</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Flowshape: Inbound Only on flows which are detected by the undefined system",
+    "AND when the flow bias is inbound"
+  ],
+  "RED_list": []
+}

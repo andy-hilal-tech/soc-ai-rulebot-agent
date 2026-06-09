@@ -1,0 +1,40 @@
+{
+  "uuid": "b4e76f31-93b2-46a3-9e5c-03e8792b30d1",
+  "id": "139902",
+  "name": "Ransomware: Petya / NotPetya Payload in Flows",
+  "notes": "This rule triggers when a Petya payload is observed in flows.",
+  "response_qid": "67501101",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501101"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>445</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>the source</a> side of the flow <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>has</a> payload data",
+    "when the flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%70 00 73 00 65 00 78 00 65 00 63 00 73 00 76 00 63 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%50 00 53 00 45 00 58 00 45 00 53 00 56 00 43 00 2e 00 45 00 58 00 45%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%73 00 76 00 63 00 63 00 74 00 6c 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%5c 00 61 00 64 00 6d 00 69 00 6e 00 24 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%ff 53 4d 42 72 00 00 00 00 18 07 c0%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%10 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 4a 00 00 00 4a 00 02 00 23 00 00 00 07 00 5c 50 49 50 45 5c 00%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Ransomware: Petya / NotPetya Payload in Flows on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Local",
+    "AND when the destination port is one of the following 445",
+    "AND when the source side of the flow has payload data",
+    "AND when the flow matches FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%70 00 73 00 65 00 78 00 65 00 63 00 73 00 76 00 63 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%50 00 53 00 45 00 58 00 45 00 53 00 56 00 43 00 2e 00 45 00 58 00 45%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%73 00 76 00 63 00 63 00 74 00 6c 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%5c 00 61 00 64 00 6d 00 69 00 6e 00 24 00%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%ff 53 4d 42 72 00 00 00 00 18 07 c0%' OR FORMAT::PAYLOAD_TO_HEX(sourcepayload) like '%10 00 00 00 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 4a 00 00 00 4a 00 02 00 23 00 00 00 07 00 5c 50 49 50 45 5c 00%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Petya / NotPetya IOC Detected",
+    "Event description: An IOC (Payload) related to Petya / NotPetya ransomware has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

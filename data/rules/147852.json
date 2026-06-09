@@ -1,0 +1,29 @@
+{
+  "uuid": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9",
+  "id": "147852",
+  "name": "BB:BehaviorDefinition: MSExchange Transport Agent Installation",
+  "notes": "This building block detects the installation of a Transport Agent in Exchange.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Tobias Michalski\nSIGMA Title: MSExchange Transport Agent Installation - Builtin\nSIGMA Description: Detects the Installation of a Exchange Transport Agent\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: MSExchange Transport Agent Installation on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of Install-TransportAgent</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: MSExchange Transport Agent Installation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success, System.Process Creation Success",
+    "AND when the event matches Command (custom) contains any of Install-TransportAgent"
+  ],
+  "RED_list": []
+}

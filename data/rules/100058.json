@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1286",
+  "id": "100058",
+  "name": "BB:CategoryDefinition: Authentication to Disabled Account",
+  "notes": "Edit this BB to include all events that indicate failed attempts to access the network using a disabled account.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication to Disabled Account on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5753626) Disabled Account Blank Pwd, (5753627) Disabled Account User Pwd, (5769200) User_account_locked_out, (9500470) Windows Account Locked, (5754790) Failed_login-account_disabled, (5755917) Guessed Disabled Account Pwd, (5754792) Failed_login-account_locked_out, (5754795) Failed_login-not_authorized_for_console_login, (4253354) HOST:WIN:DIAL-IN-LOCKOUT, (4253427) HOST:WU-FTP:DISABLED-ACCOUNT, (5754798) Failed_login-time_restriction_violation, (5000013) Logon Failure - Account logon time restriction violation, (5000014) Logon Failure - Account currently disabled, (5000016) Logon Failure - User not allowed to logon at this computer, (5000017) Logon Failure - The user has not been granted the requested logon type at this machine, (5000094) User Account Locked Out, (4253320) HOST:WIN:530-FAILED-RESTRICTED, (4253321) HOST:WIN:531-ACCOUNT-DISABLED, (5000169) User account disabled, (26500002) IAS_ACCOUNT_DISABLED, (4253323) HOST:WIN:533-FAILED-NOT-ALLOWED, (26500004) IAS_ACCOUNT_LOCKED_OUT, (4253326) HOST:WIN:539-ACCOUNT-LOCKED, (26500008) IAS_DIALIN_DISABLED, (26500009) IAS_DIALIN_LOCKED_OUT, (5000248) A user account was locked out, (4253263) HOST:TACACS:REJECTED-USER, (4253264) HOST:TACACS:REJECTED-USER2, (5769198) User_account_disabled, (5001959) An account failed to log on: Account Disabled, (5001948) Failure Audit: An account failed to log on: Account Disabled, (5001954) Failure Audit: An account failed to log on: User Locked Out, (5001965) An account failed to log on: User Locked Out, (5001949) Failure Audit: An account failed to log on: Account Expired, (5001960) An account failed to log on: Account Expired, (5001962) An account failed to log on: Logon Outside Normal Time, (5001951) Failure Audit: An account failed to log on: Logon Outside Normal Time</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Authentication to Disabled Account on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (5753626) Disabled Account Blank Pwd, (5753627) Disabled Account User Pwd, (5769200) User_account_locked_out, (9500470) Windows Account Locked, (5754790) Failed_login-account_disabled, (5755917) Guessed Disabled Account Pwd, (5754792) Failed_login-account_locked_out, (5754795) Failed_login-not_authorized_for_console_login, (4253354) HOST:WIN:DIAL-IN-LOCKOUT, (4253427) HOST:WU-FTP:DISABLED-ACCOUNT, (5754798) Failed_login-time_restriction_violation, (5000013) Logon Failure - Account logon time restriction violation, (5000014) Logon Failure - Account currently disabled, (5000016) Logon Failure - User not allowed to logon at this computer, (5000017) Logon Failure - The user has not been granted the requested logon type at this machine, (5000094) User Account Locked Out, (4253320) HOST:WIN:530-FAILED-RESTRICTED, (4253321) HOST:WIN:531-ACCOUNT-DISABLED, (5000169) User account disabled, (26500002) IAS_ACCOUNT_DISABLED, (4253323) HOST:WIN:533-FAILED-NOT-ALLOWED, (26500004) IAS_ACCOUNT_LOCKED_OUT, (4253326) HOST:WIN:539-ACCOUNT-LOCKED, (26500008) IAS_DIALIN_DISABLED, (26500009) IAS_DIALIN_LOCKED_OUT, (5000248) A user account was locked out, (4253263) HOST:TACACS:REJECTED-USER, (4253264) HOST:TACACS:REJECTED-USER2, (5769198) User_account_disabled, (5001959) An account failed to log on: Account Disabled, (5001948) Failure Audit: An account failed to log on: Account Disabled, (5001954) Failure Audit: An account failed to log on: User Locked Out, (5001965) An account failed to log on: User Locked Out, (5001949) Failure Audit: An account failed to log on: Account Expired, (5001960) An account failed to log on: Account Expired, (5001962) An account failed to log on: Logon Outside Normal Time, (5001951) Failure Audit: An account failed to log on: Logon Outside Normal Time"
+  ],
+  "RED_list": []
+}

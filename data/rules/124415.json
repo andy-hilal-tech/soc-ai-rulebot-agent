@@ -1,0 +1,48 @@
+{
+  "uuid": "a92da42e-b3dc-4707-9c6f-e2e69b9183a7",
+  "id": "124415",
+  "name": "UBA : User Accessing Risky IP Anonymization",
+  "notes": "Detects when a local user or host is connecting to an external anonymization service.",
+  "response_qid": "67500543",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500543"
+  ],
+  "rule_refs": [
+    "a218c871-518b-42dc-bda9-a5d139338b23",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "a218c871-518b-42dc-bda9-a5d139338b23",
+      "name": "X-Force Risky IP, Anonymization"
+    }
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote, Remote to Remote</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>UBA : Common Event Filters</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>X-Force Risky IP, Anonymization</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Accessing Risky IP Anonymization on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Remote, Remote to Remote",
+    "AND when an event matches all of the following UBA : Common Event Filters",
+    "AND when an event matches any of the following X-Force Risky IP, Anonymization"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Accessing Risky IP Anonymization",
+    "Event description: senseValue=15,senseDesc=Detects when a user or host is accessing an external anonymization service.',usecase_id='4ee42a67-7204-4997-988b-fbb83438ff9f'",
+    "Severity: 8, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

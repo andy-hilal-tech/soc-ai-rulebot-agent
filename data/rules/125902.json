@@ -1,0 +1,47 @@
+{
+  "uuid": "2803975e-abbd-4062-b3ba-6d9150074889",
+  "id": "125902",
+  "name": "Critical File or Directory Mounted on a Container",
+  "notes": "This rule detects when a critical file or directory is mounted on a container, for example \"/etc/passwd\". This allows access to the host's critical directory or files.\n\nNote: Edit the rule to add any critical file or directory you may want to monitor.",
+  "response_qid": "67500781",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500781"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Containers",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Containers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Audit.Media Connect Success, Audit.Machine Creation Success, Audit.Read Activity Succeeded</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Source Mount Point (custom) is any of [/etc/cron or /etc/passwd or /etc/group or /etc/init.d or /.ssh/authorized_keys or /etc/inittab or /usr/lib/systemd/system or /etc/rc or /lib/modules or /etc/gshadow or /etc/sudoers or /etc/sshd or /sbin/init or /boot or /etc/systemd or /etc/at. or /etc/shadow or /]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Critical File or Directory Mounted on a Container on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Containers",
+    "AND when the event category for the event is one of the following Audit.Media Connect Success, Audit.Machine Creation Success, Audit.Read Activity Succeeded",
+    "AND when the event matches Source Mount Point (custom) is any of [/etc/cron or /etc/passwd or /etc/group or /etc/init.d or /.ssh/authorized_keys or /etc/inittab or /usr/lib/systemd/system or /etc/rc or /lib/modules or /etc/gshadow or /etc/sudoers or /etc/sshd or /sbin/init or /boot or /etc/systemd or /etc/at. or /etc/shadow or /]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Critical File or Directory Mounted on a Container",
+    "Event description: This rule detects when a critical file or directory is mounted on a container.",
+    "Severity: 9, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

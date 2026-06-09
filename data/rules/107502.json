@@ -1,0 +1,54 @@
+{
+  "uuid": "414254ef-9678-4060-a87e-73db8bdcd732",
+  "id": "107502",
+  "name": "UBA : Ransomware Behavior Detected",
+  "notes": "Detects behavior that is typically seen during a ransomware infection.",
+  "response_qid": "67500318",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500318"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "Object Name",
+    "Process Name",
+    "userName, Process Name"
+  ],
+  "reference_sets": [
+    "61"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000850) Success Audit: An attempt was made to access an object</a>",
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>500</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username, Process Name (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Object Name (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Shared) UBA : Windows Common Processes - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>500</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username, Process Name (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Object Name (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Ransomware Behavior Detected on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5000850) Success Audit: An attempt was made to access an object",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when at least 500 events are seen with the same Username, Process Name (custom) and different Object Name (custom) in 1 minutes",
+    "AND NOT when any of Process Name (custom) are contained in any of (Shared) UBA : Windows Common Processes - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Ransomware Behavior Detected",
+    "Event description: senseValue=15",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

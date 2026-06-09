@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1499",
+  "id": "100288",
+  "name": "BB:HostDefinition: Consultant Assets",
+  "notes": "Edit this Building Block to include any Consultant Assets.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:HostDefinition: Consultant Assets on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostDefinition: Consultant Assets on events which are detected by the undefined system",
+    "AND when either the source or destination IP is one of the following 127.0.0.2"
+  ],
+  "RED_list": []
+}

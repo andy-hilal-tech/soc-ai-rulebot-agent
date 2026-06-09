@@ -1,0 +1,40 @@
+{
+  "uuid": "e5657294-01d2-411c-80d9-2437130653af",
+  "id": "150152",
+  "name": "New Port Forwarding Rule Added Via Netsh",
+  "notes": "This rule detects the execution of netsh commands that configure a new port forwarding (PortProxy) rule\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems), omkar72, oscd.community, Swachchhanda Shrawan Poudel\nSIGMA Title: New Port Forwarding Rule Added Via Netsh.EXX\nSIGMA Description: Detects the execution of netsh commands that configure a new port forwarding (PortProxy) rule\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501543",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501543"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of netsh</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%interface%' AND LOWER(&quot;Command&quot;) LIKE '%portproxy%' AND LOWER(&quot;Command&quot;) LIKE '%add%' AND LOWER(&quot;Command&quot;) LIKE '%v4tov4%') OR (LOWER(&quot;Command&quot;) LIKE '%connectp%' AND LOWER(&quot;Command&quot;) LIKE '%listena%' AND LOWER(&quot;Command&quot;) LIKE '%c=%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY New Port Forwarding Rule Added Via Netsh on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success",
+    "AND when the event matches Command (custom) contains any of netsh",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%interface%' AND LOWER(\"Command\") LIKE '%portproxy%' AND LOWER(\"Command\") LIKE '%add%' AND LOWER(\"Command\") LIKE '%v4tov4%') OR (LOWER(\"Command\") LIKE '%connectp%' AND LOWER(\"Command\") LIKE '%listena%' AND LOWER(\"Command\") LIKE '%c=%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: New Port Forwarding Rule Added Via Netsh",
+    "Event description: Detects the execution of netsh commands that configure a new port forwarding (PortProxy) rule",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Routing\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

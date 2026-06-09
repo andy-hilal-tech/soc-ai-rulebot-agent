@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1388",
+  "id": "100173",
+  "name": "BB:FalsePositive: LDAP Server False Positive Categories",
+  "notes": "Edit this BB to define all the false positive categories that occur to or from LDAP servers that are defined in the BB:HostDefinition: LDAP Servers building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "9bf7752a-36cb-4a12-bffb-092ef7257e79",
+    "SYSTEM-1375"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: LDAP Server False Positive Categories on events which are detected by the LOCAL system",
+    "BB:HostDefinition: LDAP Servers",
+    "BB:HostReference: LDAP Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1375",
+    "9bf7752a-36cb-4a12-bffb-092ef7257e79"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: LDAP Servers, BB:HostReference: LDAP Servers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>User Defined.Custom User 9</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: LDAP Server False Positive Categories on events which are detected by the LOCAL system",
+    "AND when a flow or an event matches any of the following BB:HostDefinition: LDAP Servers, BB:HostReference: LDAP Servers",
+    "AND when the event category for the event is one of the following User Defined.Custom User 9"
+  ],
+  "RED_list": []
+}

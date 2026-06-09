@@ -1,0 +1,41 @@
+{
+  "uuid": "104e953f-c94f-455d-8c50-9e39aa97bbac",
+  "id": "130452",
+  "name": "BB:Threats: Cryptocurrency Mining Threat Names",
+  "notes": "This Building Block triggers when a cryptocurrency mining threat name is detected.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "SYSTEM-1321"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: AV/AM",
+    "BB:DeviceDefinition: IDS / IPS",
+    "BB:Threats: Cryptocurrency Mining Threat Names on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "Threat Name"
+  ],
+  "reference_sets": [
+    "192"
+  ],
+  "dependencies": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "SYSTEM-1321"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: IDS / IPS</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Threat Name (custom) is not N/A</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Threat Name (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Threat Names - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Threat Names on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: IDS / IPS",
+    "AND when the event matches Threat Name (custom) is not N/A",
+    "AND when any of Threat Name (custom) are contained in any of Cryptocurrency Mining Threat Names - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": []
+}

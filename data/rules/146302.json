@@ -1,0 +1,29 @@
+{
+  "uuid": "b07f6eb1-e9ea-47a0-b7fd-e24683f00668",
+  "id": "146302",
+  "name": "BB:BehaviorDefinition: HyperStack Pipe",
+  "notes": "This building block detects when HyperStack pipe name is discovered.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: HyperStack Pipe on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Pipe Name (custom) is any of suplexrpc</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: HyperStack Pipe on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)",
+    "AND when the event matches Pipe Name (custom) is any of suplexrpc"
+  ],
+  "RED_list": []
+}

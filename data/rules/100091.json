@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1299",
+  "id": "100091",
+  "name": "BB:Database: System Action Allow",
+  "notes": "Edit this BB to include any events that indicate successful actions within a database",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+    "SYSTEM-1374"
+  ],
+  "bb_references": [
+    "BB:Database: System Action Allow on events which are detected by the LOCAL system",
+    "BB:HostDefinition: Database Servers",
+    "BB:HostReference: Database Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1374",
+    "5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+  ],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.System Action Allow</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Database: System Action Allow on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following System.System Action Allow",
+    "AND when an event matches any of the following BB:HostDefinition: Database Servers, BB:HostReference: Database Servers"
+  ],
+  "RED_list": []
+}

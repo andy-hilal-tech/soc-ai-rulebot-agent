@@ -1,0 +1,38 @@
+{
+  "uuid": "080b2f4c-374c-45a3-aa46-8c0c4becf01d",
+  "id": "113052",
+  "name": "Thread Creation by a Process Launched from a Shared Folder",
+  "notes": "This rule triggers when a process launched from a shared folder is creating a thread into another process.",
+  "response_qid": "67500486",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500486"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Path MATCHES '\\\\\\\\.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Thread Creation by a Process Launched from a Shared Folder on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001845) CreateRemoteThread",
+    "AND when the event matches Process Path MATCHES '\\\\\\\\.*' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Process Launched from a Shared Folder and Created Thread into Another Process",
+    "Event description: Detect if a process starts from a shared folder and creates a thread in another process.",
+    "Severity: 10, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

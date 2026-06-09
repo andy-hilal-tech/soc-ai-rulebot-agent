@@ -1,0 +1,25 @@
+{
+  "uuid": "ad6be411-b766-44a2-adfe-ecb5bf323489",
+  "id": "131952",
+  "name": "BB:CategoryDefinition: Countries/Regions with Restricted Access",
+  "notes": "Edit this BB to include any geographic location that typically would not be allowed to access the enterprise. Once configured, you can enable the rule, Confidential Content Being Transferred to Foreign Geography.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Countries/Regions with Restricted Access on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Africa, Antarctic, Asia, CentralAmerica, Europe, Oceania, SouthAmerica, misc</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Countries/Regions with Restricted Access on events which are detected by the LOCAL system",
+    "AND when the any IP is a part of any of the following Africa, Antarctic, Asia, CentralAmerica, Europe, Oceania, SouthAmerica, misc"
+  ],
+  "RED_list": []
+}

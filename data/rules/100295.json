@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1284",
+  "id": "100295",
+  "name": "BB:HostDefinition: VoIP PBX Server",
+  "notes": "Edit this BB to define typical VoIP PBX servers. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:HostDefinition: VoIP PBX Server on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostDefinition: VoIP PBX Server on events which are detected by the LOCAL system",
+    "AND when the destination IP is one of the following 127.0.0.2"
+  ],
+  "RED_list": []
+}

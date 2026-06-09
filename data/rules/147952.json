@@ -1,0 +1,52 @@
+{
+  "uuid": "c673847d-b064-496b-9388-163a12d062a1",
+  "id": "147952",
+  "name": "Suspicious Elevated System Shell",
+  "notes": "This rule triggers when a shell program such as the windows Command Prompt or PowerShell is launched with system privileges.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113, Tim Shelton (update fp)\nSIGMA Title: Suspicious Elevated System Shell\nSIGMA Description: Detects when a shell program such as the windows Command Prompt or PowerShell is launched with system privileges.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501516",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501516"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [powershell.exe or pwsh.exe or cmd.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"9\", \"1\")' class='dynamic'>Username is any of [AUTHORI or AUTORI]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of [C:\\Windows\\System32\\ or C:\\Program Files (x86)\\ or C:\\Program Files\\], Process Name (custom) is any of [cmd.exe or powershell.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Parent Process Path (custom) is any of C:\\ManageEngine\\ADManager Plus\\pgsql\\bin\\postgres.exe, Process Name (custom) is any of cmd.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of C:\\Windows\\SysWOW64\\config\\systemprofile\\Citrix\\UpdaterBinaries\\, Parent Process Name (custom) is any of CitrixReceiverUpdater.exe, Process Name (custom) is any of cmd.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"6\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of python.exe, Command (custom) is any of C:\\WINDOWS\\system32\\cmd.exe /c &quot;ver&quot;</a>",
+    "when the event matches <a href='javascript:editParameter(\"7\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of C:\\Windows\\Temp, Parent Process Name (custom) is any of invcol.exe, Parent Command (custom) contains any of C:\\ProgramData\\Dell\\UpdateService\\, Process Name (custom) is any of cmd.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"8\", \"1\")' class='dynamic'>Command (custom) contains any of powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Elevated System Shell on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [powershell.exe or pwsh.exe or cmd.exe]",
+    "AND when the event matches Username is any of [AUTHORI or AUTORI]",
+    "AND NOT when the event matches Parent Process Path (custom) contains any of [C:\\Windows\\System32\\ or C:\\Program Files (x86)\\ or C:\\Program Files\\], Process Name (custom) is any of [cmd.exe or powershell.exe]",
+    "AND NOT when the event matches Parent Process Path (custom) is any of C:\\ManageEngine\\ADManager Plus\\pgsql\\bin\\postgres.exe, Process Name (custom) is any of cmd.exe",
+    "AND NOT when the event matches Parent Process Path (custom) contains any of C:\\Windows\\SysWOW64\\config\\systemprofile\\Citrix\\UpdaterBinaries\\, Parent Process Name (custom) is any of CitrixReceiverUpdater.exe, Process Name (custom) is any of cmd.exe",
+    "AND NOT when the event matches Parent Process Name (custom) is any of python.exe, Command (custom) is any of C:\\WINDOWS\\system32\\cmd.exe /c \"ver\"",
+    "AND NOT when the event matches Parent Process Path (custom) contains any of C:\\Windows\\Temp, Parent Process Name (custom) is any of invcol.exe, Parent Command (custom) contains any of C:\\ProgramData\\Dell\\UpdateService\\, Process Name (custom) is any of cmd.exe",
+    "AND NOT when the event matches Command (custom) contains any of powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Elevated System Shell",
+    "Event description: Detects when a shell program such as the windows Command Prompt or PowerShell is launched with system privileges.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

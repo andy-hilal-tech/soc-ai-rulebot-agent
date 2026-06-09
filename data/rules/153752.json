@@ -1,0 +1,38 @@
+{
+  "uuid": "66e1348c-08d8-4b2b-b6be-ae7275027cb4",
+  "id": "153752",
+  "name": "Execution of Exfiltration and Tunneling Tools",
+  "notes": "This is rule detects execution of exfiltration and tunneling tools.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Daniil Yugoslavskiy, oscd.community\nSIGMA Title: Exfiltration and Tunneling Tools Execution\nSIGMA Description: Execution of well known tools for data exfiltration and tunneling\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501590",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501590"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) IN ('plink.exe', 'socat.exe', 'stunnel.exe', 'httptunnel.exe')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Execution of Exfiltration and Tunneling Tools on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Process Full Full Name\") IN ('plink.exe', 'socat.exe', 'stunnel.exe', 'httptunnel.exe') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Execution of Exfiltration and Tunneling Tools",
+    "Event description: Detects execution of exfiltration and tunneling tools.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

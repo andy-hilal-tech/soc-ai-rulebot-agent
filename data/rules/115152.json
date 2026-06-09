@@ -1,0 +1,29 @@
+{
+  "uuid": "744d274f-88d6-4cb1-92c2-31f0be63ffb6",
+  "id": "115152",
+  "name": "BB:UBA : Detect WannaCry Using Hashes",
+  "notes": "This building block looks for hashes in the UBA : Malware Activity WannaCry - Hash reference set. Any known hashes related to WannaCry should be added to this table. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Detect WannaCry Using Hashes on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "SHA256 Hash, SHA1 Hash, MD5 Hash, File Hash, IMP Hash, Root Hash"
+  ],
+  "reference_sets": [
+    "84"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>SHA256 Hash (custom), SHA1 Hash (custom), MD5 Hash (custom), File Hash (custom), IMP Hash (custom), Root Hash (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : Malware Activity WannaCry - Hash - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Detect WannaCry Using Hashes on events which are detected by the LOCAL system",
+    "AND when any of SHA256 Hash (custom), SHA1 Hash (custom), MD5 Hash (custom), File Hash (custom), IMP Hash (custom), Root Hash (custom) are contained in any of UBA : Malware Activity WannaCry - Hash - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "ffd20ffe-8410-49fe-aa3f-e2b535a8fbde",
+  "id": "162354",
+  "name": "Loading of Kernel Module via Insmod",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Pawel Mazur\nSIGMA Title: Loading of Kernel Module via Insmod\nSIGMA Description: Detects loading of kernel modules with insmod command.\nLoadable Kernel Modules (LKMs) are pieces of code that can be loaded and unloaded into the kernel upon demand.\nAdversaries may use LKMs to obtain persistence within the system or elevate the privileges.\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND LOWER(UTF8(payload)) LIKE '%syscall%' AND LOWER(UTF8(payload)) LIKE '%insmod%' AND LOWER(UTF8(payload)) LIKE '%/usr/bin/kmod%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Loading of Kernel Module via Insmod on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND LOWER(UTF8(payload)) LIKE '%syscall%' AND LOWER(UTF8(payload)) LIKE '%insmod%' AND LOWER(UTF8(payload)) LIKE '%/usr/bin/kmod%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Loading of Kernel Module via Insmod",
+    "Event description: Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Loading of Kernel Module via Insmod SIGMA Description: Detects loading of kernel modules with insmod command. Loadable Kernel Modules (LKMs) are pieces of code that can be loaded and unloaded into the kernel upon demand. Adversaries may use LKMs to obtain persistence within the system or elevate the privileges.   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

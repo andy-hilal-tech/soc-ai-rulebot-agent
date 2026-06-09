@@ -1,0 +1,48 @@
+{
+  "uuid": "e6f3ba63-a42d-4760-9a24-74306f461d58",
+  "id": "113202",
+  "name": "PsExec Process Observed",
+  "notes": "This rule triggers when a PsExec process has been detected.",
+  "response_qid": "67500489",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500489"
+  ],
+  "rule_refs": [
+    "62e8415a-2543-4216-968c-491961b42c12",
+    "e13363dd-1fd5-49d9-a8d6-b59be0831ce9"
+  ],
+  "bb_references": [
+    "BB: PsExec Has Been Detected"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "e13363dd-1fd5-49d9-a8d6-b59be0831ce9",
+    "62e8415a-2543-4216-968c-491961b42c12"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create, (5000862) Success Audit: A new process has been created</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB: PsExec Has Been Detected</a>",
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>PsExec Has Been Launched From a Compromised Host</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY PsExec Process Observed on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create, (5000862) Success Audit: A new process has been created",
+    "AND when an event matches any of the following BB: PsExec Has Been Detected",
+    "AND NOT when an event matches any of the following PsExec Has Been Launched From a Compromised Host"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: PsExec Has Been Detected",
+    "Event description: PsExec Has Been Detected",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Information\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

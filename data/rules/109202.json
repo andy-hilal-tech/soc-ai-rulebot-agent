@@ -1,0 +1,25 @@
+{
+  "uuid": "e54a0b13-631d-41ea-b814-e661c847d246",
+  "id": "109202",
+  "name": "BB:UBA : File Transfer to Cloud services",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : File Transfer to Cloud services on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(20276574) MegaCloud_Upload, (106500010) Cloud Exfiltration, (20275809) iCloud_File.Upload, (20276160) Baidu.Cloud_File.Upload, (20276294) Daum.Cloud_Upload, (20276256) Zip.Cloud_File.Upload, (20276463) Cloudsafe_File.Upload, (20276506) Lgecloud_File.Upload, (20276513) JustCloud_File.Upload, (20276516) Filecloud.io_File.Upload, (20279210) SoundCloud_File.Upload, (20279218) MultCloud_File.Upload, (20279382) Meocloud_File.Upload, (20279696) CloudSigma_File.Upload, (20276167) Adobe.Creative.Cloud_File.Upload, (20278838) KT.Ucloud_Upload, (20278931) Acrobat.Cloud_Upload, (20278640) Myflare_File.Upload, (20279282) TrendMicro.SafeSync_File.Upload, (20256999) Docstoc_File.Upload</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : File Transfer to Cloud services on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (20276574) MegaCloud_Upload, (106500010) Cloud Exfiltration, (20275809) iCloud_File.Upload, (20276160) Baidu.Cloud_File.Upload, (20276294) Daum.Cloud_Upload, (20276256) Zip.Cloud_File.Upload, (20276463) Cloudsafe_File.Upload, (20276506) Lgecloud_File.Upload, (20276513) JustCloud_File.Upload, (20276516) Filecloud.io_File.Upload, (20279210) SoundCloud_File.Upload, (20279218) MultCloud_File.Upload, (20279382) Meocloud_File.Upload, (20279696) CloudSigma_File.Upload, (20276167) Adobe.Creative.Cloud_File.Upload, (20278838) KT.Ucloud_Upload, (20278931) Acrobat.Cloud_Upload, (20278640) Myflare_File.Upload, (20279282) TrendMicro.SafeSync_File.Upload, (20256999) Docstoc_File.Upload"
+  ],
+  "RED_list": []
+}

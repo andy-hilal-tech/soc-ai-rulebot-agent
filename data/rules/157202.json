@@ -1,0 +1,33 @@
+{
+  "uuid": "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+  "id": "157202",
+  "name": "BB:BehaviorDefinition: Atbroker Registry Change",
+  "notes": "This Building Block detects creation/modification of Assistive Technology applications and persistence with usage of 'at'.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Mateusz Wydra, oscd.community\nSIGMA Title: Atbroker Registry Change\nSIGMA Description: Detects creation/modification of Assistive Technology applications and persistence with usage of 'at'\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Atbroker Registry Change on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%') or (LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%')</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of atbroker.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(((LOWER(&quot;Target Object&quot;) LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and &quot;target details&quot;='(empty)') or (LOWER(&quot;Process File File Path&quot;) LIKE 'c:\\windows\\installer\\msi%' and LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%'))) or (((LOWER(&quot;Registry Key&quot;) LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and &quot;registry value data&quot;='(empty)') or (LOWER(&quot;Process File File Path&quot;) LIKE 'c:\\windows\\installer\\msi%' and LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Atbroker Registry Change on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification",
+    "AND when the event matches (LOWER(\"Target Object\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(\"Target Object\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%') or (LOWER(\"Registry Key\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(\"Registry Key\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%') AQL filter query",
+    "AND NOT when the event matches Process Name (custom) is any of atbroker.exe",
+    "AND NOT when the event matches (((LOWER(\"Target Object\") LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and \"target details\"='(empty)') or (LOWER(\"Process File File Path\") LIKE 'c:\\windows\\installer\\msi%' and LOWER(\"Target Object\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%'))) or (((LOWER(\"Registry Key\") LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and \"registry value data\"='(empty)') or (LOWER(\"Process File File Path\") LIKE 'c:\\windows\\installer\\msi%' and LOWER(\"Registry Key\") LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%'))) AQL filter query"
+  ],
+  "RED_list": []
+}

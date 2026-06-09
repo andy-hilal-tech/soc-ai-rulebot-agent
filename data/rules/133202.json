@@ -1,0 +1,48 @@
+{
+  "uuid": "28d1ad0c-8671-4445-8fa6-0c2df729a9c2",
+  "id": "133202",
+  "name": "QNI : High Number of Emails From Unauthorized Users",
+  "notes": "This rule triggers when flow content has an email sender that is not included in the whitelist sends numerous emails. This behaviour can reveal a tentative of massive infection. In most cases, only a limited number of entities are meant to send mass emailing.\n\nNote: The \"Whitelisted Email Admins\" reference set must be populated with email addresses allowed to send large amount of emails at once.",
+  "response_qid": "67500943",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500943"
+  ],
+  "rule_refs": [
+    "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail in Flows"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail in Flows</a>",
+    "when the flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Originating User is not N/A</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Whitelisted Email Admins',&quot;Originating User&quot;) == FALSE</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Originating User</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Originating User</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY QNI : High Number of Emails From Unauthorized Users on flows which are detected by the LOCAL system",
+    "AND when a flow matches any of the following BB:DeviceDefinition: Mail in Flows",
+    "AND when the flow matches Originating User is not N/A",
+    "AND when the flow matches REFERENCESETCONTAINS('Whitelisted Email Admins',\"Originating User\") == FALSE AQL filter query",
+    "AND when at least 100 flows are seen with the same Originating User in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : High Number of Emails From Unauthorized Users",
+    "Event description: Detects when flow content has an email sender that is not included in the whitelist sending numerous emails. ",
+    "Severity: 6, Credibility: 6, Relevance: 6",
+    "High-Level Category: \"Application\"",
+    "Low-Level Category: \"Mail Receive\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

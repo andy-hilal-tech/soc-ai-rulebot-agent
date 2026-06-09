@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1300",
+  "id": "100002",
+  "name": "BB:DeviceDefinition: Devices to Monitor for High Event Rates",
+  "notes": "Defines devices in which you wish to monitor for high event rates.  The event rate threshold is controlled in the rule \"Anomaly: Devices with High Event Rates\"",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: Devices to Monitor for High Event Rates on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Flow Classification Engine-5 :: acme21</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: Devices to Monitor for High Event Rates on events which are detected by the undefined system",
+    "AND when the event(s) were detected by one or more of Flow Classification Engine-5 :: acme21"
+  ],
+  "RED_list": []
+}

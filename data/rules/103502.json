@@ -1,0 +1,25 @@
+{
+  "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+  "id": "103502",
+  "name": "BB:VMware: Session Activity",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:VMware: Session Activity on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(54500178) Session Event, (54500179) Session Terminated Event, (54500019) Already Authenticated Session Event, (54500292) Begin Session, (54500302) Finish Session, (54500177) Server Started Session Event, (54500191) User Login Session Event, (54500192) User Logout Session Event, (78250043) Login Session</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:VMware: Session Activity on events which are detected by the undefined system",
+    "AND when the event QID is one of the following (54500178) Session Event, (54500179) Session Terminated Event, (54500019) Already Authenticated Session Event, (54500292) Begin Session, (54500302) Finish Session, (54500177) Server Started Session Event, (54500191) User Login Session Event, (54500192) User Logout Session Event, (78250043) Login Session"
+  ],
+  "RED_list": []
+}

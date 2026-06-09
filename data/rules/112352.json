@@ -1,0 +1,50 @@
+{
+  "uuid": "03ea0946-9a67-4ea0-9234-71ef50185fe1",
+  "id": "112352",
+  "name": "Service Binary Path Update Followed by User or Group Modification",
+  "notes": "This rule triggers when a service binary path is updated and a user or a group is modified on the same host.",
+  "response_qid": "67500474",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500474"
+  ],
+  "rule_refs": [
+    "6b885afd-3669-434f-8a8f-3e77c3debbd1",
+    "SYSTEM-1309"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Service Binary Path Set or Update",
+    "BB:CategoryDefinition: Authentication User or Group Added or Changed",
+    "BB:CategoryDefinition: Authentication User or Group Added or Changed match at least 1 times in 10 minutes after any of BB:BehaviorDefinition: Service Binary Path Set or Update match with the same Source IP"
+  ],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1309",
+    "6b885afd-3669-434f-8a8f-3e77c3debbd1"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication User or Group Added or Changed</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Service Binary Path Set or Update</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Source IP</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication User or Group Added or Changed</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Service Binary Path Set or Update</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Source IP</a>"
+  ],
+  "TD_list": [
+    "APPLY Service Binary Path Update Followed by User or Group Modification on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when BB:CategoryDefinition: Authentication User or Group Added or Changed match at least 1 times in 10 minutes after any of BB:BehaviorDefinition: Service Binary Path Set or Update match with the same Source IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detected a Service Binary Path Changed followed by a User or Group Added",
+    "Event description: Detected a Service Binary Path Changed followed by a User or Group Added",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1223",
+  "id": "100171",
+  "name": "BB:FalsePositive: Local Source to Local Destination False Positives",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from Local-to-Local (L2L) based servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:FalsePositive: Local Source to Local Destination False Positives on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1007205) SMB:NAME-WILDCARD</a>",
+    "where the attack context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Local Source to Local Destination False Positives on events which are detected by the undefined system",
+    "AND the event QID is one of the following (1007205) SMB:NAME-WILDCARD",
+    "AND where the attack context is Local to Local"
+  ],
+  "RED_list": []
+}

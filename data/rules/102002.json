@@ -1,0 +1,27 @@
+{
+  "uuid": "5fc3b7bd-434a-420d-9612-983cf319ce84",
+  "id": "102002",
+  "name": "BB:UBA : Unusual Times, Evening",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Unusual Times"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow(s) or event(s) occur <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>after</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>18:00</a>",
+    "when the flow(s) or event(s) occur <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>before</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>23:59</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Unusual Times, Evening on events which are detected by the LOCAL system",
+    "AND when the flow(s) or event(s) occur after 18:00",
+    "AND when the flow(s) or event(s) occur before 23:59"
+  ],
+  "RED_list": []
+}

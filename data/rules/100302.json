@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1250",
+  "id": "100302",
+  "name": "BB:PortDefinition: Proxy Ports",
+  "notes": "Edit this BB to include all common ports used by proxy servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: Proxy Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>3128, 1080, 3127</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: Proxy Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 3128, 1080, 3127"
+  ],
+  "RED_list": []
+}

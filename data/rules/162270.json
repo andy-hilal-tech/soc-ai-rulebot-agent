@@ -1,0 +1,36 @@
+{
+  "uuid": "034f3e73-1e75-4774-8a66-2425825d79d1",
+  "id": "162270",
+  "name": "Certificate Request Export to Exchange Webserver",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Max Altgelt (Nextron Systems)\nSIGMA Title: Certificate Request Export to Exchange Webserver\nSIGMA Description: Detects a write of an Exchange CSR to an untypical directory or with aspx name suffix which can be used to place a webshell\n\nFalse positives:\n- Unlikely\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Defender 365, Dhalman ME O365, Health360 O365, O365, Microsoft Azure H360</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%new-exchangecertificate%' OR LOWER(UTF8(payload)) LIKE '% -generaterequest%' OR LOWER(UTF8(payload)) LIKE '% -binaryencoded%' OR LOWER(UTF8(payload)) LIKE '% -requestfile%') AND (LOWER(UTF8(payload)) LIKE '%\\localhost\\c$%' OR LOWER(UTF8(payload)) LIKE '%\\\\127.0.0.1\\c$%' OR LOWER(UTF8(payload)) LIKE '%c:\\inetpub%' OR LOWER(UTF8(payload)) LIKE '%.aspx%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Certificate Request Export to Exchange Webserver on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Defender 365, Dhalman ME O365, Health360 O365, O365, Microsoft Azure H360",
+    "AND when the event matches devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%new-exchangecertificate%' OR LOWER(UTF8(payload)) LIKE '% -generaterequest%' OR LOWER(UTF8(payload)) LIKE '% -binaryencoded%' OR LOWER(UTF8(payload)) LIKE '% -requestfile%') AND (LOWER(UTF8(payload)) LIKE '%\\localhost\\c$%' OR LOWER(UTF8(payload)) LIKE '%\\\\127.0.0.1\\c$%' OR LOWER(UTF8(payload)) LIKE '%c:\\inetpub%' OR LOWER(UTF8(payload)) LIKE '%.aspx%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Certificate Request Export to Exchange Webserver",
+    "Event description: Converted from SIGMA Rule.  Original Author: Max Altgelt (Nextron Systems) SIGMA Title: Certificate Request Export to Exchange Webserver SIGMA Description: Detects a write of an Exchange CSR to an untypical directory or with aspx name suffix which can be used to place a webshell  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

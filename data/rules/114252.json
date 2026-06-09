@@ -1,0 +1,47 @@
+{
+  "uuid": "dca938f3-5d6b-4cfe-a823-941fb8e5ada2",
+  "id": "114252",
+  "name": "UBA : MaaS360 device out of compliance due to non-roaming data usage",
+  "notes": "Device is not compliant because it exceeded the mobile usage limit set by MaaS Admin",
+  "response_qid": "67500517",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500517"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "qidEventCategory",
+    "qidEventId"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM MaaS360 Security</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Event ID</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>NON_ROAMING_DATA_USAGE</a>",
+    "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Event Category</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>COMPLIANCE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : MaaS360 device out of compliance due to non-roaming data usage on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of IBM MaaS360 Security",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when any of Event ID match NON_ROAMING_DATA_USAGE",
+    "AND when any of Event Category match COMPLIANCE"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : MaaS360 device out of compliance due to non-roaming data usage",
+    "Event description: senseValue=5,senseDesc='MaaS360 device out of compliance due to non-roaming data usage'",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Network Threshold Policy Violation\""
+  ]
+}

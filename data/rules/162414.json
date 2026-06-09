@@ -1,0 +1,34 @@
+{
+  "uuid": "7025dc46-b636-42e3-aeba-2642c8e20dbd",
+  "id": "162414",
+  "name": "WMI Persistence - Security",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems), Gleb Sukhodolskiy, Timur Zinniatullin oscd.community\nSIGMA Title: WMI Persistence - Security\nSIGMA Description: Detects suspicious WMI event filter and command line event consumer based on WMI and Security Logs.\n\nFalse positives:\n- Unknown (data set is too small; further testing needed)\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4662 AND \"Object Type\"='WMI Namespace' AND LOWER(\"Object Name\") LIKE '%subscription%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY WMI Persistence - Security on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4662 AND \"Object Type\"='WMI Namespace' AND LOWER(\"Object Name\") LIKE '%subscription%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: WMI Persistence - Security",
+    "Event description: Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems), Gleb Sukhodolskiy, Timur Zinniatullin oscd.community SIGMA Title: WMI Persistence - Security SIGMA Description: Detects suspicious WMI event filter and command line event consumer based on WMI and Security Logs.  False positives: - Unknown (data set is too small; further testing needed)  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

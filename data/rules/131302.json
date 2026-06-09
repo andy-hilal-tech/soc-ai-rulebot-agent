@@ -1,0 +1,53 @@
+{
+  "uuid": "a633437e-abfb-40bd-95af-375cfda6b20a",
+  "id": "131302",
+  "name": "Email containing Sensitive File Sent to Potentially Hostile Host",
+  "notes": "This rule triggers when an email that contains a sensitive file being sent to a host that is known for hostile activities, such as Phishing, Spam, Malware, Botnet Command and Control, or Cryptocurrency Mining. The Files in Sensitive Directories reference set is populated by the Files in Sensitive File Directories rule.\n\nNote: The Sensitive Directories reference set must be populated.",
+  "response_qid": "67500888",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500888"
+  ],
+  "rule_refs": [
+    "1e4cafae-654f-4a15-a324-472fbcfbc32b",
+    "7e9d4fd7-2803-4952-ac24-c215b0888ee2",
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Potentially Hostile Email Host",
+    "BB:DeviceDefinition: Mail",
+    "BB:Exfiltration: Files in Sensitive Directories",
+    "BB:Exfiltration: Files in Sensitive Directories match at least 1 times with the same Message ID (custom) in 5 minutes after BB:BehaviorDefinition: Potentially Hostile Email Host match"
+  ],
+  "db_fields_used": [
+    "Message ID"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+    "7e9d4fd7-2803-4952-ac24-c215b0888ee2",
+    "1e4cafae-654f-4a15-a324-472fbcfbc32b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Exfiltration: Files in Sensitive Directories</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Message ID (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Potentially Hostile Email Host</a> match"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Exfiltration: Files in Sensitive Directories</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Message ID (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Potentially Hostile Email Host</a> match"
+  ],
+  "TD_list": [
+    "APPLY Email containing Sensitive File Sent to Potentially Hostile Host on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Mail",
+    "AND when BB:Exfiltration: Files in Sensitive Directories match at least 1 times with the same Message ID (custom) in 5 minutes after BB:BehaviorDefinition: Potentially Hostile Email Host match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Email containing Sensitive File Sent to Potentially Hostile Host",
+    "Event description: Detects when an email that contains a sensitive file is sent to a host that is known for hostile activities.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Information Leak\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Recipients (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

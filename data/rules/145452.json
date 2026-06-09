@@ -1,0 +1,29 @@
+{
+  "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+  "id": "145452",
+  "name": "BB:BehaviorDefinition: HyperStack Filenames",
+  "notes": "This building block detects when HyperStack files are discovered.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: HyperStack Filenames on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Success, Audit.Object Access Attempt</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) MATCHES ('backport.inf') OR LOWER(&quot;Filename&quot;) MATCHES ('adschemeintegrity.exe')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: HyperStack Filenames on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Success, Audit.Object Access Attempt",
+    "AND when the event matches LOWER(\"Filename\") MATCHES ('backport.inf') OR LOWER(\"Filename\") MATCHES ('adschemeintegrity.exe') AQL filter query"
+  ],
+  "RED_list": []
+}

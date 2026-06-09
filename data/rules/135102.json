@@ -1,0 +1,44 @@
+{
+  "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+  "id": "135102",
+  "name": "Reconnaissance Tool Detected",
+  "notes": "This rule triggers when discovery tools commonly used before deploying ransomware are detected.\nThese tools may also be used by red teams and are not inherently dangerous, however malicious actors can use them to survey an environment before attacking it.\nThe rule has been prepopulated with the following tools:\n\n- BloodHound, and its data-ingestion tool SharpHound, is an application used to map hidden and unintended relationships within an Active Directory environment. Attackers can use these tools to easily identify attack paths.\n- PingCastle is a tool commonly used by enterprises to asses the security of their Active Directory. Malicious actors can use this tool to detect vulnerabilities within the environment.\n- Advanced IP Scanner is a network scanner that can be used to remotely control devices in an environment. This tool can be used during a ransomware attack to enable lateral movement.\n- AdFind is a command line Active Directory query tool. It can be used to quickly identify weak points within an Active Directory configuration.\n- Everything (or ES) is a search utility allowing to find files and folders faster. This functionality can enable ransomware to gather information about all files and folders for later encryption.\n- Masscan is a port-scanning tool. It is frequently used by attackers to list potentially vulnerable ports.",
+  "response_qid": "67501046",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501046"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, System.File Created</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) MATCHES '(sharphound|bloodhound|pingcastle|advanced_ip_scanner|adfind|everything|es|masscan)(\\.exe)?'  OR LOWER(&quot;Filename&quot;) MATCHES '(sharphound|bloodhound|pingcastle|advanced_ip_scanner|adfind|everything|es|masscan)(\\.exe)?'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Reconnaissance Tool Detected on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Process Creation Success, System.File Created",
+    "AND when the event matches LOWER(\"Process Name\") MATCHES '(sharphound|bloodhound|pingcastle|advanced_ip_scanner|adfind|everything|es|masscan)(\\.exe)?'  OR LOWER(\"Filename\") MATCHES '(sharphound|bloodhound|pingcastle|advanced_ip_scanner|adfind|everything|es|masscan)(\\.exe)?' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Reconnaissance Tool Process Detected",
+    "Event description: Detects discovery tools commonly used before deploying ransomware.\nNote that these tools may also be used by Red teams, and are not necessarily malicious (in penetration testing, for example).",
+    "Severity: 7, Credibility: 9, Relevance: 9",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Content Scan\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

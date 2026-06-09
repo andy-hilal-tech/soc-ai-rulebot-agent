@@ -1,0 +1,50 @@
+{
+  "uuid": "9a5b3f28-18cf-4092-8da0-11f6f8e1304c",
+  "id": "141952",
+  "name": "Multiple Login Failures from Default Accounts",
+  "notes": "This rule detects multiple login failures from default accounts.",
+  "response_qid": "67501124",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501124"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>username MATCHES '(J&auml;rjestelm&auml;nvalvoja|Rendszergazda|Администратор|Administrateur|Administrador|Administrat&ouml;r|Administrator|guest|DefaultAccount)'</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Multiple Login Failures from Default Accounts on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when an event matches any of the following BB:CategoryDefinition: Authentication Failures",
+    "AND when the event matches username MATCHES '(Järjestelmänvalvoja|Rendszergazda|Администратор|Administrateur|Administrador|Administratör|Administrator|guest|DefaultAccount)' AQL filter query",
+    "AND when at least 3 events are seen with the same Machine Identifier (custom) in 10 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Login Failures from Default Accounts",
+    "Event description: This rule detects multiple login failures from default accounts.",
+    "Severity: 6, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using ProcessName (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

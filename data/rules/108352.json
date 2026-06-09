@@ -1,0 +1,33 @@
+{
+  "uuid": "0fb19a99-f328-4cbf-b38f-01c9ccdd2bf1",
+  "id": "108352",
+  "name": "BB:UBA : Multiple Blocked File Uploads",
+  "notes": "BB to detect multiple blocked uploads from the same IP address within 30 min",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Multiple Blocked File Uploads on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.FTP Action Denied, Access.Firewall Session Closed, Access.Access Denied</a>",
+    "when the destination port is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>443, 21, 80</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:UBA : Multiple Blocked File Uploads on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Access.FTP Action Denied, Access.Firewall Session Closed, Access.Access Denied",
+    "AND when the destination port is one of the following 443, 21, 80",
+    "AND when at least 10 events are seen with the same Source IP in 30 minutes"
+  ],
+  "RED_list": []
+}

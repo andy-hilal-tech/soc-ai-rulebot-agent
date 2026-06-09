@@ -1,0 +1,47 @@
+{
+  "uuid": "dea6ba31-1383-4035-b006-a9064ff92984",
+  "id": "124702",
+  "name": "QRadar Audit: Shared Account",
+  "notes": "This rule generates an offense when there is a potential shared account that is connected to QRadar. Add QRadar IP addresses to the QRadar Deployment – IP reference set to exclude them as source IP addresses.",
+  "response_qid": "67500751",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500751"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "sourceIP",
+    "userName, qid"
+  ],
+  "reference_sets": [
+    "27"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>SIM Audit</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>QRadar Deployment - IP</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Username is any of configservices</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Username, Event Name</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Username, Event Name</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY QRadar Audit: Shared Account on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of SIM Audit",
+    "AND NOT when any of Source IP are contained in any of QRadar Deployment - IP",
+    "AND NOT when the event matches Username is any of configservices",
+    "AND when at least 2 events are seen with the same Username, Event Name and different Source IP in 30 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Possible Shared Account",
+    "Event description: Detects when an account has been shared between multiple users.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Control System\"",
+    "Low-Level Category: \"Suspicious Behavior\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

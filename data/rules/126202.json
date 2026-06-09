@@ -1,0 +1,46 @@
+{
+  "uuid": "38d9c250-1617-423e-ae59-52a5d894d5bf",
+  "id": "126202",
+  "name": "Command Execution in Critical Namespaces by Non-System User",
+  "notes": "This rule detects execution of a command in a critical namespace, for example kube-system in Kerbernetes, by a non-system user. Normal users should not interact with system resources.\n\nNote: Edit the rule to replace \"system:serviceaccount\" by typical Service Accounts on the system",
+  "response_qid": "67500786",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500786"
+  ],
+  "rule_refs": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "bb_references": [
+    "BB:DeviceDefiniton: Containers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:DeviceDefiniton: Containers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Procedure/Trigger Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Username is not any of system:serviceaccount</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Namespace (custom) is any of [kube-system or kube-public]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Command Execution in Critical Namespaces by Non-System User on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefiniton: Containers",
+    "AND when the event category for the event is one of the following Audit.Procedure/Trigger Execution",
+    "AND when the event matches Username is not any of system:serviceaccount",
+    "AND when the event matches Namespace (custom) is any of [kube-system or kube-public]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Command Execution in Critical Namespaces by Non-System User",
+    "Event description: Detects when a command execution in critical namespaces by a non-system user.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Command Execution\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

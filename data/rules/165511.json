@@ -1,0 +1,35 @@
+{
+  "uuid": "8f937c03-60de-4f32-bed5-b4c6be8e633f",
+  "id": "165511",
+  "name": "H360 - Log source not sending logs - 1 - SRV-APP-H360",
+  "notes": "",
+  "response_qid": "67501884",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501884"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>WindowsAuthServer @ SRV-APP-H360</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY H360 - Log source not sending logs - 1 - SRV-APP-H360 on events which are detected by the LOCAL system",
+    "AND when the event(s) have not been detected by one or more of WindowsAuthServer @ SRV-APP-H360 for 900 seconds"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: SRV-APP-H360 - Log source not sending logs",
+    "Event description: SRV-APP-H360 - Log source not sending logs",
+    "Severity: 10, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"System Failure\"",
+    "Annotate offense with SRV-APP-H360 - Log source not sending logs",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

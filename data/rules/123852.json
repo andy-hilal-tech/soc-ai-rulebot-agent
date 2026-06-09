@@ -1,0 +1,25 @@
+{
+  "uuid": "9ce5e220-fe61-4ee8-9c3d-8da63286a5bc",
+  "id": "123852",
+  "name": "BB:DeviceDefinition: Attack Surface Management",
+  "notes": "This rule defines all attack surface management devices on the system.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: Attack Surface Management on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM Security Randori Recon</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: Attack Surface Management on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of IBM Security Randori Recon"
+  ],
+  "RED_list": []
+}

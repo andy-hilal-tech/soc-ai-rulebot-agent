@@ -1,0 +1,34 @@
+{
+  "uuid": "2182d939-49f4-4ca3-b426-45efe813b73f",
+  "id": "162430",
+  "name": "Suspicious Scheduled Task Creation",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: Suspicious Scheduled Task Creation\nSIGMA Description: Detects suspicious scheduled task creation events. Based on attributes such as paths, commands line flags, etc.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4698 AND (LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp*%' OR LOWER(UTF8(payload)) LIKE '%\\appdata\\roaming\\%' OR LOWER(UTF8(payload)) LIKE '%\\users\\public\\%' OR LOWER(UTF8(payload)) LIKE '%\\windows\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%\\desktop\\%' OR LOWER(UTF8(payload)) LIKE '%\\downloads\\%' OR LOWER(UTF8(payload)) LIKE '%\\temporary internet%' OR LOWER(UTF8(payload)) LIKE '%c:\\programdata\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\perflogs\\%') AND (LOWER(UTF8(payload)) LIKE '%regsvr32%' OR LOWER(UTF8(payload)) LIKE '%rundll32%' OR LOWER(UTF8(payload)) LIKE '%cmd.exe</command>%' OR LOWER(UTF8(payload)) LIKE '%cmd</command>%' OR LOWER(UTF8(payload)) LIKE '%<arguments>/c %' OR LOWER(UTF8(payload)) LIKE '%<arguments>/k %' OR LOWER(UTF8(payload)) LIKE '%<arguments>/r %' OR LOWER(UTF8(payload)) LIKE '%powershell%' OR LOWER(UTF8(payload)) LIKE '%pwsh%' OR LOWER(UTF8(payload)) LIKE '%mshta%' OR LOWER(UTF8(payload)) LIKE '%wscript%' OR LOWER(UTF8(payload)) LIKE '%cscript%' OR LOWER(UTF8(payload)) LIKE '%certutil%' OR LOWER(UTF8(payload)) LIKE '%bitsadmin%' OR LOWER(UTF8(payload)) LIKE '%bash.exe%' OR LOWER(UTF8(payload)) LIKE '%bash %' OR LOWER(UTF8(payload)) LIKE '%scrcons%' OR LOWER(UTF8(payload)) LIKE '%wmic %' OR LOWER(UTF8(payload)) LIKE '%wmic.exe%' OR LOWER(UTF8(payload)) LIKE '%forfiles%' OR LOWER(UTF8(payload)) LIKE '%scriptrunner%' OR LOWER(UTF8(payload)) LIKE '%hh.exe%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Scheduled Task Creation on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4698 AND (LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp*%' OR LOWER(UTF8(payload)) LIKE '%\\appdata\\roaming\\%' OR LOWER(UTF8(payload)) LIKE '%\\users\\public\\%' OR LOWER(UTF8(payload)) LIKE '%\\windows\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%\\desktop\\%' OR LOWER(UTF8(payload)) LIKE '%\\downloads\\%' OR LOWER(UTF8(payload)) LIKE '%\\temporary internet%' OR LOWER(UTF8(payload)) LIKE '%c:\\programdata\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\perflogs\\%') AND (LOWER(UTF8(payload)) LIKE '%regsvr32%' OR LOWER(UTF8(payload)) LIKE '%rundll32%' OR LOWER(UTF8(payload)) LIKE '%cmd.exe%' OR LOWER(UTF8(payload)) LIKE '%cmd%' OR LOWER(UTF8(payload)) LIKE '%/c %' OR LOWER(UTF8(payload)) LIKE '%/k %' OR LOWER(UTF8(payload)) LIKE '%/r %' OR LOWER(UTF8(payload)) LIKE '%powershell%' OR LOWER(UTF8(payload)) LIKE '%pwsh%' OR LOWER(UTF8(payload)) LIKE '%mshta%' OR LOWER(UTF8(payload)) LIKE '%wscript%' OR LOWER(UTF8(payload)) LIKE '%cscript%' OR LOWER(UTF8(payload)) LIKE '%certutil%' OR LOWER(UTF8(payload)) LIKE '%bitsadmin%' OR LOWER(UTF8(payload)) LIKE '%bash.exe%' OR LOWER(UTF8(payload)) LIKE '%bash %' OR LOWER(UTF8(payload)) LIKE '%scrcons%' OR LOWER(UTF8(payload)) LIKE '%wmic %' OR LOWER(UTF8(payload)) LIKE '%wmic.exe%' OR LOWER(UTF8(payload)) LIKE '%forfiles%' OR LOWER(UTF8(payload)) LIKE '%scriptrunner%' OR LOWER(UTF8(payload)) LIKE '%hh.exe%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Scheduled Task Creation",
+    "Event description: Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Suspicious Scheduled Task Creation SIGMA Description: Detects suspicious scheduled task creation events. Based on attributes such as paths, commands line flags, etc.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

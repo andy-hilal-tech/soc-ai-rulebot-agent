@@ -1,0 +1,34 @@
+{
+  "uuid": "52642bee-3ce9-4074-b590-7abb1bfc32a3",
+  "id": "162237",
+  "name": "BITS Transfer Job Download From Direct IP",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: BITS Transfer Job Download From Direct IP\nSIGMA Description: Detects a BITS transfer job downloading file(s) from a direct IP address.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=16403 AND (LOWER(UTF8(payload)) LIKE '%http://1%' OR LOWER(UTF8(payload)) LIKE '%http://2%' OR LOWER(UTF8(payload)) LIKE '%http://3%' OR LOWER(UTF8(payload)) LIKE '%http://4%' OR LOWER(UTF8(payload)) LIKE '%http://5%' OR LOWER(UTF8(payload)) LIKE '%http://6%' OR LOWER(UTF8(payload)) LIKE '%http://7%' OR LOWER(UTF8(payload)) LIKE '%http://8%' OR LOWER(UTF8(payload)) LIKE '%http://9%' OR LOWER(UTF8(payload)) LIKE '%https://1%' OR LOWER(UTF8(payload)) LIKE '%https://2%' OR LOWER(UTF8(payload)) LIKE '%https://3%' OR LOWER(UTF8(payload)) LIKE '%https://4%' OR LOWER(UTF8(payload)) LIKE '%https://5%' OR LOWER(UTF8(payload)) LIKE '%https://6%' OR LOWER(UTF8(payload)) LIKE '%https://7%' OR LOWER(UTF8(payload)) LIKE '%https://8%' OR LOWER(UTF8(payload)) LIKE '%https://9%')) AND (NOT(((LOWER(UTF8(payload)) LIKE '%://10.%' OR LOWER(UTF8(payload)) LIKE '%://192.168.%' OR LOWER(UTF8(payload)) LIKE '%://172.16.%' OR LOWER(UTF8(payload)) LIKE '%://172.17.%' OR LOWER(UTF8(payload)) LIKE '%://172.18.%' OR LOWER(UTF8(payload)) LIKE '%://172.19.%' OR LOWER(UTF8(payload)) LIKE '%://172.20.%' OR LOWER(UTF8(payload)) LIKE '%://172.21.%' OR LOWER(UTF8(payload)) LIKE '%://172.22.%' OR LOWER(UTF8(payload)) LIKE '%://172.23.%' OR LOWER(UTF8(payload)) LIKE '%://172.24.%' OR LOWER(UTF8(payload)) LIKE '%://172.25.%' OR LOWER(UTF8(payload)) LIKE '%://172.26.%' OR LOWER(UTF8(payload)) LIKE '%://172.27.%' OR LOWER(UTF8(payload)) LIKE '%://172.28.%' OR LOWER(UTF8(payload)) LIKE '%://172.29.%' OR LOWER(UTF8(payload)) LIKE '%://172.30.%' OR LOWER(UTF8(payload)) LIKE '%://172.31.%' OR LOWER(UTF8(payload)) LIKE '%://127.%' OR LOWER(UTF8(payload)) LIKE '%://169.254.%') OR (LOWER(UTF8(payload)) LIKE '%https://7-%' OR LOWER(UTF8(payload)) LIKE '%http://7-%'))))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BITS Transfer Job Download From Direct IP on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\"=16403 AND (LOWER(UTF8(payload)) LIKE '%http://1%' OR LOWER(UTF8(payload)) LIKE '%http://2%' OR LOWER(UTF8(payload)) LIKE '%http://3%' OR LOWER(UTF8(payload)) LIKE '%http://4%' OR LOWER(UTF8(payload)) LIKE '%http://5%' OR LOWER(UTF8(payload)) LIKE '%http://6%' OR LOWER(UTF8(payload)) LIKE '%http://7%' OR LOWER(UTF8(payload)) LIKE '%http://8%' OR LOWER(UTF8(payload)) LIKE '%http://9%' OR LOWER(UTF8(payload)) LIKE '%https://1%' OR LOWER(UTF8(payload)) LIKE '%https://2%' OR LOWER(UTF8(payload)) LIKE '%https://3%' OR LOWER(UTF8(payload)) LIKE '%https://4%' OR LOWER(UTF8(payload)) LIKE '%https://5%' OR LOWER(UTF8(payload)) LIKE '%https://6%' OR LOWER(UTF8(payload)) LIKE '%https://7%' OR LOWER(UTF8(payload)) LIKE '%https://8%' OR LOWER(UTF8(payload)) LIKE '%https://9%')) AND (NOT(((LOWER(UTF8(payload)) LIKE '%://10.%' OR LOWER(UTF8(payload)) LIKE '%://192.168.%' OR LOWER(UTF8(payload)) LIKE '%://172.16.%' OR LOWER(UTF8(payload)) LIKE '%://172.17.%' OR LOWER(UTF8(payload)) LIKE '%://172.18.%' OR LOWER(UTF8(payload)) LIKE '%://172.19.%' OR LOWER(UTF8(payload)) LIKE '%://172.20.%' OR LOWER(UTF8(payload)) LIKE '%://172.21.%' OR LOWER(UTF8(payload)) LIKE '%://172.22.%' OR LOWER(UTF8(payload)) LIKE '%://172.23.%' OR LOWER(UTF8(payload)) LIKE '%://172.24.%' OR LOWER(UTF8(payload)) LIKE '%://172.25.%' OR LOWER(UTF8(payload)) LIKE '%://172.26.%' OR LOWER(UTF8(payload)) LIKE '%://172.27.%' OR LOWER(UTF8(payload)) LIKE '%://172.28.%' OR LOWER(UTF8(payload)) LIKE '%://172.29.%' OR LOWER(UTF8(payload)) LIKE '%://172.30.%' OR LOWER(UTF8(payload)) LIKE '%://172.31.%' OR LOWER(UTF8(payload)) LIKE '%://127.%' OR LOWER(UTF8(payload)) LIKE '%://169.254.%') OR (LOWER(UTF8(payload)) LIKE '%https://7-%' OR LOWER(UTF8(payload)) LIKE '%http://7-%')))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: BITS Transfer Job Download From Direct IP",
+    "Event description: Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: BITS Transfer Job Download From Direct IP SIGMA Description: Detects a BITS transfer job downloading file(s) from a direct IP address.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

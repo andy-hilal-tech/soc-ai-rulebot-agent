@@ -1,0 +1,44 @@
+{
+  "uuid": "c845c1cd-b54d-46cb-aa9c-633136b42ca7",
+  "id": "158352",
+  "name": "Reconnaissance Activity Using BuiltIn Commands",
+  "notes": "This rule detects the execution of a set of builtin commands often used in recon stages by different attack groups\n\nCovered from SIGMA Rule.\n\nOriginal Author: juju4\nSIGMA Title: Quick Execution of a Series of Suspicious Commands\nSIGMA Description: Detects multiple suspicious process in a limited timeframe\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501653",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501653"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "sourceaddress"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) LIKE 'arp.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'attrib.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'dsquery.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'hostname.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'ipconfig.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'nbtstat.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'net.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'netsh.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'nslookup.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'ping.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'quser.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'qwinsta.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'reg.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'runas.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'sc.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'schtasks.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'systeminfo.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'telnet.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'tracert.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'xcopy.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'pscp.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'copy.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'robocopy.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'certutil.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'wbadmin.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'icacls.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'diskpart.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'tasklist.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'whoami.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'qprocess.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'netstat.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'net1.exe'</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Source Address</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Source Address</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Reconnaissance Activity Using BuiltIn Commands on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Process Full Full Name\") LIKE 'arp.exe' or LOWER(\"Process Full Full Name\") LIKE 'attrib.exe' or LOWER(\"Process Full Full Name\") LIKE 'dsquery.exe' or LOWER(\"Process Full Full Name\") LIKE 'hostname.exe' or LOWER(\"Process Full Full Name\") LIKE 'ipconfig.exe' or LOWER(\"Process Full Full Name\") LIKE 'nbtstat.exe' or LOWER(\"Process Full Full Name\") LIKE 'net.exe' or LOWER(\"Process Full Full Name\") LIKE 'netsh.exe' or LOWER(\"Process Full Full Name\") LIKE 'nslookup.exe' or LOWER(\"Process Full Full Name\") LIKE 'ping.exe' or LOWER(\"Process Full Full Name\") LIKE 'quser.exe' or LOWER(\"Process Full Full Name\") LIKE 'qwinsta.exe' or LOWER(\"Process Full Full Name\") LIKE 'reg.exe' or LOWER(\"Process Full Full Name\") LIKE 'runas.exe' or LOWER(\"Process Full Full Name\") LIKE 'sc.exe' or LOWER(\"Process Full Full Name\") LIKE 'schtasks.exe' or LOWER(\"Process Full Full Name\") LIKE 'systeminfo.exe' or LOWER(\"Process Full Full Name\") LIKE 'telnet.exe' or LOWER(\"Process Full Full Name\") LIKE 'tracert.exe' or LOWER(\"Process Full Full Name\") LIKE 'xcopy.exe' or LOWER(\"Process Full Full Name\") LIKE 'pscp.exe' or LOWER(\"Process Full Full Name\") LIKE 'copy.exe' or LOWER(\"Process Full Full Name\") LIKE 'robocopy.exe' or LOWER(\"Process Full Full Name\") LIKE 'certutil.exe' or LOWER(\"Process Full Full Name\") LIKE 'wbadmin.exe' or LOWER(\"Process Full Full Name\") LIKE 'icacls.exe' or LOWER(\"Process Full Full Name\") LIKE 'diskpart.exe' or LOWER(\"Process Full Full Name\") LIKE 'tasklist.exe' or LOWER(\"Process Full Full Name\") LIKE 'whoami.exe' or LOWER(\"Process Full Full Name\") LIKE 'qprocess.exe' or LOWER(\"Process Full Full Name\") LIKE 'netstat.exe' or LOWER(\"Process Full Full Name\") LIKE 'net1.exe' AQL filter query",
+    "AND when at least 5 events are seen with the same Source Address in 1 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Reconnaissance Activity Using BuiltIn Commands",
+    "Event description: Detects the execution of a set of builtin commands often used in recon stages by different attack groups",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Recon\"",
+    "Low-Level Category: \"Windows Reconnaissance\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "89c925ea-ba0c-4661-8115-9aee2b76caa3",
+  "id": "162224",
+  "name": "File Was Not Allowed To Run",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Pushkarev Dmitry\nSIGMA Title: File Was Not Allowed To Run\nSIGMA Description: Detect run not allowed files. Applocker is a very useful tool, especially on servers where unprivileged users have access. For example terminal servers. You need configure applocker and log collect to receive these events.\n\nFalse positives:\n- Need tuning applocker or add exceptions in SIEM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\" IN('8004', '8007', '8022', '8025')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY File Was Not Allowed To Run on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\" IN('8004', '8007', '8022', '8025') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: File Was Not Allowed To Run",
+    "Event description: Converted from SIGMA Rule.  Original Author: Pushkarev Dmitry SIGMA Title: File Was Not Allowed To Run SIGMA Description: Detect run not allowed files. Applocker is a very useful tool, especially on servers where unprivileged users have access. For example terminal servers. You need configure applocker and log collect to receive these events.  False positives: - Need tuning applocker or add exceptions in SIEM  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

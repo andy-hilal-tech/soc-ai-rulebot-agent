@@ -1,0 +1,44 @@
+{
+  "uuid": "SYSTEM-1298",
+  "id": "122602",
+  "name": "Exploit Followed by Suspicious Host Activity",
+  "notes": "This rule triggers when exploit or attack events are followed by suspicious activity event, which may indicate a successful attack.",
+  "response_qid": "67500706",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500706"
+  ],
+  "rule_refs": [
+    "SYSTEM-1204",
+    "SYSTEM-1297"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Exploits Backdoors and Trojans",
+    "BB:CategoryDefinition: Post Exploit Account Activity",
+    "BB:CategoryDefinition: Post Exploit Account Activity in order with the same IP from the previous destination"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1204",
+    "SYSTEM-1297"
+  ],
+  "conditions_text": [
+    "when all of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>IP</a> followed by all of these <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:CategoryDefinition: Post Exploit Account Activity</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>in</a> order with the same <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>IP</a> from the previous <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>destination</a>, within <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"12\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Exploit Followed by Suspicious Host Activity on events which are detected by the LOCAL system",
+    "AND when all of these BB:CategoryDefinition: Exploits Backdoors and Trojans, in order, with the same source IP followed by all of these BB:CategoryDefinition: Post Exploit Account Activity in order with the same IP from the previous destination, within 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Exploit Followed by Suspicious Host Activity",
+    "Event description: Detects when exploit or attack events are followed by suspicious activity event, which may indicate a successful attack.",
+    "Severity: 6, Credibility: 7, Relevance: 5",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Misc Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

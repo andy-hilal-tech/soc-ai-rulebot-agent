@@ -1,0 +1,40 @@
+{
+  "uuid": "d5f00220-3746-4921-b23e-d2157f649a7b",
+  "id": "139852",
+  "name": "Ransomware: WCry Payload in Flows",
+  "notes": "This rule triggers when a WCry payload is observed in flows.",
+  "response_qid": "67501100",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501100"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>445</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>the destination</a> side of the flow <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>has</a> payload data",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%00 00 00 31%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%4a 6c 4a 6d 49 68 43 6c 42 73 72 00%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%2b 00 00 00 00 98 07 c0%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Ransomware: WCry Payload in Flows on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Local",
+    "AND when the destination port is one of the following 445",
+    "AND when the destination side of the flow has payload data",
+    "AND when the flow matches FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%00 00 00 31%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%4a 6c 4a 6d 49 68 43 6c 42 73 72 00%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%2b 00 00 00 00 98 07 c0%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: WCry IOC Detected",
+    "Event description: An IOC (Payload) related to WCry ransomware has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

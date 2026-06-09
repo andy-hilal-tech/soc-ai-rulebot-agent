@@ -1,0 +1,41 @@
+{
+  "uuid": "7ee3de94-6a24-47a0-bbfb-7a2f4547d50f",
+  "id": "123952",
+  "name": "High Temptation Target Changed to Lower Temptation",
+  "notes": "This rule triggers when a high temptation target has decreased to medium or low temptation.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "9ce5e220-fe61-4ee8-9c3d-8da63286a5bc"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Attack Surface Management"
+  ],
+  "db_fields_used": [
+    "Target ID"
+  ],
+  "reference_sets": [
+    "169"
+  ],
+  "dependencies": [
+    "9ce5e220-fe61-4ee8-9c3d-8da63286a5bc"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Attack Surface Management</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Temptation (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Temptation (custom) is less than or equal to 29</a>",
+    "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Target ID (custom)</a> are contained in <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>High Temptation Target - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY High Temptation Target Changed to Lower Temptation on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Attack Surface Management",
+    "AND when the event matches Temptation (custom) is not N/A",
+    "AND when the event matches Temptation (custom) is less than or equal to 29",
+    "AND when any of Target ID (custom) are contained in any of High Temptation Target - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Remove \"Target ID\" from Reference Set: \"High Temptation Target\""
+  ]
+}

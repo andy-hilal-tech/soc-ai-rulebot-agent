@@ -1,0 +1,38 @@
+{
+  "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+  "id": "138002",
+  "name": "BB:CategoryDefinition: File Permission Changed",
+  "notes": "This Building Block defines when a command has been executed to change the permissions assigned to a file.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: File Permission Changed on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Audit ID (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Call Type (custom) is 268</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Name (custom) is any of chmod</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: File Permission Changed on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Audit ID (custom) is not N/A",
+    "AND when the event matches Call Type (custom) is 268",
+    "AND when the event matches Process Name (custom) is any of chmod"
+  ],
+  "RED_list": []
+}

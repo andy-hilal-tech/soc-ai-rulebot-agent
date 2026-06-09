@@ -1,0 +1,43 @@
+{
+  "uuid": "1fcd5ba4-8983-4c96-937f-442fadbd967b",
+  "id": "142802",
+  "name": "MITRE.LIN.T1016.RULE System Network Configuration Discovery",
+  "notes": "The following auditd rules should be enabled:\n\n-w /etc/hosts -p r -k siem-network-discovery\n-w /etc/sysconfig/network -p r -k siem-network-discovery\n-w /etc/network/ -p r -k siem-network-discovery\n-a always,exit -F dir=/etc/NetworkManager/ -F perm=r -k siem-network-discovery\n-w /etc/sysconfig/network -p r -k siem-network-discovery\n-w /etc/netplan/ -p r -k siem-network-discovery\n\n-w /usr/bin/ip -p x -k siem-network-discovery\n-w /usr/sbin/ifconfig -p x -k siem-network-discovery\n-w /usr/bin/nmcli -p x -k siem-network-discovery\n-w /usr/sbin/route -p x -k siem-network-discovery\n-w /usr/sbin/arp -p x -k siem-network-discovery\n\nSet correct path for your linux distro (check 'whereis' command)\n\nGet more Linux MITRE rules: https://www.scnsoft.com/services/security/siem/linux-mitre-attack-rules",
+  "response_qid": "67501170",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501170"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Linux UID"
+  ],
+  "reference_sets": [
+    "238"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Linux Auditd Key (custom) is any of siem-network-discovery</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Linux UID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>MITRE: Linux Users - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY MITRE.LIN.T1016.RULE System Network Configuration Discovery on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event matches Linux Auditd Key (custom) is any of siem-network-discovery",
+    "AND NOT when any of Linux UID (custom) are contained in any of MITRE: Linux Users - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MITRE.LIN.T1016.RULE System Network Configuration Discovery",
+    "Event description: Adversaries may use the information from System Network Configuration Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nSee more on: https://attack.mitre.org/techniques/T1016",
+    "Severity: 3, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "Include detected events by \"Source IP\" from this point forward, in the offense, for 0 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

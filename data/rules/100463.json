@@ -1,0 +1,47 @@
+{
+  "uuid": "fa657f7f-67bc-4649-a425-701865f6dcce",
+  "id": "100463",
+  "name": "Local: Clear Text Application Usage",
+  "notes": "Detects flows to or from the Internet where the application type uses clear text passwords.  This may include applications such as Telnet, FTP, etc.",
+  "response_qid": "67500052",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500052"
+  ],
+  "rule_refs": [
+    "SYSTEM-1068",
+    "SYSTEM-1472"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Successful Communication",
+    "BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1068",
+    "SYSTEM-1472"
+  ],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when a flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage</a>",
+    "when a flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Successful Communication</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Local: Clear Text Application Usage on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Local",
+    "AND when a flow matches any of the following BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage",
+    "AND when a flow matches all of the following BB:CategoryDefinition: Successful Communication"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Policy: Local: Clear Text Application Usage",
+    "Event description: Detects flows to or from the Internet where the application type uses clear text passwords.  This may include applications such as Telnet, FTP, etc.",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Compliance Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

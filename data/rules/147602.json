@@ -1,0 +1,33 @@
+{
+  "uuid": "de3ee44f-1968-4364-9690-01ba4803946f",
+  "id": "147602",
+  "name": "BB:BehaviorDefinition: Abuse of Print Executable",
+  "notes": "This Building Block detects the use of print.exe for remote file copy.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Furkan CALISKAN, @caliskanfurkan_, @oscd_initiative\nSIGMA Title: Abusing Print Executable\nSIGMA Description: Attackers can use print.exe for remote file copy\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Abuse of Print Executable on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of print.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE 'print%' and LOWER(&quot;Command&quot;) LIKE '%/d%' and LOWER(&quot;Command&quot;) LIKE '%.exe%')</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%print.exe%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Abuse of Print Executable on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of print.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE 'print%' and LOWER(\"Command\") LIKE '%/d%' and LOWER(\"Command\") LIKE '%.exe%') AQL filter query",
+    "AND NOT when the event matches LOWER(\"Command\") LIKE '%print.exe%' AQL filter query"
+  ],
+  "RED_list": []
+}

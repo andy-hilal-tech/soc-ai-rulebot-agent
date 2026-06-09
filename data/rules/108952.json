@@ -1,0 +1,41 @@
+{
+  "uuid": "4c880a7e-e373-4dae-b900-123357a12953",
+  "id": "108952",
+  "name": "UBA : Data Exfiltration by Print",
+  "notes": "Detects users that are sending files to print or that are using screen capture tools such as Print Screen and Snipping Tool.",
+  "response_qid": "67500343",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500343"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "b336cfa0-5111-4d7a-b57d-abdcf05ce5fe"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : File Transfer to Print"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "b336cfa0-5111-4d7a-b57d-abdcf05ce5fe"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : File Transfer to Print</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Data Exfiltration by Print on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:UBA : File Transfer to Print"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Data Exfiltration by Print",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "uuid": "SYSTEM-1010",
+  "id": "100220",
+  "name": "Destination Asset Weight is High",
+  "notes": "Adjusts the relevance of events and flows if the destination asset weight is high.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>destination</a> asset has a weight <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>6</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Destination Asset Weight is High on events which are detected by the LOCAL system",
+    "AND when the destination asset has a weight greater than 6"
+  ],
+  "RED_list": []
+}

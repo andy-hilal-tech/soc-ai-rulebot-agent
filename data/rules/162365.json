@@ -1,0 +1,34 @@
+{
+  "uuid": "96911a95-d5eb-4561-9111-82626edf9fa8",
+  "id": "162365",
+  "name": "Screen Capture with Import Tool",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Pawel Mazur\nSIGMA Title: Screen Capture with Import Tool\nSIGMA Description: Detects adversary creating screen capture of a desktop with Import Tool.\nHighly recommended using rule on servers, due to high usage of screenshot utilities on user workstations.\nImageMagick must be installed.\n\n\nFalse positives:\n- Legitimate use of screenshot utility\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%import%') AND ((LOWER(Command) LIKE '%a1%-window%' AND LOWER(Command) LIKE '%a2%root%' AND (LOWER(Command) LIKE '%a3%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%')) OR (LOWER(Command) LIKE '%a1%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Screen Capture with Import Tool on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%import%') AND ((LOWER(Command) LIKE '%a1%-window%' AND LOWER(Command) LIKE '%a2%root%' AND (LOWER(Command) LIKE '%a3%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%')) OR (LOWER(Command) LIKE '%a1%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%')) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Screen Capture with Import Tool",
+    "Event description: Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Screen Capture with Import Tool SIGMA Description: Detects adversary creating screen capture of a desktop with Import Tool. Highly recommended using rule on servers, due to high usage of screenshot utilities on user workstations. ImageMagick must be installed.   False positives: - Legitimate use of screenshot utility  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

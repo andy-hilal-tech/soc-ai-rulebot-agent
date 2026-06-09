@@ -1,0 +1,31 @@
+{
+  "uuid": "03c60dd8-2c94-48b5-9ad3-cd377e99a64e",
+  "id": "153352",
+  "name": "BB:BehaviorDefinition: File Download Using ProtocolHandler",
+  "notes": "This Building Block detects usage of \"ProtocolHandler\" to download files. Downloaded files will be located in the cache folder.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: File Download Using ProtocolHandler.exe\nSIGMA Description: Detects usage of \"ProtocolHandler\" to download files. Downloaded files will be located in the cache folder (for example - %LOCALAPPDATA%\\Microsoft\\Windows\\INetCache\\IE)\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: File Download Using ProtocolHandler on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [protocolhandler.exe or ProtocolHandler.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%&quot;ms-word%' AND LOWER(&quot;Command&quot;) LIKE '%.docx&quot;%') OR LOWER(&quot;Command&quot;) LIKE '% http%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: File Download Using ProtocolHandler on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [protocolhandler.exe or ProtocolHandler.exe]",
+    "AND when the event matches ((LOWER(\"Command\") LIKE '%\"ms-word%' AND LOWER(\"Command\") LIKE '%.docx\"%') OR LOWER(\"Command\") LIKE '% http%') AQL filter query"
+  ],
+  "RED_list": []
+}

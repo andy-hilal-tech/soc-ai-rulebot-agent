@@ -1,0 +1,36 @@
+{
+  "uuid": "19712f5f-1817-4f55-b268-4af14cbbccd7",
+  "id": "137402",
+  "name": "BB:BehaviorDefinition: Admin Privileges Added (Unix)",
+  "notes": "This rule detects admin privileges added to standard users. An adversary may escalate its privileges for further attacks.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Admin Privileges Added (Unix) on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Group Member Add Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application (custom) is any of usermod</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Group Name (custom) is any of sudo</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Admin Privileges Added (Unix) on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following Authentication.Group Member Add Success",
+    "AND when the event matches Application (custom) is any of usermod",
+    "AND when the event matches Group Name (custom) is any of sudo"
+  ],
+  "RED_list": []
+}

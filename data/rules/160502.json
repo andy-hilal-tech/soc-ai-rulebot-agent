@@ -1,0 +1,31 @@
+{
+  "uuid": "f20939e6-82e0-4764-8dad-b7d3d18d54c2",
+  "id": "160502",
+  "name": "BB:BehaviorDefinition: Windows Software Discovery",
+  "notes": "This Building Block triggers when windows software is discovered.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Nikita Nazarov, oscd.community\nSIGMA Title: Detected Windows Software Discovery\nSIGMA Description: Adversaries may attempt to enumerate software for a variety of reasons, such as figuring out what security measures are present or if the compromised system has a version of software that is vulnerable.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Windows Software Discovery on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of reg.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%query%') AND (LOWER(&quot;Command&quot;) LIKE '%_software_%') AND (LOWER(&quot;Command&quot;) LIKE '%/v%') AND (LOWER(&quot;Command&quot;) LIKE '%svcversion%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Windows Software Discovery on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of reg.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%query%') AND (LOWER(\"Command\") LIKE '%_software_%') AND (LOWER(\"Command\") LIKE '%/v%') AND (LOWER(\"Command\") LIKE '%svcversion%') AQL filter query"
+  ],
+  "RED_list": []
+}

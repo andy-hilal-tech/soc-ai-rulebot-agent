@@ -1,0 +1,35 @@
+{
+  "uuid": "ab83bd19-7020-4ebd-ace5-1593f955cd84",
+  "id": "144552",
+  "name": "BB:BehaviorDefinition: Svchost Incoming Connection",
+  "notes": "This building block detects suspicious incoming connections to the svchost.exe process.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Svchost Incoming Connection on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of svchost.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of false</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;sourceport&quot; &gt;= 49152 AND &quot;destinationport&quot; &gt;= 49152</a> AQL filter query",
+    "when the source IP is one of the following <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>127.0.0.1</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Svchost Incoming Connection on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches Process Name (custom) is any of svchost.exe",
+    "AND when the event matches Initiated (custom) is any of false",
+    "AND when the event matches \"sourceport\" &gt;= 49152 AND \"destinationport\" &gt;= 49152 AQL filter query",
+    "AND NOT when the source IP is one of the following 127.0.0.1"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,46 @@
+{
+  "uuid": "3507361c-4a6d-4686-9f28-e65ea532cfc3",
+  "id": "125552",
+  "name": "Creation of a User with Superuser Privileges",
+  "notes": "This rule detects the creation of a user account that has a uid or gid of 0. This indicates a Superuser.",
+  "response_qid": "67500776",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500776"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Account Added</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Target Username (custom) is not any of root</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;User ID&quot; = 0 OR &quot;Group ID&quot; = 0</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Creation of a User with Superuser Privileges on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following Authentication.User Account Added",
+    "AND when the event matches Target Username (custom) is not any of root",
+    "AND when the event matches \"User ID\" = 0 OR \"Group ID\" = 0 AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Creation of a User with Superuser Privileges",
+    "Event description: Detects the creation of a user account that has a uid or gid of 0.",
+    "Severity: 9, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"User Account Added\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Target Username (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

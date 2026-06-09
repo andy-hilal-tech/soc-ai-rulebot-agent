@@ -1,0 +1,47 @@
+{
+  "uuid": "37e8275e-f794-4807-b8c1-45279bce708c",
+  "id": "165510",
+  "name": "MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts",
+  "notes": "",
+  "response_qid": "67501883",
+  "qids_trigger": [
+    "105750203"
+  ],
+  "qids_all": [
+    "105750203",
+    "67501883"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Threat Name_EST",
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>QID Number is 105,750,203</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Threat Name_EST (custom)</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>60</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Threat Name_EST (custom)</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>60</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of ESET Remote Administrator",
+    "AND when the event matches QID Number is 105,750,203",
+    "AND when at least 3 events are seen with the same Threat Name_EST (custom) and different Source IP in 60 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts",
+    "Event description: MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Access Denied\"",
+    "Annotate offense with MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should set or replace the name of the associated offense(s)"
+  ]
+}

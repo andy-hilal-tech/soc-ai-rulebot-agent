@@ -1,0 +1,31 @@
+{
+  "uuid": "92686b12-8481-483d-a9ca-b4648cb28ae9",
+  "id": "145502",
+  "name": "BB:BehaviorDefinition: Netcat Execution",
+  "notes": "This building block detects suspicious netcat execution.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113, Florian Roth\nSIGMA Title: Netcat Suspicious Execution\nSIGMA Description: Detects execution of Netcat. Adversaries may use a non-application layer protocol for communication between host and C2 server or among infected hosts within a network\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Netcat Execution on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES '(nc|ncat|netcat)\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% -lvp %' or LOWER(&quot;Command&quot;) LIKE '% -lvnp%' or LOWER(&quot;Command&quot;) LIKE '% -l -v -p %' or LOWER(&quot;Command&quot;) LIKE '% -lv -p %' or LOWER(&quot;Command&quot;) LIKE '% -l --proxy-type http %' or LOWER(&quot;Command&quot;) LIKE '% -vnl --exec %' or LOWER(&quot;Command&quot;) LIKE '% -vnl -e %' or LOWER(&quot;Command&quot;) LIKE '% --lua-exec %' or LOWER(&quot;Command&quot;) LIKE '% --sh-exec %'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Netcat Execution on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Process Full Full Name\") MATCHES '(nc|ncat|netcat)\\.exe' AQL filter query",
+    "AND when the event matches LOWER(\"Command\") LIKE '% -lvp %' or LOWER(\"Command\") LIKE '% -lvnp%' or LOWER(\"Command\") LIKE '% -l -v -p %' or LOWER(\"Command\") LIKE '% -lv -p %' or LOWER(\"Command\") LIKE '% -l --proxy-type http %' or LOWER(\"Command\") LIKE '% -vnl --exec %' or LOWER(\"Command\") LIKE '% -vnl -e %' or LOWER(\"Command\") LIKE '% --lua-exec %' or LOWER(\"Command\") LIKE '% --sh-exec %' AQL filter query"
+  ],
+  "RED_list": []
+}

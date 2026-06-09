@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1046",
+  "id": "100144",
+  "name": "BB:Threats: Port Scans: Host Scans",
+  "notes": "This Building Block identifies potential reconnaissance by flows.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Port Scans: Host Scans on flows which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow type is one of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Superflow C</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Port Scans: Host Scans on flows which are detected by the undefined system",
+    "AND when the flow type is one of Superflow C"
+  ],
+  "RED_list": []
+}

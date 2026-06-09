@@ -1,0 +1,31 @@
+{
+  "uuid": "21e3a7b5-4495-48e3-baed-88578a8606a3",
+  "id": "110502",
+  "name": "BB:BehaviorDefinition: Remote Thread Creation False-Positives",
+  "notes": "This Building Block defines processes allowed to create remote threads.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Remote Thread Creation False-Positives on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Start Function (custom) is any of [EtwpNotificationThread or CtrlRoutine]</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(Start Function = 'EtwpNotificationThread' and Start Module ilike 'C:\\Windows\\system32\\ntdll.dll') or (Start Function = 'CtrlRoutine' and Process Path ilike 'C:\\Windows\\System32\\csrss.exe' and (Start Module ilike 'C:\\Windows\\System32\\KERNELBASE.dll' or Start Module ilike 'C:\\Windows\\system32\\kernel32.dll'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Remote Thread Creation False-Positives on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001845) CreateRemoteThread",
+    "AND when the event matches Start Function (custom) is any of [EtwpNotificationThread or CtrlRoutine]",
+    "AND when the event matches (Start Function = 'EtwpNotificationThread' and Start Module ilike 'C:\\Windows\\system32\\ntdll.dll') or (Start Function = 'CtrlRoutine' and Process Path ilike 'C:\\Windows\\System32\\csrss.exe' and (Start Module ilike 'C:\\Windows\\System32\\KERNELBASE.dll' or Start Module ilike 'C:\\Windows\\system32\\kernel32.dll')) AQL filter query"
+  ],
+  "RED_list": []
+}

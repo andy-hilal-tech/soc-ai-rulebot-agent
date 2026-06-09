@@ -1,0 +1,73 @@
+{
+  "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+  "id": "104252",
+  "name": "BB:UBA : Privileged Activity",
+  "notes": "Indicates when a user has performed an action which is considered to be privileged.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+    "88a260e2-74a4-463b-aaab-f3659991b4ef",
+    "SYSTEM-1308",
+    "SYSTEM-1309",
+    "SYSTEM-1313",
+    "SYSTEM-1439",
+    "SYSTEM-1537",
+    "SYSTEM-1561",
+    "SYSTEM-1563",
+    "SYSTEM-1565",
+    "SYSTEM-1570",
+    "bb8bfe65-c70a-4aa5-b62e-8360fa38716c",
+    "c257057b-d791-4efe-872e-d3c0abcbf582",
+    "de9666ec-3c73-4527-b401-2dd38a038930",
+    "dff65144-caf2-4516-a29a-cde5b5f4626f",
+    "f147d837-a095-4a5f-be3d-7a646600f166"
+  ],
+  "bb_references": [
+    "BB:Audit Tools Access",
+    "BB:CategoryDefinition: Application or Service Installed or Modified",
+    "BB:CategoryDefinition: Auditing Changed",
+    "BB:CategoryDefinition: Authentication User or Group Added or Changed",
+    "BB:CategoryDefinition: Privileged Escalations",
+    "BB:CategoryDefinition: Service Started",
+    "BB:CategoryDefinition: System Configuration",
+    "BB:CategoryDefinition: System or Device Configuration Change",
+    "BB:CategoryDefinition: Windows Compliance Events",
+    "BB:Database: User Addition or Change",
+    "BB:Review Of Access Rights",
+    "BB:System Update Policy Violation Events",
+    "BB:UBA : Privileged Activity on events which are detected by the LOCAL system",
+    "BB:VMware: Session Activity",
+    "BB:VMware: User Account"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1565",
+    "SYSTEM-1563",
+    "SYSTEM-1309",
+    "SYSTEM-1570",
+    "SYSTEM-1537",
+    "SYSTEM-1313",
+    "SYSTEM-1561",
+    "SYSTEM-1308",
+    "SYSTEM-1439",
+    "c257057b-d791-4efe-872e-d3c0abcbf582",
+    "bb8bfe65-c70a-4aa5-b62e-8360fa38716c",
+    "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+    "88a260e2-74a4-463b-aaab-f3659991b4ef",
+    "de9666ec-3c73-4527-b401-2dd38a038930",
+    "f147d837-a095-4a5f-be3d-7a646600f166",
+    "dff65144-caf2-4516-a29a-cde5b5f4626f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Application or Service Installed or Modified, BB:CategoryDefinition: Auditing Changed, BB:CategoryDefinition: Authentication User or Group Added or Changed, BB:CategoryDefinition: Privileged Escalations, BB:CategoryDefinition: Service Started, BB:CategoryDefinition: System Configuration, BB:CategoryDefinition: System or Device Configuration Change, BB:CategoryDefinition: Windows Compliance Events, BB:Database: User Addition or Change, BB:Review Of Access Rights, BB:System Update Policy Violation Events, BB:VMware: Session Activity, BB:VMware: User Account, Role and Permission Created Activity, BB:VMware: User Account, Role and Permission Removal Activity, BB:VMware: User Account, Role and Permission Updated Activity, BB:Audit Tools Access</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Privileged Activity on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:CategoryDefinition: Application or Service Installed or Modified, BB:CategoryDefinition: Auditing Changed, BB:CategoryDefinition: Authentication User or Group Added or Changed, BB:CategoryDefinition: Privileged Escalations, BB:CategoryDefinition: Service Started, BB:CategoryDefinition: System Configuration, BB:CategoryDefinition: System or Device Configuration Change, BB:CategoryDefinition: Windows Compliance Events, BB:Database: User Addition or Change, BB:Review Of Access Rights, BB:System Update Policy Violation Events, BB:VMware: Session Activity, BB:VMware: User Account, Role and Permission Created Activity, BB:VMware: User Account, Role and Permission Removal Activity, BB:VMware: User Account, Role and Permission Updated Activity, BB:Audit Tools Access"
+  ],
+  "RED_list": []
+}

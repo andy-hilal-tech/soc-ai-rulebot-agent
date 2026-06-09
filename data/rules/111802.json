@@ -1,0 +1,29 @@
+{
+  "uuid": "6b885afd-3669-434f-8a8f-3e77c3debbd1",
+  "id": "111802",
+  "name": "BB:BehaviorDefinition: Service Binary Path Set or Update",
+  "notes": "This Building Block triggers when a service binary path is set or updated.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Service Binary Path Set or Update on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set)</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Target Object&quot; IMATCHES '.*services\\\\.*\\\\ImagePath'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Service Binary Path Set or Update on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001832) RegistryEvent (Value Set)",
+    "AND when the event matches \"Target Object\" IMATCHES '.*services\\\\.*\\\\ImagePath' AQL filter query"
+  ],
+  "RED_list": []
+}

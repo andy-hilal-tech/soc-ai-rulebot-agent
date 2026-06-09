@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1350",
+  "id": "100179",
+  "name": "BB:FalsePositive: Proxy Server False Positive Events",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from proxy servers that are defined in the BB:HostDefinition: Proxy Servers and BB:HostReference: Proxy Servers building blocks.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "5eed76c4-d314-4008-88a9-7088c37cf424",
+    "SYSTEM-1222"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: Proxy Server False Positive Events on events which are detected by the LOCAL system",
+    "BB:HostDefinition: Proxy Servers",
+    "BB:HostReference: Proxy Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1222",
+    "5eed76c4-d314-4008-88a9-7088c37cf424"
+  ],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(4254401) PROXY:WEB-GET, (4254404) PROXY:WEB-POST</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Proxy Servers, BB:HostReference: Proxy Servers</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Proxy Server False Positive Events on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (4254401) PROXY:WEB-GET, (4254404) PROXY:WEB-POST",
+    "AND when an event matches any of the following BB:HostDefinition: Proxy Servers, BB:HostReference: Proxy Servers"
+  ],
+  "RED_list": []
+}

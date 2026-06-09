@@ -1,0 +1,31 @@
+{
+  "uuid": "e51f647a-96c9-49d5-a19a-f5f13db14fe4",
+  "id": "115554",
+  "name": "Process Baselining: Process Started with System User Privileges",
+  "notes": "Enable this rule to create a baseline of processes executed with System user privileges found in your environment.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [
+    "68"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Username IMATCHES 'NT\\sAUTHORITY\\\\SYSTEM'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Process Baselining: Process Started with System User Privileges on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when the event matches Username IMATCHES 'NT\\sAUTHORITY\\\\SYSTEM' AQL filter query"
+  ],
+  "RED_list": [
+    "Add the \"File Hash\" of the event or flow payload to the Reference Set \"ProcessHashesStartedAsSystemUser\""
+  ]
+}

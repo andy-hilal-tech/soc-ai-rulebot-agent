@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1351",
+  "id": "100060",
+  "name": "BB:CategoryDefinition: Authentication to Expired Account",
+  "notes": "Edit this BB to include all events that indicate failed attempts to access the network using an expired account.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication to Expired Account on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    ""
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Authentication to Expired Account on events which are detected by the undefined system",
+    "AND "
+  ],
+  "RED_list": []
+}

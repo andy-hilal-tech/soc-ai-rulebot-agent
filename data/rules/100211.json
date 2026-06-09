@@ -1,0 +1,31 @@
+{
+  "uuid": "SYSTEM-1492",
+  "id": "100211",
+  "name": "BB:FalsePositive: Windows AD Source Authentication Events",
+  "notes": "This Building Block defines the addresses of Windows Authentication or Active Directory Servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:FalsePositive: Windows AD Source Authentication Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.0/8</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5000543) Failure Audit: A member was added to a security-enabled global group, (5000899) Success Audit: A member was added to a security-enabled global group, (5000570) Failure Audit: A member was added to a security-enabled universal group, (5000926) Success Audit: A member was added to a security-enabled universal group, (5000547) Failure Audit: A member was added to a security-enabled local group, (5000903) Success Audit: A member was added to a security-enabled local group, (5000910) Success Audit: A user account was locked out, (5000094) User Account Locked Out</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Windows AD Source Authentication Events on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the source IP is one of the following 127.0.0.0/8",
+    "AND when the event category for the event is one of the following Authentication",
+    "AND NOT when the event QID is one of the following (5000543) Failure Audit: A member was added to a security-enabled global group, (5000899) Success Audit: A member was added to a security-enabled global group, (5000570) Failure Audit: A member was added to a security-enabled universal group, (5000926) Success Audit: A member was added to a security-enabled universal group, (5000547) Failure Audit: A member was added to a security-enabled local group, (5000903) Success Audit: A member was added to a security-enabled local group, (5000910) Success Audit: A user account was locked out, (5000094) User Account Locked Out"
+  ],
+  "RED_list": []
+}

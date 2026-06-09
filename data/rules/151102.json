@@ -1,0 +1,36 @@
+{
+  "uuid": "9e19eb75-5665-4cd0-a1d0-fee0ce4c51aa",
+  "id": "151102",
+  "name": "Alternate Data Streams Writing Files",
+  "notes": "This building block detects Alternate Data Stream (ADS) writing files. ADS may be used to store configuration files.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Sami Ruohonen\nSIGMA Title: NTFS Alternate Data Stream\nSIGMA Description: Detects writing data into NTFS alternate data streams from powershell. Needs Script Block Logging.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501556",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501556"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, Audit.Object Access Success, System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES ('.*?-stream.*') AND (LOWER(&quot;Command&quot;) MATCHES ('.*?set-content.*') OR LOWER(&quot;Command&quot;) MATCHES ('.*?add-content.*'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Alternate Data Streams Writing Files on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success, Audit.Object Access Success, System.Process Creation Success",
+    "AND when the event matches LOWER(\"Command\") MATCHES ('.*?-stream.*') AND (LOWER(\"Command\") MATCHES ('.*?set-content.*') OR LOWER(\"Command\") MATCHES ('.*?add-content.*')) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Alternate Data Streams Writing Files",
+    "Event description: Detects Alternate Data Stream (ADS) writing files. ADS may be used to store configuration files.",
+    "Severity: 7, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\""
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "uuid": "37cb175b-31c0-41cc-a82e-dd1aadfc8ca5",
+  "id": "165075",
+  "name": "Number Of Resource Creation Or Deployment Activities",
+  "notes": "",
+  "response_qid": "67501815",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501815"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure Platform</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Operation Name (custom) is any of [MICROSOFT.COMPUTE/VIRTUALMACHINES/WRITE or MICROSOFT.RESOURCES/DEPLOYMENT/WRITE]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Number Of Resource Creation Or Deployment Activities on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Azure Platform",
+    "AND when the event matches Operation Name (custom) is any of [MICROSOFT.COMPUTE/VIRTUALMACHINES/WRITE or MICROSOFT.RESOURCES/DEPLOYMENT/WRITE]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Number Of Resource Creation Or Deployment Activities",
+    "Event description: Number of VM creations or deployment activities occur in Azure via the azureactivity log.",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "Include detected events by \"Username\" from this point forward, in the offense, for 300 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

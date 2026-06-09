@@ -1,0 +1,42 @@
+{
+  "uuid": "c98476dd-9b17-4d2e-b097-a7a2bc788285",
+  "id": "137002",
+  "name": "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System",
+  "notes": "This Building Block triggers when multiple non-temporary files are deleted on endpoint systems.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.File Deleted</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Filename (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>NOT (&quot;File Extension&quot; IN ('swp', 'swpx') OR &quot;Filename&quot; MATCHES '~\\$.*')</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Multiple File Deletions on Endpoint System on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.File Deleted",
+    "AND when the event matches Filename (custom) is not N/A",
+    "AND when the event matches NOT (\"File Extension\" IN ('swp', 'swpx') OR \"Filename\" MATCHES '~\\$.*') AQL filter query",
+    "AND when at least 3 events are seen with the same Machine Identifier (custom) in 10 minutes"
+  ],
+  "RED_list": []
+}

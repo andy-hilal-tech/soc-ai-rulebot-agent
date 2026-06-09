@@ -1,0 +1,39 @@
+{
+  "uuid": "b5492f4a-99f8-45d4-96fa-20c7f0ac87c3",
+  "id": "165080",
+  "name": "Unauthorized Mailbox Access Detection",
+  "notes": "",
+  "response_qid": "67501819",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501819"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Affected Workload (custom) is any of Exchange</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Operation (custom) is any of [Add-MailboxPermission or Set-Mailbox]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Unauthorized Mailbox Access Detection on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when the event matches Affected Workload (custom) is any of Exchange",
+    "AND when the event matches Operation (custom) is any of [Add-MailboxPermission or Set-Mailbox]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Added or Modified Inbox Rules in Exchange",
+    "Event description: Detects when mailbox access permissions are added or modified, a technique attackers use to maintain persistent access.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Mail Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "Include detected events by \"Username\" from this point forward, in the offense, for 300 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

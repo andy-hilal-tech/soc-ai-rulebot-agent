@@ -1,0 +1,43 @@
+{
+  "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+  "id": "139052",
+  "name": "Potential Component Object Model (COM) Hijacking",
+  "notes": "This rule triggers when Potential Component Object Model (COM) hijacking activities is detected. An attacker can execute malicious code by hijacking legitimate COM references.",
+  "response_qid": "67501087",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501087"
+  ],
+  "rule_refs": [
+    "85cf8a29-7a67-4826-99fd-a9558987e599",
+    "b6091a00-5a16-4987-9422-175bb697ce94"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Component Object Model Hijacking",
+    "BB:BehaviorDefinition: Component Object Model Hijacking Rules"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "b6091a00-5a16-4987-9422-175bb697ce94",
+    "85cf8a29-7a67-4826-99fd-a9558987e599"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Component Object Model Hijacking, BB:BehaviorDefinition: Component Object Model Hijacking Rules</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Component Object Model (COM) Hijacking on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Component Object Model Hijacking, BB:BehaviorDefinition: Component Object Model Hijacking Rules"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential COM Hijacking",
+    "Event description: Detects potential Component Object Model (COM) hijacking activities.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Command Execution\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

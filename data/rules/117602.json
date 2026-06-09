@@ -1,0 +1,55 @@
+{
+  "uuid": "87cd5073-91e7-4631-ad61-fb8193fb5c1b",
+  "id": "117602",
+  "name": "Suspicious Number of Virtual Machines Created",
+  "notes": "This rule triggers when a high number of virtual machines is created in a short period of time. This can show a malicious user behaviour.\n\nNote: If authorized users perform this action often, exclude them by adding in a rule condition.\nPlease see \"Suspicious Number of Modifications Made on Virtual Machines\" for an example.",
+  "response_qid": "67500591",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500591"
+  ],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "712eb67c-f6ac-409f-ac4c-d2b9c1ea0253",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Virtual Machine Created",
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: Virtualization"
+  ],
+  "db_fields_used": [
+    "Machine Identifier",
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "edf618f4-9e8c-4068-88aa-2675753eb003",
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "712eb67c-f6ac-409f-ac4c-d2b9c1ea0253"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Virtualization, BB:DeviceDefinition: Cloud</a>",
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:CategoryDefinition: Virtual Machine Created</a>",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>200</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>200</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Number of Virtual Machines Created on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Virtualization, BB:DeviceDefinition: Cloud",
+    "AND when an event matches any of the following BB:CategoryDefinition: Virtual Machine Created",
+    "AND when at least 200 events are seen with the same Username and different Machine Identifier (custom) in 30 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Number of Virtual Machines Created",
+    "Event description: High rate of virtual machines creation in a short period of time (e.g. 200 machines created in 30 minutes).",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Virtual Machine Creation Success\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

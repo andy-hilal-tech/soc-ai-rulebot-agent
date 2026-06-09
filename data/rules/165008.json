@@ -1,0 +1,40 @@
+{
+  "uuid": "ea8f5905-26d1-4ac5-a89c-38ef6ed72d66",
+  "id": "165008",
+  "name": "External IP Access to Internal Servers- H360",
+  "notes": "",
+  "response_qid": "67501780",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501780"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "destinationIP"
+  ],
+  "reference_sets": [
+    "325"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 0:0:0:0:0:0:0:1, ::1</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Health360) Health360 Servers - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY External IP Access to Internal Servers- H360 on events which are detected by the LOCAL system",
+    "AND NOT when the source IP is one of the following 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 0:0:0:0:0:0:0:1, ::1",
+    "AND when any of Destination IP are contained in any of (Health360) Health360 Servers - AlphaNumeric"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: External IP Access to Servers  - H360",
+    "Event description: External IP Access to Servers  - H360 , any activity",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Destination IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

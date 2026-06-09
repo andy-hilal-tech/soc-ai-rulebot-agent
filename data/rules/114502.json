@@ -1,0 +1,44 @@
+{
+  "uuid": "bf60ff4f-16e6-4f77-904b-4e4aea2b8d3f",
+  "id": "114502",
+  "name": "UBA : Network Traffic : Capture Monitoring and Analysis Program Usage",
+  "notes": "This rule indicates when a process is created and the process name matches one of the binary names listed in the reference set \"UBA : Network Capture, Monitoring and Analysis Program Filenames\". This reference set is a list of binary names of network packet capturing software. The reference set has been pre-populated with names of some common network protocol analysis software filenames.\n\nBackground:\n   Packet capturing programs can allow a user to capture and examine traffic on a network. If these programs don't have adequate internal access controls, users may use them to learn information they might otherwise not have access to.\n\n   In addition, these programs sometimes carry a risk of exploitation.\n\n    IBM Trusted References :\n        https://exchange.xforce.ibmcloud.com/search/tcpdump\n        https://exchange.xforce.ibmcloud.com/search/netmon\n        https://exchange.xforce.ibmcloud.com/search/wireshark\n\n    Third Party References :\n        http://sectools.org/tag/sniffers/?sort=release\n\nRemedy :\n    Examine the addresses and users involved. Ensure those systems are authorized to engage in packet capturing for administrative purposes.\n\n    Refer to packet capture program's vendor documentation for patch, upgrade or suggested workaround information to mitigate any known vulnerabilities.\n\nDetection notes and modification:\n    The scope of this rule can be modified by adding or removing binary names for packet capturing tools to \"UBA : Network Capture, Monitoring and Analysis Program Filenames\"\n\n    The reference set has been pre-populated with the following values:\n\n        'wireshark.exe'\n        'dumpcap.exe'\n        'tshark.exe'\n        'netmon.exe'\n        'messageanalyzer.exe'\n        'windump.exe'\n        'nmap.exe'\n\n    Example: To add detection for WinDump.exe, add the value 'windump.exe'  to the reference set 'UBA : Network Capture, Monitoring and Analysis Program Filenames' [Note - Do not include the quotes. For full details please see Qradar SIEM administration documentation topics 'Reference sets management' -and- 'Adding an element to a reference set' topics. ]\n\n    The reference set \"UBA : Network Capture, Monitoring and Analysis Program Filenames\" is not case sensitive. 'netmon.exe' is equivalent to 'NetMon.exe'.\n\n    The rule will not trigger if the Username is unavailable or any of the other \"BB:UBA : Common Event Filters\" tests are true.",
+  "response_qid": "67500526",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500526"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "Object Name, Filename"
+  ],
+  "reference_sets": [
+    "81"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Object Name (custom), Filename (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) UBA : Network Capture, Monitoring and Analysis Program Filenames - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Network Traffic : Capture Monitoring and Analysis Program Usage on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when any of Object Name (custom), Filename (custom) are contained in any of (Shared) UBA : Network Capture, Monitoring and Analysis Program Filenames - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Network Traffic : Capture Monitoring and Analysis Program Usage",
+    "Event description: senseValue=15,senseDesc='This rule indicates when a process is created and the process name matches one of the binary names listed in the reference set UBA : Network Capture, Monitoring and Analysis Program Filenames.',usecase_id='bf60ff4f-16e6-4f77-904b-4e4aea2b8d3f'",
+    "Severity: 7, Credibility: 10, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Privilege\""
+  ]
+}

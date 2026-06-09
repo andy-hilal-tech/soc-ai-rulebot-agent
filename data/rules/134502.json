@@ -1,0 +1,36 @@
+{
+  "uuid": "94288bed-606e-4e15-a5eb-912793d7e9dc",
+  "id": "134502",
+  "name": "Malware: Potential Dridex Traffic",
+  "notes": "This rule triggers when a TLS fingerprint known to be related to the Dridex trojan is observed. The rule is looking to match both client and server fingerprints to reduce the risk of false-positives.",
+  "response_qid": "67501038",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501038"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IS NOT NULL AND &quot;tls ja3s hash&quot; IS NOT NULL</a> AQL filter query",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IN ('51c64c77e60f3980eea90869b68c58a8')  AND &quot;tls ja3s hash&quot; IN ('e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Malware: Potential Dridex Traffic on flows which are detected by the LOCAL system",
+    "AND when the flow matches \"tls ja3 hash\" IS NOT NULL AND \"tls ja3s hash\" IS NOT NULL AQL filter query",
+    "AND when the flow matches \"tls ja3 hash\" IN ('51c64c77e60f3980eea90869b68c58a8')  AND \"tls ja3s hash\" IN ('e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Dridex Traffic observed",
+    "Event description: A potential Dridex related JA3 Hash has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Trojan Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

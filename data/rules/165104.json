@@ -1,0 +1,43 @@
+{
+  "uuid": "18910412-2e2f-418f-a710-becc506a8202",
+  "id": "165104",
+  "name": "Communication with a Potential Hostile Host (Flows)",
+  "notes": "This rule triggers when communication with a potential hostile host, categorized by X-Force or in the reference set collection is detected.\n\nBB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets)\n   This Building Block defines communication with a potential hostile host, categorized by reference sets.\n\n    Note: The reference sets starting with \"XFE ATPF\" prefixes are automatically managed by the Threat Intelligence App. This requires a paid subscription.\n\n    The other reference sets provided by the Threat Intelligence App can be used to include third party Threat Intelligence feeds. Tune these Reference Sets with the adapted Time to Live for each element.\n\n\nBB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)\n   This Building Block defines communication with a potential hostile host, categorized by F-Force.\n\n    Note: X-Force categorization is available for free of use.",
+  "response_qid": "67500685",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500685"
+  ],
+  "rule_refs": [
+    "25364d8c-8e0e-476e-bc87-d630e3098c64",
+    "69901f9d-85ae-4681-b96d-03494c2471c4"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets)",
+    "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "25364d8c-8e0e-476e-bc87-d630e3098c64",
+    "69901f9d-85ae-4681-b96d-03494c2471c4"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Communication with a Potential Hostile Host (Flows) on flows which are detected by the LOCAL system",
+    "AND when a flow matches any of the following BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Communication with a Potential Hostile Host (Flows)",
+    "Event description: A communication with a host that matches known hostile X-force categories or reference set collection has been detected",
+    "Severity: 8, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Address\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

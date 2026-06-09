@@ -1,0 +1,31 @@
+{
+  "uuid": "39db027f-3709-4807-8664-51173f9b93e3",
+  "id": "152602",
+  "name": "BB:BehaviorDefinition: Sysmon Driver Unload",
+  "notes": "This Building Block detect possible Sysmon driver unload.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Kirill Kiryanov, oscd.community\nSIGMA Title: Sysmon Driver Unload\nSIGMA Description: Detect possible Sysmon driver unload\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Sysmon Driver Unload on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of fltmc.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%unload%' AND LOWER(&quot;Command&quot;) LIKE '%sysmon%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Sysmon Driver Unload on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of fltmc.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%unload%' AND LOWER(\"Command\") LIKE '%sysmon%') AQL filter query"
+  ],
+  "RED_list": []
+}

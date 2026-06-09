@@ -1,0 +1,40 @@
+{
+  "uuid": "d6230b09-465d-48ce-9da9-6a961b750923",
+  "id": "155102",
+  "name": "Remote Service Activity via SVCCTL Named Pipe",
+  "notes": "This rule detects remote service activity via remote access to the svcctl named pipe.\n\nCovered from SIGMA Rule.\n\nOriginal Author: mdecrevoisier\nSIGMA Title: Remote service creation via named pipes\nSIGMA Description: Detects scenarios where an attacker remotely creates a service over named pipes. Tools like Tchopper or CrackMapExec can trigger this rule.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501609",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501609"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001471) Success Audit: Network Share Object Checked for Access</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Share Name (custom) is any of IPC$</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Filename (custom) is any of svcctl</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Accesses (custom) contains any of WriteData</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Remote Service Activity via SVCCTL Named Pipe on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001471) Success Audit: Network Share Object Checked for Access",
+    "AND when the event matches Share Name (custom) is any of IPC$",
+    "AND when the event matches Filename (custom) is any of svcctl",
+    "AND when the event matches Accesses (custom) contains any of WriteData"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remote Service Activity via SVCCTL Named Pipe",
+    "Event description: Detects remote service activity via remote access to the svcctl named pipe.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malware Infection\""
+  ]
+}

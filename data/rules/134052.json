@@ -1,0 +1,37 @@
+{
+  "uuid": "e301621c-5cc0-493e-a144-961108d5627c",
+  "id": "134052",
+  "name": "BB:BehaviorDefinition: Cloud Account Discovery",
+  "notes": "This building block detects cloud account discovery commands.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Cloud Account Discovery on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "290df59b-44ef-452a-9633-2d52e74dbc97"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Cloud</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%get-msolrolemember%') OR  (LOWER(&quot;Command&quot;) LIKE 'az ad user list' OR LOWER(&quot;Command&quot;) LIKE 'aws iam list-users' OR LOWER(&quot;Command&quot;) LIKE 'aws iam list-roles' OR LOWER(&quot;Command&quot;) LIKE 'gcloud iam service-accounts list' OR LOWER(&quot;Command&quot;) LIKE 'gcloud projects get-iam-policy')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Cloud Account Discovery on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Cloud",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%get-msolrolemember%') OR  (LOWER(\"Command\") LIKE 'az ad user list' OR LOWER(\"Command\") LIKE 'aws iam list-users' OR LOWER(\"Command\") LIKE 'aws iam list-roles' OR LOWER(\"Command\") LIKE 'gcloud iam service-accounts list' OR LOWER(\"Command\") LIKE 'gcloud projects get-iam-policy') AQL filter query"
+  ],
+  "RED_list": []
+}

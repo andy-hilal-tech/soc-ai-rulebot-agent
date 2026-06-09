@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1068",
+  "id": "100237",
+  "name": "BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage",
+  "notes": "This Building Block identifies flows that are using unencrypted protocols like telnet and FTP.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application is any of [RemoteAccess.Telnet or RemoteAccess.Telnet-Port or Mail.POP or Mail.POP-port or DataTransfer.FTP]</a>",
+    "when the flow bias is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>inbound, outbound</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage on flows which are detected by the LOCAL system",
+    "AND when the flow matches Application is any of [RemoteAccess.Telnet or RemoteAccess.Telnet-Port or Mail.POP or Mail.POP-port or DataTransfer.FTP]",
+    "AND NOT when the flow bias is inbound, outbound"
+  ],
+  "RED_list": []
+}

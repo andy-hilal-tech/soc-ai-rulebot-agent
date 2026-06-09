@@ -1,0 +1,34 @@
+{
+  "uuid": "fd1832b5-a9ba-49d3-9050-465eb719ad48",
+  "id": "162295",
+  "name": "Outgoing Logon with New Credentials",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Max Altgelt (Nextron Systems)\nSIGMA Title: Outgoing Logon with New Credentials\nSIGMA Description: Detects logon events that specify new credentials\n\nFalse positives:\n- Legitimate remote administration activity\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4624 AND \"Logon Type\"=9</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Outgoing Logon with New Credentials on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4624 AND \"Logon Type\"=9 AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Outgoing Logon with New Credentials",
+    "Event description: Converted from SIGMA Rule.  Original Author: Max Altgelt (Nextron Systems) SIGMA Title: Outgoing Logon with New Credentials SIGMA Description: Detects logon events that specify new credentials  False positives: - Legitimate remote administration activity  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

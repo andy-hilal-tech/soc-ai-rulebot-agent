@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1323",
+  "id": "122852",
+  "name": "BB:NetworkDefinition: Watch List Addresses",
+  "notes": "This Building Block defines networks to be included into a watch list.\n\nEdit this BB to include networks which should be added into a watch list.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:NetworkDefinition: Watch List Addresses on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Watchlists</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:NetworkDefinition: Watch List Addresses on events which are detected by the LOCAL system",
+    "AND when the any IP is a part of any of the following Watchlists"
+  ],
+  "RED_list": []
+}

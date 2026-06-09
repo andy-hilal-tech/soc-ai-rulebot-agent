@@ -1,0 +1,38 @@
+{
+  "uuid": "affaf7c8-51ab-47f5-b4f6-e64f568fe3cf",
+  "id": "151702",
+  "name": "Service Registry Permissions Weakness Check",
+  "notes": "This rule detects adversaries checking for flaws in permissions inside the registry to redirect from the originally specified executable to one that they control, in order to launch their own code at Service start.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Service Registry Permissions Weakness Check\nSIGMA Description: dversaries may execute their own malicious payloads by hijacking the Registry entries used by services.\n    Adversaries may use flaws in the permissions for registry to redirect from the originally specified executable to one that they control, in order to launch their own code at Service start.\n    Windows stores local service configuration information in the Registry under HKLM\\SYSTEM\\CurrentControlSet\\Services\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501563",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501563"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%get-acl%' AND LOWER(&quot;Command&quot;) LIKE '%REGISTRY::HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Service Registry Permissions Weakness Check on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches LOWER(\"Command\") LIKE '%get-acl%' AND LOWER(\"Command\") LIKE '%REGISTRY::HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Service Registry Permissions Weakness Check",
+    "Event description: Detects adversaries checking for flaws in permissions inside the registry to redirect from the originally specified executable to one that they control, in order to launch their own code at Service start.",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

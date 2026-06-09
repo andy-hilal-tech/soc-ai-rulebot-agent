@@ -1,0 +1,40 @@
+{
+  "uuid": "8f0e4fd1-8d9a-4ab8-a621-b0bc730b4cdd",
+  "id": "158402",
+  "name": "Unusual Child Process from Different Processes",
+  "notes": "This rule detects unusual child process from different processes.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Semanur Guneysu @semanurtg, oscd.community\nSIGMA Title: Abused Debug Privilege by Arbitrary Parent Processes\nSIGMA Description: Detection of unusual child processes by different system processes\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501654",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501654"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% route %' AND LOWER(&quot;Command&quot;) LIKE '% add %'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>( \tLOWER(&quot;Parent Process Full Full Name&quot;) in ('winlogon.exe', 'services.exe', 'lsass.exe', 'csrss.exe', 'smss.exe', 'wininit.exe', 'spoolsv.exe', 'searchindexer.exe') \tAND LOWER(Username) in ('authori', 'autori') ) AND  ( \tLOWER(&quot;Process Full Full Name&quot;) in ('powershell.exe', 'pwsh.exe', 'cmd.exe') \tOR LOWER(&quot;Filename&quot;) in ('powershell.exe', 'pwsh.dll', 'cmd.exe') )</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Unusual Child Process from Different Processes on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND NOT when the event matches LOWER(\"Command\") LIKE '% route %' AND LOWER(\"Command\") LIKE '% add %' AQL filter query",
+    "AND when the event matches ( \tLOWER(\"Parent Process Full Full Name\") in ('winlogon.exe', 'services.exe', 'lsass.exe', 'csrss.exe', 'smss.exe', 'wininit.exe', 'spoolsv.exe', 'searchindexer.exe') \tAND LOWER(Username) in ('authori', 'autori') ) AND  ( \tLOWER(\"Process Full Full Name\") in ('powershell.exe', 'pwsh.exe', 'cmd.exe') \tOR LOWER(\"Filename\") in ('powershell.exe', 'pwsh.dll', 'cmd.exe') ) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Unusual Child Process from Different Processes",
+    "Event description: Detects unusual child process from different processes.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

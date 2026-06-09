@@ -1,0 +1,48 @@
+{
+  "uuid": "6a378fe6-bb89-45c7-b604-853e81ed6a6c",
+  "id": "138652",
+  "name": "Critical Security Tool Stopped",
+  "notes": "This rule triggers when permission of critical files or directories are modified. An attacker may modify the permissions of a sensitive file to become the only user able to access it and proceed to Defacement, Data Destruction, Disabling Security Tools, etc.\n\nNote: The reference set Critical Security Tool Processes has been pre-populated with common security tool process names. Tune the reference set with any tool used by the organization.",
+  "response_qid": "67501081",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501081"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Process Name"
+  ],
+  "reference_sets": [
+    "213"
+  ],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Service Stopped</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Critical Security Tool Processes - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Critical Security Tool Stopped on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Service Stopped",
+    "AND when any of Process Name (custom) are contained in any of Critical Security Tool Processes - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Critical Security Tool Stopped",
+    "Event description: Detect when a critical security tool has been stopped.",
+    "Severity: 9, Credibility: 8, Relevance: 9",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Service Stopped\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

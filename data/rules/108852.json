@@ -1,0 +1,32 @@
+{
+  "uuid": "0bfc4895-8ea8-442e-8a5c-bb0f56d8cf12",
+  "id": "108852",
+  "name": "BB:UBA : Data Loss Devices",
+  "notes": "Building block to detect data loss based on QRadar supported devices.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Data Loss Devices on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Symantec DLP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Data Loss Devices on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when the event(s) were detected by one or more of Symantec DLP"
+  ],
+  "RED_list": []
+}

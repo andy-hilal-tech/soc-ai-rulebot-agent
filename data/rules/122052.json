@@ -1,0 +1,48 @@
+{
+  "uuid": "c271a61f-ccc3-4950-9bae-8a6b1481f1d9",
+  "id": "122052",
+  "name": "Potential DoS Attack on a Web Server",
+  "notes": "This rule triggers when a potential Denial-of-Service attack is detected from a single source ip.",
+  "response_qid": "67500700",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500700"
+  ],
+  "rule_refs": [
+    "5a8e0600-6485-4175-b615-11519306c7da",
+    "faaf6048-6c80-48f5-9d9f-a597ee6caccc"
+  ],
+  "bb_references": [
+    "BB: Threats: HTTP Service Unavailable",
+    "BB: Threats: HTTP Service Unavailable match at least 1 times in 10 minutes after any of BB:Threats: Potential DoS Attack match with the same Source IP",
+    "BB:Threats: Potential DoS Attack"
+  ],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "faaf6048-6c80-48f5-9d9f-a597ee6caccc",
+    "5a8e0600-6485-4175-b615-11519306c7da"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB: Threats: HTTP Service Unavailable</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:Threats: Potential DoS Attack</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB: Threats: HTTP Service Unavailable</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:Threats: Potential DoS Attack</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>"
+  ],
+  "TD_list": [
+    "APPLY Potential DoS Attack on a Web Server on events which are detected by the LOCAL system",
+    "AND when BB: Threats: HTTP Service Unavailable match at least 1 times in 10 minutes after any of BB:Threats: Potential DoS Attack match with the same Source IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential DoS Attack detected on a Web Server",
+    "Event description: Detects when a potential denial-of-service attack is detected from a single source ip.",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"DOS\"",
+    "Low-Level Category: \"Web Service DoS\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

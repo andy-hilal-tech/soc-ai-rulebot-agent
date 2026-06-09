@@ -1,0 +1,34 @@
+{
+  "uuid": "921380e8-72c2-4b95-bee4-4d8aee2b89fc",
+  "id": "162423",
+  "name": "Potential Privileged System Service Operation - SeLoadDriverPrivilege",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: xknow (@xknow_infosec), xorxes (@xor_xes)\nSIGMA Title: Potential Privileged System Service Operation - SeLoadDriverPrivilege\nSIGMA Description: Detects the usage of the 'SeLoadDriverPrivilege' privilege. This privilege is required to load or unload a device driver.\nWith this privilege, the user can dynamically load and unload device drivers or other code in to kernel mode.\nThis user right does not apply to Plug and Play device drivers.\nIf you exclude privileged users/admins and processes, which are allowed to do so, you are maybe left with bad programs trying to load malicious kernel drivers.\nThis will detect Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs) and the usage of Sysinternals and various other tools. So you have to work with a whitelist to find the bad stuff.\n\n\nFalse positives:\n- Other legimate tools loading drivers. Including but not limited to, Sysinternals, CPU-Z, AVs etc. A baseline needs to be created according to the used products and allowed tools. A good thing to do is to try and exclude users who are allowed to load drivers.\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=4673 AND LOWER(UTF8(payload)) LIKE '%seloaddriverprivilege%' AND \"Service Name\"='-') AND (NOT(((\"Process Name\" IN('C:\\Windows\\System32\\Dism.exe', 'C:\\Windows\\System32\\rundll32.exe', 'C:\\Windows\\System32\\fltMC.exe', 'C:\\Windows\\HelpPane.exe', 'C:\\Windows\\System32\\mmc.exe', 'C:\\Windows\\System32\\svchost.exe', 'C:\\Windows\\System32\\wimserv.exe', 'C:\\Windows\\System32\\RuntimeBroker.exe', 'C:\\Windows\\System32\\SystemSettingsBroker.exe', 'C:\\Windows\\explorer.exe')) OR (LOWER(\"Process Name\") LIKE '%\\procexp64.exe' OR LOWER(\"Process Name\") LIKE '%\\procexp.exe' OR LOWER(\"Process Name\") LIKE '%\\procmon64.exe' OR LOWER(\"Process Name\") LIKE '%\\procmon.exe' OR LOWER(\"Process Name\") LIKE '%\\google\\chrome\\application\\chrome.exe' OR LOWER(\"Process Name\") LIKE '%\\appdata\\local\\microsoft\\teams\\current\\teams.exe') OR LOWER(\"Process Name\") LIKE 'c:\\program files\\windowsapps\\microsoft%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Privileged System Service Operation - SeLoadDriverPrivilege on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\"=4673 AND LOWER(UTF8(payload)) LIKE '%seloaddriverprivilege%' AND \"Service Name\"='-') AND (NOT(((\"Process Name\" IN('C:\\Windows\\System32\\Dism.exe', 'C:\\Windows\\System32\\rundll32.exe', 'C:\\Windows\\System32\\fltMC.exe', 'C:\\Windows\\HelpPane.exe', 'C:\\Windows\\System32\\mmc.exe', 'C:\\Windows\\System32\\svchost.exe', 'C:\\Windows\\System32\\wimserv.exe', 'C:\\Windows\\System32\\RuntimeBroker.exe', 'C:\\Windows\\System32\\SystemSettingsBroker.exe', 'C:\\Windows\\explorer.exe')) OR (LOWER(\"Process Name\") LIKE '%\\procexp64.exe' OR LOWER(\"Process Name\") LIKE '%\\procexp.exe' OR LOWER(\"Process Name\") LIKE '%\\procmon64.exe' OR LOWER(\"Process Name\") LIKE '%\\procmon.exe' OR LOWER(\"Process Name\") LIKE '%\\google\\chrome\\application\\chrome.exe' OR LOWER(\"Process Name\") LIKE '%\\appdata\\local\\microsoft\\teams\\current\\teams.exe') OR LOWER(\"Process Name\") LIKE 'c:\\program files\\windowsapps\\microsoft%'))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Privileged System Service Operation - SeLoadDriverPrivilege",
+    "Event description: Converted from SIGMA Rule.  Original Author: xknow (@xknow_infosec), xorxes (@xor_xes) SIGMA Title: Potential Privileged System Service Operation - SeLoadDriverPrivilege SIGMA Description: Detects the usage of the 'SeLoadDriverPrivilege' privilege. This privilege is required to load or unload a device driver. With this privilege, the user can dynamically load and unload device drivers or other code in to kernel mode. This user right does not apply to Plug and Play device drivers. If you exclude privileged users/admins and processes, which are allowed to do so, you are maybe left with bad programs trying to load malicious kernel drivers. This will detect Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs) and the usage of Sysinternals and various other tools. So you have to work with a whitelist to find the bad stuff.   False positives: - Other legimate tools loading drivers. Including but not limited to, Sysinternals, CPU-Z, AVs etc. A baseline needs to be created according to the used products and allowed tools. A good thing to do is to try and exclude users who are allowed to load drivers.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

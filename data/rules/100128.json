@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1393",
+  "id": "100128",
+  "name": "BB:FalsePositive: Database Server False Positive Events",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from database servers that are defined in the BB:HostDefinition: Database Servers building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+    "SYSTEM-1374"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: Database Server False Positive Events on events which are detected by the LOCAL system",
+    "BB:HostDefinition: Database Servers",
+    "BB:HostReference: Database Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1374",
+    "5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6500120) Custom User 9 - Event CRE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Database Server False Positive Events on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:HostDefinition: Database Servers, BB:HostReference: Database Servers",
+    "AND when the event QID is one of the following (6500120) Custom User 9 - Event CRE"
+  ],
+  "RED_list": []
+}

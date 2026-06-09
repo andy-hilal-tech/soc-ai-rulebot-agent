@@ -1,0 +1,31 @@
+{
+  "uuid": "5f492d3e-a5ca-4760-acba-7d209e700ca0",
+  "id": "149052",
+  "name": "BB:BehaviorDefinition: Security Software Discovery - Linux",
+  "notes": "This Building Block detects usage of system utilities to discover security software discovery.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Daniil Yugoslavskiy, oscd.community\nSIGMA Title: Security Software Discovery - Linux\nSIGMA Description: Detects usage of system utilities (only grep and egrep for now) to discover security software discovery\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Security Software Discovery - Linux on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Attempt</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [grep or egrep]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%nessusd%' or LOWER(&quot;Command&quot;) LIKE '%td-agent%' or LOWER(&quot;Command&quot;) LIKE '%packetbeat%' or LOWER(&quot;Command&quot;) LIKE '%filebeat%' or LOWER(&quot;Command&quot;) LIKE '%auditbeat%' or LOWER(&quot;Command&quot;) LIKE '%osqueryd%' or LOWER(&quot;Command&quot;) LIKE '%cbagentd%' or LOWER(&quot;Command&quot;) LIKE '%falcond%') or (LOWER(&quot;Command Arguments&quot;) LIKE '%nessusd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%td-agent%' or LOWER(&quot;Command Arguments&quot;) LIKE '%packetbeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%filebeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%auditbeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%osqueryd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%cbagentd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%falcond%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Security Software Discovery - Linux on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Attempt",
+    "AND when the event matches Process Name (custom) is any of [grep or egrep]",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%nessusd%' or LOWER(\"Command\") LIKE '%td-agent%' or LOWER(\"Command\") LIKE '%packetbeat%' or LOWER(\"Command\") LIKE '%filebeat%' or LOWER(\"Command\") LIKE '%auditbeat%' or LOWER(\"Command\") LIKE '%osqueryd%' or LOWER(\"Command\") LIKE '%cbagentd%' or LOWER(\"Command\") LIKE '%falcond%') or (LOWER(\"Command Arguments\") LIKE '%nessusd%' or LOWER(\"Command Arguments\") LIKE '%td-agent%' or LOWER(\"Command Arguments\") LIKE '%packetbeat%' or LOWER(\"Command Arguments\") LIKE '%filebeat%' or LOWER(\"Command Arguments\") LIKE '%auditbeat%' or LOWER(\"Command Arguments\") LIKE '%osqueryd%' or LOWER(\"Command Arguments\") LIKE '%cbagentd%' or LOWER(\"Command Arguments\") LIKE '%falcond%') AQL filter query"
+  ],
+  "RED_list": []
+}

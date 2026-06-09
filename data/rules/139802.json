@@ -1,0 +1,48 @@
+{
+  "uuid": "a444890b-eca7-44f7-8903-962c12377715",
+  "id": "139802",
+  "name": "Suspicious Activity Followed by Endpoint Administration Task",
+  "notes": "This rule triggers when normal administration tasks (download a file, update user rights, run as another user, etc) are performed after a suspicious activity is detected on the same machine.",
+  "response_qid": "67501099",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501099"
+  ],
+  "rule_refs": [
+    "cd6f89e3-ce4e-4f86-bec1-a0195b3dbf87",
+    "dd652a28-7c36-40e8-8e0b-033414acdbf1"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Regular Endpoint Administration",
+    "BB:BehaviorDefinition: Regular Endpoint Administration match at least 1 times in 10 minutes after any of BB:BehaviorDefinition: Suspicious Endpoint Activities match with the same Machine Identifier (custom)",
+    "BB:BehaviorDefinition: Suspicious Endpoint Activities"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "dd652a28-7c36-40e8-8e0b-033414acdbf1",
+    "cd6f89e3-ce4e-4f86-bec1-a0195b3dbf87"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Regular Endpoint Administration</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Endpoint Activities</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Machine Identifier (custom)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Regular Endpoint Administration</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Endpoint Activities</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Machine Identifier (custom)</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Activity Followed by Endpoint Administration Task on events which are detected by the LOCAL system",
+    "AND when BB:BehaviorDefinition: Regular Endpoint Administration match at least 1 times in 10 minutes after any of BB:BehaviorDefinition: Suspicious Endpoint Activities match with the same Machine Identifier (custom)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Activity Followed by Endpoint Administration task",
+    "Event description: Detects a suspicious activity (communication with a potential hostile host, process masquerading, password reconnaissance, etc) is followed by a regular administration task (account management, privilege escalation, etc).",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

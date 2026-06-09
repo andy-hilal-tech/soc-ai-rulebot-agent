@@ -1,0 +1,31 @@
+{
+  "uuid": "SYSTEM-1418",
+  "id": "100200",
+  "name": "User:BB:FalsePositives: User Defined Server Type 1 False Positive Events",
+  "notes": "Edit this BB to include any events to treat as false positives for hosts defined in User-BB-HostDefinition: User Defined Server Type 1",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1276"
+  ],
+  "bb_references": [
+    "BB:FalsePositives: User Defined Server Type 1 False Positive Events on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1276"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>User-BB-HostDefinition: User Defined Server Type 1</a>",
+    "the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(1159448) Custom User 9 - Event CRE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY User:BB:FalsePositives: User Defined Server Type 1 False Positive Events on events which are detected by the undefined system",
+    "AND when we see an event match any of the following User-BB-HostDefinition: User Defined Server Type 1",
+    "AND the event QID is one of the following (1159448) Custom User 9 - Event CRE"
+  ],
+  "RED_list": []
+}

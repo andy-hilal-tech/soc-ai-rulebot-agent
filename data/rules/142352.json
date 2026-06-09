@@ -1,0 +1,42 @@
+{
+  "uuid": "43307299-d3f0-4149-bc61-de38ef467d69",
+  "id": "142352",
+  "name": "Dllhost Outbound Network Connection",
+  "notes": "This rule detects outbound connections initiated by dllhost.exe.",
+  "response_qid": "67501499",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501499"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES 'dllhost\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Destination IP is any of [10.0.0.0/8 or 127.0.0.0/8 or 169.254.0.0/16 or 172.16.0.0/12 or 192.168.0.0/16  or 20.184.0.0/13 or 51.103.210.0/23]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Dllhost Outbound Network Connection on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches LOWER(\"Process Full Full Name\") MATCHES 'dllhost\\.exe' AQL filter query",
+    "AND when the event matches Initiated (custom) is any of true",
+    "AND NOT when the event matches Destination IP is any of [10.0.0.0/8 or 127.0.0.0/8 or 169.254.0.0/16 or 172.16.0.0/12 or 192.168.0.0/16  or 20.184.0.0/13 or 51.103.210.0/23]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Dllhost Outbound Network Connection",
+    "Event description: Detects outbound connections initiated by dllhost.exe",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

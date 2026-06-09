@@ -1,0 +1,40 @@
+{
+  "uuid": "0f34a730-1f1d-4a56-b3f2-3f9e9749a198",
+  "id": "104952",
+  "name": "UBA : Browsed to Pornography Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500239",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500239"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%porn%' OR &quot;Web Category&quot; ilike '%sex%' OR &quot;Web Category&quot; ilike '%nudity%' OR &quot;Web Category&quot; ilike '%provocative%' OR &quot;Web Category&quot; ilike '%intimate%' OR &quot;Web Category&quot; ilike '%lingerie%' or &quot;Web Category&quot; in (65, 67, 94, 95)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Pornography Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%porn%' OR \"Web Category\" ilike '%sex%' OR \"Web Category\" ilike '%nudity%' OR \"Web Category\" ilike '%provocative%' OR \"Web Category\" ilike '%intimate%' OR \"Web Category\" ilike '%lingerie%' or \"Web Category\" in (65, 67, 94, 95) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Pornography Website",
+    "Event description: senseValue=10,senseDesc='',usecase_id='0f34a730-1f1d-4a56-b3f2-3f9e9749a198'",
+    "Severity: 7, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

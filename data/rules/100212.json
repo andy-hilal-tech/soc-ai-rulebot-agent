@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1576",
+  "id": "100212",
+  "name": "BB:FalsePositive: Reversed Flows",
+  "notes": "At times flows within the system will get reversed (source IP is listed as the destination). This BB will stop these flows from being processed by the rules.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:FalsePositive: Reversed Flows on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>equal to</a> <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>0</a>",
+    "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>destination</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>0</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Reversed Flows on flows which are detected by the LOCAL system",
+    "AND when the source bytes is equal to 0",
+    "AND when the destination bytes is greater than 0"
+  ],
+  "RED_list": []
+}

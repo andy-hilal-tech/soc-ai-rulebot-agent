@@ -1,0 +1,35 @@
+{
+  "uuid": "8a8ed8f6-1d13-43ac-b138-29a8a8cfaa41",
+  "id": "146752",
+  "name": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript",
+  "notes": "This Building Block detects modification or creation of UserInitMprLogonScript\n\nCovered from SIGMA Rule.\n\nOriginal Author: Tom Ueltschi (@c_APT_ure), Tim Shelton\nSIGMA Title: Logon Scripts (UserInitMprLogonScript)\nSIGMA Description: Detects creation or execution of UserInitMprLogonScript persistence method\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of userinit.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of [explorer.exe or proquota.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of [netlogon*.bat or UsrLogon.cmd or C:\\WINDOWS\\Explorer.EXE], Process Name (custom) contains any of \\Citrix\\System32\\icast.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Command (custom) contains any of UserInitMprLogonScript</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Parent Process Name (custom) is any of userinit.exe",
+    "AND NOT when the event matches Process Name (custom) is any of [explorer.exe or proquota.exe]",
+    "AND NOT when the event matches Command (custom) contains any of [netlogon*.bat or UsrLogon.cmd or C:\\WINDOWS\\Explorer.EXE], Process Name (custom) contains any of \\Citrix\\System32\\icast.exe",
+    "AND when the event matches Command (custom) contains any of UserInitMprLogonScript"
+  ],
+  "RED_list": []
+}

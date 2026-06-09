@@ -1,0 +1,23 @@
+{
+  "uuid": "91f12598-2273-4494-942b-3665e287d0ea",
+  "id": "125152",
+  "name": "A Custom Property has been Disabled",
+  "notes": "This rule triggers when a custom property expression is disabled due to performance problems with the custom property expression.\n\nNote: This rule can be tuned as needed to enable email notifications.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(38750097) Custom property disabled</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY A Custom Property has been Disabled on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (38750097) Custom property disabled"
+  ],
+  "RED_list": []
+}

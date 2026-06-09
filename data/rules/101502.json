@@ -1,0 +1,45 @@
+{
+  "uuid": "7dedde69-4330-4ee0-bd88-ac06d4178436",
+  "id": "101502",
+  "name": "UBA : VPN Certificate Sharing",
+  "notes": "This rule detects when a VPN event's Username is not equal to 'VPNSubjectcn'. This could indicate that there is VPN certificate sharing occurring. Certificate sharing or other authentication token sharing can make it difficult to identify who's done what. This can complicate taking next steps in the event of a compromise.",
+  "response_qid": "67500167",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500167"
+  ],
+  "rule_refs": [
+    "0ebee01a-da91-47c2-ac75-3a60658414df"
+  ],
+  "bb_references": [],
+  "db_fields_used": [
+    "VPN Subject CN",
+    "userName"
+  ],
+  "reference_sets": [
+    "36"
+  ],
+  "dependencies": [
+    "0ebee01a-da91-47c2-ac75-3a60658414df"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>UBA : BB : VPN Mapping (logic)</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>VPN Subject CN (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : VPN Subject_CN - AlphaNumeric (Ignore Case)</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>VPN Subject CN (custom)</a> is the key and <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Username</a> is the value in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>UBA : VPN Subject_CN and UserName - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : VPN Certificate Sharing on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following UBA : BB : VPN Mapping (logic)",
+    "AND when any of VPN Subject CN (custom) are contained in any of UBA : VPN Subject_CN - AlphaNumeric (Ignore Case)",
+    "AND NOT when any of VPN Subject CN (custom) is the key and any of Username is the value in any of UBA : VPN Subject_CN and UserName - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : VPN Certificate Sharing",
+    "Event description: senseValue=15,senseDesc='VPN Certificate sharing detected.',usecase_id='7dedde69-4330-4ee0-bd88-ac06d4178436'",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

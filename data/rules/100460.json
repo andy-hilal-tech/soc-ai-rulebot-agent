@@ -1,0 +1,29 @@
+{
+  "uuid": "8020abf2-ad54-4819-9553-1b050b499c28",
+  "id": "100460",
+  "name": "Treat Key Loggers as Offenses",
+  "notes": "Enable this rule if you wish all events categorized as key loggers to create offenses.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1305"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Key Loggers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1305"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Key Loggers</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Treat Key Loggers as Offenses on events which are detected by the undefined system",
+    "AND when an event matches any of the following BB:CategoryDefinition: Key Loggers"
+  ],
+  "RED_list": []
+}

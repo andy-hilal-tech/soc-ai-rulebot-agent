@@ -1,0 +1,60 @@
+{
+  "uuid": "7ea3318d-4b63-45c2-8541-97f38eb0cc7e",
+  "id": "139752",
+  "name": "File Decode or Download followed by Suspicious Activity",
+  "notes": "This rule triggers when a file decode or download occurred followed by a suspicious activity. It can be when utilities such as certutil is used to decode a file. This could indicate a malicious user downloading an encoded file and decoding the file to evade security.",
+  "response_qid": "67501098",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501098"
+  ],
+  "rule_refs": [
+    "19c64eb1-9fe5-4704-8083-480f3e730803",
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "cd6f89e3-ce4e-4f86-bec1-a0195b3dbf87",
+    "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Download Utilities in Events",
+    "BB:BehaviorDefinition: PowerShell File Download Activity",
+    "BB:BehaviorDefinition: Suspicious Endpoint Activities",
+    "BB:BehaviorDefinition: Suspicious Endpoint Activities match at least 1 times in 2 minutes after any of BB:BehaviorDefinition: Download Utilities in Events",
+    "BB:CategoryDefinition: File Decode by a Utility",
+    "BB:CategoryDefinition: File Decode by a Utility match with the same Machine Identifier (custom)",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "cd6f89e3-ce4e-4f86-bec1-a0195b3dbf87",
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+    "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67",
+    "19c64eb1-9fe5-4704-8083-480f3e730803"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Endpoint Activities</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: File Decode by a Utility</a> match with the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>Machine Identifier (custom)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Endpoint Activities</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: File Decode by a Utility</a> match with the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>Machine Identifier (custom)</a>"
+  ],
+  "TD_list": [
+    "APPLY File Decode or Download followed by Suspicious Activity on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when BB:BehaviorDefinition: Suspicious Endpoint Activities match at least 1 times in 2 minutes after any of BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: File Decode by a Utility match with the same Machine Identifier (custom)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: File Decode or Download followed by Suspicious Activity",
+    "Event description: Detects when utilities such as certutil is used to decode a file. This could indicate a malicious user downloading an encoded file and decoding the file to evade security.",
+    "Severity: 9, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

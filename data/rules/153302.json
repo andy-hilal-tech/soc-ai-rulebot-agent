@@ -1,0 +1,38 @@
+{
+  "uuid": "6f65e2d1-f6a7-4ab2-9cdd-f3edddcaea37",
+  "id": "153302",
+  "name": "System Owner or User Discovery (Windows)",
+  "notes": "This rule detects system owner or user discovery activities.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Timur Zinniatullin, Daniil Yugoslavskiy, oscd.community\nSIGMA Title: Local Accounts Discovery\nSIGMA Description: Local accounts, System Owner/User discovery using operating systems utilities\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501582",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501582"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>( \t&quot;Process Full Full Name&quot; == 'cmd.exe' \tAND \t( \t\tLOWER(&quot;Command&quot;) LIKE '% dir %' \t\tOR LOWER(&quot;Command&quot;) LIKE '% /c%'  \t\tOR LOWER(&quot;Command&quot;) LIKE '%\\users\\%' \t) ) OR ( \t( \t\t&quot;Process Full Full Name&quot; == 'net.exe'  \t\tOR  \t\t&quot;Process Full Full Name&quot; == 'net1.exe' \t) \tAND  \t\tLOWER(&quot;Command&quot;) LIKE '%user%' ) AND NOT ( \tLOWER(&quot;Command&quot;) MATCHES '.*?\\/(domain|add|delete|active|expires|passwordreq|scriptpath|times|workstations).*?' ) OR \t&quot;Process Full Full Name&quot; in ('whoami.exe', 'quser.exe', 'qwinsta.exe') OR \t( \t\t&quot;Process Full Full Name&quot; == 'wmic.exe'  \t\tAND  \t\t( \t\t\tLOWER(&quot;Command&quot;) LIKE '%useraccount%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%get%' \t\t) \t) OR \t( \t\t&quot;Process Full Full Name&quot; == 'cmdkey.exe' \t\tAND LOWER(&quot;Command&quot;) LIKE '% /l%' \t)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY System Owner or User Discovery (Windows) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches ( \t\"Process Full Full Name\" == 'cmd.exe' \tAND \t( \t\tLOWER(\"Command\") LIKE '% dir %' \t\tOR LOWER(\"Command\") LIKE '% /c%'  \t\tOR LOWER(\"Command\") LIKE '%\\users\\%' \t) ) OR ( \t( \t\t\"Process Full Full Name\" == 'net.exe'  \t\tOR  \t\t\"Process Full Full Name\" == 'net1.exe' \t) \tAND  \t\tLOWER(\"Command\") LIKE '%user%' ) AND NOT ( \tLOWER(\"Command\") MATCHES '.*?\\/(domain|add|delete|active|expires|passwordreq|scriptpath|times|workstations).*?' ) OR \t\"Process Full Full Name\" in ('whoami.exe', 'quser.exe', 'qwinsta.exe') OR \t( \t\t\"Process Full Full Name\" == 'wmic.exe'  \t\tAND  \t\t( \t\t\tLOWER(\"Command\") LIKE '%useraccount%' \t\t\tOR LOWER(\"Command\") LIKE '%get%' \t\t) \t) OR \t( \t\t\"Process Full Full Name\" == 'cmdkey.exe' \t\tAND LOWER(\"Command\") LIKE '% /l%' \t) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: System Owner or User Discovery (Windows)",
+    "Event description: Detects system owner or user discovery activities.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

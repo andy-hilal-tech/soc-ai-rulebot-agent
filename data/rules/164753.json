@@ -1,0 +1,31 @@
+{
+  "uuid": "f7f3041c-6aeb-4058-afda-d2e1b6cb4b2e",
+  "id": "164753",
+  "name": "BB:DNS Exploit whitelist",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DNS Exploit whitelist on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "destinationIP"
+  ],
+  "reference_sets": [
+    "12"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Exploit.DNS Exploit</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) DNS Servers - IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DNS Exploit whitelist on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Exploit.DNS Exploit",
+    "AND when any of Destination IP are contained in any of (Shared) DNS Servers - IP"
+  ],
+  "RED_list": []
+}

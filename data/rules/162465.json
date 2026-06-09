@@ -1,0 +1,34 @@
+{
+  "uuid": "da5b4936-9916-4cc7-a559-8613e80c4db2",
+  "id": "162465",
+  "name": "Meterpreter or Cobalt Strike Getsystem Service Installation - Security",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Teymur Kheirkhabarov, Ecco, Florian Roth (Nextron Systems)\nSIGMA Title: Meterpreter or Cobalt Strike Getsystem Service Installation - Security\nSIGMA Description: Detects the use of getsystem Meterpreter/Cobalt Strike command by detecting a specific service installation\n\nFalse positives:\n- Unlikely\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4697 AND (((LOWER(\"Service Filename\") LIKE '%/c%' AND LOWER(\"Service Filename\") LIKE '%echo%' AND LOWER(\"Service Filename\") LIKE '%\\pipe\\%') AND (LOWER(\"Service Filename\") LIKE '%cmd%' OR LOWER(\"Service Filename\") LIKE '%%comspec%%')) OR (LOWER(\"Service Filename\") LIKE '%rundll32%' AND LOWER(\"Service Filename\") LIKE '%.dll,a%' AND LOWER(\"Service Filename\") LIKE '%/p:%') OR LOWER(\"Service Filename\") LIKE '\\\\127.0.0.1\\admin$\\%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Meterpreter or Cobalt Strike Getsystem Service Installation - Security on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4697 AND (((LOWER(\"Service Filename\") LIKE '%/c%' AND LOWER(\"Service Filename\") LIKE '%echo%' AND LOWER(\"Service Filename\") LIKE '%\\pipe\\%') AND (LOWER(\"Service Filename\") LIKE '%cmd%' OR LOWER(\"Service Filename\") LIKE '%%comspec%%')) OR (LOWER(\"Service Filename\") LIKE '%rundll32%' AND LOWER(\"Service Filename\") LIKE '%.dll,a%' AND LOWER(\"Service Filename\") LIKE '%/p:%') OR LOWER(\"Service Filename\") LIKE '\\\\127.0.0.1\\admin$\\%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Meterpreter or Cobalt Strike Getsystem Service Installation - Security",
+    "Event description: Converted from SIGMA Rule.  Original Author: Teymur Kheirkhabarov, Ecco, Florian Roth (Nextron Systems) SIGMA Title: Meterpreter or Cobalt Strike Getsystem Service Installation - Security SIGMA Description: Detects the use of getsystem Meterpreter/Cobalt Strike command by detecting a specific service installation  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

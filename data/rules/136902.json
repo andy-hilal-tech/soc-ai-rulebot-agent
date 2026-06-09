@@ -1,0 +1,50 @@
+{
+  "uuid": "b944381f-646a-458a-a15b-3d1534d790b9",
+  "id": "136902",
+  "name": "Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix)",
+  "notes": "This rule triggers when a suspicious amount of files are renamed using the command mv. This could indicate the presence of a ransomware, which typically encrypt and rename files as part of their process.",
+  "response_qid": "67501072",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501072"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of mv</a>",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>750</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>750</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix) on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of mv",
+    "AND when at least 750 events are seen with the same Machine Identifier (custom) in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Amount of Files Renamed on the Same Machine",
+    "Event description: Detects a suspicious amount of files renamed.",
+    "Severity: 8, Credibility: 9, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

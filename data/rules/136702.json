@@ -1,0 +1,62 @@
+{
+  "uuid": "12aeabf0-b3ad-4152-8926-e20171cd8249",
+  "id": "136702",
+  "name": "Ransomware: WCry IOC in Events",
+  "notes": "This rule triggers when an IOC (Filename, File Hash, Hostname, IP) related to WCry Ransomware is observed.\n\nNote: The WCry_FileHash, WCry_FileName, WCry_Hostname, WCry_IP have been prepopulated. Tune these Reference Sets with relevant IOC.",
+  "response_qid": "67501068",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501068"
+  ],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "41ba2a03-cd17-4cb4-986b-28140db49974",
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "SYSTEM-1316",
+    "SYSTEM-1321",
+    "SYSTEM-1322"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: AV/AM",
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: FW / Router / Switch",
+    "BB:DeviceDefinition: IDS / IPS",
+    "BB:DeviceDefinition: Operating System",
+    "BB:DeviceDefinition: Proxy",
+    "BB:DeviceDefinition: VPN"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "SYSTEM-1322",
+    "SYSTEM-1321",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "41ba2a03-cd17-4cb4-986b-28140db49974",
+    "SYSTEM-1316",
+    "290df59b-44ef-452a-9633-2d52e74dbc97"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Proxy, BB:DeviceDefinition: VPN, BB:DeviceDefinition: Cloud</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;File Hash&quot; is not NULL OR &quot;Filename&quot; is not NULL OR &quot;Hostname&quot; is not NULL OR &quot;Source Host Name&quot; is not NULL OR &quot;Destination Host Name&quot; is not NULL OR eventdirection != 'L2L'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('WCry_FileHash', &quot;File Hash&quot;) OR REFERENCESETCONTAINS('WCry_FileName', &quot;Filename&quot;) OR REFERENCESETCONTAINS('WCry_HostName', &quot;Hostname&quot;) OR REFERENCESETCONTAINS('WCry_HostName', &quot;Source Host Name&quot;) OR REFERENCESETCONTAINS('WCry_HostName', &quot;Destination Host Name&quot;) OR REFERENCESETCONTAINS('WCry_IP', &quot;sourceaddress&quot;) OR REFERENCESETCONTAINS('WCry_IP', &quot;destinationaddress&quot;)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Ransomware: WCry IOC in Events on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Proxy, BB:DeviceDefinition: VPN, BB:DeviceDefinition: Cloud",
+    "AND when the event matches \"File Hash\" is not NULL OR \"Filename\" is not NULL OR \"Hostname\" is not NULL OR \"Source Host Name\" is not NULL OR \"Destination Host Name\" is not NULL OR eventdirection != 'L2L' AQL filter query",
+    "AND when the event matches REFERENCESETCONTAINS('WCry_FileHash', \"File Hash\") OR REFERENCESETCONTAINS('WCry_FileName', \"Filename\") OR REFERENCESETCONTAINS('WCry_HostName', \"Hostname\") OR REFERENCESETCONTAINS('WCry_HostName', \"Source Host Name\") OR REFERENCESETCONTAINS('WCry_HostName', \"Destination Host Name\") OR REFERENCESETCONTAINS('WCry_IP', \"sourceaddress\") OR REFERENCESETCONTAINS('WCry_IP', \"destinationaddress\") AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: WCry IOC Detected",
+    "Event description: An IOC (Filename, File Hash, Hostname, IP) related to WCry Ransomware has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

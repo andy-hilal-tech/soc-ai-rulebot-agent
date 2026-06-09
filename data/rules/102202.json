@@ -1,0 +1,49 @@
+{
+  "uuid": "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+  "id": "102202",
+  "name": "UBA : User Access - Failed Access to Critical Assets",
+  "notes": "This rule detects authentication failures for systems located in the Critical Assets reference set.",
+  "response_qid": "67500174",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500174"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures",
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "destinationIP"
+  ],
+  "reference_sets": [
+    "21"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:CategoryDefinition: Authentication Failures</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Critical Assets - IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Access - Failed Access to Critical Assets on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:CategoryDefinition: Authentication Failures",
+    "AND when any of Destination IP are contained in any of Critical Assets - IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Access - Failed Access to Critical Assets",
+    "Event description: senseValue=5,senseDesc='Authentication Failure to a critical asset.',usecase_id='09349955-1776-4545-bdc4-8aeee6bfb0f7'",
+    "Severity: 6, Credibility: 5, Relevance: 4",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "uuid": "9bb79206-4c8d-4b3b-8bef-d5a6f2c743a6",
+  "id": "140102",
+  "name": "Malware as a Service Behaviour",
+  "notes": "This rule triggers when a Malware as a service behaviour is observed.\n\nThese behaviours include using a download utility on the Endpoint and the file path showing the indication of compromise.",
+  "response_qid": "67501104",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501104"
+  ],
+  "rule_refs": [
+    "43f636ed-67ee-4a02-94cc-5068e15db44f",
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Download Utilities in Events",
+    "BB:BehaviorDefinition: Download Utilities in Events match at least 1 times in 15 minutes after any of BB:BehaviorDefinition: Malware as a Service Path IOC match",
+    "BB:BehaviorDefinition: Malware as a Service Path IOC"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+    "43f636ed-67ee-4a02-94cc-5068e15db44f"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Malware as a Service Path IOC</a> match"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Malware as a Service Path IOC</a> match"
+  ],
+  "TD_list": [
+    "APPLY Malware as a Service Behaviour on events which are detected by the LOCAL system",
+    "AND when BB:BehaviorDefinition: Download Utilities in Events match at least 1 times in 15 minutes after any of BB:BehaviorDefinition: Malware as a Service Path IOC match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Malware as a Service Behaviour",
+    "Event description: Detected when a Malware as a service behaviour is observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Trojan Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

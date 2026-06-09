@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1480",
+  "id": "100132",
+  "name": "BB:CategoryDefinition: Recon Event Categories",
+  "notes": "Edit this BB to include all events that indicate reconnaissance activity. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Recon Event Categories on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Recon</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Recon Event Categories on events which are detected by the undefined system",
+    "AND where the Event Category for the event is one of the following Recon"
+  ],
+  "RED_list": []
+}

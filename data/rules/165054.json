@@ -1,0 +1,38 @@
+{
+  "uuid": "650abee7-3c7e-4e86-ac92-f19d060008d9",
+  "id": "165054",
+  "name": "TI-IOC Match - Hostnames",
+  "notes": "",
+  "response_qid": "67501788",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501788"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Hostname, URL"
+  ],
+  "reference_sets": [
+    "318"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Hostname (custom), URL (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>(Shared) OpenCTI - Hostnames - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY TI-IOC Match - Hostnames on events which are detected by the LOCAL system",
+    "AND when any of Hostname (custom), URL (custom) are contained in any of (Shared) OpenCTI - Hostnames - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: TI-IOC Match - Hostnames",
+    "Event description: Detect DNS resolution or traffic towards malicious hostnames.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

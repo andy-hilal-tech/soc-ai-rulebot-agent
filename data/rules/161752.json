@@ -1,0 +1,40 @@
+{
+  "uuid": "0c7aa57b-4d8b-4039-be77-da4c9d238486",
+  "id": "161752",
+  "name": "Ryuk Ransomware Command Line Activity Detected",
+  "notes": "This is rule detects Ryuk ransomware command line activity.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Vasiliy Burov\nSIGMA Title: Ryuk Ransomware Command Line Activity\nSIGMA Description: Detects Ryuk Ransomware command lines\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501715",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501715"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of [net.exe or net1.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%stop%' AND  ( \tLOWER(&quot;Command&quot;) LIKE '%samss%' \tOR LOWER(&quot;Command&quot;) LIKE '%audioendpointbuilder%' \tOR LOWER(&quot;Command&quot;) LIKE '%unistoresvc_%' )</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Ryuk Ransomware Command Line Activity Detected on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]",
+    "AND when the event matches LOWER(\"Command\") LIKE '%stop%' AND  ( \tLOWER(\"Command\") LIKE '%samss%' \tOR LOWER(\"Command\") LIKE '%audioendpointbuilder%' \tOR LOWER(\"Command\") LIKE '%unistoresvc_%' ) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Ryuk Ransomware Command Line Activity Detected",
+    "Event description: Detects Ryuk ransomware command line activity.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

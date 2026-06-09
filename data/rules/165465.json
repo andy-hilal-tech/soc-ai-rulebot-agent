@@ -1,0 +1,42 @@
+{
+  "uuid": "3ffb4cbb-9f69-458d-b7d4-b95aed16d6bf",
+  "id": "165465",
+  "name": "MSSP - OS - MS - 19 - M - User Account Created during weekends",
+  "notes": "",
+  "response_qid": "67501856",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501856"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Account Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4720</a>",
+    "when the event(s) occur on any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Friday, Saturday</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY MSSP - OS - MS - 19 - M - User Account Created during weekends on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event matches Event ID is any of 4720",
+    "AND when the event(s) occur on any of Friday, Saturday",
+    "AND when at least 1 events are seen with the same Account Name (custom) in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: User Account Created during weekend",
+    "Event description: On weekends",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Access Denied\""
+  ]
+}

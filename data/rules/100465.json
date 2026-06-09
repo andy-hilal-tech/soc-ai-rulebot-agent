@@ -1,0 +1,38 @@
+{
+  "uuid": "b53a159c-efe4-46f0-a6ab-ddcb258feb05",
+  "id": "100465",
+  "name": "Policy: New Service Discovered in DMZ",
+  "notes": "Detects when an existing host has a new service discovered on it.",
+  "response_qid": "67500118",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500118"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>VIS Host Discovery.New Port Discovered</a>",
+    "when the local <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>source</a> host profile age is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>hours</a>",
+    "when the local network is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>DMZ</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Policy: New Service Discovered in DMZ on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following VIS Host Discovery.New Port Discovered",
+    "AND when the local source host profile age is greater than 24 hours",
+    "AND when the local network is DMZ"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: New service discovered on existing host",
+    "Event description: Detected an existing host with a new service installed on it.",
+    "Severity: 4, Credibility: 8, Relevance: 5",
+    "High-Level Category: \"VIS Host Discovery\"",
+    "Low-Level Category: \"New Port Discovered\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

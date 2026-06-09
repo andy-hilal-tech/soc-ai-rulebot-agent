@@ -1,0 +1,41 @@
+{
+  "uuid": "a443da40-73b2-46e4-96ea-7fbb0fed1bca",
+  "id": "130252",
+  "name": "BB:Threats: Cryptocurrency Mining Threat Hashes for Events",
+  "notes": "This Building Block triggers when a cryptocurrency mining file hash is observed.\n\nNote: Populate the Cryptocurrency Mining Threat Hashes Reference Set with relevant file hashes.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: AV/AM",
+    "BB:DeviceDefinition: Operating System",
+    "BB:Threats: Cryptocurrency Mining Threat Hashes for Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "File Hash, SHA256 Hash, MD5 Hash, SHA1 Hash"
+  ],
+  "reference_sets": [
+    "189"
+  ],
+  "dependencies": [
+    "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: Operating System</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>'File Hash' IS NOT NULL OR 'SHA256 Hash' IS NOT NULL OR 'MD5 Hash' IS NOT NULL OR 'SHA1 Hash' IS NOT NULL</a> AQL filter query",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>File Hash (custom), SHA256 Hash (custom), MD5 Hash (custom), SHA1 Hash (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Threat Hashes - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Threat Hashes for Events on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: Operating System",
+    "AND when the event matches 'File Hash' IS NOT NULL OR 'SHA256 Hash' IS NOT NULL OR 'MD5 Hash' IS NOT NULL OR 'SHA1 Hash' IS NOT NULL AQL filter query",
+    "AND when any of File Hash (custom), SHA256 Hash (custom), MD5 Hash (custom), SHA1 Hash (custom) are contained in any of Cryptocurrency Mining Threat Hashes - AlphaNumeric"
+  ],
+  "RED_list": []
+}

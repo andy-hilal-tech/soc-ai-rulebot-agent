@@ -1,0 +1,40 @@
+{
+  "uuid": "a88e00f9-c56a-4008-95be-6d0cfa56ebbf",
+  "id": "113852",
+  "name": "Powershell Script Created by a Remote Management Service",
+  "notes": "This rule triggers when a file containing a Powershell extension is created by a remote management service.",
+  "response_qid": "67500499",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500499"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5001830) FileCreate</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Name IMATCHES '((psexesvc)|(wsmprovhost)|(wmiprvse))\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Filename&quot; IMATCHES '.*\\.(ps|psm)1'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Powershell Script Created by a Remote Management Service on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001830) FileCreate",
+    "AND when the event matches Process Name IMATCHES '((psexesvc)|(wsmprovhost)|(wmiprvse))\\.exe' AQL filter query",
+    "AND when the event matches \"Filename\" IMATCHES '.*\\.(ps|psm)1' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: a Remoting Service Created a Powershell Script File",
+    "Event description: a Remoting Service Created a Powershell Script File",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Misc Suspicious Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

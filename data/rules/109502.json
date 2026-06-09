@@ -1,0 +1,25 @@
+{
+  "uuid": "a698202a-7ff2-451a-bd32-ed2dbc722dd8",
+  "id": "109502",
+  "name": "BB:UBA : Blocked File Transfer",
+  "notes": "Detects denied file transfer, FTP and TFTP attempts.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Blocked File Transfer on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application.FileTransfer Denied, Application.FTP Denied, Application.TFTP Session Denied, Access.FTP Action Denied</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Blocked File Transfer on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Application.FileTransfer Denied, Application.FTP Denied, Application.TFTP Session Denied, Access.FTP Action Denied"
+  ],
+  "RED_list": []
+}

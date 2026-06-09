@@ -1,0 +1,31 @@
+{
+  "uuid": "8560aab0-9a53-487f-858c-8aaafc16d561",
+  "id": "147102",
+  "name": "BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe",
+  "notes": "This Building Block detects execution of of Dxcap.exe and also detects usage of \"cdb.exe\" to launch 64-bit shellcode or arbitrary processes or commands from a debugger script file.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Beyu Denis, oscd.community, Nasreddine Bencherchali\nSIGMA Title: WinDbg/CDB LOLBIN Usage\nSIGMA Description: Detects usage of \"cdb.exe\" to launch 64-bit shellcode or arbitrary processes or commands from a debugger script file\n\nOriginal Author: Beyu Denis, oscd.community, Nasreddine Bencherchali (update)\nSIGMA Title: Application Whitelisting Bypass via Dxcap.exe\nSIGMA Description: Detects execution of of Dxcap.exe\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [cdb.exe or CDB.Exe or DXCap.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% -c %') OR (LOWER(&quot;Command&quot;) LIKE '% -c %' OR LOWER(&quot;Command&quot;) LIKE '% -cf %')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [cdb.exe or CDB.Exe or DXCap.exe]",
+    "AND when the event matches (LOWER(\"Command\") LIKE '% -c %') OR (LOWER(\"Command\") LIKE '% -c %' OR LOWER(\"Command\") LIKE '% -cf %') AQL filter query"
+  ],
+  "RED_list": []
+}

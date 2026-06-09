@@ -1,0 +1,29 @@
+{
+  "uuid": "e60dd432-9d7f-40f7-b6fd-9d556cc17d45",
+  "id": "117252",
+  "name": "BB:BehaviorDefinition: Default Policy Creation (AWS)",
+  "notes": "This Building Block defines when a user created a new policy version and set it to default(current) version. In AWS, a user with \"iam:CreatePolicyVersion\" permission can overwrite an existing policy, by creating a new version on top. An attacker can assign themselves the highest privileges, or revoke security managers permissions which are privilege escalation and defense evasion techniques.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Default Policy Creation (AWS) on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Amazon AWS CloudTrail</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Policy Change</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit Flags (custom) matches any of expressions (?i)true</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Default Policy Creation (AWS) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Amazon AWS CloudTrail",
+    "AND when the event category for the event is one of the following Authentication.Policy Change",
+    "AND when the event matches Audit Flags (custom) matches any of expressions (?i)true"
+  ],
+  "RED_list": []
+}

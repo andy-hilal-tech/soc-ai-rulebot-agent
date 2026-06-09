@@ -1,0 +1,34 @@
+{
+  "uuid": "5ef1ecb4-72ae-4fab-b90e-756ea8082a7a",
+  "id": "162381",
+  "name": "Processes Accessing the Microphone and Webcam",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)\nSIGMA Title: Processes Accessing the Microphone and Webcam\nSIGMA Description: Potential adversaries accessing the microphone and webcam in an endpoint.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\" IN('4657', '4656', '4663')) AND (LOWER(\"Object Name\") LIKE '%\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\microphone\\nonpackaged%' OR LOWER(\"Object Name\") LIKE '%\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\webcam\\nonpackaged%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Processes Accessing the Microphone and Webcam on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\" IN('4657', '4656', '4663')) AND (LOWER(\"Object Name\") LIKE '%\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\microphone\\nonpackaged%' OR LOWER(\"Object Name\") LIKE '%\\software\\microsoft\\windows\\currentversion\\capabilityaccessmanager\\consentstore\\webcam\\nonpackaged%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Processes Accessing the Microphone and Webcam",
+    "Event description: Converted from SIGMA Rule.  Original Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research) SIGMA Title: Processes Accessing the Microphone and Webcam SIGMA Description: Potential adversaries accessing the microphone and webcam in an endpoint.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

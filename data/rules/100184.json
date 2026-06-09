@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1382",
+  "id": "100184",
+  "name": "BB:FalsePositive: SNMP Sender or Receiver False Positive Events",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from SNMP senders or receivers that are defined in the BB:HostDefinition: SNMP Sender or Receiver building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1366"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: SNMP Sender or Receiver False Positive Events on events which are detected by the undefined system",
+    "BB:HostDefinition: SNMP Sender or Receiver"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1366"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: SNMP Sender or Receiver</a>",
+    "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1159448) Custom User 9 - Event CRE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: SNMP Sender or Receiver False Positive Events on events which are detected by the undefined system",
+    "AND when we see an event match any of the following BB:HostDefinition: SNMP Sender or Receiver",
+    "AND the event QID is one of the following (1159448) Custom User 9 - Event CRE"
+  ],
+  "RED_list": []
+}

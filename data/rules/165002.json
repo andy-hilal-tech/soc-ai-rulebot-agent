@@ -1,0 +1,42 @@
+{
+  "uuid": "7e64b012-c987-462c-9a32-41ef73ddc97e",
+  "id": "165002",
+  "name": "Potential Windows Command Shell Interpreter",
+  "notes": "This rule triggers when the usage of path traversal in cmd.exe indicating possible command/argument confusion/hijacking.\n\nCovered from SIGMA Rule.\n\nOriginal Author: xknow @xknow_infosec, Tim Shelton\nSIGMA Title: Cmd.exe CommandLine Path Traversal\nSIGMA Description: detects the usage of path traversal in cmd.exe indicating possible command/argument confusion/hijacking\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501621",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501621"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of cmd.exe, Parent Command (custom) contains any of [/c or /k or /r or /../../]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Command (custom) contains any of \\Tasktop\\keycloak\\bin\\/../../jre\\bin\\java</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of [\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1 or \\system32\\conhost.exe 0xffffffff -ForceV1]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Windows Command Shell Interpreter on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Parent Process Name (custom) is any of cmd.exe, Parent Command (custom) contains any of [/c or /k or /r or /../../]",
+    "AND NOT when the event matches Command (custom) contains any of \\Tasktop\\keycloak\\bin\\/../../jre\\bin\\java",
+    "AND NOT when the event matches Command (custom) contains any of [\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1 or \\system32\\conhost.exe 0xffffffff -ForceV1]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Windows Command Shell Interpreter",
+    "Event description: Detects the usage of path traversal in cmd.exe indicating possible command/argument confusion/hijacking.",
+    "Severity: 7, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Command Execution Success\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

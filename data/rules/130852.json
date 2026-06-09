@@ -1,0 +1,36 @@
+{
+  "uuid": "8e0089b5-901c-4037-868b-02e8465cb6ce",
+  "id": "130852",
+  "name": "QNI : Confidential Content Being Transferred",
+  "notes": "This rule detects confidential content that is being transferred to a remote destination. \nNote that Suspect Content can be tuned with YARA rules, please refer to QNI documentation.",
+  "response_qid": "67500885",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500885"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Suspect Content Descriptions</a> match <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>confidential content</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Confidential Content Being Transferred on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Remote",
+    "AND when any of Suspect Content Descriptions match confidential content"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Confidential Content Being Transferred",
+    "Event description: Confidential content detected in outbound transfers. ",
+    "Severity: 8, Credibility: 8, Relevance: 10",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Data Loss Possible\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "uuid": "SYSTEM-1103",
+  "id": "134802",
+  "name": "Remote: Remote Desktop Access from the Internet",
+  "notes": "This rule triggers when the Microsoft Remote Desktop Protocol is detected from the Internet to a local host.  Most companies consider this a violation of corporate policy.  If this is normal activity on your network, you should disable this rule.",
+  "response_qid": "67501043",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501043"
+  ],
+  "rule_refs": [
+    "SYSTEM-1055",
+    "SYSTEM-1472"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Remote Desktop Access from a Remote Host",
+    "BB:CategoryDefinition: Successful Communication"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1055",
+    "SYSTEM-1472"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Remote Desktop Access from a Remote Host, BB:CategoryDefinition: Successful Communication</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Remote: Remote Desktop Access from the Internet on flows which are detected by the LOCAL system",
+    "AND when a flow matches all of the following BB:BehaviorDefinition: Remote Desktop Access from a Remote Host, BB:CategoryDefinition: Successful Communication"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remote Desktop Access from the Internet",
+    "Event description: Detects the Microsoft Remote Desktop Protocol from the Internet to a local host.  Most companies consider this a violation of corporate policy.  If this is normal activity on your network, you should disable this rule.",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Remote Access Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

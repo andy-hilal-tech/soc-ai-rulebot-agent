@@ -1,0 +1,44 @@
+{
+  "uuid": "b1138b4c-389e-48d5-9431-7681ad4fb687",
+  "id": "116652",
+  "name": "BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure)",
+  "notes": "This Building Block defines when an Azure resource instance with managed identity is assigned a role to another resource. Resources with managed identity can access and managed other resources through Azure Active Directory Authentication.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure) on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: Virtualization"
+  ],
+  "db_fields_used": [
+    "Object ID",
+    "Object Type"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Role Creation Success, Authentication.Role Assignment Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Object Type (custom) is not N/A</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Object ID (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Object Type (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Object ID (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Object Type (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure) on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization",
+    "AND when the event category for the event is one of the following Authentication.Role Creation Success, Authentication.Role Assignment Success",
+    "AND when the event matches Object Type (custom) is not N/A",
+    "AND when at least 2 events are seen with the same Object ID (custom) and different Object Type (custom) in 5 minutes"
+  ],
+  "RED_list": []
+}

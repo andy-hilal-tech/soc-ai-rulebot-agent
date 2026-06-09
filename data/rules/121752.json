@@ -1,0 +1,44 @@
+{
+  "uuid": "5e47cf3a-42b8-4f45-81c8-46c0e1fbe4c6",
+  "id": "121752",
+  "name": "Website Manipulations via SQL Injection",
+  "notes": "This rule triggers when abnormal behaviour such as SQL Injection is observed.",
+  "response_qid": "67500699",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500699"
+  ],
+  "rule_refs": [
+    "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Web Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Web Servers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application.HTTP Opened, Application.Request Successful, Application.Request In Progress</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;URL Query String&quot;) matches '.*\\b(select|union|delete|create|update|drop|insert|alter|merge|char)\\b.*(from|in|all|where).*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Website Manipulations via SQL Injection on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Web Servers",
+    "AND when the event category for the event is one of the following Application.HTTP Opened, Application.Request Successful, Application.Request In Progress",
+    "AND when the event matches LOWER(\"URL Query String\") matches '.*\\b(select|union|delete|create|update|drop|insert|alter|merge|char)\\b.*(from|in|all|where).*' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Website Manipulations via SQL Injection",
+    "Event description: Detects when abnormal behaviour such as SQL Injection is observed.",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Web Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

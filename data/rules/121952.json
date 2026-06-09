@@ -1,0 +1,25 @@
+{
+  "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+  "id": "121952",
+  "name": "BB:DeviceDefinition: Web Servers",
+  "notes": "Edit this BB to define web servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: Web Servers on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Apache HTTP Server, Microsoft IIS, NGINX HTTP Server, Amazon AWS Route 53</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: Web Servers on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Apache HTTP Server, Microsoft IIS, NGINX HTTP Server, Amazon AWS Route 53"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1563",
+  "id": "100327",
+  "name": "BB:CategoryDefinition: Auditing Changed",
+  "notes": "This Building Block identifies auditing changed events.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Auditing Changed on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Audit Logging Disablement Success, System.Audit Logging Enablement Success, System.Audit Logging Disablement Failure, Authentication.Policy Change, System.Successful File Modification, System.Successful Configuration Modification, SIM Audit.SIM User Action, Audit.Object Modification Success, Authentication.Group Changed, System.System Configuration, Audit.Monitor Activity Attempted</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Auditing Changed on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following System.Audit Logging Disablement Success, System.Audit Logging Enablement Success, System.Audit Logging Disablement Failure, Authentication.Policy Change, System.Successful File Modification, System.Successful Configuration Modification, SIM Audit.SIM User Action, Audit.Object Modification Success, Authentication.Group Changed, System.System Configuration, Audit.Monitor Activity Attempted"
+  ],
+  "RED_list": []
+}

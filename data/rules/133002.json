@@ -1,0 +1,44 @@
+{
+  "uuid": "67d1dc0a-e0c7-480b-bd75-23f3a151f729",
+  "id": "133002",
+  "name": "QNI : Email Received From Potentially Hostile Host",
+  "notes": "This rule triggers when an email flow is received from a host that is known for hostile activities, such as Phishing, Spam, Malware, Botnet Command and Control, or Cryptocurrency Mining.",
+  "response_qid": "67500939",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500939"
+  ],
+  "rule_refs": [
+    "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Mail Applications in Flows"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:CategoryDefinition: Mail Applications in Flows</a>",
+    "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Originating User is not N/A</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>XFORCE_URL_CATEGORY(REPLACEALL('.*\\@(.+?)\\&gt;?$',&quot;originating user&quot;,'$1')) IN ('Phishing URLs', 'Spam URLs', 'Malware', 'Botnet Command and Control Server', 'Cryptocurrency Mining')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Email Received From Potentially Hostile Host on flows which are detected by the LOCAL system",
+    "AND when a flow matches any of the following BB:CategoryDefinition: Mail Applications in Flows",
+    "AND when the flow matches Originating User is not N/A",
+    "AND when the flow matches XFORCE_URL_CATEGORY(REPLACEALL('.*\\@(.+?)\\&gt;?$',\"originating user\",'$1')) IN ('Phishing URLs', 'Spam URLs', 'Malware', 'Botnet Command and Control Server', 'Cryptocurrency Mining') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Email Received From Potentially Hostile Host",
+    "Event description: Detects when an email flow is received from a host that is known for hostile activities, such as Phishing, Spam, Malware, Botnet Command and Control, or Cryptocurrency Mining.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Address\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "uuid": "50e1fa06-13d4-47cb-8271-71d76760ebeb",
+  "id": "164808",
+  "name": "Failed Logons with Different Usernames from Same IP",
+  "notes": "",
+  "response_qid": "67500115",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500115"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures"
+  ],
+  "db_fields_used": [
+    "destinationIP",
+    "sourceIP, userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1201",
+      "name": "BB:CategoryDefinition: Authentication Failures"
+    }
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Source IP, Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Source IP, Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Failed Logons with Different Usernames from Same IP on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:CategoryDefinition: Authentication Failures",
+    "AND when at least 5 events are seen with the same Destination IP and different Source IP, Username in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Login Failures to the Same Destination",
+    "Event description: Detected authentication failures (more than 10) to the same destination IP.",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"Remote Access Login Failed\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Destination IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

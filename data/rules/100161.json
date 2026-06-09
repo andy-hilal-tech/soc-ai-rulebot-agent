@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1051",
+  "id": "100161",
+  "name": "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows",
+  "notes": "This Building Block identifies unidirectional ICMP flows.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1548"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Unidirectional Flow",
+    "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1548"
+  ],
+  "conditions_text": [
+    "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP</a>",
+    "when a flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Unidirectional Flow</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows on flows which are detected by the LOCAL system",
+    "AND when the IP protocol is one of the following ICMP",
+    "AND when a flow matches any of the following BB:CategoryDefinition: Unidirectional Flow"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+  "id": "140502",
+  "name": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+  "notes": "This Building Block triggers when images (DLLs, EXEs, etc.) are loaded from a System32 directory that is not C:\\Windows\\System32.\n\nUpdate the last rule filter to point to your default system directory if it is not C:Windows\\System32.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Image Loaded from Mock System Directory on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Object Load Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Directory (custom) matches any of expressions (?i)\\\\system32(\\\\|$)</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>File Directory (custom) does not match any of expressions (?i)\\w:\\\\windows\\\\system32(\\\\|$)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Image Loaded from Mock System Directory on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Object Load Success",
+    "AND when the event matches File Directory (custom) matches any of expressions (?i)\\\\system32(\\\\|$)",
+    "AND when the event matches File Directory (custom) does not match any of expressions (?i)\\w:\\\\windows\\\\system32(\\\\|$)"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,38 @@
+{
+  "uuid": "19c24abb-5109-4273-a737-88fc25ee9eb6",
+  "id": "101152",
+  "name": "UBA : Terminated User Activity",
+  "notes": "Detects activity from any user that is listed as terminated or resigned in the UBA : Terminated Users reference table. \n**NOTE this rule does not ignore any log sources.***",
+  "response_qid": "67500162",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500162"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [
+    "47"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Username is not N/A</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Terminated Users - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Terminated User Activity on events which are detected by the LOCAL system",
+    "AND when the event matches Username is not N/A",
+    "AND when any of Username are contained in any of UBA : Terminated Users - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Terminated User Activity",
+    "Event description: senseValue=25;",
+    "Severity: 10, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Risk\""
+  ]
+}

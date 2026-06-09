@@ -1,0 +1,29 @@
+{
+  "uuid": "f110f769-230e-467f-bc2d-0d3ed0707d93",
+  "id": "135752",
+  "name": "BB:BehaviorDefinition: Cobalt Strike Port Usage",
+  "notes": "This Building Block triggers when outbound TCP traffic over the port 50050 is detected. This is the default port for communication with a Cobalt Strike Server.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Cobalt Strike Port Usage on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Destination Port is 50050</a>",
+    "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Protocol is TCP.tcp_ip</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Cobalt Strike Port Usage on flows which are detected by the LOCAL system",
+    "AND when the destination is Remote",
+    "AND when the flow matches Destination Port is 50050",
+    "AND when the flow matches Protocol is TCP.tcp_ip"
+  ],
+  "RED_list": []
+}

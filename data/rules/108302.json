@@ -1,0 +1,27 @@
+{
+  "uuid": "7b851b26-adfb-42f8-bbe8-1bea35824211",
+  "id": "108302",
+  "name": "BB:UBA : Successful File Upload",
+  "notes": "This rule detects all the successful file upload events (HTTP, FTP)",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Successful File Upload on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.FTP Action Allowed, Access.Firewall Session Opened, Access.Access Permitted</a>",
+    "when the destination port is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>443, 80, 21</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Successful File Upload on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Access.FTP Action Allowed, Access.Firewall Session Opened, Access.Access Permitted",
+    "AND when the destination port is one of the following 443, 80, 21"
+  ],
+  "RED_list": []
+}

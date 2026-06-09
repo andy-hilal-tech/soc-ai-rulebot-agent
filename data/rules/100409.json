@@ -1,0 +1,54 @@
+{
+  "uuid": "3a7b6c8c-bd98-4dfa-be79-91f15e9e8931",
+  "id": "100409",
+  "name": "Excessive Failed Logins to Compliance IS",
+  "notes": "Reports excessive authentication failures to a compliance server within 10 minutes. ",
+  "response_qid": "67500088",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500088"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201",
+    "SYSTEM-1258",
+    "SYSTEM-1260",
+    "SYSTEM-1261"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures",
+    "BB:CategoryDefinition: Authentication Failures with the same destination IP more than 10 times",
+    "BB:ComplianceDefinition: GLBA Servers",
+    "BB:ComplianceDefinition: HIPAA Servers",
+    "BB:ComplianceDefinition: SOX Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1261",
+    "SYSTEM-1260",
+    "SYSTEM-1258",
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:ComplianceDefinition: GLBA Servers, BB:ComplianceDefinition: HIPAA Servers, BB:ComplianceDefinition: SOX Servers</a>",
+    "when we see any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>destination IP</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>10</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP(s)</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when we see any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>destination IP</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>10</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP(s)</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Excessive Failed Logins to Compliance IS on events which are detected by the undefined system",
+    "AND when we see an event match any of the following BB:ComplianceDefinition: GLBA Servers, BB:ComplianceDefinition: HIPAA Servers, BB:ComplianceDefinition: SOX Servers",
+    "AND when we see any of these BB:CategoryDefinition: Authentication Failures with the same destination IP more than 10 times, across more than 0 destination IP(s) within 10 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Excessive Failed Logins to Compliance IS",
+    "Event description: Detected excessive authentication failures to a compliance server within 10 minutes. ",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Compliance Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Destination IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

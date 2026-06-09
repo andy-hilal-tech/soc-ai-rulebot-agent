@@ -1,0 +1,48 @@
+{
+  "uuid": "9cafdd9d-72a4-4d23-9a53-0273cbccfcd0",
+  "id": "109952",
+  "name": "UBA : User Access from Multiple Locations",
+  "notes": "Detects when a username is being used in multiple locations simultaneously. ",
+  "response_qid": "67500360",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500360"
+  ],
+  "rule_refs": [
+    "5ee6fcf9-2c17-4c59-8797-533542c06992",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Excluded Geographic Locations"
+  ],
+  "db_fields_used": [
+    "sourceGeographic",
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "5ee6fcf9-2c17-4c59-8797-533542c06992"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations</a>",
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Source Geographic Country/Region</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Source Geographic Country/Region</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : User Access from Multiple Locations on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations",
+    "AND when at least 2 events are seen with the same Username and different Source Geographic Country/Region in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Access from Multiple Locations",
+    "Event description: senseValue=5,senseDesc='Indicates that the same user account is being used from multiple locations/sources simultaneously',usecase_id='9cafdd9d-72a4-4d23-9a53-0273cbccfcd0'",
+    "Severity: 3, Credibility: 2, Relevance: 2",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Geography\""
+  ]
+}

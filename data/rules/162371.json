@@ -1,0 +1,34 @@
+{
+  "uuid": "161554ba-a34a-4af4-8c12-057c38fa297f",
+  "id": "162371",
+  "name": "System Owner or User Discovery",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Timur Zinniatullin, oscd.community\nSIGMA Title: System Owner or User Discovery\nSIGMA Description: Adversaries may use the information from System Owner/User Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nFalse positives:\n- Admin activity\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND (LOWER(Command) LIKE '%a0%users%' OR LOWER(Command) LIKE '%w%' OR LOWER(Command) LIKE '%who%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY System Owner or User Discovery on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND (LOWER(Command) LIKE '%a0%users%' OR LOWER(Command) LIKE '%w%' OR LOWER(Command) LIKE '%who%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: System Owner or User Discovery",
+    "Event description: Converted from SIGMA Rule.  Original Author: Timur Zinniatullin, oscd.community SIGMA Title: System Owner or User Discovery SIGMA Description: Adversaries may use the information from System Owner/User Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.  False positives: - Admin activity  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

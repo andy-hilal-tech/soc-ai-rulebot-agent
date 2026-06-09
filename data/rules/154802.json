@@ -1,0 +1,29 @@
+{
+  "uuid": "00c36571-6fc5-4017-aa68-89d993dd42a2",
+  "id": "154802",
+  "name": "BB:BehaviorDefinition: Turla Group Lateral Movement",
+  "notes": "This Building Block detects automated lateral movement by Turla group.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Markus Neis\nSIGMA Title: Turla Group Lateral Movement \nSIGMA Description: Detects automated lateral movement by Turla group\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Turla Group Lateral Movement on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE 'net use \\\\\\%%domaincontroller%%\\c$ &quot;p@ssw0rd&quot; %' OR LOWER(&quot;Command&quot;) LIKE 'dir c:\\%.doc% /s' OR LOWER(&quot;Command&quot;) LIKE 'dir %%temp%%\\%.exe'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Turla Group Lateral Movement on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Command\") LIKE 'net use \\\\\\%%domaincontroller%%\\c$ \"p@ssw0rd\" %' OR LOWER(\"Command\") LIKE 'dir c:\\%.doc% /s' OR LOWER(\"Command\") LIKE 'dir %%temp%%\\%.exe' AQL filter query"
+  ],
+  "RED_list": []
+}

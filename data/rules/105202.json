@@ -1,0 +1,34 @@
+{
+  "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+  "id": "105202",
+  "name": "BB:UBA : URL Category Filter",
+  "notes": "This building block is used to provide the log source types available to the Risky URL Filter Category rules. \nNote: Just adding a log source to building block does not mean the source will be able to pull the category. Some other updates maybe required.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : URL Category Filter on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Blue Coat SG Appliance, Cisco IronPort, McAfee Web Gateway, Check Point, Palo Alto PA Series, Forcepoint V Series, Fortinet FortiGate Security Gateway</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Web Category (custom) is not N/A</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : URL Category Filter on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Blue Coat SG Appliance, Cisco IronPort, McAfee Web Gateway, Check Point, Palo Alto PA Series, Forcepoint V Series, Fortinet FortiGate Security Gateway",
+    "AND when the event matches Web Category (custom) is not N/A",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters"
+  ],
+  "RED_list": []
+}

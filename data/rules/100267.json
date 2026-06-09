@@ -1,0 +1,25 @@
+{
+  "uuid": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+  "id": "100267",
+  "name": "BB:DeviceDefinition: Mail",
+  "notes": "This Building Block defines all Mail devices on the system.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Cisco IronPort, PostFix MailTransferAgent, Microsoft Exchange Server, IBM Lotus Domino, Solaris Operating System Sendmail Logs, Trend Micro Deep Discovery Email Inspector, Proofpoint Enterprise Protection/Enterprise Privacy, Barracuda Spam &amp; Virus Firewall, Microsoft Office 365</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: Mail on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Cisco IronPort, PostFix MailTransferAgent, Microsoft Exchange Server, IBM Lotus Domino, Solaris Operating System Sendmail Logs, Trend Micro Deep Discovery Email Inspector, Proofpoint Enterprise Protection/Enterprise Privacy, Barracuda Spam &amp; Virus Firewall, Microsoft Office 365"
+  ],
+  "RED_list": []
+}

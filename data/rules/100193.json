@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1409",
+  "id": "100193",
+  "name": "BB:FalsePositive: Virus Definition Update Categories",
+  "notes": "Edit this BB to define all the false positive QIDs that occur to or from virus definition or other automatic update hosts that are defined in the BB:HostDefinition: Virus Definition and Other Update Servers building block.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1251"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: Virus Definition Update Categories on events which are detected by the undefined system",
+    "BB:HostDefinition: Virus Definition and Other Update Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1251"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Virus Definition and Other Update Servers</a>",
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(key not found: Recon), (key not found: Suspicious)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Virus Definition Update Categories on events which are detected by the undefined system",
+    "AND when we see an event match any of the following BB:HostDefinition: Virus Definition and Other Update Servers",
+    "AND where the Event Category for the event is one of the following (key not found: Recon), (key not found: Suspicious)"
+  ],
+  "RED_list": []
+}

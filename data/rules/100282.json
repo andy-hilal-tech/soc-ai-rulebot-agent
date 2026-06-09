@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1565",
+  "id": "100282",
+  "name": "BB:CategoryDefinition: Application or Service Installed or Modified",
+  "notes": "This Building Block identifies applications or services installed or modified categories.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Application or Service Installed or Modified on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Successful Application Modification, System.Service Installed, System.Registry Addition, System.Application Installed</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Application or Service Installed or Modified on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following System.Successful Application Modification, System.Service Installed, System.Registry Addition, System.Application Installed"
+  ],
+  "RED_list": []
+}

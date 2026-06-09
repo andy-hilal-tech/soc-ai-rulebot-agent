@@ -1,0 +1,40 @@
+{
+  "uuid": "abfeabe4-8588-4551-b325-7d3ba020a343",
+  "id": "138552",
+  "name": "BB:BehaviorDefinition: Critical Security Tool Process Information",
+  "notes": "This building block detects when an audit message records information about a Critical Security Tool as a response to it's PID being targeted by another signal.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Critical Security Tool Process Information on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Process Name"
+  ],
+  "reference_sets": [
+    "213"
+  ],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Audit.General Audit Event</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Name (custom) is not N/A</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Critical Security Tool Processes - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Critical Security Tool Process Information on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following Audit.General Audit Event",
+    "AND when the event matches Process Name (custom) is not N/A",
+    "AND when any of Process Name (custom) are contained in any of Critical Security Tool Processes - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": []
+}

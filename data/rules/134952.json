@@ -1,0 +1,31 @@
+{
+  "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+  "id": "134952",
+  "name": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+  "notes": "This Building Block detects suspicious processes logging on with explicit credentials.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Login Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Process Full Full Name&quot; in ('cmd.exe', 'powershell.exe', 'pwsh.exe', 'winrs.exe', 'wmic.exe', 'net.exe', 'net1.exe', 'reg.exe')</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Machine Identifier&quot; ILIKE '%localhost%' OR (&quot;Account Full Full Name&quot; ILIKE '%$' AND &quot;Target Username&quot; ILIKE '%$'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Authentication.User Login Success",
+    "AND when the event matches \"Process Full Full Name\" in ('cmd.exe', 'powershell.exe', 'pwsh.exe', 'winrs.exe', 'wmic.exe', 'net.exe', 'net1.exe', 'reg.exe') AQL filter query",
+    "AND NOT when the event matches (\"Machine Identifier\" ILIKE '%localhost%' OR (\"Account Full Full Name\" ILIKE '%$' AND \"Target Username\" ILIKE '%$')) AQL filter query"
+  ],
+  "RED_list": []
+}

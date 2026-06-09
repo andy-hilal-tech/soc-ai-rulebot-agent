@@ -1,0 +1,31 @@
+{
+  "uuid": "d56a4f37-f52d-4f3c-9690-2831883e1c3f",
+  "id": "155202",
+  "name": "BB:BehaviorDefinition: DLL Execution via Rasautou",
+  "notes": "This Building Block detects using Rasautou.exe for loading arbitrary .DLL specified in -d option and executes the export specified in -p.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Julia Fomina, oscd.community\nSIGMA Title: DLL Execution via Rasautou.exe\nSIGMA Description: Detects using Rasautou.exe for loading arbitrary .DLL specified in -d option and executes the export specified in -p.\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: DLL Execution via Rasautou on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of rasdlui.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% -d %' AND LOWER(&quot;Command&quot;) LIKE '% -p %'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: DLL Execution via Rasautou on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of rasdlui.exe",
+    "AND when the event matches LOWER(\"Command\") LIKE '% -d %' AND LOWER(\"Command\") LIKE '% -p %' AQL filter query"
+  ],
+  "RED_list": []
+}

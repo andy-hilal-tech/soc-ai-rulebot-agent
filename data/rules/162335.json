@@ -1,0 +1,34 @@
+{
+  "uuid": "97f4ec56-4786-4bb8-80d0-ef0f16106606",
+  "id": "162335",
+  "name": "Linux Capabilities Discovery",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Pawel Mazur\nSIGMA Title: Linux Capabilities Discovery\nSIGMA Description: Detects attempts to discover the files with setuid/setgid capability on them. That would allow adversary to escalate their privileges.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%getcap%' AND LOWER(Command) LIKE '%a1%-r%' AND LOWER(Command) LIKE '%a2%/%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Linux Capabilities Discovery on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%getcap%' AND LOWER(Command) LIKE '%a1%-r%' AND LOWER(Command) LIKE '%a2%/%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Linux Capabilities Discovery",
+    "Event description: Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Linux Capabilities Discovery SIGMA Description: Detects attempts to discover the files with setuid/setgid capability on them. That would allow adversary to escalate their privileges.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

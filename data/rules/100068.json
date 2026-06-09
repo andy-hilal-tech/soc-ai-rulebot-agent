@@ -1,0 +1,79 @@
+{
+  "uuid": "SYSTEM-1199",
+  "id": "100068",
+  "name": "Login Successful After Scan Attempt",
+  "notes": "Reports a successful log in to a host after recon has been performed against the network.",
+  "response_qid": "67500016",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500016"
+  ],
+  "rule_refs": [
+    "SYSTEM-1159",
+    "SYSTEM-1161",
+    "SYSTEM-1162",
+    "SYSTEM-1164",
+    "SYSTEM-1165",
+    "SYSTEM-1166",
+    "SYSTEM-1188",
+    "SYSTEM-1189",
+    "SYSTEM-1191",
+    "SYSTEM-1196",
+    "SYSTEM-1220",
+    "SYSTEM-1397",
+    "SYSTEM-1400",
+    "SYSTEM-1407",
+    "SYSTEM-1585",
+    "SYSTEM-1586",
+    "SYSTEM-1587",
+    "SYSTEM-1592",
+    "SYSTEM-1595"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Success",
+    "BB:CategoryDefinition: Authentication Success in order with the same IP from the previous source"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1407",
+    "SYSTEM-1166",
+    "SYSTEM-1164",
+    "SYSTEM-1165",
+    "SYSTEM-1162",
+    "SYSTEM-1161",
+    "SYSTEM-1189",
+    "SYSTEM-1159",
+    "SYSTEM-1191",
+    "SYSTEM-1196",
+    "SYSTEM-1397",
+    "SYSTEM-1188",
+    "SYSTEM-1400",
+    "SYSTEM-1586",
+    "SYSTEM-1587",
+    "SYSTEM-1592",
+    "SYSTEM-1585",
+    "SYSTEM-1595",
+    "SYSTEM-1220"
+  ],
+  "conditions_text": [
+    "when at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Authentication: Login Failures Across Multiple Hosts, Recon: Remote SSH Server Scanner, Recon: Remote Proxy Server Scanner, Recon: Remote RPC Server Scanner, Recon: Remote LDAP Server Scanner, Recon: Remote IRC Server Scanner, Recon: Remote FTP Scanner, Recon: Remote Database Scanner, Recon: Local SSH Server Scanner, Recon: Local IRC Server Scanner, Recon: Local FTP Scanner, Recon: Local Database Scanner, Recon: Local &nbsp;LDAP Server Scanner</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>IP</a> followed by at least <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>in</a> order with the same <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>IP</a> from the previous <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>source</a>, within <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"12\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Authentication: Login Failures Across Multiple Hosts, Recon: Remote SSH Server Scanner, Recon: Remote Proxy Server Scanner, Recon: Remote RPC Server Scanner, Recon: Remote LDAP Server Scanner, Recon: Remote IRC Server Scanner, Recon: Remote FTP Scanner, Recon: Remote Database Scanner, Recon: Local SSH Server Scanner, Recon: Local IRC Server Scanner, Recon: Local FTP Scanner, Recon: Local Database Scanner, Recon: Local &nbsp;LDAP Server Scanner</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>IP</a> followed by at least <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>in</a> order with the same <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>IP</a> from the previous <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>source</a>, within <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"12\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Login Successful After Scan Attempt on events which are detected by the LOCAL system",
+    "AND when at least 1 of these Authentication: Login Failures Across Multiple Hosts, Recon: Remote SSH Server Scanner, Recon: Remote Proxy Server Scanner, Recon: Remote RPC Server Scanner, Recon: Remote LDAP Server Scanner, Recon: Remote IRC Server Scanner, Recon: Remote FTP Scanner, Recon: Remote Database Scanner, Recon: Local SSH Server Scanner, Recon: Local IRC Server Scanner, Recon: Local FTP Scanner, Recon: Local Database Scanner, Recon: Local  LDAP Server Scanner, in any order, with the same source IP followed by at least 1 of these BB:CategoryDefinition: Authentication Success in order with the same IP from the previous source, within 30 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Scan Followed By Successful Login",
+    "Event description: Detected a source IP scanning the network for typical authentication services followed by a successful login.  It is not typical for hosts to scan the network before authenticating.  This offense should be treated as suspicious.",
+    "Severity: 5, Credibility: 6, Relevance: 5",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Pattern Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

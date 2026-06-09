@@ -1,0 +1,45 @@
+{
+  "uuid": "af741462-5abd-4368-a1db-a4619cdc2c58",
+  "id": "112952",
+  "name": "Remote Process Execution on Multiple Hosts",
+  "notes": "This rule triggers when remote management service are creating process on multiple hosts.",
+  "response_qid": "67500484",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500484"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Process Name",
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Parent Process Name IMATCHES '((psexesvc)|(wsmprovhost)|(wmiprvse))\\.exe'</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Process Name (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Process Name (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Remote Process Execution on Multiple Hosts on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when the event matches Parent Process Name IMATCHES '((psexesvc)|(wsmprovhost)|(wmiprvse))\\.exe' AQL filter query",
+    "AND when at least 2 events are seen with the same Process Name (custom) and different Source IP in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detected a Remotely Executed Process over Multiple Hosts",
+    "Event description: Detected a Remotely Executed Process over Multiple Hosts",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Misc Suspicious Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

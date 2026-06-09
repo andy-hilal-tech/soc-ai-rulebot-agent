@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1052",
+  "id": "100160",
+  "name": "BB:Threats: Suspicious IP Protocol Usage: Long Duration Outbound Flow",
+  "notes": "This Building Block identifies flows that have been active for more than 48 hours",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Suspicious IP Protocol Usage: Long Duration Outbound Flow on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when the flow duration is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>48</a> <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>hours</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Suspicious IP Protocol Usage: Long Duration Outbound Flow on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Remote",
+    "AND when the flow duration is greater than 48 hours"
+  ],
+  "RED_list": []
+}

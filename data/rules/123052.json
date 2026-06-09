@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1329",
+  "id": "123052",
+  "name": "BB:FalseNegative: Events That Indicate Successful Compromise",
+  "notes": "This Building Block defines successful compromise events.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:FalseNegative: Events That Indicate Successful Compromise on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6500120) Custom User 9 - Event CRE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalseNegative: Events That Indicate Successful Compromise on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (6500120) Custom User 9 - Event CRE"
+  ],
+  "RED_list": []
+}

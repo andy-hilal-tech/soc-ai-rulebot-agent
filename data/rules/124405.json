@@ -1,0 +1,45 @@
+{
+  "uuid": "308c3b0b-5c50-4b84-8ba7-1aa1393d5f30",
+  "id": "124405",
+  "name": "UBA : User Accessing Account from Anonymous Source",
+  "notes": "Indicates that a user is accessing internal resources from an anonymous source such as TOR or a VPN.",
+  "response_qid": "67500181",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500181"
+  ],
+  "rule_refs": [
+    "SYSTEM-1220",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Success",
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1220",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Success, BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Source IP</a> is categorized by X-Force as <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Anonymization Services</a> with confidence value <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>85</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Accessing Account from Anonymous Source on events which are detected by the LOCAL system",
+    "AND when the event context is Remote to Local",
+    "AND when an event matches all of the following BB:CategoryDefinition: Authentication Success, BB:UBA : Common Event Filters",
+    "AND when Source IP is categorized by X-Force as Anonymization Services with confidence value greater than 85"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Accessing Account from Anonymous Source",
+    "Event description: senseValue=15,senseDesc='A user is accessing internal resources from an anonymous source such as TOR or a privacy VPN.',usecase_id='52dca274-5833-42af-9c5d-00b7369106ba'",
+    "Severity: 8, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

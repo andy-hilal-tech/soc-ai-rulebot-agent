@@ -1,0 +1,47 @@
+{
+  "uuid": "0dbc04ea-6d2a-4681-9260-595e639bbaa9",
+  "id": "100454",
+  "name": "Repeat Non-Windows Login Failures",
+  "notes": "Reports when a source IP address causes an authentication failure event at least 7 times to a single destination within 5 minutes. ",
+  "response_qid": "67500018",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500018"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures",
+    "BB:CategoryDefinition: Authentication Failures match at least 7 times with the same Source IP"
+  ],
+  "db_fields_used": [
+    "sourceIP, destinationIP, qid"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>7</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP, Destination IP, Event Name</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>7</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP, Destination IP, Event Name</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Repeat Non-Windows Login Failures on events which are detected by the LOCAL system",
+    "AND NOT when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when BB:CategoryDefinition: Authentication Failures match at least 7 times with the same Source IP, Destination IP, Event Name in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Authentication: Repeated Non-Windows Login Failures",
+    "Event description: Detected a source IP address causing an authentication failure event at least 7 times to a single destination within 5 minutes. ",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"Remote Access Login Failed\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

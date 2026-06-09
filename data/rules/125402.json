@@ -1,0 +1,46 @@
+{
+  "uuid": "14396a6d-4cf4-4634-99e6-5cf844f8fc26",
+  "id": "125402",
+  "name": "No Password Rule Added to Sudoers File",
+  "notes": "This rule detects an unusual sudo rule added in the system, which requires no password for a user. \n\nNote: Edit the rule to replace \"authorized_username\" to authorized administrators of the system.",
+  "response_qid": "67500773",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500773"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Policy Added</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Target Username (custom) is not any of authorized_users</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Rule Details (custom) contains any of NOPASSWD</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY No Password Rule Added to Sudoers File on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following Authentication.Policy Added",
+    "AND when the event matches Target Username (custom) is not any of authorized_users",
+    "AND when the event matches Rule Details (custom) contains any of NOPASSWD"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: No Password Rule Added to Sudoers File",
+    "Event description: Detects an unusual sudo rule added in the system, which requires no password for any user.",
+    "Severity: 6, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"System Security Access Granted\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Target Username (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

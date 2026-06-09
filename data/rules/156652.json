@@ -1,0 +1,31 @@
+{
+  "uuid": "e9f08a52-2a0c-4b47-96cf-46e98826fb30",
+  "id": "156652",
+  "name": "BB:BehaviorDefinition: Scheduled Task/Job - Windows",
+  "notes": "This building block detects uncommon scheduled task.\n\nCovered from SIGMA Rule.\n\nOriginal Author: pH-T\nSIGMA Title: Uncommon Scheduled Task Once 00:00\nSIGMA Description: Detects scheduled task creation events that include suspicious actions, and is run once at 00:00\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Scheduled Task/Job - Windows on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of schtasks.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '*/create* *regsvr32.exe*') or (LOWER(&quot;Command&quot;) LIKE '%wscript%' or LOWER(&quot;Command&quot;) LIKE '%vbscript%' or LOWER(&quot;Command&quot;) LIKE '%cscript%' or LOWER(&quot;Command&quot;) LIKE '%wmic %' or LOWER(&quot;Command&quot;) LIKE '%wmic.exe%' or LOWER(&quot;Command&quot;) LIKE '%regsvr32.exe%' or LOWER(&quot;Command&quot;) LIKE '%powershell%' or LOWER(&quot;Command&quot;) LIKE '%\\appdata\\%') or (LOWER(&quot;Command&quot;) LIKE '%/create%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Scheduled Task/Job - Windows on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of schtasks.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE '*/create* *regsvr32.exe*') or (LOWER(\"Command\") LIKE '%wscript%' or LOWER(\"Command\") LIKE '%vbscript%' or LOWER(\"Command\") LIKE '%cscript%' or LOWER(\"Command\") LIKE '%wmic %' or LOWER(\"Command\") LIKE '%wmic.exe%' or LOWER(\"Command\") LIKE '%regsvr32.exe%' or LOWER(\"Command\") LIKE '%powershell%' or LOWER(\"Command\") LIKE '%\\appdata\\%') or (LOWER(\"Command\") LIKE '%/create%') AQL filter query"
+  ],
+  "RED_list": []
+}

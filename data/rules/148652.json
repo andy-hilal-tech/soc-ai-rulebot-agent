@@ -1,0 +1,38 @@
+{
+  "uuid": "6f314ec4-f76e-4f4a-a08f-bbaaf7cd6286",
+  "id": "148652",
+  "name": "Suspicious Behavior by SOURGUM Actor",
+  "notes": "This rule detects suspicious behavior by SOURGUM actor.\n\nCovered from SIGMA Rule.\n\nOriginal Author: MSTIC, FPT.EagleEye\nSIGMA Title: SOURGUM Actor Behaviours\nSIGMA Description: Suspicious behaviours related to an actor tracked by Microsoft as SOURGUM\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501527",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501527"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>((     LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\physmem.sys%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\shared\\wimbootconfigurations.ini%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\imejp\\wimbootconfigurations.ini%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\imetc\\wimbootconfigurations.ini%'\t ) OR ( \t( \t\t( \t\t\tLOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\filepath2%' \t\t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime%' \t\t)  \t\tAND LOWER(&quot;Command&quot;) LIKE '% reg add%' \t) \tAND  \t( \t\tLOWER(&quot;Command&quot;) LIKE '%hkey_local_machine\\software\\classes\\clsid\\{7c857801-7381-11cf-884d-00aa004b2e24}\\inprocserver32%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%hkey_local_machine\\software\\classes\\clsid\\{cf4cc405-e2c5-4ddd-b3ce-5e7582d8c9fa}\\inprocserver32%' \t) ))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Behavior by SOURGUM Actor on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches ((     LOWER(\"Process File File Path\") LIKE '%windows\\system32\\physmem.sys%' \tOR LOWER(\"Process File File Path\") LIKE '%windows\\system32\\ime\\shared\\wimbootconfigurations.ini%' \tOR LOWER(\"Process File File Path\") LIKE '%windows\\system32\\ime\\imejp\\wimbootconfigurations.ini%' \tOR LOWER(\"Process File File Path\") LIKE '%windows\\system32\\ime\\imetc\\wimbootconfigurations.ini%'\t ) OR ( \t( \t\t( \t\t\tLOWER(\"Process File File Path\") LIKE '%windows\\system32\\filepath2%' \t\t\tOR LOWER(\"Process File File Path\") LIKE '%windows\\system32\\ime%' \t\t)  \t\tAND LOWER(\"Command\") LIKE '% reg add%' \t) \tAND  \t( \t\tLOWER(\"Command\") LIKE '%hkey_local_machine\\software\\classes\\clsid\\{7c857801-7381-11cf-884d-00aa004b2e24}\\inprocserver32%' \t\tOR LOWER(\"Command\") LIKE '%hkey_local_machine\\software\\classes\\clsid\\{cf4cc405-e2c5-4ddd-b3ce-5e7582d8c9fa}\\inprocserver32%' \t) )) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Behavior by SOURGUM Actor",
+    "Event description: Detects suspicious behavior by SOURGUM actor.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1328",
+  "id": "100297",
+  "name": "BB:PortDefinition: Authorized L2R Ports",
+  "notes": "Defines ports that commonly seen in local to remote traffic.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: Authorized L2R Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>80, 443, 25, 22, 53, 123</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: Authorized L2R Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 80, 443, 25, 22, 53, 123"
+  ],
+  "RED_list": []
+}

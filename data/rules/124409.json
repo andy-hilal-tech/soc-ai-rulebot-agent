@@ -1,0 +1,34 @@
+{
+  "uuid": "abe6af05-e42b-4fdc-879d-42c5a0fa3355",
+  "id": "124409",
+  "name": "X-Force Risky IP, Spam",
+  "notes": "This rule will detect when a local user or host is connecting to a spam sending  host.",
+  "response_qid": "67500554",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500554"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote, Remote to Remote</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination IP</a> is categorized by X-Force as <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Spam</a> with confidence value <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>85</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY X-Force Risky IP, Spam on events which are detected by the LOCAL system",
+    "AND when the context is Local to Remote, Remote to Remote",
+    "AND when Destination IP is categorized by X-Force as Spam with confidence value greater than 85"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: X-Force Risky IP - Spam",
+    "Event description: A local user or host is connecting to a spam sending  host.",
+    "Severity: 8, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Hostile IP\""
+  ]
+}

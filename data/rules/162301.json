@@ -1,0 +1,34 @@
+{
+  "uuid": "c38747cb-de1a-471b-83a1-48d5e2570428",
+  "id": "162301",
+  "name": "Privileged Container Deployed",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Leo Tsaousis (@laripping)\nSIGMA Title: Privileged Container Deployed\nSIGMA Description: Detects the creation of a \"privileged\" container, an action which could be indicative of a threat actor mounting a container breakout attacks.\nA privileged container is a container that can access the host with all of the root capabilities of the host machine. This allows it to view, interact and modify processes, network operations, IPC calls, the file system, mount points, SELinux configurations etc. as the root user on the host.\nVarious versions of \"privileged\" containers can be specified, e.g. by setting the securityContext.privileged flag in the resource specification, setting non-standard Linux capabilities, or configuring the hostNetwork/hostPID fields\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%pods%' AND UTF8(payload) LIKE '%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Privileged Container Deployed on events which are detected by the LOCAL system",
+    "AND when the event matches LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%pods%' AND UTF8(payload) LIKE '%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Privileged Container Deployed",
+    "Event description: Converted from SIGMA Rule.  Original Author: Leo Tsaousis (@laripping) SIGMA Title: Privileged Container Deployed SIGMA Description: Detects the creation of a \"privileged\" container, an action which could be indicative of a threat actor mounting a container breakout attacks. A privileged container is a container that can access the host with all of the root capabilities of the host machine. This allows it to view, interact and modify processes, network operations, IPC calls, the file system, mount points, SELinux configurations etc. as the root user on the host. Various versions of \"privileged\" containers can be specified, e.g. by setting the securityContext.privileged flag in the resource specification, setting non-standard Linux capabilities, or configuring the hostNetwork/hostPID fields   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

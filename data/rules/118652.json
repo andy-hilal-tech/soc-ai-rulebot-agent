@@ -1,0 +1,40 @@
+{
+  "uuid": "e34d39ad-e64f-4180-9c08-bf89719ab69e",
+  "id": "118652",
+  "name": "UBA : Browsed to Phishing Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500238",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500238"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%phishing%' or &quot;Web Category&quot; in (164)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Phishing Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%phishing%' or \"Web Category\" in (164) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Phishing Website",
+    "Event description: senseValue=15,senseDesc='User access to Risky Resource Category - Phishing',usecase_id='c9d01cfb-9b0d-4f38-a835-aff3847c3d49'",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

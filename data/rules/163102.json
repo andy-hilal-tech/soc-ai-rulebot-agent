@@ -1,0 +1,34 @@
+{
+  "uuid": "924369c6-aa5f-4608-84dc-22de2b119e77",
+  "id": "163102",
+  "name": "QNI : Access to Improperly Secured Service - SSL in Use",
+  "notes": "This rule triggers when QRadar Network Insights detects an SSL session. According to NIST publication 800-52, all versions of SSL should not be used. Recent versions of TLS should be used instead.",
+  "response_qid": "67501754",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501754"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Protocol Name is not N/A, Protocol Name is any of SSL</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Access to Improperly Secured Service - SSL in Use on flows which are detected by the LOCAL system",
+    "AND when the flow matches Protocol Name is not N/A, Protocol Name is any of SSL"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Access to Improperly Secured Service - SSL in Use",
+    "Event description: Detects when an SSL session has been observed.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Weak Encryption\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

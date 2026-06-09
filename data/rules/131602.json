@@ -1,0 +1,51 @@
+{
+  "uuid": "ace3e218-bea7-42f8-8e10-392f285ac7f1",
+  "id": "131602",
+  "name": "Excessive File Downloads Events From the Same Source IP",
+  "notes": "This rule triggers when at least 10 different files are downloaded from the same source IP within 5 minutes. \n\nNote: Edit the AQL function to exclude known legitimate download activities such as OS Updates or Software Updates.",
+  "response_qid": "67500894",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500894"
+  ],
+  "rule_refs": [
+    "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Object Download Events"
+  ],
+  "db_fields_used": [
+    "Filename",
+    "sourceaddress, device"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Object Download Events</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Filename (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>NOT ((NETWORKNAME(destinationaddress)='Net_172_16_0_0') OR (INCIDR('192.0.2.0/24', destinationaddress)))</a> AQL filter query",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source Address, Log Source</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Filename (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source Address, Log Source</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Filename (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Excessive File Downloads Events From the Same Source IP on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:CategoryDefinition: Object Download Events",
+    "AND when the event matches Filename (custom) is not N/A",
+    "AND when the event matches NOT ((NETWORKNAME(destinationaddress)='Net_172_16_0_0') OR (INCIDR('192.0.2.0/24', destinationaddress))) AQL filter query",
+    "AND when at least 10 events are seen with the same Source Address, Log Source and different Filename (custom) in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Excessive File Download Events From the Same Source IP",
+    "Event description: Detected excessive file download from the same source IP",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Data Loss Possible\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

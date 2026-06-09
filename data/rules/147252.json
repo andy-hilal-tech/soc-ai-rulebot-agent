@@ -1,0 +1,33 @@
+{
+  "uuid": "5e4462a9-c052-4629-a612-57cc5b7425f3",
+  "id": "147252",
+  "name": "BB:BehaviorDefinition: Windows Update Client LOLBIN",
+  "notes": "This Building Block detects code execution via the Windows Update client.\n\nCovered from SIGMA Rule.\n\nOriginal Author: FPT.EagleEye Team\nSIGMA Title: Windows Update Client LOLBIN\nSIGMA Description: Detects code execution via the Windows Update client (wuauclt)\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Windows Update Client LOLBIN on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of wuauclt.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%/updatedeploymentprovider%' and LOWER(&quot;Command&quot;) LIKE '%/runhandlercomserver%' and LOWER(&quot;Command&quot;) LIKE '%.dll%')</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% /classid %' OR LOWER(&quot;Command&quot;) LIKE '% wuaueng.dll %')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Windows Update Client LOLBIN on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of wuauclt.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%/updatedeploymentprovider%' and LOWER(\"Command\") LIKE '%/runhandlercomserver%' and LOWER(\"Command\") LIKE '%.dll%') AQL filter query",
+    "AND NOT when the event matches (LOWER(\"Command\") LIKE '% /classid %' OR LOWER(\"Command\") LIKE '% wuaueng.dll %') AQL filter query"
+  ],
+  "RED_list": []
+}

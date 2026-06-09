@@ -1,0 +1,37 @@
+{
+  "uuid": "3bc0e8eb-7886-4450-9992-2e10c30ecb76",
+  "id": "124952",
+  "name": "QRadar Audit: Expensive Log Sources",
+  "notes": "This rule triggers when QRadar log sources are expensive. Optimize those log sources / log source extensions to reduce load in parsing and reduce a chance of unparsed events.",
+  "response_qid": "67500755",
+  "qids_trigger": [
+    "38750143"
+  ],
+  "qids_all": [
+    "38750143",
+    "67500755"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>QID is 38,750,143</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QRadar Audit: Expensive Log Sources on events which are detected by the LOCAL system",
+    "AND when the event matches QID is 38,750,143"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Expensive Log Sources",
+    "Event description: Detects when QRadar log sources are expensive. Optimize those log sources / log source extensions to reduce load in parsing and reduce a chance of unparsed events.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"CRE\"",
+    "Low-Level Category: \"Single Event Rule Match\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

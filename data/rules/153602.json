@@ -1,0 +1,38 @@
+{
+  "uuid": "0fee4ffe-5f96-4f26-9b99-ea204264d6e7",
+  "id": "153602",
+  "name": "Mimikatz Execution",
+  "notes": "This rule detects well-known Mimikatz command line arguments.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Teymur Kheirkhabarov, oscd.community, David ANDRE (additional keywords), Tim Shelton\nSIGMA Title: HackTool - Mimikatz Execution\nSIGMA Description: Detection well-known mimikatz command line arguments\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501587",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501587"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%dumpcreds%' or LOWER(&quot;Command&quot;) LIKE '%mimikatz%') or (LOWER(&quot;Command&quot;) LIKE '%::aadcookie%' or LOWER(&quot;Command&quot;) LIKE '%::detours%' or LOWER(&quot;Command&quot;) LIKE '%::memssp%' or LOWER(&quot;Command&quot;) LIKE '%::mflt%' or LOWER(&quot;Command&quot;) LIKE '%::ncroutemon%' or LOWER(&quot;Command&quot;) LIKE '%::ngcsign%' or LOWER(&quot;Command&quot;) LIKE '%::printnightmare%' or LOWER(&quot;Command&quot;) LIKE '%::skeleton%' or LOWER(&quot;Command&quot;) LIKE '%::preshutdown%' or LOWER(&quot;Command&quot;) LIKE '%::mstsc%' or LOWER(&quot;Command&quot;) LIKE '%::multirdp%') or (LOWER(&quot;Command&quot;) LIKE '%rpc::%' or LOWER(&quot;Command&quot;) LIKE '%token::%' or LOWER(&quot;Command&quot;) LIKE '%crypto::%' or LOWER(&quot;Command&quot;) LIKE '%dpapi::%' or LOWER(&quot;Command&quot;) LIKE '%sekurlsa::%' or LOWER(&quot;Command&quot;) LIKE '%kerberos::%' or LOWER(&quot;Command&quot;) LIKE '%lsadump::%' or LOWER(&quot;Command&quot;) LIKE '%privilege::%' or LOWER(&quot;Command&quot;) LIKE '%process::%' or LOWER(&quot;Command&quot;) LIKE '%vault::%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Mimikatz Execution on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%dumpcreds%' or LOWER(\"Command\") LIKE '%mimikatz%') or (LOWER(\"Command\") LIKE '%::aadcookie%' or LOWER(\"Command\") LIKE '%::detours%' or LOWER(\"Command\") LIKE '%::memssp%' or LOWER(\"Command\") LIKE '%::mflt%' or LOWER(\"Command\") LIKE '%::ncroutemon%' or LOWER(\"Command\") LIKE '%::ngcsign%' or LOWER(\"Command\") LIKE '%::printnightmare%' or LOWER(\"Command\") LIKE '%::skeleton%' or LOWER(\"Command\") LIKE '%::preshutdown%' or LOWER(\"Command\") LIKE '%::mstsc%' or LOWER(\"Command\") LIKE '%::multirdp%') or (LOWER(\"Command\") LIKE '%rpc::%' or LOWER(\"Command\") LIKE '%token::%' or LOWER(\"Command\") LIKE '%crypto::%' or LOWER(\"Command\") LIKE '%dpapi::%' or LOWER(\"Command\") LIKE '%sekurlsa::%' or LOWER(\"Command\") LIKE '%kerberos::%' or LOWER(\"Command\") LIKE '%lsadump::%' or LOWER(\"Command\") LIKE '%privilege::%' or LOWER(\"Command\") LIKE '%process::%' or LOWER(\"Command\") LIKE '%vault::%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Mimikatz Execution",
+    "Event description: Detects well-known Mimikatz command line arguments",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "uuid": "a360b938-2efb-4688-bba2-ff0681b262f0",
+  "id": "114352",
+  "name": "UBA : MaaS360 device out of compliance due to OS version",
+  "notes": "Device is not compliant because it required updated OS versions",
+  "response_qid": "67500519",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500519"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "qidEventCategory",
+    "qidEventId"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM MaaS360 Security</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Event ID</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>OS_VERSION</a>",
+    "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Event Category</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>COMPLIANCE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : MaaS360 device out of compliance due to OS version on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of IBM MaaS360 Security",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when any of Event ID match OS_VERSION",
+    "AND when any of Event Category match COMPLIANCE"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : MaaS360 device out of compliance due to OS version",
+    "Event description: senseValue=5,senseDesc='MaaS360 device out of compliance due to OS version'",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Warning\""
+  ]
+}

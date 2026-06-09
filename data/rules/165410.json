@@ -1,0 +1,38 @@
+{
+  "uuid": "bafa1e5d-ec88-4a5d-bfed-a87545cf7265",
+  "id": "165410",
+  "name": "UAC Bypass - Scheduled Task Configured to Run with Highest Privileges",
+  "notes": "This rule triggers when a scheduled task is configured to run with the highest privileges.",
+  "response_qid": "67500498",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500498"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000872) Success Audit: A scheduled task was created, (5000876) Success Audit: A scheduled task was updated</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Run Level&quot; = 'HighestAvailable'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UAC Bypass - Scheduled Task Configured to Run with Highest Privileges on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5000872) Success Audit: A scheduled task was created, (5000876) Success Audit: A scheduled task was updated",
+    "AND when the event matches \"Run Level\" = 'HighestAvailable' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Possible UAC Bypass - A Scheduled Task Has Been Configured to Run with Highest Privileges",
+    "Event description: Possible UAC Bypass - A Scheduled Task Has Been Configured to Run with Highest Privileges",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Misc Suspicious Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

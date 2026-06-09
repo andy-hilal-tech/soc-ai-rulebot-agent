@@ -1,0 +1,51 @@
+{
+  "uuid": "dc658e00-bde7-4b24-9f3e-15de427f96dc",
+  "id": "115553",
+  "name": "Unusual Parent for a Process",
+  "notes": "This rule triggers when an unusual parent is found for a process.",
+  "response_qid": "67500441",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500441"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "MD5 Hash, Process Name, Parent Process Name, Process Path",
+    "Process Name"
+  ],
+  "reference_sets": [
+    "155",
+    "156",
+    "157",
+    "158",
+    "77"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>(Shared) ProcesstoParentProcessPathRefMapKeys - AlphaNumeric (Ignore Case)</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCEMAPSETCONTAINS('ProcessMaptoProcessParentPath', LOWER(&quot;Process Name&quot;), LOWER(&quot;Parent Process Path&quot;))</a> AQL filter query",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>MD5 Hash (custom), Process Name (custom), Parent Process Name (custom), Process Path (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Shared) Unusual parent MD5 - AlphaNumeric, (Shared) P.Name - AlphaNumeric, (Shared) PP.name - AlphaNumeric, (Shared) P.path - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Unusual Parent for a Process on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when any of Process Name (custom) are contained in any of (Shared) ProcesstoParentProcessPathRefMapKeys - AlphaNumeric (Ignore Case)",
+    "AND NOT when the event matches REFERENCEMAPSETCONTAINS('ProcessMaptoProcessParentPath', LOWER(\"Process Name\"), LOWER(\"Parent Process Path\")) AQL filter query",
+    "AND NOT when any of MD5 Hash (custom), Process Name (custom), Parent Process Name (custom), Process Path (custom) are contained in any of (Shared) Unusual parent MD5 - AlphaNumeric, (Shared) P.Name - AlphaNumeric, (Shared) PP.name - AlphaNumeric, (Shared) P.path - AlphaNumeric"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detected Abnormal Parent for a Process",
+    "Event description: Detects if a process will be launched from an unusual parent",
+    "Severity: 7, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

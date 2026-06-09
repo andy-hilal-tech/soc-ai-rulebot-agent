@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1473",
+  "id": "100105",
+  "name": "BB:CategoryDefinition: Any Flow",
+  "notes": "Defines any flows record",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Any Flow on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow type is one of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Standard, Superflow A, Superflow B, Superflow C</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Any Flow on flows which are detected by the LOCAL system",
+    "AND when the flow type is one of Standard, Superflow A, Superflow B, Superflow C"
+  ],
+  "RED_list": []
+}

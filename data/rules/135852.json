@@ -1,0 +1,33 @@
+{
+  "uuid": "dbd603f7-a7c8-44bf-9ae5-8ea80e8b4774",
+  "id": "135852",
+  "name": "BB:BehaviorDefinition: Potential Cobalt Strike Traffic",
+  "notes": "This Building Block triggers when a TLS fingerprint known to be related to Cobalt Strike is observed. Cobalt Strike is a penetration-testing tool commonly used by red teams. However, malicious actors will often use illegally-obtained versions of this application to utilize in their own attacks. The rule is looking to match both client and server fingerprints to reduce the risk of false-positives.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "23b8d254-b3a9-4f88-a81c-d332bafbbf95",
+    "81ac5e01-fc5e-46df-aa4e-c5bb80cba2f0"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Cobalt Strike Inbound Traffic",
+    "BB:BehaviorDefinition: Cobalt Strike Outbound Traffic",
+    "BB:BehaviorDefinition: Potential Cobalt Strike Traffic on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "23b8d254-b3a9-4f88-a81c-d332bafbbf95",
+    "81ac5e01-fc5e-46df-aa4e-c5bb80cba2f0"
+  ],
+  "conditions_text": [
+    "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Cobalt Strike Inbound Traffic, BB:BehaviorDefinition: Cobalt Strike Outbound Traffic</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Potential Cobalt Strike Traffic on flows which are detected by the LOCAL system",
+    "AND when a flow matches all of the following BB:BehaviorDefinition: Cobalt Strike Inbound Traffic, BB:BehaviorDefinition: Cobalt Strike Outbound Traffic"
+  ],
+  "RED_list": []
+}

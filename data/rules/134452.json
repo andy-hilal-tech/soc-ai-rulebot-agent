@@ -1,0 +1,49 @@
+{
+  "uuid": "658776f1-0f4f-409e-b884-83df807903c9",
+  "id": "134452",
+  "name": "Possible Brute Force Attempt",
+  "notes": "This rule detects adversary performing brute force.",
+  "response_qid": "67501514",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501514"
+  ],
+  "rule_refs": [
+    "5f0d30e6-2de8-4283-97b7-9aee8c6f1061",
+    "af52d9ee-8bd5-4b14-b514-19c79cfab703"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Invalid Password at Login",
+    "BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "af52d9ee-8bd5-4b14-b514-19c79cfab703",
+    "5f0d30e6-2de8-4283-97b7-9aee8c6f1061"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Invalid Password at Login, BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication</a>",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Possible Brute Force Attempt on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Invalid Password at Login, BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication",
+    "AND when at least 10 events are seen with the same Username in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Possible Brute Force Attempt",
+    "Event description: Detects adversary performing brute force.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"User Login Failure\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

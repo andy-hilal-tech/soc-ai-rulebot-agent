@@ -1,0 +1,47 @@
+{
+  "uuid": "c91467d8-5025-4aaf-aaa3-2af22be851fb",
+  "id": "114002",
+  "name": "UBA : MaaS360 URL access blocked",
+  "notes": "Device accessed a blocked URL via MaaS Secure Browser App",
+  "response_qid": "67500512",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500512"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "qidEventCategory",
+    "qidEventId"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>IBM MaaS360 Security</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Event ID</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BLOCKED_URL_ACCESS</a>",
+    "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Event Category</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>VULNERABILITY</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : MaaS360 URL access blocked on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of IBM MaaS360 Security",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when any of Event ID match BLOCKED_URL_ACCESS",
+    "AND when any of Event Category match VULNERABILITY"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : MaaS360 URL access blocked",
+    "Event description: senseValue=10,senseDesc='Blocked URL Accessed'",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Web Policy Violation\""
+  ]
+}

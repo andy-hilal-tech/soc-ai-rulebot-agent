@@ -1,0 +1,34 @@
+{
+  "uuid": "d89f4dec-70d4-4f58-9d96-dcdf6b106c6a",
+  "id": "162396",
+  "name": "HybridConnectionManager Service Installation",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)\nSIGMA Title: HybridConnectionManager Service Installation\nSIGMA Description: Rule to detect the Hybrid Connection Manager service installation.\n\nFalse positives:\n- Legitimate use of Hybrid Connection Manager via Azure function apps.\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4697 AND \"Service Name\"='HybridConnectionManager' AND LOWER(\"Service Filename\") LIKE '%hybridconnectionmanager%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY HybridConnectionManager Service Installation on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4697 AND \"Service Name\"='HybridConnectionManager' AND LOWER(\"Service Filename\") LIKE '%hybridconnectionmanager%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: HybridConnectionManager Service Installation",
+    "Event description: Converted from SIGMA Rule.  Original Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research) SIGMA Title: HybridConnectionManager Service Installation SIGMA Description: Rule to detect the Hybrid Connection Manager service installation.  False positives: - Legitimate use of Hybrid Connection Manager via Azure function apps.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

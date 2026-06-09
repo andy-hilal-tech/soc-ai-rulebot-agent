@@ -1,0 +1,31 @@
+{
+  "uuid": "943c4414-c48f-4094-8806-52aa23909d68",
+  "id": "131702",
+  "name": "BB:BehaviorDefinition: External Recipient Host",
+  "notes": "This Building Block identifies recipient hosts that are not in the Corporate Email Domains reference set. \n\nNote: The Corporate Email Domains reference set must be populated.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: External Recipient Host on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "Recipient Host"
+  ],
+  "reference_sets": [
+    "200"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Recipient Host (custom) is not N/A</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Recipient Host (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Corporate Email Domains - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: External Recipient Host on events which are detected by the LOCAL system",
+    "AND when the event matches Recipient Host (custom) is not N/A",
+    "AND NOT when any of Recipient Host (custom) are contained in any of Corporate Email Domains - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": []
+}

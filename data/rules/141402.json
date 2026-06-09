@@ -1,0 +1,29 @@
+{
+  "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+  "id": "141402",
+  "name": "BB:BehaviorDefinition: Critical Process Created",
+  "notes": "This Building Block detects new critical processes created. Critical processes refer to ones that can potentially be misused by adversaries to perform malicious activities. The common processes include: powershell, cmd, mshta.\n\nNote: The rule may be tuned by the \"Process CommandLine\" field. \nSome common \"Process CommandLine\" keywords that appear in malware are:\nfindstr\ntmp\ntemp\nvbs\nregsvr32\ncommand\noutfile\ndll\nhttp",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Critical Process Created on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?powershell.*' OR LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?cmd.*' OR LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?mshta.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Critical Process Created on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Parent Process Name\") MATCHES '.*?powershell.*' OR LOWER(\"Parent Process Name\") MATCHES '.*?cmd.*' OR LOWER(\"Parent Process Name\") MATCHES '.*?mshta.*' AQL filter query"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "a2879375-dfa9-4398-bbd1-7a5f7552ec03",
+  "id": "162384",
+  "name": "DCOM InternetExplorer.Application Iertutil DLL Hijack - Security",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez @Cyb3rWard0g, Open Threat Research (OTR)\nSIGMA Title: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security\nSIGMA Description: Detects a threat actor creating a file named `iertutil.dll` in the `C:\\Program Files\\Internet Explorer\\` directory over the network for a DCOM InternetExplorer DLL Hijack scenario.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=5145 AND LOWER(UTF8(payload)) LIKE '%\\internet explorer\\iertutil.dll%') AND (NOT(LOWER(UTF8(payload)) LIKE '%$%'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY DCOM InternetExplorer.Application Iertutil DLL Hijack - Security on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\"=5145 AND LOWER(UTF8(payload)) LIKE '%\\internet explorer\\iertutil.dll%') AND (NOT(LOWER(UTF8(payload)) LIKE '%$%')) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security",
+    "Event description: Converted from SIGMA Rule.  Original Author: Roberto Rodriguez @Cyb3rWard0g, Open Threat Research (OTR) SIGMA Title: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security SIGMA Description: Detects a threat actor creating a file named `iertutil.dll` in the `C:\\Program Files\\Internet Explorer\\` directory over the network for a DCOM InternetExplorer DLL Hijack scenario.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

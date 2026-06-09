@@ -1,0 +1,44 @@
+{
+  "uuid": "8b271f23-a229-4c92-b383-240566e0b63d",
+  "id": "132702",
+  "name": "Mailbox Item Deleted by Another User",
+  "notes": "This rule triggers when a mailbox item is deleted by a user other than the mailbox owner. This could reveal abuse of rights on a mailbox.",
+  "response_qid": "67500933",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500933"
+  ],
+  "rule_refs": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Message Deleted</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Target Username&quot; != &quot;Sender&quot; and &quot;Target Username&quot; is not NULL</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Mailbox Item Deleted by Another User on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Mail",
+    "AND when the event category for the event is one of the following Audit.Message Deleted",
+    "AND when the event matches \"Target Username\" != \"Sender\" and \"Target Username\" is not NULL AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Mailbox Item Deleted by Another User",
+    "Event description: Detects when a mailbox item is deleted by a user other than the mailbox owner.",
+    "Severity: 7, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Mail Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

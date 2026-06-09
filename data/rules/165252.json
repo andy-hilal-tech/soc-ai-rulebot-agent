@@ -1,0 +1,27 @@
+{
+  "uuid": "4ab8a0fa-d301-41a7-8f22-618219a7bf2b",
+  "id": "165252",
+  "name": "BB:CategoryDefinition: DDoS Attack Events",
+  "notes": "Edit this BB to include all event categories that you wish to categorize as a DDoS attack.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: DDoS Attack Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure H360, O365</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Distributed DoS, DOS.Distributed High Rate DoS, DOS.Distributed High Rate ICMP DoS, DOS.Distributed High Rate TCP DoS, DOS.Distributed High Rate UDP DoS, DOS.Distributed Low Rate DoS, DOS.Distributed Low Rate ICMP DoS, DOS.Distributed Low Rate TCP DoS, DOS.Distributed Low Rate UDP DoS, DOS.Distributed Medium Rate DoS, DOS.Distributed Medium Rate ICMP DoS, DOS.Distributed Medium Rate TCP DoS, DOS.Distributed Medium Rate UDP DoS</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: DDoS Attack Events on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Azure H360, O365",
+    "AND when the event category for the event is one of the following DOS.Distributed DoS, DOS.Distributed High Rate DoS, DOS.Distributed High Rate ICMP DoS, DOS.Distributed High Rate TCP DoS, DOS.Distributed High Rate UDP DoS, DOS.Distributed Low Rate DoS, DOS.Distributed Low Rate ICMP DoS, DOS.Distributed Low Rate TCP DoS, DOS.Distributed Low Rate UDP DoS, DOS.Distributed Medium Rate DoS, DOS.Distributed Medium Rate ICMP DoS, DOS.Distributed Medium Rate TCP DoS, DOS.Distributed Medium Rate UDP DoS"
+  ],
+  "RED_list": []
+}

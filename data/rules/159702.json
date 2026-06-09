@@ -1,0 +1,42 @@
+{
+  "uuid": "7f37b2f6-081b-412b-8e38-7286d5074707",
+  "id": "159702",
+  "name": "Microsoft Binary Suspicious Communication Endpoint",
+  "notes": "This rule detects an executable in the Windows folder accessing suspicious domains\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: Microsoft Binary Suspicious Communication Endpoint\nSIGMA Description: Detects an executable in the Windows folder accessing suspicious domains\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501677",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501677"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination Hostname (custom) contains any of [dl.dropboxusercontent.com or pastebin.com or cdn.discordapp.com/attachments or mediafire.com or mega.nz or ddns.net or paste.ee or hastebin.com/raw or ghostbin.co or ufile.io or anonfiles.com or send.exploit.in or transfer.sh or privatlab.net or privatlab.com or sendspace.com or pastetext.net or pastebin.pl or api.dropboxapi or script.google.com or script.googleusercontent.com]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Process Path (custom) contains any of [C:\\Windows or C:\\Users\\Public]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Microsoft Binary Suspicious Communication Endpoint on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches Initiated (custom) is any of true",
+    "AND when the event matches Destination Hostname (custom) contains any of [dl.dropboxusercontent.com or pastebin.com or cdn.discordapp.com/attachments or mediafire.com or mega.nz or ddns.net or paste.ee or hastebin.com/raw or ghostbin.co or ufile.io or anonfiles.com or send.exploit.in or transfer.sh or privatlab.net or privatlab.com or sendspace.com or pastetext.net or pastebin.pl or api.dropboxapi or script.google.com or script.googleusercontent.com]",
+    "AND when the event matches Process Path (custom) contains any of [C:\\Windows or C:\\Users\\Public]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Microsoft Binary Suspicious Communication Endpoint",
+    "Event description: Detects an executable in the Windows folder accessing suspicious domains",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

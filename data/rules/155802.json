@@ -1,0 +1,63 @@
+{
+  "uuid": "b319afa8-03ad-4e0e-928e-fbafc47f0cf7",
+  "id": "155802",
+  "name": "File and Directory Permission Modification after Download",
+  "notes": "This rule detects file and directory permission modification after file download event.",
+  "response_qid": "67501617",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501617"
+  ],
+  "rule_refs": [
+    "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6",
+    "394d38b7-9043-454a-a50a-12358b91838e",
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+    "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Download Utilities in Events",
+    "BB:BehaviorDefinition: PowerShell File Download Activity",
+    "BB:CategoryDefinition: File Permission Changed",
+    "BB:CategoryDefinition: File Permission Changed match at least 1 times with the same Machine Identifier (custom) in 1 hour(s) after BB:BehaviorDefinition: Download Utilities in Events",
+    "BB:CategoryDefinition: Object Download Events",
+    "BB:CategoryDefinition: Object Download Events match",
+    "BB:DeviceDefinition: Endpoint Devices",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "394d38b7-9043-454a-a50a-12358b91838e",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+    "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+    "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67",
+    "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Endpoint Devices, BB:DeviceDefinition: Operating System</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: File Permission Changed</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: Object Download Events</a> match"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: File Permission Changed</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: Object Download Events</a> match"
+  ],
+  "TD_list": [
+    "APPLY File and Directory Permission Modification after Download on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Endpoint Devices, BB:DeviceDefinition: Operating System",
+    "AND when BB:CategoryDefinition: File Permission Changed match at least 1 times with the same Machine Identifier (custom) in 1 hour(s) after BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: Object Download Events match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: File and Directory Permission Modification after Download",
+    "Event description: Detects file and directory permission modification after file download event.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

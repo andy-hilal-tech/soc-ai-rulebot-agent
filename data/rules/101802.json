@@ -1,0 +1,35 @@
+{
+  "uuid": "0e75461e-461d-47eb-81e6-3c5e8feeb00b",
+  "id": "101802",
+  "name": "BB:UBA : VPN Login Successful",
+  "notes": "Detects successful authentication from VPN device.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "0ebee01a-da91-47c2-ac75-3a60658414df",
+    "SYSTEM-1220"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Success",
+    "BB:UBA : VPN Login Successful on events which are detected by the LOCAL system",
+    "BB:UBA : VPN Mapping (logic)"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1220",
+    "0ebee01a-da91-47c2-ac75-3a60658414df"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Success, BB:UBA : VPN Mapping (logic)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : VPN Login Successful on events which are detected by the LOCAL system",
+    "AND when the event context is Remote to Local",
+    "AND when an event matches all of the following BB:CategoryDefinition: Authentication Success, BB:UBA : VPN Mapping (logic)"
+  ],
+  "RED_list": []
+}

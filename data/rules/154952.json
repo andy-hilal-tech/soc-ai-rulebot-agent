@@ -1,0 +1,38 @@
+{
+  "uuid": "45d2bc80-18ab-4c76-87ea-f2f76af7269f",
+  "id": "154952",
+  "name": "Suspicious WMIC Execution",
+  "notes": "This rule detects WMIC executing suspicious or recon commands.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Michael Haag, Florian Roth, juju4, oscd.community\nSIGMA Title: Suspicious WMIC Execution\nSIGMA Description: Detects WMIC executing suspicious or recon commands\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501606",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501606"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(lower(&quot;command&quot;) matches '.*?wmic.*' and LOWER(&quot;Command&quot;) LIKE '%process%' and LOWER(&quot;Command&quot;) LIKE '%call%' and LOWER(&quot;Command&quot;) LIKE '%create %') or (LOWER(&quot;Command&quot;) LIKE '%wmic%' and LOWER(&quot;Command&quot;) LIKE '% path %' and (LOWER(&quot;Command&quot;) LIKE '%antivirus%' or LOWER(&quot;Command&quot;) LIKE '%firewall%') and LOWER(&quot;Command&quot;) LIKE '%product%' and LOWER(&quot;Command&quot;) LIKE '% get %')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious WMIC Execution on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches (lower(\"command\") matches '.*?wmic.*' and LOWER(\"Command\") LIKE '%process%' and LOWER(\"Command\") LIKE '%call%' and LOWER(\"Command\") LIKE '%create %') or (LOWER(\"Command\") LIKE '%wmic%' and LOWER(\"Command\") LIKE '% path %' and (LOWER(\"Command\") LIKE '%antivirus%' or LOWER(\"Command\") LIKE '%firewall%') and LOWER(\"Command\") LIKE '%product%' and LOWER(\"Command\") LIKE '% get %') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious WMIC Execution",
+    "Event description: Detects WMIC executing suspicious or recon commands",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

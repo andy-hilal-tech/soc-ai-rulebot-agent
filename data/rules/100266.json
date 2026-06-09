@@ -1,0 +1,25 @@
+{
+  "uuid": "57991ff5-1cbc-4259-8804-87080973b5c3",
+  "id": "100266",
+  "name": "BB:DeviceDefinition: DLP Devices",
+  "notes": "This Building Block defines all data loss prevention (DLP) devices on the system.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: DLP Devices on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>IBM Guardium, Symantec DLP, Vormetric Data Security, Vericept Content 360, Zscaler Nss, Verdasys Digital Guardian</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: DLP Devices on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of IBM Guardium, Symantec DLP, Vormetric Data Security, Vericept Content 360, Zscaler Nss, Verdasys Digital Guardian"
+  ],
+  "RED_list": []
+}

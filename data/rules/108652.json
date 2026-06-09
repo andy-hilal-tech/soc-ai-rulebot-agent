@@ -1,0 +1,51 @@
+{
+  "uuid": "adf601c5-b563-4a34-8818-ae43b7eee8c5",
+  "id": "108652",
+  "name": "BB:UBA : Compromised Account - Execution",
+  "notes": "Building block to track rules that indicate suspicious access situations.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "069ef417-aaae-4442-83eb-989f8c94dacf",
+    "06bd0239-ae61-4846-8685-6f48bbe760db",
+    "08787241-c480-48ce-9f2a-295977435977",
+    "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+    "35729450-d697-4789-a805-4869af580eca",
+    "52dca274-5833-42af-9c5d-00b7369106ba",
+    "8927074a-581f-41ae-93b0-3ea054bdca50",
+    "90fd4769-6bb5-4534-b233-e4b0503eaf3e",
+    "9c1c3036-1dcb-4972-88cd-fba31c440a82",
+    "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+    "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a",
+    "fa609090-598b-4058-9a3e-daed5d574320"
+  ],
+  "bb_references": [
+    "BB:UBA : Compromised Account - Execution on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "06bd0239-ae61-4846-8685-6f48bbe760db",
+    "9c1c3036-1dcb-4972-88cd-fba31c440a82",
+    "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+    "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+    "52dca274-5833-42af-9c5d-00b7369106ba",
+    "069ef417-aaae-4442-83eb-989f8c94dacf",
+    "8927074a-581f-41ae-93b0-3ea054bdca50",
+    "fa609090-598b-4058-9a3e-daed5d574320",
+    "35729450-d697-4789-a805-4869af580eca",
+    "08787241-c480-48ce-9f2a-295977435977",
+    "90fd4769-6bb5-4534-b233-e4b0503eaf3e",
+    "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : User Geography Change, UBA : Unauthorized Access, UBA : User Access - Failed Access to Critical Assets, UBA : User Access Login Anomaly, UBA : User Accessing Account from Anonymous Source, UBA : Account or Group or Privileges Added, UBA : Account or Group or Privileges Modified, UBA : User Account Created and Deleted in a Short Period of Time, UBA : Dormant Account Use Attempted, UBA : Dormant Account Used, UBA : User Time, Access at Unusual Times, UBA : Suspicious Privileged Activity (Rarely Used Privilege)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Compromised Account - Execution on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following UBA : User Geography Change, UBA : Unauthorized Access, UBA : User Access - Failed Access to Critical Assets, UBA : User Access Login Anomaly, UBA : User Accessing Account from Anonymous Source, UBA : Account or Group or Privileges Added, UBA : Account or Group or Privileges Modified, UBA : User Account Created and Deleted in a Short Period of Time, UBA : Dormant Account Use Attempted, UBA : Dormant Account Used, UBA : User Time, Access at Unusual Times, UBA : Suspicious Privileged Activity (Rarely Used Privilege)"
+  ],
+  "RED_list": []
+}

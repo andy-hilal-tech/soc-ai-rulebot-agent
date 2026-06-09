@@ -1,0 +1,31 @@
+{
+  "uuid": "73a31e05-0ffc-48c2-8a8e-589ce0458b4d",
+  "id": "135602",
+  "name": "BB:BehaviorDefinition: Cobalt Strike Process Address",
+  "notes": "This Building Block triggers when a remote thread is created at a start address ending in \"0B80\". This behaviour is indicative of a thread being created by Cobalt Strike.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Cobalt Strike Process Address on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Start Address (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Start Address (custom) matches any of expressions \\S+0B80$</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Cobalt Strike Process Address on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001845) CreateRemoteThread",
+    "AND when the event matches Start Address (custom) is not N/A",
+    "AND when the event matches Start Address (custom) matches any of expressions \\S+0B80$"
+  ],
+  "RED_list": []
+}

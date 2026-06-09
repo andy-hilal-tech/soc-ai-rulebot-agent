@@ -1,0 +1,40 @@
+{
+  "uuid": "aa48df6c-81ec-47c7-b6b0-3b6d1f129e78",
+  "id": "165059",
+  "name": "H360 - Login failure for single user",
+  "notes": "",
+  "response_qid": "67501795",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501795"
+  ],
+  "rule_refs": [
+    "9b23bff3-60a2-433a-b731-4973193dfbd7",
+    "SYSTEM-1543"
+  ],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "9b23bff3-60a2-433a-b731-4973193dfbd7",
+    "SYSTEM-1543"
+  ],
+  "conditions_text": [
+    "when the domain is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Health360</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Hybrid Cloud Multiple Login Failures from Same Username, Multiple Login Failures for Single Username</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY H360 - Login failure for single user on events which are detected by the LOCAL system",
+    "AND when the domain is one of the following Health360",
+    "AND when an event matches any of the following Hybrid Cloud Multiple Login Failures from Same Username, Multiple Login Failures for Single Username"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: H360 - Login failure for single user",
+    "Event description: Detects multiple login faliures from same user (H360 Requirment)",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Access Denied\""
+  ]
+}

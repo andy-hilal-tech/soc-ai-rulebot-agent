@@ -1,0 +1,29 @@
+{
+  "uuid": "7f31a95b-5f9e-4c22-97fa-92f1736b08d4",
+  "id": "133952",
+  "name": "BB:BehaviorDefinition: Mailbox Permission Added",
+  "notes": "This building block detects mailbox permission added.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Mailbox Permission Added on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%add-mailboxpermission%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Mailbox Permission Added on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success",
+    "AND when the event matches LOWER(\"Command\") LIKE '%add-mailboxpermission%' AQL filter query"
+  ],
+  "RED_list": []
+}

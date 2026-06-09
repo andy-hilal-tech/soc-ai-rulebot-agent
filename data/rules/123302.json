@@ -1,0 +1,34 @@
+{
+  "uuid": "195f4b18-8f3a-4b8b-b4aa-3384a446a43f",
+  "id": "123302",
+  "name": "Log4Shell Evasion Pattern in Flows",
+  "notes": "This rule triggers when potential Remote Code Execution related to Log4Shell Exploit (CVE-2021-44228) is observed. This could indicate an attacker bypassing it via techniques such as system environment variables, lower or upper lookup, invalid unicode characters with upper, system properties, html url encoding and notations.",
+  "response_qid": "67500714",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500714"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host, HTTP Referrer, HTTP User Agent, HTTP GET Request (custom)</a> match <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>(?i)(\\$|%24)(\\{|%7[bB])(lower|upper|env|::-\\w+|base64)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Log4Shell Evasion Pattern in Flows on flows which are detected by the LOCAL system",
+    "AND when any of HTTP Host, HTTP Referrer, HTTP User Agent, HTTP GET Request (custom) match (?i)(\\$|%24)(\\{|%7[bB])(lower|upper|env|::-\\w+|base64)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Log4Shell Evasion Pattern",
+    "Event description: Detects when potential Remote Code Execution related to Log4Shell Exploit (CVE-2021-44228) is observed. This could indicate an attacker bypassing it via techniques such as system environment variables, lower or upper lookup, invalid unicode characters with upper, system properties, html url encoding and notations.",
+    "Severity: 10, Credibility: 9, Relevance: 10",
+    "High-Level Category: \"Potential Exploit\"",
+    "Low-Level Category: \"Potential Web Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

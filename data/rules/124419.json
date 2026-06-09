@@ -1,0 +1,46 @@
+{
+  "uuid": "77d7f6e7-cd3a-4be4-aacb-18876fdca5d6",
+  "id": "124419",
+  "name": "UBA : Detect IOCs For Locky",
+  "notes": "Detects user computers that show Indicators of Compromise (IOCs) for Locky by using URLs or IPs that are populated from X-Force campaign feeds.",
+  "response_qid": "67500549",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500549"
+  ],
+  "rule_refs": [
+    "a8ed072a-f9f2-49ec-83a0-a7029fc3f2f0",
+    "c18f0605-67d5-4100-8710-885ca7a393f7",
+    "f579d0d6-1e6a-4f5b-b840-9450e33c71ec"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Log Source Filters",
+    "BB:UBA : Detect Locky Using IP",
+    "BB:UBA : Detect Locky Using URL"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "c18f0605-67d5-4100-8710-885ca7a393f7",
+    "a8ed072a-f9f2-49ec-83a0-a7029fc3f2f0",
+    "f579d0d6-1e6a-4f5b-b840-9450e33c71ec"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filters</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Detect Locky Using IP, BB:UBA : Detect Locky Using URL</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Detect IOCs For Locky on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Log Source Filters",
+    "AND when an event matches any of the following BB:UBA : Detect Locky Using IP, BB:UBA : Detect Locky Using URL"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Detect IOCs For Locky",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Risk\""
+  ]
+}

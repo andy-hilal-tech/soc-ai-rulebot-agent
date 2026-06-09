@@ -1,0 +1,29 @@
+{
+  "uuid": "15986a69-0c69-4251-97ba-7461d5cc023d",
+  "id": "152102",
+  "name": "BB:BehaviorDefinition: Suspicious Delete Command",
+  "notes": "This Building Block detects suspicious command line to remove 'exe' or 'dll'\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Greedy File Deletion Using Del\nSIGMA Description: Detects execution of the \"del\" builtin command to remove files using greedy/wildcard expression. This is often used by malware to delete content of folders that perhaps contains the initial malware infection or to delete evidence.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Suspicious Delete Command on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of [del or *.exe or /f or /q], Command (custom) contains any of [del or \\*.dll or C:\\ProgramData\\]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Delete Command on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Command (custom) contains any of [del or *.exe or /f or /q], Command (custom) contains any of [del or \\*.dll or C:\\ProgramData\\]"
+  ],
+  "RED_list": []
+}

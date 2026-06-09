@@ -1,0 +1,52 @@
+{
+  "uuid": "eceba149-894f-4a7f-ac07-a592db681639",
+  "id": "118452",
+  "name": "Same Management Policy Added and Deleted within a Short Period of Time (Office 365)",
+  "notes": "This rule triggers when same management policy is added and deleted within a short period of time.",
+  "response_qid": "67500600",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500600"
+  ],
+  "rule_refs": [
+    "3e12025b-31c9-46a3-a342-9f3c6d7ee85e",
+    "50ca1088-5295-4ee5-8745-40b43bc6ed6f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Management Role Assignment Added (Office 365)",
+    "BB:BehaviorDefinition: Management Role Assignment Removed (Office 365)",
+    "BB:BehaviorDefinition: Management Role Assignment Removed (Office 365) match at least 1 times with the same Policy Name (custom) in 30 minutes after BB:BehaviorDefinition: Management Role Assignment Added (Office 365) match"
+  ],
+  "db_fields_used": [
+    "Policy Name",
+    "category"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "50ca1088-5295-4ee5-8745-40b43bc6ed6f",
+    "3e12025b-31c9-46a3-a342-9f3c6d7ee85e"
+  ],
+  "conditions_text": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Policy Name (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Removed (Office 365)</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Policy Name (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Added (Office 365)</a> match"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Policy Name (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Removed (Office 365)</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Policy Name (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Added (Office 365)</a> match"
+  ],
+  "TD_list": [
+    "APPLY Same Management Policy Added and Deleted within a Short Period of Time (Office 365) on events which are detected by the LOCAL system",
+    "AND when at least 2 events are seen with the same Policy Name (custom) and different Low Level Category in 30 minutes",
+    "AND when BB:BehaviorDefinition: Management Role Assignment Removed (Office 365) match at least 1 times with the same Policy Name (custom) in 30 minutes after BB:BehaviorDefinition: Management Role Assignment Added (Office 365) match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Same Management Policy Added and Deleted within a Short Period of Time",
+    "Event description: Detects when same management policy is added and deleted within a short period of time.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Policy Name (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

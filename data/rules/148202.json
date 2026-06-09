@@ -1,0 +1,38 @@
+{
+  "uuid": "a1030fec-f8fd-4330-af65-f6f1759e5541",
+  "id": "148202",
+  "name": "COM Object Downloading Cradles",
+  "notes": "This rule detects usage of COM objects that can be abused to download files in PowerShell by CLSID.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Potential COM Objects Download Cradles Usage - PS Script\nSIGMA Description: Detects usage of COM objects that can be abused to download files in PowerShell by CLSID\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501521",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501521"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%::gettypefromclsid(%' AND (LOWER(&quot;Command&quot;) LIKE '%0002df01-0000-0000-c000-000000000046%' OR LOWER(&quot;Command&quot;) LIKE '%f6d90f16-9c73-11d3-b32e-00c04f990bb4%' OR LOWER(&quot;Command&quot;) LIKE '%f5078f35-c551-11d3-89b9-0000f81fe221%' OR LOWER(&quot;Command&quot;) LIKE '%88d96a0a-f192-11d4-a65f-0040963251e5%' OR LOWER(&quot;Command&quot;) LIKE '%afba6b42-5692-48ea-8141-dc517dcf0ef1%' OR LOWER(&quot;Command&quot;) LIKE '%afb40ffd-b609-40a3-9828-f88bbe11e4e3%' OR LOWER(&quot;Command&quot;) LIKE '%88d96a0b-f192-11d4-a65f-0040963251e5%' OR LOWER(&quot;Command&quot;) LIKE '%2087c2f4-2cef-4953-a8ab-66779b670495%' OR LOWER(&quot;Command&quot;) LIKE '%000209ff-0000-0000-c000-000000000046%' OR LOWER(&quot;Command&quot;) LIKE '%00024500-0000-0000-c000-000000000046%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY COM Object Downloading Cradles on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches LOWER(\"Command\") LIKE '%::gettypefromclsid(%' AND (LOWER(\"Command\") LIKE '%0002df01-0000-0000-c000-000000000046%' OR LOWER(\"Command\") LIKE '%f6d90f16-9c73-11d3-b32e-00c04f990bb4%' OR LOWER(\"Command\") LIKE '%f5078f35-c551-11d3-89b9-0000f81fe221%' OR LOWER(\"Command\") LIKE '%88d96a0a-f192-11d4-a65f-0040963251e5%' OR LOWER(\"Command\") LIKE '%afba6b42-5692-48ea-8141-dc517dcf0ef1%' OR LOWER(\"Command\") LIKE '%afb40ffd-b609-40a3-9828-f88bbe11e4e3%' OR LOWER(\"Command\") LIKE '%88d96a0b-f192-11d4-a65f-0040963251e5%' OR LOWER(\"Command\") LIKE '%2087c2f4-2cef-4953-a8ab-66779b670495%' OR LOWER(\"Command\") LIKE '%000209ff-0000-0000-c000-000000000046%' OR LOWER(\"Command\") LIKE '%00024500-0000-0000-c000-000000000046%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: COM Object Downloading Cradles",
+    "Event description: Detects usage of COM objects that can be abused to download files in PowerShell by CLSID",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

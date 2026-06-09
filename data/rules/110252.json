@@ -1,0 +1,40 @@
+{
+  "uuid": "48d9d1aa-97b5-4739-b1fe-bff95db74ede",
+  "id": "110252",
+  "name": "Unusual Parent for a System Process",
+  "notes": "This rule triggers when an unusual parent is found for a system process.",
+  "response_qid": "67500442",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500442"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name IMATCHES '((smss)|(wininit)|(taskhost)|(lsass)|(winlogon)|(explorer)|(lsm)|(svchost)|(services)|(csrss))\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCEMAPSETCONTAINS('ProcessMaptoProcessParentPath', LOWER(&quot;Process Name&quot;), LOWER(&quot;Parent Process Path&quot;)) != True</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Unusual Parent for a System Process on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when the event matches Process Name IMATCHES '((smss)|(wininit)|(taskhost)|(lsass)|(winlogon)|(explorer)|(lsm)|(svchost)|(services)|(csrss))\\.exe' AQL filter query",
+    "AND when the event matches REFERENCEMAPSETCONTAINS('ProcessMaptoProcessParentPath', LOWER(\"Process Name\"), LOWER(\"Parent Process Path\")) != True AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Abnormal Parent for a System Process",
+    "Event description: Abnormal Parent for a System Process",
+    "Severity: 7, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

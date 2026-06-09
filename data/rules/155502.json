@@ -1,0 +1,29 @@
+{
+  "uuid": "5fc73126-accf-4510-ac75-91f928344ae8",
+  "id": "155502",
+  "name": "BB:BehaviorDefinition: Suspicious Commands Linux",
+  "notes": "This Building Block detects relevant commands often related to malware or hacking activity.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth\nSIGMA Title: Suspicious Commands Linux\nSIGMA Description: Detects relevant commands often related to malware or hacking activity\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Suspicious Commands Linux on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Attempt</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command Arguments&quot;) LIKE '%execve%' and (LOWER(&quot;Command Arguments&quot;) LIKE '%chmod%777%') or (LOWER(&quot;Command Arguments&quot;) LIKE '%chmod%' and LOWER(&quot;Command Arguments&quot;) LIKE '%u+s%') or (LOWER(&quot;Command Arguments&quot;) LIKE '%cp%' and LOWER(&quot;Command Arguments&quot;) LIKE '%/bin/ksh%') or (LOWER(&quot;Command Arguments&quot;) LIKE '%cp%' and LOWER(&quot;Command Arguments&quot;) LIKE '%/bin/sh%'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Commands Linux on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following Audit.Command Execution Attempt",
+    "AND when the event matches (LOWER(\"Command Arguments\") LIKE '%execve%' and (LOWER(\"Command Arguments\") LIKE '%chmod%777%') or (LOWER(\"Command Arguments\") LIKE '%chmod%' and LOWER(\"Command Arguments\") LIKE '%u+s%') or (LOWER(\"Command Arguments\") LIKE '%cp%' and LOWER(\"Command Arguments\") LIKE '%/bin/ksh%') or (LOWER(\"Command Arguments\") LIKE '%cp%' and LOWER(\"Command Arguments\") LIKE '%/bin/sh%')) AQL filter query"
+  ],
+  "RED_list": []
+}

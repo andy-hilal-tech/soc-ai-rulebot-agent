@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1071",
+  "id": "100150",
+  "name": "BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination",
+  "notes": "This Building Block identifies flows that have an illegal TCP flag combination.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> TCP flags are any of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>SR, SF, FUP, FUPSAR78, SRAFU</a>",
+    "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>equal to</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>1</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination on flows which are detected by the LOCAL system",
+    "AND when the source TCP flags are any of SR, SF, FUP, FUPSAR78, SRAFU",
+    "AND when the source packets is equal to 1"
+  ],
+  "RED_list": []
+}

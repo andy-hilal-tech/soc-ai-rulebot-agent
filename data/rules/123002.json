@@ -1,0 +1,40 @@
+{
+  "uuid": "SYSTEM-1459",
+  "id": "123002",
+  "name": "Successful Signature Compromise",
+  "notes": "This rule triggers when a host signature is successfully compromised.",
+  "response_qid": "67500712",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500712"
+  ],
+  "rule_refs": [
+    "SYSTEM-1329"
+  ],
+  "bb_references": [
+    "BB:FalseNegative: Events That Indicate Successful Compromise"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1329"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:FalseNegative: Events That Indicate Successful Compromise</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Successful Signature Compromise on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:FalseNegative: Events That Indicate Successful Compromise"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Successful Signature Compromise",
+    "Event description: Detects when a host signature is successfully compromised.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Misc System Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

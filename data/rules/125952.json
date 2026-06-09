@@ -1,0 +1,48 @@
+{
+  "uuid": "3a16b560-394a-4203-96b9-47c4b7bd6ac1",
+  "id": "125952",
+  "name": "Hostile Process Detected in a Container",
+  "notes": "This rule detects processes categorized as hostile (e.g. malware, phishing, cryptomining). \n\nNote: The Malware Hashes SHA reference set must be populated. The Threat Intelligence App can be used to import threat intel feeds in that Reference Set.",
+  "response_qid": "67500782",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500782"
+  ],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [
+    "SHA256 Hash"
+  ],
+  "reference_sets": [
+    "109"
+  ],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>System.Process Creation Success, System.Process Update Success</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>SHA256 Hash (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Malware Hashes SHA - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Hostile Process Detected in a Container on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.Process Creation Success, System.Process Update Success",
+    "AND when any of SHA256 Hash (custom) are contained in any of Malware Hashes SHA - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Hostile Process Detected in a Container",
+    "Event description: This rule detects processes categorized as hostile (e.g. malware, phishing, cryptomining).",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Container ID (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

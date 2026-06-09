@@ -1,0 +1,43 @@
+{
+  "uuid": "c7c72c9c-3f90-4eff-8186-8b8fefd2b90c",
+  "id": "142902",
+  "name": "MITRE.LIN.T1547.006.RULE Boot or Logon Autostart Execution: Kernel Modules and Extensions",
+  "notes": "The following auditd rules should be enabled:\n\n-a always,exit -F arch=b64 -S create_module,init_module,delete_module,get_kernel_syms,query_module,finit_module -F key=siem-kernel\n\nGet more Linux MITRE rules: https://www.scnsoft.com/services/security/siem/linux-mitre-attack-rules",
+  "response_qid": "67501172",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501172"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Linux UID"
+  ],
+  "reference_sets": [
+    "238"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Linux Auditd Key (custom) is any of siem-kernel</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Linux UID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>MITRE: Linux Users - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY MITRE.LIN.T1547.006.RULE Boot or Logon Autostart Execution: Kernel Modules and Extensions on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event matches Linux Auditd Key (custom) is any of siem-kernel",
+    "AND NOT when any of Linux UID (custom) are contained in any of MITRE: Linux Users - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MITRE.LIN.T1547.006.RULE Boot or Logon Autostart Execution: Kernel Modules and Extensions",
+    "Event description: Adversaries can use loadable kernel modules to covertly persist on a system and evade defenses.\nSee more on: https://attack.mitre.org/techniques/T1547/006",
+    "Severity: 1, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Kernel\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "Include detected events by \"Source IP\" from this point forward, in the offense, for 0 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

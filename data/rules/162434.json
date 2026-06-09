@@ -1,0 +1,34 @@
+{
+  "uuid": "3928279b-e69b-4b4f-8f2c-b39bc0fda4a1",
+  "id": "162434",
+  "name": "Possible Shadow Credentials Added",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Nasreddine Bencherchali (Nextron Systems), Elastic (idea)\nSIGMA Title: Possible Shadow Credentials Added\nSIGMA Description: Detects possible addition of shadow credentials to an active directory object.\n\nFalse positives:\n- Modifications in the msDS-KeyCredentialLink attribute can be done legitimately by the Azure AD Connect synchronization account or the ADFS service account. These accounts can be added as Exceptions. (From elastic FP section)\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=5136 AND (Username='msDS-KeyCredentialLink' OR \"Account Name\"='msDS-KeyCredentialLink' OR \"Distinguished Name\"='msDS-KeyCredentialLink')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Possible Shadow Credentials Added on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=5136 AND (Username='msDS-KeyCredentialLink' OR \"Account Name\"='msDS-KeyCredentialLink' OR \"Distinguished Name\"='msDS-KeyCredentialLink') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Possible Shadow Credentials Added",
+    "Event description: Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems), Elastic (idea) SIGMA Title: Possible Shadow Credentials Added SIGMA Description: Detects possible addition of shadow credentials to an active directory object.  False positives: - Modifications in the msDS-KeyCredentialLink attribute can be done legitimately by the Azure AD Connect synchronization account or the ADFS service account. These accounts can be added as Exceptions. (From elastic FP section)  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

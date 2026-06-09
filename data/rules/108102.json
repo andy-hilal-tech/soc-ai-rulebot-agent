@@ -1,0 +1,25 @@
+{
+  "uuid": "f80ed253-1b07-4cb1-9ac8-6df3d8a3a70e",
+  "id": "108102",
+  "name": "BB:PortDefinition: Telnet Ports",
+  "notes": "Edit this BB to include all common Telnet ports.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: Telnet Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>23</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: Telnet Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 23"
+  ],
+  "RED_list": []
+}

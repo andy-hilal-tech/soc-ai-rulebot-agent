@@ -1,0 +1,34 @@
+{
+  "uuid": "c2ad91d6-8d45-430d-a004-21bf84ad53d8",
+  "id": "162348",
+  "name": "Hidden Files and Directories",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Pawel Mazur\nSIGMA Title: Hidden Files and Directories\nSIGMA Description: Detects adversary creating hidden file or directory, by detecting directories or files with . as the first character\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND (LOWER(UTF8(payload)) LIKE '%execve%' AND (LOWER(Command) LIKE '%a0%mkdir%' OR LOWER(Command) LIKE '%touch%' OR LOWER(Command) LIKE '%vim%' OR LOWER(Command) LIKE '%nano%' OR LOWER(Command) LIKE '%vi%')) AND (LOWER(Command) LIKE '%a1%/.%' OR LOWER(Command) LIKE '%a1%.%' OR LOWER(Command) LIKE '%a2%/.%' OR LOWER(Command) LIKE '%a2%.%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Hidden Files and Directories on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND (LOWER(UTF8(payload)) LIKE '%execve%' AND (LOWER(Command) LIKE '%a0%mkdir%' OR LOWER(Command) LIKE '%touch%' OR LOWER(Command) LIKE '%vim%' OR LOWER(Command) LIKE '%nano%' OR LOWER(Command) LIKE '%vi%')) AND (LOWER(Command) LIKE '%a1%/.%' OR LOWER(Command) LIKE '%a1%.%' OR LOWER(Command) LIKE '%a2%/.%' OR LOWER(Command) LIKE '%a2%.%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Hidden Files and Directories",
+    "Event description: Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Hidden Files and Directories SIGMA Description: Detects adversary creating hidden file or directory, by detecting directories or files with . as the first character  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

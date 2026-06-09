@@ -1,0 +1,51 @@
+{
+  "uuid": "6d1b62d3-7026-4821-9bdf-4aa10f3d9cad",
+  "id": "132652",
+  "name": "Mailbox Permission Added and Deleted in a Short Period of Time",
+  "notes": "This rule triggers when a mailbox permission is added and deleted in a short period of time. This could indicate that a user is trying to get access before performing an administrative action such as accessing or deleting information, or create a forwarding rule, before removing their rights to remain undiscovered.",
+  "response_qid": "67500932",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500932"
+  ],
+  "rule_refs": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail"
+  ],
+  "db_fields_used": [
+    "Target Username",
+    "category"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.User Right Assigned, Authentication.User Right Removed</a>",
+    "when at least <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"5\", \"3\")' class='dynamic'>Target Username (custom)</a> and different <a href='javascript:editParameter(\"5\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"5\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"5\", \"6\")' class='dynamic'>minutes</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Target Username&quot; != &quot;Sender&quot;</a> AQL filter query"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"5\", \"3\")' class='dynamic'>Target Username (custom)</a> and different <a href='javascript:editParameter(\"5\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"5\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"5\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Mailbox Permission Added and Deleted in a Short Period of Time on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Mail",
+    "AND when the event category for the event is one of the following Authentication.User Right Assigned, Authentication.User Right Removed",
+    "AND when at least 2 events are seen with the same Target Username (custom) and different Low Level Category in 5 minutes",
+    "AND when the event matches \"Target Username\" != \"Sender\" AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Mailbox Permission Added Followed by Deletion",
+    "Event description: Detects when a mailbox permission is added and deleted in a short period of time",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"Mail Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

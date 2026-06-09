@@ -1,0 +1,29 @@
+{
+  "uuid": "33c15fc6-bb53-4881-a4f3-cab0cded47ba",
+  "id": "133702",
+  "name": "BB:BehaviorDefinition: Rogue Named Pipe Impersonation",
+  "notes": "This building block detects a privilege escalation attempt via rogue named pipe impersonation.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Rogue Named Pipe Impersonation on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001836) PipeEvent (Pipe Created)</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Pipe Name&quot;) MATCHES '\\\\.*\\\\pipe\\\\.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Rogue Named Pipe Impersonation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001836) PipeEvent (Pipe Created)",
+    "AND when the event matches LOWER(\"Pipe Name\") MATCHES '\\\\.*\\\\pipe\\\\.*' AQL filter query"
+  ],
+  "RED_list": []
+}

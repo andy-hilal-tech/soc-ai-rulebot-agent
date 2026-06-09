@@ -1,0 +1,29 @@
+{
+  "uuid": "7c9a14bc-b3a3-45ff-b6f0-527f7c50d2bb",
+  "id": "152052",
+  "name": "BB:BehaviorDefinition: Linux File Deletion",
+  "notes": "This Building Block detects file deletion using \"rm\", \"shred\" or \"unlink\" commands. Adversaries may delete files using these commands to cover up their activities.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Ömer Günal, oscd.community\nSIGMA Title: File Deletion\nSIGMA Description: Detects file deletion using \"rm\", \"shred\" or \"unlink\" commands which are used often by adversaries to delete files left behind by the actions of their intrusion activity\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Linux File Deletion on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [rm or shred or unlink]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Linux File Deletion on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [rm or shred or unlink]"
+  ],
+  "RED_list": []
+}

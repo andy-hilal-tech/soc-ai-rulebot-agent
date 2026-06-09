@@ -1,0 +1,29 @@
+{
+  "uuid": "SYSTEM-1272",
+  "id": "100075",
+  "name": "BB:CategoryDefinition: High Magnitude Events",
+  "notes": "Edit this BB to the severity, credibility, and relevance levels you wish to generate an event. The defaults are: severity (8), credibility (8), and relevance (8).",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: High Magnitude Events on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the Event Severity is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>6</a>",
+    "where the Event Credibility is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>7</a>",
+    "where the Event Relevance is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>7</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: High Magnitude Events on events which are detected by the undefined system",
+    "AND where the Event Severity is greater than 6",
+    "AND where the Event Credibility is greater than 7",
+    "AND where the Event Relevance is greater than 7"
+  ],
+  "RED_list": []
+}

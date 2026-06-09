@@ -1,0 +1,34 @@
+{
+  "uuid": "22fd98b5-085d-49ec-8762-eb0f7823af01",
+  "id": "162319",
+  "name": "Potential Sidecar Injection Into Running Deployment",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Leo Tsaousis (@laripping)\nSIGMA Title: Potential Sidecar Injection Into Running Deployment\nSIGMA Description: Detects attempts to inject a sidecar container into a running deployment.\nA sidecar container is an additional container within a pod, that resides alongside the main container.\nOne way to add containers to running resources like Deployments/DeamonSets/StatefulSets, is via a \"kubectl patch\" operation.\nBy injecting a new container within a legitimate pod, an attacker can run their code and hide their activity, instead of running their own separated pod in the cluster.\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(UTF8(payload)) LIKE '%patch%' AND LOWER(UTF8(payload)) LIKE '%apps%' AND LOWER(UTF8(payload)) LIKE '%deployments%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Sidecar Injection Into Running Deployment on events which are detected by the LOCAL system",
+    "AND when the event matches LOWER(UTF8(payload)) LIKE '%patch%' AND LOWER(UTF8(payload)) LIKE '%apps%' AND LOWER(UTF8(payload)) LIKE '%deployments%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Sidecar Injection Into Running Deployment",
+    "Event description: Converted from SIGMA Rule.  Original Author: Leo Tsaousis (@laripping) SIGMA Title: Potential Sidecar Injection Into Running Deployment SIGMA Description: Detects attempts to inject a sidecar container into a running deployment. A sidecar container is an additional container within a pod, that resides alongside the main container. One way to add containers to running resources like Deployments/DeamonSets/StatefulSets, is via a \"kubectl patch\" operation. By injecting a new container within a legitimate pod, an attacker can run their code and hide their activity, instead of running their own separated pod in the cluster.   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

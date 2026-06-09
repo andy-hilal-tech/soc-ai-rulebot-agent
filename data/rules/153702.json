@@ -1,0 +1,29 @@
+{
+  "uuid": "4ef2e038-d0ec-4888-86b0-ad5a80cedbae",
+  "id": "153702",
+  "name": "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder",
+  "notes": "This Building Block monitors for the hiding possible malicious files in the C:\\Windows\\Fonts\\ location. This folder doesn't require admin privillege to be written and executed from.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Sreeman\nSIGMA Title: Writing Of Malicious Files To The Fonts Folder\nSIGMA Description: Monitors for the hiding possible malicious files in the C:\\Windows\\Fonts\\ location. This folder doesn't require admin privillege to be written and executed from.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%echo%' or LOWER(&quot;Command&quot;) LIKE '%copy%' or LOWER(&quot;Command&quot;) LIKE '%type%' or LOWER(&quot;Command&quot;) LIKE '%file createnew%' or LOWER(&quot;Command&quot;) LIKE '%cacls%') and LOWER(&quot;Command&quot;) LIKE '%c:\\windows\\fonts\\%' and (LOWER(&quot;Command&quot;) LIKE '%.sh%' or LOWER(&quot;Command&quot;) LIKE '%.exe%' or LOWER(&quot;Command&quot;) LIKE '%.dll%' or LOWER(&quot;Command&quot;) LIKE '%.bin%' or LOWER(&quot;Command&quot;) LIKE '%.bat%' or LOWER(&quot;Command&quot;) LIKE '%.cmd%' or LOWER(&quot;Command&quot;) LIKE '%.js%' or LOWER(&quot;Command&quot;) LIKE '%.msh%' or LOWER(&quot;Command&quot;) LIKE '%.reg%' or LOWER(&quot;Command&quot;) LIKE '%.scr%' or LOWER(&quot;Command&quot;) LIKE '%.ps%' or LOWER(&quot;Command&quot;) LIKE '%.vb%' or LOWER(&quot;Command&quot;) LIKE '%.jar%' or LOWER(&quot;Command&quot;) LIKE '%.pl%' or LOWER(&quot;Command&quot;) LIKE '%.inf%' or LOWER(&quot;Command&quot;) LIKE '%.cpl%' or LOWER(&quot;Command&quot;) LIKE '%.hta%' or LOWER(&quot;Command&quot;) LIKE '%.msi%' or LOWER(&quot;Command&quot;) LIKE '%.vbs%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%echo%' or LOWER(\"Command\") LIKE '%copy%' or LOWER(\"Command\") LIKE '%type%' or LOWER(\"Command\") LIKE '%file createnew%' or LOWER(\"Command\") LIKE '%cacls%') and LOWER(\"Command\") LIKE '%c:\\windows\\fonts\\%' and (LOWER(\"Command\") LIKE '%.sh%' or LOWER(\"Command\") LIKE '%.exe%' or LOWER(\"Command\") LIKE '%.dll%' or LOWER(\"Command\") LIKE '%.bin%' or LOWER(\"Command\") LIKE '%.bat%' or LOWER(\"Command\") LIKE '%.cmd%' or LOWER(\"Command\") LIKE '%.js%' or LOWER(\"Command\") LIKE '%.msh%' or LOWER(\"Command\") LIKE '%.reg%' or LOWER(\"Command\") LIKE '%.scr%' or LOWER(\"Command\") LIKE '%.ps%' or LOWER(\"Command\") LIKE '%.vb%' or LOWER(\"Command\") LIKE '%.jar%' or LOWER(\"Command\") LIKE '%.pl%' or LOWER(\"Command\") LIKE '%.inf%' or LOWER(\"Command\") LIKE '%.cpl%' or LOWER(\"Command\") LIKE '%.hta%' or LOWER(\"Command\") LIKE '%.msi%' or LOWER(\"Command\") LIKE '%.vbs%') AQL filter query"
+  ],
+  "RED_list": []
+}

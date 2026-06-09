@@ -1,0 +1,42 @@
+{
+  "uuid": "7d294fbf-ad90-4e60-9fbb-2f6491bfe1f7",
+  "id": "165078",
+  "name": "UBA : User Added to a Group on SharePoint or OneDrive by Site Admin",
+  "notes": "Detects a user being added to a group in Sharepoint or OneDrive by a Site Admin.",
+  "response_qid": "67500263",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500263"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(101250121) User added to group</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Added to a Group on SharePoint or OneDrive by Site Admin on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when the event QID is one of the following (101250121) User added to group"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Added to a Group on SharePoint or OneDrive by Site Admin",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

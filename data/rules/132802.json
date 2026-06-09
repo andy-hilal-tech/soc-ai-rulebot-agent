@@ -1,0 +1,42 @@
+{
+  "uuid": "b1a82f02-d5ea-4b1a-bf40-ca635f3843db",
+  "id": "132802",
+  "name": "Email Received From Potentially Hostile Host",
+  "notes": "This rule triggers when an email is received from a host that is known for hostile activities, such as Phishing, Spam, Malware, Botnet Command and Control, or Cryptocurrency Mining.\n",
+  "response_qid": "67500935",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500935"
+  ],
+  "rule_refs": [
+    "5bda6dac-7a0d-4e86-83c4-369088100622"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Potentially Hostile Originating Host"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "5bda6dac-7a0d-4e86-83c4-369088100622"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Potentially Hostile Originating Host</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application.Mail Receive, System.Content Information</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Email Received From Potentially Hostile Host on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Potentially Hostile Originating Host",
+    "AND when the event category for the event is one of the following Application.Mail Receive, System.Content Information"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Email Received From Potentially Hostile Host",
+    "Event description: Detects when an email is received from a host that is known for hostile activities, such as Phishing, Spam, Malware, Botnet Command and Control, or Cryptocurrency Mining.\n",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Address\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

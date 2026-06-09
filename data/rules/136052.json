@@ -1,0 +1,38 @@
+{
+  "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+  "id": "136052",
+  "name": "Search for Password Files using Select-String (Windows)",
+  "notes": "This rule triggers when a search is made for the string \"password\" using the Select-String PowerShell command.\nThis behaviour could indicate a malicious actor searching for files containing passwords.",
+  "response_qid": "67501057",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501057"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?select-string.*?password.*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Search for Password Files using Select-String (Windows) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success",
+    "AND when the event matches LOWER(\"Command\") MATCHES '.*?select-string.*?password.*' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Search for Password Files using Select-String",
+    "Event description: a search for password files using Select-String has been detected.",
+    "Severity: 9, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Password Guess/Retrieve\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

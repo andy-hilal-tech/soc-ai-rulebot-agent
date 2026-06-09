@@ -1,0 +1,51 @@
+{
+  "uuid": "SYSTEM-1152",
+  "id": "100109",
+  "name": "Host Port Scan Detected by Remote Host",
+  "notes": "Reports when more than 50 ports were scanned from a single source IP address more than 5 times within 3 minutes.",
+  "response_qid": "67500122",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500122"
+  ],
+  "rule_refs": [
+    "SYSTEM-1179",
+    "SYSTEM-1202",
+    "SYSTEM-1358"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Recon Events",
+    "BB:CategoryDefinition: Suspicious Events",
+    "BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times",
+    "BB:HostDefinition: Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1358",
+    "SYSTEM-1202",
+    "SYSTEM-1179"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:HostDefinition: Servers</a>",
+    "when the context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Remote to Local, Remote to Remote</a>",
+    "when any of these <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>50</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>destination port</a> within <a href='javascript:editParameter(\"3\", \"7\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"3\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when any of these <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>50</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>destination port</a> within <a href='javascript:editParameter(\"3\", \"7\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"3\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Host Port Scan Detected by Remote Host on events which are detected by the LOCAL system",
+    "AND NOT when a flow or an event matches any of the following BB:HostDefinition: Servers",
+    "AND when the context is Remote to Local, Remote to Remote",
+    "AND when any of these BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times, across more than 50 destination port within 3 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Host Port Scan Detected by Remote Host",
+    "Event description: Detected multiple ports scans from a single source IP address.",
+    "Severity: 6, Credibility: 6, Relevance: 6",
+    "High-Level Category: \"Recon\"",
+    "Low-Level Category: \"Host Port Scan\""
+  ]
+}

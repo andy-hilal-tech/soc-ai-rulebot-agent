@@ -1,0 +1,42 @@
+{
+  "uuid": "d9d1afd9-112f-4225-97fb-6e5dce13f98b",
+  "id": "107102",
+  "name": "UBA : Kerberos Account Mapping",
+  "notes": "Maps Kerberos \"User Account\" and \"IP\" address when a Kerberos authentication ticket (TGT) was granted at the first time. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "Account Name"
+  ],
+  "reference_sets": [
+    "55"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the source IP is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>127.0.0.1</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Account Name (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : Kerberos Account Name - AlphaNumeric</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5000937) Success Audit: A Kerberos authentication ticket (TGT) was granted</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Kerberos Account Mapping on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND NOT when the source IP is one of the following 127.0.0.1",
+    "AND NOT when any of Account Name (custom) are contained in any of UBA : Kerberos Account Name - AlphaNumeric",
+    "AND when the event QID is one of the following (5000937) Success Audit: A Kerberos authentication ticket (TGT) was granted"
+  ],
+  "RED_list": [
+    "Add the \"Account Name\" of the event or flow payload to the Reference Set \"UBA : Kerberos Account Name\"",
+    "Add \"sourceIP\" to Reference Map: \"UBA : Kerberos Accounts and IPs\" with key \"Account Name\""
+  ]
+}

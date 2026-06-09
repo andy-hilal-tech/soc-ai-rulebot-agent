@@ -1,0 +1,25 @@
+{
+  "uuid": "b336cfa0-5111-4d7a-b57d-abdcf05ce5fe",
+  "id": "109002",
+  "name": "BB:UBA : File Transfer to Print",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : File Transfer to Print on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(11751042) File Print, (69000033) Print, (69000054) ADE Print Screen, (69000102) Print, (6501037) File Print - Event CRE</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : File Transfer to Print on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (11751042) File Print, (69000033) Print, (69000054) ADE Print Screen, (69000102) Print, (6501037) File Print - Event CRE"
+  ],
+  "RED_list": []
+}

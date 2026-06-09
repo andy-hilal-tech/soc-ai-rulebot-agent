@@ -1,0 +1,39 @@
+{
+  "uuid": "1e0355d4-c840-47a4-9a75-a14fa2311519",
+  "id": "101352",
+  "name": "BB:UBA : Detecting Authentication Bruteforce Attempts (Vertical)",
+  "notes": "This rule detects large number of authentication failure events against a single user in a shorter time frame. This rule detects vertical brute force attack.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1201",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures",
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Detecting Authentication Bruteforce Attempts (Vertical) on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:CategoryDefinition: Authentication Failures</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:UBA : Detecting Authentication Bruteforce Attempts (Vertical) on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:CategoryDefinition: Authentication Failures",
+    "AND when at least 100 events are seen with the same Username in 1 minutes"
+  ],
+  "RED_list": []
+}

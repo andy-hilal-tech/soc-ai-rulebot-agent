@@ -1,0 +1,34 @@
+{
+  "uuid": "25f378f1-c8be-4296-a58c-9e1e10599dcd",
+  "id": "162324",
+  "name": "PUA - Sysinternal Tool Execution - Registry",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Markus Neis\nSIGMA Title: PUA - Sysinternal Tool Execution - Registry\nSIGMA Description: Detects the execution of a Sysinternals Tool via the creation of the \"accepteula\" registry key\n\nFalse positives:\n- Legitimate use of SysInternals tools\n- Programs that use the same Registry Key\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND LOWER(UTF8(payload)) LIKE '%createkey%' AND (LOWER(\"Process Name\") LIKE '%\\eulaaccepted' OR LOWER(\"Target Process Name\") LIKE '%\\eulaaccepted' OR LOWER(\"Object Name\") LIKE '%\\eulaaccepted')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY PUA - Sysinternal Tool Execution - Registry on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND LOWER(UTF8(payload)) LIKE '%createkey%' AND (LOWER(\"Process Name\") LIKE '%\\eulaaccepted' OR LOWER(\"Target Process Name\") LIKE '%\\eulaaccepted' OR LOWER(\"Object Name\") LIKE '%\\eulaaccepted') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: PUA - Sysinternal Tool Execution - Registry",
+    "Event description: Converted from SIGMA Rule.  Original Author: Markus Neis SIGMA Title: PUA - Sysinternal Tool Execution - Registry SIGMA Description: Detects the execution of a Sysinternals Tool via the creation of the \"accepteula\" registry key  False positives: - Legitimate use of SysInternals tools - Programs that use the same Registry Key  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "uuid": "dfae1837-e5a4-488e-993a-96c1cca0751b",
+  "id": "160452",
+  "name": "BB:BehaviorDefinition: Fsutil Suspicious Invocation",
+  "notes": "This Building Block detects suspicious parameters of fsutil (deleting USN journal, configuring it with small size, etc).\n\nCovered from SIGMA Rule.\n\nOriginal Author: JEcco, E.M. Anhaus, oscd.community\nSIGMA Title: Fsutil Suspicious Invocation\nSIGMA Description: Detects suspicious parameters of fsutil (deleting USN journal, configuring it with small size, etc).\n  Might be used by ransomwares during the attack (seen by NotPetya and others).\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Fsutil Suspicious Invocation on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of fsutil.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%deletejournal%' OR LOWER(&quot;Command&quot;) LIKE '%createjournal%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Fsutil Suspicious Invocation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of fsutil.exe",
+    "AND when the event matches LOWER(\"Command\") LIKE '%deletejournal%' OR LOWER(\"Command\") LIKE '%createjournal%' AQL filter query"
+  ],
+  "RED_list": []
+}

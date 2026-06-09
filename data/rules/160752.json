@@ -1,0 +1,58 @@
+{
+  "uuid": "74f410a2-7d9e-405f-95b4-9d4b90a3f0ee",
+  "id": "160752",
+  "name": "Potential Indicator Removal Activity on Host",
+  "notes": "This rule triggers when an adversary delete or modify artifacts generated on a host system to remove evidence of their presence or hinder defenses.",
+  "response_qid": "67501695",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501695"
+  ],
+  "rule_refs": [
+    "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+    "1243ee88-122a-47ff-b7ba-158b9eea0724",
+    "39db027f-3709-4807-8664-51173f9b93e3",
+    "3d6f2fb1-dfb1-4359-b86c-8188f615b5dd",
+    "6caa6d18-f2ad-4ddd-9116-ffd5112956e8",
+    "da47a940-da7c-4ec4-8870-135706955c16",
+    "dfae1837-e5a4-488e-993a-96c1cca0751b"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Clearing Windows Console History",
+    "BB:BehaviorDefinition: Disable of ETW Trace",
+    "BB:BehaviorDefinition: Fsutil Suspicious Invocation",
+    "BB:BehaviorDefinition: Possible Unauthorized MBR Modifications",
+    "BB:BehaviorDefinition: Suspicious Load of Advapi31",
+    "BB:BehaviorDefinition: Sysmon Driver Unload",
+    "BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "dfae1837-e5a4-488e-993a-96c1cca0751b",
+    "3d6f2fb1-dfb1-4359-b86c-8188f615b5dd",
+    "1243ee88-122a-47ff-b7ba-158b9eea0724",
+    "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+    "39db027f-3709-4807-8664-51173f9b93e3",
+    "da47a940-da7c-4ec4-8870-135706955c16",
+    "6caa6d18-f2ad-4ddd-9116-ffd5112956e8"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Fsutil Suspicious Invocation, BB:BehaviorDefinition: Possible Unauthorized MBR Modifications, BB:BehaviorDefinition: Suspicious Load of Advapi31, BB:BehaviorDefinition: Disable of ETW Trace, BB:BehaviorDefinition: Sysmon Driver Unload, BB:BehaviorDefinition: Clearing Windows Console History, BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Indicator Removal Activity on Host on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Fsutil Suspicious Invocation, BB:BehaviorDefinition: Possible Unauthorized MBR Modifications, BB:BehaviorDefinition: Suspicious Load of Advapi31, BB:BehaviorDefinition: Disable of ETW Trace, BB:BehaviorDefinition: Sysmon Driver Unload, BB:BehaviorDefinition: Clearing Windows Console History, BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Indicator Removal Activity on Host",
+    "Event description: Detects when an adversary delete or modify artifacts generated on a host system to remove evidence of their presence or hinder defenses.",
+    "Severity: 7, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

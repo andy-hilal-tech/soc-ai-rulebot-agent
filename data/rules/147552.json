@@ -1,0 +1,31 @@
+{
+  "uuid": "736c6a6b-9576-4203-9532-4aa5bd8c56dd",
+  "id": "147552",
+  "name": "BB:BehaviorDefinition: Abuse of Findstr",
+  "notes": "This Building Block detects abuse of findstr for evasion. Adversaries can use findstr to hide their artifacts or search specific strings and evade defense mechanism.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Furkan CALISKAN, @caliskanfurkan_, @oscd_initiative, Nasreddine Bencherchali\nSIGMA Title: Abusing Findstr for Defense Evasion\nSIGMA Description: Attackers can use findstr to hide their artifacts or search specific strings and evade defense mechanism\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Abuse of Findstr on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [findstr.exe or FINDSTR.EXE]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%findstr%') and (((LOWER(&quot;Command&quot;) LIKE '% /v %' or LOWER(&quot;Command&quot;) LIKE '% -v %') and (LOWER(&quot;Command&quot;) LIKE '% /l %' or LOWER(&quot;Command&quot;) LIKE '% -l %')) or ((LOWER(&quot;Command&quot;) LIKE '% /s %' or LOWER(&quot;Command&quot;) LIKE '% -s %') and (LOWER(&quot;Command&quot;) LIKE '% /i %' or LOWER(&quot;Command&quot;) LIKE '% -i %')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Abuse of Findstr on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [findstr.exe or FINDSTR.EXE]",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%findstr%') and (((LOWER(\"Command\") LIKE '% /v %' or LOWER(\"Command\") LIKE '% -v %') and (LOWER(\"Command\") LIKE '% /l %' or LOWER(\"Command\") LIKE '% -l %')) or ((LOWER(\"Command\") LIKE '% /s %' or LOWER(\"Command\") LIKE '% -s %') and (LOWER(\"Command\") LIKE '% /i %' or LOWER(\"Command\") LIKE '% -i %'))) AQL filter query"
+  ],
+  "RED_list": []
+}

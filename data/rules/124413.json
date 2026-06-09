@@ -1,0 +1,36 @@
+{
+  "uuid": "6b06a5a8-419d-47af-a86d-0353fbb4d478",
+  "id": "124413",
+  "name": "X-Force: Internal Host Communicating with Botnet Command and Control URL",
+  "notes": "This rule triggers when a local host loads a web URL known to be a Botnet Command and Control server. This is often more accurate than detecting communication with an IP known to be a botnet as legitimate web hosts are often exploited to host command and control servers.",
+  "response_qid": "67500689",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500689"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>XFORCE_URL_CATEGORY(&quot;URL&quot;) = 'Botnet Command and Control Server' OR XFORCE_URL_CATEGORY(&quot;URL Host&quot;) = 'Botnet Command and Control Server'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY X-Force: Internal Host Communicating with Botnet Command and Control URL on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Remote",
+    "AND when the event matches XFORCE_URL_CATEGORY(\"URL\") = 'Botnet Command and Control Server' OR XFORCE_URL_CATEGORY(\"URL Host\") = 'Botnet Command and Control Server' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Internal Host Communicating with Botnet Command and Control URL",
+    "Event description: This rule will notify when an internal client loads a web URL known to be a Botnet Command and Control server.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Potential Exploit\"",
+    "Low-Level Category: \"Potential Botnet Connection\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

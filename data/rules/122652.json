@@ -1,0 +1,47 @@
+{
+  "uuid": "SYSTEM-1185",
+  "id": "122652",
+  "name": "Exploit/Malware Events Across Multiple Destinations",
+  "notes": "This rule triggers when exploit or malware events are seen on multiple destination hosts. This could indicate a malicious software or an attacker exploiting vulnerable hosts on the network.",
+  "response_qid": "67500707",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500707"
+  ],
+  "rule_refs": [
+    "SYSTEM-1204",
+    "SYSTEM-1355"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Exploits Backdoors and Trojans",
+    "BB:CategoryDefinition: Exploits Backdoors and Trojans with the same source IP more than 5 times"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1355",
+    "SYSTEM-1204"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Destination Vulnerable to Detected Exploit on a Different Port</a>",
+    "when any of these <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a> with the same <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when any of these <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a> with the same <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Exploit/Malware Events Across Multiple Destinations on events which are detected by the LOCAL system",
+    "AND NOT when an event matches any of the following Destination Vulnerable to Detected Exploit on a Different Port",
+    "AND when any of these BB:CategoryDefinition: Exploits Backdoors and Trojans with the same source IP more than 5 times, across more than 5 destination IP within 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Exploit/Malware Events Across Multiple Targets",
+    "Event description: Detects when exploit or malware events are seen on multiple destination hosts. This could indicate a malicious software or an attacker exploiting vulnerable hosts on the network.",
+    "Severity: 7, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Misc Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

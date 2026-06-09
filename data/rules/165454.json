@@ -1,0 +1,40 @@
+{
+  "uuid": "27645088-b714-4075-b532-617ce7129569",
+  "id": "165454",
+  "name": "MSSP - OS - MS - 29 - H - Windows Audit Log Cleared",
+  "notes": "",
+  "response_qid": "67501845",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501845"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Event ID is any of 1102</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY MSSP - OS - MS - 29 - H - Windows Audit Log Cleared on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event matches Event ID is any of 1102",
+    "AND when at least 1 events are seen with the same Username in 10 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Windows Audit Log Cleared",
+    "Event description: .fasdf",
+    "Severity: 1, Credibility: 0, Relevance: 0",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Audit Logs Clearance Success\""
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1288",
+  "id": "100208",
+  "name": "BB:NetworkDefinition: Broadcast Address Space",
+  "notes": "Edit this BB to include the broadcast address space of your network.  This is used to remove false positive events that may be caused by the use of broadcast messages.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:NetworkDefinition: Broadcast Address Space on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where either the source or destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>255.255.0.0/16, 172.16.255.255, 10.0.0.255</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:NetworkDefinition: Broadcast Address Space on events which are detected by the undefined system",
+    "AND where either the source or destination IP is one of the following 255.255.0.0/16, 172.16.255.255, 10.0.0.255"
+  ],
+  "RED_list": []
+}

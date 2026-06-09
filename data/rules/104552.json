@@ -1,0 +1,40 @@
+{
+  "uuid": "a4f4f8fb-7bd9-4a42-8775-9f67bac55229",
+  "id": "104552",
+  "name": "UBA : Browsed to Gambling Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500231",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500231"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%gambling%' OR &quot;Web Category&quot; ilike '%lottery%' OR &quot;Web Category&quot; in (13)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Gambling Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%gambling%' OR \"Web Category\" ilike '%lottery%' OR \"Web Category\" in (13) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Gambling Website",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

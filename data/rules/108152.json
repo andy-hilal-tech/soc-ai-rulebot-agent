@@ -1,0 +1,25 @@
+{
+  "uuid": "83987bc1-4a4e-46e3-9ad2-f9a128eff270",
+  "id": "108152",
+  "name": "BB:PortDefinition: TFTP Ports",
+  "notes": "Edit this BB to include all common TFTP ports.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: TFTP Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>69</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: TFTP Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 69"
+  ],
+  "RED_list": []
+}

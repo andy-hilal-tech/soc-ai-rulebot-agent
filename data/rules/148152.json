@@ -1,0 +1,38 @@
+{
+  "uuid": "d6697cf6-da5b-498f-9d5d-c4d696aecf76",
+  "id": "148152",
+  "name": "Suspicious Process Discovery With Get-Process",
+  "notes": "This rule detects adversaries performing discovery to get the processes that are running on the local computer.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Suspicious Process Discovery With Get-Process\nSIGMA Description: Get the processes that are running on the local computer.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501520",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501520"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of Get-Process</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Process Discovery With Get-Process on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success",
+    "AND when the event matches Command (custom) contains any of Get-Process"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Process Discovery With Get-Process",
+    "Event description: Detects adversaries performing discovery to get the processes that are running on the local computer.",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Recon\"",
+    "Low-Level Category: \"Windows Reconnaissance\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

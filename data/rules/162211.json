@@ -1,0 +1,34 @@
+{
+  "uuid": "5e71191b-3787-4ed5-a414-9d8beb2bba7c",
+  "id": "162211",
+  "name": "Backup Catalog Deleted",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems), Tom U. @c_APT_ure (collection)\nSIGMA Title: Backup Catalog Deleted\nSIGMA Description: Detects backup catalog deletions\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=524 AND LOWER(UTF8(payload)) LIKE '%microsoft-windows-backup%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Backup Catalog Deleted on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=524 AND LOWER(UTF8(payload)) LIKE '%microsoft-windows-backup%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Backup Catalog Deleted",
+    "Event description: Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems), Tom U. @c_APT_ure (collection) SIGMA Title: Backup Catalog Deleted SIGMA Description: Detects backup catalog deletions  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

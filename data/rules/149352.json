@@ -1,0 +1,38 @@
+{
+  "uuid": "3babcd24-5c64-4d40-b1f0-3ef33ff08f28",
+  "id": "149352",
+  "name": "Suspicious NTDS Process Patterns Exfiltration",
+  "notes": "This rule detects suspicious process patterns used in NTDS.DIT exfiltration\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems)\nSIGMA Title: Suspicious Process Patterns NTDS.DIT Exfil\nSIGMA Description: Detects suspicious process patterns used in NTDS.DIT exfiltration\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501534",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501534"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(((LOWER(&quot;Process Full Full Name&quot;) LIKE 'ntdsDump.exe' OR LOWER(&quot;Process Full Full Name&quot;) LIKE 'ntdsdumpex.exe') OR (LOWER(&quot;Command&quot;) LIKE '%ntds.dit%' AND LOWER(&quot;Command&quot;) LIKE '%system.hiv%') OR LOWER(&quot;Command&quot;) LIKE '%ntdsgrab.ps1%') OR (LOWER(&quot;Command&quot;) LIKE '%ac i ntds%' AND LOWER(&quot;Command&quot;) LIKE '%create full%') OR (LOWER(&quot;Command&quot;) LIKE '%/c copy %' AND LOWER(&quot;Command&quot;) LIKE '%\\windows\\ntds\\ntds.dit%') OR (LOWER(&quot;Command&quot;) LIKE '%activate instance ntds%' AND LOWER(&quot;Command&quot;) LIKE '%create full%') OR (LOWER(&quot;Command&quot;) LIKE '%powershell%' AND LOWER(&quot;Command&quot;) LIKE '%ntds.dit%')) OR (LOWER(&quot;Command&quot;) LIKE '%ntds.dit%' AND ((LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\apache%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\tomcat%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\appdata\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\temp\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\public\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\perflogs\\%') OR (LOWER(&quot;Process File File Path&quot;) LIKE '%\\apache%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\tomcat%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\appdata\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\temp\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\public\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\perflogs\\%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious NTDS Process Patterns Exfiltration on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches (((LOWER(\"Process Full Full Name\") LIKE 'ntdsDump.exe' OR LOWER(\"Process Full Full Name\") LIKE 'ntdsdumpex.exe') OR (LOWER(\"Command\") LIKE '%ntds.dit%' AND LOWER(\"Command\") LIKE '%system.hiv%') OR LOWER(\"Command\") LIKE '%ntdsgrab.ps1%') OR (LOWER(\"Command\") LIKE '%ac i ntds%' AND LOWER(\"Command\") LIKE '%create full%') OR (LOWER(\"Command\") LIKE '%/c copy %' AND LOWER(\"Command\") LIKE '%\\windows\\ntds\\ntds.dit%') OR (LOWER(\"Command\") LIKE '%activate instance ntds%' AND LOWER(\"Command\") LIKE '%create full%') OR (LOWER(\"Command\") LIKE '%powershell%' AND LOWER(\"Command\") LIKE '%ntds.dit%')) OR (LOWER(\"Command\") LIKE '%ntds.dit%' AND ((LOWER(\"Parent Process File File Path\") LIKE '%\\apache%' OR LOWER(\"Parent Process File File Path\") LIKE '%\\tomcat%' OR LOWER(\"Parent Process File File Path\") LIKE '%\\appdata\\%' OR LOWER(\"Parent Process File File Path\") LIKE '%\\temp\\%' OR LOWER(\"Parent Process File File Path\") LIKE '%\\public\\%' OR LOWER(\"Parent Process File File Path\") LIKE '%\\perflogs\\%') OR (LOWER(\"Process File File Path\") LIKE '%\\apache%' OR LOWER(\"Process File File Path\") LIKE '%\\tomcat%' OR LOWER(\"Process File File Path\") LIKE '%\\appdata\\%' OR LOWER(\"Process File File Path\") LIKE '%\\temp\\%' OR LOWER(\"Process File File Path\") LIKE '%\\public\\%' OR LOWER(\"Process File File Path\") LIKE '%\\perflogs\\%'))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Process Patterns NTDS.DIT Exfiltration",
+    "Event description: Detects suspicious process patterns used in NTDS.DIT exfiltration",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Pattern Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

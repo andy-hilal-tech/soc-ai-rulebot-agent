@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1341",
+  "id": "100278",
+  "name": "BB:NetworkDefinition: DMZ Addresses",
+  "notes": "Update this BB to include addresses that are included in the DMZ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:NetworkDefinition: DMZ Addresses on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the local network is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DMZ</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:NetworkDefinition: DMZ Addresses on events which are detected by the LOCAL system",
+    "AND when the local network is DMZ"
+  ],
+  "RED_list": []
+}

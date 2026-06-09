@@ -1,0 +1,50 @@
+{
+  "uuid": "0f966c01-5f1b-4604-9b5c-988c36a54e6d",
+  "id": "126402",
+  "name": "Multiple Failures Reading Secrets",
+  "notes": "This rule identifies multiple failures reading secrets (storage of sensitive information, such as passwords, OAuth tokens, ssh keys, etc).",
+  "response_qid": "67500788",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500788"
+  ],
+  "rule_refs": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Containers"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Read Activity Failed</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Resource (custom) is any of secrets</a>",
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY Multiple Failures Reading Secrets on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Containers",
+    "AND when the event category for the event is one of the following Audit.Read Activity Failed",
+    "AND when the event matches Resource (custom) is any of secrets",
+    "AND when at least 5 events are seen with the same Username in 1 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Failures Reading Secrets",
+    "Event description: Detected multiple failures reading secrets in Container Environment.",
+    "Severity: 9, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Unauthorized Access Attempt\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

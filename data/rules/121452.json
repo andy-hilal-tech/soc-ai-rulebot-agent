@@ -1,0 +1,36 @@
+{
+  "uuid": "SYSTEM-1551",
+  "id": "121452",
+  "name": "Local host on Botnet CandC List (DST)",
+  "notes": "This rule triggers when a local system is a member of a known botnet CandC.",
+  "response_qid": "67500691",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500691"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>destination IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>BOT.BOT_Control</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Local host on Botnet CandC List (DST) on events which are detected by the LOCAL system",
+    "AND when the context is Local to Local, Remote to Local",
+    "AND when the destination IP is a part of any of the following BOT.BOT_Control"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Local host on Botnet CandC List (DST)",
+    "Event description: A local host has been identified on a list of known botnet command and control host. Host should be investigated.",
+    "Severity: 10, Credibility: 6, Relevance: 9",
+    "High-Level Category: \"Potential Exploit\"",
+    "Low-Level Category: \"Potential Botnet Connection\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Destination IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

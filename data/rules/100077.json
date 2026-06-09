@@ -1,0 +1,31 @@
+{
+  "uuid": "SYSTEM-1414",
+  "id": "100077",
+  "name": "DoS Events with High Magnitude Become Offenses",
+  "notes": "Rule forces offense creation for DoS based event with high magnitude.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "f866712c-ad99-4d17-a831-c49c810a3016"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Medium Magnitude Events"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "f866712c-ad99-4d17-a831-c49c810a3016"
+  ],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Brute force login, DOS.Database DoS, DOS.DNS Service DoS, DOS.FTP DoS, DOS.High Rate DoS, DOS.High Rate ICMP DoS, DOS.High Rate ICMP Scan, DOS.High Rate Scan, DOS.High Rate TCP DoS, DOS.High Rate TCP Scan, DOS.High Rate UDP DoS, DOS.High Rate UDP Scan, DOS.ICMP DoS, DOS.Infrastructure DoS, DOS.Low Rate DoS, DOS.Low Rate ICMP DoS, DOS.Low Rate ICMP Scan, DOS.Low Rate Scan, DOS.Low Rate TCP DoS, DOS.Low Rate TCP Scan, DOS.Low Rate UDP DoS, DOS.Low Rate UDP Scan, DOS.Mail Service DoS, DOS.Medium Rate DoS, DOS.Medium Rate ICMP DoS, DOS.Medium Rate ICMP Scan, DOS.Medium Rate Scan, DOS.Medium Rate TCP DoS, DOS.Medium Rate TCP Scan, DOS.Medium Rate UDP DoS, DOS.Medium Rate UDP Scan, DOS.Misc DoS, DOS.TCP DoS, DOS.Telnet DoS, DOS.UDP DoS, DOS.Unix DOS, DOS.Unknown DoS Attack, DOS.VoIP DoS, DOS.Web Service DoS, DOS.Windows DoS</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Medium Magnitude Events</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY DoS Events with High Magnitude Become Offenses on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following DOS.Brute force login, DOS.Database DoS, DOS.DNS Service DoS, DOS.FTP DoS, DOS.High Rate DoS, DOS.High Rate ICMP DoS, DOS.High Rate ICMP Scan, DOS.High Rate Scan, DOS.High Rate TCP DoS, DOS.High Rate TCP Scan, DOS.High Rate UDP DoS, DOS.High Rate UDP Scan, DOS.ICMP DoS, DOS.Infrastructure DoS, DOS.Low Rate DoS, DOS.Low Rate ICMP DoS, DOS.Low Rate ICMP Scan, DOS.Low Rate Scan, DOS.Low Rate TCP DoS, DOS.Low Rate TCP Scan, DOS.Low Rate UDP DoS, DOS.Low Rate UDP Scan, DOS.Mail Service DoS, DOS.Medium Rate DoS, DOS.Medium Rate ICMP DoS, DOS.Medium Rate ICMP Scan, DOS.Medium Rate Scan, DOS.Medium Rate TCP DoS, DOS.Medium Rate TCP Scan, DOS.Medium Rate UDP DoS, DOS.Medium Rate UDP Scan, DOS.Misc DoS, DOS.TCP DoS, DOS.Telnet DoS, DOS.UDP DoS, DOS.Unix DOS, DOS.Unknown DoS Attack, DOS.VoIP DoS, DOS.Web Service DoS, DOS.Windows DoS",
+    "AND when an event matches any of the following BB:CategoryDefinition: Medium Magnitude Events"
+  ],
+  "RED_list": []
+}

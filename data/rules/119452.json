@@ -1,0 +1,40 @@
+{
+  "uuid": "f0aec105-9619-48a3-9bde-b385d8c72c3c",
+  "id": "119452",
+  "name": "Suspicious program initiating DNS query (Windows)",
+  "notes": "This rule triggers when a program that is not referenced as legitimate is initiating a DNS query.\n\nNote: The DNS Application Allowlist reference set must be populated with applications allowed to generate DNS queries",
+  "response_qid": "67500658",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500658"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Process Name"
+  ],
+  "reference_sets": [
+    "173"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.DNS In Progress</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>DNS Application Allowlist - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious program initiating DNS query (Windows) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Application.DNS In Progress",
+    "AND when any of Process Name (custom) are contained in any of DNS Application Allowlist - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious program initiating DNS query (Windows)",
+    "Event description: Detects when a program that is not referenced as legitimate initiated a DNS query.",
+    "Severity: 5, Credibility: 6, Relevance: 6",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"DNS Protocol Anomaly\""
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "uuid": "68a203e4-83ca-4455-9436-af4ed2bac6c6",
+  "id": "151052",
+  "name": "Suspicious Outbound SMTP Connections",
+  "notes": "This rule detects potential exfiltration over SMTP protocol.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Suspicious Outbound SMTP Connections\nSIGMA Description: Adversaries may steal data by exfiltrating it over an un-encrypted network protocol other than that of the existing command and control channel. The data may also be sent to an alternate network location from the main command and control server.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501555",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501555"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination Port is any of [25 or 587 or 465 or 2525]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) LIKE 'thunderbird.exe' or LOWER(&quot;Process Full Full Name&quot;) LIKE 'outlook.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\program files\\microsoft\\exchange server\\%' or (LOWER(&quot;Process File File Path&quot;) LIKE '%\\program files\\windowsapps\\microsoft.windowscommunicationsapps%' and LOWER(&quot;Process Full Full Name&quot;) LIKE 'hxtsr.exe')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Outbound SMTP Connections on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches Destination Port is any of [25 or 587 or 465 or 2525]",
+    "AND when the event matches Initiated (custom) is any of true",
+    "AND NOT when the event matches LOWER(\"Process Full Full Name\") LIKE 'thunderbird.exe' or LOWER(\"Process Full Full Name\") LIKE 'outlook.exe' or LOWER(\"Process File File Path\") LIKE '%\\program files\\microsoft\\exchange server\\%' or (LOWER(\"Process File File Path\") LIKE '%\\program files\\windowsapps\\microsoft.windowscommunicationsapps%' and LOWER(\"Process Full Full Name\") LIKE 'hxtsr.exe') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Outbound SMTP Connections",
+    "Event description: This rule detects potential exfiltration over SMTP protocol.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Data Loss Possible\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

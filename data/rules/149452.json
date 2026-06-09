@@ -1,0 +1,29 @@
+{
+  "uuid": "42d41bca-5d67-4329-973e-034a82529348",
+  "id": "149452",
+  "name": "BB:BehaviorDefinition: Powercat Execution",
+  "notes": "This building block detects powercat execution.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Netcat The Powershell Version\nSIGMA Description: Adversaries may use a non-application layer protocol for communication between host and C2 server or among infected hosts within a network\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Powercat Execution on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of [powercat  or powercat.ps1]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Powercat Execution on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches Command (custom) contains any of [powercat  or powercat.ps1]"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,43 @@
+{
+  "uuid": "31449fad-513a-46a1-934d-434384e2aa0e",
+  "id": "143752",
+  "name": "MITRE.LIN.T1485.RULE Data Destruction",
+  "notes": "The following auditd rules should be enabled:\n\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/etc -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/bin -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/sbin -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/usr/bin -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/usr/sbin -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/var -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/home -k siem-destruction\n-a always,exit -F arch=b64 -S rename,rmdir,unlink,unlinkat,renameat -F auid!=-1 -F dir=/srv -k siem-destruction\n\nGet more Linux MITRE rules: https://www.scnsoft.com/services/security/siem/linux-mitre-attack-rules",
+  "response_qid": "67501187",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501187"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Linux UID"
+  ],
+  "reference_sets": [
+    "238"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Linux Auditd Key (custom) is any of siem-destruction</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Linux UID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>MITRE: Linux Users - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY MITRE.LIN.T1485.RULE Data Destruction on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event matches Linux Auditd Key (custom) is any of siem-destruction",
+    "AND NOT when any of Linux UID (custom) are contained in any of MITRE: Linux Users - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MITRE.LIN.T1485.RULE Data Destruction",
+    "Event description: Adversaries may attempt to overwrite files and directories with randomly generated data to make it irrecoverable. In some cases politically oriented image files have been used to overwrite data.\n\nSee more on: https://attack.mitre.org/techniques/T1485",
+    "Severity: 1, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Delete Activity Attempted\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "Include detected events by \"Source IP\" from this point forward, in the offense, for 0 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

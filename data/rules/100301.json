@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1247",
+  "id": "100301",
+  "name": "BB:PortDefinition: P2P Ports",
+  "notes": "Edit this BB to include all common ports used by Peer-to-Peer (P2P) servers.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: P2P Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1214, 1337, 2234, 5534, 2705, 5500, 5501, 5502, 5503, 5504, 5505, 6346, 6347, 6881, 6882, 6883, 6884, 6885, 6886, 6887, 6888, 6889, 6969</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: P2P Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 1214, 1337, 2234, 5534, 2705, 5500, 5501, 5502, 5503, 5504, 5505, 6346, 6347, 6881, 6882, 6883, 6884, 6885, 6886, 6887, 6888, 6889, 6969"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1475",
+  "id": "100243",
+  "name": "BB:CategoryDefinition: IRC Detected Based on Event Category",
+  "notes": "This Building Block identifies IRC traffic that has been identified by events or categories.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: IRC Detected Based on Event Category on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Policy.IRC Policy Violation</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: IRC Detected Based on Event Category on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Policy.IRC Policy Violation"
+  ],
+  "RED_list": []
+}

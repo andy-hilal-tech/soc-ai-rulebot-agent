@@ -1,0 +1,40 @@
+{
+  "uuid": "SYSTEM-1512",
+  "id": "100078",
+  "name": "Local Flood (TCP)",
+  "notes": "Detects when a single local host sends a large number of packets (greater than 1000pps) to an internet destination over a small period of time.  The packet rate in this rule can be adjusted as needed to reflect the network.",
+  "response_qid": "67500022",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500022"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow bias is any of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>outbound</a>",
+    "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> packet rate is <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>1000</a> packets/second",
+    "when the IP protocol is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>TCP</a>",
+    "when the <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>60000</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Local Flood (TCP) on flows which are detected by the LOCAL system",
+    "AND when the flow bias is any of the following outbound",
+    "AND when the source packet rate is greater than 1000 packets/second",
+    "AND when the IP protocol is one of the following TCP",
+    "AND when the source packets is greater than 60000"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Outbound TCP Flood",
+    "Event description: Single local host sending a large number of packets (greater than 1000pps) to an internet destination over a small period of time. This can indicate an attack or a service that has become unresponsive.",
+    "Severity: 5, Credibility: 5, Relevance: 7",
+    "High-Level Category: \"DOS\"",
+    "Low-Level Category: \"Low Rate DoS\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

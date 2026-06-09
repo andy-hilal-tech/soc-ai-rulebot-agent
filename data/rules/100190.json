@@ -1,0 +1,46 @@
+{
+  "uuid": "SYSTEM-1367",
+  "id": "100190",
+  "name": "BB:FalsePositive: Windows Server False Positive Categories Local",
+  "notes": "Edit this BB to define all the false positive categories that occur to or from Windows servers that are defined in the BB:HostDefinition: Windows Servers building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "7164b6e2-ef35-40e8-a731-84e63a80a1ca",
+    "SYSTEM-1179",
+    "SYSTEM-1202",
+    "SYSTEM-1216",
+    "SYSTEM-1303"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: DDoS Attack Events",
+    "BB:CategoryDefinition: Recon Events",
+    "BB:CategoryDefinition: Suspicious Events",
+    "BB:FalsePositive: Windows Server False Positive Categories Local on events which are detected by the LOCAL system",
+    "BB:HostDefinition: Windows Servers",
+    "BB:HostReference: Windows Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1216",
+    "7164b6e2-ef35-40e8-a731-84e63a80a1ca",
+    "SYSTEM-1179",
+    "SYSTEM-1202",
+    "SYSTEM-1303"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Windows Servers, BB:HostReference: Windows Servers</a>",
+    "when the context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Suspicious Events, BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: DDoS Attack Events</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Windows Server False Positive Categories Local on events which are detected by the LOCAL system",
+    "AND when a flow or an event matches any of the following BB:HostDefinition: Windows Servers, BB:HostReference: Windows Servers",
+    "AND when the context is Local to Local",
+    "AND when a flow or an event matches any of the following BB:CategoryDefinition: Suspicious Events, BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: DDoS Attack Events"
+  ],
+  "RED_list": []
+}

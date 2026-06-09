@@ -1,0 +1,44 @@
+{
+  "uuid": "397415d1-8bbe-4148-8fb8-b6a79c8ab3da",
+  "id": "165412",
+  "name": "H360-FW - Logs Error",
+  "notes": "",
+  "response_qid": "67501840",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501840"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "sourceAssetName"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the domain is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Health360</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(67501796) Log Source Stopped Sending Events (Firewall/IPS/VPN/Switch)</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Source Asset Name is any of Microsoft Azure H360</a>",
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Source Asset Name</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Source Asset Name</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY H360-FW - Logs Error on events which are detected by the LOCAL system",
+    "AND when the domain is one of the following Health360",
+    "AND when the event QID is one of the following (67501796) Log Source Stopped Sending Events (Firewall/IPS/VPN/Switch)",
+    "AND when the event matches Source Asset Name is any of Microsoft Azure H360",
+    "AND when at least 1 events are seen with the same Source Asset Name in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: H360-FW - Logs Error",
+    "Event description: H360-FW - Logs Error",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Information\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should set or replace the name of the associated offense(s)"
+  ]
+}

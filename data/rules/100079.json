@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1362",
+  "id": "100079",
+  "name": "Network DoS Attack Detected",
+  "notes": "Reports network Denial of Service (DoS) attacks on a system. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1289"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Network DoS Attack",
+    "BB:CategoryDefinition: Network DoS Attack with the same QID more than 3 times"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1289"
+  ],
+  "conditions_text": [
+    "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Network DoS Attack</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>QID</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>3</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Network DoS Attack</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>QID</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>3</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Network DoS Attack Detected on events which are detected by the LOCAL system",
+    "AND when any of these BB:CategoryDefinition: Network DoS Attack with the same QID more than 3 times, across more than 0 destination IP within 5 minutes"
+  ],
+  "RED_list": []
+}

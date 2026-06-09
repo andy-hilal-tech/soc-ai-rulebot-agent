@@ -1,0 +1,38 @@
+{
+  "uuid": "1d95e58c-3b39-438b-925b-39f94d588624",
+  "id": "162002",
+  "name": "Malicious Named Pipe",
+  "notes": "This rule triggers when a named pipe is created by known APT malware.",
+  "response_qid": "67501720",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501720"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Pipe Full Full Name&quot;) in ('atctl', 'userpipe', 'iehelper', 'sdlrpc', 'comnap', 'isapi_http', 'isapi_dg', 'isapi_dg2', 'ahexec', 'winsession', 'lsassw', '46a676ab7f179e511e30dd2dc41bd388', '9f81f59bc58452127884ce513865ed20', 'e710f28d59aa529d6792ca6ff0ca1b34', 'rpchlp_3', 'NamePipe_MoreWindows', 'pcheap_reuse', 'msagent_*', 'gruntsvc')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Malicious Named Pipe on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)",
+    "AND when the event matches LOWER(\"Pipe Full Full Name\") in ('atctl', 'userpipe', 'iehelper', 'sdlrpc', 'comnap', 'isapi_http', 'isapi_dg', 'isapi_dg2', 'ahexec', 'winsession', 'lsassw', '46a676ab7f179e511e30dd2dc41bd388', '9f81f59bc58452127884ce513865ed20', 'e710f28d59aa529d6792ca6ff0ca1b34', 'rpchlp_3', 'NamePipe_MoreWindows', 'pcheap_reuse', 'msagent_*', 'gruntsvc') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Malicious Named Pipe",
+    "Event description: Detects when a named pipe is created by known APT malware.",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "920d88c7-9111-4de3-bb18-b23f47cdac7a",
+  "id": "162341",
+  "name": "Possible Coin Miner CPU Priority Param",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems)\nSIGMA Title: Possible Coin Miner CPU Priority Param\nSIGMA Description: Detects command line parameter very often used with coin miners\n\nFalse positives:\n- Other tools that use a --cpu-priority flag\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND (LOWER(Command) LIKE '%a1%--cpu-priority%' OR LOWER(Command) LIKE '%a2%--cpu-priority%' OR LOWER(Command) LIKE '%a3%--cpu-priority%' OR LOWER(Command) LIKE '%a4%--cpu-priority%' OR LOWER(Command) LIKE '%a5%--cpu-priority%' OR LOWER(UTF8(payload)) LIKE '%--cpu-priority%' OR LOWER(UTF8(payload)) LIKE '%--cpu-priority%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Possible Coin Miner CPU Priority Param on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND (LOWER(Command) LIKE '%a1%--cpu-priority%' OR LOWER(Command) LIKE '%a2%--cpu-priority%' OR LOWER(Command) LIKE '%a3%--cpu-priority%' OR LOWER(Command) LIKE '%a4%--cpu-priority%' OR LOWER(Command) LIKE '%a5%--cpu-priority%' OR LOWER(UTF8(payload)) LIKE '%--cpu-priority%' OR LOWER(UTF8(payload)) LIKE '%--cpu-priority%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Possible Coin Miner CPU Priority Param",
+    "Event description: Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems) SIGMA Title: Possible Coin Miner CPU Priority Param SIGMA Description: Detects command line parameter very often used with coin miners  False positives: - Other tools that use a --cpu-priority flag  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

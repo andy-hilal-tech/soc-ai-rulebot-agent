@@ -1,0 +1,36 @@
+{
+  "uuid": "a58ea91f-f34a-4d0c-af33-c50ebe577dcd",
+  "id": "163052",
+  "name": "QNI : Access to Improperly Secured Service - Self Signed Certificate",
+  "notes": "QRadar Network Insights has detected an SSL/TLS session which uses a self-signed certificate. A self-signed certificate in a public-facing or production server application could allow a remote attacker to launch a man-in-the-middle attack.",
+  "response_qid": "67501753",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501753"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Flow Direction is any of [R2L or L2R or R2R], Suspect Content Descriptions is not N/A</a>",
+    "when any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Suspect Content Descriptions (QNI)</a> match <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>self signed certificate</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Access to Improperly Secured Service - Self Signed Certificate on flows which are detected by the LOCAL system",
+    "AND when the flow matches Flow Direction is any of [R2L or L2R or R2R], Suspect Content Descriptions is not N/A",
+    "AND when any of Suspect Content Descriptions (QNI) match self signed certificate"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Access to Improperly Secured Service - Self Signed Certificate",
+    "Event description: Detects when an SSL/TLS session uses a self-signed certificate.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

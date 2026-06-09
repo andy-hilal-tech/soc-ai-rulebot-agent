@@ -1,0 +1,48 @@
+{
+  "uuid": "SYSTEM-1405",
+  "id": "100251",
+  "name": "Recon Followed by Accept",
+  "notes": "Adds an additional event into the event stream when a host that has been performing reconnaissance also has a firewall accept following the reconnaissance activity.",
+  "response_qid": "67500110",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500110"
+  ],
+  "rule_refs": [
+    "5022e221-08aa-4c78-b7c3-225509af05e0",
+    "SYSTEM-1208",
+    "SYSTEM-1322"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Firewall or ACL Accept",
+    "BB:DeviceDefinition: FW / Router / Switch",
+    "BB:ReconDetected: Basic Recon Rules"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "5022e221-08aa-4c78-b7c3-225509af05e0",
+    "SYSTEM-1208",
+    "SYSTEM-1322"
+  ],
+  "conditions_text": [
+    "when all of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:ReconDetected: Basic Recon Rules, BB:CategoryDefinition: Firewall or ACL Accept</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in</a> order, from <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>source IP</a>  to  <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>any</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>destination IP</a>, over <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>minutes</a>",
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: FW / Router / Switch</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Recon Followed by Accept on events which are detected by the LOCAL system",
+    "AND when all of these BB:ReconDetected: Basic Recon Rules, BB:CategoryDefinition: Firewall or ACL Accept, in order, from the same source IP  to  any destination IP, over 5 minutes",
+    "AND when a flow or an event matches any of the following BB:DeviceDefinition: FW / Router / Switch"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Firewall or ACL Accept Following Recon Activity",
+    "Event description: Adds an additional event into the event stream when a host that has been performing reconnaissance also has a firewall accept following the reconnaissance activity.",
+    "Severity: 3, Credibility: 5, Relevance: 4",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"ACL Permit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

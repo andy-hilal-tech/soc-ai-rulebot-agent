@@ -1,0 +1,40 @@
+{
+  "uuid": "eefba06b-2805-4c9e-9149-ba6008a4ab35",
+  "id": "161302",
+  "name": "Access to ADMIN$ Share",
+  "notes": "This rule detects access to $ADMIN share.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth\nSIGMA Title: Access to ADMIN$ Share\nSIGMA Description: Detects access to $ADMIN share\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501706",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501706"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000752) Failure Audit: A network share object was accessed, (5001108) Success Audit: A network share object was accessed</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Share Full Full Name&quot;) == 'admin$'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Subject Account Full Full Name&quot;) MATCHES '\\$$'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Access to ADMIN$ Share on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5000752) Failure Audit: A network share object was accessed, (5001108) Success Audit: A network share object was accessed",
+    "AND when the event matches LOWER(\"Share Full Full Name\") == 'admin$' AQL filter query",
+    "AND when the event matches LOWER(\"Subject Account Full Full Name\") MATCHES '\\$$' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Access to ADMIN$ Share",
+    "Event description: Detects access to $ADMIN share",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Pattern Detected\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

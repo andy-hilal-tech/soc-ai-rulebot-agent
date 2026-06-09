@@ -1,0 +1,41 @@
+{
+  "uuid": "76619a3c-6633-4985-9ff3-92b37d21df6d",
+  "id": "126752",
+  "name": "Suspicious Number of Account Lockouts",
+  "notes": "This rule triggers when unusual number of user accounts are locked out.\n\nNote: Tune the rule accordingly to the compliance requirement.",
+  "response_qid": "67500794",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500794"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "device",
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.User Account Locked</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>30</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Log Source</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>30</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Log Source</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Number of Account Lockouts on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.User Account Locked",
+    "AND when at least 30 events are seen with the same Log Source and different Username in 10 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Number of Account Lockouts",
+    "Event description: Detects when unusual number of user accounts are locked out.",
+    "Severity: 8, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"User Account Locked\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Log Source",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

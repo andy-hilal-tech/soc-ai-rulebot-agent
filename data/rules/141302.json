@@ -1,0 +1,43 @@
+{
+  "uuid": "e70efac3-e1c2-4c6f-baed-06ead4b33220",
+  "id": "141302",
+  "name": "Shortcut (lnk) File Executing Commands (Windows)",
+  "notes": "This rule triggers when a shortcut (lnk) file has created processes that can execute commands. Several malware, such as Emotet,  use shortcut file that when opened execute malicious commands.",
+  "response_qid": "67501116",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501116"
+  ],
+  "rule_refs": [
+    "2fde0980-7cf5-4332-8c1f-7ec891f68917",
+    "45aa0940-cbfd-40bf-8446-67d893d6b59e"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (1)",
+    "BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (2)"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "45aa0940-cbfd-40bf-8446-67d893d6b59e",
+    "2fde0980-7cf5-4332-8c1f-7ec891f68917"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (1), BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (2)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Shortcut (lnk) File Executing Commands (Windows) on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (1), BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (2)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Shortcut (lnk) File Executing Commands (Windows)",
+    "Event description: Detects when a shortcut (lnk) file has created processes that can execute commands.",
+    "Severity: 8, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

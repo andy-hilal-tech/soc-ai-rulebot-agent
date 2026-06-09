@@ -1,0 +1,51 @@
+{
+  "uuid": "SYSTEM-1159",
+  "id": "100312",
+  "name": "Remote Database Scanner",
+  "notes": "Reports a scan from a remote host against other local or remote targets. At least 30 hosts were scanned in 10 minutes. ",
+  "response_qid": "67500075",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500075"
+  ],
+  "rule_refs": [
+    "SYSTEM-1179",
+    "SYSTEM-1202",
+    "SYSTEM-1226"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Recon Events",
+    "BB:CategoryDefinition: Suspicious Events",
+    "BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times",
+    "BB:PortDefinition: Database Ports"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1226",
+    "SYSTEM-1202",
+    "SYSTEM-1179"
+  ],
+  "conditions_text": [
+    "where the attack context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote to Local, Remote to Remote</a>",
+    "when we see an event match <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:PortDefinition: Database Ports</a>",
+    "when we see any of these <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>29</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>destination IP(s)</a> within <a href='javascript:editParameter(\"4\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"4\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when we see any of these <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>29</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>destination IP(s)</a> within <a href='javascript:editParameter(\"4\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"4\", \"8\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Remote Database Scanner on events which are detected by the undefined system",
+    "AND where the attack context is Remote to Local, Remote to Remote",
+    "AND when we see an event match any of the following BB:PortDefinition: Database Ports",
+    "AND when we see any of these BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events with the same source IP more than 5 times, across more than 29 destination IP(s) within 10 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remote Database Scanner Detected",
+    "Event description: Detected a scan from a remote host against other local or remote targets. At least 30 hosts were scanned in 10 minutes. ",
+    "Severity: 3, Credibility: 5, Relevance: 3",
+    "High-Level Category: \"Recon\"",
+    "Low-Level Category: \"Database Reconnaissance\""
+  ]
+}

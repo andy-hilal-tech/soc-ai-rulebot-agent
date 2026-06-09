@@ -1,0 +1,25 @@
+{
+  "uuid": "f999f163-4926-4a3c-a976-db807e6eccc8",
+  "id": "116202",
+  "name": "BB:CategoryDefinition: User Role Assign Events",
+  "notes": "Edit this Building Block to include any user role assignment events.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: User Role Assign Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Role Assignment Success, Authentication.Role Creation Success, Authentication.User Account Changed, Authentication.User Policy Attach Success, Authentication.Role Assignment Attempt, Authentication.Role Creation Attempt, Authentication.User Policy Attach Attempt, Authentication.Group Member Add Success, Authentication.Policy Added, Authentication.Group Member Update Success, Authentication.Group Member Added</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: User Role Assign Events on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.Role Assignment Success, Authentication.Role Creation Success, Authentication.User Account Changed, Authentication.User Policy Attach Success, Authentication.Role Assignment Attempt, Authentication.Role Creation Attempt, Authentication.User Policy Attach Attempt, Authentication.Group Member Add Success, Authentication.Policy Added, Authentication.Group Member Update Success, Authentication.Group Member Added"
+  ],
+  "RED_list": []
+}

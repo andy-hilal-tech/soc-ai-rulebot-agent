@@ -1,0 +1,34 @@
+{
+  "uuid": "93553ed3-2dcf-4438-bb54-e01c706b3004",
+  "id": "162439",
+  "name": "Suspicious Remote Logon with Explicit Credentials",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: oscd.community, Teymur Kheirkhabarov @HeirhabarovT, Zach Stanford @svch0st, Tim Shelton\nSIGMA Title: Suspicious Remote Logon with Explicit Credentials\nSIGMA Description: Detects suspicious processes logging on with explicit credentials\n\nFalse positives:\n- Administrators that use the RunAS command or scheduled tasks\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=4648 AND (LOWER(\"Process Name\") LIKE '%\\cmd.exe' OR LOWER(\"Process Name\") LIKE '%\\powershell.exe' OR LOWER(\"Process Name\") LIKE '%\\pwsh.exe' OR LOWER(\"Process Name\") LIKE '%\\winrs.exe' OR LOWER(\"Process Name\") LIKE '%\\wmic.exe' OR LOWER(\"Process Name\") LIKE '%\\net.exe' OR LOWER(\"Process Name\") LIKE '%\\net1.exe' OR LOWER(\"Process Name\") LIKE '%\\reg.exe')) AND (NOT((LOWER(UTF8(payload)) LIKE '%localhost%' OR (LOWER(UTF8(payload)) LIKE '%$%' AND LOWER(\"Target Username\") LIKE '%$'))))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Remote Logon with Explicit Credentials on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\"=4648 AND (LOWER(\"Process Name\") LIKE '%\\cmd.exe' OR LOWER(\"Process Name\") LIKE '%\\powershell.exe' OR LOWER(\"Process Name\") LIKE '%\\pwsh.exe' OR LOWER(\"Process Name\") LIKE '%\\winrs.exe' OR LOWER(\"Process Name\") LIKE '%\\wmic.exe' OR LOWER(\"Process Name\") LIKE '%\\net.exe' OR LOWER(\"Process Name\") LIKE '%\\net1.exe' OR LOWER(\"Process Name\") LIKE '%\\reg.exe')) AND (NOT((LOWER(UTF8(payload)) LIKE '%localhost%' OR (LOWER(UTF8(payload)) LIKE '%$%' AND LOWER(\"Target Username\") LIKE '%$')))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Remote Logon with Explicit Credentials",
+    "Event description: Converted from SIGMA Rule.  Original Author: oscd.community, Teymur Kheirkhabarov @HeirhabarovT, Zach Stanford @svch0st, Tim Shelton SIGMA Title: Suspicious Remote Logon with Explicit Credentials SIGMA Description: Detects suspicious processes logging on with explicit credentials  False positives: - Administrators that use the RunAS command or scheduled tasks  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "f28a3d9b-3b9a-4b62-acf5-c73d62fe2e19",
+  "id": "162401",
+  "name": "Invoke-Obfuscation COMPRESS OBFUSCATION - Security",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Timur Zinniatullin, oscd.community\nSIGMA Title: Invoke-Obfuscation COMPRESS OBFUSCATION - Security\nSIGMA Description: Detects Obfuscated Powershell via COMPRESS OBFUSCATION\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4697 AND (LOWER(\"Service Filename\") LIKE '%new-object%' AND LOWER(\"Service Filename\") LIKE '%text.encoding]::ascii%' AND LOWER(\"Service Filename\") LIKE '%readtoend%') AND (LOWER(\"Service Filename\") LIKE '%system.io.compression.deflatestream%' OR LOWER(\"Service Filename\") LIKE '%system.io.streamreader%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Invoke-Obfuscation COMPRESS OBFUSCATION - Security on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4697 AND (LOWER(\"Service Filename\") LIKE '%new-object%' AND LOWER(\"Service Filename\") LIKE '%text.encoding]::ascii%' AND LOWER(\"Service Filename\") LIKE '%readtoend%') AND (LOWER(\"Service Filename\") LIKE '%system.io.compression.deflatestream%' OR LOWER(\"Service Filename\") LIKE '%system.io.streamreader%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Invoke-Obfuscation COMPRESS OBFUSCATION - Security",
+    "Event description: Converted from SIGMA Rule.  Original Author: Timur Zinniatullin, oscd.community SIGMA Title: Invoke-Obfuscation COMPRESS OBFUSCATION - Security SIGMA Description: Detects Obfuscated Powershell via COMPRESS OBFUSCATION  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

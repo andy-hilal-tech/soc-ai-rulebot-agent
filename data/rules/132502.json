@@ -1,0 +1,58 @@
+{
+  "uuid": "7fbfb114-cf71-4f19-a484-fe026ab9b96a",
+  "id": "132502",
+  "name": "Potential Leakage of Data via Email Attachment",
+  "notes": "The rule triggers when numerous emails containing attachments are sent to an external email address that indicates potential leakage.\n\nNote: The condition \"and NOT when an event matches any of the following BB:BehaviorDefinition: Potentially Hostile Email Host\" has been added because the rule \"Email Sent to Potentially Hostile Host\" will alert on any email sent to a suspicious address. If you wish to have this additional information, remove the filter from the rule.",
+  "response_qid": "67500929",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500929"
+  ],
+  "rule_refs": [
+    "1e4cafae-654f-4a15-a324-472fbcfbc32b",
+    "943c4414-c48f-4094-8806-52aa23909d68",
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: External Email Addresses",
+    "BB:BehaviorDefinition: Potentially Hostile Email Host",
+    "BB:DeviceDefinition: Mail"
+  ],
+  "db_fields_used": [
+    "qid"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+    "943c4414-c48f-4094-8806-52aa23909d68",
+    "1e4cafae-654f-4a15-a324-472fbcfbc32b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when an event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>BB:BehaviorDefinition: External Email Addresses</a>",
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Potentially Hostile Email Host</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Content Information</a>",
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Event Name</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Event Name</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Potential Leakage of Data via Email Attachment on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:DeviceDefinition: Mail",
+    "AND when an event matches any of the following BB:BehaviorDefinition: External Email Addresses",
+    "AND NOT when an event matches any of the following BB:BehaviorDefinition: Potentially Hostile Email Host",
+    "AND when the event category for the event is one of the following System.Content Information",
+    "AND when at least 100 events are seen with the same Event Name in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Leakage of Data via Email Attachment",
+    "Event description: Detects when an internal email address sends several emails containing attachments to an email address that is outside of the organization",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Information Leak\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

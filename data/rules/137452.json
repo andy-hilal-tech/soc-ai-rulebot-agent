@@ -1,0 +1,29 @@
+{
+  "uuid": "d4750153-e6f5-4a1d-9554-b3477c9e6ba8",
+  "id": "137452",
+  "name": "BB:BehaviorDefinition: Admin Privileges Added (Windows)",
+  "notes": "This rule detects admin privileges added to standard users. An adversary may escalate its privileges for further attacks.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Admin Privileges Added (Windows) on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Group Member Added</a>",
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Group Name (custom) is any of Administrators</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Admin Privileges Added (Windows) on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Authentication.Group Member Added",
+    "AND when the event matches Group Name (custom) is any of Administrators"
+  ],
+  "RED_list": []
+}

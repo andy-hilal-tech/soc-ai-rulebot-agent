@@ -1,0 +1,48 @@
+{
+  "uuid": "a6fb1199-01b6-431d-be50-3df07f9751bc",
+  "id": "124416",
+  "name": "UBA : User Accessing Risky IP Dynamic",
+  "notes": "Detects when a local user or host is connecting to a dynamically assigned IP address.",
+  "response_qid": "67500545",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500545"
+  ],
+  "rule_refs": [
+    "7e94a235-b873-4f0b-8016-3faa43600fe7",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "7e94a235-b873-4f0b-8016-3faa43600fe7",
+      "name": "X-Force Risky IP, Dynamic"
+    }
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote, Remote to Remote</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>UBA : Common Event Filters</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>X-Force Risky IP, Dynamic</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Accessing Risky IP Dynamic on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Remote, Remote to Remote",
+    "AND when an event matches all of the following UBA : Common Event Filters",
+    "AND when an event matches any of the following X-Force Risky IP, Dynamic"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Accessing Risky IP Dynamic",
+    "Event description: senseValue=15,senseDesc='Detects when a user or host is connecting to a dynamically assigned IP address.',usecase_id='55004f9b-2fdf-4ec8-bafc-a9e3340e30a7'",
+    "Severity: 8, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

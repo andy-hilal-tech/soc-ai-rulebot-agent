@@ -1,0 +1,29 @@
+{
+  "uuid": "SYSTEM-1209",
+  "id": "100254",
+  "name": "Default-Response-Syslog: Offense SYSLOG Sender",
+  "notes": "Reports any offense matching the severity, credibility, or relevance minimums to syslog.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the offense severity is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a>",
+    "where the offense Credibility is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>5</a>",
+    "where the offense Relevance is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Default-Response-Syslog: Offense SYSLOG Sender on events which are detected by the undefined system",
+    "AND where the offense severity is greater than 5",
+    "AND where the offense Credibility is greater than 5",
+    "AND where the offense Relevance is greater than 5"
+  ],
+  "RED_list": [
+    "Send to Local SysLog"
+  ]
+}

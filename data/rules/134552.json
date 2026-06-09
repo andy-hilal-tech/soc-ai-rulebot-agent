@@ -1,0 +1,36 @@
+{
+  "uuid": "f5437cf5-8a2c-4221-9a6e-cb2865522cb2",
+  "id": "134552",
+  "name": "Potential Metasploit Traffic",
+  "notes": "This rule triggers when a TLS fingerprint known to be related to the Metasploit is observed. Metasploit is a penetration-testing tool commonly used by red teams. However, malicious actors will often use it in their own attacks.The rule is looking to match both client and server fingerprints to reduce the risk of false-positives.",
+  "response_qid": "67501039",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501039"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IS NOT NULL AND &quot;tls ja3s hash&quot; IS NOT NULL</a> AQL filter query",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IN ('72a589da586844d7f0818ce684948eea','a0e9f5d64349fb13191bc781f81f42e1')  AND &quot;tls ja3s hash&quot; IN ('70999de61602be74d4b25185843bd18e')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Metasploit Traffic on flows which are detected by the LOCAL system",
+    "AND when the flow matches \"tls ja3 hash\" IS NOT NULL AND \"tls ja3s hash\" IS NOT NULL AQL filter query",
+    "AND when the flow matches \"tls ja3 hash\" IN ('72a589da586844d7f0818ce684948eea','a0e9f5d64349fb13191bc781f81f42e1')  AND \"tls ja3s hash\" IN ('70999de61602be74d4b25185843bd18e') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Metasploit Traffic observed",
+    "Event description: A potential Matasploit related JA3 Hash has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

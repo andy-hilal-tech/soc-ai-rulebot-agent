@@ -1,0 +1,43 @@
+{
+  "uuid": "68d64709-d5fb-434d-8af4-e6adf44aa10d",
+  "id": "145102",
+  "name": "Potential Archive of Collected Data",
+  "notes": "This is rule triggers when data is archived or compressed for exfiltration. An adversary may compress data (e.g., sensitive documents) that is collected prior to exfiltration in order to make it portable and minimize the amount of data sent over the network.",
+  "response_qid": "67501495",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501495"
+  ],
+  "rule_refs": [
+    "6d0d3aad-5deb-419a-849c-895debf31fdf",
+    "f7c82218-0f22-431a-a799-3d5e34050c2e"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Data Compressed - PowerShell",
+    "BB:BehaviorDefinition: NTDS Exfiltration Command"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "f7c82218-0f22-431a-a799-3d5e34050c2e",
+    "6d0d3aad-5deb-419a-849c-895debf31fdf"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: NTDS Exfiltration Command, BB:BehaviorDefinition: Data Compressed - PowerShell</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Archive of Collected Data on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: NTDS Exfiltration Command, BB:BehaviorDefinition: Data Compressed - PowerShell"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Archive of Collected Data",
+    "Event description: Detects when data is archived or compressed for exfiltration. An adversary may compress data (e.g., sensitive documents) that is collected prior to exfiltration in order to make it portable and minimize the amount of data sent over the network.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

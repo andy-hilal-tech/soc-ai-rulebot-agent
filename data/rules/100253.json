@@ -1,0 +1,29 @@
+{
+  "uuid": "SYSTEM-1210",
+  "id": "100253",
+  "name": "Default-Response-E-mail: Offense E-mail Sender",
+  "notes": "Reports any offense matching the severity, credibility, relevance minimums to e-mail. You must configure the e-mail address. You can limit the number of e-mails sent by tuning the severity, credibility, and relevance limits. Also, this rule only sends one e-mail every hour, per offense. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the offense severity is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a>",
+    "where the offense Credibility is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>5</a>",
+    "where the offense Relevance is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Default-Response-E-mail: Offense E-mail Sender on events which are detected by the undefined system",
+    "AND where the offense severity is greater than 5",
+    "AND where the offense Credibility is greater than 5",
+    "AND where the offense Relevance is greater than 5"
+  ],
+  "RED_list": [
+    "Email to \"root@localhost.net\" using \"undefined\" template"
+  ]
+}

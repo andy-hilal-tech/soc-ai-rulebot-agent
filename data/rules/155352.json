@@ -1,0 +1,29 @@
+{
+  "uuid": "e87cc9ac-45ad-4830-9e24-c4c428ed2e67",
+  "id": "155352",
+  "name": "BB:BehaviorDefinition: Turla LightNeuron Installation",
+  "notes": "This Building Block triggers when a Turla LightNeuron is installed.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Turla LightNeuron Installation on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?(Install-Transportagent|-AssemblyPatch|-TransportAgentFactory|Enable-transportAgent).*'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Turla LightNeuron Installation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Command\") MATCHES '.*?(Install-Transportagent|-AssemblyPatch|-TransportAgentFactory|Enable-transportAgent).*' AQL filter query"
+  ],
+  "RED_list": []
+}

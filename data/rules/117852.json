@@ -1,0 +1,44 @@
+{
+  "uuid": "6bc4f9c5-fb7e-4d29-a5fb-46857adf0f93",
+  "id": "117852",
+  "name": "BB:BehaviorDefinition: Suspicious Virtualization Activities",
+  "notes": "This Building Block defines suspicious virtualization activities.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "479e5323-a9f5-4a7d-a2b9-d4f7d35c5a06",
+    "702c61e2-b0e3-4eff-8a7e-0478fc4005f2",
+    "76338cbf-d4f3-43ee-bdf5-01814f249e06",
+    "87cd5073-91e7-4631-ad61-fb8193fb5c1b",
+    "d1536a40-c741-4c56-bb69-5e53bc0525e4",
+    "d356a614-2034-4662-8596-6d0dde36aa49",
+    "e85007a7-e7aa-491b-a848-be9e1cce5b6f",
+    "f520f62c-1640-44a9-a3c6-cf04dc6a0e31"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Medium or High Severity Virtualization Events",
+    "BB:BehaviorDefinition: Suspicious Virtualization Activities on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "e85007a7-e7aa-491b-a848-be9e1cce5b6f",
+    "87cd5073-91e7-4631-ad61-fb8193fb5c1b",
+    "d356a614-2034-4662-8596-6d0dde36aa49",
+    "76338cbf-d4f3-43ee-bdf5-01814f249e06",
+    "702c61e2-b0e3-4eff-8a7e-0478fc4005f2",
+    "f520f62c-1640-44a9-a3c6-cf04dc6a0e31",
+    "d1536a40-c741-4c56-bb69-5e53bc0525e4",
+    "479e5323-a9f5-4a7d-a2b9-d4f7d35c5a06"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Suspicious Number of Modifications Made on Virtual Machines, Suspicious Number of Virtual Machines Created, Credential Exfiltration and Administration Task from the Same User, Multiple Sensitive Virtual Machines Deleted within Short Period of Time, Multiple Virtual Security Devices Powered Off within Short Period of Time, Sensitive Virtual Machines Unavailable for a Long Period of Time, Volume Attached and Detached on Different Machines, BB:BehaviorDefinition: Medium or High Severity Virtualization Events</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Virtualization Activities on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following Suspicious Number of Modifications Made on Virtual Machines, Suspicious Number of Virtual Machines Created, Credential Exfiltration and Administration Task from the Same User, Multiple Sensitive Virtual Machines Deleted within Short Period of Time, Multiple Virtual Security Devices Powered Off within Short Period of Time, Sensitive Virtual Machines Unavailable for a Long Period of Time, Volume Attached and Detached on Different Machines, BB:BehaviorDefinition: Medium or High Severity Virtualization Events"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1246",
+  "id": "100299",
+  "name": "BB:PortDefinition: Game Server Ports",
+  "notes": "Edit this BB to include all common game server ports.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: Game Server Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>26000, 27500, 27960, 27961, 27962, 27963, 27015, 7777, 2790, 666, 47624, 6073, 11999, 2300, 2301, 2302, 2303, 2304, 2305, 2306, 2307, 2308, 2309, 2310, 2400, 2399, 2398, 2397, 2396, 2395, 28800, 28801, 28802, 28803, 28804, 28805, 28806, 28807, 28808, 28809</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: Game Server Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 26000, 27500, 27960, 27961, 27962, 27963, 27015, 7777, 2790, 666, 47624, 6073, 11999, 2300, 2301, 2302, 2303, 2304, 2305, 2306, 2307, 2308, 2309, 2310, 2400, 2399, 2398, 2397, 2396, 2395, 28800, 28801, 28802, 28803, 28804, 28805, 28806, 28807, 28808, 28809"
+  ],
+  "RED_list": []
+}

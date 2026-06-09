@@ -1,0 +1,36 @@
+{
+  "uuid": "af8f17bf-30fb-413d-9b85-01c4a131733d",
+  "id": "137602",
+  "name": "BB:BehaviorDefinition: Hidden File or Folder Created",
+  "notes": "This Building Block triggers when a hidden file or folder is created. A hidden file or folder can take three forms:\n- Start with a dot\n- Start with a dot and contain a space\n- Permissions based (ie -rwx------)",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Hidden File or Folder Created on events which are detected by the LOCAL system",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.File Created</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(&quot;Filename&quot; is not NULL and Filename not in ('.viminfo')) OR &quot;Encoded Filename&quot; is not NULL</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;Filename&quot; MATCHES '^(.*\\/)*\\..*' OR &quot;Encoded Filename&quot; MATCHES '^((.{2})*2F)*2E.*' OR &quot;File Permissions&quot; MATCHES '\\d?(12|10|04)0\\d00'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Hidden File or Folder Created on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Operating System",
+    "AND when the event category for the event is one of the following System.File Created",
+    "AND when the event matches (\"Filename\" is not NULL and Filename not in ('.viminfo')) OR \"Encoded Filename\" is not NULL AQL filter query",
+    "AND when the event matches \"Filename\" MATCHES '^(.*\\/)*\\..*' OR \"Encoded Filename\" MATCHES '^((.{2})*2F)*2E.*' OR \"File Permissions\" MATCHES '\\d?(12|10|04)0\\d00' AQL filter query"
+  ],
+  "RED_list": []
+}

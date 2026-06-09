@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1236",
+  "id": "100305",
+  "name": "BB:CategoryDefinition: Mail Policy Violation",
+  "notes": "Edit this BB to include anything you would consider to be a mail based policy violation.  An example might be outbound traffic on port 25 not originating from a mail server.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Mail Policy Violation on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Policy.Mail Policy Violation</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Mail Policy Violation on events which are detected by the undefined system",
+    "AND where the Event Category for the event is one of the following Policy.Mail Policy Violation"
+  ],
+  "RED_list": []
+}

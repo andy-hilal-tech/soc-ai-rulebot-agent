@@ -1,0 +1,29 @@
+{
+  "uuid": "6f2f20c8-d8d1-4285-bf8a-91a2a130d4c9",
+  "id": "154852",
+  "name": "BB:BehaviorDefinition: Powershell File and Directory Discovery",
+  "notes": "This Building Block find or discover files on the file system. Upon execution, file and folder information will be displayed.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Powershell File and Directory Discovery\nSIGMA Description: Adversaries may enumerate files and directories or may search in specific locations of a host or network share for certain information within a file system.  Adversaries may use the information from [File and Directory Discovery](https://attack.mitre.org/techniques/T1083) during automated discovery to shape follow-on behaviors,  including whether or not the adversary fully infects the target and/or attempts specific actions.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Powershell File and Directory Discovery on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%ls%-recurse%' OR LOWER(&quot;Command&quot;) LIKE '%get-childitem%-recurse%' OR LOWER(&quot;Command&quot;) LIKE '%gci%-recurse%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Powershell File and Directory Discovery on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success",
+    "AND when the event matches LOWER(\"Command\") LIKE '%ls%-recurse%' OR LOWER(\"Command\") LIKE '%get-childitem%-recurse%' OR LOWER(\"Command\") LIKE '%gci%-recurse%' AQL filter query"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,29 @@
+{
+  "uuid": "4f6953df-ef24-4dc1-9256-4631da522672",
+  "id": "152852",
+  "name": "BB:BehaviorDefinition: HyperStack Registry",
+  "notes": "This building block detects when HyperStack registries are discovered.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: HyperStack Registry on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Service Installed</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) MATCHES '.*?hklm\\\\system\\\\currentcontrolset\\\\services\\\\lanmanserver\\\\parameters\\\\nullsessionpipes.*') OR LOWER(&quot;Registry Value Data&quot;) MATCHES '.*?hklm\\\\system\\\\currentcontrolset\\\\services\\\\lanmanserver\\\\parameters\\\\nullsessionpipes.*') OR LOWER(&quot;Registry Key&quot;) MATCHES '.*?hklm\\system\\currentcontrolset\\control\\lsa\\restrict anonymous.*') OR LOWER(&quot;Registry Value Data&quot;) MATCHES '.*?hklm\\system\\currentcontrolset\\control\\lsa\\restrict anonymous.*')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: HyperStack Registry on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification, System.Service Installed",
+    "AND when the event matches LOWER(\"Registry Key\") MATCHES '.*?hklm\\\\system\\\\currentcontrolset\\\\services\\\\lanmanserver\\\\parameters\\\\nullsessionpipes.*') OR LOWER(\"Registry Value Data\") MATCHES '.*?hklm\\\\system\\\\currentcontrolset\\\\services\\\\lanmanserver\\\\parameters\\\\nullsessionpipes.*') OR LOWER(\"Registry Key\") MATCHES '.*?hklm\\system\\currentcontrolset\\control\\lsa\\restrict anonymous.*') OR LOWER(\"Registry Value Data\") MATCHES '.*?hklm\\system\\currentcontrolset\\control\\lsa\\restrict anonymous.*') AQL filter query"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,35 @@
+{
+  "uuid": "SYSTEM-1041",
+  "id": "100134",
+  "name": "BB:Threats: Scanning: Empty Responsive Flows High",
+  "notes": "This BB detects potential reconnaissance activity where the source packet count is greater than 100,000.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Scanning: Empty Responsive Flows High on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>TCP</a>",
+    "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>100000</a>",
+    "when the <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>source</a> byte/packet ratio is <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>65</a> bytes/packet",
+    "when the <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>destination</a> byte/packet ratio is <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>65</a> bytes/packet",
+    "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>1</a>",
+    "when the <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>destination</a> <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"5\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"5\", \"4\")' class='dynamic'>1</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Scanning: Empty Responsive Flows High on flows which are detected by the LOCAL system",
+    "AND when the IP protocol is one of the following TCP",
+    "AND when the source packets is greater than 100000",
+    "AND when the source byte/packet ratio is less than 65 bytes/packet",
+    "AND when the destination byte/packet ratio is less than 65 bytes/packet",
+    "AND when the source bytes is greater than 1",
+    "AND when the destination bytes is greater than 1"
+  ],
+  "RED_list": []
+}

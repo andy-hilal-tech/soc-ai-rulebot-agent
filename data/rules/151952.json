@@ -1,0 +1,40 @@
+{
+  "uuid": "af07e9e0-ae00-4a97-ab12-b350fb20113a",
+  "id": "151952",
+  "name": "Suspicious CLR Logs Creation",
+  "notes": "This rule detects suspicious .NET assembly executions.\n\nCovered from SIGMA Rule.\n\nOriginal Author: omkar72, oscd.community, Wojciech Lesicki\nSIGMA Title: Suspicious CLR Logs Creation\nSIGMA Description: Detects suspicious .NET assembly executions. Could detect using Cobalt Strike's command execute-assembly.\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501566",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501566"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001830) FileCreate</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Target File Directory (custom) is any of [\\AppData\\Local\\Microsoft\\CLR or \\UsageLogs]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Target File Directory (custom) contains any of [mshta or cscript or wscript or regsvr32 or wmic or rundll32 or svchost]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious CLR Logs Creation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001830) FileCreate",
+    "AND when the event matches Target File Directory (custom) is any of [\\AppData\\Local\\Microsoft\\CLR or \\UsageLogs]",
+    "AND when the event matches Target File Directory (custom) contains any of [mshta or cscript or wscript or regsvr32 or wmic or rundll32 or svchost]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious CLR Logs Creation",
+    "Event description: Detects suspicious .NET assembly executions.",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

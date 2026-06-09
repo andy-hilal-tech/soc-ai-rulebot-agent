@@ -1,0 +1,36 @@
+{
+  "uuid": "3e0dcee0-4d0c-40f0-a7c2-c12833fac630",
+  "id": "133302",
+  "name": "QNI : Spam/Phishing URL Accessed",
+  "notes": "This rule triggers when a URL categorized by X-Force as \"Spam URLs\" or \"Phishing URLs\" is accessed. This may indicate that a user targeted in a spam/phishing campaign has opened a malicious URL.",
+  "response_qid": "67500944",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500944"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host is not N/A</a>",
+    "when any of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Web Categories</a> match <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>(Spam|Phishing) URLs</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Spam/Phishing URL Accessed on flows which are detected by the LOCAL system",
+    "AND when the flow matches HTTP Host is not N/A",
+    "AND when any of Web Categories match (Spam|Phishing) URLs"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Spam/Phishing URL Accessed",
+    "Event description: Detects when a URL categorized as \"Spam URLs\" or \"Phishing URLs\" has been accessed.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Phishing Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

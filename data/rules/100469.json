@@ -1,0 +1,51 @@
+{
+  "uuid": "dbb8b6db-6022-42f0-ba57-013d2cda65b3",
+  "id": "100469",
+  "name": "Device Stopped Sending Events (Firewall, IPS, VPN or Switch)",
+  "notes": "A device that was sending events stopped sending events for over 30 minutes",
+  "response_qid": "67501796",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501796"
+  ],
+  "rule_refs": [
+    "SYSTEM-1316",
+    "SYSTEM-1321",
+    "SYSTEM-1322"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: FW / Router / Switch",
+    "BB:DeviceDefinition: IDS / IPS",
+    "BB:DeviceDefinition: VPN",
+    "BB:DeviceDefinition: VPN match in 10 minutes after BB:DeviceDefinition: FW / Router / Switch",
+    "BB:DeviceDefinition: VPN match with the same Log Source"
+  ],
+  "db_fields_used": [
+    "device"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1322",
+    "SYSTEM-1321",
+    "SYSTEM-1316",
+    "SYSTEM-1322",
+    "SYSTEM-1321",
+    "SYSTEM-1316"
+  ],
+  "conditions_text": [
+    "when none of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: VPN</a> match in <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: VPN</a> match with the same <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>Log Source</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Device Stopped Sending Events (Firewall, IPS, VPN or Switch) on events which are detected by the LOCAL system",
+    "AND when none of BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: VPN match in 10 minutes after BB:DeviceDefinition: FW / Router / Switch, BB:DeviceDefinition: IDS / IPS, BB:DeviceDefinition: VPN match with the same Log Source"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Log Source Stopped Sending Events (Firewall/IPS/VPN/Switch)",
+    "Event description: A device (Firewall, IPS, VPN or Switch) that was sending events stopped sending events for over 30 minutes. Please check the device to be sure it has not failed.",
+    "Severity: 6, Credibility: 5, Relevance: 6",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"System Failure\""
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "uuid": "3e97ce23-a03e-4ef5-a25d-31fd4285d414",
+  "id": "143052",
+  "name": "BB:MITRE.LIN.T1210: Exploitation of Remote Services",
+  "notes": "No action required",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:MITRE.LIN.T1210: Exploitation of Remote Services on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(4750045) smbd Message</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:MITRE.LIN.T1210: Exploitation of Remote Services on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event QID is one of the following (4750045) smbd Message"
+  ],
+  "RED_list": []
+}

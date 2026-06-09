@@ -1,0 +1,52 @@
+{
+  "uuid": "066d27d9-9ab3-4885-a754-88906f5b6dd5",
+  "id": "147052",
+  "name": "Potential LOLBIN Activity",
+  "notes": "This rule triggers when LOLBIN is used to execute code for a specified binary.",
+  "response_qid": "67501510",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501510"
+  ],
+  "rule_refs": [
+    "5e4462a9-c052-4629-a612-57cc5b7425f3",
+    "8560aab0-9a53-487f-858c-8aaafc16d561",
+    "ac0d774b-fd91-4394-bfad-3b5487950864",
+    "be26d83c-5fae-4f34-b78e-20a79946dbe3",
+    "eb6d5897-41f8-4452-a393-6f3846d5069d"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN",
+    "BB:BehaviorDefinition: Squirrel Lolbin",
+    "BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe",
+    "BB:BehaviorDefinition: Windows Update Client LOLBIN",
+    "BB:BehaviorDefintion: Lolbin PressAnyKey and Download Activity"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "8560aab0-9a53-487f-858c-8aaafc16d561",
+    "eb6d5897-41f8-4452-a393-6f3846d5069d",
+    "ac0d774b-fd91-4394-bfad-3b5487950864",
+    "5e4462a9-c052-4629-a612-57cc5b7425f3",
+    "be26d83c-5fae-4f34-b78e-20a79946dbe3"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe, BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN, BB:BehaviorDefinition: Squirrel Lolbin, BB:BehaviorDefinition: Windows Update Client LOLBIN, BB:BehaviorDefintion: Lolbin PressAnyKey and Download Activity</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential LOLBIN Activity on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe, BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN, BB:BehaviorDefinition: Squirrel Lolbin, BB:BehaviorDefinition: Windows Update Client LOLBIN, BB:BehaviorDefintion: Lolbin PressAnyKey and Download Activity"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential LOLBIN Activity",
+    "Event description: Detects when LOLBIN is used to execute code for a specified binary.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

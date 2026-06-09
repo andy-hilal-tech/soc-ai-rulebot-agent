@@ -1,0 +1,25 @@
+{
+  "uuid": "5ee6fcf9-2c17-4c59-8797-533542c06992",
+  "id": "109652",
+  "name": "BB:UBA : Excluded Geographic Locations",
+  "notes": "Building block to restrict rules to events from a known geographic location. This BB can be edited to list any known geographic location that should be ignored. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Excluded Geographic Locations on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Source Geographic Country/Region is not Other</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Excluded Geographic Locations on events which are detected by the LOCAL system",
+    "AND when the event matches Source Geographic Country/Region is not Other"
+  ],
+  "RED_list": []
+}

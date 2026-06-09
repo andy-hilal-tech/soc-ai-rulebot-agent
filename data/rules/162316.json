@@ -1,0 +1,34 @@
+{
+  "uuid": "6050454f-8f9c-4c17-8002-33693162adea",
+  "id": "162316",
+  "name": "RBAC Permission Enumeration Attempt",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Leo Tsaousis (@laripping)\nSIGMA Title: RBAC Permission Enumeration Attempt\nSIGMA Description: Detects identities attempting to enumerate their Kubernetes RBAC permissions.\nIn the early stages of a breach, attackers will aim to list the permissions they have within the compromised environment.\nIn a Kubernetes cluster, this can be achieved by interacting with the API server, and querying the SelfSubjectAccessReview API via e.g. a \"kubectl auth can-i --list\" command.\nThis will enumerate the Role-Based Access Controls (RBAC) rules defining the compromised user's authorization.\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%authorization.k8s.io%' AND LOWER(UTF8(payload)) LIKE '%selfsubjectrulesreviews%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY RBAC Permission Enumeration Attempt on events which are detected by the LOCAL system",
+    "AND when the event matches LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%authorization.k8s.io%' AND LOWER(UTF8(payload)) LIKE '%selfsubjectrulesreviews%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: RBAC Permission Enumeration Attempt",
+    "Event description: Converted from SIGMA Rule.  Original Author: Leo Tsaousis (@laripping) SIGMA Title: RBAC Permission Enumeration Attempt SIGMA Description: Detects identities attempting to enumerate their Kubernetes RBAC permissions. In the early stages of a breach, attackers will aim to list the permissions they have within the compromised environment. In a Kubernetes cluster, this can be achieved by interacting with the API server, and querying the SelfSubjectAccessReview API via e.g. a \"kubectl auth can-i --list\" command. This will enumerate the Role-Based Access Controls (RBAC) rules defining the compromised user's authorization.   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

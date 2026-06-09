@@ -1,0 +1,42 @@
+{
+  "uuid": "b25300d1-cad3-47f8-8336-92690c1930e2",
+  "id": "155652",
+  "name": "Certutil Initiated Connection",
+  "notes": "This rule detects a network connection intitiated by the certutil.exe tool. Attackers can abuse `certutil.exe` to download malware or offensive security tools.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113, Florian Roth\nSIGMA Title: Certutil Initiated Connection\nSIGMA Description: Detects a network connection intitiated by the certutil.exe tool. Attackers can abuse `certutil.exe` to download malware or offensive security tools.\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501615",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501615"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES 'certutil\\.exe'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination Port is any of [80 or 443 or 135 or 445]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Certutil Initiated Connection on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches LOWER(\"Process Full Full Name\") MATCHES 'certutil\\.exe' AQL filter query",
+    "AND when the event matches Initiated (custom) is any of true",
+    "AND when the event matches Destination Port is any of [80 or 443 or 135 or 445]"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Certutil Initiated Connection",
+    "Event description: Detects a network connection intitiated by the certutil.exe tool. Attackers can abuse `certutil.exe` to download malware or offensive security tools.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

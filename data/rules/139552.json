@@ -1,0 +1,46 @@
+{
+  "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+  "id": "139552",
+  "name": "Excessive File Deletion and Creation",
+  "notes": "This rule triggers when a large amount of files are being created and deleted across multiple directories. This could indicate the presence of a ransomware like WCry or Samsam which create an encrypted copy of a file before deleting the original.",
+  "response_qid": "67501096",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501096"
+  ],
+  "rule_refs": [
+    "58c55c95-e12c-4182-bbf9-267bb29080fc"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: File Creation and Deletion",
+    "BB:BehaviorDefinition: File Creation and Deletion match at least 20 times with the same Machine Identifier (custom) and different File Directory (custom) in 3 minutes"
+  ],
+  "db_fields_used": [
+    "File Directory",
+    "Machine Identifier"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "58c55c95-e12c-4182-bbf9-267bb29080fc"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: File Creation and Deletion</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>File Directory (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: File Creation and Deletion</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>File Directory (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Excessive File Deletion and Creation on events which are detected by the LOCAL system",
+    "AND when BB:BehaviorDefinition: File Creation and Deletion match at least 20 times with the same Machine Identifier (custom) and different File Directory (custom) in 3 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Excessive File Deletion and Creation",
+    "Event description: A large number of files deletion and creation has been detected on the same machine.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "uuid": "b49854f7-e4c6-46ff-91e2-4b2c9acfea87",
+  "id": "125052",
+  "name": "QRadar Audit: High Parsing Utilization",
+  "notes": "This rule triggers when high parsing utilization is reached. If Parsing load continues growing then a saturation point will be reached and some events will not be parsed and normalized.",
+  "response_qid": "67500757",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500757"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Health Metrics</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Metric ID (custom) is any of EventParserThreadInfo</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Element (custom) is any of CpuUtil</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Value (custom) is greater than 75</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QRadar Audit: High Parsing Utilization on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Health Metrics",
+    "AND when the event matches Metric ID (custom) is any of EventParserThreadInfo",
+    "AND when the event matches Element (custom) is any of CpuUtil",
+    "AND when the event matches Value (custom) is greater than 75"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: High Parsing Utilization",
+    "Event description: Detects when high parsing utilization is reached. If Parsing load continues growing then a saturation point will be reached and some events will not be parsed and normalized.",
+    "Severity: 8, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"CRE\"",
+    "Low-Level Category: \"Single Event Rule Match\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Hostname (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

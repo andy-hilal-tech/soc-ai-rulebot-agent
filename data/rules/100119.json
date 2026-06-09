@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1297",
+  "id": "100119",
+  "name": "BB:CategoryDefinition: Post Exploit Account Activity",
+  "notes": "This Building Block identifies events that generally happen after an exploit.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Post Exploit Account Activity on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Admin Login Successful, Authentication.Auth Server Login Succeeded, Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Computer Account Removed, Authentication.FTP Login Succeeded, Authentication.General Authentication Successful, Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Group Member Removed, Authentication.Group Removed, Authentication.Host Login Succeeded , Authentication.Login with username/password defaults successful, Authentication.Mail Service Login Succeeded, Authentication.Misc Login Succeeded, Authentication.Password Change Succeeded, Authentication.Policy Added, Authentication.Policy Change, Authentication.Privilege Escalation Succeeded, Authentication.Remote Access Login Succeeded, Authentication.Samba Login Succeeded, Authentication.SSH Login Succeeded, Authentication.Suspicious Password, Authentication.Suspicious Username, Authentication.System Security Access Granted, Authentication.System Security Access Removed, Authentication.Telnet Login Succeeded, Authentication.Trusted Domain Added, Authentication.Trusted Domain Removed, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Account Removed, Authentication.User Right Assigned, Authentication.User Right Removed, Authentication.VoIP Login Succeeded, Authentication.Web Service Login Succeeded</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Post Exploit Account Activity on events which are detected by the undefined system",
+    "AND where the Event Category for the event is one of the following Authentication.Admin Login Successful, Authentication.Auth Server Login Succeeded, Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Computer Account Removed, Authentication.FTP Login Succeeded, Authentication.General Authentication Successful, Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Group Member Removed, Authentication.Group Removed, Authentication.Host Login Succeeded , Authentication.Login with username/password defaults successful, Authentication.Mail Service Login Succeeded, Authentication.Misc Login Succeeded, Authentication.Password Change Succeeded, Authentication.Policy Added, Authentication.Policy Change, Authentication.Privilege Escalation Succeeded, Authentication.Remote Access Login Succeeded, Authentication.Samba Login Succeeded, Authentication.SSH Login Succeeded, Authentication.Suspicious Password, Authentication.Suspicious Username, Authentication.System Security Access Granted, Authentication.System Security Access Removed, Authentication.Telnet Login Succeeded, Authentication.Trusted Domain Added, Authentication.Trusted Domain Removed, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Account Removed, Authentication.User Right Assigned, Authentication.User Right Removed, Authentication.VoIP Login Succeeded, Authentication.Web Service Login Succeeded"
+  ],
+  "RED_list": []
+}

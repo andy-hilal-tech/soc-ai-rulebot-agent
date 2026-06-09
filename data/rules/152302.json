@@ -1,0 +1,31 @@
+{
+  "uuid": "2d7e7d07-89e5-4006-a09d-231689f67f15",
+  "id": "152302",
+  "name": "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux",
+  "notes": "This Building Block detects the use of cron utility to create a scheduled job.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Alejandro Ortuno, oscd.community\nSIGMA Title: Scheduled Cron Task/Job - Linux\nSIGMA Description: Detects abuse of the cron utility to perform task scheduling for initial or recurring execution of malicious code. Detection will focus on crontab jobs uploaded from the tmp folder.\n\nOriginal Author: Joseliyo Sanchez, @Joseliyo_Jstnk\nSIGMA Title: Crontab Enumeration\nSIGMA Description: Detects usage of crontab to list the tasks of the user\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Attempt</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of crontab</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%/tmp/%' or LOWER(&quot;Command Arguments&quot;) LIKE '%/tmp/%') or (LOWER(&quot;Command&quot;) LIKE '%crontab &ndash;l%' or LOWER(&quot;Command Arguments&quot;) LIKE '%crontab &ndash;l%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Attempt",
+    "AND when the event matches Process Name (custom) is any of crontab",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%/tmp/%' or LOWER(\"Command Arguments\") LIKE '%/tmp/%') or (LOWER(\"Command\") LIKE '%crontab –l%' or LOWER(\"Command Arguments\") LIKE '%crontab –l%') AQL filter query"
+  ],
+  "RED_list": []
+}

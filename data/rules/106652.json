@@ -1,0 +1,27 @@
+{
+  "uuid": "a3971a53-4ad9-4761-9c31-5c1116c0d296",
+  "id": "106652",
+  "name": "BB:UBA : TGT PAC Forgery Patched Server",
+  "notes": "This building block monitors the MS event 4769 for failure which implies possible TGT  PAC Forgery. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : TGT PAC Forgery Patched Server on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000582) Failure Audit: A Kerberos service ticket was rejected</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Status Code (custom) is any of [0x3c or 0xf]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : TGT PAC Forgery Patched Server on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (5000582) Failure Audit: A Kerberos service ticket was rejected",
+    "AND when the event matches Status Code (custom) is any of [0x3c or 0xf]"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,29 @@
+{
+  "uuid": "e6c20cd5-513e-475c-b062-443aa7c0cf8c",
+  "id": "148302",
+  "name": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript Registry",
+  "notes": "This Building Block detects modification or creation of UserInitMprLogonScript",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript Registry on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Registry Addition</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Target Object (custom) contains any of Environment\\UserInitMprLogonScript</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript Registry on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification, System.Registry Addition",
+    "AND when the event matches Target Object (custom) contains any of Environment\\UserInitMprLogonScript"
+  ],
+  "RED_list": []
+}

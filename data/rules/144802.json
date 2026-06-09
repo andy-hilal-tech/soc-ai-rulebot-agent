@@ -1,0 +1,29 @@
+{
+  "uuid": "b6a4ccf8-54fc-4791-bfa4-5900bb7923e1",
+  "id": "144802",
+  "name": "BB:BehaviorDefinition: Mosquito Registry Installation",
+  "notes": "This building block detects when a Mosquito service creates registry keys for persistence.\n\nThe malware adds a \"shell\" value to HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Mosquito Registry Installation on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Service Installed</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) MATCHES ('.*?\\\\software\\\\microsoft\\\\windows nt\\\\currentversion\\\\winlogon\\\\shell')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Mosquito Registry Installation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification, System.Service Installed",
+    "AND when the event matches LOWER(\"Registry Key\") MATCHES ('.*?\\\\software\\\\microsoft\\\\windows nt\\\\currentversion\\\\winlogon\\\\shell') AQL filter query"
+  ],
+  "RED_list": []
+}

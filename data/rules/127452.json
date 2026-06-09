@@ -1,0 +1,46 @@
+{
+  "uuid": "SYSTEM-1461",
+  "id": "127452",
+  "name": "DMZ Reverse Tunnel",
+  "notes": "This rule will fire when connections seemed to be bridged across the network's DMZ through a reverse tunnel.",
+  "response_qid": "67500809",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500809"
+  ],
+  "rule_refs": [
+    "SYSTEM-1463",
+    "SYSTEM-1465"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Post DMZ Jump",
+    "BB:CategoryDefinition: Post DMZ Jump in order from the same source IP from the previous sequence",
+    "BB:CategoryDefinition: Pre Reverse DMZ Jump"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1465",
+    "SYSTEM-1463"
+  ],
+  "conditions_text": [
+    "when at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre Reverse DMZ Jump</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source IP</a> followed by at least <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>BB:CategoryDefinition: Post DMZ Jump</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre Reverse DMZ Jump</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source IP</a> followed by at least <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>BB:CategoryDefinition: Post DMZ Jump</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY DMZ Reverse Tunnel on events which are detected by the LOCAL system",
+    "AND when at least 1 of these BB:CategoryDefinition: Pre Reverse DMZ Jump, in order, with the same source IP followed by at least 1 of these BB:CategoryDefinition: Post DMZ Jump in order from the same source IP from the previous sequence, within 1 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: DMZ Reverse Tunnel",
+    "Event description: The system has detected events flowing from DMZ addresses and opening a new connection to a remote network.  This could be considered suspicious activity.",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

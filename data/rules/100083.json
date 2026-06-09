@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1237",
+  "id": "100083",
+  "name": "BB:HostDefinition: Host with Port Open",
+  "notes": "Edit this BB to include the host and port is actively or passively seen. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:HostDefinition: Host with Port Open on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the local <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>destination</a> host destination port is open <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Either Actively or Passively seen</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostDefinition: Host with Port Open on events which are detected by the LOCAL system",
+    "AND when the local destination host destination port is open Either Actively or Passively seen"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "6583bf76-ed0f-45e2-ad13-17a14d7b0e10",
+  "id": "162448",
+  "name": "A New Trust Was Created To A Domain",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Thomas Patzke\nSIGMA Title: A New Trust Was Created To A Domain\nSIGMA Description: Addition of domains is seldom and should be verified for legitimacy.\n\nFalse positives:\n- Legitimate extension of domain structure\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4706</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY A New Trust Was Created To A Domain on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4706 AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: A New Trust Was Created To A Domain",
+    "Event description: Converted from SIGMA Rule.  Original Author: Thomas Patzke SIGMA Title: A New Trust Was Created To A Domain SIGMA Description: Addition of domains is seldom and should be verified for legitimacy.  False positives: - Legitimate extension of domain structure  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

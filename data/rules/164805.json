@@ -1,0 +1,37 @@
+{
+  "uuid": "028cfb5a-0a22-412e-87b1-fa36c5433174",
+  "id": "164805",
+  "name": "RFISI: Internal Connection with Botnet Command and Control",
+  "notes": "This rule will notify when an internal host communicates with an IP known to be a botnet command and control server. Indicates that and internal infection is becoming active in a botnet. See https://ibm.biz/rfisi_threat_intel",
+  "response_qid": "67501771",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501771"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [
+    "261",
+    "285"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) Botnet C&amp;C IPs - IP, (Shared) XFE ATPF-c2server_ipv4 - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY RFISI: Internal Connection with Botnet Command and Control on events which are detected by the LOCAL system",
+    "AND when the context is Local to Remote",
+    "AND when any of Destination IP are contained in any of (Shared) Botnet C&amp;C IPs - IP, (Shared) XFE ATPF-c2server_ipv4 - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: RFISI: Internal Connection with Botnet Command and Control",
+    "Event description: An internal host is communicating with an IP known to be a botnet command and control server.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Access\"",
+    "Low-Level Category: \"Access Denied\""
+  ]
+}

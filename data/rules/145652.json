@@ -1,0 +1,31 @@
+{
+  "uuid": "33b505da-d01c-4887-aa17-fb254db27221",
+  "id": "145652",
+  "name": "BB:BehaviorDefinition: Runs COM Object via Verclsid",
+  "notes": "This Building Block detects when verclsid.exe is used to run COM object via GUID.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Victor Sergeev, oscd.community\nSIGMA Title: Verclsid.exe Runs COM Object\nSIGMA Description: Detects when verclsid.exe is used to run COM object via GUID\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Runs COM Object via Verclsid on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of verclsid.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%/s%' and LOWER(&quot;Command&quot;) LIKE '%/c%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Runs COM Object via Verclsid on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of verclsid.exe",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%/s%' and LOWER(\"Command\") LIKE '%/c%') AQL filter query"
+  ],
+  "RED_list": []
+}

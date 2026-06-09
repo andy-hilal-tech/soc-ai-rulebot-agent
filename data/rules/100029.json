@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1277",
+  "id": "100029",
+  "name": "BB:HostDefinition: Web Servers",
+  "notes": "Edit this BB to define typical web servers. This BB is used in conjunction with the BB:False Positive: Web Server False Positives Categories and BB:FalsePositve: Web Server False Positive Events building blocks.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1225"
+  ],
+  "bb_references": [
+    "BB:HostDefinition: Web Servers on events which are detected by the LOCAL system",
+    "BB:PortDefinition: Web Ports"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1225"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:PortDefinition: Web Ports</a>",
+    "when the destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostDefinition: Web Servers on events which are detected by the LOCAL system",
+    "AND when a flow or an event matches any of the following BB:PortDefinition: Web Ports",
+    "AND when the destination IP is one of the following 127.0.0.2"
+  ],
+  "RED_list": []
+}

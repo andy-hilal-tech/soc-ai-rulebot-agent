@@ -1,0 +1,31 @@
+{
+  "uuid": "f0fb6d85-2003-44d3-bd7b-1b761be468e5",
+  "id": "164754",
+  "name": "application misconfiguration issue - DB -BDF",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [
+    "310"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>172.21.1.66</a>",
+    "when the destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>172.21.1.66</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Shared) misconfigured DB - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY application misconfiguration issue - DB -BDF on events which are detected by the LOCAL system",
+    "AND when the source IP is one of the following 172.21.1.66",
+    "AND when the destination IP is one of the following 172.21.1.66",
+    "AND when any of Username are contained in any of (Shared) misconfigured DB - AlphaNumeric"
+  ],
+  "RED_list": []
+}

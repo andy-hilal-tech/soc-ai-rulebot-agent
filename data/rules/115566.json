@@ -1,0 +1,54 @@
+{
+  "uuid": "090042b0-c7a1-42bc-8574-2b2cebd179f4",
+  "id": "115566",
+  "name": "Powershell Process Observed",
+  "notes": "This rule triggers when a Powershell process has been detected.",
+  "response_qid": "67500492",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500492"
+  ],
+  "rule_refs": [
+    "7f927b1c-d30b-48d2-ac06-c80b56ea033c",
+    "b9c113f5-db2b-4fdd-8596-2854b611691a"
+  ],
+  "bb_references": [
+    "BB: Detected a Powershell Process"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    {
+      "uuid": "7f927b1c-d30b-48d2-ac06-c80b56ea033c",
+      "name": "BB:CategoryDefinition: Programming Environment"
+    },
+    {
+      "uuid": "b9c113f5-db2b-4fdd-8596-2854b611691a",
+      "name": "Powershell Process Observed on a Compromised Host"
+    }
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create, (5000862) Success Audit: A new process has been created</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB: Detected a Powershell Process</a>",
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Powershell Has Been Launched in a Compromised Host</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Powershell Process Observed on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create, (5000862) Success Audit: A new process has been created",
+    "AND when an event matches any of the following BB: Detected a Powershell Process",
+    "AND NOT when an event matches any of the following Powershell Has Been Launched in a Compromised Host"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Powershell Has Been Launched",
+    "Event description: Powershell Has Been Launched",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"Information\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

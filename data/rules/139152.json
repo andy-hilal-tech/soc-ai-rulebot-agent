@@ -1,0 +1,48 @@
+{
+  "uuid": "187ca0c9-b098-491a-9a2b-182d194289d3",
+  "id": "139152",
+  "name": "Potential Malicious Application Shimming",
+  "notes": "This rule triggers when application shimming activity by monitoring registry modifications is detected. Attackers can use retrocompatibility functionalities to perform privilege escalation, install backdoors, etc.\n\nCustom Databases can be found in the following locations:\n  %WINDIR%\\AppPatch\\Custom\n  %WINDIR%\\AppPatch\\CustomSDB\n  %WINDIR%\\AppPatch\\AppPatch64\\Custom\n\nNote: Tune the Reference Set Shims Allowlist with any custom Shim.",
+  "response_qid": "67501089",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501089"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "Registry Value Data"
+  ],
+  "reference_sets": [
+    "217"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"6\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Rule Name (custom) contains any of T1138</a>",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Registry Value Data (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Registry Value Data&quot;) MATCHES '.*?\\\\(apppatch\\\\(?:apppatch64\\\\)?custom(?:sdb)?).*'</a> AQL filter query",
+    "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Registry Value Data (custom)</a> are contained in <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Shims Allowlist - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Malicious Application Shimming on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful Registry Modification",
+    "AND when the event matches Rule Name (custom) contains any of T1138",
+    "AND when the event matches Registry Value Data (custom) is not N/A",
+    "AND when the event matches LOWER(\"Registry Value Data\") MATCHES '.*?\\\\(apppatch\\\\(?:apppatch64\\\\)?custom(?:sdb)?).*' AQL filter query",
+    "AND NOT when any of Registry Value Data (custom) are contained in any of Shims Allowlist - AlphaNumeric"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Application Shimming",
+    "Event description: Detects application shimming activity by monitoring registry modifications.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

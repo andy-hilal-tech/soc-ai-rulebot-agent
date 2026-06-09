@@ -1,0 +1,40 @@
+{
+  "uuid": "80486fa8-a926-428a-832e-aac36369cc11",
+  "id": "135152",
+  "name": "Ransomware: Maze IOC in Events",
+  "notes": "This rule triggers when an IOC (Filename) related to Maze Ransomware is observed.",
+  "response_qid": "67501047",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501047"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>System.File Created</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Filename (custom) is not N/A</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) MATCHES '(sss\\.exe|2\\.txt|ad\\.7z|(2|windows|xab3x|xaa3x|2adfind|start)\\.bat)'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Ransomware: Maze IOC in Events on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Created",
+    "AND when the event matches Filename (custom) is not N/A",
+    "AND when the event matches LOWER(\"Filename\") MATCHES '(sss\\.exe|2\\.txt|ad\\.7z|(2|windows|xab3x|xaa3x|2adfind|start)\\.bat)' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Maze IOC Detected",
+    "Event description: An IOC (Filename) related to Maze ransomware has been observed.",
+    "Severity: 9, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Ransomware Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

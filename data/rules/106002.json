@@ -1,0 +1,53 @@
+{
+  "uuid": "ff3fb68e-5540-455a-b4d8-4007cf0cecf0",
+  "id": "106002",
+  "name": "UBA : Mailbox Permission Added and Deleted in a Short Period of Time",
+  "notes": "Detects mailbox permissions that are added and deleted within an hour.  ",
+  "response_qid": "67500267",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500267"
+  ],
+  "rule_refs": [
+    "9d30d366-5550-4fa2-9865-c92c90a8a241",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "d69fda0c-1608-497d-8866-e19f42b5c26c"
+  ],
+  "bb_references": [
+    "BB:UBA : Add Mailbox Permission Succeeded",
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Remove Mailbox Permission Succeeded",
+    "BB:UBA : Remove Mailbox Permission Succeeded match at least 1 times in 60 minutes after any of BB:UBA : Add Mailbox Permission Succeeded match with the same Account Name (custom)"
+  ],
+  "db_fields_used": [
+    "Account Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "9d30d366-5550-4fa2-9865-c92c90a8a241",
+    "d69fda0c-1608-497d-8866-e19f42b5c26c"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>BB:UBA : Remove Mailbox Permission Succeeded</a> match at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>60</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"3\", \"7\")' class='dynamic'>BB:UBA : Add Mailbox Permission Succeeded</a> match with the same <a href='javascript:editParameter(\"3\", \"8\")' class='dynamic'>Account Name (custom)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>BB:UBA : Remove Mailbox Permission Succeeded</a> match at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>60</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"3\", \"7\")' class='dynamic'>BB:UBA : Add Mailbox Permission Succeeded</a> match with the same <a href='javascript:editParameter(\"3\", \"8\")' class='dynamic'>Account Name (custom)</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Mailbox Permission Added and Deleted in a Short Period of Time on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when BB:UBA : Remove Mailbox Permission Succeeded match at least 1 times in 60 minutes after any of BB:UBA : Add Mailbox Permission Succeeded match with the same Account Name (custom)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Mailbox Permission Added and Deleted in a Short Period of Time",
+    "Event description: senseValue=10",
+    "Severity: 10, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Privilege\""
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "a8cbc069-7ef4-4da6-a67b-6783f7d6a6a9",
+  "id": "100802",
+  "name": "BB:UBA : GoToMyPC and OpenVPN ports",
+  "notes": "This BB tracks all the traffic through the ports 8200, 1194,943",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : GoToMyPC and OpenVPN ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the source or destination port is any of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>8200, 1194, 943</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : GoToMyPC and OpenVPN ports on events which are detected by the LOCAL system",
+    "AND when the source or destination port is any of 8200, 1194, 943"
+  ],
+  "RED_list": []
+}

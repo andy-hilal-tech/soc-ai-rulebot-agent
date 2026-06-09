@@ -1,0 +1,51 @@
+{
+  "uuid": "3eb1a508-ed2f-4d11-ad89-e10640e13b88",
+  "id": "105952",
+  "name": "UBA : External User Failed Mailbox Login",
+  "notes": "Detects repeated failures to log in to mailbox from an external user.",
+  "response_qid": "67500266",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500266"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "ExternalAccess",
+    "userName, qid"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(101250316) MailboxLogin-failed</a>",
+    "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>ExternalAccess (custom)</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>false</a>",
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Username, Event Name</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Username, Event Name</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : External User Failed Mailbox Login on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when the event QID is one of the following (101250316) MailboxLogin-failed",
+    "AND NOT when any of ExternalAccess (custom) match false",
+    "AND when at least 3 events are seen with the same Username, Event Name in 2 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : External User Failed Mailbox Login",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

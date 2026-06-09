@@ -1,0 +1,32 @@
+{
+  "uuid": "caa19161-fd8a-4b8d-8c58-3bd42a8fd0c8",
+  "id": "165411",
+  "name": "O365 not sending logs for last hour - H360",
+  "notes": "",
+  "response_qid": "67501842",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501842"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Health360 O365</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY O365 not sending logs for last hour - H360 on events which are detected by the LOCAL system",
+    "AND when the event(s) have not been detected by one or more of Health360 O365 for 900 seconds"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: O365l - H360 - Not sending logs",
+    "Event description: O365 - H360 - Not sending logs",
+    "Severity: 10, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"System Failure\""
+  ]
+}

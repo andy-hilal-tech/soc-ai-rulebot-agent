@@ -1,0 +1,25 @@
+{
+  "uuid": "d52104ba-8cf8-4a02-a7bd-d7f4dd708b67",
+  "id": "130952",
+  "name": "BB:CategoryDefinition: Object Deleted Events",
+  "notes": "Edit this Building Block to include any object deletion event categories.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Object Deleted Events on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.File Deleted, Audit.Delete Activity Attempted, Audit.Delete Activity Succeeded, Audit.Object Removal Attempt, Audit.Object Removal Success</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Object Deleted Events on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following System.File Deleted, Audit.Delete Activity Attempted, Audit.Delete Activity Succeeded, Audit.Object Removal Attempt, Audit.Object Removal Success"
+  ],
+  "RED_list": []
+}

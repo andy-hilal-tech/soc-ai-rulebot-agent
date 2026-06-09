@@ -1,0 +1,25 @@
+{
+  "uuid": "11ecd6b6-26a9-4a58-9da5-40ff7f7affec",
+  "id": "100274",
+  "name": "BB:CategoryDefinition: SIEM User and Role Modifications",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: SIEM User and Role Modifications on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(28250067) User Account Added, (28250070) User Role Added, (28250069) User Account Modified, (28250072) User Role Modified</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: SIEM User and Role Modifications on events which are detected by the undefined system",
+    "AND when the event QID is one of the following (28250067) User Account Added, (28250070) User Role Added, (28250069) User Account Modified, (28250072) User Role Modified"
+  ],
+  "RED_list": []
+}

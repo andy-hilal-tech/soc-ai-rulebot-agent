@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1249",
+  "id": "100300",
+  "name": "BB:PortDefinition: IM Ports",
+  "notes": "Edit this BB to include all common IM ports.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:PortDefinition: IM Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1863, 5000, 50001, 5100, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5190, 5191, 5192, 5193, 5222, 5223, 5224, 5225, 5226, 5227, 5228, 5229, 5230, 5231, 5232, 5233, 5234, 5235, 5236, 5237, 5238, 5239, 5240, 5241, 5242, 5243, 5244, 5245, 5246, 5247, 5248, 5249, 5251, 5252, 5253, 5254, 5255, 5256, 5257, 5258, 5259, 5260, 1025, 1026, 1027</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:PortDefinition: IM Ports on events which are detected by the LOCAL system",
+    "AND when the destination port is one of the following 1863, 5000, 50001, 5100, 5002, 5003, 5004, 5005, 5006, 5007, 5008, 5009, 5010, 5190, 5191, 5192, 5193, 5222, 5223, 5224, 5225, 5226, 5227, 5228, 5229, 5230, 5231, 5232, 5233, 5234, 5235, 5236, 5237, 5238, 5239, 5240, 5241, 5242, 5243, 5244, 5245, 5246, 5247, 5248, 5249, 5251, 5252, 5253, 5254, 5255, 5256, 5257, 5258, 5259, 5260, 1025, 1026, 1027"
+  ],
+  "RED_list": []
+}

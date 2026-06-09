@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1220",
+  "id": "100005",
+  "name": "BB:CategoryDefinition: Authentication Success",
+  "notes": "Edit this BB to include all events that indicate successful attempts to access the network.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Success on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Admin Login Successful, Authentication.Auth Server Login Succeeded, Authentication.Auth Server Session Opened, Authentication.FTP Login Succeeded, Authentication.General Authentication Successful, Authentication.Host Login Succeeded, Authentication.Login with username/password defaults successful, Authentication.Mail Service Login Succeeded, Authentication.Misc Login Succeeded, Authentication.Remote Access Login Succeeded, Authentication.Samba Login Succeeded, Authentication.SSH Login Succeeded, Authentication.System Security Access Granted, Authentication.Telnet Login Succeeded, Authentication.VoIP Login Succeeded, Authentication.Web Service Login Succeeded, Authentication.Database Login Succeeded, Authentication.IKE Authentication Succeeded, Authentication.RADIUS Authentication Succeeded, Authentication.Station authentication succeeded, Authentication.TACACS Authentication Succeeded, Authentication.User Login Success, Authentication.SFTP Login Succeeded</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Authentication Success on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.Admin Login Successful, Authentication.Auth Server Login Succeeded, Authentication.Auth Server Session Opened, Authentication.FTP Login Succeeded, Authentication.General Authentication Successful, Authentication.Host Login Succeeded, Authentication.Login with username/password defaults successful, Authentication.Mail Service Login Succeeded, Authentication.Misc Login Succeeded, Authentication.Remote Access Login Succeeded, Authentication.Samba Login Succeeded, Authentication.SSH Login Succeeded, Authentication.System Security Access Granted, Authentication.Telnet Login Succeeded, Authentication.VoIP Login Succeeded, Authentication.Web Service Login Succeeded, Authentication.Database Login Succeeded, Authentication.IKE Authentication Succeeded, Authentication.RADIUS Authentication Succeeded, Authentication.Station authentication succeeded, Authentication.TACACS Authentication Succeeded, Authentication.User Login Success, Authentication.SFTP Login Succeeded"
+  ],
+  "RED_list": []
+}

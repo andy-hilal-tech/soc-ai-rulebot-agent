@@ -1,0 +1,45 @@
+{
+  "uuid": "5022e221-08aa-4c78-b7c3-225509af05e0",
+  "id": "100107",
+  "name": "BB:ReconDetected: Basic Recon Rules",
+  "notes": "Define all default reconnaissance tests. This BB is used to detect a host that has performed reconnaissance such that other follow on tests can be performed. For example, reconnaissance followed by firewall accept.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1152",
+    "SYSTEM-1168",
+    "SYSTEM-1180",
+    "SYSTEM-1197",
+    "SYSTEM-1360",
+    "SYSTEM-1363",
+    "SYSTEM-1577",
+    "SYSTEM-1579",
+    "SYSTEM-1589"
+  ],
+  "bb_references": [
+    "BB:ReconDetected: Basic Recon Rules on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1152",
+    "SYSTEM-1360",
+    "SYSTEM-1363",
+    "SYSTEM-1168",
+    "SYSTEM-1577",
+    "SYSTEM-1579",
+    "SYSTEM-1589",
+    "SYSTEM-1180",
+    "SYSTEM-1197"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Host Port Scan Detected by Remote Host, Local L2L Scanner Detected, Remote Scanner Detected, Remote Windows Server Scanner, Local L2R RPC Server Scanner, Local L2R Windows Server Scanner, Local L2R Scanner Detected, Local L2L Suspicious Probe Events Detected, Excessive Firewall Denies from Local Host</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:ReconDetected: Basic Recon Rules on events which are detected by the LOCAL system",
+    "AND when a flow or an event matches any of the following Host Port Scan Detected by Remote Host, Local L2L Scanner Detected, Remote Scanner Detected, Remote Windows Server Scanner, Local L2R RPC Server Scanner, Local L2R Windows Server Scanner, Local L2R Scanner Detected, Local L2L Suspicious Probe Events Detected, Excessive Firewall Denies from Local Host"
+  ],
+  "RED_list": []
+}

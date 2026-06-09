@@ -1,0 +1,48 @@
+{
+  "uuid": "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a",
+  "id": "104052",
+  "name": "UBA : Suspicious Privileged Activity (Rarely Used Privilege)",
+  "notes": "Indicates that a user executed a privileged action that they were not executing recently. Observations are kept in \"UBA : Recent Activities by Low Level Category and Username\" map-of-sets.\n\nThe sensitivity of this event can be modified by changing the TTL (time-to-live) of the Reference Map-of-Sets for \"UBA : Recent Activities by Low Level Category and Username\". Increasing the TTL will reduce the sensitivity. Decreasing TTL will increase the sensitivity.",
+  "response_qid": "67500206",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500206"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "ea27230a-2ab3-48b0-a512-c27311e8c66e"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Privileged Activity : UBA"
+  ],
+  "db_fields_used": [
+    "category",
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "ea27230a-2ab3-48b0-a512-c27311e8c66e"
+  ],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Sense</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : Common Event Filters, BB:CategoryDefinition: Privileged Activity : UBA</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Low Level Category</a> is the key and <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>all</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Username</a> is the value in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>all</a> of <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>UBA : Recent Activities by Low Level Category and Username - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Suspicious Privileged Activity (Rarely Used Privilege) on events which are detected by the LOCAL system",
+    "AND NOT when the event category for the event is one of the following Sense",
+    "AND when an event matches all of the following UBA : Common Event Filters, BB:CategoryDefinition: Privileged Activity : UBA",
+    "AND NOT when all of Low Level Category is the key and all of Username is the value in all of UBA : Recent Activities by Low Level Category and Username - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Suspicious Privileged Activity (Rarely Used Privilege)",
+    "Event description: senseValue=10,senseDesc='Indicates the user has been observed performing a privileged act rarely observed from them.',usecase_id='e9726a50-9352-4eaf-ad6a-bc8eecc40c9a'",
+    "Severity: 3, Credibility: 5, Relevance: 3",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Privilege\"",
+    "Add \"userName\" to Reference Map Of Sets: \"UBA : Recent Activities by Low Level Category and Username\" with key \"category\""
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "uuid": "4f29c6bc-54d3-4bf5-b160-a52124432005",
+  "id": "107052",
+  "name": "UBA : Non-Admin Access to Domain Controller",
+  "notes": "Detect a non-admin account attempts to log into domain controller. ",
+  "response_qid": "67500300",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500300"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201",
+    "SYSTEM-1220",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures",
+    "BB:CategoryDefinition: Authentication Success",
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "destinationIP",
+    "userName"
+  ],
+  "reference_sets": [
+    "53",
+    "54"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "SYSTEM-1220",
+    "SYSTEM-1201"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Success, BB:CategoryDefinition: Authentication Failures</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Domain Controllers - IP</a>",
+    "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Domain Controller Administrators - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Non-Admin Access to Domain Controller on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when an event matches any of the following BB:CategoryDefinition: Authentication Success, BB:CategoryDefinition: Authentication Failures",
+    "AND when any of Destination IP are contained in any of Domain Controllers - IP",
+    "AND NOT when any of Username are contained in any of Domain Controller Administrators - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Non-Admin Access to Domain Controller",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 8, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

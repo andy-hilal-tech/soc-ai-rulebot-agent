@@ -1,0 +1,34 @@
+{
+  "uuid": "c78d0460-f3df-4583-a99a-cde73aa9635e",
+  "id": "162213",
+  "name": "MSI Installation From Suspicious Locations",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: MSI Installation From Suspicious Locations\nSIGMA Description: Detects MSI package installation from suspicious locations\n\nFalse positives:\n- False positives may occur if you allow installation from folders such as the desktop, the public folder or remote shares. A baseline is required before production use.\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%msiinstaller%' AND (\"Event ID\" IN('1040', '1042')) AND (LOWER(UTF8(payload)) LIKE '%:\\windows\\temp*%' OR LOWER(UTF8(payload)) LIKE '%\\\\%' OR LOWER(UTF8(payload)) LIKE '%\\desktop\\%' OR LOWER(UTF8(payload)) LIKE '%\\perflogs\\%' OR LOWER(UTF8(payload)) LIKE '%\\users\\public\\%')) AND (NOT((LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp\\winget*%' OR LOWER(UTF8(payload)) LIKE '%c:\\windows\\temp\\updhealthtools.msi%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY MSI Installation From Suspicious Locations on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%msiinstaller%' AND (\"Event ID\" IN('1040', '1042')) AND (LOWER(UTF8(payload)) LIKE '%:\\windows\\temp*%' OR LOWER(UTF8(payload)) LIKE '%\\\\%' OR LOWER(UTF8(payload)) LIKE '%\\desktop\\%' OR LOWER(UTF8(payload)) LIKE '%\\perflogs\\%' OR LOWER(UTF8(payload)) LIKE '%\\users\\public\\%')) AND (NOT((LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp\\winget*%' OR LOWER(UTF8(payload)) LIKE '%c:\\windows\\temp\\updhealthtools.msi%'))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MSI Installation From Suspicious Locations",
+    "Event description: Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: MSI Installation From Suspicious Locations SIGMA Description: Detects MSI package installation from suspicious locations  False positives: - False positives may occur if you allow installation from folders such as the desktop, the public folder or remote shares. A baseline is required before production use.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "uuid": "25ea2626-1fdd-4aee-a962-016792758ec3",
+  "id": "100952",
+  "name": "UBA : Detected Activity from a Locked Machine",
+  "notes": "Detects suspicious events from a locked machine.",
+  "response_qid": "67500161",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500161"
+  ],
+  "rule_refs": [
+    "406d04a7-a42c-42c5-85e7-3fb981565b4b",
+    "SYSTEM-1478",
+    "dc6f2608-77e3-428c-b735-a22ebd64331e"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Suspicious Event Categories",
+    "BB:CategoryDefinition: Suspicious Event Categories match at least 1 times in 5 minutes after any of BB:UBA : Workstation Locked match with the same Source IP",
+    "BB:UBA : Workstation Locked",
+    "BB:UBA : Workstation Unlocked",
+    "BB:UBA : Workstation Unlocked match in 6 minutes after BB:UBA : Workstation Locked match with the same Source IP"
+  ],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1478",
+    "dc6f2608-77e3-428c-b735-a22ebd64331e",
+    "406d04a7-a42c-42c5-85e7-3fb981565b4b",
+    "dc6f2608-77e3-428c-b735-a22ebd64331e"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Suspicious Event Categories</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:UBA : Workstation Locked</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>",
+    "when none of <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:UBA : Workstation Unlocked</a> match in <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>6</a> <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>BB:UBA : Workstation Locked</a> match with the same <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>Source IP</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Suspicious Event Categories</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:UBA : Workstation Locked</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Detected Activity from a Locked Machine on events which are detected by the LOCAL system",
+    "AND when BB:CategoryDefinition: Suspicious Event Categories match at least 1 times in 5 minutes after any of BB:UBA : Workstation Locked match with the same Source IP",
+    "AND when none of BB:UBA : Workstation Unlocked match in 6 minutes after BB:UBA : Workstation Locked match with the same Source IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Detected Activity from a Locked Machine",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

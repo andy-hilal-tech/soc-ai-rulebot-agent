@@ -1,0 +1,34 @@
+{
+  "uuid": "dcc58f43-f3d9-4e41-a09f-65233a4ca3cf",
+  "id": "162315",
+  "name": "New Kubernetes Service Account Created",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Leo Tsaousis (@laripping)\nSIGMA Title: New Kubernetes Service Account Created\nSIGMA Description: Detects creation of new Kubernetes service account, which could indicate an attacker's attempt to persist within a cluster.\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%serviceaccounts%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY New Kubernetes Service Account Created on events which are detected by the LOCAL system",
+    "AND when the event matches LOWER(UTF8(payload)) LIKE '%create%' AND LOWER(UTF8(payload)) LIKE '%serviceaccounts%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: New Kubernetes Service Account Created",
+    "Event description: Converted from SIGMA Rule.  Original Author: Leo Tsaousis (@laripping) SIGMA Title: New Kubernetes Service Account Created SIGMA Description: Detects creation of new Kubernetes service account, which could indicate an attacker's attempt to persist within a cluster.   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

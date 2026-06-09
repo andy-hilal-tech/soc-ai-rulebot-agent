@@ -1,0 +1,50 @@
+{
+  "uuid": "cab69b84-26f3-4ff2-83ad-85785e2503e3",
+  "id": "165107",
+  "name": "Remote: Suspicious Amount of IM/Chat Traffic",
+  "notes": "This rule triggers when an excessive amount of IM/Chat traffic from a single source is detected.",
+  "response_qid": "67500804",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500804"
+  ],
+  "rule_refs": [
+    "SYSTEM-1061",
+    "SYSTEM-1472"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Successful Communication",
+    "BB:Policy Violation: IRC IM Policy Violation: IM Communications",
+    "BB:Policy Violation: IRC IM Policy Violation: IM Communications match at least 20 times in 1 hour(s)"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1472",
+    "SYSTEM-1061"
+  ],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>",
+    "when a flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Successful Communication</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Policy Violation: IRC IM Policy Violation: IM Communications</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Policy Violation: IRC IM Policy Violation: IM Communications</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY Remote: Suspicious Amount of IM/Chat Traffic on flows which are detected by the LOCAL system",
+    "AND NOT when the flow context is Local to Local",
+    "AND when a flow matches all of the following BB:CategoryDefinition: Successful Communication",
+    "AND when BB:Policy Violation: IRC IM Policy Violation: IM Communications match at least 20 times in 1 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: IM/Chat",
+    "Event description: Detects an excessive amount of IM/Chat traffic from a single source.",
+    "Severity: 6, Credibility: 6, Relevance: 6",
+    "High-Level Category: \"Policy\"",
+    "Low-Level Category: \"IRC/IM Policy Violation\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

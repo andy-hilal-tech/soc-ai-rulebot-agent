@@ -1,0 +1,38 @@
+{
+  "uuid": "95c2bf9e-4bdb-41bb-88c2-5b7c8d23e14c",
+  "id": "124252",
+  "name": "Microsoft Windows RCE Vulnerability - Suspicious Files",
+  "notes": "This rule detects Remote Code Execution vulnerabilities in Microsoft Exchange.\n\nMicrosoft issued \"CVE-2022-41040\" and \"CVE-2022-41082\" Exchange Server.",
+  "response_qid": "67500729",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500729"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful File Modification</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;File Directory&quot; = 'C:\\Users\\Public' AND &quot;Filename&quot; IN ('all.exe', 'dump.dll','ad.exe')) OR (&quot;File Directory&quot; = 'C:\\PerfLogs' AND &quot;Filename&quot; IN ('gpg-error.exe', 'cm.exe')) OR (&quot;File Directory&quot; = 'C:\\\\root' AND &quot;Filename&quot; = 'DrSDKCaller.exe') OR (&quot;File Directory&quot; = 'C:\\Program Files\\Common Files\\system\\ado' AND &quot;Filename&quot; = 'msado32.tlb')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Microsoft Windows RCE Vulnerability - Suspicious Files on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Successful File Modification",
+    "AND when the event matches (\"File Directory\" = 'C:\\Users\\Public' AND \"Filename\" IN ('all.exe', 'dump.dll','ad.exe')) OR (\"File Directory\" = 'C:\\PerfLogs' AND \"Filename\" IN ('gpg-error.exe', 'cm.exe')) OR (\"File Directory\" = 'C:\\\\root' AND \"Filename\" = 'DrSDKCaller.exe') OR (\"File Directory\" = 'C:\\Program Files\\Common Files\\system\\ado' AND \"Filename\" = 'msado32.tlb') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Microsoft Windows RCE Vulnerability - Suspicious Files",
+    "Event description: Detects Remote Code Execution vulnerabilities in Microsoft Exchange.",
+    "Severity: 9, Credibility: 9, Relevance: 9",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Remote Access Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

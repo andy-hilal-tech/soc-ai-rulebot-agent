@@ -1,0 +1,40 @@
+{
+  "uuid": "e80d42f5-b54b-4d95-9d43-7ad583e20c68",
+  "id": "145752",
+  "name": "Outlook C2 Macro Creation",
+  "notes": "This rule detects the creation of a macro file for Outlook\n\nCovered from SIGMA Rule.\n\nOriginal Author: '@ScoubiMtl'\nSIGMA Title: Outlook C2 Macro Creation\nSIGMA Description: Detects the creation of a macro file for Outlook. Goes with win_outlook_c2_registry_key. VbaProject.OTM is explicitly mentioned in T1137. Particularly interesting if both events Registry & File Creation happens at the same time.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501500",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501500"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001830) FileCreate</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Filename (custom) is any of VbaProject.OTM</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Directory (custom) contains any of \\Microsoft\\Outlook</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Outlook C2 Macro Creation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001830) FileCreate",
+    "AND when the event matches Filename (custom) is any of VbaProject.OTM",
+    "AND when the event matches File Directory (custom) contains any of \\Microsoft\\Outlook"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Outlook C2 Macro Creation",
+    "Event description: Detects the creation of a macro file for Outlook",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Bad Content\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

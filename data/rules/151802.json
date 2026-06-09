@@ -1,0 +1,31 @@
+{
+  "uuid": "482bbcd1-17cc-438b-923a-464e110dea9e",
+  "id": "151802",
+  "name": "BB:BehaviorDefinition: Scheduled Cron Task",
+  "notes": "This Building Block detects the use of cron utility to create a scheduled job.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Scheduled Cron Task on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Attempt, System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [sh or bash or zsh]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Command&quot; ILIKE '%crontab &ndash;l%' AND &quot;Command&quot; ILIKE '%egrep -v &lsquo;^(#|$)&rsquo;%' AND &quot;Command&quot; ILIKE '%/.Library/SystemServices/updateSystem%') OR (&quot;Command Arguments&quot; ILIKE '%crontab &ndash;l%' AND &quot;Command Arguments&quot; ILIKE '%egrep -v &lsquo;^(#|$)&rsquo;%' AND &quot;Command Arguments&quot; ILIKE '%/.Library/SystemServices/updateSystem%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Scheduled Cron Task on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following Audit.Command Execution Attempt, System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [sh or bash or zsh]",
+    "AND when the event matches (\"Command\" ILIKE '%crontab –l%' AND \"Command\" ILIKE '%egrep -v ‘^(#|$)’%' AND \"Command\" ILIKE '%/.Library/SystemServices/updateSystem%') OR (\"Command Arguments\" ILIKE '%crontab –l%' AND \"Command Arguments\" ILIKE '%egrep -v ‘^(#|$)’%' AND \"Command Arguments\" ILIKE '%/.Library/SystemServices/updateSystem%') AQL filter query"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,36 @@
+{
+  "uuid": "071bf242-e31d-489d-8098-f9a5d07ad15e",
+  "id": "165007",
+  "name": "Failed Login Attempts to Critical Assets",
+  "notes": "Converted from SIGMA Rule.\n\n\nSIGMA Title: Failed Login Attempts to Critical Machine\nSIGMA Description: Detects multiple failed login attempts which may indicate a brute-force attack or probing.\n\nFalse positives:\n- User mistypes\n- Expired credentials\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND &quot;Event ID&quot;=4625</a> AQL filter query",
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>WindowsAuthServer @ H360-DC2, WindowsAuthServer @ H360-DC3, WindowsAuthServer @ H360-TALLY, WindowsAuthServer @ H360FS, WindowsAuthServer @ SRV-APP-H360</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Failed Login Attempts to Critical Assets on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4625 AQL filter query",
+    "AND when the event(s) were detected by one or more of WindowsAuthServer @ H360-DC2, WindowsAuthServer @ H360-DC3, WindowsAuthServer @ H360-TALLY, WindowsAuthServer @ H360FS, WindowsAuthServer @ SRV-APP-H360"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Failed Login Attempts to Critical Machine",
+    "Event description: Converted from SIGMA Rule.  Original Author: Amelia - Cybersecurity Analyst (ChatGPT) SIGMA Title: Failed Login Attempts to Critical Machine SIGMA Description: Detects multiple failed login attempts which may indicate a brute-force attack or probing.  False positives: - User mistypes - Expired credentials  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "uuid": "SYSTEM-1070",
+  "id": "100145",
+  "name": "BB:Threats: Port Scans: UDP Port Scan",
+  "notes": "This Building Block identifies UDP based port scans.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Port Scans: UDP Port Scan on flows which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>UDP</a>",
+    "when the flow type is one of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Superflow C</a>",
+    "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application is any of Misc.Unknown_UDP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Port Scans: UDP Port Scan on flows which are detected by the undefined system",
+    "AND when the IP protocol is one of the following UDP",
+    "AND when the flow type is one of Superflow C",
+    "AND when the flow matches Application is any of Misc.Unknown_UDP"
+  ],
+  "RED_list": []
+}

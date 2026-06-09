@@ -1,0 +1,63 @@
+{
+  "uuid": "e85007a7-e7aa-491b-a848-be9e1cce5b6f",
+  "id": "116702",
+  "name": "Suspicious Number of Modifications Made on Virtual Machines",
+  "notes": "This rule triggers when a suspicious number of configuration updates are performed on virtual machines. A typical administration rarely implies more than 10 configuration updates, such as adding more memory or reducing the storage size on one or multiple machines in a short period of time.\n\nNote: Populate the reference set \"Authorized Users\" with users who are authorized to perform massive updates.",
+  "response_qid": "67500583",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500583"
+  ],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "84501e1b-53ea-4e4d-b852-4cc9bae9a643",
+    "SYSTEM-1313",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: System Configuration",
+    "BB:CategoryDefinition: Virtual Machine Configuration Change",
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: Virtualization"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [
+    "166"
+  ],
+  "dependencies": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "edf618f4-9e8c-4068-88aa-2675753eb003",
+    "84501e1b-53ea-4e4d-b852-4cc9bae9a643",
+    "SYSTEM-1313"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Virtual Machine Configuration Change, BB:CategoryDefinition: System Configuration</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Machine Identifier (custom) is not N/A</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Authorized Users - AlphaNumeric</a>",
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Number of Modifications Made on Virtual Machines on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization",
+    "AND when an event matches any of the following BB:CategoryDefinition: Virtual Machine Configuration Change, BB:CategoryDefinition: System Configuration",
+    "AND when the event matches Machine Identifier (custom) is not N/A",
+    "AND NOT when any of Username are contained in any of Authorized Users - AlphaNumeric",
+    "AND when at least 10 events are seen with the same Username in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Number of Modifications Made on Virtual Machines",
+    "Event description: Detects a suspicious number of configuration updates performed on virtual machines.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

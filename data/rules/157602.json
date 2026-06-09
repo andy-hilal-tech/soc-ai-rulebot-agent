@@ -1,0 +1,29 @@
+{
+  "uuid": "72ae3485-d833-4968-8fa1-413c27701a7a",
+  "id": "157602",
+  "name": "BB:BehaviorDefinition: ETW Logging Tamper In .NET Processes",
+  "notes": "This Building Block detects changes to environment variables related to ETW logging.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)\nSIGMA Title: ETW Logging Tamper In .NET Processes\nSIGMA Description: Detects changes to environment variables related to ETW logging. This could indicate potential adversaries stopping ETW providers recording loaded .NET assemblies.\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: ETW Logging Tamper In .NET Processes on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%complus_etwenabled%' or LOWER(&quot;Command&quot;) LIKE '%complus_etwflags%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: ETW Logging Tamper In .NET Processes on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution",
+    "AND when the event matches LOWER(\"Command\") LIKE '%complus_etwenabled%' or LOWER(\"Command\") LIKE '%complus_etwflags%' AQL filter query"
+  ],
+  "RED_list": []
+}

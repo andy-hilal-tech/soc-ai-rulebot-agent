@@ -1,0 +1,25 @@
+{
+  "uuid": "a17e7f35-1d6a-426e-87f4-6de55f6502ca",
+  "id": "103202",
+  "name": "BB:UBA : User Account Deleted",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : User Account Deleted on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Removed, Authentication.User Account Removed</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : User Account Deleted on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.Computer Account Removed, Authentication.User Account Removed"
+  ],
+  "RED_list": []
+}

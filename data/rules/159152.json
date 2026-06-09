@@ -1,0 +1,40 @@
+{
+  "uuid": "29ab68ee-43eb-480d-8b71-5d549fbf3ee5",
+  "id": "159152",
+  "name": "In-memory PowerShell",
+  "notes": "This rule detects loading of essential DLLs used by PowerShell, but not by the process Powershell.exe.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Tom Kern, oscd.community, Natalia Shornikova, Tim Shelton\nSIGMA Title: In-memory PowerShell\nSIGMA Description: Detects loading of essential DLL used by PowerShell, but not by the process powershell.exe. Detects meterpreter's \"load powershell\" extension.\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501669",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501669"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001844) Image loaded</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) LIKE 'system.management.automation.dll' or LOWER(&quot;Filename&quot;) LIKE 'system.management.automation.ni.dll'</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\system32\\dsac.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\program files\\powershell\\7\\pwsh.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%powershell.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%powershell_ise.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\system32\\sdiagnhost.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%mscorsvw.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\system32\\remotefxvgpudisablement.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%sqlps.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%wsmprovhost.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%winrshost.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%syncappvpublishingserver.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%runscripthelper.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%servermanager.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\ide\\ssms.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\ide\\devenv.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%servicehub.vsdetouredhost.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%servicehub.settingshost.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%servicehub.host.clr.x86.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\citrix\\configsync\\configsyncrun.exe' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\program files (x86)\\microsoft visual studio\\%' or LOWER(&quot;Process File File Path&quot;) LIKE '%\\program files\\microsoft visual studio\\%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY In-memory PowerShell on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001844) Image loaded",
+    "AND when the event matches LOWER(\"Filename\") LIKE 'system.management.automation.dll' or LOWER(\"Filename\") LIKE 'system.management.automation.ni.dll' AQL filter query",
+    "AND NOT when the event matches LOWER(\"Process File File Path\") LIKE '%\\windows\\system32\\dsac.exe' or LOWER(\"Process File File Path\") LIKE '%\\program files\\powershell\\7\\pwsh.exe' or LOWER(\"Process File File Path\") LIKE '%powershell.exe' or LOWER(\"Process File File Path\") LIKE '%powershell_ise.exe' or LOWER(\"Process File File Path\") LIKE '%\\windows\\system32\\sdiagnhost.exe' or LOWER(\"Process File File Path\") LIKE '%mscorsvw.exe' or LOWER(\"Process File File Path\") LIKE '%\\windows\\system32\\remotefxvgpudisablement.exe' or LOWER(\"Process File File Path\") LIKE '%sqlps.exe' or LOWER(\"Process File File Path\") LIKE '%wsmprovhost.exe' or LOWER(\"Process File File Path\") LIKE '%winrshost.exe' or LOWER(\"Process File File Path\") LIKE '%syncappvpublishingserver.exe' or LOWER(\"Process File File Path\") LIKE '%runscripthelper.exe' or LOWER(\"Process File File Path\") LIKE '%servermanager.exe' or LOWER(\"Process File File Path\") LIKE '%\\ide\\ssms.exe' or LOWER(\"Process File File Path\") LIKE '%\\ide\\devenv.exe' or LOWER(\"Process File File Path\") LIKE '%servicehub.vsdetouredhost.exe' or LOWER(\"Process File File Path\") LIKE '%servicehub.settingshost.exe' or LOWER(\"Process File File Path\") LIKE '%servicehub.host.clr.x86.exe' or LOWER(\"Process File File Path\") LIKE '%\\citrix\\configsync\\configsyncrun.exe' or LOWER(\"Process File File Path\") LIKE '%\\program files (x86)\\microsoft visual studio\\%' or LOWER(\"Process File File Path\") LIKE '%\\program files\\microsoft visual studio\\%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: In-memory PowerShell",
+    "Event description: Detects loading of essential DLLs used by PowerShell, but not by the process Powershell.exe.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Malicious Software\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

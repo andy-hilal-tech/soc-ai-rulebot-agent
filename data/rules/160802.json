@@ -1,0 +1,38 @@
+{
+  "uuid": "ae23680c-00c1-429d-b85c-1331685a392f",
+  "id": "160802",
+  "name": "DNS Exfiltration in Powershell",
+  "notes": "This is rule detects DNS exfiltration in powershell.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Powershell DNSExfiltration\nSIGMA Description: DNSExfiltrator allows for transferring (exfiltrate) a file over a DNS request covert channel\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501696",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501696"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%invoke-dnsexfiltrator%' AND LOWER(&quot;Command&quot;) LIKE '% -i %' AND LOWER(&quot;Command&quot;) LIKE '% -d %' AND LOWER(&quot;Command&quot;) LIKE '% -p %' AND LOWER(&quot;Command&quot;) LIKE '% -doh %' AND LOWER(&quot;Command&quot;) LIKE '% -t %'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY DNS Exfiltration in Powershell on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success, Exploit.Command Execution",
+    "AND when the event matches LOWER(\"Command\") LIKE '%invoke-dnsexfiltrator%' AND LOWER(\"Command\") LIKE '% -i %' AND LOWER(\"Command\") LIKE '% -d %' AND LOWER(\"Command\") LIKE '% -p %' AND LOWER(\"Command\") LIKE '% -doh %' AND LOWER(\"Command\") LIKE '% -t %' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: DNS Exfiltration in Powershell",
+    "Event description: Detects DNS exfiltration in powershell.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "95f774ac-f42d-463b-afd0-ab7f7db4af02",
+  "id": "162273",
+  "name": "Remove Exported Mailbox from Exchange Webserver",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Christian Burkard (Nextron Systems)\nSIGMA Title: Remove Exported Mailbox from Exchange Webserver\nSIGMA Description: Detects removal of an exported Exchange mailbox which could be to cover tracks from ProxyShell exploit\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%remove-mailboxexportrequest%' OR LOWER(UTF8(payload)) LIKE '% -identity %' OR LOWER(UTF8(payload)) LIKE '% -confirm \"false\"%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Remove Exported Mailbox from Exchange Webserver on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%remove-mailboxexportrequest%' OR LOWER(UTF8(payload)) LIKE '% -identity %' OR LOWER(UTF8(payload)) LIKE '% -confirm \"false\"%') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remove Exported Mailbox from Exchange Webserver",
+    "Event description: Converted from SIGMA Rule.  Original Author: Christian Burkard (Nextron Systems) SIGMA Title: Remove Exported Mailbox from Exchange Webserver SIGMA Description: Detects removal of an exported Exchange mailbox which could be to cover tracks from ProxyShell exploit  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

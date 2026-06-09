@@ -1,0 +1,46 @@
+{
+  "uuid": "7bc488f2-3b4c-430a-9856-0f41497301cb",
+  "id": "148752",
+  "name": "Potential Epic Activity",
+  "notes": "This rule detects Turla Epic activity which searches for various terms within the victim system.",
+  "response_qid": "67501528",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501528"
+  ],
+  "rule_refs": [
+    "08cb8b13-ec32-4528-ba13-28540e1713db",
+    "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+    "f85180aa-42ae-4181-acb6-3501ffa8a893"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Epic Filenames",
+    "BB:BehaviorDefinition: Epic Log Filenames",
+    "BB:BehaviorDefinition: Epic Search Terms"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+    "f85180aa-42ae-4181-acb6-3501ffa8a893",
+    "08cb8b13-ec32-4528-ba13-28540e1713db"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Epic Filenames, BB:BehaviorDefinition: Epic Log Filenames, BB:BehaviorDefinition: Epic Search Terms</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Epic Activity on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Epic Filenames, BB:BehaviorDefinition: Epic Log Filenames, BB:BehaviorDefinition: Epic Search Terms"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Epic Activity",
+    "Event description: Detects Turla Epic activity which searches for various terms within the victim system.",
+    "Severity: 9, Credibility: 8, Relevance: 9",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

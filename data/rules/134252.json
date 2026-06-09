@@ -1,0 +1,36 @@
+{
+  "uuid": "07a78192-ed46-43b1-973f-c18db1702cfc",
+  "id": "134252",
+  "name": "SID History Injection",
+  "notes": "This rule detects SID (security identifier) history injection activities.",
+  "response_qid": "67501035",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501035"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000934) Success Audit: SID History was added to an account, (5000935) Success Audit: An attempt to add SID History to an account failed</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY SID History Injection on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5000934) Success Audit: SID History was added to an account, (5000935) Success Audit: An attempt to add SID History to an account failed"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: SID History Injection",
+    "Event description: Detects SID history injection activities.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using ProcessName (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

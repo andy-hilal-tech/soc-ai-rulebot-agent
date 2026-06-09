@@ -1,0 +1,40 @@
+{
+  "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+  "id": "140902",
+  "name": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+  "notes": "This Building Block triggers when a high integrity process loads images from a System32 directory that is not C:\\Windows\\System32.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "af9f1ad0-da96-412b-85f0-28a8c335700e",
+    "d11c5659-cf79-4df8-a4c5-f6c102dd321c"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+    "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image) on events which are detected by the LOCAL system",
+    "BB:CategoryDefinition: Elevated Process (Windows)"
+  ],
+  "db_fields_used": [
+    "Process ID, Machine Identifier",
+    "category"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+    "af9f1ad0-da96-412b-85f0-28a8c335700e"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Image Loaded from Mock System Directory, BB:CategoryDefinition: Elevated Process (Windows)</a>",
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Process ID (custom), Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Process ID (custom), Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image) on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Image Loaded from Mock System Directory, BB:CategoryDefinition: Elevated Process (Windows)",
+    "AND when at least 2 events are seen with the same Process ID (custom), Machine Identifier (custom) and different Low Level Category in 2 minutes"
+  ],
+  "RED_list": []
+}

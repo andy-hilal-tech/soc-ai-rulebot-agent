@@ -1,0 +1,41 @@
+{
+  "uuid": "SYSTEM-1340",
+  "id": "119552",
+  "name": "Local Host Sending Malware",
+  "notes": "This rule triggers when a malware is being sent from local hosts.",
+  "response_qid": "67500660",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500660"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "destinationIP",
+    "sourceIP"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Malware</a>",
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Local to Remote</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Source IP</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>not equals</a> <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Local Host Sending Malware on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Malware",
+    "AND when the event context is Local to Local, Local to Remote",
+    "AND when Source IP not equals Destination IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Local Malware Events",
+    "Event description: The system has detected local systems sending malware.",
+    "Severity: 7, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

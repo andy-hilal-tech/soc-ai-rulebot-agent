@@ -1,0 +1,48 @@
+{
+  "uuid": "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+  "id": "102502",
+  "name": "UBA : Login Anomaly",
+  "notes": "Indicates a sequence of login failures to a local asset. Might  indicate account compromise or lateral movement activity. Ensure that the Multiple Login Failures for Single Username rule is enabled. Adjust this rule's match and time duration parameters to tune the responsiveness.",
+  "response_qid": "67500179",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500179"
+  ],
+  "rule_refs": [
+    "SYSTEM-1543",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "SYSTEM-1543"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Multiple Login Failures for Single Username</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Multiple Login Failures for Single Username</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Login Anomaly on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when Multiple Login Failures for Single Username match at least 1 times with the same Username in 15 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Login Anomaly",
+    "Event description: senseValue=5,senseDesc='Indicates a sequence of login failures to a local asset by an account which was observed to be active. Might indicate an account compromise or a lateral movement activity.',usecase_id='b4397bc8-8541-4f61-a2b9-4369cc3b3689'",
+    "Severity: 6, Credibility: 3, Relevance: 3",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\""
+  ]
+}

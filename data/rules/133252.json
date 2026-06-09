@@ -1,0 +1,25 @@
+{
+  "uuid": "0c688149-ac7e-4a55-b3c0-d535324a31bc",
+  "id": "133252",
+  "name": "BB:CategoryDefinition: Mail Applications in Flows",
+  "notes": "This Building Block triggers when communication with a Mail Application is detected.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Mail Applications in Flows on flows which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application is any of [Mail or HttpWeb.FreeEmailSites or HttpWeb.Gmail or HttpWeb.Yahoo!Mail or HttpWeb.AOLMail or HttpWeb.Outlook or HttpWeb.T-OnlineMail or HttpWeb.QQMail]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Mail Applications in Flows on flows which are detected by the undefined system",
+    "AND when the flow matches Application is any of [Mail or HttpWeb.FreeEmailSites or HttpWeb.Gmail or HttpWeb.Yahoo!Mail or HttpWeb.AOLMail or HttpWeb.Outlook or HttpWeb.T-OnlineMail or HttpWeb.QQMail]"
+  ],
+  "RED_list": []
+}

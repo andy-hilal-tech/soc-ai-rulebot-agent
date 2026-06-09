@@ -1,0 +1,34 @@
+{
+  "uuid": "e63d8cc5-b472-46ad-97c9-a921ba8c2d7a",
+  "id": "162357",
+  "name": "Password Policy Discovery",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Ömer Günal, oscd.community, Pawel Mazur\nSIGMA Title: Password Policy Discovery\nSIGMA Description: Detects password policy discovery commands\n\nFalse positives:\n- Legitimate administration activities\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND ((LOWER(UTF8(payload)) LIKE '%path%' AND (LOWER(UTF8(payload)) LIKE '%/etc/pam.d/common-password%' OR LOWER(UTF8(payload)) LIKE '%/etc/security/pwquality.conf%' OR LOWER(UTF8(payload)) LIKE '%/etc/pam.d/system-auth%' OR LOWER(UTF8(payload)) LIKE '%/etc/login.defs%')) OR (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%chage%' AND (LOWER(Command) LIKE '%a1%--list%' OR LOWER(Command) LIKE '%-l%')) OR (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%passwd%' AND (LOWER(Command) LIKE '%a1%-s%' OR LOWER(Command) LIKE '%--status%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Password Policy Discovery on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=11 AND ((LOWER(UTF8(payload)) LIKE '%path%' AND (LOWER(UTF8(payload)) LIKE '%/etc/pam.d/common-password%' OR LOWER(UTF8(payload)) LIKE '%/etc/security/pwquality.conf%' OR LOWER(UTF8(payload)) LIKE '%/etc/pam.d/system-auth%' OR LOWER(UTF8(payload)) LIKE '%/etc/login.defs%')) OR (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%chage%' AND (LOWER(Command) LIKE '%a1%--list%' OR LOWER(Command) LIKE '%-l%')) OR (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%passwd%' AND (LOWER(Command) LIKE '%a1%-s%' OR LOWER(Command) LIKE '%--status%'))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Password Policy Discovery",
+    "Event description: Converted from SIGMA Rule.  Original Author: Ömer Günal, oscd.community, Pawel Mazur SIGMA Title: Password Policy Discovery SIGMA Description: Detects password policy discovery commands  False positives: - Legitimate administration activities  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

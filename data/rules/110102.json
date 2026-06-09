@@ -1,0 +1,25 @@
+{
+  "uuid": "b0cb9a75-185f-44e2-8877-1aaf1aafc72e",
+  "id": "110102",
+  "name": "BB:UBA : Unusual Source Locations",
+  "notes": "A match indicates that an event is sourced from a country that you would not expect under normal circumstances.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Unusual Source Locations on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the source is located in <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>misc.SatelliteProvider,   misc.AnonymousProxy,   Antarctic.Antarctica</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : Unusual Source Locations on events which are detected by the LOCAL system",
+    "AND when the source is located in misc.SatelliteProvider,   misc.AnonymousProxy,   Antarctic.Antarctica"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1045",
+  "id": "100140",
+  "name": "BB:Threats: Scanning: Potential Scan",
+  "notes": "This Building Block identifies potential reconnaissance by flows.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Scanning: Potential Scan on flows which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow type is one of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Superflow A</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Scanning: Potential Scan on flows which are detected by the undefined system",
+    "AND when the flow type is one of Superflow A"
+  ],
+  "RED_list": []
+}

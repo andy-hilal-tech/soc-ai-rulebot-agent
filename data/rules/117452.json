@@ -1,0 +1,25 @@
+{
+  "uuid": "21edbfbc-cba8-4a07-8e4d-72310c8969c8",
+  "id": "117452",
+  "name": "BB:CategoryDefinition: Virtual Machine Restarted",
+  "notes": "This Building Block defines virtual machine restart events.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Virtual Machine Restarted on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Restart Attempt, Audit.Virtual Machine Restart Success</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Virtual Machine Restarted on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Audit.Virtual Machine Restart Attempt, Audit.Virtual Machine Restart Success"
+  ],
+  "RED_list": []
+}

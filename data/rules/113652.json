@@ -1,0 +1,42 @@
+{
+  "uuid": "9af82ddf-bcf9-4f98-91fa-7ca690198f56",
+  "id": "113652",
+  "name": "Service Installed on a Compromised Host",
+  "notes": "This rule triggers when a service has been created on a compromised host.",
+  "response_qid": "67500495",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500495"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "sourceIP"
+  ],
+  "reference_sets": [
+    "69"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5002197) A service was installed in a system</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Compromised Hosts - IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Service Installed on a Compromised Host on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5002197) A service was installed in a system",
+    "AND when any of Source IP are contained in any of Compromised Hosts - IP"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: A Service Has Been Installed in a Compromised Host",
+    "Event description: A Service Has Been Installed in a Compromised Host",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Misc Suspicious Event\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "uuid": "54c22508-a753-401e-8418-04a6f406da95",
+  "id": "162327",
+  "name": "Network Connection Initiated To Cloudflared Tunnels Domains",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Kamran Saifullah, Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: Network Connection Initiated To Cloudflared Tunnels Domains\nSIGMA Description: Detects network connections to Cloudflared tunnels domains initiated by a process on the system.\nAttackers can abuse that feature to establish a reverse shell or persistence on a machine.\n\n\nFalse positives:\n- Legitimate use of cloudflare tunnels will also trigger this.\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND Initiated='true' AND (LOWER(\"Destination Hostname\") LIKE '%.v2.argotunnel.com' OR LOWER(\"Destination Hostname\") LIKE '%protocol-v2.argotunnel.com' OR LOWER(\"Destination Hostname\") LIKE '%trycloudflare.com' OR LOWER(\"Destination Hostname\") LIKE '%update.argotunnel.com')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Network Connection Initiated To Cloudflared Tunnels Domains on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND Initiated='true' AND (LOWER(\"Destination Hostname\") LIKE '%.v2.argotunnel.com' OR LOWER(\"Destination Hostname\") LIKE '%protocol-v2.argotunnel.com' OR LOWER(\"Destination Hostname\") LIKE '%trycloudflare.com' OR LOWER(\"Destination Hostname\") LIKE '%update.argotunnel.com') AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Network Connection Initiated To Cloudflared Tunnels Domains",
+    "Event description: Converted from SIGMA Rule.  Original Author: Kamran Saifullah, Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Network Connection Initiated To Cloudflared Tunnels Domains SIGMA Description: Detects network connections to Cloudflared tunnels domains initiated by a process on the system. Attackers can abuse that feature to establish a reverse shell or persistence on a machine.   False positives: - Legitimate use of cloudflare tunnels will also trigger this.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

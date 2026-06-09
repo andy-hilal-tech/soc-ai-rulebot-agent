@@ -1,0 +1,55 @@
+{
+  "uuid": "0e27f762-bdf6-4cc4-b542-4b59cd33020f",
+  "id": "102252",
+  "name": "UBA : First Access to Critical Assets",
+  "notes": "Indicates that this is a first-time access to a critical asset for this user. The \"Critical Systems Users Seen\" reference collection governs the time-to-live of an observation. By default this rule will detect the first access in three months.",
+  "response_qid": "67500175",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500175"
+  ],
+  "rule_refs": [
+    "SYSTEM-1220",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Success",
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "destinationIP",
+    "userName"
+  ],
+  "reference_sets": [
+    "21",
+    "42"
+  ],
+  "dependencies": [
+    "SYSTEM-1220",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Success, BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Critical Assets - IP</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Destination IP</a> is the key and <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Username</a> is the value in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>Critical Systems Users Seen - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : First Access to Critical Assets on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when an event matches all of the following BB:CategoryDefinition: Authentication Success, BB:UBA : Common Event Filters",
+    "AND when any of Destination IP are contained in any of Critical Assets - IP",
+    "AND NOT when any of Destination IP is the key and any of Username is the value in any of Critical Systems Users Seen - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : First Access to Critical Assets",
+    "Event description: senseValue=10,senseDesc='Indicates that this is the first time access for this user to a critical asset.',usecase_id='0e27f762-bdf6-4cc4-b542-4b59cd33020f'",
+    "Severity: 6, Credibility: 5, Relevance: 4",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\"",
+    "Add the \"userName\" of the event or flow payload to the Reference Set \"UBA : User Accounts, Privileged, Observed\"",
+    "Add \"userName\" to Reference Map Of Sets: \"Critical Systems Users Seen\" with key \"destinationIP\""
+  ]
+}

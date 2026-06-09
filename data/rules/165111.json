@@ -1,0 +1,44 @@
+{
+  "uuid": "36ff596e-3e2c-4652-ba52-6d5b5abd2911",
+  "id": "165111",
+  "name": "QNI : Confidential Content Being Transferred to Foreign Geography",
+  "notes": "This rule detects confidential content that is being transferred to countries/regions with restricted access.\n\nNote that these countries/regions are defined in the Building Block: \"BB:CategoryDefinition: Countries/Regions with Restricted Access\" therefore ensure this is setup according to your business use case before you enable this rule.",
+  "response_qid": "67501759",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501759"
+  ],
+  "rule_refs": [
+    "ad6be411-b766-44a2-adfe-ecb5bf323489"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Countries/Regions with Restricted Access"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "ad6be411-b766-44a2-adfe-ecb5bf323489"
+  ],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when a flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Countries/Regions with Restricted Access</a>",
+    "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Suspect Content Descriptions (QNI)</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>confidential content</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Confidential Content Being Transferred to Foreign Geography on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Remote",
+    "AND when a flow matches any of the following BB:CategoryDefinition: Countries/Regions with Restricted Access",
+    "AND when any of Suspect Content Descriptions (QNI) match confidential content"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Confidential Content Being Transferred to Foreign Geography",
+    "Event description: Detects when confidential content is transferred to Countries/Regions with Restricted Access.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Loss of Confidentiality\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

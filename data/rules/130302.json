@@ -1,0 +1,29 @@
+{
+  "uuid": "443d52de-b29a-4954-b92d-2d34136bd81b",
+  "id": "130302",
+  "name": "BB:Threats: Cryptocurrency Mining Threat Hashes for Flows",
+  "notes": "This Building Block triggers when a cryptocurrency mining file hash is observed.\n\nNote: Populate the Cryptocurrency Mining Threat Hashes Reference Set with relevant file hashes.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Cryptocurrency Mining Threat Hashes for Flows on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [
+    "189"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;File Hash&quot; is NOT NULL</a> AQL filter query",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>File Hash</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Threat Hashes - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Threat Hashes for Flows on flows which are detected by the LOCAL system",
+    "AND when the flow matches \"File Hash\" is NOT NULL AQL filter query",
+    "AND when any of File Hash are contained in any of Cryptocurrency Mining Threat Hashes - AlphaNumeric"
+  ],
+  "RED_list": []
+}

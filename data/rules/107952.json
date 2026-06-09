@@ -1,0 +1,34 @@
+{
+  "uuid": "f3635a23-629e-4d27-a5f2-278e991ff40e",
+  "id": "107952",
+  "name": "BB:UBA : SSH Session Opened",
+  "notes": "Detect SSH Session Opened",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : SSH Session Opened on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application.SSH Opened, Authentication.SSH Session Started</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:UBA : SSH Session Opened on events which are detected by the LOCAL system",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when the event category for the event is one of the following Application.SSH Opened, Authentication.SSH Session Started"
+  ],
+  "RED_list": []
+}

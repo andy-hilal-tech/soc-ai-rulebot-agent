@@ -1,0 +1,31 @@
+{
+  "uuid": "e906916b-1862-4b97-bd9d-8d5262a21e43",
+  "id": "129952",
+  "name": "BB:Threats: Communication to Cryptocurrency Mining URL for Flows",
+  "notes": "This Building Block triggers when a communication to a cryptocurrency mining host is detected.\n\nNote: Populate the Cryptocurrency Mining Hosts with relevant URLs.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Communication to Cryptocurrency Mining URL for Flows on flows which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [
+    "191"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host is not N/A</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>HTTP Host</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Hosts - AlphaNumeric</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Communication to Cryptocurrency Mining URL for Flows on flows which are detected by the LOCAL system",
+    "AND when the flow context is Local to Remote",
+    "AND when the flow matches HTTP Host is not N/A",
+    "AND when any of HTTP Host are contained in any of Cryptocurrency Mining Hosts - AlphaNumeric"
+  ],
+  "RED_list": []
+}

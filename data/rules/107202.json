@@ -1,0 +1,49 @@
+{
+  "uuid": "f626ca0a-a5f6-4b14-806e-557e5b178a71",
+  "id": "107202",
+  "name": "UBA : Detect Persistent SSH session",
+  "notes": "Detects SSH sessions that are active for more than 10 hours.",
+  "response_qid": "67500313",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500313"
+  ],
+  "rule_refs": [
+    "946559d7-07a0-4bb7-a89b-129332e27256",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "f3635a23-629e-4d27-a5f2-278e991ff40e"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : SSH Session Closed",
+    "BB:UBA : SSH Session Closed match in 10 hour(s) after BB:UBA : SSH Session Opened match with the same Username",
+    "BB:UBA : SSH Session Opened"
+  ],
+  "db_fields_used": [
+    "userName, destinationIP, sourceIP, SSH Process ID"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "946559d7-07a0-4bb7-a89b-129332e27256",
+    "f3635a23-629e-4d27-a5f2-278e991ff40e"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when none of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:UBA : SSH Session Closed</a> match in <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>BB:UBA : SSH Session Opened</a> match with the same <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>Username, Destination IP, Source IP, SSH Process ID (custom)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Detect Persistent SSH session on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : Common Event Filters",
+    "AND when none of BB:UBA : SSH Session Closed match in 10 hour(s) after BB:UBA : SSH Session Opened match with the same Username, Destination IP, Source IP, SSH Process ID (custom)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Detect Persistent SSH session",
+    "Event description: senseValue=10,senseDesc='Detects SSH sessions that are active for more than 10 hours.',usecase_id='f626ca0a-a5f6-4b14-806e-557e5b178a71'",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

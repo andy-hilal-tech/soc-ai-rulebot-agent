@@ -1,0 +1,52 @@
+{
+  "uuid": "ccc1185d-4fe8-446a-8522-da7a47b3b173",
+  "id": "111902",
+  "name": "Service Binary Path Update Followed by Remote Thread Creation",
+  "notes": "This rule triggers when a service binary path is updated and a remote thread is created by the same process.",
+  "response_qid": "67500467",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500467"
+  ],
+  "rule_refs": [
+    "6b885afd-3669-434f-8a8f-3e77c3debbd1",
+    "ed84aeeb-9ed3-449b-91d3-9b08a109029e"
+  ],
+  "bb_references": [
+    "BB: CreateRemoteThread Detected",
+    "BB: CreateRemoteThread Detected match at least 1 times in 30 minutes after any of BB: Service Binary Path Has Been Set or Updated match with the same Source IP",
+    "BB: Service Binary Path Has Been Set or Updated"
+  ],
+  "db_fields_used": [
+    "sourceIP, Process Name"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "ed84aeeb-9ed3-449b-91d3-9b08a109029e",
+    "6b885afd-3669-434f-8a8f-3e77c3debbd1"
+  ],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread, (5001832) RegistryEvent (Value Set)</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB: CreateRemoteThread Detected</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB: Service Binary Path Has Been Set or Updated</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Source IP, Process Name (custom)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB: CreateRemoteThread Detected</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB: Service Binary Path Has Been Set or Updated</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Source IP, Process Name (custom)</a>"
+  ],
+  "TD_list": [
+    "APPLY Service Binary Path Update Followed by Remote Thread Creation on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001845) CreateRemoteThread, (5001832) RegistryEvent (Value Set)",
+    "AND when BB: CreateRemoteThread Detected match at least 1 times in 30 minutes after any of BB: Service Binary Path Has Been Set or Updated match with the same Source IP, Process Name (custom)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Service Binary Path Has Been Updated Followed by a CreateRemoteThread Detected From the Same Process",
+    "Event description: Service Binary Path Has Been Updated Followed by a CreateRemoteThread Detected From the Same Process",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Malware\"",
+    "Low-Level Category: \"Misc Malware\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

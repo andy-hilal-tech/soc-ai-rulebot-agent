@@ -1,0 +1,46 @@
+{
+  "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+  "id": "137052",
+  "name": "Critical File Deleted",
+  "notes": "This rule trigggers when a critical file or file in a critical directory is deleted. The swap files are excluded by default and any other file extensions that you do not want to monitor can be excluded as well.\n\nNote: Edit the \"BB:CategoryDefinition: Critical Files and Directories for Endpoint\" Building Block with files or directories to monitor. These locations should be related to boot, backup, logging, or credentials, which have a higher severity when exploited.",
+  "response_qid": "67501073",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501073"
+  ],
+  "rule_refs": [
+    "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "c98476dd-9b17-4d2e-b097-a7a2bc788285"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System",
+    "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+    "BB:DeviceDefinition: Operating System"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+    "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+    "c98476dd-9b17-4d2e-b097-a7a2bc788285"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System, BB:CategoryDefinition: Critical Files and Directories for Endpoint, BB:BehaviorDefinition: Multiple File Deletions on Endpoint System</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Critical File Deleted on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:DeviceDefinition: Operating System, BB:CategoryDefinition: Critical Files and Directories for Endpoint, BB:BehaviorDefinition: Multiple File Deletions on Endpoint System"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Critical File Deleted",
+    "Event description: Detects when a critical file or file in a critical directory is deleted.",
+    "Severity: 7, Credibility: 8, Relevance: 7",
+    "High-Level Category: \"System\"",
+    "Low-Level Category: \"File Deleted\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

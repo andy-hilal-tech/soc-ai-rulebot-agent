@@ -1,0 +1,33 @@
+{
+  "uuid": "56391100-6119-4989-9c22-1248008d79ea",
+  "id": "146652",
+  "name": "BB:BehaviorDefinition: Pass the Hash Activity in Network Logons",
+  "notes": "This building block detects the attack technique pass the hash which is used to move laterally inside the network.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Dave Kennedy, Jeff Warren (method) / David Vassallo (rule)\nSIGMA Title: Pass the Hash Activity 2\nSIGMA Description: Detects the attack technique pass the hash which is used to move laterally inside the network\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Pass the Hash Activity in Network Logons on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000830) Success Audit: An account was successfully logged on</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Logon Type (custom) is any of 3</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Logon Process (custom) is any of NtLmSsp</a>",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Account Security ID (custom) contains any of NULL SID</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Pass the Hash Activity in Network Logons on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5000830) Success Audit: An account was successfully logged on",
+    "AND when the event matches Logon Type (custom) is any of 3",
+    "AND when the event matches Logon Process (custom) is any of NtLmSsp",
+    "AND when the event matches Account Security ID (custom) contains any of NULL SID"
+  ],
+  "RED_list": []
+}

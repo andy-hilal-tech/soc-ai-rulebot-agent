@@ -1,0 +1,47 @@
+{
+  "uuid": "89ee68bc-a2cc-45b9-9b08-0361e0a58b50",
+  "id": "109852",
+  "name": "UBA : User Access from Restricted Location",
+  "notes": "Detects user access from location on \"UBA : Restricted Location List\"\n\nCustomer can add Country(s) from \"geographic location\" to the \"UBA : Restricted Location List\" ",
+  "response_qid": "67500359",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500359"
+  ],
+  "rule_refs": [
+    "5ee6fcf9-2c17-4c59-8797-533542c06992",
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters",
+    "BB:UBA : Excluded Geographic Locations"
+  ],
+  "db_fields_used": [
+    "sourceGeographic"
+  ],
+  "reference_sets": [
+    "65"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "5ee6fcf9-2c17-4c59-8797-533542c06992"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Source Geographic Country/Region</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>UBA : Restricted Location List - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : User Access from Restricted Location on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations",
+    "AND when any of Source Geographic Country/Region are contained in any of UBA : Restricted Location List - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : User Access from Restricted Location",
+    "Event description: senseValue=15",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Geography\""
+  ]
+}

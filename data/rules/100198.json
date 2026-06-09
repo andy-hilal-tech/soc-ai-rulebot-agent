@@ -1,0 +1,31 @@
+{
+  "uuid": "SYSTEM-1419",
+  "id": "100198",
+  "name": "User:BB:FalsePositives: User Defined Server Type 1 False Positive Categories",
+  "notes": "Edit this BB to include any categories to treat as false positives for hosts defined in User-BB-HostDefinition: User Defined Server Type 1",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1276"
+  ],
+  "bb_references": [
+    "BB:FalsePositives: User Defined Server Type 1 False Positive Categories on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1276"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>User-BB-HostDefinition: User Defined Server Type 1</a>",
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Custom.Custom User 9</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY User:BB:FalsePositives: User Defined Server Type 1 False Positive Categories on events which are detected by the undefined system",
+    "AND when we see an event match any of the following User-BB-HostDefinition: User Defined Server Type 1",
+    "AND where the Event Category for the event is one of the following Custom.Custom User 9"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,33 @@
+{
+  "uuid": "eedfa092-9335-478c-bf0e-639323c54e71",
+  "id": "142452",
+  "name": "BB:BehaviorDefinition: Suspicious Outbound SMTP Connections",
+  "notes": "This building block detects potential exfiltration over SMTP protocol.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Suspicious Outbound SMTP Connections on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination Port is any of [25 or 587 or 465 or 2525]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Process Name&quot; ILIKE 'thunderbird.exe' OR &quot;Process Name&quot; ILIKE 'outlook.exe' OR &quot;Process Path&quot; ILIKE '%\\Program Files\\Microsoft\\Exchange Server\\%' OR (&quot;Process Path&quot; ILIKE '%\\Program Files\\WindowsApps\\microsoft.windowscommunicationsapps%' AND &quot;Process Name&quot; ILIKE 'HxTsr.exe')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Outbound SMTP Connections on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Access.ACL Permit",
+    "AND when the event matches Destination Port is any of [25 or 587 or 465 or 2525]",
+    "AND when the event matches Initiated (custom) is any of true",
+    "AND NOT when the event matches \"Process Name\" ILIKE 'thunderbird.exe' OR \"Process Name\" ILIKE 'outlook.exe' OR \"Process Path\" ILIKE '%\\Program Files\\Microsoft\\Exchange Server\\%' OR (\"Process Path\" ILIKE '%\\Program Files\\WindowsApps\\microsoft.windowscommunicationsapps%' AND \"Process Name\" ILIKE 'HxTsr.exe') AQL filter query"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,40 @@
+{
+  "uuid": "15a19dce-d710-450b-856c-efd583fa4e71",
+  "id": "145552",
+  "name": "Persistence via Startup Folder",
+  "notes": "This rule detects when a file with a suspicious extension is created in the startup folder.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Nasreddine Bencherchali\nSIGMA Title: Suspicious Startup Folder Persistence\nSIGMA Description: Detects when a file with a suspicious extension is created in the startup folder\n\n\nConfidence: HIGH\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501497",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501497"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Extension (custom) is any of [vbs or vbe or vba or bat or dll or ps1 or hta or jse or js or lnk]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>File Directory (custom) contains any of Windows\\Start Menu\\Programs\\Startup</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Persistence via Startup Folder on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Created",
+    "AND when the event matches File Extension (custom) is any of [vbs or vbe or vba or bat or dll or ps1 or hta or jse or js or lnk]",
+    "AND when the event matches File Directory (custom) contains any of Windows\\Start Menu\\Programs\\Startup"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Persistence via Startup Folder",
+    "Event description: Detects when a file with a suspicious extension is created in the startup folder",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Bad Content\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

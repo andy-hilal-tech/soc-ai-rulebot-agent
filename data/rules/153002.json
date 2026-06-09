@@ -1,0 +1,33 @@
+{
+  "uuid": "35263108-2716-42ca-b5ec-8d98d6430621",
+  "id": "153002",
+  "name": "BB:BehaviorDefinition: Execution via stordiag",
+  "notes": "This Building Block detects the use of stordiag.exe to execute schtasks.exe systeminfo.exe and fltmc.exe.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Austin Songer (@austinsonger)\nSIGMA Title: Execution via stordiag.exe\nSIGMA Description: Detects the use of stordiag.exe to execute schtasks.exe systeminfo.exe and fltmc.exe\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Execution via stordiag on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of stordiag.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of [schtasks.exe or systeminfo.exe or fltmc.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of [c:\\windows\\syswow64\\ or c:\\windows\\system32\\]</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Execution via stordiag on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Parent Process Name (custom) is any of stordiag.exe",
+    "AND when the event matches Process Name (custom) is any of [schtasks.exe or systeminfo.exe or fltmc.exe]",
+    "AND NOT when the event matches Parent Process Path (custom) contains any of [c:\\windows\\syswow64\\ or c:\\windows\\system32\\]"
+  ],
+  "RED_list": []
+}

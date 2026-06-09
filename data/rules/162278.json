@@ -1,0 +1,34 @@
+{
+  "uuid": "fd881d1c-1f90-41c6-8a7c-0bdb1f25cc96",
+  "id": "162278",
+  "name": "Potential Remote Desktop Connection to Non-Domain Host",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: James Pemberton\nSIGMA Title: Potential Remote Desktop Connection to Non-Domain Host\nSIGMA Description: Detects logons using NTLM to hosts that are potentially not part of the domain.\n\nFalse positives:\n- Host connections to valid domains, exclude these.\n- Host connections not using host FQDN.\n- Host connections to external legitimate domains.\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=8001 AND LOWER(UTF8(payload)) LIKE '%termsrv%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Potential Remote Desktop Connection to Non-Domain Host on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=8001 AND LOWER(UTF8(payload)) LIKE '%termsrv%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Remote Desktop Connection to Non-Domain Host",
+    "Event description: Converted from SIGMA Rule.  Original Author: James Pemberton SIGMA Title: Potential Remote Desktop Connection to Non-Domain Host SIGMA Description: Detects logons using NTLM to hosts that are potentially not part of the domain.  False positives: - Host connections to valid domains, exclude these. - Host connections not using host FQDN. - Host connections to external legitimate domains.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

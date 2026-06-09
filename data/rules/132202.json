@@ -1,0 +1,48 @@
+{
+  "uuid": "cddc9b19-ce44-4ee4-98ec-54f65884d8cb",
+  "id": "132202",
+  "name": "Potential Leakage of Data via High Outbound Emails",
+  "notes": "This rule triggers when a high number of emails is sent to the same email address outside the organization. This could indicate a potential exfiltration of data.",
+  "response_qid": "67500924",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500924"
+  ],
+  "rule_refs": [
+    "943c4414-c48f-4094-8806-52aa23909d68"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: External Email Addresses"
+  ],
+  "db_fields_used": [
+    "Sender, Recipients"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "943c4414-c48f-4094-8806-52aa23909d68"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:BehaviorDefinition: External Email Addresses</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.Mail Send Success</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Sender (custom), Recipients (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Sender (custom), Recipients (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY Potential Leakage of Data via High Outbound Emails on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: External Email Addresses",
+    "AND when the event category for the event is one of the following Application.Mail Send Success",
+    "AND when at least 100 events are seen with the same Sender (custom), Recipients (custom) in 1 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Potential Leakage of Data via High Outbound Emails",
+    "Event description: Detects when a high number of emails are sent to an email address outside the organization",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Information Leak\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

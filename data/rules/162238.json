@@ -1,0 +1,34 @@
+{
+  "uuid": "0484c86b-0692-4a41-b315-bd157edd850a",
+  "id": "162238",
+  "name": "BITS Transfer Job With Uncommon Or Suspicious Remote TLD",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems)\nSIGMA Title: BITS Transfer Job With Uncommon Or Suspicious Remote TLD\nSIGMA Description: Detects a suspicious download using the BITS client from a FQDN that is unusual. Adversaries may abuse BITS jobs to persistently execute or clean up after malicious payloads.\n\nFalse positives:\n- This rule doesn't exclude other known TLDs such as \".org\" or \".net\". It's recommended to apply additional filters for software and scripts that leverage the BITS service\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=16403 AND (NOT((LOWER(UTF8(payload)) LIKE '%.azureedge.net/%' OR LOWER(UTF8(payload)) LIKE '%.com/%' OR LOWER(UTF8(payload)) LIKE '%.sfx.ms/%' OR LOWER(UTF8(payload)) LIKE '%download.mozilla.org/%')))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BITS Transfer Job With Uncommon Or Suspicious Remote TLD on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=16403 AND (NOT((LOWER(UTF8(payload)) LIKE '%.azureedge.net/%' OR LOWER(UTF8(payload)) LIKE '%.com/%' OR LOWER(UTF8(payload)) LIKE '%.sfx.ms/%' OR LOWER(UTF8(payload)) LIKE '%download.mozilla.org/%'))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: BITS Transfer Job With Uncommon Or Suspicious Remote TLD",
+    "Event description: Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems) SIGMA Title: BITS Transfer Job With Uncommon Or Suspicious Remote TLD SIGMA Description: Detects a suspicious download using the BITS client from a FQDN that is unusual. Adversaries may abuse BITS jobs to persistently execute or clean up after malicious payloads.  False positives: - This rule doesn't exclude other known TLDs such as \".org\" or \".net\". It's recommended to apply additional filters for software and scripts that leverage the BITS service  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

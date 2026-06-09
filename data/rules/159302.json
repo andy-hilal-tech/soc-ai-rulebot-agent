@@ -1,0 +1,43 @@
+{
+  "uuid": "a837dc88-a0b4-4606-a07d-144d20452e43",
+  "id": "159302",
+  "name": "Automated Collection Commands",
+  "notes": "This rule detects an adversary using automated techniques for collecting internal data.",
+  "response_qid": "67501672",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501672"
+  ],
+  "rule_refs": [
+    "69441c64-f39e-4a5e-8329-d516148418d5",
+    "86afc4f3-b954-4a34-8ab1-e9d8d4e62061"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Automated Collection Command PowerShell",
+    "BB:BehaviorDefinition: Automated Collection Command Prompt"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "86afc4f3-b954-4a34-8ab1-e9d8d4e62061",
+    "69441c64-f39e-4a5e-8329-d516148418d5"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Automated Collection Command PowerShell, BB:BehaviorDefinition: Automated Collection Command Prompt</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Automated Collection Commands on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Automated Collection Command PowerShell, BB:BehaviorDefinition: Automated Collection Command Prompt"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Automated Collection Commands",
+    "Event description: etects an adversary using automated techniques for collecting internal data.",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Risk\"",
+    "Low-Level Category: \"Data Loss Possible\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "uuid": "44f9c307-1878-4892-a71f-88656a2b6cc4",
+  "id": "100456",
+  "name": "Remote Flood (TCP)",
+  "notes": "Detects when a single host on the internet sends a large number of packets (greater than 60000pps) to a single local destination at least 3 times over a small period of time. The packet rate in this rule can be adjusted as needed to reflect the network.",
+  "response_qid": "67500097",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500097"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the flow bias is any of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>inbound</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP, Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>",
+    "when the IP protocol is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>TCP</a>",
+    "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>60000</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP, Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Remote Flood (TCP) on flows which are detected by the LOCAL system",
+    "AND when the flow bias is any of the following inbound",
+    "AND when at least 3 flows are seen with the same Source IP, Destination IP in 5 minutes",
+    "AND when the IP protocol is one of the following TCP",
+    "AND when the source packets is greater than 60000"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Remote Flood (TCP)",
+    "Event description: Single host on the internet sending a large number of packets (greater than 60000pps) to a single local destination at least 3 times over a small period of time. This can indicate an attack or a service that has become unresponsive.",
+    "Severity: 3, Credibility: 5, Relevance: 4",
+    "High-Level Category: \"DOS\"",
+    "Low-Level Category: \"Low Rate DoS\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

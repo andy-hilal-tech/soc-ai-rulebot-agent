@@ -1,0 +1,56 @@
+{
+  "uuid": "d26624b0-2441-4a57-ba64-a057ada319b1",
+  "id": "164755",
+  "name": "Multiple Login Failures for Single Username",
+  "notes": "Reports authentication failures for the same username",
+  "response_qid": "67500015",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500015"
+  ],
+  "rule_refs": [
+    "SYSTEM-1201",
+    "f0fb6d85-2003-44d3-bd7b-1b761be468e5"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Authentication Failures"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    {
+      "uuid": "f0fb6d85-2003-44d3-bd7b-1b761be468e5",
+      "name": "application misconfiguration issue - DB -BDF"
+    },
+    {
+      "uuid": "SYSTEM-1201",
+      "name": "BB:CategoryDefinition: Authentication Failures"
+    }
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>application misconfiguration issue - DB -BDF</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>4</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>",
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Failures</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>4</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Multiple Login Failures for Single Username on events which are detected by the LOCAL system",
+    "AND NOT when an event matches any of the following application misconfiguration issue - DB -BDF",
+    "AND when at least 4 events are seen with the same Username in 3 minutes",
+    "AND when an event matches any of the following BB:CategoryDefinition: Authentication Failures"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Login Failures for the Same User",
+    "Event description: Detected multiple (10) authentication failures for the same user name in a 5 minute period.",
+    "Severity: 4, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"User Login Failure\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

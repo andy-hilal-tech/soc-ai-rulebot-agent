@@ -1,0 +1,34 @@
+{
+  "uuid": "627b219f-fa7e-4197-aaea-69af07e15314",
+  "id": "162285",
+  "name": "Successful Overpass the Hash Attempt",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Roberto Rodriguez (source), Dominik Schaudel (rule)\nSIGMA Title: Successful Overpass the Hash Attempt\nSIGMA Description: Detects successful logon with logon type 9 (NewCredentials) which matches the Overpass the Hash behavior of e.g Mimikatz's sekurlsa::pth module.\n\nFalse positives:\n- Runas command-line tool using /netonly parameter\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4624 AND \"Logon Type\"=9 AND LOWER(UTF8(payload)) LIKE '%seclogo%' AND LOWER(UTF8(payload)) LIKE '%negotiate%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Successful Overpass the Hash Attempt on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4624 AND \"Logon Type\"=9 AND LOWER(UTF8(payload)) LIKE '%seclogo%' AND LOWER(UTF8(payload)) LIKE '%negotiate%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Successful Overpass the Hash Attempt",
+    "Event description: Converted from SIGMA Rule.  Original Author: Roberto Rodriguez (source), Dominik Schaudel (rule) SIGMA Title: Successful Overpass the Hash Attempt SIGMA Description: Detects successful logon with logon type 9 (NewCredentials) which matches the Overpass the Hash behavior of e.g Mimikatz's sekurlsa::pth module.  False positives: - Runas command-line tool using /netonly parameter  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

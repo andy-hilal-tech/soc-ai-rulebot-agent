@@ -1,0 +1,29 @@
+{
+  "uuid": "b90c56ec-2669-4736-9d75-9f11650f9ee3",
+  "id": "149002",
+  "name": "BB:BehaviorDefinition: Security Software Discovery - Powershell",
+  "notes": "This Building Block detects powershell security software discovery.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Security Software Discovery by Powershell\nSIGMA Description: Adversaries may attempt to get a listing of security software, configurations, defensive tools, and sensors that are installed on a system or in a cloud environment. This may include things such as firewall rules and anti-viru\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Security Software Discovery - Powershell on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%get-process%' AND LOWER(&quot;Command&quot;) LIKE '%.Description%' AND LOWER(&quot;Command&quot;) LIKE '%-like%' AND (LOWER(&quot;Command&quot;) LIKE '%\\*virus*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*carbonblack*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*defender*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*cylance*\\%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Security Software Discovery - Powershell on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success",
+    "AND when the event matches LOWER(\"Command\") LIKE '%get-process%' AND LOWER(\"Command\") LIKE '%.Description%' AND LOWER(\"Command\") LIKE '%-like%' AND (LOWER(\"Command\") LIKE '%\\*virus*\\%' OR LOWER(\"Command\") LIKE '%\\*carbonblack*\\%' OR LOWER(\"Command\") LIKE '%\\*defender*\\%' OR LOWER(\"Command\") LIKE '%\\*cylance*\\%') AQL filter query"
+  ],
+  "RED_list": []
+}

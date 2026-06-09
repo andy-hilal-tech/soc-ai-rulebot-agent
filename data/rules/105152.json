@@ -1,0 +1,40 @@
+{
+  "uuid": "817bc501-efaf-43b9-8027-c96cef117076",
+  "id": "105152",
+  "name": "UBA : Browsed to Business/Service Website",
+  "notes": "A user has accessed a URL which may indicate elevated security or legal risk.\n\nReferences: \n    http://sitereview.bluecoat.com/categories.jsp\n",
+  "response_qid": "67500243",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500243"
+  ],
+  "rule_refs": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "bb_references": [
+    "BB:UBA : URL Category Filter"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%business%' OR &quot;Web Category&quot; ilike '%financ%' OR &quot;Web Category&quot; ilike '%stock%' OR &quot;Web Category&quot; ilike '%trading%'OR &quot;Web Category&quot; ilike '%job%' OR &quot;Web Category&quot; ilike '%auction%' OR &quot;Web Category&quot; ilike '%fashion%' OR &quot;Web Category&quot; ilike '%real estate%' OR &quot;Web Category&quot; ilike '%marketing%' OR &quot;Web Category&quot; ilike '%vehicle%' OR &quot;Web Category&quot; ilike '%pharmacy%' OR &quot;Web Category&quot; in (2, 68, 96, 102, 203)</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Browsed to Business/Service Website on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : URL Category Filter",
+    "AND when the event matches \"Web Category\" ilike '%business%' OR \"Web Category\" ilike '%financ%' OR \"Web Category\" ilike '%stock%' OR \"Web Category\" ilike '%trading%'OR \"Web Category\" ilike '%job%' OR \"Web Category\" ilike '%auction%' OR \"Web Category\" ilike '%fashion%' OR \"Web Category\" ilike '%real estate%' OR \"Web Category\" ilike '%marketing%' OR \"Web Category\" ilike '%vehicle%' OR \"Web Category\" ilike '%pharmacy%' OR \"Web Category\" in (2, 68, 96, 102, 203) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Browsed to Business/Service Website",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Behavior\""
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "uuid": "SYSTEM-1291",
+  "id": "122952",
+  "name": "Source Vulnerable to this Exploit",
+  "notes": "This rule triggers when a local host is attacked where the source host is vulnerable to the attack being used. This could indicate the host was targeted in a previous exploit or vulnerability.",
+  "response_qid": "67500711",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500711"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Exploit, Potential Exploit</a>",
+    "when the event context is <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>",
+    "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>source</a> is vulnerable to <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>current</a> exploit on <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> port"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Source Vulnerable to this Exploit on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Exploit, Potential Exploit",
+    "AND when the event context is Local to Local, Remote to Local",
+    "AND when the source is vulnerable to current exploit on any port"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Source vulnerable to same attack.",
+    "Event description: Detects when a local host is attacked where the source host is vulnerable to the attack being used. This could indicate the host was targeted in a previous exploit or vulnerability.",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Misc Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "Include detected events by \"Source IP\" from this point forward, in the offense, for 300 second(s)",
+    "This information should not contribute to the naming of the associated offense(s)"
+  ]
+}

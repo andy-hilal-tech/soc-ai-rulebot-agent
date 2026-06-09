@@ -1,0 +1,43 @@
+{
+  "uuid": "278aafb2-c81e-4ca1-b49d-a8fd5be7f00f",
+  "id": "144302",
+  "name": "MITRE.LIN.T1190.RULE Exploit Public-Facing Application",
+  "notes": "No action required\nGet more Linux MITRE rules: https://www.scnsoft.com/services/security/siem/linux-mitre-attack-rules",
+  "response_qid": "67501196",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501196"
+  ],
+  "rule_refs": [
+    "37fcfcbd-d1e5-43c4-a050-146fe4873988"
+  ],
+  "bb_references": [
+    "BB:MITRE.LIN.T1190: Public-Facing Application"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "37fcfcbd-d1e5-43c4-a050-146fe4873988"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:MITRE.LIN.T1190: Public-Facing Application</a>",
+    "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> is vulnerable to <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>any</a> exploit on <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> port"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY MITRE.LIN.T1190.RULE Exploit Public-Facing Application on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:MITRE.LIN.T1190: Public-Facing Application",
+    "AND when the source is vulnerable to any exploit on any port"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: MITRE.LIN.T1190.RULE Exploit Public-Facing Application",
+    "Event description: The use of software, data, or commands to take advantage of a weakness in an Internet-facing computer system or program in order to cause unintended or unanticipated behavior. The weakness in the system can be a bug, a glitch, or a design vulnerability.\nSee more on: https://attack.mitre.org/techniques/T1190",
+    "Severity: 9, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Linux Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "Include detected events by \"Source IP\" from this point forward, in the offense, for 0 second(s)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

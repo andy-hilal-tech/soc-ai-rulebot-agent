@@ -1,0 +1,34 @@
+{
+  "uuid": "87b75791-2dec-445a-ae6d-bd917257b2a6",
+  "id": "165109",
+  "name": "QNI : Access to Improperly Secured Service - BitTorrent Handshake Verification Failure",
+  "notes": "This rule triggers when a failed handshake verification has been observed in BitTorrent network communications.",
+  "response_qid": "67501748",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501748"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when any of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Suspect Content Descriptions</a> match <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BitTorrent Handshake verification failure</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY QNI : Access to Improperly Secured Service - BitTorrent Handshake Verification Failure on flows which are detected by the LOCAL system",
+    "AND when any of Suspect Content Descriptions match BitTorrent Handshake verification failure"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: QNI : Access to Improperly Secured Service - BitTorrent Handshake Verification Failure",
+    "Event description: A failed handshake verification has been observed in BitTorrent network communications.",
+    "Severity: 7, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Flow\"",
+    "Low-Level Category: \"Suspicious TCP Flow\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

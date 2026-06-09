@@ -1,0 +1,23 @@
+{
+  "uuid": "533c9470-e2ec-4726-b9c5-67585d50a7e1",
+  "id": "100652",
+  "name": "UBA : Create Offense",
+  "notes": "",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(104000010) Sense Offense Inject, (104000078) UBA Offense - User crossed risk threshold</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Create Offense on events which are detected by the LOCAL system",
+    "AND when the event QID is one of the following (104000010) Sense Offense Inject, (104000078) UBA Offense - User crossed risk threshold"
+  ],
+  "RED_list": []
+}

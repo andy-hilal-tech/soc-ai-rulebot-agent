@@ -1,0 +1,52 @@
+{
+  "uuid": "157d49e4-3f02-4ab8-850a-637c7d09b48a",
+  "id": "132602",
+  "name": "Inbound Email with Suspicious Subject Keywords",
+  "notes": "This rule triggers when an email is received with a suspicious subject or a subject conveying some sense of urgency. \n\nNote: Update the regular expression to include suspicious keywords.",
+  "response_qid": "67500931",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500931"
+  ],
+  "rule_refs": [
+    "4897fd3d-d623-4727-83a5-a5e2b4dd93e7",
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Mail"
+  ],
+  "db_fields_used": [
+    "Subject"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+    "4897fd3d-d623-4727-83a5-a5e2b4dd93e7"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Application.Mail Receive</a>",
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Inbound Email with Suspicious Subject</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Subject (custom) is not N/A</a>",
+    "when any of <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Subject (custom)</a> match <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>(?i)congratulations|\\burgent|pharmacy|lottery|payment|purchase|deposit|refund|voice\\s*mail|charity|donation|delivery|tax|heritage</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Inbound Email with Suspicious Subject Keywords on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Mail",
+    "AND when the event category for the event is one of the following Application.Mail Receive",
+    "AND NOT when an event matches any of the following Inbound Email with Suspicious Subject",
+    "AND when the event matches Subject (custom) is not N/A",
+    "AND when any of Subject (custom) match (?i)congratulations|\\burgent|pharmacy|lottery|payment|purchase|deposit|refund|voice\\s*mail|charity|donation|delivery|tax|heritage"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Inbound Email with Suspicious Subject Keywords",
+    "Event description: Detects when an email is received with a suspicious subject or a subject conveying some sense of urgency. ",
+    "Severity: 8, Credibility: 7, Relevance: 8",
+    "High-Level Category: \"Exploit\"",
+    "Low-Level Category: \"Mail Exploit\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Sender (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

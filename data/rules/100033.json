@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1287",
+  "id": "100033",
+  "name": "BB:ProtocolDefinition: Windows Protocols",
+  "notes": "Edit this BB to include all common protocols (not including TCP) used by Windows servers that will be ignored for false positive tuning rules.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:ProtocolDefinition: Windows Protocols on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP.icmp_ip, UDP.udp_ip</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:ProtocolDefinition: Windows Protocols on events which are detected by the undefined system",
+    "AND where IP protocol is one of the following ICMP.icmp_ip, UDP.udp_ip"
+  ],
+  "RED_list": []
+}

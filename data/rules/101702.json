@@ -1,0 +1,50 @@
+{
+  "uuid": "3e2a3b98-c0c2-4e47-a20a-7210230901ea",
+  "id": "101702",
+  "name": "UBA : Populate Multiple VPN Accounts Failed Login from Single IP",
+  "notes": "Detects when there are multiple, different VPN account login failures from the same source IP address.",
+  "response_qid": "67500171",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500171"
+  ],
+  "rule_refs": [
+    "91aa03b6-e94d-4b86-8551-ea98850bb528"
+  ],
+  "bb_references": [
+    "BB:UBA : VPN Login Failed"
+  ],
+  "db_fields_used": [
+    "sourceIP",
+    "userName"
+  ],
+  "reference_sets": [
+    "37"
+  ],
+  "dependencies": [
+    "91aa03b6-e94d-4b86-8551-ea98850bb528"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : VPN Login Failed</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Multiple VPN Accounts Failed Login from Single IP - IP</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Populate Multiple VPN Accounts Failed Login from Single IP on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:UBA : VPN Login Failed",
+    "AND NOT when any of Source IP are contained in any of UBA : Multiple VPN Accounts Failed Login from Single IP - IP",
+    "AND when at least 2 events are seen with the same Source IP and different Username in 1 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Populate Multiple VPN Accounts Failed Login from Single IP",
+    "Event description: senseValue=5",
+    "Severity: 5, Credibility: 5, Relevance: 5",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\"",
+    "Add the \"sourceIP\" of the event or flow payload to the Reference Set \"UBA : Multiple VPN Accounts Failed Login from Single IP\""
+  ]
+}

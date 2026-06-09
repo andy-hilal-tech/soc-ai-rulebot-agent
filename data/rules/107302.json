@@ -1,0 +1,44 @@
+{
+  "uuid": "9a065b9e-314e-4dbf-ac58-5e296d4c0ecd",
+  "id": "107302",
+  "name": "UBA : Restricted Program Usage",
+  "notes": "This rule indicates when a process is created and the process name matches one of the binary names listed in the reference set \"UBA : Restricted Program Filenames\". This reference set is for client customization and has been left blank by default. The suggested use of this rule and reference is that the client populates them with names of filenames which the client knows they'd like to monitor in the interests of risk management.\n\nDetection notes and modification:\n    The scope of this rule can be modified by adding and/or removing binary names for restricted tools to \"UBA : Restricted Program Filenames\"\n\n    The reference set has been left blank by default.\n\n    Example: To add detection for The Onion Router and The Onion Router browser executables, add the values 'tor.exe'  and ''Start Tor Browser.exe\" to the reference set 'UBA : Restricted Program Filenames' [Note - Do not include the quotes. For full details please see Qradar SIEM administration documentation topics 'Reference sets management' -and- 'Adding an element to a reference set' topics. ]\n\n    The reference set \"UBA : Restricted Program Filenames\" is not case sensitive. 'start tor browser.exe' is equivalent to 'Start Tor Browser.exe'.\n\n    The rule will not trigger if the Username is unavailable or any of the other \"UBA : Common Event Filters\" tests are true.",
+  "response_qid": "67500314",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500314"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "bb_references": [
+    "BB:UBA : Common Event Filters"
+  ],
+  "db_fields_used": [
+    "Object Name, Filename"
+  ],
+  "reference_sets": [
+    "57"
+  ],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Object Name (custom), Filename (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) UBA : Restricted Program Filenames - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Restricted Program Usage on events which are detected by the GLOBAL system",
+    "AND when an event matches all of the following BB:UBA : Common Event Filters",
+    "AND when any of Object Name (custom), Filename (custom) are contained in any of (Shared) UBA : Restricted Program Filenames - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Restricted Program Usage",
+    "Event description: senseValue=5,senseDesc='This rule indicates when a process is created and the process name matches one of the binary names listed in the reference set \"UBA : Restricted Program Filenames\".',usecase_id='9a065b9e-314e-4dbf-ac58-5e296d4c0ecd'",
+    "Severity: 3, Credibility: 5, Relevance: 3",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"Resource Risk\""
+  ]
+}

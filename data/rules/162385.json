@@ -1,0 +1,34 @@
+{
+  "uuid": "c026d240-7a31-45c5-9eff-6e058d313f04",
+  "id": "162385",
+  "name": "HackTool - EDRSilencer Execution - Filter Added",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: Thodoris Polyzos (@SmoothDeploy)\nSIGMA Title: HackTool - EDRSilencer Execution - Filter Added\nSIGMA Description: Detects execution of EDRSilencer, a tool that abuses the Windows Filtering Platform (WFP) to block the outbound traffic of running EDR agents based on specific hardcoded filter names.\n\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\" IN('5441', '5447')) AND LOWER(UTF8(payload)) LIKE '%custom outbound filter%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY HackTool - EDRSilencer Execution - Filter Added on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND (\"Event ID\" IN('5441', '5447')) AND LOWER(UTF8(payload)) LIKE '%custom outbound filter%' AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: HackTool - EDRSilencer Execution - Filter Added",
+    "Event description: Converted from SIGMA Rule.  Original Author: Thodoris Polyzos (@SmoothDeploy) SIGMA Title: HackTool - EDRSilencer Execution - Filter Added SIGMA Description: Detects execution of EDRSilencer, a tool that abuses the Windows Filtering Platform (WFP) to block the outbound traffic of running EDR agents based on specific hardcoded filter names.   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

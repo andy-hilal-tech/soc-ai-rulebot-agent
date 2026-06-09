@@ -1,0 +1,29 @@
+{
+  "uuid": "8c2fae1d-93e2-4315-92ac-94dfee46cd4a",
+  "id": "129902",
+  "name": "BB:Threats: Communication to Cryptocurrency Mining IP",
+  "notes": "This Building Block triggers when a communication to a cryptocurrency mining IP is detected.\n\nNote: Populate the Cryptocurrency Mining IPs Reference Set with IP addresses to monitor.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Communication to Cryptocurrency Mining IP on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [
+    "190"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Destination Address</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining IPs - IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Communication to Cryptocurrency Mining IP on events which are detected by the LOCAL system",
+    "AND when the context is Local to Remote",
+    "AND when any of Destination Address are contained in any of Cryptocurrency Mining IPs - IP"
+  ],
+  "RED_list": []
+}

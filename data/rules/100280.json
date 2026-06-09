@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1211",
+  "id": "100280",
+  "name": "BB:CategoryDefinition: System Errors and Failures",
+  "notes": "Edit this BB to include all events that may indicate a system error or failure. By default, this BB applies when the event category for the event is one of the following System categories: Service Failure, System Error, System Failure.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: System Errors and Failures on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Service Failure, System.System Error, System.System Failure , System.Failed Application Modification, System.Failed Configuration Modification, System.Failed File Modification, System.Failed Host-Policy Modification, System.Failed Registry Modification, System.Failed Service Modification, System.Failed Stack Modification</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: System Errors and Failures on events which are detected by the undefined system",
+    "AND where the Event Category for the event is one of the following System.Service Failure, System.System Error, System.System Failure , System.Failed Application Modification, System.Failed Configuration Modification, System.Failed File Modification, System.Failed Host-Policy Modification, System.Failed Registry Modification, System.Failed Service Modification, System.Failed Stack Modification"
+  ],
+  "RED_list": []
+}

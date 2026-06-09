@@ -1,0 +1,55 @@
+{
+  "uuid": "5938164a-f85f-4e55-b483-5c232e26101c",
+  "id": "126152",
+  "name": "Namespace Created Followed by Multiple Resources Created on a Container Environment",
+  "notes": "This rule triggers when an unauthorized user creates a new namespace, followed by multiple resources creation in that namespace. Creating a namespace is a valid action for any user, but creating multiple resources in the namespace right after creating the namespace is suspicious.\n\nNote: Edit the rule to replace \"authorized_users\" by typical administrators of the system.",
+  "response_qid": "67500785",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500785"
+  ],
+  "rule_refs": [
+    "1f44ce9f-5c92-4154-b3bb-a52ff717ff77",
+    "7db081f7-b3c4-452d-ba76-e7ab18ea80d5",
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "bb_references": [
+    "BB:BehaviourDefinition: Unauthorized User Creating Namespaces",
+    "BB:CategoryDefinition: Resource Creation Events",
+    "BB:CategoryDefinition: Resource Creation Events match at least 10 times with the same Namespace (custom) in 15 minutes after BB:BehaviourDefinition: Unauthorized User Creating Namespaces match",
+    "BB:DeviceDefinition: Containers"
+  ],
+  "db_fields_used": [
+    "Namespace"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd",
+    "7db081f7-b3c4-452d-ba76-e7ab18ea80d5",
+    "1f44ce9f-5c92-4154-b3bb-a52ff717ff77"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>",
+    "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Username is not any of authorized_users</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Resource Creation Events</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Namespace (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Unauthorized User Creating Namespaces</a> match"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Resource Creation Events</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Namespace (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Unauthorized User Creating Namespaces</a> match"
+  ],
+  "TD_list": [
+    "APPLY Namespace Created Followed by Multiple Resources Created on a Container Environment on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Containers",
+    "AND when the event matches Username is not any of authorized_users",
+    "AND when BB:CategoryDefinition: Resource Creation Events match at least 10 times with the same Namespace (custom) in 15 minutes after BB:BehaviourDefinition: Unauthorized User Creating Namespaces match"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Namespace Created Followed by Multiple Resources Created on a Container Environment",
+    "Event description: Detects new namespace created by unauthorized user, followed by multiple resources created.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Create Activity Succeeded\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

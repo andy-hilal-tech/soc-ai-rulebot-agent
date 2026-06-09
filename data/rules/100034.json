@@ -1,0 +1,34 @@
+{
+  "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+  "id": "100034",
+  "name": "BB:HostReference: Database Servers",
+  "notes": "Include Database Server IPs in the reference set \"Database Servers - IP\".",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1226"
+  ],
+  "bb_references": [
+    "BB:HostReference: Database Servers on events which are detected by the LOCAL system",
+    "BB:PortDefinition: Database Ports"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [
+    "10"
+  ],
+  "dependencies": [
+    "SYSTEM-1226"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:PortDefinition: Database Ports</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Destination Address</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Database Servers - IP</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostReference: Database Servers on events which are detected by the LOCAL system",
+    "AND when a flow or an event matches any of the following BB:PortDefinition: Database Ports",
+    "AND when any of Destination Address are contained in any of Database Servers - IP"
+  ],
+  "RED_list": []
+}

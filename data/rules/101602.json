@@ -1,0 +1,49 @@
+{
+  "uuid": "52d085dd-b9dd-4216-8c4b-1d0f813f3aa6",
+  "id": "101602",
+  "name": "UBA : Populate Multiple VPN Accounts Logged In from Single IP",
+  "notes": "Maps multiple VPN users that are coming from the same IP address and then raises the risk score. When the rule detects VPN users coming from the same IP address, the IP address is added to the \"UBA : Multiple VPN Accounts Logged In from Single IP” reference set.",
+  "response_qid": "67500169",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500169"
+  ],
+  "rule_refs": [
+    "0e75461e-461d-47eb-81e6-3c5e8feeb00b"
+  ],
+  "bb_references": [
+    "BB:UBA : VPN Login Successful",
+    "BB:UBA : VPN Login Successful match at least 2 times with the same Source IP and different Username in 1 hour(s)"
+  ],
+  "db_fields_used": [
+    "sourceIP",
+    "userName"
+  ],
+  "reference_sets": [
+    "38"
+  ],
+  "dependencies": [
+    "0e75461e-461d-47eb-81e6-3c5e8feeb00b"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Multiple VPN Accounts Logged In From Single IP - IP</a>",
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:UBA : VPN Login Successful</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Source IP</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:UBA : VPN Login Successful</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Source IP</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY UBA : Populate Multiple VPN Accounts Logged In from Single IP on events which are detected by the LOCAL system",
+    "AND NOT when any of Source IP are contained in any of UBA : Multiple VPN Accounts Logged In From Single IP - IP",
+    "AND when BB:UBA : VPN Login Successful match at least 2 times with the same Source IP and different Username in 1 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Populate Multiple VPN Accounts Logged In from Single IP",
+    "Event description: senseValue=15",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Access\"",
+    "Add the \"sourceIP\" of the event or flow payload to the Reference Set \"UBA : Multiple VPN Accounts Logged In from Single IP\""
+  ]
+}

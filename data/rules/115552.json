@@ -1,0 +1,45 @@
+{
+  "uuid": "a9897d8a-da2d-49c9-b6ec-816b479598da",
+  "id": "115552",
+  "name": "Known Process Started with a Different Hash",
+  "notes": "This rule triggers when a known process is started with an unknown hash.",
+  "response_qid": "67500440",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500440"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [
+    "File Hash",
+    "Process Name"
+  ],
+  "reference_sets": [
+    "67"
+  ],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>ProcessNametoHashRefMapOfSetKeys - AlphaNumeric (Ignore Case)</a>",
+    "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Process Name (custom)</a> is the key and <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>File Hash (custom)</a> is the value in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>ProcessNametoHash - AlphaNumeric (Ignore Case)</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Known Process Started with a Different Hash on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event QID is one of the following (5001828) Process Create",
+    "AND when any of Process Name (custom) are contained in any of ProcessNametoHashRefMapOfSetKeys - AlphaNumeric (Ignore Case)",
+    "AND NOT when any of Process Name (custom) is the key and any of File Hash (custom) is the value in any of ProcessNametoHash - AlphaNumeric (Ignore Case)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Detected a Known Process Started with a New Unseen Hash",
+    "Event description: Detects if a known process will be started with a new hash, it can help to detect some privilege escalation techniques",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Windows Events\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

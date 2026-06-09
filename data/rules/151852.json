@@ -1,0 +1,29 @@
+{
+  "uuid": "da47a940-da7c-4ec4-8870-135706955c16",
+  "id": "151852",
+  "name": "BB:BehaviorDefinition: Clearing Windows Console History",
+  "notes": "This Building Block identifies when a user attempts to clear console history. An adversary may clear the command history of a compromised account to conceal the actions undertaken during an intrusion.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Austin Songer @austinsonger\nSIGMA Title: Clearing Windows Console History\nSIGMA Description: Identifies when a user attempts to clear console history. An adversary may clear the command history of a compromised account to conceal the actions undertaken during an intrusion.\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Clearing Windows Console History on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%clear-history%' or (LOWER(&quot;Command&quot;) LIKE '%remove-item%' or LOWER(&quot;Command&quot;) LIKE '%rm%') and (LOWER(&quot;Command&quot;) LIKE '%consolehost_history.txt%' or LOWER(&quot;Command&quot;) LIKE '%(get-psreadlineoption).historysavepath%'))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Clearing Windows Console History on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following Audit.Command Execution Success",
+    "AND when the event matches (LOWER(\"Command\") LIKE '%clear-history%' or (LOWER(\"Command\") LIKE '%remove-item%' or LOWER(\"Command\") LIKE '%rm%') and (LOWER(\"Command\") LIKE '%consolehost_history.txt%' or LOWER(\"Command\") LIKE '%(get-psreadlineoption).historysavepath%')) AQL filter query"
+  ],
+  "RED_list": []
+}

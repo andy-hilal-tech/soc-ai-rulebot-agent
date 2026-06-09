@@ -1,0 +1,27 @@
+{
+  "uuid": "ef0f5a26-d151-44a0-a3e5-7cba0ba2e8b1",
+  "id": "130802",
+  "name": "BB:Threats: Cryptocurrency Mining Ports",
+  "notes": "This Building Block triggers when a communication using a common cryptocurrency mining port is detected.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Threats: Cryptocurrency Mining Ports on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>",
+    "when the destination port is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>65530, 65531, 65532, 65533, 3333, 4444, 5555, 7777, 9999, 45700, 8333, 8124, 9333</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Threats: Cryptocurrency Mining Ports on events which are detected by the LOCAL system",
+    "AND when the destination is Remote",
+    "AND when the destination port is one of the following 65530, 65531, 65532, 65533, 3333, 4444, 5555, 7777, 9999, 45700, 8333, 8124, 9333"
+  ],
+  "RED_list": []
+}

@@ -1,0 +1,27 @@
+{
+  "uuid": "SYSTEM-1276",
+  "id": "100199",
+  "name": "User:BB:HostDefinition: Server Type 1 - User Defined",
+  "notes": "Edit this BB to include the source IP address of your custom server type (or use server discovery). Then add any events or categories you wish to treat as false positives to these servers on the defined ports in the \"User:BB:FalsePositives: User Defined Server Type 1 False Positive Events\" or \"User:BB:FalsePositives: User Defined Server Type 1 False Positive Categories\".",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:HostDefinition: Server Type 1 - User Defined on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "where either the source or destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>",
+    "where the Destination Port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY User:BB:HostDefinition: Server Type 1 - User Defined on events which are detected by the undefined system",
+    "AND where either the source or destination IP is one of the following 127.0.0.2",
+    "AND where the Destination Port is one of the following 1"
+  ],
+  "RED_list": []
+}

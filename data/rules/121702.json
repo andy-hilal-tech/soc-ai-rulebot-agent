@@ -1,0 +1,48 @@
+{
+  "uuid": "a209baf1-3d6e-4b55-9bfb-71d9238023b9",
+  "id": "121702",
+  "name": "Suspicious Web Server Activities",
+  "notes": "This rule triggers when either a web server client error or server error is detected. This could indicate a suspicious activity.",
+  "response_qid": "67500698",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500698"
+  ],
+  "rule_refs": [
+    "14f6f4a3-b514-4285-a8c7-f3aab124ebf9",
+    "881680b3-e376-4183-8ed2-c07080eeb6a3"
+  ],
+  "bb_references": [
+    "BB:Threats: HTTP Client Status",
+    "BB:Threats: HTTP Server Status",
+    "BB:Threats: HTTP Server Status match at least 15 times with the same Source Address"
+  ],
+  "db_fields_used": [
+    "sourceaddress, destinationaddress"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "881680b3-e376-4183-8ed2-c07080eeb6a3",
+    "14f6f4a3-b514-4285-a8c7-f3aab124ebf9"
+  ],
+  "conditions_text": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Threats: HTTP Client Status, BB:Threats: HTTP Server Status</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>15</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source Address, Destination Address</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Threats: HTTP Client Status, BB:Threats: HTTP Server Status</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>15</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source Address, Destination Address</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Suspicious Web Server Activities on events which are detected by the LOCAL system",
+    "AND when BB:Threats: HTTP Client Status, BB:Threats: HTTP Server Status match at least 15 times with the same Source Address, Destination Address in 30 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Web Server Activities",
+    "Event description: Detects when either a web server client error or server error is detected.",
+    "Severity: 8, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

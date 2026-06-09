@@ -1,0 +1,32 @@
+{
+  "uuid": "SYSTEM-1381",
+  "id": "100177",
+  "name": "BB:FalsePositive: Network Management Server Recon",
+  "notes": "Edit this BB to define all the false positive categories that occur to or from network management servers that are defined in the BB:HostDefinition: Network Management Servers building block. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1224"
+  ],
+  "bb_references": [
+    "BB:FalsePositive: Network Management Server Recon on events which are detected by the undefined system",
+    "BB:HostDefinition: Network Management Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1224"
+  ],
+  "conditions_text": [
+    "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Network Management Servers</a>",
+    "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Recon, Suspicious</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:FalsePositive: Network Management Server Recon on events which are detected by the undefined system",
+    "AND when we see an event match any of the following BB:HostDefinition: Network Management Servers",
+    "AND where the Event Category for the event is one of the following Recon, Suspicious"
+  ],
+  "RED_list": []
+}

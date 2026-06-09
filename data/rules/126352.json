@@ -1,0 +1,52 @@
+{
+  "uuid": "c883b28c-361e-4544-b390-679fdad5adbb",
+  "id": "126352",
+  "name": "Multiple Sensitive Resources Deleted",
+  "notes": "This rule triggers when multiple sensitive resources are being deleted. This may indicate an intruder is compromising sensitive information.\n\nNote: The Sensitive Resource Names reference map of sets must be populated with the relevant names.",
+  "response_qid": "67500787",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500787"
+  ],
+  "rule_refs": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Containers"
+  ],
+  "db_fields_used": [
+    "Resource",
+    "Resource Name",
+    "sourceaddress"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "94fbba56-99ff-407e-a84d-827a99baf6fd"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Audit.Network Deletion Success, Authentication.Access Key Removal Success, Authentication.Role Removal Success, Authentication.Role Unassignment Success, Audit.Machine Deletion Success, System.Task Cancellation Success, Audit.Delete Activity Succeeded, System.Cron Failed</a>",
+    "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Resource (custom)</a> is the key and <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Resource Name (custom)</a> is the value in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>Sensitive Resource Names - AlphaNumeric</a>",
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Source Address</a> and different <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Resource Name (custom)</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Source Address</a> and different <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Resource Name (custom)</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>hour(s)</a>"
+  ],
+  "TD_list": [
+    "APPLY Multiple Sensitive Resources Deleted on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Containers",
+    "AND when the event category for the event is one of the following Audit.Network Deletion Success, Authentication.Access Key Removal Success, Authentication.Role Removal Success, Authentication.Role Unassignment Success, Audit.Machine Deletion Success, System.Task Cancellation Success, Audit.Delete Activity Succeeded, System.Cron Failed",
+    "AND when any of Resource (custom) is the key and any of Resource Name (custom) is the value in any of Sensitive Resource Names - AlphaNumeric",
+    "AND when at least 5 events are seen with the same Source Address and different Resource Name (custom) in 24 hour(s)"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Multiple Sensitive Resources Deleted",
+    "Event description: Detects when multiple sensitive resources are deleted.",
+    "Severity: 8, Credibility: 8, Relevance: 8",
+    "High-Level Category: \"Audit\"",
+    "Low-Level Category: \"Delete Activity Succeeded\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

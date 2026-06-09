@@ -1,0 +1,25 @@
+{
+  "uuid": "712eb67c-f6ac-409f-ac4c-d2b9c1ea0253",
+  "id": "116852",
+  "name": "BB:CategoryDefinition: Virtual Machine Created",
+  "notes": "This Building Block defines virtual machine creation events.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Virtual Machine Created on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Creation Attempt, Audit.Virtual Machine Creation Success</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Virtual Machine Created on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Audit.Virtual Machine Creation Attempt, Audit.Virtual Machine Creation Success"
+  ],
+  "RED_list": []
+}

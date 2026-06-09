@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1308",
+  "id": "100326",
+  "name": "BB:CategoryDefinition: Windows Compliance Events",
+  "notes": "This Building Block holds events that deal with Windows Compliance.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Windows Compliance Events on events which are detected by the undefined system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(10505) Failure assigning special privileges to new logon, (10504) Special privileges assigned to new logon successfully, (10507) Failure Calling Privileged Service, (10506) Privileged Service Called Successfully, (10509) Privileged Object Operation Failed, (10510) User Right Assigned, (10511) User Right Removed, (10512) New Trusted Domain, (10513) Trusted Domain Removed, (10514) Audit Policy Change, (10433) User Account Created, (10434) User Account Type Change, (10435) User Account Enabled, (10437) Change Password Attempt Failed, (10436) Change Password Attempt Succeeded, (10439) User Account password set unsuccessful, (10438) User Account password set successfully, (10441) Group Created, (10440) User Account Deleted, (10461) Group member added or removed, (10527) Per user auditing policy set for user, (1176417) Windows unknown, (1176318) User account privilege change, (1176379) Audit Policy Changed</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Windows Compliance Events on events which are detected by the undefined system",
+    "AND the event QID is one of the following (10505) Failure assigning special privileges to new logon, (10504) Special privileges assigned to new logon successfully, (10507) Failure Calling Privileged Service, (10506) Privileged Service Called Successfully, (10509) Privileged Object Operation Failed, (10510) User Right Assigned, (10511) User Right Removed, (10512) New Trusted Domain, (10513) Trusted Domain Removed, (10514) Audit Policy Change, (10433) User Account Created, (10434) User Account Type Change, (10435) User Account Enabled, (10437) Change Password Attempt Failed, (10436) Change Password Attempt Succeeded, (10439) User Account password set unsuccessful, (10438) User Account password set successfully, (10441) Group Created, (10440) User Account Deleted, (10461) Group member added or removed, (10527) Per user auditing policy set for user, (1176417) Windows unknown, (1176318) User account privilege change, (1176379) Audit Policy Changed"
+  ],
+  "RED_list": []
+}

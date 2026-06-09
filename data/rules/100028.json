@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1251",
+  "id": "100028",
+  "name": "BB:HostDefinition: Virus Definition and Other Update Servers",
+  "notes": "Edit this BB to include all servers that include virus protection and update functions. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:HostDefinition: Virus Definition and Other Update Servers on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:HostDefinition: Virus Definition and Other Update Servers on events which are detected by the LOCAL system",
+    "AND when the destination IP is one of the following 127.0.0.2"
+  ],
+  "RED_list": []
+}

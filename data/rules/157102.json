@@ -1,0 +1,58 @@
+{
+  "uuid": "088c5ce2-3fd8-49fc-bc35-75af28edc5c7",
+  "id": "157102",
+  "name": "Suspicious Binary DLL Execution",
+  "notes": "This rule triggers when a dll is executed from a specified directory.",
+  "response_qid": "67501637",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501637"
+  ],
+  "rule_refs": [
+    "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1",
+    "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+    "7fb555ff-26f8-462a-ba1b-d2d47b5cd79d",
+    "a397a667-8b2a-40d1-8256-ce59cf0c0a8d",
+    "a4f5791e-d3b3-4a64-a149-e40b6f369e53",
+    "d90f0dde-dddc-4428-a363-d79cc80106a5",
+    "f732eb54-64a3-4083-ba6c-b89e28e79642"
+  ],
+  "bb_references": [
+    "BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo",
+    "BB:BehaviorDefinition: Arbitrary Command Execution Using WSL",
+    "BB:BehaviorDefinition: Atbroker Registry Change",
+    "BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code",
+    "BB:BehaviorDefinition: Suspicious Cabinet File Expansion",
+    "BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution",
+    "BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "d90f0dde-dddc-4428-a363-d79cc80106a5",
+    "a397a667-8b2a-40d1-8256-ce59cf0c0a8d",
+    "a4f5791e-d3b3-4a64-a149-e40b6f369e53",
+    "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+    "f732eb54-64a3-4083-ba6c-b89e28e79642",
+    "7fb555ff-26f8-462a-ba1b-d2d47b5cd79d",
+    "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs, BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution, BB:BehaviorDefinition: Suspicious Cabinet File Expansion, BB:BehaviorDefinition: Atbroker Registry Change, BB:BehaviorDefinition: Arbitrary Command Execution Using WSL, BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo, BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Binary DLL Execution on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs, BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution, BB:BehaviorDefinition: Suspicious Cabinet File Expansion, BB:BehaviorDefinition: Atbroker Registry Change, BB:BehaviorDefinition: Arbitrary Command Execution Using WSL, BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo, BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Binary DLL Execution",
+    "Event description: Detects when a dll is executed from a specified directory.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Machine Identifier (custom)",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

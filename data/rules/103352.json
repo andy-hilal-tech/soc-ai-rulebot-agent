@@ -1,0 +1,25 @@
+{
+  "uuid": "c257057b-d791-4efe-872e-d3c0abcbf582",
+  "id": "103352",
+  "name": "BB:Review Of Access Rights",
+  "notes": "Edit this building block to define actions performed by administrators on users.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:Review Of Access Rights on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Computer Account Removed, Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Group Member Removed, Authentication.Group Removed, Authentication.Policy Added, Authentication.Policy Change, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Account Removed, Authentication.User Right Assigned, Authentication.User Right Removed, System.Service Started, System.Service Stopped, System.System Halt</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:Review Of Access Rights on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Computer Account Removed, Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Group Member Removed, Authentication.Group Removed, Authentication.Policy Added, Authentication.Policy Change, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Account Removed, Authentication.User Right Assigned, Authentication.User Right Removed, System.Service Started, System.Service Stopped, System.System Halt"
+  ],
+  "RED_list": []
+}

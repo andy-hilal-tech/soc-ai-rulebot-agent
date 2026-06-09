@@ -1,0 +1,44 @@
+{
+  "uuid": "baee5ed0-667c-4d33-811a-1853f0bd52c4",
+  "id": "124424",
+  "name": "X-Force: Non-Servers Communicating with External IP Classified as Dynamic",
+  "notes": "This rule triggers when a local host, not identified as a server, communicates with an IP that is considered to be dynamic. Usually there is no reason for internal hosts to be communicating with dynamic ranges.\n\nNote: The Confidence Factor ranges between 0 to 100. On assets of lower importance, an administrator might weigh an X-Force rule to trigger on a higher confidence factor of 75. When tuning rules, customers should think of a scale where 50 is the tipping point.\n\nSee the blog https://ibm.biz/BdPEXv for details.",
+  "response_qid": "67500667",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500667"
+  ],
+  "rule_refs": [
+    "SYSTEM-1358"
+  ],
+  "bb_references": [
+    "BB:HostDefinition: Servers"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1358"
+  ],
+  "conditions_text": [
+    "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:HostDefinition: Servers</a>",
+    "when the context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Remote, Remote to Remote</a>",
+    "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Destination IP</a> is categorized by X-Force as <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Dynamic IPs</a> with confidence value <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>75</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY X-Force: Non-Servers Communicating with External IP Classified as Dynamic on events which are detected by the LOCAL system",
+    "AND NOT when a flow or an event matches any of the following BB:HostDefinition: Servers",
+    "AND when the context is Local to Remote, Remote to Remote",
+    "AND when Destination IP is categorized by X-Force as Dynamic IPs with confidence value greater than 75"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Non-Servers Communicating with External IP Classified as Dynamic",
+    "Event description: This rule will notify when an internal host that is not a server, communicates with an IP that is considered to be dynamic. Usually there is no reason for internal hosts to be communicating with dynamic ranges.",
+    "Severity: 8, Credibility: 6, Relevance: 7",
+    "High-Level Category: \"Potential Exploit\"",
+    "Low-Level Category: \"Potential Botnet Connection\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

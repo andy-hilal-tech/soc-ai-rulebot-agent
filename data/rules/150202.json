@@ -1,0 +1,29 @@
+{
+  "uuid": "d910bdc8-5845-40ed-bc8e-dcddb407b8f6",
+  "id": "150202",
+  "name": "BB:BehaviorDefinition: BPFtrace Unsafe Option Usage",
+  "notes": "This Building Block detects the usage of the unsafe bpftrace option.\n\nCovered from SIGMA Rule.\n\nOriginal Author: Andreas Hunkeler (@Karneades)\nSIGMA Title: BPFtrace Unsafe Option Usage\nSIGMA Description: Detects the usage of the unsafe bpftrace option\n\n\nConfidence: MEDIUM\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: BPFtrace Unsafe Option Usage on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) LIKE '%bpftrace' AND LOWER(&quot;Command&quot;) LIKE '%--unsafe%'</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: BPFtrace Unsafe Option Usage on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Linux OS",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches LOWER(\"Process Full Full Name\") LIKE '%bpftrace' AND LOWER(\"Command\") LIKE '%--unsafe%' AQL filter query"
+  ],
+  "RED_list": []
+}

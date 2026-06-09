@@ -1,0 +1,25 @@
+{
+  "uuid": "SYSTEM-1321",
+  "id": "100258",
+  "name": "BB:DeviceDefinition: IDS / IPS",
+  "notes": "This rule defines all IDS and IPSs on the system.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:DeviceDefinition: IDS / IPS on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Snort Open Source IDS, Ambiron TrustWave ipAngel Intrusion Prevention System (IPS), McAfee IntruShield Network IPS Appliance, Extreme Dragon Network IPS, IBM Proventia Management SiteProtector, IBM Proventia Network Intrusion Prevention System (IPS), Juniper Networks Intrusion Detection and Prevention (IDP), TippingPoint Intrusion Prevention System (IPS), Top Layer IPS, Cisco Intrusion Prevention System (IPS), Extreme NetsightASM, TippingPoint X Series Appliances, Palo Alto PA Series, Cisco FireSIGHT Management Center, IBM QRadar Network Security XGS, IBM Security Network IPS (GX), Cisco Cloud Web Security, Blue Coat Web Security Service, CloudLock Cloud Security Fabric, Enterprise-IT-Security.com SF-Sherlock, Juniper vGW, Juniper Networks Network and Security Manager, LightCyber Magna, Niksun 2005 v3.5, Nortel Threat Protection System (TPS) Intrusion Sensor, Radware AppWall, Riverbed SteelCentral NetProfiler, Symantec Critical System Protection, Trend Micro Deep Discovery Analyzer, Vectra Networks Vectra</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:DeviceDefinition: IDS / IPS on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Snort Open Source IDS, Ambiron TrustWave ipAngel Intrusion Prevention System (IPS), McAfee IntruShield Network IPS Appliance, Extreme Dragon Network IPS, IBM Proventia Management SiteProtector, IBM Proventia Network Intrusion Prevention System (IPS), Juniper Networks Intrusion Detection and Prevention (IDP), TippingPoint Intrusion Prevention System (IPS), Top Layer IPS, Cisco Intrusion Prevention System (IPS), Extreme NetsightASM, TippingPoint X Series Appliances, Palo Alto PA Series, Cisco FireSIGHT Management Center, IBM QRadar Network Security XGS, IBM Security Network IPS (GX), Cisco Cloud Web Security, Blue Coat Web Security Service, CloudLock Cloud Security Fabric, Enterprise-IT-Security.com SF-Sherlock, Juniper vGW, Juniper Networks Network and Security Manager, LightCyber Magna, Niksun 2005 v3.5, Nortel Threat Protection System (TPS) Intrusion Sensor, Radware AppWall, Riverbed SteelCentral NetProfiler, Symantec Critical System Protection, Trend Micro Deep Discovery Analyzer, Vectra Networks Vectra"
+  ],
+  "RED_list": []
+}

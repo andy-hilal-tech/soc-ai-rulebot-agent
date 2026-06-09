@@ -1,0 +1,40 @@
+{
+  "uuid": "2b041bab-4431-4a01-bbe3-9ad33e3ad5f5",
+  "id": "159452",
+  "name": "Suspicious Execution with Colorcpl",
+  "notes": "This rule detects suspicious execution of colorcpl.exe.\n\nCovered from SIGMA Rule.\n\nOriginal Author: frack113\nSIGMA Title: Suspicious Creation with Colorcpl\nSIGMA Description: Once executed, colorcpl.exe will copy the arbitrary file to c:\\windows\\system32\\spool\\drivers\\color\\\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67501673",
+  "qids_trigger": [],
+  "qids_all": [
+    "67501673"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, System.Successful File Modification</a>",
+    "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Process Name (custom) is any of colorcpl.exe</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>( \tLOWER(&quot;Filename&quot;) LIKE '%.icm' \tOR LOWER(&quot;Filename&quot;) LIKE '%.gmmp' \tOR LOWER(&quot;Filename&quot;) LIKE '%.cdmp' \tOR LOWER(&quot;Filename&quot;) LIKE '%.camp' )</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Suspicious Execution with Colorcpl on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.File Created, System.Successful File Modification",
+    "AND when the event matches Process Name (custom) is any of colorcpl.exe",
+    "AND NOT when the event matches ( \tLOWER(\"Filename\") LIKE '%.icm' \tOR LOWER(\"Filename\") LIKE '%.gmmp' \tOR LOWER(\"Filename\") LIKE '%.cdmp' \tOR LOWER(\"Filename\") LIKE '%.camp' ) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Suspicious Execution with Colorcpl",
+    "Event description: Detects suspicious execution of colorcpl.exe.",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Source IP",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "uuid": "bc567021-947f-4582-b155-b9229c6f17d9",
+  "id": "100325",
+  "name": "BB:CategoryDefinition: Malicious Attacks",
+  "notes": "Edit this building block to define malicious attacks.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:CategoryDefinition: Malicious Attacks on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Exploit.Buffer Overflow, Exploit.Cross Site Scripting, Exploit.Database Exploit, Exploit.DNS Exploit, Exploit.Remote Access Exploit, Exploit.SQL Injection, Exploit.SSH Exploit, Exploit.Web Exploit, Exploit.Worm Active</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Malicious Attacks on events which are detected by the LOCAL system",
+    "AND when the event category for the event is one of the following Exploit.Buffer Overflow, Exploit.Cross Site Scripting, Exploit.Database Exploit, Exploit.DNS Exploit, Exploit.Remote Access Exploit, Exploit.SQL Injection, Exploit.SSH Exploit, Exploit.Web Exploit, Exploit.Worm Active"
+  ],
+  "RED_list": []
+}

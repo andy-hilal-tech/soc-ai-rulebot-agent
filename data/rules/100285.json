@@ -1,0 +1,36 @@
+{
+  "uuid": "SYSTEM-1465",
+  "id": "100285",
+  "name": "BB:CategoryDefinition: Pre Reverse DMZ Jump",
+  "notes": "This Building Block identifies actions that may be seen within a DMZ jumping scenario.  It is used mainly by Anomaly: DMZ Jumping and Anomaly: DMZ Reverse Tunnel.",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [
+    "SYSTEM-1462",
+    "SYSTEM-1464"
+  ],
+  "bb_references": [
+    "BB:CategoryDefinition: Pre DMZ Jump",
+    "BB:CategoryDefinition: Pre Reverse DMZ Jump on events which are detected by the undefined system",
+    "BB:CategoryDefinition: Reverse DMZ Jump",
+    "BB:CategoryDefinition: Reverse DMZ Jump in order to the same source IP from the previous sequence"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "SYSTEM-1462",
+    "SYSTEM-1464"
+  ],
+  "conditions_text": [
+    "when at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre DMZ Jump</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source IP</a> followed by at least <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>BB:CategoryDefinition: Reverse DMZ Jump</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>to</a> the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre DMZ Jump</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source IP</a> followed by at least <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>BB:CategoryDefinition: Reverse DMZ Jump</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>to</a> the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:CategoryDefinition: Pre Reverse DMZ Jump on events which are detected by the undefined system",
+    "AND when at least 1 of these BB:CategoryDefinition: Pre DMZ Jump, in order, with the same source IP followed by at least 1 of these BB:CategoryDefinition: Reverse DMZ Jump in order to the same source IP from the previous sequence, within 5 minutes"
+  ],
+  "RED_list": []
+}

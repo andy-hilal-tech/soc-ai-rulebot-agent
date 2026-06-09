@@ -1,0 +1,33 @@
+{
+  "uuid": "0dc352b7-3847-4bdf-82b2-90f37c97c2bb",
+  "id": "158052",
+  "name": "BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE",
+  "notes": "Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE\n\nCovered from SIGMA Rule.\n\nOriginal Author: Florian Roth (Nextron Systems), omkar72, @svch0st, Nasreddine Bencherchali (Nextron Systems)\nSIGMA Title: Suspicious Group And Account Reconnaissance Activity Using Net.EXE\nSIGMA Description: Detects suspicious reconnaissance command line activity on Windows systems using Net.EXE\n\n\nConfidence: LOW\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>",
+    "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [net.exe or net1.exe]</a>",
+    "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '% group %' or LOWER(&quot;Command&quot;) LIKE '% localgroup %') and (LOWER(&quot;Command&quot;) LIKE '%domain admins%' or LOWER(&quot;Command&quot;) LIKE '% administrator%' or LOWER(&quot;Command&quot;) LIKE '% administrateur%' or LOWER(&quot;Command&quot;) LIKE '%enterprise admins%' or LOWER(&quot;Command&quot;) LIKE '%exchange trusted subsystem%' or LOWER(&quot;Command&quot;) LIKE '%remote desktop users%' or LOWER(&quot;Command&quot;) LIKE '%utilisateurs du bureau &agrave; distance%' or LOWER(&quot;Command&quot;) LIKE '%usuarios de escritorio remoto%' or LOWER(&quot;Command&quot;) LIKE '% /do%'))</a> AQL filter query",
+    "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% /add%') OR (LOWER(&quot;Command&quot;) LIKE '% accounts %' AND LOWER(&quot;Command&quot;) LIKE '% /do%')</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Windows Security Event Log",
+    "AND when the event category for the event is one of the following System.Process Creation Success",
+    "AND when the event matches Process Name (custom) is any of [net.exe or net1.exe]",
+    "AND when the event matches ((LOWER(\"Command\") LIKE '% group %' or LOWER(\"Command\") LIKE '% localgroup %') and (LOWER(\"Command\") LIKE '%domain admins%' or LOWER(\"Command\") LIKE '% administrator%' or LOWER(\"Command\") LIKE '% administrateur%' or LOWER(\"Command\") LIKE '%enterprise admins%' or LOWER(\"Command\") LIKE '%exchange trusted subsystem%' or LOWER(\"Command\") LIKE '%remote desktop users%' or LOWER(\"Command\") LIKE '%utilisateurs du bureau à distance%' or LOWER(\"Command\") LIKE '%usuarios de escritorio remoto%' or LOWER(\"Command\") LIKE '% /do%')) AQL filter query",
+    "AND NOT when the event matches (LOWER(\"Command\") LIKE '% /add%') OR (LOWER(\"Command\") LIKE '% accounts %' AND LOWER(\"Command\") LIKE '% /do%') AQL filter query"
+  ],
+  "RED_list": []
+}

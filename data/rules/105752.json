@@ -1,0 +1,33 @@
+{
+  "uuid": "a6576d1c-c75d-4fa3-8110-bead4002ee75",
+  "id": "105752",
+  "name": "BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time",
+  "notes": "Detects 3 or more failed mailbox logins within 2 minutes by a single user. ",
+  "response_qid": "",
+  "qids_trigger": [],
+  "qids_all": [],
+  "rule_refs": [],
+  "bb_references": [
+    "BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time on events which are detected by the LOCAL system"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Office 365</a>",
+    "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(101250316) MailboxLogin-failed</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY BB:UBA : Multiple Mailbox Login Failed in a Short Period of Time on events which are detected by the LOCAL system",
+    "AND when the event(s) were detected by one or more of Microsoft Office 365",
+    "AND when the event QID is one of the following (101250316) MailboxLogin-failed",
+    "AND when at least 3 events are seen with the same Username in 2 minutes"
+  ],
+  "RED_list": []
+}

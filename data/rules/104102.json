@@ -1,0 +1,40 @@
+{
+  "uuid": "8927074a-581f-41ae-93b0-3ea054bdca50",
+  "id": "104102",
+  "name": "UBA : Account or Group or Privileges Modified",
+  "notes": "    This event detects when a user performs an action that modifies a user account or group or policy and dispatches an IBM Sense event to increment the originating user's risk score.\n\n    Clients wishing to tune the impact of this rule on users' overall risk scores may consider modifying the building block rule \"BB:UBA : Authentication User or Group or Policy Changed\" by adding event categories of interest to their organization.",
+  "response_qid": "67500207",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500207"
+  ],
+  "rule_refs": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "c5d4f530-15f3-4202-8bd8-e452303538bc"
+  ],
+  "bb_references": [
+    "BB:UBA : Authentication User or Group or Policy Changed"
+  ],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [
+    "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+    "c5d4f530-15f3-4202-8bd8-e452303538bc"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : Common Event Filters, BB:UBA : Authentication User or Group or Policy Changed</a>"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY UBA : Account or Group or Privileges Modified on events which are detected by the LOCAL system",
+    "AND when an event matches all of the following UBA : Common Event Filters, BB:UBA : Authentication User or Group or Policy Changed"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: UBA : Account or Group or Privileges Modified",
+    "Event description: senseValue=10",
+    "Severity: 5, Credibility: 10, Relevance: 10",
+    "High-Level Category: \"Sense\"",
+    "Low-Level Category: \"User Privilege\""
+  ]
+}

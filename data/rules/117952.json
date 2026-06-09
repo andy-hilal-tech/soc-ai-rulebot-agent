@@ -1,0 +1,51 @@
+{
+  "uuid": "9b23bff3-60a2-433a-b731-4973193dfbd7",
+  "id": "117952",
+  "name": "Hybrid Cloud Multiple Login Failures from Same Username",
+  "notes": "This rule triggers when there are multiple authentication failures to virtualization or cloud systems from the same username.",
+  "response_qid": "67500594",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500594"
+  ],
+  "rule_refs": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "bb_references": [
+    "BB:DeviceDefinition: Cloud",
+    "BB:DeviceDefinition: Virtualization"
+  ],
+  "db_fields_used": [
+    "userName"
+  ],
+  "reference_sets": [],
+  "dependencies": [
+    "290df59b-44ef-452a-9633-2d52e74dbc97",
+    "edf618f4-9e8c-4068-88aa-2675753eb003"
+  ],
+  "conditions_text": [
+    "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization</a>",
+    "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.User Login Failure</a>",
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "thresholds": [
+    "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+  ],
+  "TD_list": [
+    "APPLY Hybrid Cloud Multiple Login Failures from Same Username on events which are detected by the LOCAL system",
+    "AND when an event matches any of the following BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization",
+    "AND when the event category for the event is one of the following Authentication.User Login Failure",
+    "AND when at least 10 events are seen with the same Username in 5 minutes"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Hybrid Cloud Multiple Login Failures from Same Username",
+    "Event description: Detects when there are multiple authentication failures to virtualization or cloud systems from the same username.",
+    "Severity: 8, Credibility: 9, Relevance: 8",
+    "High-Level Category: \"Authentication\"",
+    "Low-Level Category: \"User Login Failure\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Username",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}

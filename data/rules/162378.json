@@ -1,0 +1,34 @@
+{
+  "uuid": "15f2b9e6-8858-4738-bbcb-d31a1bdda159",
+  "id": "162378",
+  "name": "Weak Encryption Enabled and Kerberoast",
+  "notes": "Converted from SIGMA Rule.\n\nOriginal Author: @neu5ron\nSIGMA Title: Weak Encryption Enabled and Kerberoast\nSIGMA Description: Detects scenario where weak encryption is enabled for a user profile which could be used for hash/password cracking.\n\nFalse positives:\n- Unknown\n\nThis rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+  "response_qid": "67500133",
+  "qids_trigger": [],
+  "qids_all": [
+    "67500133"
+  ],
+  "rule_refs": [],
+  "bb_references": [],
+  "db_fields_used": [],
+  "reference_sets": [],
+  "dependencies": [],
+  "conditions_text": [
+    "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4738 AND (((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%')))) OR ((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%') AND (NOT((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%')))) OR ((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%')))))</a> AQL filter query"
+  ],
+  "thresholds": [],
+  "TD_list": [
+    "APPLY Weak Encryption Enabled and Kerberoast on events which are detected by the LOCAL system",
+    "AND when the event matches devicetype=12 AND \"Event ID\"=4738 AND (((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%')))) OR ((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%') AND (NOT((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%')))) OR ((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%'))))) AQL filter query"
+  ],
+  "RED_list": [
+    "Dispatch New Event",
+    "Event name: Weak Encryption Enabled and Kerberoast",
+    "Event description: Converted from SIGMA Rule.  Original Author: @neu5ron SIGMA Title: Weak Encryption Enabled and Kerberoast SIGMA Description: Detects scenario where weak encryption is enabled for a user profile which could be used for hash/password cracking.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+    "Severity: 7, Credibility: 7, Relevance: 7",
+    "High-Level Category: \"Suspicious Activity\"",
+    "Low-Level Category: \"Suspicious Activity\"",
+    "Force the dispatched event to create a NEW offense, select the offense using Event Name",
+    "This information should contribute to the name of the associated offense(s)"
+  ]
+}
