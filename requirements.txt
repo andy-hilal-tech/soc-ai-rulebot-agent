@@ -1,0 +1,3 @@
+aiohttp
+microsoft-agents-hosting-aiohttp
+openai
