@@ -203,3 +203,22 @@ Please provide the offense/event details using this template:
 
 Paste the fields you know. Leave unknown fields blank.
 """.strip()
+
+def build_grounded_reasoning_prompt(user_text: str, context_chunks: list[str]) -> str:
+    context_text = "\n\n".join(
+        f"- {chunk}" for chunk in context_chunks
+    ) if context_chunks else "No supporting context retrieved."
+
+    return f"""
+User question:
+{user_text}
+
+Retrieved context:
+{context_text}
+
+Instructions:
+- Use the retrieved context if it is relevant.
+- If the retrieved context is insufficient, say what additional information or documentation would help.
+- Do not fabricate QRadar-specific facts.
+- Respond clearly and practically as a SOC QRadar assistant.
+""".strip()
