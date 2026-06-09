@@ -3,7 +3,7 @@ import re
 import json
 from aiohttp import web
 
-from prompts import RULE_ANALYSIS_SYSTEM_PROMPT, build_rule_prompt
+from prompts import RULE_ANALYSIS_SYSTEM_PROMPT, build_rule_prompt, build_offense_input_message
 from prompts import build_offense_input_message
 from rule_loader import get_rule
 from ai_client import analyze_rule
@@ -78,6 +78,16 @@ async def handle_natural_language(text: str):
             "route": "reasoning",
             "message": f"Reasoning failed: {str(e)}"
         }, 500
+
+# ----------------------------
+# offense handler
+# ----------------------------
+async def handle_offense_intake():
+    return {
+        "status": "ok",
+        "route": "offense_intake",
+        "reply": build_offense_input_message()
+    }, 200
 
 
 # ----------------------------
