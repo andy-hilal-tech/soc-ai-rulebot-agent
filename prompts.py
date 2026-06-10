@@ -1,3 +1,5 @@
+import json
+
 BASE_SYSTEM_PROMPT = """
 You are Rulebot, a SOC-focused QRadar assistant.
 
@@ -144,6 +146,44 @@ Instructions:
 """.strip()
 
 
+
+OFFENSE_ANALYSIS_SYSTEM_PROMPT = """
+You are Rulebot, acting as a QRadar Offense Tuning Advisor.
+
+You are helping a SOC analyst evaluate whether a QRadar offense is a likely false positive
+and what safe rule-tuning recommendations should be considered.
+
+Operating principles:
+- Recommend-only: do not imply changes are executed automatically.
+- Prefer reversible, auditable tuning options first.
+- Preserve visibility and forensic value where possible.
+- Use the offense details, analyst context, and retrieved rule definition together.
+- If the information is insufficient, clearly identify missing data.
+- Do not fabricate QRadar-specific facts.
+
+Your goal is to determine:
+1. Whether the offense appears likely benign / suspicious / unclear
+2. Why it may be firing
+3. Whether it is plausibly a false positive
+4. What tuning options should be considered
+5. What validation steps should be taken before changing a rule
+
+Return your answer in structured JSON with these fields:
+
+- classification
+- reasoning
+
+- likely_false_positive
+- tuning_options
+- compliance_notes
+- validation_steps
+- confidence
+
+Return ONLY valid JSON. Do NOT include markdown or code blocks.
+""".strip()
+
+
+
 def build_rule_prompt(rule_text: str) -> str:
     return f"""
 Analyze this QRadar rule and explain:
@@ -179,10 +219,9 @@ Answer as a helpful SOC QRadar assistant.
 """.strip()
 
 
+
 def build_offense_input_template() -> str:
     return """
-Please provide the offense/event details using this template:
-
 - offense_id:
 - rule_id:
 - event_name:
@@ -199,10 +238,11 @@ Please provide the offense/event details using this template:
 - start_time:
 - event_count:
 - payload_summary:
+- why_false_positive:
+- desired_outcome:
 - analyst_notes:
-
-Paste the fields you know. Leave unknown fields blank.
 """.strip()
+
 
 def build_grounded_reasoning_prompt(user_text: str, context_chunks: list[str]) -> str:
     context_text = "\n\n".join(
@@ -223,6 +263,7 @@ Instructions:
 - Respond clearly and practically as a SOC QRadar assistant.
 """.strip()
 
+
 def build_offense_input_message() -> str:
     return f"""
 Offense analysis requested.
@@ -230,4 +271,44 @@ Offense analysis requested.
 Please provide the offense/event details using this template:
 
 {build_offense_input_template()}
+
+Minimum required fields for analysis:
+- rule_id
+- why_false_positive
+- desired_outcome
+""".strip()
+
+
+
+def build_offense_analysis_prompt(
+    offense_data: dict,
+    rule_text: str,
+    retrieved_context: list[str] | None = None
+) -> str:
+    context_chunks = retrieved_context or []
+    context_text = "\n\n".join(f"- {chunk}" for chunk in context_chunks) if context_chunks else "No supporting context retrieved."
+
+    offense_json = json.dumps(offense_data, indent=2)
+
+    return f"""
+Analyze this QRadar offense and recommend rule-tuning guidance.
+
+Offense details:
+{offense_json}
+
+Referenced rule definition:
+{rule_text}
+
+Retrieved supporting context:
+{context_text}
+
+Instructions:
+- Assess whether this offense is likely benign, suspicious, or unclear.
+- Use the analyst's explanation of why it is considered false positive.
+- Use the desired outcome to guide tuning recommendations.
+- Base the rule understanding on the referenced rule definition.
+- Recommend safe, auditable tuning changes first.
+- Explain risks and validation steps clearly.
+
+Return ONLY valid JSON with the required fields.
 """.strip()
