@@ -63,11 +63,14 @@ def get_missing_required_fields(offense_data: dict) -> list[str]:
 def looks_like_offense_template(text: str) -> bool:
     lowered = text.lower()
 
-    matched_fields = 0
-    for field in EXPECTED_OFFENSE_FIELDS:
-        needle = f"- {field}:"
-        if needle in lowered:
-            matched_fields += 1
+    # Strong indicators that this is a filled offense template
+    has_rule_id = "- rule_id:" in lowered
+    has_false_positive = "- why_false_positive:" in lowered
+    has_desired_outcome = "- desired_outcome:" in lowered
+    has_analyst_notes = "- analyst_notes:" in lowered
 
-    # treat it as a submitted template if several known fields appear
-    return matched_fields >= 4
+    # Treat as offense template if rule_id is present and at least
+    # one of the key analyst context fields is also present
+    return has_rule_id and (
+        has_false_positive or has_desired_outcome or has_analyst_notes
+    )

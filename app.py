@@ -116,10 +116,7 @@ async def handle_offense_analysis(text: str):
             "route": "offense_analysis",
             "message": "Missing required offense fields",
             "missing_fields": missing,
-            "reply": (
-                "Please complete the required fields before analysis:\n"
-                + "\n".join(f"- {field}" for field in missing)
-            )
+            "reply": build_offense_input_message()
         }, 400
 
     rule_id = offense_data.get("rule_id", "").strip()
@@ -274,10 +271,3 @@ app.router.add_post("/message", message)
 
 if __name__ == "__main__":
     web.run_app(app, host="0.0.0.0", port=PORT)
-
-async def handle_offense_intake():
-    return {
-        "status": "ok",
-        "route": "offense_intake",
-        "reply": build_offense_input_message()
-    }, 200
