@@ -106,9 +106,15 @@ async def handle_offense_intake():
 # ----------------------------
 # offense analysis handler
 # ----------------------------
-async def handle_offense_analysis(text: str):
+async def handle_offense_analysis(text: str):    
+    print("OFFENSE RAW TEXT:", repr(text), flush=True)
+
     offense_data = parse_offense_template(text)
+    print("PARSED OFFENSE DATA:", offense_data, flush=True)
+
     missing = get_missing_required_fields(offense_data)
+    print("MISSING FIELDS:", missing, flush=True)
+
 
     if missing:
         return {
@@ -116,7 +122,11 @@ async def handle_offense_analysis(text: str):
             "route": "offense_analysis",
             "message": "Missing required offense fields",
             "missing_fields": missing,
-            "reply": build_offense_input_message()
+            "reply": (
+                "Please complete the required fields before analysis:\n"
+                + "\n".join(f"- {field}" for field in missing)
+            )
+
         }, 400
 
     rule_id = offense_data.get("rule_id", "").strip()

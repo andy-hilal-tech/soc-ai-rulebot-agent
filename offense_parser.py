@@ -30,9 +30,16 @@ REQUIRED_OFFENSE_FIELDS = [
 def parse_offense_template(text: str) -> dict:
     result = {field: "" for field in EXPECTED_OFFENSE_FIELDS}
 
+    print("PARSER INPUT REPR:", repr(text), flush=True)
+
     for raw_line in text.splitlines():
+        print("RAW LINE:", repr(raw_line), flush=True)
+
         line = raw_line.strip()
+        print("STRIPPED LINE:", repr(line), flush=True)
+
         if not line.startswith("-"):
+            print("SKIP: does not start with '-'", flush=True)
             continue
 
         line = line[1:].strip()
