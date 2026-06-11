@@ -239,38 +239,46 @@ async def analyze_rule_endpoint(request):
 
 
 async def message(request):
-    try:
-        body = await request.json()
-    except Exception:
-        return web.json_response(
-            {"error": "Invalid JSON body"},
-            status=400
-        )
+    body = await request.json()
+    text = body.get("text", "").strip()
 
-    text = str(body.get("text", "")).strip()
+    result, status = await message_internal(text)
+    return web.json_response(result, status=status)
 
-    if not text:
-        return web.json_response(
-            {"error": "text is required"},
-            status=400
-        )
 
+async def message_internal(text: str):
     route = classify_message(text)
 
     if route == "rule_id":
-        result, status = await handle_rule_id(text)
-        return web.json_response(result, status=status)
+        return await handle_rule_id(text)
 
     if route == "offense_intake":
-        result, status = await handle_offense_intake()
-        return web.json_response(result, status=status)
-        
-    if route == "offense_analysis":
-        result, status = await handle_offense_analysis(text)
-        return web.json_response(result, status=status)
+        return await handle_offense_intake()
 
-    result, status = await handle_natural_language(text)
-    return web.json_response(result, status=status)
+    if route == "offense_analysis":
+        return await handle_offense_analysis(text)
+
+    return await handle_natural_language(text)
+
+
+async def teams_messages(request):
+    body = await request.json()
+
+    # Extract message text from Teams payload
+    text = body.get("text", "").strip()
+
+    if not text:
+        return web.json_response({})
+
+    # Reuse your existing message pipeline
+    result, _ = await message_internal(text)
+
+    reply_text = result.get("reply", result.get("message", "No response"))
+
+    return web.json_response({
+        "type": "message",
+        "text": reply_text
+    })
 
 
 app = web.Application()
@@ -278,6 +286,7 @@ app.router.add_get("/", root)
 app.router.add_get("/health", health)
 app.router.add_post("/analyze_rule", analyze_rule_endpoint)
 app.router.add_post("/message", message)
+app.router.add_post("/api/messages", teams_messages)
 
 if __name__ == "__main__":
     web.run_app(app, host="0.0.0.0", port=PORT)
