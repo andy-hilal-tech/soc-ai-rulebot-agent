@@ -21,6 +21,7 @@ from prompts import build_offense_input_message
 from rule_loader import get_rule
 from ai_client import analyze_rule
 from reasoning import handle_reasoning_query
+from retrieval import retrieve_context_with_sources
 
 
 PORT = int(os.getenv("PORT", "8001"))
@@ -106,15 +107,9 @@ async def handle_offense_intake():
 # ----------------------------
 # offense analysis handler
 # ----------------------------
-async def handle_offense_analysis(text: str):    
-    print("OFFENSE RAW TEXT:", repr(text), flush=True)
-
+async def handle_offense_analysis(text: str):
     offense_data = parse_offense_template(text)
-    print("PARSED OFFENSE DATA:", offense_data, flush=True)
-
     missing = get_missing_required_fields(offense_data)
-    print("MISSING FIELDS:", missing, flush=True)
-
 
     if missing:
         return {
@@ -126,7 +121,6 @@ async def handle_offense_analysis(text: str):
                 "Please complete the required fields before analysis:\n"
                 + "\n".join(f"- {field}" for field in missing)
             )
-
         }, 400
 
     rule_id = offense_data.get("rule_id", "").strip()
@@ -141,11 +135,29 @@ async def handle_offense_analysis(text: str):
 
     rule_text = json.dumps(rule, indent=2)
 
-    # No RAG yet — placeholder empty context list
+    # ----------------------------
+    # Retrieval-aware context query
+    # ----------------------------
+    retrieval_query = " ".join([
+        offense_data.get("event_name", ""),
+        offense_data.get("event_description", ""),
+        offense_data.get("why_false_positive", ""),
+        offense_data.get("desired_outcome", ""),
+        offense_data.get("analyst_notes", ""),
+        rule_text,
+    ]).strip()
+
+    retrieved = retrieve_context_with_sources(retrieval_query)
+    context_chunks = [item["text"] for item in retrieved]
+    context_sources = [item["source"] for item in retrieved]
+
+    # ----------------------------
+    # Build grounded offense prompt
+    # ----------------------------
     user_prompt = build_offense_analysis_prompt(
         offense_data=offense_data,
         rule_text=rule_text,
-        retrieved_context=[]
+        retrieved_context=context_chunks
     )
 
     try:
@@ -160,6 +172,8 @@ async def handle_offense_analysis(text: str):
             "status": "success",
             "route": "offense_analysis",
             "offense_data": offense_data,
+            "context_used": context_chunks,
+            "context_sources": context_sources,
             "raw": result_json
         }, 200
 
@@ -169,7 +183,6 @@ async def handle_offense_analysis(text: str):
             "route": "offense_analysis",
             "message": f"Failed to analyze offense: {str(e)}"
         }, 500
-
 
 # ----------------------------
 # Router
