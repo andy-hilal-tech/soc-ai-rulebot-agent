@@ -1,16 +1,42 @@
-import os
 import re
 import json
 from pathlib import Path
+from PyPDF2 import PdfReader
 
 KNOWLEDGE_DIRS = [
     Path("knowledge/qradar_docs"),
     Path("knowledge/internal_notes"),
 ]
 
-SUPPORTED_EXTENSIONS = {".txt", ".md", ".json"}
+SUPPORTED_EXTENSIONS = {".txt", ".md", ".json", ".pdf"}
 CHUNK_SIZE = 1200
 CHUNK_OVERLAP = 200
+
+
+def extract_text_from_pdf(file_path: Path) -> str:
+    try:
+        reader = PdfReader(str(file_path))
+        pages = []
+
+        for page in reader.pages:
+            text = page.extract_text() or ""
+            pages.append(text)
+
+        return "\n".join(pages).strip()
+    except Exception:
+        return ""
+
+
+def load_text_from_file(file_path: Path) -> str:
+    suffix = file_path.suffix.lower()
+
+    try:
+        if suffix == ".pdf":
+            return extract_text_from_pdf(file_path)
+
+        return file_path.read_text(encoding="utf-8", errors="ignore").strip()
+    except Exception:
+        return ""
 
 
 def load_documents() -> list[dict]:
@@ -26,10 +52,7 @@ def load_documents() -> list[dict]:
             if file_path.suffix.lower() not in SUPPORTED_EXTENSIONS:
                 continue
 
-            try:
-                text = file_path.read_text(encoding="utf-8", errors="ignore").strip()
-            except Exception:
-                continue
+            text = load_text_from_file(file_path)
 
             if not text:
                 continue
