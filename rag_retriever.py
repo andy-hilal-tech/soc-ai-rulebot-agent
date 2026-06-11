@@ -104,4 +104,3 @@ def retrieve_chunks(query: str, top_k: int = 5) -> list[dict]:
     scored.sort(key=lambda x: x["score"], reverse=True)
 
     return scored[:top_k]
-``
