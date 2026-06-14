@@ -22,6 +22,20 @@ from rule_loader import get_rule
 from ai_client import analyze_rule
 from reasoning import handle_reasoning_query
 from retrieval import retrieve_context_with_sources
+from botbuilder.core import TurnContext, MessageFactory, ActivityHandler
+from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
+from botbuilder.schema import Activity
+
+
+BOTFRAMEWORK_CONFIG = {
+    "MicrosoftAppId": MICROSOFT_APP_ID,
+    "MicrosoftAppPassword": MICROSOFT_APP_PASSWORD,
+    "MicrosoftAppType": MICROSOFT_APP_TYPE,
+    "MicrosoftAppTenantId": MICROSOFT_APP_TENANT_ID,
+}
+
+bot_auth = ConfigurationBotFrameworkAuthentication(BOTFRAMEWORK_CONFIG)
+adapter = CloudAdapter(bot_auth)
 
 
 PORT = int(os.getenv("PORT", "8001"))
@@ -274,24 +288,32 @@ async def message_internal(text: str):
     return await handle_natural_language(text)
 
 
-async def teams_messages(request):
-    body = await request.json()
+async def teams_messages(request: web.Request) -> web.Response:
+    # CloudAdapter for aiohttp expects the actual Request object
+    invoke_response = await adapter.process(request, bot)
 
-    # Extract message text from Teams payload
-    text = body.get("text", "").strip()
+    if invoke_response:
+        return invoke_response
 
-    if not text:
-        return web.json_response({})
+    return web.Response(status=201)
 
-    # Reuse your existing message pipeline
-    result, _ = await message_internal(text)
 
-    reply_text = result.get("reply", result.get("message", "No response"))
+async def on_error(context: TurnContext, error: Exception):
+    print(f"[on_turn_error] {error}", flush=True)
 
-    return web.json_response({
-        "type": "message",
-        "text": reply_text
-    })
+adapter.on_turn_error = on_error
+
+
+class TeamsRulebot(ActivityHandler):
+    async def on_message_activity(self, turn_context: TurnContext):
+        text = (turn_context.activity.text or "").strip()
+
+        result, _status = await message_internal(text)
+
+        reply_text = result.get("reply") or result.get("message") or "No response."
+        await turn_context.send_activity(MessageFactory.text(reply_text))
+
+bot = TeamsRulebot()
 
 
 app = web.Application()

@@ -2,3 +2,5 @@ aiohttp
 microsoft-agents-hosting-aiohttp
 openai
 PyPDF2
+botbuilder-core==4.17.1
+botbuilder-integration-aiohttp==4.17.1
