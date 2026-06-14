@@ -1,9 +1,7 @@
-from email.mime import text
 import os
 import re
 import json
 from aiohttp import web
-
 
 from prompts import (
     RULE_ANALYSIS_SYSTEM_PROMPT,
@@ -12,20 +10,34 @@ from prompts import (
     OFFENSE_ANALYSIS_SYSTEM_PROMPT,
     build_offense_analysis_prompt,
 )
+
 from offense_parser import (
     parse_offense_template,
     get_missing_required_fields,
     looks_like_offense_template,
 )
-from prompts import build_offense_input_message
+
 from rule_loader import get_rule
 from ai_client import analyze_rule
 from reasoning import handle_reasoning_query
 from retrieval import retrieve_context_with_sources
-from botbuilder.core import TurnContext, MessageFactory, ActivityHandler
-from botbuilder.integration.aiohttp import CloudAdapter, ConfigurationBotFrameworkAuthentication
-from botbuilder.schema import Activity
 
+from botbuilder.core import TurnContext, MessageFactory, ActivityHandler
+from botbuilder.integration.aiohttp import (
+    CloudAdapter,
+    ConfigurationBotFrameworkAuthentication,
+)
+
+
+# ----------------------------
+# Environment variables
+# ----------------------------
+PORT = int(os.getenv("PORT", "8001"))
+
+MICROSOFT_APP_ID = os.getenv("MICROSOFT_APP_ID", "").strip()
+MICROSOFT_APP_PASSWORD = os.getenv("MICROSOFT_APP_PASSWORD", "").strip()
+MICROSOFT_APP_TYPE = os.getenv("MICROSOFT_APP_TYPE", "SingleTenant").strip()
+MICROSOFT_APP_TENANT_ID = os.getenv("MICROSOFT_APP_TENANT_ID", "").strip()
 
 BOTFRAMEWORK_CONFIG = {
     "MicrosoftAppId": MICROSOFT_APP_ID,
@@ -36,9 +48,6 @@ BOTFRAMEWORK_CONFIG = {
 
 bot_auth = ConfigurationBotFrameworkAuthentication(BOTFRAMEWORK_CONFIG)
 adapter = CloudAdapter(bot_auth)
-
-
-PORT = int(os.getenv("PORT", "8001"))
 
 
 # ----------------------------
@@ -68,7 +77,7 @@ async def handle_rule_id(rule_id: str):
         analysis = result_json
         classification = analysis.get("classification", "N/A")
         reasoning = analysis.get("reasoning", "No reasoning returned.")
-        recommendation = analysis.get("recommendation", "No recommendation returned.")
+        recommendation = analysis.get("tuning_options", "No tuning options returned.")
 
         return {
             "status": "success",
@@ -77,7 +86,7 @@ async def handle_rule_id(rule_id: str):
                 f"Rule {rule_id}\n"
                 f"Classification: {classification}\n"
                 f"Reasoning: {reasoning}\n"
-                f"Recommendation: {recommendation}"
+                f"Tuning options: {recommendation}"
             ),
             "raw": {
                 "rule_id": rule_id,
@@ -107,8 +116,9 @@ async def handle_natural_language(text: str):
             "message": f"Reasoning failed: {str(e)}"
         }, 500
 
+
 # ----------------------------
-# offense intake handler
+# Offense intake handler
 # ----------------------------
 async def handle_offense_intake():
     return {
@@ -119,7 +129,7 @@ async def handle_offense_intake():
 
 
 # ----------------------------
-# offense analysis handler
+# Offense analysis handler
 # ----------------------------
 async def handle_offense_analysis(text: str):
     offense_data = parse_offense_template(text)
@@ -149,9 +159,6 @@ async def handle_offense_analysis(text: str):
 
     rule_text = json.dumps(rule, indent=2)
 
-    # ----------------------------
-    # Retrieval-aware context query
-    # ----------------------------
     retrieval_query = " ".join([
         offense_data.get("event_name", ""),
         offense_data.get("event_description", ""),
@@ -165,9 +172,6 @@ async def handle_offense_analysis(text: str):
     context_chunks = [item["text"] for item in retrieved]
     context_sources = [item["source"] for item in retrieved]
 
-    # ----------------------------
-    # Build grounded offense prompt
-    # ----------------------------
     user_prompt = build_offense_analysis_prompt(
         offense_data=offense_data,
         rule_text=rule_text,
@@ -198,6 +202,7 @@ async def handle_offense_analysis(text: str):
             "message": f"Failed to analyze offense: {str(e)}"
         }, 500
 
+
 # ----------------------------
 # Router
 # ----------------------------
@@ -205,11 +210,9 @@ def classify_message(text: str) -> str:
     text = text.strip()
     lowered = text.lower()
 
-    # Simple deterministic route for obvious numeric lookups
     if re.fullmatch(r"\d+", text):
         return "rule_id"
 
-    # Offense / event intake trigger phrases
     offense_triggers = [
         "new offense",
         "new event",
@@ -221,11 +224,29 @@ def classify_message(text: str) -> str:
 
     if any(trigger in lowered for trigger in offense_triggers):
         return "offense_intake"
-    
+
     if looks_like_offense_template(text):
         return "offense_analysis"
 
     return "reasoning"
+
+
+# ----------------------------
+# Shared internal message pipeline
+# ----------------------------
+async def message_internal(text: str):
+    route = classify_message(text)
+
+    if route == "rule_id":
+        return await handle_rule_id(text)
+
+    if route == "offense_intake":
+        return await handle_offense_intake()
+
+    if route == "offense_analysis":
+        return await handle_offense_analysis(text)
+
+    return await handle_natural_language(text)
 
 
 # ----------------------------
@@ -248,48 +269,60 @@ async def analyze_rule_endpoint(request):
     try:
         body = await request.json()
     except Exception:
-        return web.json_response(
-            {"error": "Invalid JSON body"},
-            status=400
-        )
+        return web.json_response({"error": "Invalid JSON body"}, status=400)
 
     rule_id = str(body.get("rule_id", "")).strip()
 
     if not rule_id:
-        return web.json_response(
-            {"error": "rule_id is required"},
-            status=400
-        )
+        return web.json_response({"error": "rule_id is required"}, status=400)
 
     result, status = await handle_rule_id(rule_id)
     return web.json_response(result, status=status)
 
 
 async def message(request):
-    body = await request.json()
-    text = body.get("text", "").strip()
+    try:
+        body = await request.json()
+    except Exception:
+        return web.json_response({"error": "Invalid JSON body"}, status=400)
+
+    text = str(body.get("text", "")).strip()
+
+    if not text:
+        return web.json_response({"error": "text is required"}, status=400)
 
     result, status = await message_internal(text)
     return web.json_response(result, status=status)
 
 
-async def message_internal(text: str):
-    route = classify_message(text)
+# ----------------------------
+# Bot Framework-compatible /api/messages
+# ----------------------------
+class TeamsRulebot(ActivityHandler):
+    async def on_message_activity(self, turn_context: TurnContext):
+        text = (turn_context.activity.text or "").strip()
 
-    if route == "rule_id":
-        return await handle_rule_id(text)
+        result, _status = await message_internal(text)
+        reply_text = result.get("reply") or result.get("message") or "No response."
 
-    if route == "offense_intake":
-        return await handle_offense_intake()
+        await turn_context.send_activity(MessageFactory.text(reply_text))
 
-    if route == "offense_analysis":
-        return await handle_offense_analysis(text)
 
-    return await handle_natural_language(text)
+bot = TeamsRulebot()
+
+
+async def on_error(context: TurnContext, error: Exception):
+    print(f"[on_turn_error] {error}", flush=True)
+    try:
+        await context.send_activity("The bot encountered an internal error.")
+    except Exception:
+        pass
+
+
+adapter.on_turn_error = on_error
 
 
 async def teams_messages(request: web.Request) -> web.Response:
-    # CloudAdapter for aiohttp expects the actual Request object
     invoke_response = await adapter.process(request, bot)
 
     if invoke_response:
@@ -298,30 +331,16 @@ async def teams_messages(request: web.Request) -> web.Response:
     return web.Response(status=201)
 
 
-async def on_error(context: TurnContext, error: Exception):
-    print(f"[on_turn_error] {error}", flush=True)
-
-adapter.on_turn_error = on_error
-
-
-class TeamsRulebot(ActivityHandler):
-    async def on_message_activity(self, turn_context: TurnContext):
-        text = (turn_context.activity.text or "").strip()
-
-        result, _status = await message_internal(text)
-
-        reply_text = result.get("reply") or result.get("message") or "No response."
-        await turn_context.send_activity(MessageFactory.text(reply_text))
-
-bot = TeamsRulebot()
-
-
+# ----------------------------
+# App routes
+# ----------------------------
 app = web.Application()
 app.router.add_get("/", root)
 app.router.add_get("/health", health)
 app.router.add_post("/analyze_rule", analyze_rule_endpoint)
 app.router.add_post("/message", message)
 app.router.add_post("/api/messages", teams_messages)
+
 
 if __name__ == "__main__":
     web.run_app(app, host="0.0.0.0", port=PORT)
