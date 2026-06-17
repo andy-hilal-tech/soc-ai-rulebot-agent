@@ -58,7 +58,12 @@ async def handle_offense_analysis(text: str):
         rule_text,
     ]).strip()
 
-    retrieved = retrieve_context_with_sources(retrieval_query)
+    retrieved = retrieve_context_with_sources(
+        retrieval_query,
+        route="offense_analysis",
+        rule_id=rule_id,
+        client_id=offense_data.get("client_id", "") or None,
+    )
     context_chunks = [item["text"] for item in retrieved]
     context_sources = [item["source"] for item in retrieved]
 
