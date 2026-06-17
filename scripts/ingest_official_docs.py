@@ -2,6 +2,7 @@ import os
 import uuid
 from pathlib import Path
 from datetime import datetime, timezone
+import re
 
 from PyPDF2 import PdfReader
 from config.search_config import (
@@ -18,6 +19,12 @@ from config.search_config import (
 ROOT_QRADAR_DOCS = Path("knowledge/qradar_docs")
 ROOT_INTERNAL_NOTES = Path("knowledge/internal_notes")
 SUPPORTED_EXTENSIONS = {".pdf", ".txt", ".md", ".json"}
+
+def make_safe_key(value: str) -> str:
+    value = value.strip()
+    value = value.replace(" ", "_")
+    value = re.sub(r"[^A-Za-z0-9_\\-=]", "_", value)
+    return value
 
 
 def utc_now():
@@ -94,9 +101,9 @@ def ingest_qradar_docs():
         if not text:
             continue
 
-        doc_id = file_path.stem
+        doc_id = make_safe_key(file_path.stem)
         title = file_path.stem.replace("_", " ")
-        product_area = file_path.parent.name
+        product_area = make_safe_key(file_path.parent.name)
         chunks = chunk_text(text)
 
         for i, chunk in enumerate(chunks):
@@ -104,7 +111,7 @@ def ingest_qradar_docs():
                 "chunk_id": f"{doc_id}-{i}",
                 "doc_id": doc_id,
                 "title": title,
-                "source_path": str(file_path).replace("\\", "/"),
+                "source_path": str(file_path).replace("\\\\", "/"),
                 "source_type": "official_doc",
                 "section_title": product_area,
                 "content": chunk,
@@ -113,6 +120,7 @@ def ingest_qradar_docs():
                 "last_ingested_utc": utc_now(),
                 "chunk_order": i,
             })
+
 
     if not docs_to_upload:
         print("No official docs found to ingest.")
@@ -139,10 +147,9 @@ def ingest_internal_notes():
         if not text:
             continue
 
-        note_id = file_path.stem
+        note_id = make_safe_key(file_path.stem)
         title = file_path.stem.replace("_", " ")
-        client_id = file_path.parent.name if file_path.parent != ROOT_INTERNAL_NOTES else "default"
-        chunks = chunk_text(text)
+        client_id = make_safe_key(file_path.parent.name) if file_path.parent != ROOT_INTERNAL_NOTES else "default"
 
         for i, chunk in enumerate(chunks):
             docs_to_upload.append({
