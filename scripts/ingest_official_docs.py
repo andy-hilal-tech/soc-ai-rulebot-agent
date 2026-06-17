@@ -21,9 +21,8 @@ ROOT_INTERNAL_NOTES = Path("knowledge/internal_notes")
 SUPPORTED_EXTENSIONS = {".pdf", ".txt", ".md", ".json"}
 
 def make_safe_key(value: str) -> str:
-    value = value.strip()
-    value = value.replace(" ", "_")
-    value = re.sub(r"[^A-Za-z0-9_\\-=]", "_", value)
+    value = value.strip().replace(" ", "_")
+    value = re.sub(r"[^A-Za-z0-9_=-]", "_", value)
     return value
 
 
