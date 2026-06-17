@@ -16,9 +16,8 @@ from config.search_config import (
     get_search_index_client,
     EMBEDDING_DIMENSIONS,
     OFFICIAL_INDEX_NAME,
-    INTERNAL_INDEX_NAME,
+    ANALYST_MEMORY_INDEX_NAME,
     RULES_INDEX_NAME,
-    CASE_MEMORY_INDEX_NAME,
 )
 
 VECTOR_PROFILE_NAME = "default-vector-profile"
@@ -96,41 +95,6 @@ def official_docs_index():
     )
 
 
-def internal_knowledge_index():
-    fields = [
-        SimpleField(name="chunk_id", type=SearchFieldDataType.String, key=True, filterable=True),
-        SimpleField(name="note_id", type=SearchFieldDataType.String, filterable=True, sortable=True),
-        SimpleField(name="client_id", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SimpleField(name="author", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SimpleField(name="source_type", type=SearchFieldDataType.String, filterable=True),
-        SearchableField(name="title", type=SearchFieldDataType.String),
-        SearchableField(name="content", type=SearchFieldDataType.String),
-        SearchField(
-            name="content_vector",
-            type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
-            searchable=True,
-            vector_search_dimensions=EMBEDDING_DIMENSIONS,
-            vector_search_profile_name=VECTOR_PROFILE_NAME,
-        ),
-        SimpleField(name="confidence_level", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SearchField(
-            name="tags",
-            type=SearchFieldDataType.Collection(SearchFieldDataType.String),
-            filterable=True,
-            facetable=True,
-        ),
-        SimpleField(name="created_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
-        SimpleField(name="updated_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
-    ]
-
-    return SearchIndex(
-        name=INTERNAL_INDEX_NAME,
-        fields=fields,
-        vector_search=build_vector_search(),
-        semantic_search=build_semantic_search("title", "content", ["client_id", "author"]),
-    )
-
-
 def qradar_rules_index():
     fields = [
         SimpleField(name="rule_doc_id", type=SearchFieldDataType.String, key=True, filterable=True),
@@ -160,16 +124,18 @@ def qradar_rules_index():
         semantic_search=build_semantic_search("rule_name", "content", ["rule_id", "group_name"]),
     )
 
-
-def case_memory_index():
+def analyst_memory_index():
     fields = [
         SimpleField(name="memory_doc_id", type=SearchFieldDataType.String, key=True, filterable=True),
-        SimpleField(name="case_uid", type=SearchFieldDataType.String, filterable=True, sortable=True),
+        SimpleField(name="source_type", type=SearchFieldDataType.String, filterable=True, facetable=True),
         SimpleField(name="client_id", type=SearchFieldDataType.String, filterable=True, facetable=True),
+        SimpleField(name="author", type=SearchFieldDataType.String, filterable=True, facetable=True),
+        SimpleField(name="note_id", type=SearchFieldDataType.String, filterable=True, sortable=True),
+        SimpleField(name="case_uid", type=SearchFieldDataType.String, filterable=True, sortable=True),
         SimpleField(name="rule_id", type=SearchFieldDataType.String, filterable=True, facetable=True),
         SimpleField(name="offense_id", type=SearchFieldDataType.String, filterable=True),
-        SimpleField(name="source_type", type=SearchFieldDataType.String, filterable=True),
-        SearchableField(name="summary_text", type=SearchFieldDataType.String),
+        SearchableField(name="title", type=SearchFieldDataType.String),
+        SearchableField(name="content", type=SearchFieldDataType.String),
         SearchField(
             name="content_vector",
             type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
@@ -177,11 +143,16 @@ def case_memory_index():
             vector_search_dimensions=EMBEDDING_DIMENSIONS,
             vector_search_profile_name=VECTOR_PROFILE_NAME,
         ),
+        SimpleField(name="confidence_level", type=SearchFieldDataType.String, filterable=True, facetable=True),
         SimpleField(name="status", type=SearchFieldDataType.String, filterable=True, facetable=True),
         SimpleField(name="recommended_object_type", type=SearchFieldDataType.String, filterable=True, facetable=True),
         SimpleField(name="decision_type", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SimpleField(name="created_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
-        SimpleField(name="updated_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
+        SearchField(
+            name="tags",
+            type=SearchFieldDataType.Collection(SearchFieldDataType.String),
+            filterable=True,
+            facetable=True,
+        ),
         SearchField(
             name="linked_rule_ids",
             type=SearchFieldDataType.Collection(SearchFieldDataType.String),
@@ -194,7 +165,16 @@ def case_memory_index():
             filterable=True,
             facetable=True,
         ),
+        SimpleField(name="created_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
+        SimpleField(name="updated_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
     ]
+
+    return SearchIndex(
+        name=ANALYST_MEMORY_INDEX_NAME,
+        fields=fields,
+        vector_search=build_vector_search(),
+        semantic_search=build_semantic_search("title", "content", ["client_id", "rule_id", "author"]),
+    )
 
     return SearchIndex(
         name=CASE_MEMORY_INDEX_NAME,
@@ -206,7 +186,6 @@ def case_memory_index():
 
 if __name__ == "__main__":
     create_or_update(official_docs_index())
-    create_or_update(internal_knowledge_index())
     create_or_update(qradar_rules_index())
-    create_or_update(case_memory_index())
-    print("All four indexes created/updated successfully.")
+    create_or_update(analyst_memory_index())
+    print("All three indexes created/updated successfully.")

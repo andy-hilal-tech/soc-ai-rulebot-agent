@@ -30,9 +30,8 @@ AZURE_OPENAI_EMBED_DEPLOYMENT = _require_env("AZURE_OPENAI_EMBED_DEPLOYMENT")
 # Search index names
 # ----------------------------
 OFFICIAL_INDEX_NAME = "qradar-official-index"
-INTERNAL_INDEX_NAME = "internal-knowledge-index"
 RULES_INDEX_NAME = "qradar-rules-index"
-CASE_MEMORY_INDEX_NAME = "case-memory-index"
+ANALYST_MEMORY_INDEX_NAME = "analyst-memory-index"
 
 # text-embedding-3-large default dimension
 EMBEDDING_DIMENSIONS = 3072

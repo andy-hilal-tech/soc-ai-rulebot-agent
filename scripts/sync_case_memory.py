@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from config.search_config import (
     get_search_client,
     get_openai_client,
-    CASE_MEMORY_INDEX_NAME,
+    ANALYST_MEMORY_INDEX_NAME,
     EMBED_BATCH_SIZE,
     AZURE_OPENAI_EMBED_DEPLOYMENT,
 )
@@ -66,7 +66,7 @@ def build_case_summary(record: dict) -> str:
 
 def main():
     container = get_case_records_container()
-    search_client = get_search_client(CASE_MEMORY_INDEX_NAME)
+    search_client = get_search_client(ANALYST_MEMORY_INDEX_NAME)
 
     query = "SELECT * FROM c"
     records = list(container.query_items(query=query, enable_cross_partition_query=True))
@@ -82,23 +82,28 @@ def main():
 
         docs.append({
             "memory_doc_id": str(case_uid),
+            "note_id": "",
             "case_uid": str(case_uid),
-            "client_id": str(record.get("client_id", "default")),
             "rule_id": str(record.get("rule_id", "")),
             "offense_id": str(record.get("offense_id", "")),
+            "client_id": str(record.get("client_id", "default")),
+            "author": str(record.get("created_by", "unknown")),
             "source_type": "case_memory",
-            "summary_text": summary_text,
+            "title": f"Case {case_uid}",
+            "content": summary_text,
+            "confidence_level": "historical",
             "status": str(record.get("status", "")),
             "recommended_object_type": str(record.get("recommended_tuning", {}).get("type", "")),
             "decision_type": "rule_tuning",
-            "created_utc": record.get("created_at") or utc_now(),
-            "updated_utc": record.get("last_updated_at") or utc_now(),
+            "tags": [str(record.get("client_id", "default"))],
             "linked_rule_ids": listify(record.get("linked_rule_ids")),
             "linked_case_uids": listify(record.get("linked_case_uids")),
+            "created_utc": record.get("created_at") or utc_now(),
+            "updated_utc": record.get("last_updated_at") or utc_now(),
         })
 
     for batch in batched(docs, EMBED_BATCH_SIZE):
-        vectors = embed_texts([d["summary_text"] for d in batch])
+        vectors = embed_texts([d["content"] for d in batch])
         for d, v in zip(batch, vectors):
             d["content_vector"] = v
         search_client.merge_or_upload_documents(documents=batch)

@@ -8,7 +8,7 @@ from config.search_config import (
     get_search_client,
     get_openai_client,
     OFFICIAL_INDEX_NAME,
-    INTERNAL_INDEX_NAME,
+    ANALYST_MEMORY_INDEX_NAME,
     CHUNK_SIZE,
     CHUNK_OVERLAP,
     EMBED_BATCH_SIZE,
@@ -128,7 +128,7 @@ def ingest_qradar_docs():
 
 
 def ingest_internal_notes():
-    search_client = get_search_client(INTERNAL_INDEX_NAME)
+    search_client = get_search_client(ANALYST_MEMORY_INDEX_NAME)
 
     docs_to_upload = []
     for file_path in ROOT_INTERNAL_NOTES.rglob("*"):
@@ -146,18 +146,27 @@ def ingest_internal_notes():
 
         for i, chunk in enumerate(chunks):
             docs_to_upload.append({
-                "chunk_id": f"{note_id}-{i}",
+                "memory_doc_id": f"{note_id}-{i}",
                 "note_id": note_id,
+                "case_uid": "",
+                "rule_id": "",
+                "offense_id": "",
                 "client_id": client_id,
                 "author": "unknown",
                 "source_type": "internal_note",
                 "title": title,
                 "content": chunk,
                 "confidence_level": "unrated",
+                "status": "",
+                "recommended_object_type": "",
+                "decision_type": "",
                 "tags": [client_id],
+                "linked_rule_ids": [],
+                "linked_case_uids": [],
                 "created_utc": utc_now(),
                 "updated_utc": utc_now(),
             })
+
 
     if not docs_to_upload:
         print("No internal notes found to ingest.")
