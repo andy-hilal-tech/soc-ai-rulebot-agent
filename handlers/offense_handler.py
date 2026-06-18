@@ -50,11 +50,13 @@ async def handle_offense_analysis(text: str):
     rule_text = json.dumps(rule, indent=2)
 
     retrieval_query = " ".join([
+        f"rule id {rule_id}",
         offense_data.get("event_name", ""),
         offense_data.get("event_description", ""),
         offense_data.get("why_false_positive", ""),
         offense_data.get("desired_outcome", ""),
         offense_data.get("analyst_notes", ""),
+        offense_data.get("payload_summary", ""),
         rule_text,
     ]).strip()
 
