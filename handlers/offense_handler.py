@@ -1,4 +1,5 @@
 import json
+import asyncio
 from prompts import (
     build_offense_input_message,
     OFFENSE_ANALYSIS_SYSTEM_PROMPT,
@@ -84,17 +85,31 @@ async def handle_offense_analysis(text: str):
         except Exception:
             result_json = {"raw_output": result}
 
-        case_record = build_case_record(
-            offense_data=offense_data,
-            analysis=result_json,
-            created_by="rulebot",
-        )
-        saved_case = save_case_record(case_record)
+        case_uid = None
+        case_warning = None
+
+        try:
+            case_record = build_case_record(
+                offense_data=offense_data,
+                analysis=result_json,
+                created_by="rulebot",
+            )
+
+            # Run blocking Cosmos DB write off the event loop
+            saved_case = await asyncio.wait_for(
+                asyncio.to_thread(save_case_record, case_record),
+                timeout=10,
+            )
+            case_uid = saved_case.get("case_uid")
+
+        except Exception as case_error:
+            case_warning = f"Case record could not be saved: {str(case_error)}"
 
         return {
             "status": "success",
             "route": "offense_analysis",
-            "case_uid": saved_case.get("case_uid"),
+            "case_uid": case_uid,
+            "case_warning": case_warning,
             "offense_data": offense_data,
             "context_used": context_chunks,
             "context_sources": context_sources,
