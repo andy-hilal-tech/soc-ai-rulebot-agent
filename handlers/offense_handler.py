@@ -11,7 +11,7 @@ from offense_parser import (
 from rule_loader import get_rule
 from retrieval import retrieve_context_with_sources
 from ai_client import analyze_rule
-from case_writer import build_case_record, save_case_record
+from handlers.case_writer import build_case_record, save_case_record
 
 
 async def handle_offense_intake():
