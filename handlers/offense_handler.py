@@ -13,6 +13,7 @@ from rule_loader import get_rule
 from retrieval import retrieve_context_with_sources
 from ai_client import analyze_rule
 from handlers.case_writer import build_case_record, save_case_record
+from handlers.response_formatters import build_offense_reply
 
 
 async def handle_offense_intake():
@@ -85,6 +86,7 @@ async def handle_offense_analysis(text: str):
         except Exception:
             result_json = {"raw_output": result}
 
+
         case_uid = None
         case_warning = None
 
@@ -95,7 +97,6 @@ async def handle_offense_analysis(text: str):
                 created_by="rulebot",
             )
 
-            # Run blocking Cosmos DB write off the event loop
             saved_case = await asyncio.wait_for(
                 asyncio.to_thread(save_case_record, case_record),
                 timeout=10,
@@ -105,11 +106,20 @@ async def handle_offense_analysis(text: str):
         except Exception as case_error:
             case_warning = f"Case record could not be saved: {str(case_error)}"
 
+        reply_text = build_offense_reply(
+            case_uid=case_uid,
+            offense_data=offense_data,
+            analysis=result_json,
+            context_sources=context_sources,
+            case_warning=case_warning,
+        )
+
         return {
             "status": "success",
             "route": "offense_analysis",
             "case_uid": case_uid,
             "case_warning": case_warning,
+            "reply": reply_text,
             "offense_data": offense_data,
             "context_used": context_chunks,
             "context_sources": context_sources,
