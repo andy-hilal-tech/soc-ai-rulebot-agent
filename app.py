@@ -32,7 +32,7 @@ from botbuilder.integration.aiohttp import (
 from handlers.rule_handler import handle_rule_id
 from handlers.offense_handler import handle_offense_intake, handle_offense_analysis
 from handlers.reasoning_handler import handle_natural_language
-
+from handlers.case_handler import get_case, update_case_status
 
 
 # ----------------------------
@@ -88,6 +88,83 @@ def classify_message(text: str) -> str:
 # Shared internal message pipeline
 # ----------------------------
 async def message_internal(text: str):
+    text = text.strip()
+    text_lower = text.lower()
+
+    # ----------------------------
+    # Case lookup command
+    # Example:
+    # case CASE-20260621-AB12CD34
+    # ----------------------------
+    if text_lower.startswith("case "):
+        case_uid = text.split(" ", 1)[1].strip()
+        case = get_case(case_uid)
+
+        if not case:
+            return {
+                "status": "error",
+                "route": "case_lookup",
+                "message": f"Case {case_uid} not found"
+            }, 404
+
+        reply = f"""Case: {case_uid}
+
+Rule: {case.get("rule_id", "")}
+Event: {case.get("event_name", "")}
+Status: {case.get("implementation_status", "")}
+
+Summary:
+{case.get("offense_summary", "")}
+
+Recommended Action:
+{case.get("recommended_tuning", {}).get("details", "")}
+
+Last Updated:
+{case.get("last_updated_at", "")}
+"""
+
+        return {
+            "status": "success",
+            "route": "case_lookup",
+            "reply": reply
+        }, 200
+
+    # ----------------------------
+    # Case update command
+    # Example:
+    # update case CASE-20260621-AB12CD34 implemented
+    # ----------------------------
+    if text_lower.startswith("update case"):
+        parts = text.split()
+
+        if len(parts) < 4:
+            return {
+                "status": "error",
+                "route": "case_update",
+                "message": "Invalid update command. Use: update case <CASE_ID> <status>"
+            }, 400
+
+        case_uid = parts[2].strip()
+        new_status = parts[3].strip().lower()
+
+        updated = update_case_status(case_uid, new_status)
+
+        if not updated:
+            return {
+                "status": "error",
+                "route": "case_update",
+                "message": f"Case {case_uid} not found"
+            }, 404
+
+        return {
+            "status": "success",
+            "route": "case_update",
+            "reply": f"Case {case_uid} updated to '{new_status}'"
+        }, 200
+
+    # ----------------------------
+    # Existing routing logic
+    # ----------------------------
     route = classify_message(text)
 
     if route == "rule_id":
@@ -100,7 +177,6 @@ async def message_internal(text: str):
         return await handle_offense_analysis(text)
 
     return await handle_natural_language(text)
-
 
 # ----------------------------
 # HTTP endpoints
