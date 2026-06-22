@@ -178,12 +178,13 @@ def build_offense_reply(
         "",
         f"Event: {event_name}",
         f"Rule ID: {rule_id}",
-        if classification:
-            lines.append(f"Classification: {classification}")
-
-        if confidence:
-            lines.append(f"Confidence: {confidence}")
     ]
+
+    if classification:
+        lines.append(f"Classification: {classification}")
+
+    if confidence:
+        lines.append(f"Confidence: {confidence}")
 
     if case_uid:
         lines.append(f"Case ID: {case_uid}")
