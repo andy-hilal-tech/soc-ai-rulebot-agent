@@ -122,7 +122,7 @@ def rerank_combined_results(
 
         # case-memory remains very useful, but slightly below official
         if source_type == "case_memory":
-            score += 1.5
+            score += 3.0
 
         # internal note still valuable, but don't let it dominate too easily
         if source_type == "internal_note":

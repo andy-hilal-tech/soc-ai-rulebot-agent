@@ -150,6 +150,11 @@ def build_offense_reply(
     assessment = _extract_assessment_text(analysis)
     tuning_text = _format_tuning_options(analysis, max_items=2)
 
+    similar_cases = []
+    for src in context_sources or []:
+        if src.startswith("case_memory:"):
+            similar_cases.append(compact_source_label(src))
+
     lines = [
         "Offense Analysis Summary",
         "",
@@ -165,6 +170,14 @@ def build_offense_reply(
         "Assessment:",
         assessment,
     ])
+
+    if similar_cases:
+        lines.extend([
+            "",
+            "Similar historical case(s) found:",
+        ])
+        for case_ref in similar_cases[:2]:
+            lines.append(f"- {case_ref}")
 
     if why_fp:
         lines.extend([
