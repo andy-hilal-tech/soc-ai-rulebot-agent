@@ -146,6 +146,42 @@ Instructions:
 """.strip()
 
 
+OFFENSE_ANALYSIS_OUTPUT_SCHEMA = """
+Return ONLY valid JSON.
+
+Use exactly this structure and field names:
+
+{
+  "classification": "likely benign | suspicious | inconclusive",
+  "reasoning": "plain English summary string",
+  "likely_false_positive": true,
+  "tuning_options": [
+    {
+      "type": "short tuning option label",
+      "details": "plain English explanation of the proposed tuning action"
+    }
+  ],
+  "compliance_notes": "plain English compliance / audit notes",
+  "validation_steps": [
+    "step 1",
+    "step 2"
+  ],
+  "confidence": "low | medium | high"
+}
+
+Rules:
+- Do not rename any fields.
+- Do not add extra top-level fields.
+- "reasoning" must be a plain string, not an object.
+- Every tuning option must contain exactly:
+  - "type"
+  - "details"
+- "validation_steps" must always be a list of strings.
+- "confidence" must be one of: low, medium, high.
+- If no suitable tuning option is found, return an empty list for "tuning_options".
+- Do not wrap the JSON in markdown fences.
+""".strip()
+
 
 OFFENSE_ANALYSIS_SYSTEM_PROMPT = """
 You are Rulebot, acting as a QRadar Offense Tuning Advisor.
@@ -180,7 +216,7 @@ Return your answer in structured JSON with these fields:
 - confidence
 
 Return ONLY valid JSON. Do NOT include markdown or code blocks.
-""".strip()
+""".strip() + "\n\n" + OFFENSE_ANALYSIS_OUTPUT_SCHEMA
 
 
 
@@ -291,24 +327,19 @@ def build_offense_analysis_prompt(
     offense_json = json.dumps(offense_data, indent=2)
 
     return f"""
-Analyze this QRadar offense and recommend rule-tuning guidance.
+Analyze the following offense and recommend tuning guidance.
 
-Offense details:
-{offense_json}
+Offense data:
+{json.dumps(offense_data, indent=2)}
 
-Referenced rule definition:
+Rule definition:
 {rule_text}
 
-Retrieved supporting context:
-{context_text}
+Retrieved context:
+{json.dumps(retrieved_context, indent=2)}
 
-Instructions:
-- Assess whether this offense is likely benign, suspicious, or unclear.
-- Use the analyst's explanation of why it is considered false positive.
-- Use the desired outcome to guide tuning recommendations.
-- Base the rule understanding on the referenced rule definition.
-- Recommend safe, auditable tuning changes first.
-- Explain risks and validation steps clearly.
-
-Return ONLY valid JSON with the required fields.
+Important:
+- Use the offense details, rule definition, official QRadar guidance, and any relevant internal/client-specific knowledge.
+- Similar historical cases may be useful as supporting context, but do not assume that a cross-client case is directly applicable without justification.
+- Return ONLY valid JSON using the exact schema specified in the system prompt.
 """.strip()

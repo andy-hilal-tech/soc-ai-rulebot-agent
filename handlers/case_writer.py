@@ -22,12 +22,13 @@ def build_case_record(
 
     recommended_tuning = {}
     tuning_options = analysis.get("tuning_options", [])
+
     if isinstance(tuning_options, list) and tuning_options:
         first = tuning_options[0]
         if isinstance(first, dict):
             recommended_tuning = {
-                "type": first.get("implement_as", ""),
-                "details": first.get("reasoning", ""),
+                "type": first.get("type") or first.get("implement_as", ""),
+                "details": first.get("details") or first.get("reasoning", ""),
             }
 
     record = {
@@ -46,6 +47,8 @@ def build_case_record(
         "desired_outcome": offense_data.get("desired_outcome", ""),
         "analyst_notes": offense_data.get("analyst_notes", ""),
         "recommended_tuning": recommended_tuning,
+        "classification": analysis.get("classification", ""),
+        "confidence": analysis.get("confidence", ""),
         "compliance_notes": analysis.get("compliance_notes", ""),
         "validation_steps": analysis.get("validation_steps", []),
         "implementation_status": "not_implemented",

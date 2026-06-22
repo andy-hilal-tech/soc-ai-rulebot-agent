@@ -107,7 +107,7 @@ def _extract_assessment_text(analysis: dict) -> str:
     return "No high-level assessment returned."
 
 
-def _format_tuning_options(analysis: dict, max_items: int = 2) -> str:
+def _format_tuning_options(analysis: dict, max_items: int = 3) -> str:
     tuning_options = analysis.get("tuning_options", [])
 
     if not isinstance(tuning_options, list) or not tuning_options:
@@ -116,22 +116,38 @@ def _format_tuning_options(analysis: dict, max_items: int = 2) -> str:
     lines = []
     for i, option in enumerate(tuning_options[:max_items], start=1):
         if isinstance(option, dict):
-            implement_as = _safe_string(option.get("implement_as")) or "Recommendation"
-            reasoning = _safe_string(option.get("reasoning"))
+            label = (
+                _safe_string(option.get("type"))
+                or _safe_string(option.get("implement_as"))
+                or _safe_string(option.get("action"))
+                or "Recommendation"
+            )
+
+            detail = (
+                _safe_string(option.get("details"))
+                or _safe_string(option.get("reasoning"))
+                or _safe_string(option.get("recommendation"))
+            )
+
             risks = _safe_string(option.get("risks_and_tradeoffs"))
             compliance = _safe_string(option.get("compliance_implications"))
 
-            lines.append(f"{i}. {implement_as}")
-            if reasoning:
-                lines.append(f"   - Why: {reasoning}")
+            lines.append(f"{i}. {label}")
+
+            if detail:
+                lines.append(f"   - Details: {detail}")
+
             if risks:
                 lines.append(f"   - Risks: {risks}")
+
             if compliance:
                 lines.append(f"   - Compliance: {compliance}")
+
         else:
             lines.append(f"{i}. {_safe_string(option)}")
 
     return "\n".join(lines)
+
 
 
 def build_offense_reply(
@@ -149,6 +165,8 @@ def build_offense_reply(
 
     assessment = _extract_assessment_text(analysis)
     tuning_text = _format_tuning_options(analysis, max_items=2)
+    classification = _safe_string(analysis.get("classification"))
+    confidence = _safe_string(analysis.get("confidence"))
 
     similar_cases = []
     for src in context_sources or []:
@@ -160,6 +178,11 @@ def build_offense_reply(
         "",
         f"Event: {event_name}",
         f"Rule ID: {rule_id}",
+        if classification:
+            lines.append(f"Classification: {classification}")
+
+        if confidence:
+            lines.append(f"Confidence: {confidence}")
     ]
 
     if case_uid:
