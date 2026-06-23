@@ -1,0 +1,219 @@
+{
+  "rule_doc_id": "101602",
+  "rule_id": "101602",
+  "uuid": "52d085dd-b9dd-4216-8c4b-1d0f813f3aa6",
+  "rule_name": "UBA : Populate Multiple VPN Accounts Logged In from Single IP",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event, Add to a Reference Set",
+  "created": "2018-03-20T16:21:12.080Z",
+  "modified": "2024-02-19T16:39:42.614Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Multiple VPN Accounts Logged In From Single IP - IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "38"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "0",
+            "id": "304"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:UBA : VPN Login Successful</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Source IP</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "0e75461e-461d-47eb-81e6-3c5e8feeb00b"
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24004",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500169",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=15",
+            "name": "UBA : Populate Multiple VPN Accounts Logged In from Single IP"
+          }
+        }
+      ],
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "sourceIP",
+            "id": "38",
+            "type": "IP",
+            "name": "UBA : Multiple VPN Accounts Logged In from Single IP"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0e75461e-461d-47eb-81e6-3c5e8feeb00b",
+      "name": "BB:UBA : VPN Login Successful"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "101602",
+                "bb": "UBA : Populate Multiple VPN Accounts Logged In from Single IP",
+                "uuid": "52d085dd-b9dd-4216-8c4b-1d0f813f3aa6",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "101602",
+                "bb": "UBA : Populate Multiple VPN Accounts Logged In from Single IP",
+                "uuid": "52d085dd-b9dd-4216-8c4b-1d0f813f3aa6",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.473410",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

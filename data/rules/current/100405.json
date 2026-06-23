@@ -1,0 +1,62 @@
+{
+  "rule_doc_id": "100405",
+  "rule_id": "100405",
+  "uuid": "d326c3eb-e0ef-4296-8ee6-e00e394b9560",
+  "rule_name": "Potential Honeypot Access",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2023-11-22T14:52:01.977Z",
+  "modified": "2024-03-13T14:00:04.969Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:NetworkDefinition: Honeypot like Addresses</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1271"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1271",
+      "name": "BB:NetworkDefinition: Honeypot like Addresses"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.396320",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

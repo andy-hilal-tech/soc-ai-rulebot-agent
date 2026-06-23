@@ -1,0 +1,85 @@
+{
+  "rule_doc_id": "137852",
+  "rule_id": "137852",
+  "uuid": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b",
+  "rule_name": "BB:BehaviorDefinition: User Account Added (Windows)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-24T15:42:59.419Z",
+  "modified": "2024-07-21T10:28:51.679Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "4",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000892) Success Audit: A user account was created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000892"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1136",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136",
+            "values": [
+              {
+                "id": "137852",
+                "bb": "BB:BehaviorDefinition: User Account Added (Windows)",
+                "uuid": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.428580",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

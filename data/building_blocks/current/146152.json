@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "146152",
+  "rule_id": "146152",
+  "uuid": "530ba1fd-b7b4-4857-abf8-f7eb05a8dd11",
+  "rule_name": "BB:BehaviorDefinition: Modification of Explorer Hidden Keys",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T14:01:34.024Z",
+  "modified": "2024-07-21T12:38:18.147Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Target Object&quot; = 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden' OR &quot;Target Object&quot; = 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden') OR (&quot;Registry Key&quot; = 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden' OR &quot;Registry Key&quot; = 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\Hidden')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Target%20Object%22%20%3D%20'HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%5CShowSuperHidden'%20OR%20%22Target%20Object%22%20%3D%20'HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%5CHidden')%20OR%20(%22Registry%20Key%22%20%3D%20'HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%5CShowSuperHidden'%20OR%20%22Registry%20Key%22%20%3D%20'HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%5CHidden')|%5B%22(%5C%22Target%20Object%5C%22%20%3D%20'HKLM%5C%5CSOFTWARE%5C%5CMicrosoft%5C%5CWindows%5C%5CCurrentVersion%5C%5CExplorer%5C%5CAdvanced%5C%5CShowSuperHidden'%20OR%20%5C%22Target%20Object%5C%22%20%3D%20'HKLM%5C%5CSOFTWARE%5C%5CMicrosoft%5C%5CWindows%5C%5CCurrentVersion%5C%5CExplorer%5C%5CAdvanced%5C%5CHidden')%20OR%20(%5C%22Registry%20Key%5C%22%20%3D%20'HKLM%5C%5CSOFTWARE%5C%5CMicrosoft%5C%5CWindows%5C%5CCurrentVersion%5C%5CExplorer%5C%5CAdvanced%5C%5CShowSuperHidden'%20OR%20%5C%22Registry%20Key%5C%22%20%3D%20'HKLM%5C%5CSOFTWARE%5C%5CMicrosoft%5C%5CWindows%5C%5CCurrentVersion%5C%5CExplorer%5C%5CAdvanced%5C%5CHidden')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Target Details&quot; = 'DWORD (0x00000000)') OR (&quot;Registry Value Data&quot; = 'DWORD (0x00000000)')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Target%20Details%22%20%3D%20'DWORD%20(0x00000000)')%20OR%20(%22Registry%20Value%20Data%22%20%3D%20'DWORD%20(0x00000000)')|%5B%22(%5C%22Target%20Details%5C%22%20%3D%20'DWORD%20(0x00000000)')%20OR%20(%5C%22Registry%20Value%20Data%5C%22%20%3D%20'DWORD%20(0x00000000)')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "146152",
+                "bb": "BB:BehaviorDefinition: Modification of Explorer Hidden Keys",
+                "uuid": "530ba1fd-b7b4-4857-abf8-f7eb05a8dd11",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.573512",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

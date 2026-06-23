@@ -1,0 +1,178 @@
+{
+  "rule_doc_id": "142402",
+  "rule_id": "142402",
+  "uuid": "29b2bee3-adec-4e36-91c9-6025d150b60a",
+  "rule_name": "RunDLL32 Outbound Network Connection",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-19T15:14:24.363Z",
+  "modified": "2024-07-21T12:38:46.126Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES 'rundll32\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20MATCHES%20'rundll32%5C.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20MATCHES%20'rundll32%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "InitiatedEQanytrue"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Destination IP is any of [10.0.0.0/8 or 127.0.0.0/8 or 169.254.0.0/16 or 172.16.0.0/12 or 192.168.0.0/16  or 20.184.0.0/13 or 51.103.210.0/23]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "destinationIPEQany10.0.0.0/8�127.0.0.0/8�169.254.0.0/16�172.16.0.0/12�192.168.0.0/16 �20.184.0.0/13�51.103.210.0/23"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "T1071.001",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1071.001",
+            "values": [
+              {
+                "id": "142402",
+                "bb": "RunDLL32 Outbound Network Connection",
+                "uuid": "29b2bee3-adec-4e36-91c9-6025d150b60a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "142402",
+                "bb": "RunDLL32 Outbound Network Connection",
+                "uuid": "29b2bee3-adec-4e36-91c9-6025d150b60a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.913382",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

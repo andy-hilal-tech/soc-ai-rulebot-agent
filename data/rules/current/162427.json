@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162427",
+  "rule_id": "162427",
+  "uuid": "691fbcd8-da9f-4e6e-b697-dc93e15d8587",
+  "rule_name": "Secure Deletion with SDelete",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:05:14.973Z",
+  "modified": "2024-08-04T13:05:14.973Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\" IN('4656', '4663', '4658')) AND (LOWER(\"Object Name\") LIKE '%.aaa' OR LOWER(\"Object Name\") LIKE '%.zzz')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%274656%27%2C%20%274663%27%2C%20%274658%27%29%29%20AND%20%28LOWER%28%22Object%20Name%22%29%20LIKE%20%27%25.aaa%27%20OR%20LOWER%28%22Object%20Name%22%29%20LIKE%20%27%25.zzz%27%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%274656%27%2C%20%274663%27%2C%20%274658%27%29%29%20AND%20%28LOWER%28%22Object%20Name%22%29%20LIKE%20%27%25.aaa%27%20OR%20LOWER%28%22Object%20Name%22%29%20LIKE%20%27%25.zzz%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Thomas Patzke SIGMA Title: Secure Deletion with SDelete SIGMA Description: Detects renaming of file while deletion with SDelete tool.  False positives: - Legitimate usage of SDelete  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Secure Deletion with SDelete"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.011514",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

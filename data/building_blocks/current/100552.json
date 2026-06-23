@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100552",
+  "rule_id": "100552",
+  "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+  "rule_name": "BB:UBA : Common Event Filters",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2016-04-21T21:23:31.580Z",
+  "modified": "2024-07-21T07:53:23.247Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Username is N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c18f0605-67d5-4100-8710-885ca7a393f7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+      "name": "BB:UBA : Common Log Source Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.983272",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

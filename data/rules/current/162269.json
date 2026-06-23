@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162269",
+  "rule_id": "162269",
+  "uuid": "c282786d-a455-4b04-b4cf-036acfdc03b0",
+  "rule_name": "ProxyLogon MSExchange OabVirtualDirectory",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:59:45.741Z",
+  "modified": "2025-05-06T11:51:40.320Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%oabvirtualdirectory%' OR LOWER(UTF8(payload)) LIKE '% -externalurl %') AND (LOWER(UTF8(payload)) LIKE '%eval(request%' OR LOWER(UTF8(payload)) LIKE '%http://f/<script%' OR LOWER(UTF8(payload)) LIKE '%\"unsafe\"};%' OR LOWER(UTF8(payload)) LIKE '%function page_load()%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25oabvirtualdirectory%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-externalurl%20%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25eval%28request%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//f/%3Cscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%22unsafe%22%7D%3B%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25function%20page_load%28%29%25%27%29|%5B%22devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25oabvirtualdirectory%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-externalurl%20%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25eval%28request%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//f/%3Cscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%22unsafe%22%7D%3B%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25function%20page_load%28%29%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems) SIGMA Title: ProxyLogon MSExchange OabVirtualDirectory SIGMA Description: Detects specific patterns found after a successful ProxyLogon exploitation in relation to a Commandlet invocation of Set-OabVirtualDirectory  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "ProxyLogon MSExchange OabVirtualDirectory"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.641923",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

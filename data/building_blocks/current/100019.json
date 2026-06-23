@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100019",
+  "rule_id": "100019",
+  "uuid": "SYSTEM-1228",
+  "rule_name": "BB:PortDefinition: Mail Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-12-21T23:26:26.800Z",
+  "modified": "2023-10-30T02:02:37.940Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>25, 465, 587, 110, 143, 993, 995, 563, 1352</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "25, 465, 587, 110, 143, 993, 995, 563, 1352"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.569218",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

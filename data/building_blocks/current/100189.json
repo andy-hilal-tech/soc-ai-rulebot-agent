@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100189",
+  "rule_id": "100189",
+  "uuid": "SYSTEM-1327",
+  "rule_name": "BB:FalsePositive: Web Server False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-10-14T05:59:01.632Z",
+  "modified": "2023-10-30T02:02:39.884Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(2500212) DELETED WEB-MISC Tomcat directory traversal attempt, (2500213) SERVER-APACHE Apache Tomcat view source attempt, (2500875) SERVER-WEBAPP /cgi-bin/ access, (2500211) SERVER-WEBAPP weblogic/tomcat .jsp view source attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "2500212,  2500213,  2500875,  2500211"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Web Servers, BB:HostReference: Web Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1277, 5dd9d066-f801-4bab-823d-9bb0bb311186"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1277",
+      "name": "BB:HostDefinition: Web Servers"
+    },
+    {
+      "uuid": "5dd9d066-f801-4bab-823d-9bb0bb311186",
+      "name": "BB:HostReference: Web Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.785559",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

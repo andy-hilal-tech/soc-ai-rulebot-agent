@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "162207",
+  "rule_id": "162207",
+  "uuid": "19ef3b07-6338-4c61-af60-ff2f69ae5ded",
+  "rule_name": "Recommended Blocked Process is Running",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-30T10:58:01.269Z",
+  "modified": "2024-07-30T10:58:01.269Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Process Name (custom), Parent Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) Recommended Blocked Processes - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Process Name, Parent Process Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "216"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "System Binary Proxy Execution",
+          "STEC": "T1218.005",
+          "TAC": "Defense Evasion",
+          "MAP_C": "medium",
+          "MAP_EN": true,
+          "TEC_ID": "T1218",
+          "MAP_S": [
+            {
+              "name": "Defense Evasion - T1218.005",
+              "values": [
+                {
+                  "id": "162207",
+                  "bb": "Recommended Blocked Process is Running",
+                  "uuid": "19ef3b07-6338-4c61-af60-ff2f69ae5ded",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "TEC": "T1569",
+          "STEC": "None",
+          "TAC": "Execution",
+          "MAP_C": "high",
+          "MAP_EN": true,
+          "TEC_ID": "T1569",
+          "MAP_S": [
+            {
+              "name": "Execution - T1569",
+              "values": [
+                {
+                  "id": "162207",
+                  "bb": "Recommended Blocked Process is Running",
+                  "uuid": "19ef3b07-6338-4c61-af60-ff2f69ae5ded",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.501342",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

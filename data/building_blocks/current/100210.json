@@ -1,0 +1,60 @@
+{
+  "rule_doc_id": "100210",
+  "rule_id": "100210",
+  "uuid": "SYSTEM-1334",
+  "rule_name": "BB:FalsePositive: Large Volume Local FW Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-22T20:20:48.835Z",
+  "modified": "2023-10-30T02:02:40.425Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(3500245) Firewall Deny, (3500455) Firewall Deny, (3500629) Firewall Deny, (3501016) Firewall Deny, (3501178) Firewall Deny, (3501374) Firewall Deny, (3501712) Firewall Deny, (3503007) Firewall Deny, (9750036) 106015, (12250509) %ASA-6-106015, (12251657) Deny TCP (no connection) from IP_address/port to IP_address/port flags tcp_flags on interface interface_name.</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "3500245,  3500455,  3500629,  3501016,  3501178,  3501374,  3501712,  3503007,  9750036,  12250509,  12251657"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Source_Test",
+            "uid": "1",
+            "id": "27"
+          },
+          "text": [
+            "when the source is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "local"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.841407",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

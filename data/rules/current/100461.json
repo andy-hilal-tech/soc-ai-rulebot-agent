@@ -1,0 +1,123 @@
+{
+  "rule_doc_id": "100461",
+  "rule_id": "100461",
+  "uuid": "8db8d27f-4980-4469-9d47-8b698ace7e4d",
+  "rule_name": "Treat Non-Spyware Malware as Offenses",
+  "object_type": "rule",
+  "group": "Malware",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2024-01-16T13:33:06.123Z",
+  "modified": "2024-01-16T13:33:06.123Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Malware.Hostile Mail Attachment , Malware.Hostile Software Download, Malware.Malicious Software , Malware.Misc Malware, Malware.Unknown Malware </a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "6003, 6005, 6004, 6007, 6001"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "100461",
+                "bb": "Treat Non-Spyware Malware as Offenses",
+                "uuid": "8db8d27f-4980-4469-9d47-8b698ace7e4d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "100461",
+                "bb": "Treat Non-Spyware Malware as Offenses",
+                "uuid": "8db8d27f-4980-4469-9d47-8b698ace7e4d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100461",
+                "bb": "Treat Non-Spyware Malware as Offenses",
+                "uuid": "8db8d27f-4980-4469-9d47-8b698ace7e4d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.440397",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

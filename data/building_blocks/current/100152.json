@@ -1,0 +1,78 @@
+{
+  "rule_doc_id": "100152",
+  "rule_id": "100152",
+  "uuid": "SYSTEM-1047",
+  "rule_name": "BB:Threats: Suspicious IP Protocol Usage: Suspicious ICMP Type Code",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T15:20:27.257Z",
+  "modified": "2023-10-30T02:20:01.535Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ICMP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25",
+            "negate": "true"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "IcmpType",
+            "uid": "3",
+            "id": "212",
+            "negate": "true"
+          },
+          "text": [
+            "when the ICMP type is any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Echo Reply, Echo, Destination Unreachable, Time Exceeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getIcmpTypes",
+              "value": "0, 8, 3, 11"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.705308",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

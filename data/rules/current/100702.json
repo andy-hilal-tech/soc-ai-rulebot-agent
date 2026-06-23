@@ -1,0 +1,172 @@
+{
+  "rule_doc_id": "100702",
+  "rule_id": "100702",
+  "uuid": "9c79abee-e8d8-4db1-9b6e-f81691b29551",
+  "rule_name": "UBA : Large number of denied access events towards external domain",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-05-03T19:11:21.043Z",
+  "modified": "2024-02-19T16:39:42.180Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c18f0605-67d5-4100-8710-885ca7a393f7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21",
+            "negate": "false"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Access.Access Denied, Access.ACL Deny, Access.Firewall Deny, Access.IPS Deny</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4015, 4013, 4003, 4006"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Destination_Test",
+            "uid": "0",
+            "id": "28"
+          },
+          "text": [
+            "when the destination is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "20"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24004",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500158",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=10",
+            "name": "UBA : Large number of denied access events towards external domain"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+      "name": "BB:UBA : Common Log Source Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "100702",
+                "bb": "UBA : Large number of denied access events towards external domain",
+                "uuid": "9c79abee-e8d8-4db1-9b6e-f81691b29551",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.457634",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

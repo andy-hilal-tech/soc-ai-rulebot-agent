@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "155452",
+  "rule_id": "155452",
+  "uuid": "00295c90-6fc3-4342-ac04-98fd3a387c82",
+  "rule_name": "Snatch Ransomware Activity Detected",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T12:46:05.798Z",
+  "modified": "2024-07-21T12:38:20.375Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%shutdown /r /f /t 00%' OR LOWER(&quot;Command&quot;) LIKE '%net stop superbackupman%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25shutdown%20%2Fr%20%2Ff%20%2Ft%2000%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25net%20stop%20superbackupman%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25shutdown%20%2Fr%20%2Ff%20%2Ft%2000%25'%22,%22OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25net%20stop%20superbackupman%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.003",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.003",
+            "values": [
+              {
+                "id": "155452",
+                "bb": "Snatch Ransomware Activity Detected",
+                "uuid": "00295c90-6fc3-4342-ac04-98fd3a387c82",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.246058",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "100228",
+  "rule_id": "100228",
+  "uuid": "SYSTEM-1005",
+  "rule_name": "Source Asset Weight is Medium",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:30:46.489Z",
+  "modified": "2023-10-30T02:20:03.486Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "0",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>source</a> asset has a weight <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>7</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "lt"
+            },
+            {
+              "id": "2",
+              "value": "7"
+            },
+            {
+              "id": "3",
+              "value": "attacker"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "1",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>source</a> asset has a weight <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>3</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "3"
+            },
+            {
+              "id": "3",
+              "value": "attacker"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "false",
+        "offenseMapping": "0",
+        "drop": "false"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "1",
+            "operation": "incRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance has been increased by 1 because the source network weight is medium."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.324618",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

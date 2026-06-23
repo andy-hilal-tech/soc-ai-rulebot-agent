@@ -1,0 +1,149 @@
+{
+  "rule_doc_id": "135002",
+  "rule_id": "135002",
+  "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+  "rule_name": "BB:BehaviorDefinition: User Added to Local Administrators",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-16T13:49:49.368Z",
+  "modified": "2024-07-21T12:38:47.097Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Account Added, Authentication.Group Member Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3031, 3036"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Target Username&quot; ILIKE 'Administr%') OR (&quot;Target Account Security ID&quot; ILIKE '%S-1-5-32-544%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Target%20Username%22%20ILIKE%20'Administr%25')%20OR%20(%22Target%20Account%20Security%20ID%22%20ILIKE%20'%25S-1-5-32-544%25')|%5B%22(%5C%22Target%20Username%5C%22%20ILIKE%20'Administr%25')%20OR%20(%5C%22Target%20Account%20Security%20ID%5C%22%20ILIKE%20'%25S-1-5-32-544%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Account Name (custom) is any of $</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Account NameEQany$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.004",
+            "values": [
+              {
+                "id": "135002",
+                "bb": "BB:BehaviorDefinition: User Added to Local Administrators",
+                "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Create Account",
+        "STEC": "T1136.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136.001",
+            "values": [
+              {
+                "id": "135002",
+                "bb": "BB:BehaviorDefinition: User Added to Local Administrators",
+                "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.368827",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

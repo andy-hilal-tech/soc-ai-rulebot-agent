@@ -1,0 +1,81 @@
+{
+  "rule_doc_id": "113302",
+  "rule_id": "113302",
+  "uuid": "7f927b1c-d30b-48d2-ac06-c80b56ea033c",
+  "rule_name": "BB:CategoryDefinition: Programming Environment",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-16T17:32:02.160Z",
+  "modified": "2024-02-19T16:49:26.433Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create, (5000862) Success Audit: A new process has been created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828,                                                                                                                                                                                                                                                                                          5000862"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name IMATCHES 'powershell.exe' OR (&quot;IMP Hash&quot; is not NULL and &quot;IMP Hash&quot; in ('5A87D2858188870B4DAD9DD3F3158173', '099B747A4A31983374E54912D4BB7C44', 'F2C0E8A5BD10DBC167455484050CD683', 'CAEE994F79D85E47C06E5FA9CDEAE453'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Name%22%20IMATCHES%20'powershell.exe'%20OR%20(%22IMP%20Hash%22%20is%20not%20NULL%20and%20%22IMP%20Hash%22%20in%20('5A87D2858188870B4DAD9DD3F3158173'%2C%20'099B747A4A31983374E54912D4BB7C44'%2C%20'F2C0E8A5BD10DBC167455484050CD683'%2C%20'CAEE994F79D85E47C06E5FA9CDEAE453'))|%5B%22%5C%22Process%20Name%5C%22%20IMATCHES%20'powershell.exe'%20OR%20(%5C%22IMP%20Hash%5C%22%20is%20not%20NULL%20and%20%5C%22IMP%20Hash%5C%22%20in%20('5A87D2858188870B4DAD9DD3F3158173'%2C%20'099B747A4A31983374E54912D4BB7C44'%2C%20'F2C0E8A5BD10DBC167455484050CD683'%2C%20'CAEE994F79D85E47C06E5FA9CDEAE453'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.141901",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100297",
+  "rule_id": "100297",
+  "uuid": "SYSTEM-1328",
+  "rule_name": "BB:PortDefinition: Authorized L2R Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T18:05:52.710Z",
+  "modified": "2023-10-30T02:02:36.387Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>80, 443, 25, 22, 53, 123</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "80, 443, 25, 22, 53, 123"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.928413",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

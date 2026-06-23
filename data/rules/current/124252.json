@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "124252",
+  "rule_id": "124252",
+  "uuid": "95c2bf9e-4bdb-41bb-88c2-5b7c8d23e14c",
+  "rule_name": "Microsoft Windows RCE Vulnerability - Suspicious Files",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-09-30T19:47:03.339Z",
+  "modified": "2024-06-27T13:19:18.704Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful File Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;File Directory&quot; = 'C:\\Users\\Public' AND &quot;Filename&quot; IN ('all.exe', 'dump.dll','ad.exe')) OR (&quot;File Directory&quot; = 'C:\\PerfLogs' AND &quot;Filename&quot; IN ('gpg-error.exe', 'cm.exe')) OR (&quot;File Directory&quot; = 'C:\\\\root' AND &quot;Filename&quot; = 'DrSDKCaller.exe') OR (&quot;File Directory&quot; = 'C:\\Program Files\\Common Files\\system\\ado' AND &quot;Filename&quot; = 'msado32.tlb')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22File%20Directory%22%20%3D%20'C%3A%5CUsers%5CPublic'%20AND%20%22Filename%22%20IN%20('all.exe',%20'dump.dll','ad.exe'))%20OR%20(%22File%20Directory%22%20%3D%20'C%3A%5CPerfLogs'%20AND%20%22Filename%22%20IN%20('gpg-error.exe',%20'cm.exe'))%20OR%20(%22File%20Directory%22%20%3D%20'C%3A%5C%5Croot'%20AND%20%22Filename%22%20%3D%20'DrSDKCaller.exe')%20OR%20(%22File%20Directory%22%20%3D%20'C%3A%5CProgram%20Files%5CCommon%20Files%5Csystem%5Cado'%20AND%20%22Filename%22%20%3D%20'msado32.tlb')|%5B%22(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5CUsers%5C%5CPublic'%20AND%20%5C%22Filename%5C%22%20IN%20('all.exe',%20'dump.dll','ad.exe'))%20OR%20(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5CPerfLogs'%20AND%20%5C%22Filename%5C%22%20IN%20('gpg-error.exe',%20'cm.exe'))%20OR%20(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5C%5C%5Croot'%20AND%20%5C%22Filename%5C%22%20%3D%20'DrSDKCaller.exe')%20OR%20(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5CProgram%20Files%5C%5CCommon%20Files%5C%5Csystem%5C%5Cado'%20AND%20%5C%22Filename%5C%22%20%3D%20'msado32.tlb')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.225436",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

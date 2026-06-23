@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "145302",
+  "rule_id": "145302",
+  "uuid": "aa2b6d8f-5761-4256-8ae9-998180978b57",
+  "rule_name": "BB:BehaviorDefinition: Prefetch File Deletion",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-14T15:20:08.863Z",
+  "modified": "2024-07-21T12:38:26.777Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Deleted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8033"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>File Extension (custom) is any of pf</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionEQanypf"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Directory (custom) is any of C:\\Windows\\Prefetch\\%</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryEQanyC:\\Windows\\Prefetch\\%"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Process File File Path&quot;='C:\\windows\\system32\\svchost.exe' AND (LOWER(&quot;Username&quot;) LIKE '%authori%' or LOWER(&quot;Username&quot;) LIKE '%autori%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Process%20Path%22%3D'C%3A%5Cwindows%5Csystem32%5Csvchost.exe'%20AND%20(LOWER(%22Username%22)%20LIKE%20'%25authori%25'%20or%20LOWER(%22Username%22)%20LIKE%20'%25autori%25'))|%5B%22(%5C%22Process%20Path%5C%22%3D'C%3A%5C%5Cwindows%5C%5Csystem32%5C%5Csvchost.exe'%20AND%20(LOWER(%5C%22Username%5C%22)%20LIKE%20'%25authori%25'%20or%20LOWER(%5C%22Username%5C%22)%20LIKE%20'%25autori%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.004",
+            "values": [
+              {
+                "id": "145302",
+                "bb": "BB:BehaviorDefinition: Prefetch File Deletion",
+                "uuid": "aa2b6d8f-5761-4256-8ae9-998180978b57",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.549726",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

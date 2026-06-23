@@ -1,0 +1,181 @@
+{
+  "rule_doc_id": "157452",
+  "rule_id": "157452",
+  "uuid": "050f640d-fc8f-497e-bf85-da570e5e19f6",
+  "rule_name": "Microsoft Office DLL Sideloading",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-25T18:27:55.167Z",
+  "modified": "2024-07-21T12:38:16.989Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001844) Image loaded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001844"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Filename (custom) is any of outllib.dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameEQanyoutllib.dll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Directory (custom) contains any of [\\Program Files\\Microsoft Office\\OFFICE or \\Program Files (x86)\\Microsoft Office\\OFFICE or \\Program Files\\Microsoft Office\\Root\\OFFICE or \\Program Files (x86)\\Microsoft Office\\Root\\OFFICE]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryCONany\\Program Files\\Microsoft Office\\OFFICE�\\Program Files (x86)\\Microsoft Office\\OFFICE�\\Program Files\\Microsoft Office\\Root\\OFFICE�\\Program Files (x86)\\Microsoft Office\\Root\\OFFICE"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.002",
+            "values": [
+              {
+                "id": "157452",
+                "bb": "Microsoft Office DLL Sideloading",
+                "uuid": "050f640d-fc8f-497e-bf85-da570e5e19f6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.002",
+            "values": [
+              {
+                "id": "157452",
+                "bb": "Microsoft Office DLL Sideloading",
+                "uuid": "050f640d-fc8f-497e-bf85-da570e5e19f6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.002",
+            "values": [
+              {
+                "id": "157452",
+                "bb": "Microsoft Office DLL Sideloading",
+                "uuid": "050f640d-fc8f-497e-bf85-da570e5e19f6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.322313",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

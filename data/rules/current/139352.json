@@ -1,0 +1,163 @@
+{
+  "rule_doc_id": "139352",
+  "rule_id": "139352",
+  "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+  "rule_name": "User Account Creation followed by Account Deletion (Unix)",
+  "object_type": "rule",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-03-25T19:45:02.957Z",
+  "modified": "2024-07-21T10:28:50.580Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "1",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: User Account Deleted (Unix)</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: User Account Added (Unix)</a> match with the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>Machine Identifier (custom), Username</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "a7804230-a991-4195-abbe-65a5faf56433"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier, userName"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+      "name": "BB:BehaviorDefinition: User Account Deleted (Unix)"
+    },
+    {
+      "uuid": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc",
+      "name": "BB:BehaviorDefinition: User Account Added (Unix)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1098",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1098",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1098",
+            "values": [
+              {
+                "id": "139352",
+                "bb": "User Account Creation followed by Account Deletion (Unix)",
+                "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+                "T": "EVENT"
+              },
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              },
+              {
+                "id": "137802",
+                "bb": "BB:BehaviorDefinition: User Account Added (Unix)",
+                "uuid": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1136",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136",
+            "values": [
+              {
+                "id": "139352",
+                "bb": "User Account Creation followed by Account Deletion (Unix)",
+                "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+                "T": "EVENT"
+              },
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              },
+              {
+                "id": "137802",
+                "bb": "BB:BehaviorDefinition: User Account Added (Unix)",
+                "uuid": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.811279",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

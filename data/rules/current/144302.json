@@ -1,0 +1,116 @@
+{
+  "rule_doc_id": "144302",
+  "rule_id": "144302",
+  "uuid": "278aafb2-c81e-4ca1-b49d-a8fd5be7f00f",
+  "rule_name": "MITRE.LIN.T1190.RULE Exploit Public-Facing Application",
+  "object_type": "rule",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:MITRE.LIN.T1190: Public-Facing Application</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "37fcfcbd-d1e5-43c4-a050-146fe4873988"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Vulnerability_Test",
+            "uid": "2",
+            "id": "42"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> is vulnerable to <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>any</a> exploit on <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> port"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "attacker"
+            },
+            {
+              "id": "2",
+              "value": "any"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "37fcfcbd-d1e5-43c4-a050-146fe4873988",
+      "name": "BB:MITRE.LIN.T1190: Public-Facing Application"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "Exploit Public-Facing Application",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1190",
+        "MAP_S": [
+          {
+            "name": "Initial Access - Exploit Public-Facing Application",
+            "values": [
+              {
+                "id": "144252",
+                "bb": "BB:MITRE.LIN.T1190: Public-Facing Application",
+                "uuid": "37fcfcbd-d1e5-43c4-a050-146fe4873988",
+                "T": "EVENT"
+              },
+              {
+                "id": "144302",
+                "bb": "MITRE.LIN.T1190.RULE Exploit Public-Facing Application",
+                "uuid": "278aafb2-c81e-4ca1-b49d-a8fd5be7f00f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.977346",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

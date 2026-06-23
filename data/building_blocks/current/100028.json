@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100028",
+  "rule_id": "100028",
+  "uuid": "SYSTEM-1251",
+  "rule_name": "BB:HostDefinition: Virus Definition and Other Update Servers",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T06:18:35.911Z",
+  "modified": "2023-10-30T02:02:39.867Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstHost_Test",
+            "uid": "0",
+            "id": "9"
+          },
+          "text": [
+            "when the destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.587278",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

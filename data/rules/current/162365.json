@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162365",
+  "rule_id": "162365",
+  "uuid": "96911a95-d5eb-4561-9111-82626edf9fa8",
+  "rule_name": "Screen Capture with Import Tool",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:48:56.556Z",
+  "modified": "2024-08-04T12:48:56.556Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND (LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%import%') AND ((LOWER(Command) LIKE '%a1%-window%' AND LOWER(Command) LIKE '%a2%root%' AND (LOWER(Command) LIKE '%a3%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%')) OR (LOWER(Command) LIKE '%a1%.png%' OR LOWER(Command) LIKE '%.jpg%' OR LOWER(Command) LIKE '%.jpeg%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D11%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25execve%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a0%25import%25%27%29%20AND%20%28%28LOWER%28Command%29%20LIKE%20%27%25a1%25-window%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a2%25root%25%27%20AND%20%28LOWER%28Command%29%20LIKE%20%27%25a3%25.png%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpg%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpeg%25%27%29%29%20OR%20%28LOWER%28Command%29%20LIKE%20%27%25a1%25.png%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpg%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpeg%25%27%29%29|%5B%22devicetype%3D11%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25execve%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a0%25import%25%27%29%20AND%20%28%28LOWER%28Command%29%20LIKE%20%27%25a1%25-window%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a2%25root%25%27%20AND%20%28LOWER%28Command%29%20LIKE%20%27%25a3%25.png%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpg%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpeg%25%27%29%29%20OR%20%28LOWER%28Command%29%20LIKE%20%27%25a1%25.png%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpg%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.jpeg%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Screen Capture with Import Tool SIGMA Description: Detects adversary creating screen capture of a desktop with Import Tool. Highly recommended using rule on servers, due to high usage of screenshot utilities on user workstations. ImageMagick must be installed.   False positives: - Legitimate use of screenshot utility  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Screen Capture with Import Tool"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.877879",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

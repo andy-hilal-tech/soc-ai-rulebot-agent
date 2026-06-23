@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "143252",
+  "rule_id": "143252",
+  "uuid": "52959748-8a57-4dcf-b323-824667b049fb",
+  "rule_name": "BB:MITRE.LINUX.T1211: Exploitation for Defense Evasion",
+  "object_type": "building_block",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Cisco Firewall Services Module (FWSM), Cisco Firepower Management Center, HBGary Active Defense, Microsoft Windows Defender ATP, Radware DefensePro, VMWare AppDefense, Snort Open Source IDS, Juniper vGW, Samhain HIDS, Barracuda Spam &amp; Virus Firewall, Barracuda Web Application Firewall, Cisco ACE Firewall, Cisco PIX Firewall, Configurable Firewall Filter, CyberGuard TSP Firewall/VPN, Juniper Networks Firewall and VPN, Linux iptables Firewall, Nortel Switched Firewall 5100, Nortel Switched Firewall 6000, Radware AppWall, SonicWALL SonicOS, Trend InterScan VirusWall, Venustech Venusense Firewall, Microsoft Endpoint Protection, Palo Alto Endpoint Security Manager, Symantec Endpoint Protection, Trend Micro Deep Discovery Analyzer, Trend Micro Deep Discovery Director, Trend Micro Control Manager, Trend Micro Deep Discovery Email Inspector, Trend Micro Deep Discovery Inspector, Trend Micro Deep Security, Trend Micro Office Scan, Resolution1 CyberSecurity, Enterprise-IT-Security.com SF-Sherlock, Amazon AWS Security Hub, Application Security DbProtect, Blue Coat Web Security Service, Blue Coat SG Appliance, Carbon Black, Carbon Black Protection, Cisco AMP, Cisco Cloud Web Security, CyberArk Privileged Threat Analytics, Cyber-Ark Vault, Kaspersky CyberTrace, Extreme NetsightASM, Extreme XSR Security Routers, F5 Networks BIG-IP AFM, F5 Networks BIG-IP APM, F5 Networks BIG-IP ASM, F5 Networks BIG-IP LTM, F5 Networks FirePass, Fidelis XPS, Forcepoint V Series, Forcepoint Sidewinder, Fortinet FortiGate Security Gateway, H3C IP Security Devices, IBM Informix Audit, IBM i, IBM Security Access Manager for Enterprise Single Sign-On, IBM Security Access Manager for Mobile, IBM Security Directory Server, IBM Security Identity Governance, IBM Security Identity Manager, IBM Security Network IPS (GX), IBM Security Privileged Identity Manager, IBM Security Trusteer Apex Advanced Malware Protection, IBM Tivoli Access Manager for e-business, Illumio Adaptive Security Platform, Juniper Networks Intrusion Detection and Prevention (IDP), Juniper Networks Network and Security Manager, Kaspersky Security Center, Onapsis Inc Onapsis Security Platform, Palo Alto PA Series, Proofpoint Enterprise Protection/Enterprise Privacy, Salesforce Security, Salesforce Security Auditing, Skyhigh Networks Cloud Security Platform, Sophos Web Security Appliance, Solaris BSM, Symantec ATP, Symantec Critical System Protection, Symantec DLP, Symantec Encryption Management Server, Symantec Gateway Security (SGS) Appliance, Symantec System Center, Vormetric Data Security, WatchGuard Fireware OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "31, 197, 271, 433, 193, 434, 2, 235, 142, 278, 281, 194, 6, 4, 35, 5, 14, 120, 104, 406, 78, 100, 307, 253, 404, 160, 362, 438, 178, 401, 265, 394, 165, 363, 396, 440, 280, 399, 103, 400, 428, 437, 419, 403, 227, 414, 156, 166, 296, 234, 213, 49, 232, 298, 198, 71, 73, 337, 216, 148, 304, 389, 348, 392, 295, 297, 380, 346, 266, 416, 17, 45, 288, 402, 206, 332, 352, 357, 390, 240, 238, 4001, 374, 236, 287, 82, 87, 340, 360"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Exploitation for Defense Evasion",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1211",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Exploitation for Defense Evasion",
+            "values": [
+              {
+                "id": "143252",
+                "bb": "BB:MITRE.LINUX.T1211: Exploitation for Defense Evasion",
+                "uuid": "52959748-8a57-4dcf-b323-824667b049fb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.516296",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "149902",
+  "rule_id": "149902",
+  "uuid": "6eefe80b-170e-421e-bf0c-c4876828b459",
+  "rule_name": "BB:BehaviorDefinition: Gazer Filenames",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-21T17:48:56.217Z",
+  "modified": "2024-07-21T12:38:44.849Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Success, Audit.Object Access Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 19152, 19154, 19072, 19071, 19075, 19074, 19081, 19080"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) MATCHES ('cvrg72b5.tmp.cvr') OR LOWER(&quot;Filename&quot;) MATCHES ('cvrg1a6b.tmp.cvr') OR LOWER(&quot;Filename&quot;) MATCHES ('cvrg38d9.tmp.cvr')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Filename%22)%20MATCHES%20('cvrg72b5.tmp.cvr')%20OR%20LOWER(%22Filename%22)%20MATCHES%20('cvrg1a6b.tmp.cvr')%20OR%20LOWER(%22Filename%22)%20MATCHES%20('cvrg38d9.tmp.cvr')|%5B%22LOWER(%5C%22Filename%5C%22)%20MATCHES%20('cvrg72b5.tmp.cvr')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20MATCHES%20('cvrg1a6b.tmp.cvr')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20MATCHES%20('cvrg38d9.tmp.cvr')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1027",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1027",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1027",
+            "values": [
+              {
+                "id": "149902",
+                "bb": "BB:BehaviorDefinition: Gazer Filenames",
+                "uuid": "6eefe80b-170e-421e-bf0c-c4876828b459",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.671130",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

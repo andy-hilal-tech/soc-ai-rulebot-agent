@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "119402",
+  "rule_id": "119402",
+  "uuid": "593743d3-7446-41ea-8921-c58d22a9f012",
+  "rule_name": "BB:CategoryDefinition: Firewall or ACL Accept Event for a FW/Router/Switch Device",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-06-25T22:51:25.025Z",
+  "modified": "2024-06-27T13:19:22.301Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: FW / Router / Switch, BB:CategoryDefinition: Firewall or ACL Accept</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1322, SYSTEM-1208"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1322",
+      "name": "BB:DeviceDefinition: FW / Router / Switch"
+    },
+    {
+      "uuid": "SYSTEM-1208",
+      "name": "BB:CategoryDefinition: Firewall or ACL Accept"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.208098",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

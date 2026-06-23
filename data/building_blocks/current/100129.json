@@ -1,0 +1,61 @@
+{
+  "rule_doc_id": "100129",
+  "rule_id": "100129",
+  "uuid": "SYSTEM-1348",
+  "rule_name": "BB:FalsePositive: Device and Specific Event",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-08-11T15:53:18.689Z",
+  "modified": "2023-10-30T02:02:38.466Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1010461) Behavioral - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "1",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Classify5</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.668467",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

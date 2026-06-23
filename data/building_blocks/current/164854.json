@@ -1,0 +1,82 @@
+{
+  "rule_doc_id": "164854",
+  "rule_id": "164854",
+  "uuid": "e7e9cf12-74b3-405d-bc49-0a423581b3ef",
+  "rule_name": "BB:CategoryDefinition: Scheduled Task Creation",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2025-01-28T20:39:06.632Z",
+  "modified": "2025-01-28T20:39:21.232Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000872) Success Audit: A scheduled task was created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000872"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) is any of %systemroot%\\system32\\usoclient.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandEQany%systemroot%\\system32\\usoclient.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.843537",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

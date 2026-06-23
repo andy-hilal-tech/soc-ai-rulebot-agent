@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "104602",
+  "rule_id": "104602",
+  "uuid": "6211ae91-2517-43b2-8171-b196c5de30e6",
+  "rule_name": "UBA : Browsed to Communications Website",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-05-01T15:03:14.050Z",
+  "modified": "2024-02-19T16:41:09.603Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%postcard%'  OR &quot;Web Category&quot; ilike '%phon%'  OR &quot;Web Category&quot; ilike '%bulletin%'  OR &quot;Web Category&quot; ilike '%mail%'  OR &quot;Web Category&quot; ilike '% search%' OR &quot;Web Category&quot; ilike '%forum%'  OR &quot;Web Category&quot; ilike '%meeting%'  OR &quot;Web Category&quot; ilike '%web host%'  OR &quot;Web Category&quot; ilike '%communit%'  OR &quot;Web Category&quot; ilike '%usenet%'  OR &quot;Web Category&quot; ilike '%text/spoken%'  OR &quot;Web Category&quot; ilike '%e-card%' OR &quot;Web Category&quot; in (29, 74, 76, 91, 98, 100, 108, 110, 112, 195, 196, 201, 222, 223, 224, 225, 226, 228)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Web%20Category%22%20ilike%20'%25postcard%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25phon%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25bulletin%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25mail%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25%20search%25'%20OR%20%22Web%20Category%22%20ilike%20'%25forum%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25meeting%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25web%20host%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25communit%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25usenet%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25text%2Fspoken%25'%20%20OR%20%22Web%20Category%22%20ilike%20'%25e-card%25'%20OR%20%22Web%20Category%22%20in%20(29,%2074,%2076,%2091,%2098,%20100,%20108,%20110,%20112,%20195,%20196,%20201,%20222,%20223,%20224,%20225,%20226,%20228)|%5B%22%5C%22Web%20Category%5C%22%20ilike%20'%25postcard%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25phon%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25bulletin%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25mail%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25%20search%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25forum%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25meeting%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25web%20host%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25communit%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25usenet%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25text%2Fspoken%25'%20%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25e-card%25'%20OR%20%5C%22Web%20Category%5C%22%20in%20(29,%2074,%2076,%2091,%2098,%20100,%20108,%20110,%20112,%20195,%20196,%20201,%20222,%20223,%20224,%20225,%20226,%20228)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500232",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=5,senseDesc='User access to Risky Resource Category - Communications',usecase_id='6211ae91-2517-43b2-8171-b196c5de30e6'",
+            "name": "UBA : Browsed to Communications Website"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+      "name": "BB:UBA : URL Category Filter"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104602",
+                "bb": "UBA : Browsed to Communications Website",
+                "uuid": "6211ae91-2517-43b2-8171-b196c5de30e6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104602",
+                "bb": "UBA : Browsed to Communications Website",
+                "uuid": "6211ae91-2517-43b2-8171-b196c5de30e6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.557759",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

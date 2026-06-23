@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109452",
+  "rule_id": "109452",
+  "uuid": "b0ae736a-2d80-4e87-a957-a59f60a9f3b5",
+  "rule_name": "BB:UBA : Successful File Transfer",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-10-19T11:16:18.860Z",
+  "modified": "2024-02-19T16:44:52.987Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.File Transfer, Application.FTP Opened, Application.TFTP Session Opened, Access.FTP Action Allowed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18431, 18010, 18183, 4031"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

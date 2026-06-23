@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100298",
+  "rule_id": "100298",
+  "uuid": "SYSTEM-1326",
+  "rule_name": "BB:PortDefinition: Common Worm Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T17:58:57.795Z",
+  "modified": "2023-10-30T02:02:37.183Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>135, 136, 137, 138, 139, 444, 445, 995, 996, 997, 998, 999, 8998, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135, 3136, 3137, 3138, 3139, 3140, 3141, 3142, 3143, 3144, 3145, 3146, 3147, 3148, 3149</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "135, 136, 137, 138, 139, 444, 445, 995, 996, 997, 998, 999, 8998, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135, 3136, 3137, 3138, 3139, 3140, 3141, 3142, 3143, 3144, 3145, 3146, 3147, 3148, 3149, 3389"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.935962",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

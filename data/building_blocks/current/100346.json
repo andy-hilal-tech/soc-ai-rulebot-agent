@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100346",
+  "rule_id": "100346",
+  "uuid": "8d30923b-03c4-422f-ac08-a52b8eedf256",
+  "rule_name": "BB:Failed Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2012-10-31T17:07:32.800Z",
+  "modified": "2023-10-30T02:20:00.924Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application.AAA Authentication Failed, Application.DAP Authentication Failed, Application.DAP Session Denied, Application.DHCP Failure, Application.IPSec Authentication Failed, Application.LDAP Authentication Failed, Authentication.Admin Login Failure, Authentication.Auth Server Login Failed, Authentication.Database Login Failed, Authentication.Disassociating host failed, Authentication.Deauthenticating host failed, Authentication.General Authentication Failed, Authentication.Host Login Failed, Authentication.IKE Authentication Failed, Authentication.Misc Login Failed, Authentication.Password Change Failed, Authentication.Privilege Escalation Failed, Authentication.RADIUS Authentication Failed, Authentication.Remote Access Login Failed, Authentication.SA Creation Failure, Authentication.Samba Login Failed, Authentication.SFTP Login Failed, Authentication.SSH Login Failed, Authentication.Station association failed, Authentication.Station authentication failed, Authentication.Station reassociation failed, Authentication.TACACS Authentication Failed, Authentication.Telnet Login Failed, Authentication.User Login Failure, Authentication.VoIP Login Failed, Authentication.Web Service Login Failed, System.Daemon Failed, System.Cron Failed, System.Failed Application Modification, System.Failed Configuration Modification, System.Failed File Modification, System.Failed Host-Policy Modification, System.Failed Registry Modification, System.Failed Service Modification, System.Failed Stack Modification, System.Hot standby disable failed, System.Hot standby enable failed, System.Kernel Failed, System.Quickmode Initiation Failure, System.Service Failure, System.System Failure</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18150, 18409, 18406, 18384, 18152, 18144, 3015, 3010, 3076, 3104, 3096, 3047, 3003, 3077, 3005, 3033, 3006, 3087, 3045, 3106, 3052, 3118, 3022, 3100, 3098, 3102, 3094, 3049, 3116, 3067, 3013, 8045, 8041, 8023, 8024, 8021, 8020, 8019, 8025, 8022, 8069, 8068, 8049, 8075, 8011, 8005"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.967485",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

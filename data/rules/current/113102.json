@@ -1,0 +1,113 @@
+{
+  "rule_doc_id": "113102",
+  "rule_id": "113102",
+  "uuid": "f4eef041-8def-4592-966d-79e4400294bf",
+  "rule_name": "Malicious Service Installed",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event, Add to a Reference Set",
+  "created": "2017-09-10T13:22:30.220Z",
+  "modified": "2024-02-19T16:49:27.601Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5002197) A service was installed in a system</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5002197"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('IOCs - Malicious Service names', &quot;Service Name&quot;) OR (&quot;Service Name&quot; IMATCHES '((pwdump)|(gsecdump)|(cachedump)).*')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('IOCs%20-%20Malicious%20Service%20names',%20%22Service%20Name%22)%20OR%20(%22Service%20Name%22%20IMATCHES%20'((pwdump)%7C(gsecdump)%7C(cachedump)).*')|%5B%22REFERENCESETCONTAINS('IOCs%20-%20Malicious%20Service%20names',%20%5C%22Service%20Name%5C%22)%20OR%20(%5C%22Service%20Name%5C%22%20IMATCHES%20'((pwdump)%7C(gsecdump)%7C(cachedump)).*')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "8",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "8",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "8",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.852756",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109352",
+  "rule_id": "109352",
+  "uuid": "fc0172fa-78d4-4a9d-b747-5f1cca72cff1",
+  "rule_name": "BB:UBA : Data Exfiltration",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-19T09:44:26.690Z",
+  "modified": "2024-02-19T16:44:53.559Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(99500127) High Risk Data Exfiltration, (99500128) Insider Data Exfiltration, (88500003) Data Exfiltration Detected: Suspicious connection, (88500004) Data Exfiltration Detected, (88500023) Data Exfiltration Detected: Parasite thread creation, (88500024) Data Exfiltration Detected: Process mimic, (88500025) Data Exfiltration Detected: Parasite thread connection, (88500026) Data Exfiltration Detected: File inspection, (88500027) Data Exfiltration Detected: File inspection, (104500033) Unknown Exfiltration Event, (106500013) Unknown Exfiltration Event, (109250029) Unknown Data Exfiltration Event, (109250028) Data Exfiltration</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "99500127,             99500128,             88500003,             88500004,             88500023,             88500024,             88500025,             88500026,             88500027,             104500033,             106500013,             109250029,             109250028"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

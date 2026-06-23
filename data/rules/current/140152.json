@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "140152",
+  "rule_id": "140152",
+  "uuid": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471",
+  "rule_name": "Malware as a Service Hash IOC in Events",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-05-31T14:14:10.350Z",
+  "modified": "2024-07-21T10:28:50.254Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;MD5 Hash&quot; is NOT NULL OR  &quot;SHA256 Hash&quot; is NOT null OR  &quot;SHA1 Hash&quot;is NOT NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22MD5%20Hash%22%20is%20NOT%20NULL%20OR%20%20%22SHA256%20Hash%22%20is%20NOT%20null%20OR%20%20%22SHA1%20Hash%22is%20NOT%20NULL|%5B%22%5C%22MD5%20Hash%5C%22%20is%20NOT%20NULL%20OR%20%22,%22%5C%22SHA256%20Hash%5C%22%20is%20NOT%20null%20OR%20%22,%22%5C%22SHA1%20Hash%5C%22is%20NOT%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Malware as a Service_SHA256', &quot;SHA256 Hash&quot;) OR REFERENCESETCONTAINS('Malware as a Service_MD5', &quot;MD5 Hash&quot;) OR REFERENCESETCONTAINS('Malware as a Service_SHA1', &quot;SHA1 Hash&quot;)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Malware%20as%20a%20Service_SHA256',%20%22SHA256%20Hash%22)%20OR%20REFERENCESETCONTAINS('Malware%20as%20a%20Service_MD5',%20%22MD5%20Hash%22)%20OR%20REFERENCESETCONTAINS('Malware%20as%20a%20Service_SHA1',%20%22SHA1%20Hash%22)|%5B%22REFERENCESETCONTAINS('Malware%20as%20a%20Service_SHA256',%20%5C%22SHA256%20Hash%5C%22)%22,%22OR%20REFERENCESETCONTAINS('Malware%20as%20a%20Service_MD5',%20%5C%22MD5%20Hash%5C%22)%22,%22OR%20REFERENCESETCONTAINS('Malware%20as%20a%20Service_SHA1',%20%5C%22SHA1%20Hash%5C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.001",
+            "values": [
+              {
+                "id": "140152",
+                "bb": "Malware as a Service Hash IOC in Events",
+                "uuid": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.853668",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,112 @@
+{
+  "rule_doc_id": "122652",
+  "rule_id": "122652",
+  "uuid": "SYSTEM-1185",
+  "rule_name": "Exploit/Malware Events Across Multiple Destinations",
+  "object_type": "rule",
+  "group": "Intrusion Detection, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2005-12-07T23:30:08.153Z",
+  "modified": "2024-06-27T13:19:26.381Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Destination Vulnerable to Detected Exploit on a Different Port</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1355"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "1",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a> with the same <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1204"
+            },
+            {
+              "id": "2",
+              "value": "SourceIP"
+            },
+            {
+              "id": "3",
+              "value": "5"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "5"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1355",
+      "name": "Destination Vulnerable to Detected Exploit on a Different Port"
+    },
+    {
+      "uuid": "SYSTEM-1204",
+      "name": "BB:CategoryDefinition: Exploits Backdoors and Trojans"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.149149",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,66 @@
+{
+  "rule_doc_id": "130552",
+  "rule_id": "130552",
+  "uuid": "3e67b917-2f53-4e41-82f5-75118ad705ec",
+  "rule_name": "Cryptocurrency Mining Process",
+  "object_type": "rule",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-09-07T11:11:07.390Z",
+  "modified": "2024-07-21T09:42:16.939Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Process Name Patterns, BB:Threats: Cryptocurrency Mining Process Names</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "43e9ccc0-0fda-415f-993b-f98a465e188e, e2f4d703-db54-4e2f-bf92-4aae98edd66f"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "43e9ccc0-0fda-415f-993b-f98a465e188e",
+      "name": "BB:Threats: Cryptocurrency Mining Process Name Patterns"
+    },
+    {
+      "uuid": "e2f4d703-db54-4e2f-bf92-4aae98edd66f",
+      "name": "BB:Threats: Cryptocurrency Mining Process Names"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.543597",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

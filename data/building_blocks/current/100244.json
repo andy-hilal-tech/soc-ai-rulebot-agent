@@ -1,0 +1,73 @@
+{
+  "rule_doc_id": "100244",
+  "rule_id": "100244",
+  "uuid": "SYSTEM-1541",
+  "rule_name": "BB:CategoryDefinition: IRC Detection Based on Firewall Events",
+  "object_type": "building_block",
+  "group": "System, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-07-12T14:43:06.795Z",
+  "modified": "2023-10-30T02:02:38.832Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Firewall or ACL Accept, BB:PortDefinition: IRC Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1208, SYSTEM-1233"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote, Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r, r2l"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1208",
+      "name": "BB:CategoryDefinition: Firewall or ACL Accept"
+    },
+    {
+      "uuid": "SYSTEM-1233",
+      "name": "BB:PortDefinition: IRC Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.868830",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

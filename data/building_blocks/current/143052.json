@@ -1,0 +1,85 @@
+{
+  "rule_doc_id": "143052",
+  "rule_id": "143052",
+  "uuid": "3e97ce23-a03e-4ef5-a25d-31fd4285d414",
+  "rule_name": "BB:MITRE.LIN.T1210: Exploitation of Remote Services",
+  "object_type": "building_block",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(4750045) smbd Message</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "4750045"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Lateral Movement": [
+      {
+        "TEC": "Exploitation of Remote Services",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1210",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - Exploitation of Remote Services",
+            "values": [
+              {
+                "id": "143052",
+                "bb": "BB:MITRE.LIN.T1210: Exploitation of Remote Services",
+                "uuid": "3e97ce23-a03e-4ef5-a25d-31fd4285d414",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.516296",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

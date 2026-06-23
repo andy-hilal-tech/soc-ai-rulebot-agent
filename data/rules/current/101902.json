@@ -1,0 +1,167 @@
+{
+  "rule_doc_id": "101902",
+  "rule_id": "101902",
+  "uuid": "9348761c-a85f-43ca-bdb8-4c5511f13066",
+  "rule_name": "UBA : Subject_CN and Username Map Update",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set, Add to a Reference Map",
+  "created": "2017-05-01T19:25:06.930Z",
+  "modified": "2024-02-19T16:39:30.074Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "3",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l, r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : BB : VPN Mapping (logic)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "0ebee01a-da91-47c2-ac75-3a60658414df"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>VPN Subject CN (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>UBA : VPN Subject_CN - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "VPN Subject CN"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "36"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceDataTest",
+            "uid": "1",
+            "id": "109"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>VPN Subject CN (custom)</a> is the key and <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Username</a> is the value in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>UBA : VPN Subject_CN and UserName - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "VPN Subject CN"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "5",
+              "value": "any"
+            },
+            {
+              "id": "6",
+              "method": "getReferenceDataMaps",
+              "value": "35"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceMap": "true",
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "VPN Subject CN",
+            "id": "36",
+            "type": "ALNIC",
+            "name": "UBA : VPN Subject_CN"
+          }
+        }
+      ],
+      "referenceDataResponse": [
+        {
+          "_$": {
+            "key1": "VPN Subject CN",
+            "Filter": "userName",
+            "domainResponse": "0",
+            "id": "35",
+            "name": "UBA : VPN Subject_CN and UserName"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0ebee01a-da91-47c2-ac75-3a60658414df",
+      "name": "BB:UBA : VPN Mapping (logic)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.487960",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "154752",
+  "rule_id": "154752",
+  "uuid": "02c3cb1c-c201-4162-adfa-24f821d75fa2",
+  "rule_name": "BB:BehaviorDefinition: File and Directory Discovery - Linux",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-16T16:48:13.185Z",
+  "modified": "2024-07-21T12:38:26.095Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Process Full Full Name&quot;) LIKE '%file' and &quot;command&quot; imatches '.{200,}') or (LOWER(&quot;Process Full Full Name&quot;) LIKE '%ls' and LOWER(&quot;Command&quot;) LIKE '%-r|grep%') or LOWER(&quot;Process Full Full Name&quot;) LIKE '%find' or LOWER(&quot;Process Full Full Name&quot;) LIKE '%tree' or (LOWER(&quot;Process Full Full Name&quot;) LIKE '%locate' and LOWER(&quot;Command&quot;) LIKE '%*%') or (LOWER(&quot;Process Full Full Name&quot;) LIKE '%which' and LOWER(&quot;Command&quot;) LIKE '%sh%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Process%20Name%22)%20LIKE%20'%25file'%20and%20%22command%22%20imatches%20'.%7B200%2C%7D')%20or%20(LOWER(%22Process%20Name%22)%20LIKE%20'%25ls'%20and%20LOWER(%22Command%22)%20LIKE%20'%25-r%7Cgrep%25')%20or%20LOWER(%22Process%20Name%22)%20LIKE%20'%25find'%20or%20LOWER(%22Process%20Name%22)%20LIKE%20'%25tree'%20or%20(LOWER(%22Process%20Name%22)%20LIKE%20'%25locate'%20and%20LOWER(%22Command%22)%20LIKE%20'%25*%25')%20or%20(LOWER(%22Process%20Name%22)%20LIKE%20'%25which'%20and%20LOWER(%22Command%22)%20LIKE%20'%25sh%25')|%5B%22(LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25file'%20and%20%5C%22command%5C%22%20imatches%20'.%7B200%2C%7D')%20or%20(LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25ls'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25-r%7Cgrep%25')%20or%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25find'%20or%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25tree'%20or%20(LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25locate'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25*%25')%20or%20(LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25which'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25sh%25')%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1083",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1083",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1083",
+            "values": [
+              {
+                "id": "154752",
+                "bb": "BB:BehaviorDefinition: File and Directory Discovery - Linux",
+                "uuid": "02c3cb1c-c201-4162-adfa-24f821d75fa2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.745182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

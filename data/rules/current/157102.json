@@ -1,0 +1,258 @@
+{
+  "rule_doc_id": "157102",
+  "rule_id": "157102",
+  "uuid": "088c5ce2-3fd8-49fc-bc35-75af28edc5c7",
+  "rule_name": "Suspicious Binary DLL Execution",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T20:44:05.841Z",
+  "modified": "2024-07-21T12:38:15.223Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs, BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution, BB:BehaviorDefinition: Suspicious Cabinet File Expansion, BB:BehaviorDefinition: Atbroker Registry Change, BB:BehaviorDefinition: Arbitrary Command Execution Using WSL, BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo, BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d90f0dde-dddc-4428-a363-d79cc80106a5, a397a667-8b2a-40d1-8256-ce59cf0c0a8d, a4f5791e-d3b3-4a64-a149-e40b6f369e53, 78cfbd7d-32f5-43cc-b423-b0373fdc6582, f732eb54-64a3-4083-ba6c-b89e28e79642, 7fb555ff-26f8-462a-ba1b-d2d47b5cd79d, 3c3d2ae4-a44c-45da-8930-ae17d17c7ad1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d90f0dde-dddc-4428-a363-d79cc80106a5",
+      "name": "BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs"
+    },
+    {
+      "uuid": "a397a667-8b2a-40d1-8256-ce59cf0c0a8d",
+      "name": "BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution"
+    },
+    {
+      "uuid": "a4f5791e-d3b3-4a64-a149-e40b6f369e53",
+      "name": "BB:BehaviorDefinition: Suspicious Cabinet File Expansion"
+    },
+    {
+      "uuid": "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+      "name": "BB:BehaviorDefinition: Atbroker Registry Change"
+    },
+    {
+      "uuid": "f732eb54-64a3-4083-ba6c-b89e28e79642",
+      "name": "BB:BehaviorDefinition: Arbitrary Command Execution Using WSL"
+    },
+    {
+      "uuid": "7fb555ff-26f8-462a-ba1b-d2d47b5cd79d",
+      "name": "BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo"
+    },
+    {
+      "uuid": "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1",
+      "name": "BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "157102",
+                "bb": "Suspicious Binary DLL Execution",
+                "uuid": "088c5ce2-3fd8-49fc-bc35-75af28edc5c7",
+                "T": "EVENT"
+              },
+              {
+                "id": "154202",
+                "bb": "BB:BehaviorDefinition: Windows Shell/Scripting Processes Spawning Suspicious Programs",
+                "uuid": "d90f0dde-dddc-4428-a363-d79cc80106a5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "157102",
+                "bb": "Suspicious Binary DLL Execution",
+                "uuid": "088c5ce2-3fd8-49fc-bc35-75af28edc5c7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "150002",
+                "bb": "BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code",
+                "uuid": "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1",
+                "T": "EVENT"
+              },
+              {
+                "id": "155902",
+                "bb": "BB:BehaviorDefinition: Arbitrary Command Execution Using WSL",
+                "uuid": "f732eb54-64a3-4083-ba6c-b89e28e79642",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1140",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1140",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1140",
+            "values": [
+              {
+                "id": "152452",
+                "bb": "BB:BehaviorDefinition: Suspicious Cabinet File Expansion",
+                "uuid": "a4f5791e-d3b3-4a64-a149-e40b6f369e53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "157152",
+                "bb": "BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution",
+                "uuid": "a397a667-8b2a-40d1-8256-ce59cf0c0a8d",
+                "T": "EVENT"
+              },
+              {
+                "id": "157202",
+                "bb": "BB:BehaviorDefinition: Atbroker Registry Change",
+                "uuid": "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1553",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1553",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1553",
+            "values": [
+              {
+                "id": "157252",
+                "bb": "BB:BehaviorDefinition: Application Whitelisting Bypass via Bginfo",
+                "uuid": "7fb555ff-26f8-462a-ba1b-d2d47b5cd79d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "157152",
+                "bb": "BB:BehaviorDefinition: Suspicious Load DLL and Extexport Execution",
+                "uuid": "a397a667-8b2a-40d1-8256-ce59cf0c0a8d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.312078",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

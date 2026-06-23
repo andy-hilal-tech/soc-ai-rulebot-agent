@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "134002",
+  "rule_id": "134002",
+  "uuid": "eee15ac8-bd22-4f81-b89b-2ef91b86d003",
+  "rule_name": "Stored Credentials from Windows",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-05-17T15:19:22.937Z",
+  "modified": "2024-07-21T10:28:49.756Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 5034, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%vaultcmd /listcreds:&quot;windows credentials&quot;%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25vaultcmd%20%2Flistcreds%3A%22windows%20credentials%22%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25vaultcmd%20%2Flistcreds%3A%5C%22windows%20credentials%5C%22%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "52"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Credentials from Password Stores",
+        "STEC": "T1555.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555.004",
+            "values": [
+              {
+                "id": "134002",
+                "bb": "Stored Credentials from Windows",
+                "uuid": "eee15ac8-bd22-4f81-b89b-2ef91b86d003",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.646176",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

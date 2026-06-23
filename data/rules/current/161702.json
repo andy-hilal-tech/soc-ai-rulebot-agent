@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "161702",
+  "rule_id": "161702",
+  "uuid": "18a88a3b-c9e9-4a75-81e5-298bbc75f676",
+  "rule_name": "Potential Windows Software Discovery",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-17T14:19:04.149Z",
+  "modified": "2024-07-21T12:38:54.108Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Windows Software Discovery, BB:BehaviorDefinition: Windows Software Discovery - PowerShell</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "f20939e6-82e0-4764-8dad-b7d3d18d54c2, 48e240fa-1e2f-4e5b-9f0f-a81004c70607"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f20939e6-82e0-4764-8dad-b7d3d18d54c2",
+      "name": "BB:BehaviorDefinition: Windows Software Discovery"
+    },
+    {
+      "uuid": "48e240fa-1e2f-4e5b-9f0f-a81004c70607",
+      "name": "BB:BehaviorDefinition: Windows Software Discovery - PowerShell"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1518",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1518",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1518",
+            "values": [
+              {
+                "id": "161702",
+                "bb": "Potential Windows Software Discovery",
+                "uuid": "18a88a3b-c9e9-4a75-81e5-298bbc75f676",
+                "T": "EVENT"
+              },
+              {
+                "id": "150252",
+                "bb": "BB:BehaviorDefinition: Windows Software Discovery - PowerShell",
+                "uuid": "48e240fa-1e2f-4e5b-9f0f-a81004c70607",
+                "T": "EVENT"
+              },
+              {
+                "id": "160502",
+                "bb": "BB:BehaviorDefinition: Windows Software Discovery",
+                "uuid": "f20939e6-82e0-4764-8dad-b7d3d18d54c2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.466614",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

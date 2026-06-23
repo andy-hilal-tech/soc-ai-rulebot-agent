@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100017",
+  "rule_id": "100017",
+  "uuid": "SYSTEM-1245",
+  "rule_name": "BB:PortDefinition: LDAP Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T02:37:51.254Z",
+  "modified": "2023-10-30T02:02:39.810Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>88, 389, 636</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "88, 389, 636"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.553956",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

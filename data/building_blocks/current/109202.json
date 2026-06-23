@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109202",
+  "rule_id": "109202",
+  "uuid": "e54a0b13-631d-41ea-b814-e661c847d246",
+  "rule_name": "BB:UBA : File Transfer to Cloud services",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-19T09:40:01.460Z",
+  "modified": "2024-02-19T16:44:53.466Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(20276574) MegaCloud_Upload, (106500010) Cloud Exfiltration, (20275809) iCloud_File.Upload, (20276160) Baidu.Cloud_File.Upload, (20276294) Daum.Cloud_Upload, (20276256) Zip.Cloud_File.Upload, (20276463) Cloudsafe_File.Upload, (20276506) Lgecloud_File.Upload, (20276513) JustCloud_File.Upload, (20276516) Filecloud.io_File.Upload, (20279210) SoundCloud_File.Upload, (20279218) MultCloud_File.Upload, (20279382) Meocloud_File.Upload, (20279696) CloudSigma_File.Upload, (20276167) Adobe.Creative.Cloud_File.Upload, (20278838) KT.Ucloud_Upload, (20278931) Acrobat.Cloud_Upload, (20278640) Myflare_File.Upload, (20279282) TrendMicro.SafeSync_File.Upload, (20256999) Docstoc_File.Upload</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "20276574,             106500010,             20275809,             20276160,             20276294,             20276256,             20276463,             20276506,             20276513,             20276516,             20279210,             20279218,             20279382,             20279696,             20276167,             20278838,             20278931,             20278640,             20279282,             20256999"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

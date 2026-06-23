@@ -1,0 +1,157 @@
+{
+  "rule_doc_id": "145752",
+  "rule_id": "145752",
+  "uuid": "e80d42f5-b54b-4d95-9d43-7ad583e20c68",
+  "rule_name": "Outlook C2 Macro Creation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-23T17:29:21.047Z",
+  "modified": "2024-07-21T12:38:38.178Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001830) FileCreate</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001830"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Filename (custom) is any of VbaProject.OTM</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameEQanyVbaProject.OTM"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Directory (custom) contains any of \\Microsoft\\Outlook</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryCONany\\Microsoft\\Outlook"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Office Application Startup",
+        "STEC": "T1137.001",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1137",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1137.001",
+            "values": [
+              {
+                "id": "145752",
+                "bb": "Outlook C2 Macro Creation",
+                "uuid": "e80d42f5-b54b-4d95-9d43-7ad583e20c68",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "T1008",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1008",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1008",
+            "values": [
+              {
+                "id": "145752",
+                "bb": "Outlook C2 Macro Creation",
+                "uuid": "e80d42f5-b54b-4d95-9d43-7ad583e20c68",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.008521",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

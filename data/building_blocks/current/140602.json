@@ -1,0 +1,254 @@
+{
+  "rule_doc_id": "140602",
+  "rule_id": "140602",
+  "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-28T18:02:05.760Z",
+  "modified": "2024-07-21T10:28:52.129Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Elevated Process (Windows)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "af9f1ad0-da96-412b-85f0-28a8c335700e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Path (custom) matches any of expressions (?i)\\\\system32(\\\\|$)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process PathREXany(?i)\\\\system32(\\\\|$)"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Path (custom) does not match any of expressions (?i)\\w:\\\\windows\\\\system32(\\\\|$)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process PathNREXany(?i)\\w:\\\\windows\\\\system32(\\\\|$)"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+      "name": "BB:CategoryDefinition: Elevated Process (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.470316",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

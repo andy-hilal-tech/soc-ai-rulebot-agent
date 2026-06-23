@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "152302",
+  "rule_id": "152302",
+  "uuid": "2d7e7d07-89e5-4006-a09d-231689f67f15",
+  "rule_name": "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T17:20:29.948Z",
+  "modified": "2024-07-21T12:38:18.937Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19252"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of crontab</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanycrontab"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%/tmp/%' or LOWER(&quot;Command Arguments&quot;) LIKE '%/tmp/%') or (LOWER(&quot;Command&quot;) LIKE '%crontab &ndash;l%' or LOWER(&quot;Command Arguments&quot;) LIKE '%crontab &ndash;l%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25%2Ftmp%2F%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25%2Ftmp%2F%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25crontab%20%E2%80%93l%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25crontab%20%E2%80%93l%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Ftmp%2F%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25%2Ftmp%2F%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25crontab%20%E2%80%93l%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25crontab%20%E2%80%93l%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.003",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.003",
+            "values": [
+              {
+                "id": "152302",
+                "bb": "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux",
+                "uuid": "2d7e7d07-89e5-4006-a09d-231689f67f15",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.714059",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

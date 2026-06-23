@@ -1,0 +1,188 @@
+{
+  "rule_doc_id": "100061",
+  "rule_id": "100061",
+  "uuid": "SYSTEM-1365",
+  "rule_name": "Login Failures Followed By Success from the same Source IP",
+  "object_type": "rule",
+  "group": "Authentication, Intrusion Detection",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2005-12-07T23:41:25.680Z",
+  "modified": "2023-10-30T02:02:40.885Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>Authentication: Multiple Login Failures from the Same Source</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1220"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "SYSTEM-1407"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1220",
+      "name": "BB:CategoryDefinition: Authentication Success"
+    },
+    {
+      "uuid": "SYSTEM-1407",
+      "name": "Multiple Login Failures from the Same Source"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100061",
+                "bb": "Login Failures Followed By Success from the same Source IP",
+                "uuid": "SYSTEM-1365",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100061",
+                "bb": "Login Failures Followed By Success from the same Source IP",
+                "uuid": "SYSTEM-1365",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.211308",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

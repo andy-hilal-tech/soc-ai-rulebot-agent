@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "100146",
+  "rule_id": "100146",
+  "uuid": "SYSTEM-1179",
+  "rule_name": "BB:CategoryDefinition: Suspicious Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-08-29T17:49:37.605Z",
+  "modified": "2023-10-30T02:02:39.431Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Suspicious Flows, BB:CategoryDefinition: Suspicious Event Categories</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1477, SYSTEM-1478"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1477",
+      "name": "BB:CategoryDefinition: Suspicious Flows"
+    },
+    {
+      "uuid": "SYSTEM-1478",
+      "name": "BB:CategoryDefinition: Suspicious Event Categories"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.705308",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

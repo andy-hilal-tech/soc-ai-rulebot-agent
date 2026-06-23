@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "100147",
+  "rule_id": "100147",
+  "uuid": "SYSTEM-1477",
+  "rule_name": "BB:CategoryDefinition: Suspicious Flows",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-05-06T17:32:51.228Z",
+  "modified": "2023-10-30T02:02:36.297Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Flowshape: Inbound Only, BB:Flowshape: Outbound Only, BB:NetworkDefinition: Honeypot like Addresses, BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination, BB:Threats: Suspicious IP Protocol Usage: Large ICMP Packets, BB:Threats: Suspicious IP Protocol Usage: Suspicious ICMP Type Code, BB:Threats: Suspicious IP Protocol Usage: TCP or UDP Port 0, BB:Threats: Suspicious IP Protocol Usage: Zero Payload Bidirectional Flows, BB:Threats: Suspicious IP Protocol Usage:Unidirectional TCP Flows, BB:Threats: Suspicious IP Protocol Usage: Large DNS Packets, BB:Threats: Suspicious IP Protocol Usage: Long Duration Outbound Flow, BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows, BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Replys, BB:Threats: Suspicious IP Protocol Usage:Unidirectional UDP and Misc Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1016, SYSTEM-1017, SYSTEM-1271, SYSTEM-1071, SYSTEM-1053, SYSTEM-1047, SYSTEM-1048, SYSTEM-1133, SYSTEM-1050, SYSTEM-1524, SYSTEM-1052, SYSTEM-1051, SYSTEM-1137, SYSTEM-1049"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1016",
+      "name": "BB:Flowshape: Inbound Only"
+    },
+    {
+      "uuid": "SYSTEM-1017",
+      "name": "BB:Flowshape: Outbound Only"
+    },
+    {
+      "uuid": "SYSTEM-1271",
+      "name": "BB:NetworkDefinition: Honeypot like Addresses"
+    },
+    {
+      "uuid": "SYSTEM-1071",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination"
+    },
+    {
+      "uuid": "SYSTEM-1053",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Large ICMP Packets"
+    },
+    {
+      "uuid": "SYSTEM-1047",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Suspicious ICMP Type Code"
+    },
+    {
+      "uuid": "SYSTEM-1048",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: TCP or UDP Port 0"
+    },
+    {
+      "uuid": "SYSTEM-1133",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Zero Payload Bidirectional Flows"
+    },
+    {
+      "uuid": "SYSTEM-1050",
+      "name": "BB:Threats: Suspicious IP Protocol Usage:Unidirectional TCP Flows"
+    },
+    {
+      "uuid": "SYSTEM-1524",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Large DNS Packets"
+    },
+    {
+      "uuid": "SYSTEM-1052",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Long Duration Outbound Flow"
+    },
+    {
+      "uuid": "SYSTEM-1051",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows"
+    },
+    {
+      "uuid": "SYSTEM-1137",
+      "name": "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Replys"
+    },
+    {
+      "uuid": "SYSTEM-1049",
+      "name": "BB:Threats: Suspicious IP Protocol Usage:Unidirectional UDP and Misc Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.705308",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "160302",
+  "rule_id": "160302",
+  "uuid": "23c071b7-bbf4-4c26-909d-2772d5158116",
+  "rule_name": "Potential Exchange Exploit Activity Detected",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T15:36:04.055Z",
+  "modified": "2024-07-21T12:38:30.285Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>( \tLOWER(&quot;Command&quot;) LIKE '%attrib%' \tAND LOWER(&quot;Command&quot;) LIKE '% +h %' \tAND LOWER(&quot;Command&quot;) LIKE '% +s %' \tAND LOWER(&quot;Command&quot;) LIKE '% +r %' \tAND LOWER(&quot;Command&quot;) LIKE '%.aspx%' ) OR  ( \tLOWER(&quot;Command&quot;) LIKE '%schtasks%' \tAND LOWER(&quot;Command&quot;) LIKE '%vsperfmon%' ) OR  ( \tLOWER(&quot;Command&quot;) LIKE '%vssadmin list shadows%' \tAND LOWER(&quot;Command&quot;) LIKE '%temp\\__output%' ) OR  ( \tLOWER(&quot;Command&quot;) MATCHES '.*?(%temp%\\\\execute\\.bat).*?' ) OR  ( \tLOWER(&quot;Process File File Path&quot;) LIKE '%users\\public\\opera\\opera_browser.exe' ) OR ( \tLOWER(&quot;Process Full Full Name&quot;) == 'opera_browser.exe' \tAND LOWER(&quot;Parent Process Full Full Name&quot;) in ('services.exe', 'svchost.exe') ) OR  ( \tLOWER(&quot;Process Full Full Name&quot;) LIKE '%\\programdata\\vsperfmon\\' ) OR  ( \tLOWER(&quot;Command&quot;) LIKE '% -t7z%' \tAND LOWER(&quot;Command&quot;) LIKE '%c:\\programdata\\pst%' \tAND LOWER(&quot;Command&quot;) LIKE '%c:\\it.zip%' ) OR ( \tLOWER(&quot;Process Full Full Name&quot;) == 'makecab.exe' \tAND  \t( \t\tLOWER(&quot;Command&quot;) LIKE '%microsoft\\exchange server\\%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%inetpub\\wwwroot%' \t) ) OR  ( \tLOWER(&quot;Command&quot;) LIKE '%\\temp\\xx.bat%' \tOR LOWER(&quot;Command&quot;) LIKE '%windows\\wwansvcdcs%' \tOR LOWER(&quot;Command&quot;) LIKE '%windows\\temp\\cw.exe%' ) OR  ( \tLOWER(&quot;Command&quot;) LIKE '%\\comsvcs.dll%' \tAND LOWER(&quot;Command&quot;) LIKE '%minidump%' \tAND LOWER(&quot;Command&quot;) LIKE '%\\inetpub\\wwwroot%' ) OR  (\t \tLOWER(&quot;Command&quot;) LIKE '%dsquery%' \tAND LOWER(&quot;Command&quot;) LIKE '% -uco %' \tAND LOWER(&quot;Command&quot;) LIKE '%\\inetpub\\wwwroot%' )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Command%22)%20LIKE%20'%25attrib%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20%2Bh%20%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20%2Bs%20%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20%2Br%20%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25.aspx%25'%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20LIKE%20'%25schtasks%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25vsperfmon%25'%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20LIKE%20'%25vssadmin%20list%20shadows%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25temp%5C__output%25'%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20MATCHES%20'.*%3F(%25temp%25%5C%5Cexecute%5C.bat).*%3F'%20)%20OR%20%20(%20%09LOWER(%22Process%20Path%22)%20LIKE%20'%25users%5Cpublic%5Copera%5Copera_browser.exe'%20)%20OR%20(%20%09LOWER(%22Process%20Name%22)%20%3D%3D%20'opera_browser.exe'%20%09AND%20LOWER(%22Parent%20Process%20Name%22)%20in%20('services.exe'%2C%20'svchost.exe')%20)%20OR%20%20(%20%09LOWER(%22Process%20Name%22)%20LIKE%20'%25%5Cprogramdata%5Cvsperfmon%5C'%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20LIKE%20'%25%20-t7z%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Cprogramdata%5Cpst%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Cit.zip%25'%20)%20OR%20(%20%09LOWER(%22Process%20Name%22)%20%3D%3D%20'makecab.exe'%20%09AND%20%20%09(%20%09%09LOWER(%22Command%22)%20LIKE%20'%25microsoft%5Cexchange%20server%5C%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25inetpub%5Cwwwroot%25'%20%09)%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20LIKE%20'%25%5Ctemp%5Cxx.bat%25'%20%09OR%20LOWER(%22Command%22)%20LIKE%20'%25windows%5Cwwansvcdcs%25'%20%09OR%20LOWER(%22Command%22)%20LIKE%20'%25windows%5Ctemp%5Ccw.exe%25'%20)%20OR%20%20(%20%09LOWER(%22Command%22)%20LIKE%20'%25%5Ccomsvcs.dll%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25minidump%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%5Cinetpub%5Cwwwroot%25'%20)%20OR%20%20(%09%20%09LOWER(%22Command%22)%20LIKE%20'%25dsquery%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20-uco%20%25'%20%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%5Cinetpub%5Cwwwroot%25'%20)|%5B%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25attrib%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Bh%20%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Bs%20%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Br%20%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.aspx%25'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25schtasks%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25vsperfmon%25'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25vssadmin%20list%20shadows%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25temp%5C%5C__output%25'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3F(%25temp%25%5C%5C%5C%5Cexecute%5C%5C.bat).*%3F'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25users%5C%5Cpublic%5C%5Copera%5C%5Copera_browser.exe'%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'opera_browser.exe'%22%2C%22%5CtAND%20LOWER(%5C%22Parent%20Process%20Name%5C%22)%20in%20('services.exe'%2C%20'svchost.exe')%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25%5C%5Cprogramdata%5C%5Cvsperfmon%5C%5C'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20-t7z%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Cprogramdata%5C%5Cpst%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Cit.zip%25'%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'makecab.exe'%22%2C%22%5CtAND%20%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25microsoft%5C%5Cexchange%20server%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25inetpub%5C%5Cwwwroot%25'%22%2C%22%5Ct)%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Ctemp%5C%5Cxx.bat%25'%22%2C%22%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windows%5C%5Cwwansvcdcs%25'%22%2C%22%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windows%5C%5Ctemp%5C%5Ccw.exe%25'%22%2C%22)%22%2C%22OR%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Ccomsvcs.dll%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25minidump%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cinetpub%5C%5Cwwwroot%25'%22%2C%22)%22%2C%22OR%20%22%2C%22(%5Ct%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25dsquery%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20-uco%20%25'%22%2C%22%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cinetpub%5C%5Cwwwroot%25'%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.417259",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

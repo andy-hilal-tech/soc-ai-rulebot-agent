@@ -1,0 +1,141 @@
+{
+  "rule_doc_id": "165463",
+  "rule_id": "165463",
+  "uuid": "30b5abb5-ae45-40f6-b00e-68fb5b550e03",
+  "rule_name": "MSSP - OS - MS - 21 - H - Successful Logon with Administrative or Special privileges during Weekend(white listing required)",
+  "object_type": "rule",
+  "group": "MSSP - Rules, OS - MS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-03-11T16:21:30.752Z",
+  "modified": "2026-06-07T11:53:46.514Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4672</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidEventIdEQany4672"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DayOfWeek_Test",
+            "uid": "2",
+            "id": "17"
+          },
+          "text": [
+            "when the event(s) occur on any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Friday, Saturday</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "6, 7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Account Name"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "4015",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67501931",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "On weekends",
+            "name": "MSSP - OS - MS - 21 - H - Successful Logon with Administrative or Special privileges during Weekend(white listing required)"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.387393",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

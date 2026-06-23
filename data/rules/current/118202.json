@@ -1,0 +1,82 @@
+{
+  "rule_doc_id": "118202",
+  "rule_id": "118202",
+  "uuid": "ef95fb03-ac07-492e-909f-a7c5244e1083",
+  "rule_name": "Logs Have Been Deleted / Disabled or Stopped",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-07-27T14:23:44.003Z",
+  "modified": "2024-04-29T12:45:21.939Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Virtualization</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "edf618f4-9e8c-4068-88aa-2675753eb003"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(CATEGORYNAME(category) == 'Disable Logging Attempted' OR CATEGORYNAME(category) == 'Disable Logging Succeeded') OR QID == 88750314</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(CATEGORYNAME(category)%20%3D%3D%20'Disable%20Logging%20Attempted'%20OR%20CATEGORYNAME(category)%20%3D%3D%20'Disable%20Logging%20Succeeded')%20OR%20QID%20%3D%3D%2088750314|%5B%22(CATEGORYNAME(category)%20%3D%3D%20'Disable%20Logging%20Attempted'%20OR%20CATEGORYNAME(category)%20%3D%3D%20'Disable%20Logging%20Succeeded')%20OR%20QID%20%3D%3D%2088750314%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+      "name": "BB:DeviceDefinition: Virtualization"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.025211",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

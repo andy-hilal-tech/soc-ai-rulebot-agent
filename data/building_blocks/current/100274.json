@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "100274",
+  "rule_id": "100274",
+  "uuid": "11ecd6b6-26a9-4a58-9da5-40ff7f7affec",
+  "rule_name": "BB:CategoryDefinition: SIEM User and Role Modifications",
+  "object_type": "building_block",
+  "group": "Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2014-05-23T15:36:29.510Z",
+  "modified": "2023-10-30T02:20:04.554Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(28250067) User Account Added, (28250070) User Role Added, (28250069) User Account Modified, (28250072) User Role Modified</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "28250067,    28250070,    28250069,    28250072"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "100274",
+                "bb": "BB:CategoryDefinition: SIEM User and Role Modifications",
+                "uuid": "11ecd6b6-26a9-4a58-9da5-40ff7f7affec",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

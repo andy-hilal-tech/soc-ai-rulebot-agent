@@ -1,0 +1,107 @@
+{
+  "rule_doc_id": "126252",
+  "rule_id": "126252",
+  "uuid": "85b41dbe-e5dd-4135-a3ff-703796dc4267",
+  "rule_name": "Creation of a Privileged Role for Container",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set",
+  "created": "2019-11-13T16:32:37.892Z",
+  "modified": "2024-07-21T09:33:21.296Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "4",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Authentication.Role Creation Success, Authentication.Role Assignment Success, Audit.Update Activity Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3127, 3133, 19018"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(&quot;Role Name Name Actions&quot; like '%*%' AND &quot;Role Name Name Assigned Resources&quot; like '%*%') OR ((&quot;Role Name Name Actions&quot; ilike '%create%' OR &quot;Role Name Name Actions&quot; ilike '%update%' OR &quot;Role Name Name Actions&quot; ilike '%delete%' OR &quot;Role Name Name Actions&quot; like '%*%') AND &quot;Role Name Name Assigned Resources&quot; ilike '%secrets%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Role%20Actions%22%20like%20'%25*%25'%20AND%20%22Role%20Assigned%20Resources%22%20like%20'%25*%25')%20OR%20((%22Role%20Actions%22%20ilike%20'%25create%25'%20OR%20%22Role%20Actions%22%20ilike%20'%25update%25'%20OR%20%22Role%20Actions%22%20ilike%20'%25delete%25'%20OR%20%22Role%20Actions%22%20like%20'%25*%25')%20AND%20%22Role%20Assigned%20Resources%22%20ilike%20'%25secrets%25')|%5B%22(%5C%22Role%20Actions%5C%22%20like%20'%25*%25'%20AND%20%5C%22Role%20Assigned%20Resources%5C%22%20like%20'%25*%25')%20OR%20((%5C%22Role%20Actions%5C%22%20ilike%20'%25create%25'%20OR%20%5C%22Role%20Actions%5C%22%20ilike%20'%25update%25'%20OR%20%5C%22Role%20Actions%5C%22%20ilike%20'%25delete%25'%20OR%20%5C%22Role%20Actions%5C%22%20like%20'%25*%25')%20AND%20%5C%22Role%20Assigned%20Resources%5C%22%20ilike%20'%25secrets%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Resource Name",
+            "id": "180",
+            "type": "ALN",
+            "name": "Privileged Role"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.371453",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

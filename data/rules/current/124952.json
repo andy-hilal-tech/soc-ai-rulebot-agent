@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "124952",
+  "rule_id": "124952",
+  "uuid": "3bc0e8eb-7886-4450-9992-2e10c30ecb76",
+  "rule_name": "QRadar Audit: Expensive Log Sources",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-10-05T18:38:27.044Z",
+  "modified": "2024-07-21T08:29:28.423Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>QID is 38,750,143</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidNumberEQ38750143"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.315728",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

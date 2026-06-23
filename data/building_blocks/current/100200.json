@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "100200",
+  "rule_id": "100200",
+  "uuid": "SYSTEM-1418",
+  "rule_name": "User:BB:FalsePositives: User Defined Server Type 1 False Positive Events",
+  "object_type": "building_block",
+  "group": "User Tuning",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-08-15T22:12:51.183Z",
+  "modified": "2023-10-30T02:02:35.601Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when we see an event match <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>User-BB-HostDefinition: User Defined Server Type 1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1276"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(1159448) Custom User 9 - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500120"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1276",
+      "name": "User:BB:HostDefinition: Server Type 1 - User Defined"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.809399",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

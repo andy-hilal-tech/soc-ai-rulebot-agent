@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162206",
+  "rule_id": "162206",
+  "uuid": "4ec22122-a9d0-4b10-a994-b27a37592d08",
+  "rule_name": "PowerShell ADRecon Execution",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-29T12:29:54.813Z",
+  "modified": "2024-07-29T12:29:54.809Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(Message) LIKE '%function get-adrexcelcomob%' OR LOWER(Message) LIKE '%get-adrgpo%' OR LOWER(Message) LIKE '%get-adrdomaincontroller%' OR LOWER(Message) LIKE '%adrecon-report.xlsx%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28LOWER%28Message%29%20LIKE%20%27%25function%20get-adrexcelcomob%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25get-adrgpo%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25get-adrdomaincontroller%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25adrecon-report.xlsx%25%27%29|%5B%22devicetype%3D12%20AND%20%28LOWER%28Message%29%20LIKE%20%27%25function%20get-adrexcelcomob%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25get-adrgpo%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25get-adrdomaincontroller%25%27%20OR%20LOWER%28Message%29%20LIKE%20%27%25adrecon-report.xlsx%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Bhabesh Raj SIGMA Title: PowerShell ADRecon Execution SIGMA Description: Detects execution of ADRecon.ps1 for AD reconnaissance which has been reported to be actively used by FIN7  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "PowerShell ADRecon Execution"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.501342",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

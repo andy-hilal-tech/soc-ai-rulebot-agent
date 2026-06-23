@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "122402",
+  "rule_id": "122402",
+  "uuid": "75249b45-4d52-4027-b07d-2165282fd921",
+  "rule_name": "BB:Threats: Suspicious IP Network Traffic",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-10-29T17:06:55.665Z",
+  "modified": "2024-06-27T13:19:20.990Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Web Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.Request In Progress, Application.Request Successful</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18467, 18466"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "2",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>XFORCE_IP_CONFIDENCE('Anonymization Services',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Malware',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Botnet Command and Control Server',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Spam',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Cryptocurrency Mining',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Scanning IPs',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Bots',sourceip) &gt; 75</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',sourceip)%20%3E%2075|%5B%22%20XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',sourceip)%20%3E%2075%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "4",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>50</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "50"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "10"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+      "name": "BB:DeviceDefinition: Web Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.236698",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

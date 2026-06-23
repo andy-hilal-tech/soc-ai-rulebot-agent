@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "151502",
+  "rule_id": "151502",
+  "uuid": "315031e2-bef3-4fe7-b5ae-116a5cad9fc9",
+  "rule_name": "New Service Creation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-03T07:50:09.809Z",
+  "modified": "2024-07-21T12:38:28.404Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: New Service Creation Using PowerShell, BB:BehaviorDefinition: New Service Creation Using Sc.EXE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "cf52b221-1c32-4e59-948a-69da1e8182cd, 39b52ca4-8b05-4a77-b4b4-2e25ea8333d4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "cf52b221-1c32-4e59-948a-69da1e8182cd",
+      "name": "BB:BehaviorDefinition: New Service Creation Using PowerShell"
+    },
+    {
+      "uuid": "39b52ca4-8b05-4a77-b4b4-2e25ea8333d4",
+      "name": "BB:BehaviorDefinition: New Service Creation Using Sc.EXE"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Create or Modify System Process",
+        "STEC": "T1543.003",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1543.003",
+            "values": [
+              {
+                "id": "151502",
+                "bb": "New Service Creation",
+                "uuid": "315031e2-bef3-4fe7-b5ae-116a5cad9fc9",
+                "T": "EVENT"
+              },
+              {
+                "id": "151552",
+                "bb": "BB:BehaviorDefinition: New Service Creation Using PowerShell",
+                "uuid": "cf52b221-1c32-4e59-948a-69da1e8182cd",
+                "T": "EVENT"
+              },
+              {
+                "id": "151602",
+                "bb": "BB:BehaviorDefinition: New Service Creation Using Sc.EXE",
+                "uuid": "39b52ca4-8b05-4a77-b4b4-2e25ea8333d4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.136871",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

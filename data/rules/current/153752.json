@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "153752",
+  "rule_id": "153752",
+  "uuid": "66e1348c-08d8-4b2b-b6be-ae7275027cb4",
+  "rule_name": "Execution of Exfiltration and Tunneling Tools",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T17:53:23.136Z",
+  "modified": "2024-07-21T12:38:28.974Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) IN ('plink.exe', 'socat.exe', 'stunnel.exe', 'httptunnel.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20IN%20('plink.exe'%2C%20'socat.exe'%2C%20'stunnel.exe'%2C%20'httptunnel.exe')|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20IN%20('plink.exe'%2C%20'socat.exe'%2C%20'stunnel.exe'%2C%20'httptunnel.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "Exfiltration Over C2 Channel",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1041",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - Exfiltration Over C2 Channel",
+            "values": [
+              {
+                "id": "153752",
+                "bb": "Execution of Exfiltration and Tunneling Tools",
+                "uuid": "66e1348c-08d8-4b2b-b6be-ae7275027cb4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "T1572",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1572",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1572",
+            "values": [
+              {
+                "id": "153752",
+                "bb": "Execution of Exfiltration and Tunneling Tools",
+                "uuid": "66e1348c-08d8-4b2b-b6be-ae7275027cb4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "T1071.001",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1071.001",
+            "values": [
+              {
+                "id": "153752",
+                "bb": "Execution of Exfiltration and Tunneling Tools",
+                "uuid": "66e1348c-08d8-4b2b-b6be-ae7275027cb4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.202497",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

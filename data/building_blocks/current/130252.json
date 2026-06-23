@@ -1,0 +1,107 @@
+{
+  "rule_doc_id": "130252",
+  "rule_id": "130252",
+  "uuid": "a443da40-73b2-46e4-96ea-7fbb0fed1bca",
+  "rule_name": "BB:Threats: Cryptocurrency Mining Threat Hashes for Events",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-30T12:19:21.780Z",
+  "modified": "2024-07-21T09:42:17.224Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5, 73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>'File Hash' IS NOT NULL OR 'SHA256 Hash' IS NOT NULL OR 'MD5 Hash' IS NOT NULL OR 'SHA1 Hash' IS NOT NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "'File%20Hash'%20IS%20NOT%20NULL%20OR%20'SHA256%20Hash'%20IS%20NOT%20NULL%20OR%20'MD5%20Hash'%20IS%20NOT%20NULL%20OR%20'SHA1%20Hash'%20IS%20NOT%20NULL|%5B%22'File%20Hash'%20IS%20NOT%20NULL%20OR%20'SHA256%20Hash'%20IS%20NOT%20NULL%20OR%20'MD5%20Hash'%20IS%20NOT%20NULL%20OR%20'SHA1%20Hash'%20IS%20NOT%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>File Hash (custom), SHA256 Hash (custom), MD5 Hash (custom), SHA1 Hash (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Threat Hashes - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "File Hash, SHA256 Hash, MD5 Hash, SHA1 Hash"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "189"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+      "name": "BB:DeviceDefinition: Endpoint Protection Devices"
+    },
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.284820",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

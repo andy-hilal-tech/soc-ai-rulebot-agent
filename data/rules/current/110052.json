@@ -1,0 +1,97 @@
+{
+  "rule_doc_id": "110052",
+  "rule_id": "110052",
+  "uuid": "ae5e3db1-a8fa-4e01-8bde-2619fd49cef8",
+  "rule_name": "UBA : User Access from Unusual Locations",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2016-05-24T16:22:30.190Z",
+  "modified": "2024-02-19T16:45:45.295Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations, BB:UBA : Unusual Source Locations</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80, 5ee6fcf9-2c17-4c59-8797-533542c06992, b0cb9a75-185f-44e2-8877-1aaf1aafc72e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "2",
+            "operation": "incSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "5ee6fcf9-2c17-4c59-8797-533542c06992",
+      "name": "BB:UBA : Excluded Geographic Locations"
+    },
+    {
+      "uuid": "b0cb9a75-185f-44e2-8877-1aaf1aafc72e",
+      "name": "BB:UBA : Unusual Source Locations"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "110052",
+                "bb": "UBA : User Access from Unusual Locations",
+                "uuid": "ae5e3db1-a8fa-4e01-8bde-2619fd49cef8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.726693",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

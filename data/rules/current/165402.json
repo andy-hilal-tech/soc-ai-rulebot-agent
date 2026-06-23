@@ -1,0 +1,98 @@
+{
+  "rule_doc_id": "165402",
+  "rule_id": "165402",
+  "uuid": "6ab88044-1820-45d4-b183-22a8fdc530d0",
+  "rule_name": "Al Haddad - ESET AV Alert",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-01-25T12:24:51.165Z",
+  "modified": "2026-01-25T12:24:51.164Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "0",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator @ APPLICATION</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "6045"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "2",
+            "id": "225",
+            "negate": "true"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>ESET AV Action (custom)</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Blocked</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "ESET AV Action"
+            },
+            {
+              "id": "2",
+              "value": "Blocked"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "80"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "10",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "8",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "8",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.343077",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

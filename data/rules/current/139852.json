@@ -1,0 +1,155 @@
+{
+  "rule_doc_id": "139852",
+  "rule_id": "139852",
+  "uuid": "d5f00220-3746-4921-b23e-d2157f649a7b",
+  "rule_name": "Ransomware: WCry Payload in Flows",
+  "object_type": "rule",
+  "group": "Ransomware, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-05-17T18:15:11.930Z",
+  "modified": "2024-07-21T10:28:47.027Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "2",
+            "id": "25"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>445</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "445"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "FlowHasPayload",
+            "uid": "3",
+            "id": "224"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>the destination</a> side of the flow <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>has</a> payload data"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "destination"
+            },
+            {
+              "id": "2",
+              "value": "true"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%00 00 00 31%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%4a 6c 4a 6d 49 68 43 6c 42 73 72 00%' and FORMAT::PAYLOAD_TO_HEX(destinationpayload) like '%2b 00 00 00 00 98 07 c0%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%2500%2000%2000%2031%25'%20and%20FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%254a%206c%204a%206d%2049%2068%2043%206c%2042%2073%2072%2000%25'%20and%20FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%252b%2000%2000%2000%2000%2098%2007%20c0%25'|%5B%22FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%2500%2000%2000%2031%25'%20and%20FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%254a%206c%204a%206d%2049%2068%2043%206c%2042%2073%2072%2000%25'%20and%20FORMAT%3A%3APAYLOAD_TO_HEX(destinationpayload)%20like%20'%252b%2000%2000%2000%2000%2098%2007%20c0%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "139852",
+                "bb": "Ransomware: WCry Payload in Flows",
+                "uuid": "d5f00220-3746-4921-b23e-d2157f649a7b",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": false,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "139852",
+                "bb": "Ransomware: WCry Payload in Flows",
+                "uuid": "d5f00220-3746-4921-b23e-d2157f649a7b",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.839217",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

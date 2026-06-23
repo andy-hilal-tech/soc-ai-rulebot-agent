@@ -1,0 +1,104 @@
+{
+  "rule_doc_id": "130402",
+  "rule_id": "130402",
+  "uuid": "4d74e362-f6e7-4403-90ee-a506f814a1f6",
+  "rule_name": "BB:Threats: Cryptocurrency Mining Threat Name Patterns",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-30T12:14:10.300Z",
+  "modified": "2024-07-21T09:42:16.468Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM, BB:DeviceDefinition: IDS / IPS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5, SYSTEM-1321"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Threat Names</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "104e953f-c94f-455d-8c50-9e39aa97bbac"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "0",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Threat Name (custom)</a> match <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>.*?(?i)mine|coin|bit|btc|crypto.*?</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "Threat Name"
+            },
+            {
+              "id": "2",
+              "value": ".*?(?i)mine|coin|bit|btc|crypto.*?"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+      "name": "BB:DeviceDefinition: Endpoint Protection Devices"
+    },
+    {
+      "uuid": "SYSTEM-1321",
+      "name": "BB:DeviceDefinition: IDS / IPS"
+    },
+    {
+      "uuid": "104e953f-c94f-455d-8c50-9e39aa97bbac",
+      "name": "BB:Threats: Cryptocurrency Mining Threat Names"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.284820",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

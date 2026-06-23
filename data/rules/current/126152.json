@@ -1,0 +1,140 @@
+{
+  "rule_doc_id": "126152",
+  "rule_id": "126152",
+  "uuid": "5938164a-f85f-4e55-b483-5c232e26101c",
+  "rule_name": "Namespace Created Followed by Multiple Resources Created on a Container Environment",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-11-05T14:50:25.141Z",
+  "modified": "2024-07-21T09:33:20.937Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Username is not any of authorized_users</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameNEQanyauthorized_users"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "2",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Resource Creation Events</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Namespace (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Unauthorized User Creating Namespaces</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "7db081f7-b3c4-452d-ba76-e7ab18ea80d5"
+            },
+            {
+              "id": "2",
+              "value": "10"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Namespace"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "1f44ce9f-5c92-4154-b3bb-a52ff717ff77"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    },
+    {
+      "uuid": "7db081f7-b3c4-452d-ba76-e7ab18ea80d5",
+      "name": "BB:CategoryDefinition: Resource Creation Events"
+    },
+    {
+      "uuid": "1f44ce9f-5c92-4154-b3bb-a52ff717ff77",
+      "name": "BB:BehaviourDefinition: Unauthorized User Creating Namespaces"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.366859",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

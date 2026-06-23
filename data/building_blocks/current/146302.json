@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "146302",
+  "rule_id": "146302",
+  "uuid": "b07f6eb1-e9ea-47a0-b7fd-e24683f00668",
+  "rule_name": "BB:BehaviorDefinition: HyperStack Pipe",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-22T18:17:39.009Z",
+  "modified": "2024-07-21T12:38:52.407Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001837,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     5001836"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Pipe Name (custom) is any of suplexrpc</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Pipe NameEQanysuplexrpc"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Native API",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1106",
+        "MAP_S": [
+          {
+            "name": "Execution - Native API",
+            "values": [
+              {
+                "id": "146302",
+                "bb": "BB:BehaviorDefinition: HyperStack Pipe",
+                "uuid": "b07f6eb1-e9ea-47a0-b7fd-e24683f00668",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.579233",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

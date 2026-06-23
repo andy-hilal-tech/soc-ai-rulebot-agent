@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "123052",
+  "rule_id": "123052",
+  "uuid": "SYSTEM-1329",
+  "rule_name": "BB:FalseNegative: Events That Indicate Successful Compromise",
+  "object_type": "building_block",
+  "group": "False Positive, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T18:21:18.853Z",
+  "modified": "2024-06-27T13:19:21.959Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6500120) Custom User 9 - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500120"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.236698",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "154952",
+  "rule_id": "154952",
+  "uuid": "45d2bc80-18ab-4c76-87ea-f2f76af7269f",
+  "rule_name": "Suspicious WMIC Execution",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-03-21T12:09:44.035Z",
+  "modified": "2024-07-21T12:38:49.749Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(lower(&quot;command&quot;) matches '.*?wmic.*' and LOWER(&quot;Command&quot;) LIKE '%process%' and LOWER(&quot;Command&quot;) LIKE '%call%' and LOWER(&quot;Command&quot;) LIKE '%create %') or (LOWER(&quot;Command&quot;) LIKE '%wmic%' and LOWER(&quot;Command&quot;) LIKE '% path %' and (LOWER(&quot;Command&quot;) LIKE '%antivirus%' or LOWER(&quot;Command&quot;) LIKE '%firewall%') and LOWER(&quot;Command&quot;) LIKE '%product%' and LOWER(&quot;Command&quot;) LIKE '% get %')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(lower(%22command%22)%20matches%20'.*%3Fwmic.*'%20and%20LOWER(%22Command%22)%20LIKE%20'%25process%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25call%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25create%20%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25wmic%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%20path%20%25'%20and%20(LOWER(%22Command%22)%20LIKE%20'%25antivirus%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25firewall%25')%20and%20LOWER(%22Command%22)%20LIKE%20'%25product%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%20get%20%25')|%5B%22(lower(%5C%22command%5C%22)%20matches%20'.*%3Fwmic.*'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25process%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25call%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25create%20%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25wmic%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20path%20%25'%20and%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25antivirus%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25firewall%25')%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25product%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20get%20%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.230402",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

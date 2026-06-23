@@ -1,0 +1,62 @@
+{
+  "rule_doc_id": "100452",
+  "rule_id": "100452",
+  "uuid": "798891fd-e3d2-4ecc-bf77-27e342c0e26f",
+  "rule_name": "Login Failure to Expired Account",
+  "object_type": "rule",
+  "group": "Authentication, Horizontal Movement",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-01-16T13:29:29.109Z",
+  "modified": "2024-01-16T13:29:29.109Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication to Expired Account</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1351"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1351",
+      "name": "BB:CategoryDefinition: Authentication to Expired Account"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.424660",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

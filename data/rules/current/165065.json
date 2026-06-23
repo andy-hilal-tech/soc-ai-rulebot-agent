@@ -1,0 +1,111 @@
+{
+  "rule_doc_id": "165065",
+  "rule_id": "165065",
+  "uuid": "a25a2cd5-fb1c-4cdc-ac93-1eff646c0d00",
+  "rule_name": "Azure Point-to-site VPN Modified or Deleted",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-23T13:59:29.976Z",
+  "modified": "2025-04-24T06:44:28.217Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure Platform</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "413"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Operation Name (custom) is any of [MICROSOFT.NETWORK/P2SVPNGATEWAYS/WRITE or MICROSOFT.NETWORK/P2SVPNGATEWAYS/DELETE or MICROSOFT.NETWORK/P2SVPNGATEWAYS/RESET/ACTION or MICROSOFT.NETWORK/P2SVPNGATEWAYS/GENERATEVPNPROFILE/ACTION or MICROSOFT.NETWORK/P2SVPNGATEWAYS/DISCONNECTP2SVPNCONNECTIONS/ACTION or MICROSOFT.NETWORK/P2SVPNGATEWAYS/PROVIDERS/MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/WRITE]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Operation NameEQanyMICROSOFT.NETWORK/P2SVPNGATEWAYS/WRITE�MICROSOFT.NETWORK/P2SVPNGATEWAYS/DELETE�MICROSOFT.NETWORK/P2SVPNGATEWAYS/RESET/ACTION�MICROSOFT.NETWORK/P2SVPNGATEWAYS/GENERATEVPNPROFILE/ACTION�MICROSOFT.NETWORK/P2SVPNGATEWAYS/DISCONNECTP2SVPNCONNECTIONS/ACTION�MICROSOFT.NETWORK/P2SVPNGATEWAYS/PROVIDERS/MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/WRITE"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "includeAttackerEventsInterval": "300",
+            "offenseMapping": "3",
+            "forceOffenseCreation": "true",
+            "qid": "67501805",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Identifies when a Point-to-site VPN is Modified or Deleted.\n\n- Point-to-site VPN being modified or deleted may be performed by a system administrator. Verify whether the user identity, user agent, and/or hostname should be making changes in your environment.\n\n- Point-to-site VPN modified or deleted from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.",
+            "name": "Azure Point-to-site VPN Modified or Deleted"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "165065",
+                "bb": "Azure Point-to-site VPN Modified or Deleted",
+                "uuid": "a25a2cd5-fb1c-4cdc-ac93-1eff646c0d00",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.227008",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

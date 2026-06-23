@@ -1,0 +1,167 @@
+{
+  "rule_doc_id": "146752",
+  "rule_id": "146752",
+  "uuid": "8a8ed8f6-1d13-43ac-b138-29a8a8cfaa41",
+  "rule_name": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-09T18:49:49.259Z",
+  "modified": "2024-07-21T12:38:22.453Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of userinit.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanyuserinit.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of [explorer.exe or proquota.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyexplorer.exe�proquota.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of [netlogon*.bat or UsrLogon.cmd or C:\\WINDOWS\\Explorer.EXE], Process Name (custom) contains any of \\Citrix\\System32\\icast.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanynetlogon*.bat�UsrLogon.cmd�C:\\WINDOWS\\Explorer.EXEProcess NameCONany\\Citrix\\System32\\icast.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "5",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Command (custom) contains any of UserInitMprLogonScript</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanyUserInitMprLogonScript"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Initialization Scripts",
+        "STEC": "T1037.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1037",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1037.001",
+            "values": [
+              {
+                "id": "146752",
+                "bb": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript",
+                "uuid": "8a8ed8f6-1d13-43ac-b138-29a8a8cfaa41",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.591044",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

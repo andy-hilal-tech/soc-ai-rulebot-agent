@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "146052",
+  "rule_id": "146052",
+  "uuid": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a",
+  "rule_name": "BB:BehaviorDefinition: Hiding Files with Attrib.exe",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T13:46:29.838Z",
+  "modified": "2024-07-21T12:38:40.001Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "5",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) == 'attrib.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20%3D%3D%20'attrib.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'attrib.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% +h %'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25%20%2Bh%20%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Bh%20%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%_desktop.ini %' or (LOWER(&quot;Parent Process Full Full Name&quot;) LIKE '%cmd.exe' and LOWER(&quot;Command&quot;) LIKE '+r +h +s +a \\\\%.cui' and LOWER(&quot;Parent Command&quot;) LIKE 'c:\\\\windows\\\\system32\\\\%.bat')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Command%22)%20LIKE%20'%25_desktop.ini%20%25'%20or%20(LOWER(%22Parent%20Process%20Name%22)%20LIKE%20'%25cmd.exe'%20and%20LOWER(%22Command%22)%20LIKE%20'%2Br%20%2Bh%20%2Bs%20%2Ba%20%5C%5C%25.cui'%20and%20LOWER(%22Parent%20Command%22)%20LIKE%20'c%3A%5C%5Cwindows%5C%5Csystem32%5C%5C%25.bat')))|%5B%22((LOWER(%5C%22Command%5C%22)%20LIKE%20'%25_desktop.ini%20%25'%20or%20(LOWER(%5C%22Parent%20Process%20Name%5C%22)%20LIKE%20'%25cmd.exe'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%2Br%20%2Bh%20%2Bs%20%2Ba%20%5C%5C%5C%5C%25.cui'%20and%20LOWER(%5C%22Parent%20Command%5C%22)%20LIKE%20'c%3A%5C%5C%5C%5Cwindows%5C%5C%5C%5Csystem32%5C%5C%5C%5C%25.bat')))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1564",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1564",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1564",
+            "values": [
+              {
+                "id": "146052",
+                "bb": "BB:BehaviorDefinition: Hiding Files with Attrib.exe",
+                "uuid": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.567490",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "100161",
+  "rule_id": "100161",
+  "uuid": "SYSTEM-1051",
+  "rule_name": "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Flows",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T15:27:06.767Z",
+  "modified": "2023-10-30T02:02:40.633Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ICMP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Unidirectional Flow</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1548"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1548",
+      "name": "BB:CategoryDefinition: Unidirectional Flow"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.728212",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

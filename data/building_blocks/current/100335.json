@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100335",
+  "rule_id": "100335",
+  "uuid": "SYSTEM-1258",
+  "rule_name": "BB:ComplianceDefinition: SOX Servers",
+  "object_type": "building_block",
+  "group": "Compliance",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-13T17:16:15.550Z",
+  "modified": "2023-10-30T02:02:37.501Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "0",
+            "id": "12"
+          },
+          "text": [
+            "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.951682",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

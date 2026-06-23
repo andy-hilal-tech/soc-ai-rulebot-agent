@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "122852",
+  "rule_id": "122852",
+  "uuid": "SYSTEM-1323",
+  "rule_name": "BB:NetworkDefinition: Watch List Addresses",
+  "object_type": "building_block",
+  "group": "Network Definition, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T17:41:47.948Z",
+  "modified": "2024-06-27T13:19:20.434Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkView_Test",
+            "uid": "0",
+            "id": "104"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Watchlists</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Any"
+            },
+            {
+              "id": "2",
+              "value": "Any"
+            },
+            {
+              "id": "3",
+              "method": "getRemoteNetworkView",
+              "value": "Watchlists"
+            },
+            {
+              "id": "4",
+              "value": "Remote"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.236698",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

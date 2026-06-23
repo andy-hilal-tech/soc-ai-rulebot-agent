@@ -1,0 +1,64 @@
+{
+  "rule_doc_id": "100237",
+  "rule_id": "100237",
+  "uuid": "SYSTEM-1068",
+  "rule_name": "BB:Policy Violation: Compliance Policy Violation: Clear Text Application Usage",
+  "object_type": "building_block",
+  "group": "Policy",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-31T14:33:59.466Z",
+  "modified": "2023-10-30T02:02:37.381Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application is any of [RemoteAccess.Telnet or RemoteAccess.Telnet-Port or Mail.POP or Mail.POP-port or DataTransfer.FTP]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQanyRemoteAccess.Telnet�RemoteAccess.Telnet-Port�Mail.POP�Mail.POP-port�DataTransfer.FTP"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "FlowBiasTest",
+            "uid": "1",
+            "id": "200",
+            "negate": "true"
+          },
+          "text": [
+            "when the flow bias is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>inbound, outbound</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "0, 1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.857235",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

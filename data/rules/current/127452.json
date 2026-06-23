@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "127452",
+  "rule_id": "127452",
+  "uuid": "SYSTEM-1461",
+  "rule_name": "DMZ Reverse Tunnel",
+  "object_type": "rule",
+  "group": "Post-Intrusion Activity, Horizontal Movement",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2008-08-20T18:42:05.871Z",
+  "modified": "2024-07-21T09:34:35.249Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DoubleSequenceFunction_Test",
+            "uid": "1",
+            "id": "94"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre Reverse DMZ Jump</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source IP</a> followed by at least <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>BB:CategoryDefinition: Post DMZ Jump</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1465"
+            },
+            {
+              "id": "3",
+              "value": "In"
+            },
+            {
+              "id": "4",
+              "value": "SourceIP"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "method": "getEventRules",
+              "value": "SYSTEM-1463"
+            },
+            {
+              "id": "7",
+              "value": "In"
+            },
+            {
+              "id": "8",
+              "value": "SourceIP"
+            },
+            {
+              "id": "9",
+              "value": "1"
+            },
+            {
+              "id": "10",
+              "value": "m"
+            },
+            {
+              "id": "11",
+              "value": "From"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1465",
+      "name": "BB:CategoryDefinition: Pre Reverse DMZ Jump"
+    },
+    {
+      "uuid": "SYSTEM-1463",
+      "name": "BB:CategoryDefinition: Post DMZ Jump"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.413690",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

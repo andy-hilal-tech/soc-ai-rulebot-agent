@@ -1,0 +1,59 @@
+{
+  "rule_doc_id": "100199",
+  "rule_id": "100199",
+  "uuid": "SYSTEM-1276",
+  "rule_name": "User:BB:HostDefinition: Server Type 1 - User Defined",
+  "object_type": "building_block",
+  "group": "User Tuning",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-08-15T22:10:49.282Z",
+  "modified": "2023-10-30T02:02:39.585Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "1",
+            "id": "12"
+          },
+          "text": [
+            "where either the source or destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "where the Destination Port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.809399",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "146202",
+  "rule_id": "146202",
+  "uuid": "988c216e-df52-46e6-9210-20d5150aa599",
+  "rule_name": "BB:BehaviorDefinition: Kazuar Registry Installation",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-10T14:32:49.256Z",
+  "modified": "2024-07-21T12:38:51.369Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Service Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) MATCHES ('.*software\\\\microsoft\\\\windows\\\\currentversion\\\\run') OR LOWER(&quot;Registry Key&quot;) MATCHES ('.*software\\\\microsoft\\\\windows\\\\currentversion\\\\runonce') OR LOWER(&quot;Registry Key&quot;) MATCHES ('.*software\\\\microsoft\\\\windows\\\\currentversion\\\\policies\\\\explorer\\\\run') OR LOWER(&quot;Registry Key&quot;) MATCHES ('.*software\\\\microsoft\\\\windows nt\\\\currentversion\\\\winlogon\\\\shell') OR LOWER(&quot;Registry Key&quot;) MATCHES ('.*software\\\\microsoft\\\\windows nt\\\\currentversion\\\\windows\\\\load')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Key%22)%20MATCHES%20('.*software%5C%5Cmicrosoft%5C%5Cwindows%5C%5Ccurrentversion%5C%5Crun')%20OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*software%5C%5Cmicrosoft%5C%5Cwindows%5C%5Ccurrentversion%5C%5Crunonce')%20OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*software%5C%5Cmicrosoft%5C%5Cwindows%5C%5Ccurrentversion%5C%5Cpolicies%5C%5Cexplorer%5C%5Crun')%20OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Cwinlogon%5C%5Cshell')%20OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Cwindows%5C%5Cload')|%5B%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*software%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Crun')%20OR%22,%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*software%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Crunonce')%20OR%22,%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*software%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cpolicies%5C%5C%5C%5Cexplorer%5C%5C%5C%5Crun')%20OR%22,%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*software%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%20nt%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cwinlogon%5C%5C%5C%5Cshell')%20OR%22,%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*software%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%20nt%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cwindows%5C%5C%5C%5Cload')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "146202",
+                "bb": "BB:BehaviorDefinition: Kazuar Registry Installation",
+                "uuid": "988c216e-df52-46e6-9210-20d5150aa599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.576580",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

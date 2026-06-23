@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "132702",
+  "rule_id": "132702",
+  "uuid": "8b271f23-a229-4c92-b383-240566e0b63d",
+  "rule_name": "Mailbox Item Deleted by Another User",
+  "object_type": "rule",
+  "group": "Email",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-01-08T19:03:30.885Z",
+  "modified": "2024-07-21T10:01:52.499Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Message Deleted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19243"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Target Username&quot; != &quot;Sender&quot; and &quot;Target Username&quot; is not NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Username%22%20%21%3D%20%22Sender%22%20and%20%22Target%20Username%22%20is%20not%20NULL|%5B%22%5C%22Target%20Username%5C%22%20%21%3D%20%5C%22Sender%5C%22%20and%20%5C%22Target%20Username%5C%22%20is%20not%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "72"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+      "name": "BB:DeviceDefinition: Mail"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.613451",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

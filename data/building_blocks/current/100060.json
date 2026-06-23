@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100060",
+  "rule_id": "100060",
+  "uuid": "SYSTEM-1351",
+  "rule_name": "BB:CategoryDefinition: Authentication to Expired Account",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-01-02T20:09:14.351Z",
+  "modified": "2023-10-30T02:20:03.851Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            ""
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5754791,    5754797,    5000015,    5000018,    18000415,    4253322,    26500003,    5767183,    4253324,    5762317,    16001143,    5001653,    5001654"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.627717",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "161102",
+  "rule_id": "161102",
+  "uuid": "ea948081-5149-4d2f-b413-7c4be92aac2f",
+  "rule_name": "Suspicious Execution of Outlook from Temporary Directory",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T17:00:46.235Z",
+  "modified": "2024-07-21T12:38:29.053Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process File File Path&quot;) LIKE '%\\temporary internet files\\content.outlook%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Ctemporary%20internet%20files%5Ccontent.outlook%25'|%5B%22LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Ctemporary%20internet%20files%5C%5Ccontent.outlook%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "Phishing",
+        "STEC": "T1566.001",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1566",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1566.001",
+            "values": [
+              {
+                "id": "161102",
+                "bb": "Suspicious Execution of Outlook from Temporary Directory",
+                "uuid": "ea948081-5149-4d2f-b413-7c4be92aac2f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.446059",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

@@ -1,0 +1,169 @@
+{
+  "rule_doc_id": "154452",
+  "rule_id": "154452",
+  "uuid": "1fdab5bc-3dde-44b5-a7e0-c3464681c8aa",
+  "rule_name": "Excessive Number of nslookup from Powershell",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T17:56:15.645Z",
+  "modified": "2024-07-21T12:38:25.370Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Process Name (custom) is any of nslookup.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanynslookup.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of [powershell.exe or pwsh.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanypowershell.exe�pwsh.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "5",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% -q=txt %' OR  LOWER(&quot;Command&quot;) LIKE '% -querytype=txt %')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25%20-q%3Dtxt%20%25'%20OR%20%20LOWER(%22Command%22)%20LIKE%20'%25%20-querytype%3Dtxt%20%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20-q%3Dtxt%20%25'%20OR%20%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20-querytype%3Dtxt%20%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>100</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Process Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "100"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Process Name"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.225844",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

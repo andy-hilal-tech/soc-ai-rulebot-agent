@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "150902",
+  "rule_id": "150902",
+  "uuid": "d513d9b8-5ce4-4cdc-b252-75112311a622",
+  "rule_name": "Potential MSExchange Mailbox Export",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-19T20:13:09.848Z",
+  "modified": "2024-07-21T12:38:20.505Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Exchange Mailbox Export via PowerShell, BB:BehaviorDefinition: Exchange PowerShell Snap-Ins Usage</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "887aa260-250e-43bc-ae33-2aecc02ee60e, ba8dde02-1e7a-4c1d-922e-cdc54eb244da"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "887aa260-250e-43bc-ae33-2aecc02ee60e",
+      "name": "BB:BehaviorDefinition: Exchange Mailbox Export via PowerShell"
+    },
+    {
+      "uuid": "ba8dde02-1e7a-4c1d-922e-cdc54eb244da",
+      "name": "BB:BehaviorDefinition: Exchange PowerShell Snap-Ins Usage"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "T1114",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1114",
+        "MAP_S": [
+          {
+            "name": "Collection - T1114",
+            "values": [
+              {
+                "id": "150902",
+                "bb": "Potential MSExchange Mailbox Export",
+                "uuid": "d513d9b8-5ce4-4cdc-b252-75112311a622",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Email Collection",
+        "STEC": "T1114.002",
+        "TAC": "Collection",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1114",
+        "MAP_S": [
+          {
+            "name": "Collection - T1114.002",
+            "values": [
+              {
+                "id": "144652",
+                "bb": "BB:BehaviorDefinition: Exchange Mailbox Export via PowerShell",
+                "uuid": "887aa260-250e-43bc-ae33-2aecc02ee60e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "147402",
+                "bb": "BB:BehaviorDefinition: Exchange PowerShell Snap-Ins Usage",
+                "uuid": "ba8dde02-1e7a-4c1d-922e-cdc54eb244da",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.119361",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

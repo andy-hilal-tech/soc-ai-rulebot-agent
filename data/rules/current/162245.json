@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162245",
+  "rule_id": "162245",
+  "uuid": "69997130-bb2b-4e17-9fe4-ee3fba18476f",
+  "rule_name": "CodeIntegrity - Revoked Kernel Driver Loaded",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:27:18.407Z",
+  "modified": "2024-08-04T08:27:18.407Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\" IN('3021', '3022')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%20IN%28%273021%27%2C%20%273022%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%20IN%28%273021%27%2C%20%273022%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: CodeIntegrity - Revoked Kernel Driver Loaded SIGMA Description: Detects the load of a revoked kernel driver  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "CodeIntegrity - Revoked Kernel Driver Loaded"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.586329",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

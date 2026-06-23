@@ -1,0 +1,130 @@
+{
+  "rule_doc_id": "157302",
+  "rule_id": "157302",
+  "uuid": "58f5d85e-348d-4b30-8d1b-5a53e01c6c83",
+  "rule_name": "COM Hijacking With Suspicious Locations",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-05T17:00:39.914Z",
+  "modified": "2024-07-21T12:38:26.679Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) LIKE '%\\clsid\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cclsid%5C%25'|%5B%22LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cclsid%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) LIKE '%\\inprocserver32\\%' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\localserver32\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cinprocserver32%5C%25'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Clocalserver32%5C%25'|%5B%22LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cinprocserver32%5C%5C%25'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Clocalserver32%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Registry Value Data&quot;) LIKE '%\\users\\public\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\desktop\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\appdata\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\downloads\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\windows\\temp\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\start menu\\programs\\startup\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%\\system32\\spool\\drivers\\color\\%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%%temp%%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%%tmp%%' or LOWER(&quot;Registry Value Data&quot;) LIKE '%%appdata%%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cusers%5Cpublic%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cdesktop%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cappdata%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cdownloads%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cwindows%5Ctemp%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Cstart%20menu%5Cprograms%5Cstartup%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Csystem32%5Cspool%5Cdrivers%5Ccolor%5C%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%25temp%25%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%25tmp%25%25'%20or%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%25appdata%25%25'|%5B%22LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cusers%5C%5Cpublic%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cdesktop%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cdownloads%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Ctemp%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Cstart%20menu%5C%5Cprograms%5C%5Cstartup%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Csystem32%5C%5Cspool%5C%5Cdrivers%5C%5Ccolor%5C%5C%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%25temp%25%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%25tmp%25%25'%20or%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%25appdata%25%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.312078",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

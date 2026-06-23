@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "165510",
+  "rule_id": "165510",
+  "uuid": "37e8275e-f794-4807-b8c1-45279bce708c",
+  "rule_name": "MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts",
+  "object_type": "rule",
+  "group": "EDR & EPP, EPP - ESET",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-28T13:27:06.753Z",
+  "modified": "2026-04-28T13:27:06.752Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "415"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>QID Number is 105,750,203</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidNumberEQ105750203"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>3</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Threat Name_EST (custom)</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>60</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "3"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Threat Name_EST"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "5",
+              "value": "60"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "91"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 06 - Same Threat Detected on Multiple Hosts"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.468136",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

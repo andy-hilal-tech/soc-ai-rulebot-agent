@@ -1,0 +1,175 @@
+{
+  "rule_doc_id": "100135",
+  "rule_id": "100135",
+  "uuid": "SYSTEM-1043",
+  "rule_name": "BB:Threats: Scanning: Empty Responsive Flows Low",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T15:03:42.435Z",
+  "modified": "2023-10-30T02:02:35.712Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>TCP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "TCP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "1",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>500</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "packets"
+            },
+            {
+              "id": "3",
+              "value": "1"
+            },
+            {
+              "id": "4",
+              "value": "500"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketRatio",
+            "uid": "3",
+            "id": "211"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>source</a> byte/packet ratio is <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>65</a> bytes/packet"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "-1"
+            },
+            {
+              "id": "3",
+              "value": "65"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketRatio",
+            "uid": "4",
+            "id": "211"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>destination</a> byte/packet ratio is <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>65</a> bytes/packet"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "dst"
+            },
+            {
+              "id": "2",
+              "value": "-1"
+            },
+            {
+              "id": "3",
+              "value": "65"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "2",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "bytes"
+            },
+            {
+              "id": "3",
+              "value": "1"
+            },
+            {
+              "id": "4",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "5",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>destination</a> <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>bytes</a> is <a href='javascript:editParameter(\"5\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"5\", \"4\")' class='dynamic'>1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "dst"
+            },
+            {
+              "id": "2",
+              "value": "bytes"
+            },
+            {
+              "id": "3",
+              "value": "1"
+            },
+            {
+              "id": "4",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.680003",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

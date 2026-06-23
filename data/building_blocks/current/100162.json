@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "100162",
+  "rule_id": "100162",
+  "uuid": "SYSTEM-1137",
+  "rule_name": "BB:Threats: Suspicious IP Protocol Usage: Unidirectional ICMP Replys",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-04-15T19:14:59.519Z",
+  "modified": "2023-10-30T02:02:40.649Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ICMP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "IcmpType",
+            "uid": "1",
+            "id": "212"
+          },
+          "text": [
+            "when the ICMP type is any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Echo Reply, Destination Unreachable, Timestamp Reply, Information Reply, Address Mask Reply, Mobile Registration Reply, Domain Name Reply</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getIcmpTypes",
+              "value": "0, 3, 14, 16, 18, 36, 38"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Unidirectional Flow</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1548"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1548",
+      "name": "BB:CategoryDefinition: Unidirectional Flow"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.736773",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

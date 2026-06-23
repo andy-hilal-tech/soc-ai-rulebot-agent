@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "145152",
+  "rule_id": "145152",
+  "uuid": "f7c82218-0f22-431a-a799-3d5e34050c2e",
+  "rule_name": "BB:BehaviorDefinition: NTDS Exfiltration Command",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-21T19:24:21.714Z",
+  "modified": "2024-07-21T12:38:16.844Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;)  LIKE '%7za.exe%' AND LOWER(&quot;Command&quot;) LIKE '%\\\\c$\\\\temp\\\\log.zip%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20%20LIKE%20'%257za.exe%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25%5C%5Cc%24%5C%5Ctemp%5C%5Clog.zip%25'|%5B%22LOWER(%5C%22Command%5C%22)%20%20LIKE%20'%257za.exe%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5C%5C%5Cc%24%5C%5C%5C%5Ctemp%5C%5C%5C%5Clog.zip%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.003",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.003",
+            "values": [
+              {
+                "id": "145152",
+                "bb": "BB:BehaviorDefinition: NTDS Exfiltration Command",
+                "uuid": "f7c82218-0f22-431a-a799-3d5e34050c2e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.540865",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "153402",
+  "rule_id": "153402",
+  "uuid": "a1cc8596-158e-4775-a21f-9b795d2bb4ee",
+  "rule_name": "Powershell Keylogging Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-09T17:49:26.539Z",
+  "modified": "2024-07-21T12:38:45.237Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%get-keystrokes%' OR LOWER(&quot;Command&quot;) LIKE 'get-procaddress user32.dll getssynckeystate' OR  LOWER(&quot;Command&quot;) LIKE 'get-procaddress user32.dll getforegroundwindow'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25get-keystrokes%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'get-procaddress%20user32.dll%20getssynckeystate'%20OR%20%20LOWER(%22Command%22)%20LIKE%20'get-procaddress%20user32.dll%20getforegroundwindow'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-keystrokes%25'%22,%22OR%22,%22LOWER(%5C%22Command%5C%22)%20LIKE%20'get-procaddress%20user32.dll%20getssynckeystate'%22,%22OR%20%22,%22LOWER(%5C%22Command%5C%22)%20LIKE%20'get-procaddress%20user32.dll%20getforegroundwindow'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "Input Capture",
+        "STEC": "T1056.001",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1056",
+        "MAP_S": [
+          {
+            "name": "Collection - T1056.001",
+            "values": [
+              {
+                "id": "153402",
+                "bb": "Powershell Keylogging Activity",
+                "uuid": "a1cc8596-158e-4775-a21f-9b795d2bb4ee",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "Input Capture",
+        "STEC": "T1056.001",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1056",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1056.001",
+            "values": [
+              {
+                "id": "153402",
+                "bb": "Powershell Keylogging Activity",
+                "uuid": "a1cc8596-158e-4775-a21f-9b795d2bb4ee",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.198862",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

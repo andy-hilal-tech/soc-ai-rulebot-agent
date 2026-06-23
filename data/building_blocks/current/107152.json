@@ -1,0 +1,62 @@
+{
+  "rule_doc_id": "107152",
+  "rule_id": "107152",
+  "uuid": "e6240535-3b5b-43b7-b54d-72d783ee2561",
+  "rule_name": "BB:UBA : Kerberos Authentication Failures",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-06-13T02:29:45.560Z",
+  "modified": "2024-02-19T16:43:12.883Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceGroupID_Test",
+            "uid": "0",
+            "id": "93",
+            "negate": "true"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>UBA : Trusted Log Source Group</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getSensorDevicesTreeRoot",
+              "value": "100070"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5000581) Failure Audit: A Kerberos authentication ticket (TGT) was rejected, (5000584) Failure Audit: Kerberos pre-authentication failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000581,            5000584"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.069280",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

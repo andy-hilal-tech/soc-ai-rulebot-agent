@@ -1,0 +1,164 @@
+{
+  "rule_doc_id": "108702",
+  "rule_id": "108702",
+  "uuid": "989cb025-0928-4a85-9ab9-2e340035a9a1",
+  "rule_name": "BB:UBA : Compromised Account - Initial Access",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-10-23T22:02:50.538Z",
+  "modified": "2024-02-19T16:44:53.106Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : Browsed to Malicious Website, UBA : Browsed to Phishing Website, UBA : Browsed to Scam/Questionable/Illegal Website, UBA : User Accessing Risky IP, Botnet, UBA : User Accessing Risky IP, Malware</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "22a95fda-b76a-488d-adc6-10cf2ac60821, c9d01cfb-9b0d-4f38-a835-aff3847c3d49, eb59a2ad-864c-4978-8635-491123aca19a, c2a687d1-fc37-4153-b7fc-4bc152d271e0, a0865f81-85a2-46b7-8fcb-5243c7d8ded4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+      "name": "UBA : Browsed to Malicious Website"
+    },
+    {
+      "uuid": "c9d01cfb-9b0d-4f38-a835-aff3847c3d49",
+      "name": "UBA : Browsed to Phishing Website"
+    },
+    {
+      "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+      "name": "UBA : Browsed to Scam/Questionable/Illegal Website"
+    },
+    {
+      "uuid": "c2a687d1-fc37-4153-b7fc-4bc152d271e0",
+      "name": "UBA : User Accessing Risky IP Botnet"
+    },
+    {
+      "uuid": "a0865f81-85a2-46b7-8fcb-5243c7d8ded4",
+      "name": "UBA : User Accessing Risky IP Malware"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              },
+              {
+                "id": "118652",
+                "bb": "UBA : Browsed to Phishing Website",
+                "uuid": "e34d39ad-e64f-4180-9c08-bf89719ab69e",
+                "T": "EVENT"
+              },
+              {
+                "id": "105002",
+                "bb": "UBA : Browsed to Scam/Questionable/Illegal Website",
+                "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124404",
+                "bb": "UBA : User Accessing Risky IP Botnet",
+                "uuid": "e3974ff9-bc7c-44ac-bc9c-4dfd0d07260a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124417",
+                "bb": "UBA : User Accessing Risky IP Malware",
+                "uuid": "73d9fdb5-2d73-4f98-91da-e71083bb4058",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              },
+              {
+                "id": "118652",
+                "bb": "UBA : Browsed to Phishing Website",
+                "uuid": "e34d39ad-e64f-4180-9c08-bf89719ab69e",
+                "T": "EVENT"
+              },
+              {
+                "id": "105002",
+                "bb": "UBA : Browsed to Scam/Questionable/Illegal Website",
+                "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124404",
+                "bb": "UBA : User Accessing Risky IP Botnet",
+                "uuid": "e3974ff9-bc7c-44ac-bc9c-4dfd0d07260a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124417",
+                "bb": "UBA : User Accessing Risky IP Malware",
+                "uuid": "73d9fdb5-2d73-4f98-91da-e71083bb4058",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.095305",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

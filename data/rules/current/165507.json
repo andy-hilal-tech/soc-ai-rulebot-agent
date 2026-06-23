@@ -1,0 +1,167 @@
+{
+  "rule_doc_id": "165507",
+  "rule_id": "165507",
+  "uuid": "6ac70cb7-b05e-4280-9edc-3eefc2d1347d",
+  "rule_name": "MSSP - AV - ESET - M - 04 - Multipe Login Failures Observed for Same user",
+  "object_type": "rule",
+  "group": "EDR & EPP, EPP - ESET",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-27T12:59:24.069Z",
+  "modified": "2026-04-27T12:59:24.067Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "415"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Action_EST (custom) is any of Login attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Action_ESTEQanyLogin attempt"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Result_EST (custom) is any of Access denied</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Result_ESTEQanyAccess denied"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Username is N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 04 - Multiple Login Failures Observed for Same user"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 04 - Multiple Login Failures Observed for Same user"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.450240",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

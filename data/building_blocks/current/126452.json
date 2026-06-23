@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "126452",
+  "rule_id": "126452",
+  "uuid": "7db081f7-b3c4-452d-ba76-e7ab18ea80d5",
+  "rule_name": "BB:CategoryDefinition: Resource Creation Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-11-15T13:25:05.467Z",
+  "modified": "2024-07-21T09:33:21.249Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Network Peering Success, Authentication.Access Key Creation Success, Authentication.Role Creation Success, Authentication.Role Assignment Success, Audit.Machine Creation Success, System.Task Creation Success, System.Cron Successful, Audit.Configure Activity Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19126, 3148, 3127, 3133, 19216, 8106, 8042, 19030"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.252418",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

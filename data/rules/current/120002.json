@@ -1,0 +1,131 @@
+{
+  "rule_doc_id": "120002",
+  "rule_id": "120002",
+  "uuid": "3f6c249a-caed-445c-bf49-695ab0e5b2f9",
+  "rule_name": "Same Threat Detected on Same Host (by Source Address)",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-06-21T13:46:58.045Z",
+  "modified": "2024-06-27T13:19:17.619Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Endpoint Protection Devices, BB:DeviceDefinition: IDS / IPS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5, SYSTEM-1321"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Threat Name (custom), Source Address</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Threat Name, sourceaddress"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Same Threat Detected on Same Host (by Machine Identifier)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "b8305fe8-4665-4ed5-863b-af91aa13e004"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "67"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+      "name": "BB:DeviceDefinition: Endpoint Protection Devices"
+    },
+    {
+      "uuid": "SYSTEM-1321",
+      "name": "BB:DeviceDefinition: IDS / IPS"
+    },
+    {
+      "uuid": "b8305fe8-4665-4ed5-863b-af91aa13e004",
+      "name": "Same Threat Detected on Same Host (by Machine Identifier)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.058723",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

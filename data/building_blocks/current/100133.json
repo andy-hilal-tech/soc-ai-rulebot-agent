@@ -1,0 +1,97 @@
+{
+  "rule_doc_id": "100133",
+  "rule_id": "100133",
+  "uuid": "SYSTEM-1479",
+  "rule_name": "BB:CategoryDefinition: Recon Flows",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-05-06T18:17:16.550Z",
+  "modified": "2023-10-30T02:02:40.227Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Scanning: Empty Responsive Flows High, BB:Threats: Scanning: Empty Responsive Flows Low, BB:Threats: Scanning: Empty Responsive Flows Medium, BB:Threats: Scanning: ICMP Scan High, BB:Threats: Scanning: ICMP Scan Low, BB:Threats: Scanning: ICMP Scan Medium, BB:Threats: Scanning: Potential Scan, BB:Threats: Scanning: Scan High, BB:Threats: Scanning: Scan Low, BB:Threats: Scanning: Scan Medium, BB:Threats: Port Scans: Host Scans, BB:Threats: Port Scans: UDP Port Scan</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1041, SYSTEM-1043, SYSTEM-1044, SYSTEM-1036, SYSTEM-1037, SYSTEM-1038, SYSTEM-1045, SYSTEM-1042, SYSTEM-1039, SYSTEM-1040, SYSTEM-1046, SYSTEM-1070"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1041",
+      "name": "BB:Threats: Scanning: Empty Responsive Flows High"
+    },
+    {
+      "uuid": "SYSTEM-1043",
+      "name": "BB:Threats: Scanning: Empty Responsive Flows Low"
+    },
+    {
+      "uuid": "SYSTEM-1044",
+      "name": "BB:Threats: Scanning: Empty Responsive Flows Medium"
+    },
+    {
+      "uuid": "SYSTEM-1036",
+      "name": "BB:Threats: Scanning: ICMP Scan High"
+    },
+    {
+      "uuid": "SYSTEM-1037",
+      "name": "BB:Threats: Scanning: ICMP Scan Low"
+    },
+    {
+      "uuid": "SYSTEM-1038",
+      "name": "BB:Threats: Scanning: ICMP Scan Medium"
+    },
+    {
+      "uuid": "SYSTEM-1045",
+      "name": "BB:Threats: Scanning: Potential Scan"
+    },
+    {
+      "uuid": "SYSTEM-1042",
+      "name": "BB:Threats: Scanning: Scan High"
+    },
+    {
+      "uuid": "SYSTEM-1039",
+      "name": "BB:Threats: Scanning: Scan Low"
+    },
+    {
+      "uuid": "SYSTEM-1040",
+      "name": "BB:Threats: Scanning: Scan Medium"
+    },
+    {
+      "uuid": "SYSTEM-1046",
+      "name": "BB:Threats: Port Scans: Host Scans"
+    },
+    {
+      "uuid": "SYSTEM-1070",
+      "name": "BB:Threats: Port Scans: UDP Port Scan"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.680003",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

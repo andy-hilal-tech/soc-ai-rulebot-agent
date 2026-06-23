@@ -1,0 +1,129 @@
+{
+  "rule_doc_id": "150052",
+  "rule_id": "150052",
+  "uuid": "fe898fd1-2944-4ed6-b082-2386d4d8a1f6",
+  "rule_name": "Potential C2 Communication over a Non-Application Layer Protocol",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-21T09:36:58.875Z",
+  "modified": "2024-07-21T12:38:33.527Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Powercat Execution, BB:BehaviorDefinition: Netcat Execution, BB:BehaviorDefinition: C2 Session over ICMP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "42d41bca-5d67-4329-973e-034a82529348, 92686b12-8481-483d-a9ca-b4648cb28ae9, bee2ef4a-662c-4099-a64f-9800ae2f884e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "42d41bca-5d67-4329-973e-034a82529348",
+      "name": "BB:BehaviorDefinition: Powercat Execution"
+    },
+    {
+      "uuid": "92686b12-8481-483d-a9ca-b4648cb28ae9",
+      "name": "BB:BehaviorDefinition: Netcat Execution"
+    },
+    {
+      "uuid": "bee2ef4a-662c-4099-a64f-9800ae2f884e",
+      "name": "BB:BehaviorDefinition: C2 Session over ICMP"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Non-Application Layer Protocol",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1095",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Non-Application Layer Protocol",
+            "values": [
+              {
+                "id": "150052",
+                "bb": "Potential C2 Communication over a Non-Application Layer Protocol",
+                "uuid": "fe898fd1-2944-4ed6-b082-2386d4d8a1f6",
+                "T": "EVENT"
+              },
+              {
+                "id": "149452",
+                "bb": "BB:BehaviorDefinition: Powercat Execution",
+                "uuid": "42d41bca-5d67-4329-973e-034a82529348",
+                "T": "EVENT"
+              },
+              {
+                "id": "150102",
+                "bb": "BB:BehaviorDefinition: C2 Session over ICMP",
+                "uuid": "bee2ef4a-662c-4099-a64f-9800ae2f884e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "145502",
+                "bb": "BB:BehaviorDefinition: Netcat Execution",
+                "uuid": "92686b12-8481-483d-a9ca-b4648cb28ae9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.103543",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

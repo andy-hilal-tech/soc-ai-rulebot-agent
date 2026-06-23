@@ -1,0 +1,136 @@
+{
+  "rule_doc_id": "146902",
+  "rule_id": "146902",
+  "uuid": "7c2e8ec3-cebf-4e24-a100-4b5cbbeee313",
+  "rule_name": "Potential Crutch Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-17T14:39:51.648Z",
+  "modified": "2024-07-21T12:38:47.942Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Crutch File Staging, BB:BehaviorDefinition: Crutch Filenames</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "669a91a0-dc59-435a-a525-89d1f9c9c9b0, ebb93656-ec22-4190-a733-7d7252e7fb16"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "669a91a0-dc59-435a-a525-89d1f9c9c9b0",
+      "name": "BB:BehaviorDefinition: Crutch File Staging"
+    },
+    {
+      "uuid": "ebb93656-ec22-4190-a733-7d7252e7fb16",
+      "name": "BB:BehaviorDefinition: Crutch Filenames"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "Data Staged",
+        "STEC": "T1074.001",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1074",
+        "MAP_S": [
+          {
+            "name": "Collection - T1074.001",
+            "values": [
+              {
+                "id": "146952",
+                "bb": "BB:BehaviorDefinition: Crutch File Staging",
+                "uuid": "669a91a0-dc59-435a-a525-89d1f9c9c9b0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "147002",
+                "bb": "BB:BehaviorDefinition: Crutch Filenames",
+                "uuid": "ebb93656-ec22-4190-a733-7d7252e7fb16",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Exfiltration": [
+      {
+        "TEC": "Exfiltration Over C2 Channel",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1041",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - Exfiltration Over C2 Channel",
+            "values": [
+              {
+                "id": "146902",
+                "bb": "Potential Crutch Activity",
+                "uuid": "7c2e8ec3-cebf-4e24-a100-4b5cbbeee313",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.025563",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

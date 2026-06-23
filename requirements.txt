@@ -6,3 +6,4 @@ botbuilder-core==4.17.1
 botbuilder-integration-aiohttp==4.17.1
 azure-search-documents
 azure-cosmos
+pandas

@@ -1,0 +1,77 @@
+{
+  "rule_doc_id": "165502",
+  "rule_id": "165502",
+  "uuid": "2e7a29d6-ddc1-44e5-9360-c2fa468aff48",
+  "rule_name": "GDN - OS - ALL - C - 1 - Log Sources not sending logs",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-20T11:05:57.568Z",
+  "modified": "2026-04-20T12:08:53.199Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>SonicWall @ 192.168.160.254, WindowsAuthServer @ DATABASE-SERVER, WindowsAuthServer @ DATABASE-STBY, WindowsAuthServer @ GDNDC2, WindowsAuthServer @ GDNHV1</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "4563, 4312, 4315, 4314, 4313"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "8060",
+            "offenseMapping": "6",
+            "forceOffenseCreation": "true",
+            "qid": "67501876",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "10",
+            "description": "GDN - Log Sources not sending logs",
+            "name": "MSSP - OS - ALL - C - 1 - GDN - Log Sources not sending logs"
+          },
+          "offenseAnnotation": [
+            {
+              "formatString": [
+                "GDN - Log Sources not sending logs"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.450240",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "152902",
+  "rule_id": "152902",
+  "uuid": "4c8e2298-5a40-42db-bbdf-e6ce5e883a04",
+  "rule_name": "BB:BehaviorDefinition: Scheduled Task Write to System32 Tasks",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T18:24:19.631Z",
+  "modified": "2024-07-21T12:38:34.610Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, System.Successful File Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 8014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Directory (custom) is any of \\Windows\\System32\\Tasks</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryEQany\\Windows\\System32\\Tasks"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Process File File Path&quot;) LIKE'%\\appdata\\%' or LOWER(&quot;Process File File Path&quot;) LIKE'%c:\\perflogs%' or LOWER(&quot;Process File File Path&quot;) LIKE'%\\windows\\system32\\config\\systemprofile%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Process%20Path%22)%20LIKE'%25%5Cappdata%5C%25'%20or%20LOWER(%22Process%20Path%22)%20LIKE'%25c%3A%5Cperflogs%25'%20or%20LOWER(%22Process%20Path%22)%20LIKE'%25%5Cwindows%5Csystem32%5Cconfig%5Csystemprofile%25')|%5B%22(LOWER(%5C%22Process%20Path%5C%22)%20LIKE'%25%5C%5Cappdata%5C%5C%25'%20or%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE'%25c%3A%5C%5Cperflogs%25'%20or%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE'%25%5C%5Cwindows%5C%5Csystem32%5C%5Cconfig%5C%5Csystemprofile%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - Scheduled Task/Job",
+            "values": [
+              {
+                "id": "152902",
+                "bb": "BB:BehaviorDefinition: Scheduled Task Write to System32 Tasks",
+                "uuid": "4c8e2298-5a40-42db-bbdf-e6ce5e883a04",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.729249",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

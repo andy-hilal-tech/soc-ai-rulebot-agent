@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162444",
+  "rule_id": "162444",
+  "uuid": "94de3627-5169-4e1f-846b-403c707cf2ca",
+  "rule_name": "Password Change on Directory Service Restore Mode (DSRM) Account",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:08:20.823Z",
+  "modified": "2024-08-06T13:01:19.283Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4794</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4794|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4794%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Thomas Patzke SIGMA Title: Password Change on Directory Service Restore Mode (DSRM) Account SIGMA Description: Detects potential attempts made to set the Directory Services Restore Mode administrator password. The Directory Service Restore Mode (DSRM) account is a local administrator account on Domain Controllers. Attackers may change the password in order to obtain persistence.   False positives: - Initial installation of a domain controller.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Password Change on Directory Service Restore Mode (DSRM) Account"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.058161",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "136052",
+  "rule_id": "136052",
+  "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+  "rule_name": "Search for Password Files using Select-String (Windows)",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-10T20:45:58.169Z",
+  "modified": "2024-07-21T10:28:55.252Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?select-string.*?password.*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20'.*%3Fselect-string.*%3Fpassword.*'|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3Fselect-string.*%3Fpassword.*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "T1555",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555",
+            "values": [
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Unsecured Credentials",
+        "STEC": "T1552.001",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1552",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1552.001",
+            "values": [
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.710095",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

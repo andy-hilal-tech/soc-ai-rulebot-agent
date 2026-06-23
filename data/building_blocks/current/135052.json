@@ -1,0 +1,147 @@
+{
+  "rule_doc_id": "135052",
+  "rule_id": "135052",
+  "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+  "rule_name": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-16T13:39:14.031Z",
+  "modified": "2024-07-21T12:38:31.904Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Login Failure, Authentication.General Authentication Failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3116, 3047"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Error Code (custom) is any of [0xC0000072 or 0xC000006F or 0xC0000070 or 0xC0000413 or 0xC000018C or 0xC000015B]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Error CodeEQany0xC0000072�0xC000006F�0xC0000070�0xC0000413�0xC000018C�0xC000015B"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Target Account Security ID&quot; = 'S-1-0-0'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Account%20Security%20ID%22%20%3D%20'S-1-0-0'|%5B%22%5C%22Target%20Account%20Security%20ID%5C%22%20%3D%20'S-1-0-0'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.004",
+            "values": [
+              {
+                "id": "135052",
+                "bb": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons",
+                "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1110",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110",
+            "values": [
+              {
+                "id": "135052",
+                "bb": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons",
+                "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.372854",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

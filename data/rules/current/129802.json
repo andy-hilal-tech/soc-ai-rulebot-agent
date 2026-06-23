@@ -1,0 +1,115 @@
+{
+  "rule_doc_id": "129802",
+  "rule_id": "129802",
+  "uuid": "7e83a53f-a73a-4773-9cce-32510819ddd1",
+  "rule_name": "Exploit Attempt Followed By Cryptocurrency Mining Activity",
+  "object_type": "rule",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-09-06T15:09:51.100Z",
+  "modified": "2024-07-21T09:42:17.423Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DoubleSequenceFunction_Test",
+            "uid": "0",
+            "id": "94"
+          },
+          "text": [
+            "when a subset of at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Exploits Backdoors and Trojans</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source IP</a> followed by a subset of at least <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>Successful Communication to Cryptocurrency Mining Host, Cryptocurrency Mining File Hash, Cryptocurrency Mining Threat Name, In-Browser Cryptojacking - JavaScript Filename</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>in any</a> order <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>destination IP</a> from the previous sequence, within <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1204"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "SourceIP"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "method": "getEventRules",
+              "value": "6adeed8f-f743-410a-945a-13fbf07233a3, 29915876-f0e8-49d9-a816-c1a497b9de81, c172587a-0d59-446c-9bcf-02af6dc71d85, 0a163b4f-ca45-4bbb-aa2c-42703f08372c"
+            },
+            {
+              "id": "7",
+              "value": "Any"
+            },
+            {
+              "id": "8",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "9",
+              "value": "15"
+            },
+            {
+              "id": "10",
+              "value": "m"
+            },
+            {
+              "id": "11",
+              "value": "From"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1204",
+      "name": "BB:CategoryDefinition: Exploits Backdoors and Trojans"
+    },
+    {
+      "uuid": "6adeed8f-f743-410a-945a-13fbf07233a3",
+      "name": "Successful Communication to Cryptocurrency Mining Host"
+    },
+    {
+      "uuid": "29915876-f0e8-49d9-a816-c1a497b9de81",
+      "name": "Cryptocurrency Mining File Hash"
+    },
+    {
+      "uuid": "c172587a-0d59-446c-9bcf-02af6dc71d85",
+      "name": "Cryptocurrency Mining Threat Name"
+    },
+    {
+      "uuid": "0a163b4f-ca45-4bbb-aa2c-42703f08372c",
+      "name": "In-Browser Cryptojacking - JavaScript Filename"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.525416",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,121 @@
+{
+  "rule_doc_id": "110702",
+  "rule_id": "110702",
+  "uuid": "81c0565c-44ec-4ad4-852d-52eef628717a",
+  "rule_name": "BB:CategoryDefinition: Processes Allowed to Access lsass",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-08-26T01:51:26.170Z",
+  "modified": "2024-02-19T16:49:23.259Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001829) ProcessAccess</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001829"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;Target Process Name&quot; IMATCHES 'lsass\\.exe' and &quot;Granted Access&quot; IMATCHES '(0x1010)|(0x1410)|(0x143A)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Process%20Name%22%20IMATCHES%20'lsass%5C.exe'%20and%20%22Granted%20Access%22%20IMATCHES%20'(0x1010)%7C(0x1410)%7C(0x143A)'|%5B%22%5C%22Target%20Process%20Name%5C%22%20IMATCHES%20'lsass%5C%5C.exe'%20and%20%5C%22Granted%20Access%5C%22%20IMATCHES%20'(0x1010)%7C(0x1410)%7C(0x143A)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Process Path&quot; IMATCHES '(C\\:\\\\Windows\\\\System32\\\\((svchost)|(taskmgr)|(perfmon))\\.exe)|(C\\:\\\\Program\\\\sFiles\\\\Windows\\\\sDefender\\\\MsMpEng\\.exe)|(C\\:\\\\Windows\\\\system32\\\\wbem\\\\wmiprvse\\.exe)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Path%22%20IMATCHES%20'(C%5C%3A%5C%5CWindows%5C%5CSystem32%5C%5C((svchost)%7C(taskmgr)%7C(perfmon))%5C.exe)%7C(C%5C%3A%5C%5CProgram%5C%5CsFiles%5C%5CWindows%5C%5CsDefender%5C%5CMsMpEng%5C.exe)%7C(C%5C%3A%5C%5CWindows%5C%5Csystem32%5C%5Cwbem%5C%5Cwmiprvse%5C.exe)'|%5B%22%5C%22Process%20Path%5C%22%20IMATCHES%20'(C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5CSystem32%5C%5C%5C%5C((svchost)%7C(taskmgr)%7C(perfmon))%5C%5C.exe)%7C(C%5C%5C%3A%5C%5C%5C%5CProgram%5C%5C%5C%5CsFiles%5C%5C%5C%5CWindows%5C%5C%5C%5CsDefender%5C%5C%5C%5CMsMpEng%5C%5C.exe)%7C(C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5Cwbem%5C%5C%5C%5Cwmiprvse%5C%5C.exe)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Call Trace&quot; IMATCHES 'C\\:\\\\Windows\\\\SYSTEM32\\\\ntdll\\.dll\\+[\\w]{1,}\\|C\\:\\\\Windows\\\\system32\\\\KERNELBASE\\.dll\\+[\\w]{1,}\\|((C\\:\\\\program\\sfiles\\\\windows\\sdefender\\\\mprtp\\.dll\\+)|(C\\:\\\\Windows\\\\system32\\\\taskmgr\\.exe\\+)|(C\\:\\\\Windows\\\\System32\\\\wdc\\.dll\\+)|(C\\:\\\\ProgramData\\\\Microsoft\\\\Windows\\sDefender\\\\Definition\\sUpdates\\\\\\{\\w{8}\\-\\w{4}\\-\\w{4}\\-\\w{4}\\-\\w{12}\\}\\\\mpengine.dll\\+)|(C\\:\\\\Windows\\\\system32\\\\wbem\\\\cimwin32\\.dll\\+)).*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Call%20Trace%22%20IMATCHES%20'C%5C%3A%5C%5CWindows%5C%5CSYSTEM32%5C%5Cntdll%5C.dll%5C%2B%5B%5Cw%5D%7B1,%7D%5C%7CC%5C%3A%5C%5CWindows%5C%5Csystem32%5C%5CKERNELBASE%5C.dll%5C%2B%5B%5Cw%5D%7B1,%7D%5C%7C((C%5C%3A%5C%5Cprogram%5Csfiles%5C%5Cwindows%5Csdefender%5C%5Cmprtp%5C.dll%5C%2B)%7C(C%5C%3A%5C%5CWindows%5C%5Csystem32%5C%5Ctaskmgr%5C.exe%5C%2B)%7C(C%5C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwdc%5C.dll%5C%2B)%7C(C%5C%3A%5C%5CProgramData%5C%5CMicrosoft%5C%5CWindows%5CsDefender%5C%5CDefinition%5CsUpdates%5C%5C%5C%7B%5Cw%7B8%7D%5C-%5Cw%7B4%7D%5C-%5Cw%7B4%7D%5C-%5Cw%7B4%7D%5C-%5Cw%7B12%7D%5C%7D%5C%5Cmpengine.dll%5C%2B)%7C(C%5C%3A%5C%5CWindows%5C%5Csystem32%5C%5Cwbem%5C%5Ccimwin32%5C.dll%5C%2B)).*'|%5B%22%5C%22Call%20Trace%5C%22%20IMATCHES%20'C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5CSYSTEM32%5C%5C%5C%5Cntdll%5C%5C.dll%5C%5C%2B%5B%5C%5Cw%5D%7B1,%7D%5C%5C%7CC%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5CKERNELBASE%5C%5C.dll%5C%5C%2B%5B%5C%5Cw%5D%7B1,%7D%5C%5C%7C((C%5C%5C%3A%5C%5C%5C%5Cprogram%5C%5Csfiles%5C%5C%5C%5Cwindows%5C%5Csdefender%5C%5C%5C%5Cmprtp%5C%5C.dll%5C%5C%2B)%7C(C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5Ctaskmgr%5C%5C.exe%5C%5C%2B)%7C(C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5CSystem32%5C%5C%5C%5Cwdc%5C%5C.dll%5C%5C%2B)%7C(C%5C%5C%3A%5C%5C%5C%5CProgramData%5C%5C%5C%5CMicrosoft%5C%5C%5C%5CWindows%5C%5CsDefender%5C%5C%5C%5CDefinition%5C%5CsUpdates%5C%5C%5C%5C%5C%5C%7B%5C%5Cw%7B8%7D%5C%5C-%5C%5Cw%7B4%7D%5C%5C-%5C%5Cw%7B4%7D%5C%5C-%5C%5Cw%7B4%7D%5C%5C-%5C%5Cw%7B12%7D%5C%5C%7D%5C%5C%5C%5Cmpengine.dll%5C%5C%2B)%7C(C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5Cwbem%5C%5C%5C%5Ccimwin32%5C%5C.dll%5C%5C%2B)).*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.128775",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

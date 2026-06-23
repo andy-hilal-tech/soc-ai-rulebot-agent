@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100144",
+  "rule_id": "100144",
+  "uuid": "SYSTEM-1046",
+  "rule_name": "BB:Threats: Port Scans: Host Scans",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T15:13:22.095Z",
+  "modified": "2023-10-30T02:02:37.655Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowType",
+            "uid": "0",
+            "id": "209"
+          },
+          "text": [
+            "when the flow type is one of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Superflow C</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.690262",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

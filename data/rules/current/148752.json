@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "148752",
+  "rule_id": "148752",
+  "uuid": "7bc488f2-3b4c-430a-9856-0f41497301cb",
+  "rule_name": "Potential Epic Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-18T18:31:45.964Z",
+  "modified": "2024-07-21T12:38:54.864Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Epic Filenames, BB:BehaviorDefinition: Epic Log Filenames, BB:BehaviorDefinition: Epic Search Terms</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "20f04063-ef17-4c7d-a022-23ce65ec07e7, f85180aa-42ae-4181-acb6-3501ffa8a893, 08cb8b13-ec32-4528-ba13-28540e1713db"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+      "name": "BB:BehaviorDefinition: Epic Filenames"
+    },
+    {
+      "uuid": "f85180aa-42ae-4181-acb6-3501ffa8a893",
+      "name": "BB:BehaviorDefinition: Epic Log Filenames"
+    },
+    {
+      "uuid": "08cb8b13-ec32-4528-ba13-28540e1713db",
+      "name": "BB:BehaviorDefinition: Epic Search Terms"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "Input Capture",
+        "STEC": "T1056.001",
+        "TAC": "Collection",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1056",
+        "MAP_S": [
+          {
+            "name": "Collection - T1056.001",
+            "values": [
+              {
+                "id": "148852",
+                "bb": "BB:BehaviorDefinition: Epic Log Filenames",
+                "uuid": "f85180aa-42ae-4181-acb6-3501ffa8a893",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "148802",
+                "bb": "BB:BehaviorDefinition: Epic Filenames",
+                "uuid": "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "T1083",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1083",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1083",
+            "values": [
+              {
+                "id": "148902",
+                "bb": "BB:BehaviorDefinition: Epic Search Terms",
+                "uuid": "08cb8b13-ec32-4528-ba13-28540e1713db",
+                "T": "EVENT"
+              },
+              {
+                "id": "148752",
+                "bb": "Potential Epic Activity",
+                "uuid": "7bc488f2-3b4c-430a-9856-0f41497301cb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.071655",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

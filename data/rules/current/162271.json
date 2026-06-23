@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162271",
+  "rule_id": "162271",
+  "uuid": "3867faef-6c64-4c14-91c2-24111bc4c991",
+  "rule_name": "Mailbox Export to Exchange Webserver",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T09:05:16.884Z",
+  "modified": "2025-05-06T11:51:45.736Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (((LOWER(UTF8(payload)) LIKE '%new-mailboxexportrequest%' OR LOWER(UTF8(payload)) LIKE '% -mailbox %') AND (LOWER(UTF8(payload)) LIKE '%-filepath \"\\%' OR LOWER(UTF8(payload)) LIKE '%.aspx%')) OR (LOWER(UTF8(payload)) LIKE '%new-managementroleassignment%' OR LOWER(UTF8(payload)) LIKE '% -role \"mailbox import export\"%' OR LOWER(UTF8(payload)) LIKE '% -user %'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-mailboxexportrequest%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-mailbox%20%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25-filepath%20%22%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.aspx%25%27%29%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-managementroleassignment%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-role%20%22mailbox%20import%20export%22%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-user%20%25%27%29%29|%5B%22devicetype%3D12%20AND%20%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-mailboxexportrequest%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-mailbox%20%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25-filepath%20%22%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.aspx%25%27%29%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-managementroleassignment%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-role%20%22mailbox%20import%20export%22%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-user%20%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems), Rich Warren, Christian Burkard (Nextron Systems) SIGMA Title: Mailbox Export to Exchange Webserver SIGMA Description: Detects a successful export of an Exchange mailbox to untypical directory or with aspx name suffix which can be used to place a webshell or the needed role assignment for it  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Mailbox Export to Exchange Webserver"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.641923",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

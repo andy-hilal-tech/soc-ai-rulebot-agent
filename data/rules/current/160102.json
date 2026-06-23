@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "160102",
+  "rule_id": "160102",
+  "uuid": "ca144acd-de1f-4263-b860-8c4d35b381a2",
+  "rule_name": "Potential Web Shell Dropped",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-20T10:18:28.315Z",
+  "modified": "2024-07-21T12:38:38.396Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Target File Directory&quot;) MATCHES '.*(frontend\\\\httpproxy\\\\|\\\\inetpub\\\\wwwroot\\\\aspnet_client\\\\).*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Target%20File%20Directory%22)%20MATCHES%20'.*(frontend%5C%5Chttpproxy%5C%5C%7C%5C%5Cinetpub%5C%5Cwwwroot%5C%5Caspnet_client%5C%5C).*'|%5B%22LOWER(%5C%22Target%20File%20Directory%5C%22)%20MATCHES%20'.*(frontend%5C%5C%5C%5Chttpproxy%5C%5C%5C%5C%7C%5C%5C%5C%5Cinetpub%5C%5C%5C%5Cwwwroot%5C%5C%5C%5Caspnet_client%5C%5C%5C%5C).*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;File Extension&quot;) MATCHES '(aspx|asp|ashx|ps1|bat|exe|dll|vbs)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22File%20Extension%22)%20MATCHES%20'(aspx%7Casp%7Cashx%7Cps1%7Cbat%7Cexe%7Cdll%7Cvbs)'|%5B%22LOWER(%5C%22File%20Extension%5C%22)%20MATCHES%20'(aspx%7Casp%7Cashx%7Cps1%7Cbat%7Cexe%7Cdll%7Cvbs)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Server Software Component",
+        "STEC": "T1505.003",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1505",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1505.003",
+            "values": [
+              {
+                "id": "160102",
+                "bb": "Potential Web Shell Dropped",
+                "uuid": "ca144acd-de1f-4263-b860-8c4d35b381a2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.416051",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,110 @@
+{
+  "rule_doc_id": "115557",
+  "rule_id": "115557",
+  "uuid": "f3ca31e2-54df-430b-93f3-7cd2de103176",
+  "rule_name": "Process Baselining: Process Name to Parent Process",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Add to a Reference Set, Add to a Reference Map Of Sets",
+  "created": "2024-02-19T17:08:06.225Z",
+  "modified": "2024-02-19T17:08:06.225Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) NOT IN ('smss.exe', 'wininit.exe', 'taskhost.exe', 'lsass.exe', 'winlogon.exe', 'explorer.exe', 'lsm.exe', 'svchost.exe', 'services.exe', 'csrss.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20NOT%20IN%20('smss.exe'%2C%20'wininit.exe'%2C%20'taskhost.exe'%2C%20'lsass.exe'%2C%20'winlogon.exe'%2C%20'explorer.exe'%2C%20'lsm.exe'%2C%20'svchost.exe'%2C%20'services.exe'%2C%20'csrss.exe')|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20NOT%20IN%20('smss.exe'%2C%20'wininit.exe'%2C%20'taskhost.exe'%2C%20'lsass.exe'%2C%20'winlogon.exe'%2C%20'explorer.exe'%2C%20'lsm.exe'%2C%20'svchost.exe'%2C%20'services.exe'%2C%20'csrss.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceMapOfSets": "true",
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Process Name",
+            "id": "77",
+            "type": "ALNIC",
+            "name": "ProcesstoParentProcessPathRefMapKeys"
+          }
+        }
+      ],
+      "referenceDataResponse": [
+        {
+          "_$": {
+            "key1": "Process Name",
+            "Filter": "Parent Process Path",
+            "domainResponse": "0",
+            "id": "72",
+            "name": "ProcessMaptoProcessParentPath"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.949110",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

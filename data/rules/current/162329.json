@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162329",
+  "rule_id": "162329",
+  "uuid": "e7206939-9cb3-425d-afe3-0482c732c75a",
+  "rule_name": "Audio Capture",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:34:07.496Z",
+  "modified": "2024-08-04T12:34:07.496Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=11 AND LOWER(UTF8(payload)) LIKE '%execve%' AND LOWER(Command) LIKE '%a0%arecord%' AND LOWER(Command) LIKE '%a1%-vv%' AND LOWER(Command) LIKE '%a2%-fdat%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D11%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25execve%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a0%25arecord%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a1%25-vv%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a2%25-fdat%25%27|%5B%22devicetype%3D11%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25execve%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a0%25arecord%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a1%25-vv%25%27%20AND%20LOWER%28Command%29%20LIKE%20%27%25a2%25-fdat%25%27%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Pawel Mazur SIGMA Title: Audio Capture SIGMA Description: Detects attempts to record audio with arecord utility  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Audio Capture"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.776849",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

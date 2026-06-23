@@ -1,0 +1,237 @@
+{
+  "rule_doc_id": "100126",
+  "rule_id": "100126",
+  "uuid": "SYSTEM-1263",
+  "rule_name": "BB:FalsePositive: All Default False Positive BBs",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-06-05T09:53:06.379Z",
+  "modified": "2023-10-30T02:20:02.282Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:FalsePositive: Database Server False Positive Categories, BB:FalsePositive: Database Server False Positive Events, BB:FalsePositive: Device and Specific Event, BB:FalsePositive: DHCP Server False Positive Categories, BB:FalsePositive: DHCP Server False Positive Events, BB:FalsePositive: DNS Server False Positive Categories, BB:FalsePositive: DNS Server False Positive Events, BB:FalsePositive: FTP Server False Positive Categories, BB:FalsePositive: FTP Server False Positive Events, BB:FalsePositive: Global False Positive Events, BB:FalsePositive: Local Source to Local Destination False Positives, BB:FalsePositive: Local Source to Remote Destination False Positives, BB:FalsePositive: LDAP Server False Positive Categories, BB:FalsePositive: LDAP Server False Positive Events, BB:FalsePositive: Mail Server False Positive Categories, BB:FalsePositive: Mail Server False Positive Events, BB:FalsePositive: Network Management Server Recon, BB:FalsePositive: Proxy Server False Positive Categories, BB:FalsePositive: Proxy Server False Positive Events, BB:FalsePositive: Remote Source to Local Destination False Positives, BB:FalsePositive: RPC Server False Positive Categories, BB:FalsePositive: RPC Server False Positive Events, BB:FalsePositive: SNMP Sender or Receiver False Positive Categories, BB:FalsePositive: SNMP Sender or Receiver False Positive Events, BB:FalsePositive: Source IP and Specific Event, BB:FalsePositive: SSH Server False Positive Categories, BB:FalsePositive: SSH Server False Positive Events, BB:FalsePositive: Web Server False Positive Categories, BB:FalsePositive: Web Server False Positive Events, BB:FalsePositive: Windows Server False Positive Categories Local, BB:FalsePositive: Windows Server False Positive Events, User-BB-FalsePositive: User Defined False Positives Tunings, BB:FalsePositive: Virus Definition Update Categories, BB:FalsePositive: Syslog Sender False Positive Categories, BB:FalsePositive: Syslog Sender False Positive Events, User:BB:FalsePositives: User Defined Server Type 1 False Positive Categories, User:BB:FalsePositives: User Defined Server Type 1 False Positive Events, User:BB:FalsePositives: User Defined Server Type 2 False Positive Categories, User:BB:FalsePositives: User Defined Server Type 2 False Positive Events, User:BB:FalsePositives: User Defined Server Type 3 False Positive Categories, User:BB:FalsePositives: User Defined Server Type 3 False Positive Events, BB:FalsePositive: Broadcast Address False Positive Categories, BB:FalsePositive: Firewall Deny False Postive Events, BB:FalsePositive: Large Volume Local FW Events, BB:FalsePositive: Windows AD Source Authentication Events, BB:FalsePositive: Reversed Flows, BB:HostDefinition: VA Scanner Source IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1394, SYSTEM-1393, SYSTEM-1348, SYSTEM-1370, SYSTEM-1392, SYSTEM-1354, SYSTEM-1347, SYSTEM-1390, SYSTEM-1389, SYSTEM-1205, SYSTEM-1223, SYSTEM-1242, SYSTEM-1388, SYSTEM-1387, SYSTEM-1373, SYSTEM-1386, SYSTEM-1381, SYSTEM-1385, SYSTEM-1350, SYSTEM-1243, SYSTEM-1384, SYSTEM-1383, SYSTEM-1368, SYSTEM-1382, SYSTEM-1349, SYSTEM-1380, SYSTEM-1379, SYSTEM-1378, SYSTEM-1327, SYSTEM-1367, SYSTEM-1203, SYSTEM-1264, SYSTEM-1409, SYSTEM-1415, SYSTEM-1417, SYSTEM-1419, SYSTEM-1418, SYSTEM-1421, SYSTEM-1420, SYSTEM-1423, SYSTEM-1422, SYSTEM-1429, SYSTEM-1311, SYSTEM-1334, SYSTEM-1492, SYSTEM-1576, SYSTEM-1151"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1394",
+      "name": "BB:FalsePositive: Database Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1393",
+      "name": "BB:FalsePositive: Database Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1348",
+      "name": "BB:FalsePositive: Device and Specific Event"
+    },
+    {
+      "uuid": "SYSTEM-1370",
+      "name": "BB:FalsePositive: DHCP Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1392",
+      "name": "BB:FalsePositive: DHCP Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1354",
+      "name": "BB:FalsePositive: DNS Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1347",
+      "name": "BB:FalsePositive: DNS Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1390",
+      "name": "BB:FalsePositive: FTP Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1389",
+      "name": "BB:FalsePositive: FTP Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1205",
+      "name": "BB:FalsePositive: Global False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1223",
+      "name": "BB:FalsePositive: Local Source to Local Destination False Positives"
+    },
+    {
+      "uuid": "SYSTEM-1242",
+      "name": "BB:FalsePositive: Local Source to Remote Destination False Positives"
+    },
+    {
+      "uuid": "SYSTEM-1388",
+      "name": "BB:FalsePositive: LDAP Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1387",
+      "name": "BB:FalsePositive: LDAP Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1373",
+      "name": "BB:FalsePositive: Mail Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1386",
+      "name": "BB:FalsePositive: Mail Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1381",
+      "name": "BB:FalsePositive: Network Management Server Recon"
+    },
+    {
+      "uuid": "SYSTEM-1385",
+      "name": "BB:FalsePositive: Proxy Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1350",
+      "name": "BB:FalsePositive: Proxy Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1243",
+      "name": "BB:FalsePositive: Remote Source to Local Destination False Positives"
+    },
+    {
+      "uuid": "SYSTEM-1384",
+      "name": "BB:FalsePositive: RPC Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1383",
+      "name": "BB:FalsePositive: RPC Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1368",
+      "name": "BB:FalsePositive: SNMP Sender or Receiver False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1382",
+      "name": "BB:FalsePositive: SNMP Sender or Receiver False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1349",
+      "name": "BB:FalsePositive: Source IP and Specific Event"
+    },
+    {
+      "uuid": "SYSTEM-1380",
+      "name": "BB:FalsePositive: SSH Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1379",
+      "name": "BB:FalsePositive: SSH Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1378",
+      "name": "BB:FalsePositive: Web Server False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1327",
+      "name": "BB:FalsePositive: Web Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1367",
+      "name": "BB:FalsePositive: Windows Server False Positive Categories Local"
+    },
+    {
+      "uuid": "SYSTEM-1203",
+      "name": "BB:FalsePositive: Windows Server False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1264",
+      "name": "User-BB-FalsePositive: User Defined False Positives Tunings"
+    },
+    {
+      "uuid": "SYSTEM-1409",
+      "name": "BB:FalsePositive: Virus Definition Update Categories"
+    },
+    {
+      "uuid": "SYSTEM-1415",
+      "name": "BB:FalsePositive: Syslog Sender False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1417",
+      "name": "BB:FalsePositive: Syslog Sender False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1419",
+      "name": "User:BB:FalsePositives: User Defined Server Type 1 False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1418",
+      "name": "User:BB:FalsePositives: User Defined Server Type 1 False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1421",
+      "name": "User:BB:FalsePositives: User Defined Server Type 2 False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1420",
+      "name": "User:BB:FalsePositives: User Defined Server Type 2 False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1423",
+      "name": "User:BB:FalsePositives: User Defined Server Type 3 False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1422",
+      "name": "User:BB:FalsePositives: User Defined Server Type 3 False Positive Events"
+    },
+    {
+      "uuid": "SYSTEM-1429",
+      "name": "BB:FalsePositive: Broadcast Address False Positive Categories"
+    },
+    {
+      "uuid": "SYSTEM-1311",
+      "name": "BB:FalsePositive: Firewall Deny False Postive Events"
+    },
+    {
+      "uuid": "SYSTEM-1334",
+      "name": "BB:FalsePositive: Large Volume Local FW Events"
+    },
+    {
+      "uuid": "SYSTEM-1492",
+      "name": "BB:FalsePositive: Windows AD Source Authentication Events"
+    },
+    {
+      "uuid": "SYSTEM-1576",
+      "name": "BB:FalsePositive: Reversed Flows"
+    },
+    {
+      "uuid": "SYSTEM-1151",
+      "name": "BB:HostDefinition: VA Scanner Source IP"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.657749",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

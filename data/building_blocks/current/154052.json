@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "154052",
+  "rule_id": "154052",
+  "uuid": "e02eb310-67bf-4ff5-9633-13b5ba0d3bb8",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Loaders",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T14:43:16.621Z",
+  "modified": "2024-07-21T12:38:30.786Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%cmd.exe /c %' and LOWER(&quot;Command&quot;) LIKE '% -p 0x%' and (LOWER(&quot;Command&quot;) LIKE '%c:\\programdata\\%' or LOWER(&quot;Command&quot;) LIKE '%c:\\recycler\\%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25cmd.exe%20%2Fc%20%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%20-p%200x%25'%20and%20(LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Cprogramdata%5C%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Crecycler%5C%25'))|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25cmd.exe%20%2Fc%20%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20-p%200x%25'%20and%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Cprogramdata%5C%5C%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Crecycler%5C%5C%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%rundll32.exe %' and LOWER(&quot;Command&quot;) LIKE '%c:\\programdata\\%' and (LOWER(&quot;Command&quot;) LIKE '%.bin,%' or LOWER(&quot;Command&quot;) LIKE '%.tmp,%' or LOWER(&quot;Command&quot;) LIKE '%.dat,%' or LOWER(&quot;Command&quot;) LIKE '%.io,%' or LOWER(&quot;Command&quot;) LIKE '%.ini,%' or LOWER(&quot;Command&quot;) LIKE '%.db,%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25rundll32.exe%20%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Cprogramdata%5C%25'%20and%20(LOWER(%22Command%22)%20LIKE%20'%25.bin,%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.tmp,%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.dat,%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.io,%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.ini,%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.db,%25'))|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25rundll32.exe%20%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Cprogramdata%5C%5C%25'%20and%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.bin,%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.tmp,%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.dat,%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.io,%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ini,%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.db,%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "154052",
+                "bb": "BB:BehaviorDefinition: Suspicious Loaders",
+                "uuid": "e02eb310-67bf-4ff5-9633-13b5ba0d3bb8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.729249",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

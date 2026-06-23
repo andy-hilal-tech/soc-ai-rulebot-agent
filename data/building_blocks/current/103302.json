@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103302",
+  "rule_id": "103302",
+  "uuid": "f147d837-a095-4a5f-be3d-7a646600f166",
+  "rule_name": "BB:VMware: User Account, Role and Permission Updated Activity",
+  "object_type": "building_block",
+  "group": "VMware Virtual Infrastructure",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2013-08-05T21:01:23.850Z",
+  "modified": "2024-02-19T16:40:37.157Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(54500004) Account Updated Event, (54500156) Permission Updated Event, (54500166) Role Updated Event, (78250042) Role Modified, (78250163) User Disabled, (78250164) User Enabled., (78250050) User Import, (78250052) User Account Locked, (78250053) User Property Modified, (78250051) User Lock Expired</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "54500004,                                                                                                                                                                                                                                                                                                                                                                                                                54500156,                                                                                                                                                                                                                                                                                                                                                                                                                54500166,                                                                                                                                                                                                                                                                                                                                                                                                                78250042,                                                                                                                                                                                                                                                                                                                                                                                                                78250163,                                                                                                                                                                                                                                                                                                                                                                                                                78250164,                                                                                                                                                                                                                                                                                                                                                                                                                78250050,                                                                                                                                                                                                                                                                                                                                                                                                                78250052,                                                                                                                                                                                                                                                                                                                                                                                                                78250053,                                                                                                                                                                                                                                                                                                                                                                                                                78250051"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.030508",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

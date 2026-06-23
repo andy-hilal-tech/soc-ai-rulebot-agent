@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100099",
+  "rule_id": "100099",
+  "uuid": "SYSTEM-1309",
+  "rule_name": "BB:CategoryDefinition: Authentication User or Group Added or Changed",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-09-04T12:03:15.218Z",
+  "modified": "2024-02-19T16:49:26.175Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Policy Added, Authentication.Policy Change, Authentication.Trusted Domain Added, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Right Assigned</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3038, 3039, 3036, 3041, 3042, 3029, 3030, 3025, 3031, 3032, 3023"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

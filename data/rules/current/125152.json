@@ -1,0 +1,53 @@
+{
+  "rule_doc_id": "125152",
+  "rule_id": "125152",
+  "uuid": "91f12598-2273-4494-942b-3665e287d0ea",
+  "rule_name": "A Custom Property has been Disabled",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2024-05-22T18:18:13.848Z",
+  "modified": "2024-07-21T08:29:28.702Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(38750097) Custom property disabled</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "38750097"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "2"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.325514",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

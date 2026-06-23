@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "165409",
+  "rule_id": "165409",
+  "uuid": "71e1fb84-1852-4295-9b9a-162eafce61e4",
+  "rule_name": "Health360 -  Events not received",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-02-16T07:19:11.704Z",
+  "modified": "2026-04-20T10:56:52.600Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure H360</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "4062"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "4015",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501838",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "true",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "Health360 -  Events not received",
+            "name": "Health360 -  Events not received"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.360200",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

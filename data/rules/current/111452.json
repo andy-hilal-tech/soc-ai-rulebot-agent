@@ -1,0 +1,113 @@
+{
+  "rule_doc_id": "111452",
+  "rule_id": "111452",
+  "uuid": "39b21617-0d64-4461-9cf4-e48612d6ba40",
+  "rule_name": "Process Launched from Unusual Directory",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event, Add to a Reference Set",
+  "created": "2017-08-18T01:43:50.170Z",
+  "modified": "2024-02-19T16:49:28.777Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create, (5000862) Success Audit: A new process has been created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828,                                                                                                                                                                                                                                                                                          5000862"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Path IMATCHES '(.\\:\\\\*Perflogs.*)|(.*((\\$Recycle\\.bin)|(\\\\*Users\\\\*All\\sUsers)).*)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Path%22%20IMATCHES%20'(.%5C%3A%5C%5C*Perflogs.*)%7C(.*((%5C%24Recycle%5C.bin)%7C(%5C%5C*Users%5C%5C*All%5CsUsers)).*)'|%5B%22%5C%22Process%20Path%5C%22%20IMATCHES%20'(.%5C%5C%3A%5C%5C%5C%5C*Perflogs.*)%7C(.*((%5C%5C%24Recycle%5C%5C.bin)%7C(%5C%5C%5C%5C*Users%5C%5C%5C%5C*All%5C%5CsUsers)).*)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.752419",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

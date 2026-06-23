@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100213",
+  "rule_id": "100213",
+  "uuid": "SYSTEM-1151",
+  "rule_name": "BB:HostDefinition: VA Scanner Source IP",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-08-11T15:54:58.916Z",
+  "modified": "2023-10-30T02:02:36.700Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "1",
+            "id": "12"
+          },
+          "text": [
+            "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.841407",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

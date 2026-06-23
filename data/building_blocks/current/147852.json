@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "147852",
+  "rule_id": "147852",
+  "uuid": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9",
+  "rule_name": "BB:BehaviorDefinition: MSExchange Transport Agent Installation",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-05T15:50:14.953Z",
+  "modified": "2024-07-21T12:38:15.504Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250, 8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of Install-TransportAgent</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanyInstall-TransportAgent"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Server Software Component",
+        "STEC": "T1505.002",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1505",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1505.002",
+            "values": [
+              {
+                "id": "147852",
+                "bb": "BB:BehaviorDefinition: MSExchange Transport Agent Installation",
+                "uuid": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.631099",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

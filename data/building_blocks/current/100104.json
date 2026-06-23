@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100104",
+  "rule_id": "100104",
+  "uuid": "SYSTEM-1217",
+  "rule_name": "BB:CategoryDefinition: Firewall or ACL Denies",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-11-30T00:07:52.161Z",
+  "modified": "2024-02-19T16:49:25.815Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.ACL Deny, Access.Firewall Deny, Access.Access Denied, Access.Database Action Denied, Access.FTP Action Denied, Access.IPS Deny, Access.Session Denied</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4013, 4003, 4015, 4030, 4032, 4006, 4020"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

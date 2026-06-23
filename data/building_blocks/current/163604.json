@@ -1,0 +1,122 @@
+{
+  "rule_doc_id": "163604",
+  "rule_id": "163604",
+  "uuid": "9f024299-1728-49c7-bec4-0c2d2c950112",
+  "rule_name": "one",
+  "object_type": "building_block",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2024-09-18T08:54:11.927Z",
+  "modified": "2024-09-18T08:54:11.925Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "4",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>29</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"4\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"4\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1202, SYSTEM-1179"
+            },
+            {
+              "id": "2",
+              "value": "SourceIP"
+            },
+            {
+              "id": "3",
+              "value": "5"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "29"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "10"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote to Local, Remote to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l, r2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:PortDefinition: RPC Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1230"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    },
+    {
+      "uuid": "SYSTEM-1230",
+      "name": "BB:PortDefinition: RPC Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.829478",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

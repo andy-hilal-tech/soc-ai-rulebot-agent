@@ -1,0 +1,63 @@
+{
+  "rule_doc_id": "126702",
+  "rule_id": "126702",
+  "uuid": "SYSTEM-1059",
+  "rule_name": "BB:Policy Violation: Mail Policy Violation: Outbound Mail Sender",
+  "object_type": "building_block",
+  "group": "Policy",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-31T14:10:08.074Z",
+  "modified": "2024-07-21T09:34:35.329Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application is any of [Mail.SMTP or Mail.SMTP-port]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQanyMail.SMTP�Mail.SMTP-port"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.269771",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

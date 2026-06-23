@@ -1,0 +1,47 @@
+{
+  "rule_doc_id": "100083",
+  "rule_id": "100083",
+  "uuid": "SYSTEM-1237",
+  "rule_name": "BB:HostDefinition: Host with Port Open",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-01-12T23:10:32.702Z",
+  "modified": "2023-10-30T02:02:36.273Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "PortOpen_Test",
+            "uid": "0",
+            "id": "29"
+          },
+          "text": [
+            "when the local <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>destination</a> host destination port is open <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Either Actively or Passively seen</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Destination"
+            },
+            {
+              "id": "2",
+              "value": "Either"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.627717",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

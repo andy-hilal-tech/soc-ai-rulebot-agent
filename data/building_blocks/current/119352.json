@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "119352",
+  "rule_id": "119352",
+  "uuid": "b7151386-d7dc-41ab-9371-e474591a5c21",
+  "rule_name": "BB:DeviceDefinition: DNS",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-06-25T17:59:18.091Z",
+  "modified": "2024-06-27T13:19:17.441Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ISC BIND, Microsoft Windows Security Event Log, Infoblox NIOS, BlueCat Networks Adonis, Microsoft DNS Debug, Amazon AWS Application Load Balancer Access Logs, Amazon GuardDuty</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "185, 12, 243, 285, 384, 460, 436"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.208098",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

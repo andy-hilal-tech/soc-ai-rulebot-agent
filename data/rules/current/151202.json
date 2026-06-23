@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "151202",
+  "rule_id": "151202",
+  "uuid": "ae940526-e29d-4476-b0d5-821aa45656ec",
+  "rule_name": "Suspicious Microsoft OneNote Child Process",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T17:09:43.821Z",
+  "modified": "2024-07-21T12:38:51.558Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>( \tLOWER(&quot;Parent Process Full Full Name&quot;) == 'onenote.exe' ) AND  ( \t \t( \t\tLOWER(&quot;Filename&quot;) IN ('rundll32.exe','regsvr32.exe','bitsadmin.exe','certutil.exe','installutil.exe','schtasks.exe','wmic.exe','cscript.exe','wscript.exe','cmstp.exe','microsoft.workflow.compiler.exe','regasm.exe','regsvcs.exe','mshta.exe','msxsl.exe','ieexec.exe','cmd.exe','powershell.exe','hh.exe','javaw.exe','pcalua.exe','curl.exe','scriptrunner.exe','certoc.exe','workfolders.exe','odbcconf.exe','msiexec.exe','msdt.exe') \t\tAND LOWER(&quot;Process Full Full Name&quot;) IN ('rundll32.exe','regsvr32.exe','bitsadmin.exe','certutil.exe','installutil.exe','schtasks.exe','wmic.exe','cscript.exe','wscript.exe','cmstp.exe','microsoft.workflow.compiler.exe','regasm.exe','regsvcs.exe','mshta.exe','msxsl.exe','ieexec.exe','cmd.exe','powershell.exe','hh.exe','javaw.exe','pcalua.exe','curl.exe','scriptrunner.exe','certoc.exe','workfolders.exe','odbcconf.exe','msiexec.exe','msdt.exe') \t) \tOR  \t( \t\tLOWER(&quot;Process Full Full Name&quot;) == 'explorer.exe' \t\tAND \t\t( \t\t\tLOWER(&quot;Command&quot;) LIKE '%.hta%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.vb%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.wsh%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.js%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.ps%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.scr%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.pif%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.bat%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%.cmd%' \t\t) \t) \tOR \t( \t\tLOWER(&quot;Process File File Path&quot;) LIKE '%\\appdata\\%' \t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%\\users\\public\\%' \t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%\\programdata\\%' \t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\tasks\\%' \t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\temp\\%' \t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%\\windows\\system32\\tasks\\%' \t) )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Parent%20Process%20Name%22)%20%3D%3D%20'onenote.exe'%20)%20AND%20%20(%20%09%20%09(%20%09%09LOWER(%22Filename%22)%20IN%20('rundll32.exe'%2C'regsvr32.exe'%2C'bitsadmin.exe'%2C'certutil.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'wmic.exe'%2C'cscript.exe'%2C'wscript.exe'%2C'cmstp.exe'%2C'microsoft.workflow.compiler.exe'%2C'regasm.exe'%2C'regsvcs.exe'%2C'mshta.exe'%2C'msxsl.exe'%2C'ieexec.exe'%2C'cmd.exe'%2C'powershell.exe'%2C'hh.exe'%2C'javaw.exe'%2C'pcalua.exe'%2C'curl.exe'%2C'scriptrunner.exe'%2C'certoc.exe'%2C'workfolders.exe'%2C'odbcconf.exe'%2C'msiexec.exe'%2C'msdt.exe')%20%09%09AND%20LOWER(%22Process%20Name%22)%20IN%20('rundll32.exe'%2C'regsvr32.exe'%2C'bitsadmin.exe'%2C'certutil.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'wmic.exe'%2C'cscript.exe'%2C'wscript.exe'%2C'cmstp.exe'%2C'microsoft.workflow.compiler.exe'%2C'regasm.exe'%2C'regsvcs.exe'%2C'mshta.exe'%2C'msxsl.exe'%2C'ieexec.exe'%2C'cmd.exe'%2C'powershell.exe'%2C'hh.exe'%2C'javaw.exe'%2C'pcalua.exe'%2C'curl.exe'%2C'scriptrunner.exe'%2C'certoc.exe'%2C'workfolders.exe'%2C'odbcconf.exe'%2C'msiexec.exe'%2C'msdt.exe')%20%09)%20%09OR%20%20%09(%20%09%09LOWER(%22Process%20Name%22)%20%3D%3D%20'explorer.exe'%20%09%09AND%20%09%09(%20%09%09%09LOWER(%22Command%22)%20LIKE%20'%25.hta%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.vb%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.wsh%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.js%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.ps%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.scr%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.pif%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.bat%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25.cmd%25'%20%09%09)%20%09)%20%09OR%20%09(%20%09%09LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cappdata%5C%25'%20%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cusers%5Cpublic%5C%25'%20%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cprogramdata%5C%25'%20%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cwindows%5Ctasks%5C%25'%20%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cwindows%5Ctemp%5C%25'%20%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cwindows%5Csystem32%5Ctasks%5C%25'%20%09)%20)|%5B%22(%22%2C%22%5CtLOWER(%5C%22Parent%20Process%20Name%5C%22)%20%3D%3D%20'onenote.exe'%22%2C%22)%22%2C%22AND%20%22%2C%22(%22%2C%22%5Ct%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Filename%5C%22)%20IN%20('rundll32.exe'%2C'regsvr32.exe'%2C'bitsadmin.exe'%2C'certutil.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'wmic.exe'%2C'cscript.exe'%2C'wscript.exe'%2C'cmstp.exe'%2C'microsoft.workflow.compiler.exe'%2C'regasm.exe'%2C'regsvcs.exe'%2C'mshta.exe'%2C'msxsl.exe'%2C'ieexec.exe'%2C'cmd.exe'%2C'powershell.exe'%2C'hh.exe'%2C'javaw.exe'%2C'pcalua.exe'%2C'curl.exe'%2C'scriptrunner.exe'%2C'certoc.exe'%2C'workfolders.exe'%2C'odbcconf.exe'%2C'msiexec.exe'%2C'msdt.exe')%22%2C%22%5Ct%5CtAND%20LOWER(%5C%22Process%20Name%5C%22)%20IN%20('rundll32.exe'%2C'regsvr32.exe'%2C'bitsadmin.exe'%2C'certutil.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'wmic.exe'%2C'cscript.exe'%2C'wscript.exe'%2C'cmstp.exe'%2C'microsoft.workflow.compiler.exe'%2C'regasm.exe'%2C'regsvcs.exe'%2C'mshta.exe'%2C'msxsl.exe'%2C'ieexec.exe'%2C'cmd.exe'%2C'powershell.exe'%2C'hh.exe'%2C'javaw.exe'%2C'pcalua.exe'%2C'curl.exe'%2C'scriptrunner.exe'%2C'certoc.exe'%2C'workfolders.exe'%2C'odbcconf.exe'%2C'msiexec.exe'%2C'msdt.exe')%22%2C%22%5Ct)%22%2C%22%5CtOR%20%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'explorer.exe'%22%2C%22%5Ct%5CtAND%22%2C%22%5Ct%5Ct(%22%2C%22%5Ct%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25.hta%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.vb%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.wsh%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.js%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ps%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.scr%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pif%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.bat%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.cmd%25'%22%2C%22%5Ct%5Ct)%22%2C%22%5Ct)%22%2C%22%5CtOR%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cusers%5C%5Cpublic%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cprogramdata%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Ctasks%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Ctemp%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Csystem32%5C%5Ctasks%5C%5C%25'%22%2C%22%5Ct)%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "151202",
+                "bb": "Suspicious Microsoft OneNote Child Process",
+                "uuid": "ae940526-e29d-4476-b0d5-821aa45656ec",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.136871",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "165053",
+  "rule_id": "165053",
+  "uuid": "223c9cab-1868-4bf5-8bf0-2ae57f26effb",
+  "rule_name": "TI-IOC Match - IPv4  Addresses",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-10T07:41:28.450Z",
+  "modified": "2025-10-23T06:18:18.937Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19",
+            "negate": "true"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(62250129) Denied, (20257872) Firewall Deny</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "62250129, 20257872"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "6004",
+            "includeAttackerEventsInterval": "300",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501791",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "8",
+            "credibility": "8",
+            "severity": "8",
+            "description": "Identify traffic to/from known malicious IPs (e.g., command and control servers, botnets).",
+            "name": "TI-IOC Match - IPv4  Addresses"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.205389",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

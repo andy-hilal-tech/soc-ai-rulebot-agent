@@ -1,0 +1,116 @@
+{
+  "rule_doc_id": "144102",
+  "rule_id": "144102",
+  "uuid": "f791299e-c6d9-4c5f-8e39-fdb014fc0431",
+  "rule_name": "MITRE.LIN.T1212.RULE Exploitation for Credential Access",
+  "object_type": "rule",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:MITRE.LIN.T1212: Exploitation for Credential Access</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "33fedd1a-5f69-4bb2-8cec-7b430cac3866"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Vulnerability_Test",
+            "uid": "2",
+            "id": "42"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> is vulnerable to <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>any</a> exploit on <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> port"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "attacker"
+            },
+            {
+              "id": "2",
+              "value": "any"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "33fedd1a-5f69-4bb2-8cec-7b430cac3866",
+      "name": "BB:MITRE.LIN.T1212: Exploitation for Credential Access"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Exploitation for Credential Access",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1212",
+        "MAP_S": [
+          {
+            "name": "Credential Access - Exploitation for Credential Access",
+            "values": [
+              {
+                "id": "144052",
+                "bb": "BB:MITRE.LIN.T1212: Exploitation for Credential Access",
+                "uuid": "33fedd1a-5f69-4bb2-8cec-7b430cac3866",
+                "T": "EVENT"
+              },
+              {
+                "id": "144102",
+                "bb": "MITRE.LIN.T1212.RULE Exploitation for Credential Access",
+                "uuid": "f791299e-c6d9-4c5f-8e39-fdb014fc0431",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.977346",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

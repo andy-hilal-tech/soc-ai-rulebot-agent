@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "163603",
+  "rule_id": "163603",
+  "uuid": "647a2a34-d9b0-4160-9fdf-a5a552ef8208",
+  "rule_name": "User-BB-FalsePositive: User Defined False Positives Tunings",
+  "object_type": "building_block",
+  "group": "User Tuning",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2024-09-02T10:44:50.684Z",
+  "modified": "2024-10-20T12:20:25.831Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FalsePositiveTuningTest",
+            "uid": "0",
+            "id": "90"
+          },
+          "text": [
+            "when the false positive signature matches one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>CAT:1:1.1.1.1:2.2.2.2, QID:53250087:172.21.2.100:52.112.120.205, QID:53250087:172.21.2.121:20.166.109.4</a> "
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CAT:1:1.1.1.1:2.2.2.2, QID:53250087:172.21.2.100:52.112.120.205, QID:53250087:172.21.2.121:20.166.109.4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.829478",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

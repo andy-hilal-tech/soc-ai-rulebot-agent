@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "100413",
+  "rule_id": "100413",
+  "uuid": "12e8f7df-b94a-4a41-b876-5b9c7b437f2d",
+  "rule_name": "Devices with High Event Rates",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-11-22T14:53:20.950Z",
+  "modified": "2023-11-22T14:53:20.950Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "0",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:DeviceDefinition: Devices to Monitor for High Event Rates</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>log source</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>500</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1300"
+            },
+            {
+              "id": "2",
+              "value": "DeviceId"
+            },
+            {
+              "id": "3",
+              "value": "500"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "0"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "1"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1300",
+      "name": "BB:DeviceDefinition: Devices to Monitor for High Event Rates"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.410099",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

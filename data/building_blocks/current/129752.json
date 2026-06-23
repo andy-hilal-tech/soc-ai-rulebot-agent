@@ -1,0 +1,117 @@
+{
+  "rule_doc_id": "129752",
+  "rule_id": "129752",
+  "uuid": "43e9ccc0-0fda-415f-993b-f98a465e188e",
+  "rule_name": "BB:Threats: Cryptocurrency Mining Process Name Patterns",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-09-07T13:39:43.290Z",
+  "modified": "2024-07-21T09:42:17.551Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "4",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Process Names</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "e2f4d703-db54-4e2f-bf92-4aae98edd66f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "2",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom)</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>(?i).*(miner|coin|crypt).*</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "Process Name"
+            },
+            {
+              "id": "2",
+              "value": "(?i).*(miner|coin|crypt).*"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "e2f4d703-db54-4e2f-bf92-4aae98edd66f",
+      "name": "BB:Threats: Cryptocurrency Mining Process Names"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.269771",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

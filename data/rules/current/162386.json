@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162386",
+  "rule_id": "162386",
+  "uuid": "9d048a16-ed23-427a-8965-d0c45fa3a02f",
+  "rule_name": "Mimikatz DC Sync",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:58:04.201Z",
+  "modified": "2024-08-07T08:30:41.303Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=4662 AND (LOWER(UTF8(payload)) LIKE '%replicating directory changes all%' OR LOWER(UTF8(payload)) LIKE '%1131f6ad-9c07-11d1-f79f-00c04fc2dcd2%' OR LOWER(UTF8(payload)) LIKE '%1131f6aa-9c07-11d1-f79f-00c04fc2dcd2%' OR LOWER(UTF8(payload)) LIKE '%9923a32a-3607-11d2-b9be-0000f87a36b2%' OR LOWER(UTF8(payload)) LIKE '%89e95b76-444d-4c62-991a-0facbeda640c%') AND \"Access Mask\"='0x100') AND (NOT((LOWER(UTF8(payload)) LIKE '%window manager%' OR (LOWER(UTF8(payload)) LIKE '%nt aut%' OR LOWER(UTF8(payload)) LIKE '%msol_%') OR LOWER(UTF8(payload)) LIKE '%$%')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%3D4662%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25replicating%20directory%20changes%20all%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251131f6ad-9c07-11d1-f79f-00c04fc2dcd2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251131f6aa-9c07-11d1-f79f-00c04fc2dcd2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259923a32a-3607-11d2-b9be-0000f87a36b2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%2589e95b76-444d-4c62-991a-0facbeda640c%25%27%29%20AND%20%22Access%20Mask%22%3D%270x100%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25window%20manager%25%27%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25nt%20aut%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25msol_%25%27%29%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%24%25%27%29%29%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%3D4662%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25replicating%20directory%20changes%20all%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251131f6ad-9c07-11d1-f79f-00c04fc2dcd2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251131f6aa-9c07-11d1-f79f-00c04fc2dcd2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259923a32a-3607-11d2-b9be-0000f87a36b2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%2589e95b76-444d-4c62-991a-0facbeda640c%25%27%29%20AND%20%22Access%20Mask%22%3D%270x100%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25window%20manager%25%27%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25nt%20aut%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25msol_%25%27%29%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%24%25%27%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Benjamin Delpy, Florian Roth (Nextron Systems), Scott Dermott, Sorina Ionescu SIGMA Title: Mimikatz DC Sync SIGMA Description: Detects Mimikatz DC sync security events  False positives: - Valid DC Sync that is not covered by the filters; please report - Local Domain Admin account used for Azure AD Connect  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Mimikatz DC Sync"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.916509",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

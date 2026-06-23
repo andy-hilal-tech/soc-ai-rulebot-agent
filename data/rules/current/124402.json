@@ -1,0 +1,53 @@
+{
+  "rule_doc_id": "124402",
+  "rule_id": "124402",
+  "uuid": "1a51ff89-1d45-4107-a616-3a24315b47e5",
+  "rule_name": "Generated CRE Rule For AD Rule Potential DoS Attack via Web Server Response Time",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-08T07:37:42.142Z",
+  "modified": "2024-07-08T09:39:20.598Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(53750003) Event: Potential DoS Attack via Web Server Response Time</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "53750003"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "2"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.232521",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

@@ -1,0 +1,215 @@
+{
+  "rule_doc_id": "147502",
+  "rule_id": "147502",
+  "uuid": "c1eb8ca0-849e-4fec-88e6-fed3452427c6",
+  "rule_name": "Suspicious Proxy Binary Execution",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T20:38:42.842Z",
+  "modified": "2024-07-21T12:38:41.416Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Abuse of Findstr, BB:BehaviorDefinition: Abuse of Print Executable, BB:BehaviorDefinition: Mavinject Inject DLL Into Running Process, BB:BehaviorDefinition: Suspicious Atbroker Execution, BB:BehaviorDefinition: Suspicious ZipExec Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "736c6a6b-9576-4203-9532-4aa5bd8c56dd, de3ee44f-1968-4364-9690-01ba4803946f, af4d09bd-50e3-4a94-a05a-d776ec656fb8, b6175b84-289b-430a-b53e-286173d44965, eba9760e-30eb-4ce0-8a85-f4b5c23b769d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "736c6a6b-9576-4203-9532-4aa5bd8c56dd",
+      "name": "BB:BehaviorDefinition: Abuse of Findstr"
+    },
+    {
+      "uuid": "de3ee44f-1968-4364-9690-01ba4803946f",
+      "name": "BB:BehaviorDefinition: Abuse of Print Executable"
+    },
+    {
+      "uuid": "af4d09bd-50e3-4a94-a05a-d776ec656fb8",
+      "name": "BB:BehaviorDefinition: Mavinject Inject DLL Into Running Process"
+    },
+    {
+      "uuid": "b6175b84-289b-430a-b53e-286173d44965",
+      "name": "BB:BehaviorDefinition: Suspicious Atbroker Execution"
+    },
+    {
+      "uuid": "eba9760e-30eb-4ce0-8a85-f4b5c23b769d",
+      "name": "BB:BehaviorDefinition: Suspicious ZipExec Execution"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "147502",
+                "bb": "Suspicious Proxy Binary Execution",
+                "uuid": "c1eb8ca0-849e-4fec-88e6-fed3452427c6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Hide Artifacts",
+        "STEC": "T1564.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1564",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1564.004",
+            "values": [
+              {
+                "id": "147552",
+                "bb": "BB:BehaviorDefinition: Abuse of Findstr",
+                "uuid": "736c6a6b-9576-4203-9532-4aa5bd8c56dd",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Ingress Tool Transfer",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1105",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Ingress Tool Transfer",
+            "values": [
+              {
+                "id": "147602",
+                "bb": "BB:BehaviorDefinition: Abuse of Print Executable",
+                "uuid": "de3ee44f-1968-4364-9690-01ba4803946f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Process Injection",
+        "STEC": "T1055.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055.001",
+            "values": [
+              {
+                "id": "147652",
+                "bb": "BB:BehaviorDefinition: Mavinject Inject DLL Into Running Process",
+                "uuid": "af4d09bd-50e3-4a94-a05a-d776ec656fb8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "147752",
+                "bb": "BB:BehaviorDefinition: Suspicious ZipExec Execution",
+                "uuid": "eba9760e-30eb-4ce0-8a85-f4b5c23b769d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.008",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.008",
+            "values": [
+              {
+                "id": "147702",
+                "bb": "BB:BehaviorDefinition: Suspicious Atbroker Execution",
+                "uuid": "b6175b84-289b-430a-b53e-286173d44965",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.040129",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

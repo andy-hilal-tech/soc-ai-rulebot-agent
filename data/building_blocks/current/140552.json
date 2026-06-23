@@ -1,0 +1,170 @@
+{
+  "rule_doc_id": "140552",
+  "rule_id": "140552",
+  "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-29T21:27:03.033Z",
+  "modified": "2024-07-21T10:28:57.295Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "2",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.File Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(&quot;Filename&quot; like 'BluetoothDiagnosticUtil.dll' and &quot;File Directory&quot; matches '.*AppData\\\\Local\\\\Microsoft\\\\WindowsApps') OR (&quot;Filename&quot; matches 'OskSupport.dll|osk.exe' and &quot;File Directory&quot; matches '.*Program Files\\\\Windows Media Player')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Filename%22%20like%20'BluetoothDiagnosticUtil.dll'%20and%20%22File%20Directory%22%20matches%20'.*AppData%5C%5CLocal%5C%5CMicrosoft%5C%5CWindowsApps')%20OR%20(%22Filename%22%20matches%20'OskSupport.dll%7Cosk.exe'%20and%20%22File%20Directory%22%20matches%20'.*Program%20Files%5C%5CWindows%20Media%20Player')|%5B%22(%5C%22Filename%5C%22%20like%20'BluetoothDiagnosticUtil.dll'%20and%20%5C%22File%20Directory%5C%22%20matches%20'.*AppData%5C%5C%5C%5CLocal%5C%5C%5C%5CMicrosoft%5C%5C%5C%5CWindowsApps')%20OR%22,%22(%5C%22Filename%5C%22%20matches%20'OskSupport.dll%7Cosk.exe'%20and%20%5C%22File%20Directory%5C%22%20matches%20'.*Program%20Files%5C%5C%5C%5CWindows%20Media%20Player')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.470316",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

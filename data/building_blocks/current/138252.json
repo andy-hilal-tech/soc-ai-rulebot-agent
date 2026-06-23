@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "138252",
+  "rule_id": "138252",
+  "uuid": "60f34547-2463-4c88-806d-e23f1891eb87",
+  "rule_name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-06-09T16:24:30.357Z",
+  "modified": "2024-07-21T10:28:56.820Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25",
+            "negate": "true"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>XFORCE_IP_CONFIDENCE('Anonymization Services',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Malware',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Botnet Command and Control Server',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Spam',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Cryptocurrency Mining',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Scanning IPs',destinationaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Bots',destinationaddress) &gt; 75 OR XFORCE_IP_CONFIDENCE('Anonymization Services',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Malware',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Botnet Command and Control Server',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Spam',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Cryptocurrency Mining',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Scanning IPs',sourceaddress) &gt; 75 OR  XFORCE_IP_CONFIDENCE('Bots',sourceaddress) &gt; 75</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_IP_CONFIDENCE('Anonymization%20Services',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Malware',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Spam',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',destinationaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Bots',destinationaddress)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Malware',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Spam',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceaddress)%20%3E%2075%20OR%20%20XFORCE_IP_CONFIDENCE('Bots',sourceaddress)%20%3E%2075|%5B%22XFORCE_IP_CONFIDENCE('Anonymization%20Services',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Malware',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Spam',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Scanning%20IPs',destinationaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Bots',destinationaddress)%20%3E%2075%20OR%22,%22XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Malware',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Spam',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceaddress)%20%3E%2075%20OR%20%22,%22XFORCE_IP_CONFIDENCE('Bots',sourceaddress)%20%3E%2075%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138252",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)",
+                "uuid": "60f34547-2463-4c88-806d-e23f1891eb87",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.452541",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

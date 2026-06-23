@@ -1,0 +1,151 @@
+{
+  "rule_doc_id": "115563",
+  "rule_id": "115563",
+  "uuid": "783a1b16-5dbf-400c-984c-fe6fbf1574c9",
+  "rule_name": "Service Binary Path Update Followed by Network Connection",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-02-19T17:08:31.744Z",
+  "modified": "2024-02-19T17:08:31.744Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001840) Network connection detected, (5001832) RegistryEvent (Value Set)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001840,                                                                                                                                                                                                                                                                                       5001832"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "2",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB: Process created a Network Connection</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB: Service Binary Path Has Been Set or Updated</a> match with the same <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>Source IP, Process Name (custom)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "ef1a0efd-49f6-4971-b773-725e9d12b1f8"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "6b885afd-3669-434f-8a8f-3e77c3debbd1"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP, Process Name"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "ef1a0efd-49f6-4971-b773-725e9d12b1f8",
+      "name": "BB:CategoryDefinition: Network Connection"
+    },
+    {
+      "uuid": "6b885afd-3669-434f-8a8f-3e77c3debbd1",
+      "name": "BB:BehaviorDefinition: Service Binary Path Set or Update"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.949110",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

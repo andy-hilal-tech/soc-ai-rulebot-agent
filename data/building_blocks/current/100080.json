@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100080",
+  "rule_id": "100080",
+  "uuid": "SYSTEM-1289",
+  "rule_name": "BB:CategoryDefinition: Network DoS Attack",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-01-02T21:14:20.574Z",
+  "modified": "2023-10-30T02:02:39.653Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Infrastructure DoS, DOS.TCP DoS, DOS.UDP DoS, DOS.ICMP DoS , DOS.Misc DoS, DOS.Unknown DoS Attack, DOS.High Rate DoS, DOS.High Rate ICMP DoS, DOS.High Rate ICMP Scan, DOS.High Rate Scan, DOS.High Rate TCP DoS, DOS.High Rate TCP Scan, DOS.High Rate UDP DoS, DOS.High Rate UDP Scan, DOS.Medium Rate DoS, DOS.Medium Rate ICMP DoS, DOS.Medium Rate ICMP Scan, DOS.Medium Rate Scan, DOS.Medium Rate TCP DoS, DOS.Medium Rate TCP Scan, DOS.Medium Rate UDP DoS, DOS.Medium Rate UDP Scan</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "2014, 2003, 2004, 2002, 2009, 2001, 2020, 2019, 2043, 2044, 2017, 2041, 2018, 2042, 2024, 2023, 2047, 2048, 2021, 2045, 2022, 2046"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.627717",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

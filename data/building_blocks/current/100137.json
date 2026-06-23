@@ -1,0 +1,83 @@
+{
+  "rule_doc_id": "100137",
+  "rule_id": "100137",
+  "uuid": "SYSTEM-1036",
+  "rule_name": "BB:Threats: Scanning: ICMP Scan High",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T14:48:32.822Z",
+  "modified": "2023-10-30T02:02:40.564Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ICMP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "FlowType",
+            "uid": "1",
+            "id": "209"
+          },
+          "text": [
+            "when the flow type is one of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Superflow A, Superflow B, Superflow C</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "3, 4, 5"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "HostCount",
+            "uid": "2",
+            "id": "202"
+          },
+          "text": [
+            "when the number of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>local</a> hosts is <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>greater than</a> than <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>100000</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "local"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "value": "100000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.680003",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

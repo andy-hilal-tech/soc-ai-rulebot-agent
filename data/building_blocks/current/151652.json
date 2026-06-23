@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "151652",
+  "rule_id": "151652",
+  "uuid": "0ccead90-9f13-4744-a891-41483a6bf60a",
+  "rule_name": "BB:BehaviorDefinition: Windows Spooler Service Binary Load",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T15:31:52.999Z",
+  "modified": "2024-07-21T12:38:37.612Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Object Load Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19247"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of spoolsv.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyspoolsv.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Extension (custom) is any of dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionEQanydll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(LOWER(&quot;File Directory&quot;) LIKE '%\\windows\\system32\\spool\\drivers\\x64\\3\\%' or LOWER(&quot;File Directory&quot;) LIKE '%\\windows\\system32\\spool\\drivers\\x64\\4\\%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cwindows%5Csystem32%5Cspool%5Cdrivers%5Cx64%5C3%5C%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cwindows%5Csystem32%5Cspool%5Cdrivers%5Cx64%5C4%5C%25')|%5B%22(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Csystem32%5C%5Cspool%5C%5Cdrivers%5C%5Cx64%5C%5C3%5C%5C%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Csystem32%5C%5Cspool%5C%5Cdrivers%5C%5Cx64%5C%5C4%5C%5C%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.012",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.012",
+            "values": [
+              {
+                "id": "151652",
+                "bb": "BB:BehaviorDefinition: Windows Spooler Service Binary Load",
+                "uuid": "0ccead90-9f13-4744-a891-41483a6bf60a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.698267",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,321 @@
+{
+  "rule_doc_id": "155152",
+  "rule_id": "155152",
+  "uuid": "7ea5a9e6-5409-4280-96d0-21c058c55403",
+  "rule_name": "Suspicious Binary Load and Execution",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T20:51:00.181Z",
+  "modified": "2024-07-21T12:38:37.857Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: DLL Execution via Rasautou, BB:BehaviorDefinition: Execute Files with Msdeploy, BB:BehaviorDefinition: Execution via Diskshadow, BB:BehaviorDefinition: Execution via stordiag, BB:BehaviorDefinition: Execution DLL of Choice Using WAB, BB:BehaviorDefinition: Execution via WorkFolders, BB:BehaviorDefinition: File Download Using ProtocolHandler, BB:BehaviorDefinition: Specified Binary Execution via Devtoolslauncher or OpenWith, BB:BehaviorDefinition: Suspicious Registration via cscript, BB:BehaviorDefinition: Runs COM Object via Verclsid, BB:BehaviorDefintion: Proxy Execution Via Explorer</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d56a4f37-f52d-4f3c-9690-2831883e1c3f, 62d3f455-a127-4932-b97d-13222501c74e, 292faf56-9722-43fc-a380-4d21d7fbf211, 35263108-2716-42ca-b5ec-8d98d6430621, 5b93f963-d2e9-4df2-9e25-9405469e49ef, 0afe7f83-5191-4354-84b0-a2e6bc11e224, 03c60dd8-2c94-48b5-9ad3-cd377e99a64e, 179f5b67-9262-4164-a2da-b666b5d2cf87, 6c99874b-ca8b-4236-bb12-76ab9cad492f, 33b505da-d01c-4887-aa17-fb254db27221, 3c489fb4-62ef-456e-bcb3-aff4fc751822"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d56a4f37-f52d-4f3c-9690-2831883e1c3f",
+      "name": "BB:BehaviorDefinition: DLL Execution via Rasautou"
+    },
+    {
+      "uuid": "62d3f455-a127-4932-b97d-13222501c74e",
+      "name": "BB:BehaviorDefinition: Execute Files with Msdeploy"
+    },
+    {
+      "uuid": "292faf56-9722-43fc-a380-4d21d7fbf211",
+      "name": "BB:BehaviorDefinition: Execution via Diskshadow"
+    },
+    {
+      "uuid": "35263108-2716-42ca-b5ec-8d98d6430621",
+      "name": "BB:BehaviorDefinition: Execution via stordiag"
+    },
+    {
+      "uuid": "5b93f963-d2e9-4df2-9e25-9405469e49ef",
+      "name": "BB:BehaviorDefinition: Execution DLL of Choice Using WAB"
+    },
+    {
+      "uuid": "0afe7f83-5191-4354-84b0-a2e6bc11e224",
+      "name": "BB:BehaviorDefinition: Execution via WorkFolders"
+    },
+    {
+      "uuid": "03c60dd8-2c94-48b5-9ad3-cd377e99a64e",
+      "name": "BB:BehaviorDefinition: File Download Using ProtocolHandler"
+    },
+    {
+      "uuid": "179f5b67-9262-4164-a2da-b666b5d2cf87",
+      "name": "BB:BehaviorDefinition: Specified Binary Execution via Devtoolslauncher or OpenWith"
+    },
+    {
+      "uuid": "6c99874b-ca8b-4236-bb12-76ab9cad492f",
+      "name": "BB:BehaviorDefinition: Suspicious Registration via cscript"
+    },
+    {
+      "uuid": "33b505da-d01c-4887-aa17-fb254db27221",
+      "name": "BB:BehaviorDefinition: Runs COM Object via Verclsid"
+    },
+    {
+      "uuid": "3c489fb4-62ef-456e-bcb3-aff4fc751822",
+      "name": "BB:BehaviorDefinition: Proxy Execution Via Explorer"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "155152",
+                "bb": "Suspicious Binary Load and Execution",
+                "uuid": "7ea5a9e6-5409-4280-96d0-21c058c55403",
+                "T": "EVENT"
+              },
+              {
+                "id": "154002",
+                "bb": "BB:BehaviorDefinition: Execution via WorkFolders",
+                "uuid": "0afe7f83-5191-4354-84b0-a2e6bc11e224",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "155152",
+                "bb": "Suspicious Binary Load and Execution",
+                "uuid": "7ea5a9e6-5409-4280-96d0-21c058c55403",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "JavaScript",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - JavaScript",
+            "values": [
+              {
+                "id": "144602",
+                "bb": "BB:BehaviorDefinition: Suspicious Registration via cscript",
+                "uuid": "6c99874b-ca8b-4236-bb12-76ab9cad492f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - Scheduled Task/Job",
+            "values": [
+              {
+                "id": "153002",
+                "bb": "BB:BehaviorDefinition: Execution via stordiag",
+                "uuid": "35263108-2716-42ca-b5ec-8d98d6430621",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.012",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.012",
+            "values": [
+              {
+                "id": "145652",
+                "bb": "BB:BehaviorDefinition: Runs COM Object via Verclsid",
+                "uuid": "33b505da-d01c-4887-aa17-fb254db27221",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "148402",
+                "bb": "BB:BehaviorDefinition: Proxy Execution Via Explorer",
+                "uuid": "3c489fb4-62ef-456e-bcb3-aff4fc751822",
+                "T": "EVENT"
+              },
+              {
+                "id": "151302",
+                "bb": "BB:BehaviorDefinition: Execution DLL of Choice Using WAB",
+                "uuid": "5b93f963-d2e9-4df2-9e25-9405469e49ef",
+                "T": "EVENT"
+              },
+              {
+                "id": "155202",
+                "bb": "BB:BehaviorDefinition: DLL Execution via Rasautou",
+                "uuid": "d56a4f37-f52d-4f3c-9690-2831883e1c3f",
+                "T": "EVENT"
+              },
+              {
+                "id": "155252",
+                "bb": "BB:BehaviorDefinition: Execute Files with Msdeploy",
+                "uuid": "62d3f455-a127-4932-b97d-13222501c74e",
+                "T": "EVENT"
+              },
+              {
+                "id": "155302",
+                "bb": "BB:BehaviorDefinition: Execution via Diskshadow",
+                "uuid": "292faf56-9722-43fc-a380-4d21d7fbf211",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "152502",
+                "bb": "BB:BehaviorDefinition: Specified Binary Execution via Devtoolslauncher or OpenWith",
+                "uuid": "179f5b67-9262-4164-a2da-b666b5d2cf87",
+                "T": "EVENT"
+              },
+              {
+                "id": "155252",
+                "bb": "BB:BehaviorDefinition: Execute Files with Msdeploy",
+                "uuid": "62d3f455-a127-4932-b97d-13222501c74e",
+                "T": "EVENT"
+              },
+              {
+                "id": "155302",
+                "bb": "BB:BehaviorDefinition: Execution via Diskshadow",
+                "uuid": "292faf56-9722-43fc-a380-4d21d7fbf211",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Ingress Tool Transfer",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1105",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Ingress Tool Transfer",
+            "values": [
+              {
+                "id": "153352",
+                "bb": "BB:BehaviorDefinition: File Download Using ProtocolHandler",
+                "uuid": "03c60dd8-2c94-48b5-9ad3-cd377e99a64e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.246058",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "123852",
+  "rule_id": "123852",
+  "uuid": "9ce5e220-fe61-4ee8-9c3d-8da63286a5bc",
+  "rule_name": "BB:DeviceDefinition: Attack Surface Management",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-01T13:59:44.908Z",
+  "modified": "2024-06-27T13:19:22.860Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM Security Randori Recon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "517"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.252418",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

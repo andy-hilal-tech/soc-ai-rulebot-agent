@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "133552",
+  "rule_id": "133552",
+  "uuid": "eda76d71-8719-454c-accf-d958c538d151",
+  "rule_name": "BB:BehaviorDefinition: User Agent Changed via Powershell",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-20T15:34:32.114Z",
+  "modified": "2024-07-21T12:38:33.254Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains all of [-UserAgent  or Invoke-WebRequest]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONALLany-UserAgent �Invoke-WebRequest"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "T1071.001",
+        "TAC": "Command and Control",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1071.001",
+            "values": [
+              {
+                "id": "133552",
+                "bb": "BB:BehaviorDefinition: User Agent Changed via Powershell",
+                "uuid": "eda76d71-8719-454c-accf-d958c538d151",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.337467",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

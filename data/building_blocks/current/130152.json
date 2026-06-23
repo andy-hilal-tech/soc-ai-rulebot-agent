@@ -1,0 +1,112 @@
+{
+  "rule_doc_id": "130152",
+  "rule_id": "130152",
+  "uuid": "2d834047-3e90-4b40-a628-52a58c3b8a4a",
+  "rule_name": "BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Flows",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-09-03T11:13:49.240Z",
+  "modified": "2024-07-21T09:42:17.308Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "2",
+            "id": "25"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:Threats: Communication to Cryptocurrency Mining URL for Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "e906916b-1862-4b97-bd9d-8d5262a21e43"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131105NENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "XForceCategoryByURL_Test",
+            "uid": "0",
+            "id": "114"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>HTTP Host</a> is categorized by X-Force as <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Cryptocurrency Mining</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getStringFlowDatabaseFields",
+              "value": "131105"
+            },
+            {
+              "id": "2",
+              "method": "getXForceURLCategories",
+              "value": "68"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "e906916b-1862-4b97-bd9d-8d5262a21e43",
+      "name": "BB:Threats: Communication to Cryptocurrency Mining URL for Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.284820",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

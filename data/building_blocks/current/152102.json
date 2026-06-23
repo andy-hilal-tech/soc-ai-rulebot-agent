@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "152102",
+  "rule_id": "152102",
+  "uuid": "15986a69-0c69-4251-97ba-7461d5cc023d",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Delete Command",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-14T15:09:49.251Z",
+  "modified": "2024-07-21T12:38:46.342Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of [del or *.exe or /f or /q], Command (custom) contains any of [del or \\*.dll or C:\\ProgramData\\]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanydel�*.exe�/f�/qCommandCONanydel�\\*.dll�C:\\ProgramData\\"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.004",
+            "values": [
+              {
+                "id": "152102",
+                "bb": "BB:BehaviorDefinition: Suspicious Delete Command",
+                "uuid": "15986a69-0c69-4251-97ba-7461d5cc023d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.698267",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

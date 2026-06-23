@@ -1,0 +1,53 @@
+{
+  "rule_doc_id": "100652",
+  "rule_id": "100652",
+  "uuid": "533c9470-e2ec-4726-b9c5-67585d50a7e1",
+  "rule_name": "UBA : Create Offense",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2016-06-29T13:11:16.500Z",
+  "modified": "2024-07-21T07:53:23.139Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(104000010) Sense Offense Inject, (104000078) UBA Offense - User crossed risk threshold</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "104000010,                                                                                                                                                                                                                                                                                       104000078"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "3600",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.457634",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

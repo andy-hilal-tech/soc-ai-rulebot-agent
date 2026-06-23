@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "123252",
+  "rule_id": "123252",
+  "uuid": "23d4272f-787d-40d8-a201-83f3ee8b968d",
+  "rule_name": "Log4Shell Base Pattern in Flows",
+  "object_type": "rule",
+  "group": "Exploit, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-02-22T14:53:32.621Z",
+  "modified": "2024-06-27T13:19:25.929Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "1",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host, HTTP Referrer, HTTP User Agent, HTTP GET Request (custom)</a> match <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>(?i)(\\$|%24)(\\{|%7B)[^\\}]*?j.*?n.*?d.*?i</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getFlowDatabaseFields",
+              "value": "131105, 131106, 131109, HTTP GET Request"
+            },
+            {
+              "id": "2",
+              "value": "(?i)(\\$|%24)(\\{|%7B)[^\\}]*?j.*?n.*?d.*?i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.168316",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

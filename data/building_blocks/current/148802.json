@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "148802",
+  "rule_id": "148802",
+  "uuid": "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+  "rule_name": "BB:BehaviorDefinition: Epic Filenames",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-18T18:08:37.694Z",
+  "modified": "2024-07-21T12:38:48.263Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Success, Audit.Object Access Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 19152, 19154, 19072, 19071, 19075, 19074, 19081, 19080"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) in ('zagruzchik.dll') OR LOWER(&quot;Filename&quot;) in ('ؤتمر جنيف.rar') OR LOWER(&quot;Filename&quot;) in ('nato position on syria.scr') OR LOWER(&quot;Filename&quot;) MATCHES ('note_№107-41d.pdf') OR LOWER(&quot;Filename&quot;) in ('talking points.scr') OR LOWER(&quot;Filename&quot;) in ('border_security_protocol.rar') OR LOWER(&quot;Filename&quot;) in ('security protocol.scr') OR LOWER(&quot;Filename&quot;) in ('program.scr')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Filename%22)%20in%20('zagruzchik.dll')%20OR%20LOWER(%22Filename%22)%20in%20('%D8%A4%D8%AA%D9%85%D8%B1%20%D8%AC%D9%86%D9%8A%D9%81.rar')%20OR%20LOWER(%22Filename%22)%20in%20('nato%20position%20on%20syria.scr')%20OR%20LOWER(%22Filename%22)%20MATCHES%20('note_%E2%84%96107-41d.pdf')%20OR%20LOWER(%22Filename%22)%20in%20('talking%20points.scr')%20OR%20LOWER(%22Filename%22)%20in%20('border_security_protocol.rar')%20OR%20LOWER(%22Filename%22)%20in%20('security%20protocol.scr')%20OR%20LOWER(%22Filename%22)%20in%20('program.scr')|%5B%22LOWER(%5C%22Filename%5C%22)%20in%20('zagruzchik.dll')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('%D8%A4%D8%AA%D9%85%D8%B1%20%D8%AC%D9%86%D9%8A%D9%81.rar')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('nato%20position%20on%20syria.scr')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20MATCHES%20('note_%E2%84%96107-41d.pdf')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('talking%20points.scr')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('border_security_protocol.rar')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('security%20protocol.scr')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20in%20('program.scr')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "148802",
+                "bb": "BB:BehaviorDefinition: Epic Filenames",
+                "uuid": "20f04063-ef17-4c7d-a022-23ce65ec07e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.648933",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

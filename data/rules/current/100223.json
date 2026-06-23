@@ -1,0 +1,91 @@
+{
+  "rule_doc_id": "100223",
+  "rule_id": "100223",
+  "uuid": "SYSTEM-1013",
+  "rule_name": "Source Address is a Bogon IP",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:44:09.895Z",
+  "modified": "2023-10-30T02:02:40.244Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkView_Test",
+            "uid": "0",
+            "id": "104"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>source IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Bogon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Source"
+            },
+            {
+              "id": "2",
+              "value": "Any"
+            },
+            {
+              "id": "3",
+              "method": "getRemoteNetworkView",
+              "value": "Bogon"
+            },
+            {
+              "id": "4",
+              "value": "Remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Source_Test",
+            "uid": "1",
+            "id": "27"
+          },
+          "text": [
+            "when the source is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setSeverity",
+            "operation": "incSeverity",
+            "value": "1"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Severity has been increased by 1 because the source address is a Bogon IP."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.314849",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

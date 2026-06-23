@@ -1,0 +1,95 @@
+{
+  "rule_doc_id": "124302",
+  "rule_id": "124302",
+  "uuid": "3c4f352f-cf70-4091-bc5a-ff94c10fd19d",
+  "rule_name": "Microsoft Windows RCE Vulnerability - Suspicious Hashes",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-10-03T11:32:58.058Z",
+  "modified": "2024-06-27T13:19:26.524Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Endpoint Protection Devices</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(&quot;SHA256 Hash&quot; IS NOT NULL AND REFERENCESETCONTAINS('Windows RCE SHA256 Hashes', &quot;SHA256 Hash&quot;))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22SHA256%20Hash%22%20IS%20NOT%20NULL%20AND%20REFERENCESETCONTAINS('Windows%20RCE%20SHA256%20Hashes',%20%22SHA256%20Hash%22))|%5B%22(%5C%22SHA256%20Hash%5C%22%20IS%20NOT%20NULL%20AND%20REFERENCESETCONTAINS('Windows%20RCE%20SHA256%20Hashes',%20%5C%22SHA256%20Hash%5C%22))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "5026",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67500730",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "9",
+            "credibility": "9",
+            "severity": "9",
+            "description": "Detects when RCE SHA256 hashes are seen.",
+            "name": "Microsoft Windows RCE Vulnerability - Suspicious Hashes"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+      "name": "BB:DeviceDefinition: Endpoint Protection Devices"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.225436",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

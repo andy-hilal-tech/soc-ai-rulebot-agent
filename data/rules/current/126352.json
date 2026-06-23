@@ -1,0 +1,157 @@
+{
+  "rule_doc_id": "126352",
+  "rule_id": "126352",
+  "uuid": "c883b28c-361e-4544-b390-679fdad5adbb",
+  "rule_name": "Multiple Sensitive Resources Deleted",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-10-30T16:47:45.642Z",
+  "modified": "2024-07-21T09:33:21.407Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "5",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Audit.Network Deletion Success, Authentication.Access Key Removal Success, Authentication.Role Removal Success, Authentication.Role Unassignment Success, Audit.Machine Deletion Success, System.Task Cancellation Success, Audit.Delete Activity Succeeded, System.Cron Failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19123, 3151, 3130, 3136, 19219, 8101, 19021, 8041"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceDataTest",
+            "uid": "2",
+            "id": "110"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Resource (custom)</a> is the key and <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Resource Name (custom)</a> is the value in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>Sensitive Resource Names - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Resource"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Resource Name"
+            },
+            {
+              "id": "5",
+              "value": "any"
+            },
+            {
+              "id": "6",
+              "method": "getReferenceDataMapsOfSets",
+              "value": "179"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "4",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Source Address</a> and different <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>Resource Name (custom)</a> in <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceaddress"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Resource Name"
+            },
+            {
+              "id": "5",
+              "value": "24"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.379965",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

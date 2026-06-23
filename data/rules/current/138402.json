@@ -1,0 +1,247 @@
+{
+  "rule_doc_id": "138402",
+  "rule_id": "138402",
+  "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+  "rule_name": "Credential Dumping Activities Discovered",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-03-16T13:25:54.311Z",
+  "modified": "2024-07-21T10:28:49.899Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Object Access Success, System.Process Creation Success, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19081, 8110, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [reg.exe or regedit.exe or regedit32.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyreg.exe�regedit.exe�regedit32.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?reg(\\.exe\\&quot;)?\\s+(add|query|save).*(uselogoncredential|password|sam|system|security).*' OR LOWER(&quot;Registry Key&quot;) MATCHES '\\\\system\\\\(controlset001|controlset002|currentcontrolset).*wdigest'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20'.*%3Freg(%5C.exe%5C%22)%3F%5Cs%2B(add%7Cquery%7Csave).*(uselogoncredential%7Cpassword%7Csam%7Csystem%7Csecurity).*'%20OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20'%5C%5Csystem%5C%5C(controlset001%7Ccontrolset002%7Ccurrentcontrolset).*wdigest'|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3Freg(%5C%5C.exe%5C%5C%5C%22)%3F%5C%5Cs%2B(add%7Cquery%7Csave).*(uselogoncredential%7Cpassword%7Csam%7Csystem%7Csecurity).*'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20'%5C%5C%5C%5Csystem%5C%5C%5C%5C(controlset001%7Ccontrolset002%7Ccurrentcontrolset).*wdigest'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - OS Credential Dumping",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Unsecured Credentials",
+        "STEC": "T1552.002",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1552",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1552.002",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "T1012",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1012",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1012",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.011",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.011",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Collection": [
+      {
+        "TEC": "T1005",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1005",
+        "MAP_S": [
+          {
+            "name": "Collection - T1005",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.771249",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

@@ -1,0 +1,183 @@
+{
+  "rule_doc_id": "137702",
+  "rule_id": "137702",
+  "uuid": "c558200e-8acd-4e80-a09f-b7f8b3717bb0",
+  "rule_name": "BB:BehaviorDefinition: Run as Superuser or Another User (Unix)",
+  "object_type": "building_block",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-22T19:36:26.676Z",
+  "modified": "2024-07-21T10:28:56.614Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyMatch_Test",
+            "uid": "4",
+            "id": "321"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Audit ID (custom)</a> <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>not equals</a> <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>Effective User ID (custom)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "Audit ID"
+            },
+            {
+              "id": "2",
+              "value": "notEquals"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Effective User ID"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>User ID (custom) is any of [0 or 100]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "User IDEQany0�100"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of [su or sudo or sh or bash]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanysu�sudo�sh�bash"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.003",
+            "values": [
+              {
+                "id": "137702",
+                "bb": "BB:BehaviorDefinition: Run as Superuser or Another User (Unix)",
+                "uuid": "c558200e-8acd-4e80-a09f-b7f8b3717bb0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1068",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1068",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1068",
+            "values": [
+              {
+                "id": "137702",
+                "bb": "BB:BehaviorDefinition: Run as Superuser or Another User (Unix)",
+                "uuid": "c558200e-8acd-4e80-a09f-b7f8b3717bb0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.428580",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

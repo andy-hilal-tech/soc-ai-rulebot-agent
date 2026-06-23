@@ -1,0 +1,129 @@
+{
+  "rule_doc_id": "100098",
+  "rule_id": "100098",
+  "uuid": "SYSTEM-1451",
+  "rule_name": "BB:BehaviorDefinition: Post Compromise Activities",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T17:05:50.851Z",
+  "modified": "2023-10-30T02:20:04.707Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication User or Group Added or Changed, Anomaly: Potential Honeypot Access, Botnet: Potential Botnet Connection (DNS), WormDetection: Local Mass Mailing Host Detected, BB:ReconDetected: Basic Recon Rules</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1309, SYSTEM-1411, SYSTEM-1372, SYSTEM-1190, 5022e221-08aa-4c78-b7c3-225509af05e0"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1309",
+      "name": "BB:CategoryDefinition: Authentication User or Group Added or Changed"
+    },
+    {
+      "uuid": "SYSTEM-1411",
+      "name": "Potential Honeypot Access"
+    },
+    {
+      "uuid": "SYSTEM-1372",
+      "name": "Botnet: Potential Botnet Connection (DNS)"
+    },
+    {
+      "uuid": "SYSTEM-1190",
+      "name": "Local Mass Mailing Host Detected"
+    },
+    {
+      "uuid": "5022e221-08aa-4c78-b7c3-225509af05e0",
+      "name": "BB:ReconDetected: Basic Recon Rules"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100110",
+                "bb": "Local L2L Scanner Detected",
+                "uuid": "SYSTEM-1360",
+                "T": "COMMON"
+              },
+              {
+                "id": "100111",
+                "bb": "Remote Scanner Detected",
+                "uuid": "SYSTEM-1363",
+                "T": "COMMON"
+              },
+              {
+                "id": "100114",
+                "bb": "Local L2R Windows Server Scanner",
+                "uuid": "SYSTEM-1579",
+                "T": "COMMON"
+              },
+              {
+                "id": "100115",
+                "bb": "Local L2R Scanner Detected",
+                "uuid": "SYSTEM-1589",
+                "T": "COMMON"
+              },
+              {
+                "id": "100107",
+                "bb": "BB:ReconDetected: Basic Recon Rules",
+                "uuid": "5022e221-08aa-4c78-b7c3-225509af05e0",
+                "T": "COMMON"
+              },
+              {
+                "id": "165515",
+                "bb": "Excessive Firewall Denies from Local Host",
+                "uuid": "7ccb1c2a-eeb0-4263-88c1-7d2b3d226cb9",
+                "T": "EVENT"
+              },
+              {
+                "id": "100109",
+                "bb": "Host Port Scan Detected by Remote Host",
+                "uuid": "SYSTEM-1152",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

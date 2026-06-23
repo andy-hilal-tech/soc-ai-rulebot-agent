@@ -1,0 +1,85 @@
+{
+  "rule_doc_id": "125302",
+  "rule_id": "125302",
+  "uuid": "d6a47453-d554-4bd3-8147-2b6bf2615082",
+  "rule_name": "BB:BehaviourDefinition: Abnormal Right Assigned followed by Privileged Container Creation",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-09-26T16:20:39.247Z",
+  "modified": "2024-07-21T09:33:20.876Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Creation of a Privileged Container</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Source Address</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>Abnormal Rights Assigned to Unauthorized Users</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "84a22997-c84a-4ede-b73c-4d18ca09c253"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceaddress"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "da88a0d1-b068-428c-a9f2-928e047136d4"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "84a22997-c84a-4ede-b73c-4d18ca09c253",
+      "name": "Creation of a Privileged Container"
+    },
+    {
+      "uuid": "da88a0d1-b068-428c-a9f2-928e047136d4",
+      "name": "Abnormal Rights Assigned to Unauthorized Users"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.252418",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

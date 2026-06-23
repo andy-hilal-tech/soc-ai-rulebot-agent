@@ -1,0 +1,111 @@
+{
+  "rule_doc_id": "127402",
+  "rule_id": "127402",
+  "uuid": "SYSTEM-1460",
+  "rule_name": "Anomaly: DMZ Jumping",
+  "object_type": "rule",
+  "group": "Post-Intrusion Activity, Horizontal Movement, Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-01-19T14:40:31.631Z",
+  "modified": "2024-07-21T09:34:35.674Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DoubleSequenceFunction_Test",
+            "uid": "1",
+            "id": "94"
+          },
+          "text": [
+            "when a subset of at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Pre DMZ Jump, BB:DeviceDefinition: FW / Router / Switch</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source IP</a> followed by a subset of at least <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>BB:CategoryDefinition: Post DMZ Jump, BB:DeviceDefinition: FW / Router / Switch</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>in</a> order <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>destination IP</a> from the previous sequence, within <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1462, SYSTEM-1322"
+            },
+            {
+              "id": "3",
+              "value": "In"
+            },
+            {
+              "id": "4",
+              "value": "SourceIP"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1463, SYSTEM-1322"
+            },
+            {
+              "id": "7",
+              "value": "In"
+            },
+            {
+              "id": "8",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "9",
+              "value": "5"
+            },
+            {
+              "id": "10",
+              "value": "m"
+            },
+            {
+              "id": "11",
+              "value": "From"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1462",
+      "name": "BB:CategoryDefinition: Pre DMZ Jump"
+    },
+    {
+      "uuid": "SYSTEM-1322",
+      "name": "BB:DeviceDefinition: FW / Router / Switch"
+    },
+    {
+      "uuid": "SYSTEM-1463",
+      "name": "BB:CategoryDefinition: Post DMZ Jump"
+    },
+    {
+      "uuid": "SYSTEM-1322",
+      "name": "BB:DeviceDefinition: FW / Router / Switch"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.411669",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

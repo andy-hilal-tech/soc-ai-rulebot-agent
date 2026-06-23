@@ -1,0 +1,178 @@
+{
+  "rule_doc_id": "108602",
+  "rule_id": "108602",
+  "uuid": "2d7183f2-339c-4826-a10a-ef6d374510e0",
+  "rule_name": "BB:UBA : Compromised Account - Exfiltration",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-10-24T14:29:11.385Z",
+  "modified": "2024-02-19T16:44:53.337Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : Large Outbound Transfer by High Risk User, UBA : Suspicious Access Followed by Data Exfiltration, UBA : Potential Access to DGA Domain</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "ea3e15b4-95c8-4e08-a726-5c0b324a9711, 58d07018-14df-40bc-b20c-ac92aea382cf, 6ea2c3e1-e757-48b6-b5d0-733543999a9d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "ea3e15b4-95c8-4e08-a726-5c0b324a9711",
+      "name": "UBA : Large Outbound Transfer by High Risk User"
+    },
+    {
+      "uuid": "58d07018-14df-40bc-b20c-ac92aea382cf",
+      "name": "UBA : Suspicious Access Followed by Data Exfiltration"
+    },
+    {
+      "uuid": "6ea2c3e1-e757-48b6-b5d0-733543999a9d",
+      "name": "UBA : Potential Access to DGA Domain"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "110052",
+                "bb": "UBA : User Access from Unusual Locations",
+                "uuid": "ae5e3db1-a8fa-4e01-8bde-2619fd49cef8",
+                "T": "EVENT"
+              },
+              {
+                "id": "106352",
+                "bb": "UBA : Potential Access to DGA Domain",
+                "uuid": "6ea2c3e1-e757-48b6-b5d0-733543999a9d",
+                "T": "EVENT"
+              },
+              {
+                "id": "109302",
+                "bb": "UBA : Suspicious Access Followed by Data Exfiltration",
+                "uuid": "58d07018-14df-40bc-b20c-ac92aea382cf",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "106352",
+                "bb": "UBA : Potential Access to DGA Domain",
+                "uuid": "6ea2c3e1-e757-48b6-b5d0-733543999a9d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "109802",
+                "bb": "UBA : User Access from Prohibited Location",
+                "uuid": "013863bb-b98c-48f4-a011-7f0ef803cf67",
+                "T": "EVENT"
+              },
+              {
+                "id": "109852",
+                "bb": "UBA : User Access from Restricted Location",
+                "uuid": "89ee68bc-a2cc-45b9-9b08-0361e0a58b50",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Exfiltration": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - None",
+            "values": [
+              {
+                "id": "109552",
+                "bb": "UBA : Large Outbound Transfer by High Risk User",
+                "uuid": "ea3e15b4-95c8-4e08-a726-5c0b324a9711",
+                "T": "EVENT"
+              },
+              {
+                "id": "109302",
+                "bb": "UBA : Suspicious Access Followed by Data Exfiltration",
+                "uuid": "58d07018-14df-40bc-b20c-ac92aea382cf",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.095305",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

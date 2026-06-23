@@ -1,0 +1,66 @@
+{
+  "rule_doc_id": "165104",
+  "rule_id": "165104",
+  "uuid": "18910412-2e2f-418f-a710-becc506a8202",
+  "rule_name": "Communication with a Potential Hostile Host (Flows)",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-05-06T09:18:58.231Z",
+  "modified": "2025-05-06T09:18:58.231Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "25364d8c-8e0e-476e-bc87-d630e3098c64, 69901f9d-85ae-4681-b96d-03494c2471c4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "25364d8c-8e0e-476e-bc87-d630e3098c64",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows Reference Sets)"
+    },
+    {
+      "uuid": "69901f9d-85ae-4681-b96d-03494c2471c4",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.267791",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

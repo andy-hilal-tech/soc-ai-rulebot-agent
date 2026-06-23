@@ -1,0 +1,147 @@
+{
+  "rule_doc_id": "146352",
+  "rule_id": "146352",
+  "uuid": "26dc60cc-af21-4bfc-b453-6cef1ab41420",
+  "rule_name": "BB:BehaviorDefinition: Regsvr32 Command Line Without DLL",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T15:05:45.697Z",
+  "modified": "2024-07-21T12:38:33.323Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of regsvr32.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyregsvr32.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) is N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%.dll%' OR LOWER(&quot;Command&quot;) LIKE '%.ocx%' OR LOWER(&quot;Command&quot;) LIKE '%.cpl%' OR LOWER(&quot;Command&quot;) LIKE '%.ax%' OR LOWER(&quot;Command&quot;) LIKE '%.bav%' OR LOWER(&quot;Command&quot;) LIKE '%.ppl%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Command%22)%20LIKE%20'%25.dll%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25.ocx%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25.cpl%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25.ax%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25.bav%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25.ppl%25'))|%5B%22%20((LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.dll%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ocx%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.cpl%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ax%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.bav%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ppl%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "146352",
+                "bb": "BB:BehaviorDefinition: Regsvr32 Command Line Without DLL",
+                "uuid": "26dc60cc-af21-4bfc-b453-6cef1ab41420",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.579233",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162260",
+  "rule_id": "162260",
+  "uuid": "d9cac958-2e4f-4042-9ca2-e478d9477665",
+  "rule_name": "Uncommon New Firewall Rule Added In Windows Firewall Exception List",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:50:51.555Z",
+  "modified": "2024-08-04T08:50:51.554Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\" IN('2004', '2071', '2097')) AND (NOT((LOWER(UTF8(payload)) LIKE '%action%2%' OR (LOWER(UTF8(payload)) LIKE '%:\\program files (x86)*%' OR LOWER(UTF8(payload)) LIKE '%:\\program files\\%' OR LOWER(UTF8(payload)) LIKE '%:\\windows\\system32\\%' OR LOWER(UTF8(payload)) LIKE '%:\\windows\\syswow64\\%' OR LOWER(UTF8(payload)) LIKE '%:\\windows\\winsxs\\%') OR (LOWER(UTF8(payload)) LIKE '%:\\perflogs*%' OR LOWER(UTF8(payload)) LIKE '%:\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%:\\tmp\\%' OR LOWER(UTF8(payload)) LIKE '%:\\users\\public\\%' OR LOWER(UTF8(payload)) LIKE '%:\\windows\\tasks\\%' OR LOWER(UTF8(payload)) LIKE '%:\\windows\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp\\%')))) AND (NOT((LOWER(UTF8(payload)) LIKE '%:\\programdata\\microsoft\\windows defender\\platform*%' OR LOWER(UTF8(payload)) LIKE '%\\msmpeng.exe%')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%272004%27%2C%20%272071%27%2C%20%272097%27%29%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25action%252%25%27%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogram%20files%20%28x86%29%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogram%20files%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Csystem32%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Csyswow64%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Cwinsxs%5C%25%27%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cperflogs%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Ctmp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cusers%5Cpublic%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Ctasks%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Clocal%5Ctemp%5C%25%27%29%29%29%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogramdata%5Cmicrosoft%5Cwindows%20defender%5Cplatform%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cmsmpeng.exe%25%27%29%29%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%272004%27%2C%20%272071%27%2C%20%272097%27%29%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25action%252%25%27%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogram%20files%20%28x86%29%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogram%20files%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Csystem32%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Csyswow64%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Cwinsxs%5C%25%27%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cperflogs%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Ctmp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cusers%5Cpublic%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Ctasks%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cwindows%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Clocal%5Ctemp%5C%25%27%29%29%29%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A%5Cprogramdata%5Cmicrosoft%5Cwindows%20defender%5Cplatform%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cmsmpeng.exe%25%27%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: frack113 SIGMA Title: Uncommon New Firewall Rule Added In Windows Firewall Exception List SIGMA Description: Detects when a rule has been added to the Windows Firewall exception list  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Uncommon New Firewall Rule Added In Windows Firewall Exception List"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.626366",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

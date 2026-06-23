@@ -1,0 +1,123 @@
+{
+  "rule_doc_id": "130752",
+  "rule_id": "130752",
+  "uuid": "652e9e12-4bb4-4a32-a425-c0b67ec9c5ad",
+  "rule_name": "Cryptocurrency Mining Traffic",
+  "object_type": "rule",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-10-27T19:40:24.554Z",
+  "modified": "2024-07-21T09:42:17.379Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DoubleSequenceFunction_Test",
+            "uid": "1",
+            "id": "94"
+          },
+          "text": [
+            "when a subset of at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Cryptocurrency Mining Command Execution, Cryptocurrency Mining File Hash, Cryptocurrency Mining Process, Cryptocurrency Mining Threat Name, In-Browser Cryptojacking - Javascript File Hash, In-Browser Cryptojacking - Javascript Filename</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source IP</a> followed by a subset of at least <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Ports</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>in any</a> order <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>from</a> the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>source IP</a> from the previous sequence, within <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "2b9816df-d1bc-4b48-9894-aa46c52b1cdd, 29915876-f0e8-49d9-a816-c1a497b9de81, 3e67b917-2f53-4e41-82f5-75118ad705ec, c172587a-0d59-446c-9bcf-02af6dc71d85, 5dacabab-613a-4081-9b38-2e7ed4fbb850, 0a163b4f-ca45-4bbb-aa2c-42703f08372c"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "SourceIP"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "method": "getCommonRules",
+              "value": "ef0f5a26-d151-44a0-a3e5-7cba0ba2e8b1"
+            },
+            {
+              "id": "7",
+              "value": "Any"
+            },
+            {
+              "id": "8",
+              "value": "SourceIP"
+            },
+            {
+              "id": "9",
+              "value": "15"
+            },
+            {
+              "id": "10",
+              "value": "m"
+            },
+            {
+              "id": "11",
+              "value": "From"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "2b9816df-d1bc-4b48-9894-aa46c52b1cdd",
+      "name": "Cryptocurrency Mining Command Execution"
+    },
+    {
+      "uuid": "29915876-f0e8-49d9-a816-c1a497b9de81",
+      "name": "Cryptocurrency Mining File Hash"
+    },
+    {
+      "uuid": "3e67b917-2f53-4e41-82f5-75118ad705ec",
+      "name": "Cryptocurrency Mining Process"
+    },
+    {
+      "uuid": "c172587a-0d59-446c-9bcf-02af6dc71d85",
+      "name": "Cryptocurrency Mining Threat Name"
+    },
+    {
+      "uuid": "5dacabab-613a-4081-9b38-2e7ed4fbb850",
+      "name": "In-Browser Cryptojacking - JavaScript File Hash"
+    },
+    {
+      "uuid": "0a163b4f-ca45-4bbb-aa2c-42703f08372c",
+      "name": "In-Browser Cryptojacking - JavaScript Filename"
+    },
+    {
+      "uuid": "ef0f5a26-d151-44a0-a3e5-7cba0ba2e8b1",
+      "name": "BB:Threats: Cryptocurrency Mining Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.543597",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

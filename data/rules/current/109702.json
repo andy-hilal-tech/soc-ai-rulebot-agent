@@ -1,0 +1,204 @@
+{
+  "rule_doc_id": "109702",
+  "rule_id": "109702",
+  "uuid": "d4d4f824-8e36-4375-8c74-bce00d838923",
+  "rule_name": "UBA : Anomalous Cloud Account Created From New Location",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-08-07T13:49:23.940Z",
+  "modified": "2024-02-19T16:45:45.715Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Cloud Endpoints</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "eaab6c66-5e92-4bbd-88cf-055f45c50e31"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "1",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:UBA : User Account Created</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a> after any of <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>UBA : User Geography Change</a> match with the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>Username</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "ef826f3a-4acb-46a6-8829-1fb3c4671eeb"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "3"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "06bd0239-ae61-4846-8685-6f48bbe760db"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24006",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500356",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=10",
+            "name": "UBA : Anomalous Cloud Account Created From New Location"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "eaab6c66-5e92-4bbd-88cf-055f45c50e31",
+      "name": "BB:UBA : Cloud Endpoints"
+    },
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "ef826f3a-4acb-46a6-8829-1fb3c4671eeb",
+      "name": "BB:UBA : User Account Created"
+    },
+    {
+      "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+      "name": "UBA : User Geography Change"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "110002",
+                "bb": "UBA : User Geography Change",
+                "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "109702",
+                "bb": "UBA : Anomalous Cloud Account Created From New Location",
+                "uuid": "d4d4f824-8e36-4375-8c74-bce00d838923",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.708248",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

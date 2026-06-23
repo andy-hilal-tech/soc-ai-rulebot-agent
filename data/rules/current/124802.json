@@ -1,0 +1,123 @@
+{
+  "rule_doc_id": "124802",
+  "rule_id": "124802",
+  "uuid": "c7b7a29b-7a69-431e-a1ea-7e2bc7958f02",
+  "rule_name": "QRadar Audit: Potential Sensitive File Modification",
+  "object_type": "rule",
+  "group": "System, Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-01-30T13:48:07.300Z",
+  "modified": "2024-07-21T08:29:29.020Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>SIM Audit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "105"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(28250184) A user executed a command from the command prompt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "28250184"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) matches any of expressions [(vi|rm|mv|cp).*\\.bash_history or echo.*&gt;.*\\.bash_history]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandREXany(vi|rm|mv|cp).*\\.bash_history�echo.*>.*\\.bash_history"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "3",
+            "operation": "incSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "Clear Command History",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Clear Command History",
+            "values": [
+              {
+                "id": "124802",
+                "bb": "QRadar Audit: Potential Sensitive File Modification",
+                "uuid": "c7b7a29b-7a69-431e-a1ea-7e2bc7958f02",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.298668",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

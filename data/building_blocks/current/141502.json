@@ -1,0 +1,151 @@
+{
+  "rule_doc_id": "141502",
+  "rule_id": "141502",
+  "uuid": "2fde0980-7cf5-4332-8c1f-7ec891f68917",
+  "rule_name": "BB:BehaviorDefinition: Shortcut (lnk) File Executing a Critical Process (2)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-07-27T16:35:16.613Z",
+  "modified": "2024-07-21T10:28:56.896Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Critical Process Created by Shorcut (lnk) File</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Critical Process Executing Commands</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "cd729d5a-847e-4e30-b02b-89fddb6c193f"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+      "name": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File"
+    },
+    {
+      "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+      "name": "BB:BehaviorDefinition: Critical Process Created"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "141402",
+                "bb": "BB:BehaviorDefinition: Critical Process Created",
+                "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "141452",
+                "bb": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File",
+                "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1068",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1068",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1068",
+            "values": [
+              {
+                "id": "141452",
+                "bb": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File",
+                "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.500274",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,221 @@
+{
+  "rule_doc_id": "160252",
+  "rule_id": "160252",
+  "uuid": "bc1d5d5d-cc6d-4c12-8019-1c097ad5414f",
+  "rule_name": "Potential DLL Search Order Hijacking",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-04T12:43:21.531Z",
+  "modified": "2024-07-21T12:38:54.008Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Successful File Modification, Audit.Object Load Success, System.File Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8014, 19247, 8028"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "5",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) in ('winword.exe', 'excel.exe', 'powerpnt.exe', 'MSACCESS.EXE', 'MSPUB.EXE', 'fltldr.exe', 'cmd.exe', 'certutil.exe', 'mshta.exe', 'cscript.exe', 'wscript.exe', 'curl.exe', 'powershell.exe', 'pwsh.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20in%20('winword.exe'%2C%20'excel.exe'%2C%20'powerpnt.exe'%2C%20'MSACCESS.EXE'%2C%20'MSPUB.EXE'%2C%20'fltldr.exe'%2C%20'cmd.exe'%2C%20'certutil.exe'%2C%20'mshta.exe'%2C%20'cscript.exe'%2C%20'wscript.exe'%2C%20'curl.exe'%2C%20'powershell.exe'%2C%20'pwsh.exe')|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20in%20('winword.exe'%2C%20'excel.exe'%2C%20'powerpnt.exe'%2C%20'MSACCESS.EXE'%2C%20'MSPUB.EXE'%2C%20'fltldr.exe'%2C%20'cmd.exe'%2C%20'certutil.exe'%2C%20'mshta.exe'%2C%20'cscript.exe'%2C%20'wscript.exe'%2C%20'curl.exe'%2C%20'powershell.exe'%2C%20'pwsh.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Extension (custom) is any of dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionEQanydll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;File Directory&quot;) LIKE '%\\users\\%' and LOWER(&quot;File Directory&quot;) LIKE '%\\appdata\\%' and (LOWER(&quot;File Directory&quot;) LIKE '%\\microsoft\\onedrive\\%' or LOWER(&quot;File Directory&quot;) LIKE '%\\microsoft onedrive\\%' or LOWER(&quot;File Directory&quot;) LIKE '%\\microsoft\\teams\\%' or LOWER(&quot;File Directory&quot;) LIKE '%\\local\\slack\\app-%' or LOWER(&quot;File Directory&quot;) LIKE '%\\local\\programs\\microsoft vs code\\%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cusers%5C%25'%20and%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cappdata%5C%25'%20and%20(LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cmicrosoft%5Conedrive%5C%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cmicrosoft%20onedrive%5C%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cmicrosoft%5Cteams%5C%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Clocal%5Cslack%5Capp-%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Clocal%5Cprograms%5Cmicrosoft%20vs%20code%5C%25'))|%5B%22(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cusers%5C%5C%25'%20and%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%20and%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%5C%5Conedrive%5C%5C%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%20onedrive%5C%5C%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%5C%5Cteams%5C%5C%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Clocal%5C%5Cslack%5C%5Capp-%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Clocal%5C%5Cprograms%5C%5Cmicrosoft%20vs%20code%5C%5C%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>((LOWER(&quot;Process Full Full Name&quot;) LIKE '%cmd.exe' and (LOWER(&quot;File Directory&quot;) LIKE '%\\users\\%' and LOWER(&quot;File Directory&quot;) LIKE '%\\appdata\\%' and LOWER(&quot;File Directory&quot;) LIKE '%\\microsoft\\onedrive\\%' and LOWER(&quot;File Directory&quot;) LIKE '%\\api-ms-win-core-%')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Process%20Name%22)%20LIKE%20'%25cmd.exe'%20and%20(LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cusers%5C%25'%20and%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cappdata%5C%25'%20and%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Cmicrosoft%5Conedrive%5C%25'%20and%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5Capi-ms-win-core-%25')))|%5B%22((LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25cmd.exe'%20and%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cusers%5C%5C%25'%20and%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%20and%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%5C%5Conedrive%5C%5C%25'%20and%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5Capi-ms-win-core-%25')))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.001",
+            "values": [
+              {
+                "id": "160252",
+                "bb": "Potential DLL Search Order Hijacking",
+                "uuid": "bc1d5d5d-cc6d-4c12-8019-1c097ad5414f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.001",
+            "values": [
+              {
+                "id": "160252",
+                "bb": "Potential DLL Search Order Hijacking",
+                "uuid": "bc1d5d5d-cc6d-4c12-8019-1c097ad5414f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.001",
+            "values": [
+              {
+                "id": "160252",
+                "bb": "Potential DLL Search Order Hijacking",
+                "uuid": "bc1d5d5d-cc6d-4c12-8019-1c097ad5414f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.417259",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

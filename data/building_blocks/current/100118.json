@@ -1,0 +1,62 @@
+{
+  "rule_doc_id": "100118",
+  "rule_id": "100118",
+  "uuid": "SYSTEM-1204",
+  "rule_name": "BB:CategoryDefinition: Exploits Backdoors and Trojans",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-08-11T16:35:58.559Z",
+  "modified": "2023-10-30T02:20:03.585Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Exploit, Malware.Backdoor Detected, Malware.Trojan Detected, Potential Exploit, Malware.Hostile Mail Attachment, Malware.Hostile Software Download, Malware.Keylogger, Malware.Malicious Software, Malware.Misc Malware, Malware.Virus Detected, Suspicious Activity.Potential Database Vulnerability, Suspicious Activity.Potential DNS Vulnerability, Suspicious Activity.Potential FTP Vulnerability, Suspicious Activity.Potential Mail Vulnerability, Suspicious Activity.Potential NFS Vulnerability, Suspicious Activity.Potential NNTP Vulnerability, Suspicious Activity.Potential RPC Vulnerability, Suspicious Activity.Potential SMB Vulnerability, Suspicious Activity.Potential SNMP Vulnerability, Suspicious Activity.Potential SSH Vulnerability, Suspicious Activity.Potential Telnet Vulnerability, Suspicious Activity.Potential Version Vulnerability, Suspicious Activity.Potential VoIP Vulnerability, Suspicious Activity.Potential Web Vulnerability</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "5000, 6002, 6008, 13000, 6003, 6005, 6014, 6004, 6007, 6006, 7031, 7029, 7027, 7025, 7038, 7039, 7040, 7030, 7042, 7028, 7041, 7026, 7057, 7010"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14",
+            "negate": "true"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Custom Rule Engine</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "18"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.657749",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

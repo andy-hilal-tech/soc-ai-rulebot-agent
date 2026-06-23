@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "142052",
+  "rule_id": "142052",
+  "uuid": "88ef1b78-6b96-4d61-ac40-66a915d8b451",
+  "rule_name": "Enumerate Credentials from Windows Credential Manager With PowerShell",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-12-13T14:45:40.942Z",
+  "modified": "2024-07-21T12:38:31.778Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, Exploit.Command Execution, System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250, 5034, 8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains all of [vaultcmd or listcreds]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONALLanyvaultcmd�listcreds"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Credentials from Password Stores",
+        "STEC": "T1555.004",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555.004",
+            "values": [
+              {
+                "id": "142052",
+                "bb": "Enumerate Credentials from Windows Credential Manager With PowerShell",
+                "uuid": "88ef1b78-6b96-4d61-ac40-66a915d8b451",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.903681",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

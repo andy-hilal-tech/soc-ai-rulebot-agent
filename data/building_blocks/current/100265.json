@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100265",
+  "rule_id": "100265",
+  "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+  "rule_name": "BB:DeviceDefinition: Operating System",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-09-03T09:47:34.980Z",
+  "modified": "2023-10-30T02:20:01.069Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log, Linux OS, Hewlett Packard UniX, Solaris Operating System Authentication Messages, IBM AIX Audit, IBM AIX Server, Mac OS X, IBM i, Cilasoft QJRN/400</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12, 11, 180, 24, 286, 85, 102, 148, 339"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.880375",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

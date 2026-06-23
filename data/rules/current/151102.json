@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "151102",
+  "rule_id": "151102",
+  "uuid": "9e19eb75-5665-4cd0-a1d0-fee0ce4c51aa",
+  "rule_name": "Alternate Data Streams Writing Files",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-04T15:50:12.018Z",
+  "modified": "2024-07-21T12:38:28.877Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, Audit.Object Access Success, System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250, 19081, 8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES ('.*?-stream.*') AND (LOWER(&quot;Command&quot;) MATCHES ('.*?set-content.*') OR LOWER(&quot;Command&quot;) MATCHES ('.*?add-content.*'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20('.*%3F-stream.*')%20AND%20(LOWER(%22Command%22)%20MATCHES%20('.*%3Fset-content.*')%20OR%20LOWER(%22Command%22)%20MATCHES%20('.*%3Fadd-content.*'))|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3F-stream.*')%20AND%20(LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3Fset-content.*')%20OR%20LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3Fadd-content.*'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Hide Artifacts",
+        "STEC": "T1564.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1564",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1564.004",
+            "values": [
+              {
+                "id": "151102",
+                "bb": "Alternate Data Streams Writing Files",
+                "uuid": "9e19eb75-5665-4cd0-a1d0-fee0ce4c51aa",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.135423",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

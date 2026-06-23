@@ -1,0 +1,157 @@
+{
+  "rule_doc_id": "146002",
+  "rule_id": "146002",
+  "uuid": "1361822d-bf2a-40be-8e95-d84458a3038c",
+  "rule_name": "Potential Hidden File or Directory",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T14:09:41.395Z",
+  "modified": "2024-07-21T12:38:22.329Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Hiding Files with Attrib.exe, BB:BehaviorDefinition: Set Windows System File with Attrib, BB:BehaviorDefinition: Modification of Explorer Hidden Keys</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a, 3041edd0-2ee7-40d1-8562-ce05600eb0e5, 530ba1fd-b7b4-4857-abf8-f7eb05a8dd11"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a",
+      "name": "BB:BehaviorDefinition: Hiding Files with Attrib.exe"
+    },
+    {
+      "uuid": "3041edd0-2ee7-40d1-8562-ce05600eb0e5",
+      "name": "BB:BehaviorDefinition: Set Windows System File with Attrib"
+    },
+    {
+      "uuid": "530ba1fd-b7b4-4857-abf8-f7eb05a8dd11",
+      "name": "BB:BehaviorDefinition: Modification of Explorer Hidden Keys"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Hide Artifacts",
+        "STEC": "T1564.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1564",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1564.001",
+            "values": [
+              {
+                "id": "146002",
+                "bb": "Potential Hidden File or Directory",
+                "uuid": "1361822d-bf2a-40be-8e95-d84458a3038c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1564",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1564",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1564",
+            "values": [
+              {
+                "id": "146052",
+                "bb": "BB:BehaviorDefinition: Hiding Files with Attrib.exe",
+                "uuid": "d0a6ce88-d5a1-41a8-95aa-31693bebbc0a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "146152",
+                "bb": "BB:BehaviorDefinition: Modification of Explorer Hidden Keys",
+                "uuid": "530ba1fd-b7b4-4857-abf8-f7eb05a8dd11",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "File and Directory Permissions Modification",
+        "STEC": "T1222.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222.001",
+            "values": [
+              {
+                "id": "146102",
+                "bb": "BB:BehaviorDefinition: Set Windows System File with Attrib",
+                "uuid": "3041edd0-2ee7-40d1-8562-ce05600eb0e5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.008521",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

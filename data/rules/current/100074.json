@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "100074",
+  "rule_id": "100074",
+  "uuid": "SYSTEM-1444",
+  "rule_name": "DDoS Events with High Magnitude Become Offenses",
+  "object_type": "rule",
+  "group": "D\\DoS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-08-13T19:08:43.375Z",
+  "modified": "2023-10-30T02:02:36.074Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Distributed DoS, DOS.Distributed High Rate DoS, DOS.Distributed High Rate ICMP DoS, DOS.Distributed High Rate TCP DoS, DOS.Distributed High Rate UDP DoS, DOS.Distributed Low Rate DoS, DOS.Distributed Low Rate ICMP DoS, DOS.Distributed Low Rate TCP DoS, DOS.Distributed Low Rate UDP DoS, DOS.Distributed Medium Rate DoS, DOS.Distributed Medium Rate ICMP DoS, DOS.Distributed Medium Rate TCP DoS, DOS.Distributed Medium Rate UDP DoS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "2008, 2032, 2031, 2029, 2030, 2040, 2039, 2037, 2038, 2036, 2035, 2033, 2034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: High Magnitude Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1272"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "1"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1272",
+      "name": "BB:CategoryDefinition: High Magnitude Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100074",
+                "bb": "DDoS Events with High Magnitude Become Offenses",
+                "uuid": "SYSTEM-1444",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "100074",
+                "bb": "DDoS Events with High Magnitude Become Offenses",
+                "uuid": "SYSTEM-1444",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.237392",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

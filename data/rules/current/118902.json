@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "118902",
+  "rule_id": "118902",
+  "uuid": "6e25c328-ca1e-40ce-892a-602a9a475b4b",
+  "rule_name": "Log4Shell Base Pattern",
+  "object_type": "rule",
+  "group": "Exploit, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-12-14T19:45:32.165Z",
+  "modified": "2024-06-27T13:19:16.633Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Apache HTTP Server, Amazon AWS WAF, Microsoft IIS, NGINX HTTP Server, Amazon AWS Elastic Kubernetes Service, F5 Networks BIG-IP ASM</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "10, 501, 13, 439, 502, 213"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "1",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>URL Referrer (custom), URL (custom), URL Host (custom), Request URI (custom)</a> match <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>(?i)(\\$|%24)(\\{|%7B)[^\\}]*?j.*?n.*?d.*?i</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "URL Referrer, URL, URL Host, Request URI"
+            },
+            {
+              "id": "2",
+              "value": "(?i)(\\$|%24)(\\{|%7B)[^\\}]*?j.*?n.*?d.*?i"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.040978",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

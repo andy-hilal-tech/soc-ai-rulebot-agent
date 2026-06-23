@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "164752",
+  "rule_id": "164752",
+  "uuid": "d628b5c5-6b8c-4153-94e2-a13894d19cba",
+  "rule_name": "PAM-RULE BB",
+  "object_type": "building_block",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2024-10-24T09:00:52.952Z",
+  "modified": "2024-10-24T12:57:55.765Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Admin Login Successful, Authentication.Auth Server Login Succeeded, Authentication.Auth Server Session Closed, Authentication.FTP Login Succeeded, Authentication.Login with username/password defaults successful, Authentication.Mail Service Login Succeeded, Authentication.Misc Login Succeeded, Authentication.Remote Access Login Succeeded, Authentication.Samba Login Succeeded, Authentication.SSH Login Succeeded, Authentication.System Security Access Granted, Authentication.Telnet Login Succeeded, Authentication.VoIP Login Succeeded, Authentication.User Login Success, Authentication.SFTP Login Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3014, 3011, 3054, 3019, 3017, 3008, 3004, 3044, 3051, 3021, 3027, 3048, 3066, 3115, 3117"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.829478",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

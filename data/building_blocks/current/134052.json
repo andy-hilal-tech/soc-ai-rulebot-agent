@@ -1,0 +1,94 @@
+{
+  "rule_doc_id": "134052",
+  "rule_id": "134052",
+  "uuid": "e301621c-5cc0-493e-a144-961108d5627c",
+  "rule_name": "BB:BehaviorDefinition: Cloud Account Discovery",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-06-02T10:28:22.447Z",
+  "modified": "2024-07-21T10:28:55.293Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System, BB:DeviceDefinition: Cloud</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f, 290df59b-44ef-452a-9633-2d52e74dbc97"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 5034, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%get-msolrolemember%') OR  (LOWER(&quot;Command&quot;) LIKE 'az ad user list' OR LOWER(&quot;Command&quot;) LIKE 'aws iam list-users' OR LOWER(&quot;Command&quot;) LIKE 'aws iam list-roles' OR LOWER(&quot;Command&quot;) LIKE 'gcloud iam service-accounts list' OR LOWER(&quot;Command&quot;) LIKE 'gcloud projects get-iam-policy')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25get-msolrolemember%25')%20OR%20%20(LOWER(%22Command%22)%20LIKE%20'az%20ad%20user%20list'%20OR%20LOWER(%22Command%22)%20LIKE%20'aws%20iam%20list-users'%20OR%20LOWER(%22Command%22)%20LIKE%20'aws%20iam%20list-roles'%20OR%20LOWER(%22Command%22)%20LIKE%20'gcloud%20iam%20service-accounts%20list'%20OR%20LOWER(%22Command%22)%20LIKE%20'gcloud%20projects%20get-iam-policy')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-msolrolemember%25')%22,%22OR%20%22,%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'az%20ad%20user%20list'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'aws%20iam%20list-users'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'aws%20iam%20list-roles'%22,%22OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'gcloud%20iam%20service-accounts%20list'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'gcloud%20projects%20get-iam-policy')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.346998",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

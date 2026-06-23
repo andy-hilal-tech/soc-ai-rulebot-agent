@@ -1,0 +1,140 @@
+{
+  "rule_doc_id": "124852",
+  "rule_id": "124852",
+  "uuid": "97e0bebc-b814-4408-9724-21a07f4f6162",
+  "rule_name": "QRadar Audit: QRadar Host Unavailable",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Notify",
+  "created": "2018-03-12T15:58:38.790Z",
+  "modified": "2024-07-21T08:29:28.813Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(38750003) Information Message</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "38750003"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System Status (custom) matches any of expressions [UNKNOWN or FAILED]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "System StatusREXanyUNKNOWN�FAILED"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>8</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP, System Status (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "8"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP, System Status"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "notify": "true"
+      },
+      "notifyResponse": [
+        {
+          "_$": {
+            "severityOverride": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "Disable or Modify Tools",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Disable or Modify Tools",
+            "values": [
+              {
+                "id": "124852",
+                "bb": "QRadar Audit: QRadar Host Unavailable",
+                "uuid": "97e0bebc-b814-4408-9724-21a07f4f6162",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.298668",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

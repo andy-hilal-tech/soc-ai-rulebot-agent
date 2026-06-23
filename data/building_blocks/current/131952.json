@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "131952",
+  "rule_id": "131952",
+  "uuid": "ad6be411-b766-44a2-adfe-ecb5bf323489",
+  "rule_name": "BB:CategoryDefinition: Countries/Regions with Restricted Access",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-07-26T12:36:49.490Z",
+  "modified": "2024-08-08T12:19:53.210Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkView_Test",
+            "uid": "0",
+            "id": "106"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Africa, Antarctic, Asia, CentralAmerica, Europe, Oceania, SouthAmerica, misc</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Any"
+            },
+            {
+              "id": "2",
+              "value": "Any"
+            },
+            {
+              "id": "3",
+              "method": "getGeographicView",
+              "value": "Africa, Antarctic, Asia, CentralAmerica, Europe, Oceania, SouthAmerica, misc"
+            },
+            {
+              "id": "4",
+              "value": "Geographic"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.315565",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

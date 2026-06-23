@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100103",
+  "rule_id": "100103",
+  "uuid": "SYSTEM-1208",
+  "rule_name": "BB:CategoryDefinition: Firewall or ACL Accept",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-09-13T19:41:00.426Z",
+  "modified": "2024-02-19T16:49:29.392Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.Firewall Permit, Access.ACL Permit, Access.Access Permitted, Access.Session Opened, Application.AAA Session Started, Application.Auth Opened, Application.Chargen Session Started, Application.Chat Opened, Application.CUPS Session Opened, Application.CVS Session Opened, Application.DAP Session Started, Application.Database Opened, Application.DHCP Session Opened, Application.Discard Session Opened, Application.DNP3 Session Opened, Application.DNS Opened, Application.Echo Session Opened, Application.FileTransfer Opened, Application.Finger Session Opened, Application.FTP Opened, Application.GIOP Session Opened, Application.Gopher Session Opened, Application.Groupwise Session Opened, Application.HTTP Opened, Application.HTTPS Opened, Application.ICCP Session Opened, Application.Ident Session Opened, Application.IEC 104 Session Opened, Application.IM Session Opened, Application.IPSec Session Started, Application.IRC Session Opened, Application.Kerberos Session Opened, Application.LDAP Session Started, Application.Lotus Notes Session Opened, Application.LPD Session Opened, Application.Mail Opened, Application.MODBUS Session Opened, Application.NCP Session Opened, Application.NetBIOS Session Opened, Application.NFS Session Opened, Application.NNTP Session Opened, Application.NTP Session Opened, Application.P2P Opened, Application.RDP Opened, Application.Remote .NET Session Opened, Application.RemoteAccess Opened, Application.REXEC Session Opened, Application.RLOGIN Session Opened, Application.RPC Session Opened, Application.RSH Session Opened, Application.RUSERS Session Opened, Application.SMB Session Opened, Application.SMTP Opened, Application.SNMP Session Opened, Application.SSH Opened, Application.SSL Session Opened, Application.Streaming Media Session Opened, Application.Syslog Session Opened, Application.Telnet Session Opened, Application.TFTP Session Opened, Application.TN3270 Session Opened, Application.TOR Session Started, Application.Traceroute Session Opened, Application.VPN Opened, Application.Web Opened, Application.Whois Session Opened, Access.Firewall Session Opened, Access.Database Action Allowed, Access.FTP Action Allowed, Access.Misc Application Action Allowed, Access.Object Cached, Access.Session In Progress, Access.Session Inbound, Access.Session Outbound</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4002, 4012, 4014, 4016, 18146, 18107, 18397, 18084, 18391, 18385, 18404, 18091, 18379, 18373, 18367, 18076, 18357, 18067, 18351, 18010, 18345, 18339, 18333, 18017, 18027, 18327, 18321, 18315, 18158, 18154, 18309, 18303, 18140, 18297, 18291, 18001, 18285, 18273, 18279, 18267, 18261, 18255, 18116, 18060, 18361, 18043, 18243, 18237, 18249, 18231, 18227, 18215, 18098, 18211, 18037, 18205, 18221, 18201, 18189, 18183, 18177, 18411, 18173, 18051, 18122, 18166, 4007, 4029, 4031, 4027, 4033, 4021, 4024, 4025"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

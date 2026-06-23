@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "102402",
+  "rule_id": "102402",
+  "uuid": "e4c7213a-753b-47d0-ab3e-be7120559598",
+  "rule_name": "BB:UBA : Application Denies",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-08-18T06:40:38.010Z",
+  "modified": "2024-02-19T16:44:09.908Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application.AAA Session Denied, Application.Auth Denied, Application.Chargen Session Denied, Application.Chat Denied, Application.CUPS Session Denied, Application.CVS Session Denied, Application.DAP Session Denied, Application.Database Denied, Application.DHCP Session Denied, Application.Discard Session Denied, Application.DNP3 Session Denied, Application.DNS Denied, Application.Echo Session Denied, Application.FileTransfer Denied, Application.Finger Session Denied, Application.FTP Denied, Application.Game Session Denied, Application.GIOP Session Denied, Application.Gopher Session Denied, Application.Groupwise Session Denied, Application.HTTP Denied, Application.HTTPS Denied, Application.ICCP Session Denied, Application.Ident Session Denied, Application.IEC 104 Session Denied, Application.IM Session Denied, Application.IRC Session Denied, Application.Kerberos Session Denied, Application.LDAP Session Denied, Application.Lotus Notes Session Denied, Application.LPD Session Denied, Application.Mail Denied, Application.MODBUS Session Denied, Application.NCP Session Denied, Application.NetBIOS Session Denied, Application.NFS Session Denied, Application.NNTP Session Denied, Application.NTP Session Denied, Application.P2P Denied, Application.RDP Denied, Application.Remote .NET Session Denied, Application.RemoteAccess Denied, Application.REXEC Session Denied, Application.RLOGIN Session Denied, Application.RPC Session Denied, Application.RSH Session Denied, Application.RUSERS Session Denied, Application.SMB Session Denied, Application.SMTP Denied, Application.SNMP Session Denied, Application.SSH Denied, Application.SSL Session Denied, Application.Streaming Media Session Denied, Application.Syslog Session Denied, Application.Telnet Session Denied, Application.TFTP Session Denied, Application.TN3270 Session Denied, Application.TOR Session Denied, Application.Traceroute Session Denied, Application.VoIP Denied, Application.VPN Denied, Application.Web Denied, Application.Whois Session Denied</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18148, 18111, 18401, 18088, 18395, 18389, 18406, 18095, 18381, 18377, 18371, 18080, 18359, 18071, 18355, 18014, 18421, 18349, 18343, 18337, 18021, 18031, 18331, 18325, 18319, 18162, 18313, 18307, 18142, 18301, 18295, 18005, 18289, 18277, 18283, 18271, 18265, 18259, 18120, 18064, 18365, 18047, 18247, 18241, 18253, 18235, 18229, 18219, 18102, 18213, 18041, 18209, 18225, 18203, 18193, 18187, 18181, 18415, 18175, 18136, 18055, 18126, 18170"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.015182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

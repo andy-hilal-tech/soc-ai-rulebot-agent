@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "149852",
+  "rule_id": "149852",
+  "uuid": "03dbbe94-22d3-42ee-aacb-e13c67e934d4",
+  "rule_name": "BB:BehaviorDefinition: Gazer Registry Values",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-21T17:03:49.149Z",
+  "modified": "2024-07-21T12:38:31.037Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Service Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>( \tLOWER(&quot;Registry Key&quot;) MATCHES ('.*?\\\\software\\\\microsoft\\windows\\\\currentversion\\\\explorer\\\\screensaver.*')  \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?\\\\software\\\\microsoft\\\\windows\\\\currentversion\\\\explorer\\\\screensaver.*') )  AND ( \tLOWER(&quot;Registry Key&quot;) MATCHES ('.*?119d263d-68fc-1942-3ca3-46b23fa652a0.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?119d263d-68fc-1942-3ca3-46b23fa652a0.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?1dc12691-2b24-2265-435d-735d3b118a70.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?1dc12691-2b24-2265-435d-735d3b118a70.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?28e74bda-4327-31b0-17b9-56a66a818c1d.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?28e74bda-4327-31b0-17b9-56a66a818c1d.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?31ac34a1-2de2-36ac-1f6e-86f43772841f.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?31ac34a1-2de2-36ac-1f6e-86f43772841f.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?3cdc155d-398a-646e-1021-23047d9b4366.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?3cdc155d-398a-646e-1021-23047d9b4366.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?4a3130bd-2608-730f-31a7-86d16ce66100.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?4a3130bd-2608-730f-31a7-86d16ce66100.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?56594fea-5774-746d-4496-6361266c40d0.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?56594fea-5774-746d-4496-6361266c40d0.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?629336e3-58d6-633b-5182-576588cf702a.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?629336e3-58d6-633b-5182-576588cf702a.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?6cee6fe1-10a2-4c33-7e7f-855a51733c77.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?6cee6fe1-10a2-4c33-7e7f-855a51733c77.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?81a03bf8-60aa-4a56-253c-449121d61caf.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?81a03bf8-60aa-4a56-253c-449121d61caf.*') \tOR LOWER(&quot;Registry Key&quot;) MATCHES ('.*?8e9810c5-3014-4678-27ee-3b7a7ac346af.*') \tOR LOWER(&quot;Registry Value Data&quot;) MATCHES ('.*?8e9810c5-3014-4678-27ee-3b7a7ac346af.*') )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F%5C%5Csoftware%5C%5Cmicrosoft%5Cwindows%5C%5Ccurrentversion%5C%5Cexplorer%5C%5Cscreensaver.*')%20%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwindows%5C%5Ccurrentversion%5C%5Cexplorer%5C%5Cscreensaver.*')%20)%20%20AND%20(%20%09LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F119d263d-68fc-1942-3ca3-46b23fa652a0.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F119d263d-68fc-1942-3ca3-46b23fa652a0.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F1dc12691-2b24-2265-435d-735d3b118a70.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F1dc12691-2b24-2265-435d-735d3b118a70.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F28e74bda-4327-31b0-17b9-56a66a818c1d.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F28e74bda-4327-31b0-17b9-56a66a818c1d.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F31ac34a1-2de2-36ac-1f6e-86f43772841f.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F31ac34a1-2de2-36ac-1f6e-86f43772841f.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F3cdc155d-398a-646e-1021-23047d9b4366.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F3cdc155d-398a-646e-1021-23047d9b4366.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F4a3130bd-2608-730f-31a7-86d16ce66100.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F4a3130bd-2608-730f-31a7-86d16ce66100.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F56594fea-5774-746d-4496-6361266c40d0.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F56594fea-5774-746d-4496-6361266c40d0.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F629336e3-58d6-633b-5182-576588cf702a.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F629336e3-58d6-633b-5182-576588cf702a.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F6cee6fe1-10a2-4c33-7e7f-855a51733c77.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F6cee6fe1-10a2-4c33-7e7f-855a51733c77.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F81a03bf8-60aa-4a56-253c-449121d61caf.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F81a03bf8-60aa-4a56-253c-449121d61caf.*')%20%09OR%20LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F8e9810c5-3014-4678-27ee-3b7a7ac346af.*')%20%09OR%20LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20('.*%3F8e9810c5-3014-4678-27ee-3b7a7ac346af.*')%20)|%5B%22(%22,%22%5CtLOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F%5C%5C%5C%5Csoftware%5C%5C%5C%5Cmicrosoft%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cexplorer%5C%5C%5C%5Cscreensaver.*')%20%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F%5C%5C%5C%5Csoftware%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cexplorer%5C%5C%5C%5Cscreensaver.*')%22,%22)%22,%22AND%22,%22(%22,%22%5CtLOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F119d263d-68fc-1942-3ca3-46b23fa652a0.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F119d263d-68fc-1942-3ca3-46b23fa652a0.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F1dc12691-2b24-2265-435d-735d3b118a70.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F1dc12691-2b24-2265-435d-735d3b118a70.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F28e74bda-4327-31b0-17b9-56a66a818c1d.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F28e74bda-4327-31b0-17b9-56a66a818c1d.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F31ac34a1-2de2-36ac-1f6e-86f43772841f.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F31ac34a1-2de2-36ac-1f6e-86f43772841f.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F3cdc155d-398a-646e-1021-23047d9b4366.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F3cdc155d-398a-646e-1021-23047d9b4366.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F4a3130bd-2608-730f-31a7-86d16ce66100.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F4a3130bd-2608-730f-31a7-86d16ce66100.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F56594fea-5774-746d-4496-6361266c40d0.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F56594fea-5774-746d-4496-6361266c40d0.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F629336e3-58d6-633b-5182-576588cf702a.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F629336e3-58d6-633b-5182-576588cf702a.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F6cee6fe1-10a2-4c33-7e7f-855a51733c77.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F6cee6fe1-10a2-4c33-7e7f-855a51733c77.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F81a03bf8-60aa-4a56-253c-449121d61caf.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F81a03bf8-60aa-4a56-253c-449121d61caf.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F8e9810c5-3014-4678-27ee-3b7a7ac346af.*')%22,%22%5CtOR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20('.*%3F8e9810c5-3014-4678-27ee-3b7a7ac346af.*')%22,%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1546",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546",
+            "values": [
+              {
+                "id": "149852",
+                "bb": "BB:BehaviorDefinition: Gazer Registry Values",
+                "uuid": "03dbbe94-22d3-42ee-aacb-e13c67e934d4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.667000",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

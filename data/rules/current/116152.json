@@ -1,0 +1,80 @@
+{
+  "rule_doc_id": "116152",
+  "rule_id": "116152",
+  "uuid": "d1536a40-c741-4c56-bb69-5e53bc0525e4",
+  "rule_name": "Volume Attached and Detached on Different Machines",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-01-28T18:47:16.411Z",
+  "modified": "2024-04-29T12:45:18.846Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "304"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Volume Detached and Attached on the Same Machine</a> match at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>2</a> times with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Volume ID (custom)</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "012b0463-2e88-48f8-a3de-a991c7e75dd8"
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Volume ID"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "65"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "012b0463-2e88-48f8-a3de-a991c7e75dd8",
+      "name": "BB:BehaviorDefinition: Volume Detached and Attached on the Same Machine"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.979508",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

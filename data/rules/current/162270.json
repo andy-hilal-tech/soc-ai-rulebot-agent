@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "162270",
+  "rule_id": "162270",
+  "uuid": "034f3e73-1e75-4774-8a66-2425825d79d1",
+  "rule_name": "Certificate Request Export to Exchange Webserver",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T09:02:26.532Z",
+  "modified": "2025-05-08T19:13:56.431Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "1",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Defender 365, Dhalman ME O365, Health360 O365, O365, Microsoft Azure H360</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "416, 4212, 3770, 362, 4062"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%new-exchangecertificate%' OR LOWER(UTF8(payload)) LIKE '% -generaterequest%' OR LOWER(UTF8(payload)) LIKE '% -binaryencoded%' OR LOWER(UTF8(payload)) LIKE '% -requestfile%') AND (LOWER(UTF8(payload)) LIKE '%\\localhost\\c$%' OR LOWER(UTF8(payload)) LIKE '%\\\\127.0.0.1\\c$%' OR LOWER(UTF8(payload)) LIKE '%c:\\inetpub%' OR LOWER(UTF8(payload)) LIKE '%.aspx%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-exchangecertificate%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-generaterequest%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-binaryencoded%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-requestfile%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Clocalhost%5Cc%24%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5C%5C127.0.0.1%5Cc%24%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cinetpub%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.aspx%25%27%29|%5B%22devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25new-exchangecertificate%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-generaterequest%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-binaryencoded%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%20-requestfile%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Clocalhost%5Cc%24%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5C%5C127.0.0.1%5Cc%24%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cinetpub%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.aspx%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Max Altgelt (Nextron Systems) SIGMA Title: Certificate Request Export to Exchange Webserver SIGMA Description: Detects a write of an Exchange CSR to an untypical directory or with aspx name suffix which can be used to place a webshell  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Certificate Request Export to Exchange Webserver"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.641923",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

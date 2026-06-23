@@ -1,0 +1,130 @@
+{
+  "rule_doc_id": "139452",
+  "rule_id": "139452",
+  "uuid": "45e655ff-d9db-4ab2-892d-8b0e6c621d03",
+  "rule_name": "User Account Creation followed by Account Deletion (Windows)",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-07-28T19:52:28.989Z",
+  "modified": "2024-07-21T10:28:59.227Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "1",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: User Account Deleted (Windows)</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: User Account Added (Windows)</a> match with the same <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>Machine Identifier (custom), Target Username (custom)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "96ab922b-456c-4329-b19a-5de405354717"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier, Target Username"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "96ab922b-456c-4329-b19a-5de405354717",
+      "name": "BB:BehaviorDefinition: User Account Deleted (Windows)"
+    },
+    {
+      "uuid": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b",
+      "name": "BB:BehaviorDefinition: User Account Added (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1136",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136",
+            "values": [
+              {
+                "id": "139452",
+                "bb": "User Account Creation followed by Account Deletion (Windows)",
+                "uuid": "45e655ff-d9db-4ab2-892d-8b0e6c621d03",
+                "T": "EVENT"
+              },
+              {
+                "id": "137952",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Windows)",
+                "uuid": "96ab922b-456c-4329-b19a-5de405354717",
+                "T": "EVENT"
+              },
+              {
+                "id": "137852",
+                "bb": "BB:BehaviorDefinition: User Account Added (Windows)",
+                "uuid": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.811279",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

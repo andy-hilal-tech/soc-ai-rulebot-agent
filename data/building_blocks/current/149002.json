@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "149002",
+  "rule_id": "149002",
+  "uuid": "b90c56ec-2669-4736-9d75-9f11650f9ee3",
+  "rule_name": "BB:BehaviorDefinition: Security Software Discovery - Powershell",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T14:50:56.117Z",
+  "modified": "2024-07-21T12:38:43.367Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%get-process%' AND LOWER(&quot;Command&quot;) LIKE '%.Description%' AND LOWER(&quot;Command&quot;) LIKE '%-like%' AND (LOWER(&quot;Command&quot;) LIKE '%\\*virus*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*carbonblack*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*defender*\\%' OR LOWER(&quot;Command&quot;) LIKE '%\\*cylance*\\%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25get-process%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25.Description%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25-like%25'%20AND%20(LOWER(%22Command%22)%20LIKE%20'%25%5C*virus*%5C%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%5C*carbonblack*%5C%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%5C*defender*%5C%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%5C*cylance*%5C%25')|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-process%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.Description%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25-like%25'%20AND%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5C*virus*%5C%5C%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5C*carbonblack*%5C%5C%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5C*defender*%5C%5C%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5C*cylance*%5C%5C%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Software Discovery",
+        "STEC": "T1518.001",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1518",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1518.001",
+            "values": [
+              {
+                "id": "149002",
+                "bb": "BB:BehaviorDefinition: Security Software Discovery - Powershell",
+                "uuid": "b90c56ec-2669-4736-9d75-9f11650f9ee3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.653789",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

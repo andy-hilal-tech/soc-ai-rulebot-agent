@@ -1,0 +1,136 @@
+{
+  "rule_doc_id": "100090",
+  "rule_id": "100090",
+  "uuid": "SYSTEM-1438",
+  "rule_name": "Multiple Database Failures Followed by Success",
+  "object_type": "rule",
+  "group": "Intrusion Detection, Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2007-08-10T15:32:24.673Z",
+  "modified": "2023-10-30T02:20:04.606Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1374, 5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "CauseAndEffect_Test",
+            "uid": "1",
+            "id": "71"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>50</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:Database: System Action Deny</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>IP</a> followed by at least <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:Database: System Action Allow</a> <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>in any</a> order with the same <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>IP</a> from the previous <a href='javascript:editParameter(\"1\", \"10\")' class='dynamic'>source</a>, within <a href='javascript:editParameter(\"1\", \"11\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"1\", \"12\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "50"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1437"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "Source"
+            },
+            {
+              "id": "5",
+              "value": "IP"
+            },
+            {
+              "id": "6",
+              "value": "1"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "SYSTEM-1299"
+            },
+            {
+              "id": "8",
+              "value": "Any"
+            },
+            {
+              "id": "9",
+              "value": "IP"
+            },
+            {
+              "id": "10",
+              "value": "Source"
+            },
+            {
+              "id": "11",
+              "value": "5"
+            },
+            {
+              "id": "12",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "300",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1374",
+      "name": "BB:HostDefinition: Database Servers"
+    },
+    {
+      "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+      "name": "BB:HostReference: Database Servers"
+    },
+    {
+      "uuid": "SYSTEM-1437",
+      "name": "BB:Database: System Action Deny"
+    },
+    {
+      "uuid": "SYSTEM-1299",
+      "name": "BB:Database: System Action Allow"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.256234",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

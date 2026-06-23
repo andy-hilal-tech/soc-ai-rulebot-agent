@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "157752",
+  "rule_id": "157752",
+  "uuid": "6236ee70-d327-42d7-a1a6-8f094b0017d0",
+  "rule_name": "Disable Windows Defender Functionalities Via Registry Keys",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-03-21T09:46:21.733Z",
+  "modified": "2024-07-21T12:38:18.509Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001832"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Registry Key&quot;) LIKE '%\\software\\microsoft\\windows defender\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Registry%20Key%22)%20LIKE%20'%25%5Csoftware%5Cmicrosoft%5Cwindows%20defender%5C%25'|%5B%22(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwindows%20defender%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Registry Key&quot;) LIKE '%\\real-time protection\\disablebehaviormonitoring' OR LOWER(&quot;Registry Value Data&quot;) LIKE '%\\real-time protection\\disableioavprotection' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\real-time protection\\disableonaccessprotection' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\real-time protection\\disablerealtimemonitoring' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\real-time protection\\disablescanonrealtimeenable' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\reporting\\disableenhancednotifications' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\spynet\\disableblockatfirstseen' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\disableantispyware' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\disableantivirus') AND LOWER(&quot;Registry Value Data&quot;)='dword (0x00000001)') OR ((LOWER(&quot;Registry Key&quot;) LIKE '%\\spynet\\spynetreporting' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\spynet\\submitsamplesconsent' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\mpengine\\mpenablepus') AND LOWER(&quot;Registry Value Data&quot;) == 'dword (0x00000000)')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Creal-time%20protection%5Cdisablebehaviormonitoring'%20OR%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25%5Creal-time%20protection%5Cdisableioavprotection'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Creal-time%20protection%5Cdisableonaccessprotection'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Creal-time%20protection%5Cdisablerealtimemonitoring'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Creal-time%20protection%5Cdisablescanonrealtimeenable'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Creporting%5Cdisableenhancednotifications'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cspynet%5Cdisableblockatfirstseen'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cdisableantispyware'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cdisableantivirus')%20AND%20LOWER(%22Registry%20Value%20Data%22)%3D'dword%20(0x00000001)')%20OR%20((LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cspynet%5Cspynetreporting'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cspynet%5Csubmitsamplesconsent'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cmpengine%5Cmpenablepus')%20AND%20LOWER(%22Registry%20Value%20Data%22)%20%3D%3D%20'dword%20(0x00000000)')|%5B%22((LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Creal-time%20protection%5C%5Cdisablebehaviormonitoring'%20OR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25%5C%5Creal-time%20protection%5C%5Cdisableioavprotection'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Creal-time%20protection%5C%5Cdisableonaccessprotection'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Creal-time%20protection%5C%5Cdisablerealtimemonitoring'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Creal-time%20protection%5C%5Cdisablescanonrealtimeenable'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Creporting%5C%5Cdisableenhancednotifications'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cspynet%5C%5Cdisableblockatfirstseen'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cdisableantispyware'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cdisableantivirus')%20AND%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%3D'dword%20(0x00000001)')%20OR%20((LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cspynet%5C%5Cspynetreporting'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cspynet%5C%5Csubmitsamplesconsent'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cmpengine%5C%5Cmpenablepus')%20AND%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20%3D%3D%20'dword%20(0x00000000)')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.001",
+            "values": [
+              {
+                "id": "157752",
+                "bb": "Disable Windows Defender Functionalities Via Registry Keys",
+                "uuid": "6236ee70-d327-42d7-a1a6-8f094b0017d0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.326157",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

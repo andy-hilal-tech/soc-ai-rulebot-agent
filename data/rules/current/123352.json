@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "123352",
+  "rule_id": "123352",
+  "uuid": "afd33f8a-6dec-4108-8752-67690a8eedae",
+  "rule_name": "Potential Log4Shell Activity (Flows)",
+  "object_type": "rule",
+  "group": "Exploit, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-02-23T17:46:03.567Z",
+  "modified": "2024-06-27T13:19:20.370Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;HTTP GET Request&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP GET Request&quot;, 40) == TRUE) OR (&quot;HTTP Referer&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP Referer&quot;, 40) == TRUE) OR (&quot;HTTP User-Agent&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP User-Agent&quot;, 40) == TRUE) OR (&quot;HTTP Host&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP Host&quot;, 40) == TRUE) OR (&quot;HTTP Server&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP Server&quot;, 40) == TRUE) OR (&quot;HTTP Content-Type&quot; IS NOT NULL AND LOG4J::DETECTED(&quot;HTTP Content-Type&quot;, 40) == TRUE)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22HTTP%20GET%20Request%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20GET%20Request%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%22HTTP%20Referer%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20Referer%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%22HTTP%20User-Agent%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20User-Agent%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%22HTTP%20Host%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20Host%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%22HTTP%20Server%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20Server%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%22HTTP%20Content-Type%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%22HTTP%20Content-Type%22,%2040)%20%3D%3D%20TRUE)|%5B%22(%5C%22HTTP%20GET%20Request%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20GET%20Request%5C%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%5C%22HTTP%20Referer%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20Referer%5C%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%5C%22HTTP%20User-Agent%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20User-Agent%5C%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%5C%22HTTP%20Host%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20Host%5C%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%5C%22HTTP%20Server%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20Server%5C%22,%2040)%20%3D%3D%20TRUE)%20OR%20(%5C%22HTTP%20Content-Type%5C%22%20IS%20NOT%20NULL%20AND%20LOG4J%3A%3ADETECTED(%5C%22HTTP%20Content-Type%5C%22,%2040)%20%3D%3D%20TRUE)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.168316",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

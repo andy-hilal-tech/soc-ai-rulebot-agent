@@ -1,0 +1,176 @@
+{
+  "rule_doc_id": "158802",
+  "rule_id": "158802",
+  "uuid": "b9991570-f2c8-4a79-8f18-7c39d5ba226e",
+  "rule_name": "Potential Kazuar Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-10T14:16:10.209Z",
+  "modified": "2024-07-21T12:38:55.120Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "1",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Kazuar Registry Installation</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Kazuar Shortcut Created</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "988c216e-df52-46e6-9210-20d5150aa599"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "f95351a0-4869-4550-a933-328bea5efce9"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "988c216e-df52-46e6-9210-20d5150aa599",
+      "name": "BB:BehaviorDefinition: Kazuar Registry Installation"
+    },
+    {
+      "uuid": "f95351a0-4869-4550-a933-328bea5efce9",
+      "name": "BB:BehaviorDefinition: Startup Shortcut Created"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.009",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.009",
+            "values": [
+              {
+                "id": "149752",
+                "bb": "BB:BehaviorDefinition: Startup Shortcut Created",
+                "uuid": "f95351a0-4869-4550-a933-328bea5efce9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "149752",
+                "bb": "BB:BehaviorDefinition: Startup Shortcut Created",
+                "uuid": "f95351a0-4869-4550-a933-328bea5efce9",
+                "T": "EVENT"
+              },
+              {
+                "id": "146202",
+                "bb": "BB:BehaviorDefinition: Kazuar Registry Installation",
+                "uuid": "988c216e-df52-46e6-9210-20d5150aa599",
+                "T": "EVENT"
+              },
+              {
+                "id": "158802",
+                "bb": "Potential Kazuar Activity",
+                "uuid": "b9991570-f2c8-4a79-8f18-7c39d5ba226e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.367762",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

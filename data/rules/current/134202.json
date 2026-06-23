@@ -1,0 +1,106 @@
+{
+  "rule_doc_id": "134202",
+  "rule_id": "134202",
+  "uuid": "a0f8deff-3b73-46cd-ad78-89076406bdcd",
+  "rule_name": "Potential Exfiltration of Stored Credentials from Browsers",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-05-18T12:00:36.489Z",
+  "modified": "2024-07-21T10:28:48.054Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Malware Hashes SHA', &quot;SHA256 Hash&quot;) OR REFERENCESETCONTAINS('Malware Hashes SHA', &quot;SHA1 Hash&quot;) OR REFERENCESETCONTAINS('Malware IPs', sourceaddress) OR REFERENCESETCONTAINS('Malware IPs', destinationaddress) OR REFERENCESETCONTAINS('Malicious URLs', &quot;URL&quot;) OR REFERENCESETCONTAINS('Malicious URLs', &quot;URL Host&quot;)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Malware%20Hashes%20SHA',%20%22SHA256%20Hash%22)%20OR%20REFERENCESETCONTAINS('Malware%20Hashes%20SHA',%20%22SHA1%20Hash%22)%20OR%20REFERENCESETCONTAINS('Malware%20IPs',%20sourceaddress)%20OR%20REFERENCESETCONTAINS('Malware%20IPs',%20destinationaddress)%20OR%20REFERENCESETCONTAINS('Malicious%20URLs',%20%22URL%22)%20OR%20REFERENCESETCONTAINS('Malicious%20URLs',%20%22URL%20Host%22)|%5B%22REFERENCESETCONTAINS('Malware%20Hashes%20SHA',%20%5C%22SHA256%20Hash%5C%22)%20OR%20REFERENCESETCONTAINS('Malware%20Hashes%20SHA',%20%5C%22SHA1%20Hash%5C%22)%20OR%20REFERENCESETCONTAINS('Malware%20IPs',%20sourceaddress)%20OR%20REFERENCESETCONTAINS('Malware%20IPs',%20destinationaddress)%20OR%20REFERENCESETCONTAINS('Malicious%20URLs',%20%5C%22URL%5C%22)%20OR%20REFERENCESETCONTAINS('Malicious%20URLs',%20%5C%22URL%20Host%5C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "52"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Credentials from Password Stores",
+        "STEC": "T1555.003",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555.003",
+            "values": [
+              {
+                "id": "134202",
+                "bb": "Potential Exfiltration of Stored Credentials from Browsers",
+                "uuid": "a0f8deff-3b73-46cd-ad78-89076406bdcd",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.646176",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

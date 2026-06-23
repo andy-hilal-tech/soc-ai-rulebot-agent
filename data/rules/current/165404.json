@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "165404",
+  "rule_id": "165404",
+  "uuid": "1d2d3db6-661c-4088-912e-398dd7dc5296",
+  "rule_name": "BB: IPS Detection: ICMP Echo Reply",
+  "object_type": "rule",
+  "group": "Intrusion Detection",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2026-01-31T22:41:51.273Z",
+  "modified": "2026-01-31T22:49:01.528Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventPayload_Test",
+            "uid": "0",
+            "id": "3",
+            "negate": "true"
+          },
+          "text": [
+            "when the Event Payload contains <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ICMP Echo Reply</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ICMP Echo Reply"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.343077",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

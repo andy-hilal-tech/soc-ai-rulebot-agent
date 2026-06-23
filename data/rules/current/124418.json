@@ -1,0 +1,155 @@
+{
+  "rule_doc_id": "124418",
+  "rule_id": "124418",
+  "uuid": "0e3f6264-5c84-4f75-bc8f-0e988dc02ffb",
+  "rule_name": "UBA : User Accessing Risky IP Spam",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-08T09:28:25.956Z",
+  "modified": "2024-07-08T09:28:25.956Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Remote, Remote to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r, r2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>X-Force Risky IP, Spam</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d38d36fe-73bf-4942-ab72-0c88f12c318d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "3",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "d38d36fe-73bf-4942-ab72-0c88f12c318d",
+      "name": "X-Force Risky IP, Spam"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "None",
+          "STEC": "None",
+          "TAC": "Initial Access",
+          "MAP_C": "high",
+          "MAP_EN": true,
+          "TEC_ID": "None",
+          "MAP_S": [
+            {
+              "name": "Initial Access - None",
+              "values": [
+                {
+                  "id": "124418",
+                  "bb": "UBA : User Accessing Risky IP Spam",
+                  "uuid": "0e3f6264-5c84-4f75-bc8f-0e988dc02ffb",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "TEC": "None",
+          "STEC": "None",
+          "TAC": "Command and Control",
+          "MAP_C": "high",
+          "MAP_EN": true,
+          "TEC_ID": "None",
+          "MAP_S": [
+            {
+              "name": "Command and Control - None",
+              "values": [
+                {
+                  "id": "124418",
+                  "bb": "UBA : User Accessing Risky IP Spam",
+                  "uuid": "0e3f6264-5c84-4f75-bc8f-0e988dc02ffb",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.271577",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

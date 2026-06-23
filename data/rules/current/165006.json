@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "165006",
+  "rule_id": "165006",
+  "uuid": "e6198bd3-64c6-4962-a5b1-6c35131377e5",
+  "rule_name": "Network Configuration Change Detected",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-06T13:07:13.349Z",
+  "modified": "2025-04-06T15:55:47.243Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND &quot;Event ID&quot; IN('4200', '4201', '4199', '6144')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%20IN%28%274200%27,%20%274201%27,%20%274199%27,%20%276144%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%20IN%28%274200%27,%20%274201%27,%20%274199%27,%20%276144%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "1",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>WindowsAuthServer @ H360-DC2, WindowsAuthServer @ H360-DC3, WindowsAuthServer @ H360-TALLY, WindowsAuthServer @ H360FS, WindowsAuthServer @ SRV-APP-H360</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "3776, 4065, 4067, 3733, 3775"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Khalaf Alasfoor SIGMA Title: Network Configuration Change Detected SIGMA Description: Detects changes to network configuration settings (e.g., IP address, DNS server, network adapter).  False positives: - Admin or automated reconfiguration  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Network Configuration Change Detected"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.184965",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "100403",
+  "rule_id": "100403",
+  "uuid": "a9e52d1c-2fc9-4fcb-9f83-84e520665267",
+  "rule_name": "Auditing Services Changed on Compliance Host",
+  "object_type": "rule",
+  "group": "Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-11-22T13:20:52.150Z",
+  "modified": "2023-11-22T13:20:52.150Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:ComplianceDefinition: GLBA Servers, BB:ComplianceDefinition: HIPAA Servers, BB:ComplianceDefinition: PCI DSS Servers, BB:ComplianceDefinition: SOX Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1261, SYSTEM-1260, SYSTEM-1310, SYSTEM-1258"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Auditing Changed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1563"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "6"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1261",
+      "name": "BB:ComplianceDefinition: GLBA Servers"
+    },
+    {
+      "uuid": "SYSTEM-1260",
+      "name": "BB:ComplianceDefinition: HIPAA Servers"
+    },
+    {
+      "uuid": "SYSTEM-1310",
+      "name": "BB:ComplianceDefinition: PCI DSS Servers"
+    },
+    {
+      "uuid": "SYSTEM-1258",
+      "name": "BB:ComplianceDefinition: SOX Servers"
+    },
+    {
+      "uuid": "SYSTEM-1563",
+      "name": "BB:CategoryDefinition: Auditing Changed"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.396320",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

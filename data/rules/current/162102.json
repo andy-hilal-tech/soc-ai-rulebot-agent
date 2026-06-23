@@ -1,0 +1,135 @@
+{
+  "rule_doc_id": "162102",
+  "rule_id": "162102",
+  "uuid": "38a255b9-66ef-41e2-9907-3bf5b8a8fae6",
+  "rule_name": "SetupComplete.cmd Exploitation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-06-29T13:52:50.516Z",
+  "modified": "2024-07-21T12:38:31.708Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Parent Command&quot; ILIKE '%\\cmd.exe%' AND &quot;Parent Command&quot; ILIKE '%/c%' AND &quot;Parent Command&quot; ILIKE '%C:\\Windows\\Setup\\Scripts\\%' AND (&quot;Parent Command&quot; ILIKE '%SetupComplete.cmd' OR &quot;Parent Command&quot; ILIKE '%PartnerSetupComplete.cmd'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Parent%20Command%22%20ILIKE%20'%25%5Ccmd.exe%25'%20AND%20%22Parent%20Command%22%20ILIKE%20'%25%2Fc%25'%20AND%20%22Parent%20Command%22%20ILIKE%20'%25C%3A%5CWindows%5CSetup%5CScripts%5C%25'%20AND%20(%22Parent%20Command%22%20ILIKE%20'%25SetupComplete.cmd'%20OR%20%22Parent%20Command%22%20ILIKE%20'%25PartnerSetupComplete.cmd'))|%5B%22(%5C%22Parent%20Command%5C%22%20ILIKE%20'%25%5C%5Ccmd.exe%25'%20AND%20%5C%22Parent%20Command%5C%22%20ILIKE%20'%25%2Fc%25'%20AND%20%5C%22Parent%20Command%5C%22%20ILIKE%20'%25C%3A%5C%5CWindows%5C%5CSetup%5C%5CScripts%5C%5C%25'%20AND%20(%5C%22Parent%20Command%5C%22%20ILIKE%20'%25SetupComplete.cmd'%20OR%20%5C%22Parent%20Command%5C%22%20ILIKE%20'%25PartnerSetupComplete.cmd'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Process File File Path&quot; ILIKE 'C:\\Windows\\System32\\%' OR &quot;Process File File Path&quot; ILIKE 'C:\\Windows\\SysWOW64\\%' OR &quot;Process File File Path&quot; ILIKE 'C:\\Windows\\WinSxS\\%' OR &quot;Process File File Path&quot; ILIKE 'C:\\Windows\\Setup\\%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Process%20Path%22%20ILIKE%20'C%3A%5CWindows%5CSystem32%5C%25'%20OR%20%22Process%20Path%22%20ILIKE%20'C%3A%5CWindows%5CSysWOW64%5C%25'%20OR%20%22Process%20Path%22%20ILIKE%20'C%3A%5CWindows%5CWinSxS%5C%25'%20OR%20%22Process%20Path%22%20ILIKE%20'C%3A%5CWindows%5CSetup%5C%25')|%5B%22(%5C%22Process%20Path%5C%22%20ILIKE%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5C%25'%20OR%20%5C%22Process%20Path%5C%22%20ILIKE%20'C%3A%5C%5CWindows%5C%5CSysWOW64%5C%5C%25'%20OR%20%5C%22Process%20Path%5C%22%20ILIKE%20'C%3A%5C%5CWindows%5C%5CWinSxS%5C%5C%25'%20OR%20%5C%22Process%20Path%5C%22%20ILIKE%20'C%3A%5C%5CWindows%5C%5CSetup%5C%5C%25')%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1548",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548",
+            "values": [
+              {
+                "id": "162102",
+                "bb": "SetupComplete.cmd Exploitation",
+                "uuid": "38a255b9-66ef-41e2-9907-3bf5b8a8fae6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.477368",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

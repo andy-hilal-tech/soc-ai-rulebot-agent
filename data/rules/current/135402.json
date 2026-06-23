@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "135402",
+  "rule_id": "135402",
+  "uuid": "9ac2862b-343f-4b7c-be9e-b08c59ff86fa",
+  "rule_name": "Ransomware: Maze Suspicious File Transfer",
+  "object_type": "rule",
+  "group": "Ransomware, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-06T16:15:45.251Z",
+  "modified": "2024-07-21T10:28:58.781Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Destination_Test",
+            "uid": "1",
+            "id": "28"
+          },
+          "text": [
+            "when the destination is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application is DataTransfer.FTP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQDataTransfer.FTP"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Name is any of [2.txt or ad.7z]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131143EQany2.txt�ad.7z"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "T1020",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1020",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - T1020",
+            "values": [
+              {
+                "id": "135402",
+                "bb": "Ransomware: Maze Suspicious File Transfer",
+                "uuid": "9ac2862b-343f-4b7c-be9e-b08c59ff86fa",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1030",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1030",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - T1030",
+            "values": [
+              {
+                "id": "135402",
+                "bb": "Ransomware: Maze Suspicious File Transfer",
+                "uuid": "9ac2862b-343f-4b7c-be9e-b08c59ff86fa",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.694530",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

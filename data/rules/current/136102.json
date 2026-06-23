@@ -1,0 +1,200 @@
+{
+  "rule_doc_id": "136102",
+  "rule_id": "136102",
+  "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+  "rule_name": "SharpHound PowerShell Detected",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-11T19:50:06.088Z",
+  "modified": "2024-07-21T10:28:51.615Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?invoke-bloodhound.*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20'.*%3Finvoke-bloodhound.*'|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3Finvoke-bloodhound.*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Software Deployment Tools",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1072",
+        "MAP_S": [
+          {
+            "name": "Execution - Software Deployment Tools",
+            "values": [
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "T1482",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1482",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1482",
+            "values": [
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1087",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087",
+            "values": [
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1069",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1069",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1069",
+            "values": [
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.710095",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

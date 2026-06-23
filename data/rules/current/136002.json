@@ -1,0 +1,159 @@
+{
+  "rule_doc_id": "136002",
+  "rule_id": "136002",
+  "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+  "rule_name": "Cobalt Strike Behaviour Detected",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-10T16:32:28.654Z",
+  "modified": "2024-07-21T10:28:51.826Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Cobalt Strike Process Address, BB:BehaviorDefinition: Cobalt Strike Port Usage, BB:BehaviorDefinition: Potential Cobalt Strike Traffic</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "73a31e05-0ffc-48c2-8a8e-589ce0458b4d, f110f769-230e-467f-bc2d-0d3ed0707d93, dbd603f7-a7c8-44bf-9ae5-8ea80e8b4774"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73a31e05-0ffc-48c2-8a8e-589ce0458b4d",
+      "name": "BB:BehaviorDefinition: Cobalt Strike Process Address"
+    },
+    {
+      "uuid": "f110f769-230e-467f-bc2d-0d3ed0707d93",
+      "name": "BB:BehaviorDefinition: Cobalt Strike Port Usage"
+    },
+    {
+      "uuid": "dbd603f7-a7c8-44bf-9ae5-8ea80e8b4774",
+      "name": "BB:BehaviorDefinition: Potential Cobalt Strike Traffic"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Software Deployment Tools",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1072",
+        "MAP_S": [
+          {
+            "name": "Execution - Software Deployment Tools",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1203",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1203",
+        "MAP_S": [
+          {
+            "name": "Execution - T1203",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "T1055",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.710095",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

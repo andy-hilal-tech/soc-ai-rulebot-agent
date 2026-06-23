@@ -1,0 +1,110 @@
+{
+  "rule_doc_id": "137602",
+  "rule_id": "137602",
+  "uuid": "af8f17bf-30fb-413d-9b85-01c4a131733d",
+  "rule_name": "BB:BehaviorDefinition: Hidden File or Folder Created",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-07T15:27:08.816Z",
+  "modified": "2024-07-21T10:28:53.505Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.File Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(&quot;Filename&quot; is not NULL and Filename not in ('.viminfo')) OR &quot;Encoded Filename&quot; is not NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Filename%22%20is%20not%20NULL%20and%20Filename%20not%20in%20('.viminfo'))%20OR%20%22Encoded%20Filename%22%20is%20not%20NULL|%5B%22(%5C%22Filename%5C%22%20is%20not%20NULL%20and%20Filename%20not%20in%20('.viminfo'))%20OR%20%5C%22Encoded%20Filename%5C%22%20is%20not%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;Filename&quot; MATCHES '^(.*\\/)*\\..*' OR &quot;Encoded Filename&quot; MATCHES '^((.{2})*2F)*2E.*' OR &quot;File Permissions&quot; MATCHES '\\d?(12|10|04)0\\d00'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Filename%22%20MATCHES%20'%5E(.*%5C%2F)*%5C..*'%20OR%20%22Encoded%20Filename%22%20MATCHES%20'%5E((.%7B2%7D)*2F)*2E.*'%20OR%20%22File%20Permissions%22%20MATCHES%20'%5Cd%3F(12%7C10%7C04)0%5Cd00'|%5B%22%5C%22Filename%5C%22%20MATCHES%20'%5E(.*%5C%5C%2F)*%5C%5C..*'%20OR%20%5C%22Encoded%20Filename%5C%22%20MATCHES%20'%5E((.%7B2%7D)*2F)*2E.*'%20OR%20%5C%22File%20Permissions%5C%22%20MATCHES%20'%5C%5Cd%3F(12%7C10%7C04)0%5C%5Cd00'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.420270",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

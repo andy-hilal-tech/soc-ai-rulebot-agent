@@ -1,0 +1,60 @@
+{
+  "rule_doc_id": "100180",
+  "rule_id": "100180",
+  "uuid": "SYSTEM-1243",
+  "rule_name": "BB:FalsePositive: Remote Source to Local Destination False Positives",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T01:47:38.087Z",
+  "modified": "2023-10-30T02:02:39.203Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1007205) SMB:NAME-WILDCARD</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "4254668"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "where the attack context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.770897",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "141402",
+  "rule_id": "141402",
+  "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+  "rule_name": "BB:BehaviorDefinition: Critical Process Created",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-07-27T12:18:16.517Z",
+  "modified": "2024-07-21T10:28:51.524Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "3",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?powershell.*' OR LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?cmd.*' OR LOWER(&quot;Parent Process Name&quot;) MATCHES '.*?mshta.*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Parent%20Process%20Name%22)%20MATCHES%20'.*%3Fpowershell.*'%20OR%20LOWER(%22Parent%20Process%20Name%22)%20MATCHES%20'.*%3Fcmd.*'%20OR%20LOWER(%22Parent%20Process%20Name%22)%20MATCHES%20'.*%3Fmshta.*'|%5B%22LOWER(%5C%22Parent%20Process%20Name%5C%22)%20MATCHES%20'.*%3Fpowershell.*'%22,%22OR%20LOWER(%5C%22Parent%20Process%20Name%5C%22)%20MATCHES%20'.*%3Fcmd.*'%22,%22OR%20LOWER(%5C%22Parent%20Process%20Name%5C%22)%20MATCHES%20'.*%3Fmshta.*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "141402",
+                "bb": "BB:BehaviorDefinition: Critical Process Created",
+                "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.500274",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

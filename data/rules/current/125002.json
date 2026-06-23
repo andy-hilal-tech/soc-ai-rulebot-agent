@@ -1,0 +1,113 @@
+{
+  "rule_doc_id": "125002",
+  "rule_id": "125002",
+  "uuid": "d0758e72-42ff-4aef-878b-4fc113d0c133",
+  "rule_name": "QRadar Audit: High CRE Utilization",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-09-26T16:17:18.563Z",
+  "modified": "2024-07-21T08:29:28.151Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Health Metrics</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "368"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Metric ID (custom) is any of CREPRocessorThreadInfo</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Metric IDEQanyCREPRocessorThreadInfo"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Element (custom) is any of CpuUtil</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ElementEQanyCpuUtil"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Value (custom) is greater than 75</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ValueGT75"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "69"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.315728",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

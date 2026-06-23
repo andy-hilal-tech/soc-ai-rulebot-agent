@@ -1,0 +1,315 @@
+{
+  "rule_doc_id": "138902",
+  "rule_id": "138902",
+  "uuid": "e932e293-86d3-4f88-876c-a031e8c7c549",
+  "rule_name": "Suspicious PSExec Module Usage Detected",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-09-10T23:58:07.760Z",
+  "modified": "2024-07-21T10:28:51.582Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>System.Successful Registry Modification, Audit.Object Access Success, System.Process Creation Success, System.Service Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 19081, 8110, 8030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "303"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Service Configured to Use Powershell, Encoded Command Malicious Usage in a Programming Environment, BB:BehaviorDefinition: Administrative Share Accessed, BB:BehaviorDefinition: Programming Environment Started with a Privileged Account</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>4</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93, a8da84b4-884c-492e-aa86-bc61aa4301c4, 66067912-26f8-4899-ac0c-1c9c1a259a8c, a138d39e-431a-4911-8db4-8e0966a628a9"
+            },
+            {
+              "id": "2",
+              "value": "4"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "destinationIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+      "name": "Service Configured to Use Powershell"
+    },
+    {
+      "uuid": "a8da84b4-884c-492e-aa86-bc61aa4301c4",
+      "name": "Encoded Command Malicious Usage in a Programming Environment"
+    },
+    {
+      "uuid": "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+      "name": "BB:BehaviorDefinition: Administrative Share Accessed"
+    },
+    {
+      "uuid": "a138d39e-431a-4911-8db4-8e0966a628a9",
+      "name": "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "138902",
+                "bb": "Suspicious PSExec Module Usage Detected",
+                "uuid": "e932e293-86d3-4f88-876c-a031e8c7c549",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "133452",
+                "bb": "Encoded Command Malicious Usage in a Programming Environment",
+                "uuid": "a8da84b4-884c-492e-aa86-bc61aa4301c4",
+                "T": "EVENT"
+              },
+              {
+                "id": "138952",
+                "bb": "Service Configured to Use Powershell",
+                "uuid": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "T1133",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1133",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1133",
+            "values": [
+              {
+                "id": "134702",
+                "bb": "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account",
+                "uuid": "a138d39e-431a-4911-8db4-8e0966a628a9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "T1133",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1133",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1133",
+            "values": [
+              {
+                "id": "134702",
+                "bb": "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account",
+                "uuid": "a138d39e-431a-4911-8db4-8e0966a628a9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "135652",
+                "bb": "BB:BehaviorDefinition: Administrative Share Accessed",
+                "uuid": "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.002",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.002",
+            "values": [
+              {
+                "id": "135652",
+                "bb": "BB:BehaviorDefinition: Administrative Share Accessed",
+                "uuid": "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Create or Modify System Process",
+        "STEC": "T1543.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543.003",
+            "values": [
+              {
+                "id": "138952",
+                "bb": "Service Configured to Use Powershell",
+                "uuid": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.786517",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

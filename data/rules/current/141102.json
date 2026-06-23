@@ -1,0 +1,200 @@
+{
+  "rule_doc_id": "141102",
+  "rule_id": "141102",
+  "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+  "rule_name": "Potential Mailto Ransomware Behavior (Windows)",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-07-22T15:25:56.595Z",
+  "modified": "2024-07-21T10:28:51.224Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Attempt to Delete Shadow Copies, BB:BehaviorDefinition: New File Created in Temporary Directory, BB:BehaviorDefinition: Excessive File Modifications</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: New Registry Added to HKLM/HKCU (Windows)</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "d7e4e83c-d675-4adc-95e9-c12df78a7216, db74f8bd-bcf2-4880-8e62-faa9c697969e, a5cbcb32-3d0b-4a14-95cb-d470236f1325"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "59a72349-bd17-48d5-bcd7-f8a779a187bd"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+      "name": "Attempt to Delete Shadow Copies"
+    },
+    {
+      "uuid": "db74f8bd-bcf2-4880-8e62-faa9c697969e",
+      "name": "BB:BehaviorDefinition: New File Created in Temporary Directory"
+    },
+    {
+      "uuid": "a5cbcb32-3d0b-4a14-95cb-d470236f1325",
+      "name": "BB:BehaviorDefinition: Excessive File Modifications"
+    },
+    {
+      "uuid": "59a72349-bd17-48d5-bcd7-f8a779a187bd",
+      "name": "BB:BehaviorDefinition: New Registry Added to HKLM/HKCU (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "141102",
+                "bb": "Potential Mailto Ransomware Behavior (Windows)",
+                "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+                "T": "EVENT"
+              },
+              {
+                "id": "141202",
+                "bb": "BB:BehaviorDefinition: Excessive File Modifications",
+                "uuid": "a5cbcb32-3d0b-4a14-95cb-d470236f1325",
+                "T": "EVENT"
+              },
+              {
+                "id": "141152",
+                "bb": "BB:BehaviorDefinition: New File Created in Temporary Directory",
+                "uuid": "db74f8bd-bcf2-4880-8e62-faa9c697969e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1490",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1490",
+        "MAP_S": [
+          {
+            "name": "Impact - T1490",
+            "values": [
+              {
+                "id": "141102",
+                "bb": "Potential Mailto Ransomware Behavior (Windows)",
+                "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+                "T": "EVENT"
+              },
+              {
+                "id": "135552",
+                "bb": "Attempt to Delete Shadow Copies",
+                "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+                "T": "EVENT"
+              },
+              {
+                "id": "141252",
+                "bb": "BB:BehaviorDefinition: New Registry Added to HKLM/HKCU (Windows)",
+                "uuid": "59a72349-bd17-48d5-bcd7-f8a779a187bd",
+                "T": "EVENT"
+              },
+              {
+                "id": "141152",
+                "bb": "BB:BehaviorDefinition: New File Created in Temporary Directory",
+                "uuid": "db74f8bd-bcf2-4880-8e62-faa9c697969e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Indicator Removal",
+            "values": [
+              {
+                "id": "135552",
+                "bb": "Attempt to Delete Shadow Copies",
+                "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.876729",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

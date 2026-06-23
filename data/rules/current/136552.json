@@ -1,0 +1,182 @@
+{
+  "rule_doc_id": "136552",
+  "rule_id": "136552",
+  "uuid": "78537bdf-787c-469b-9d4a-5dba11e85088",
+  "rule_name": "Ransomware IOCs Detected on Multiple Machines",
+  "object_type": "rule",
+  "group": "Ransomware, Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-19T18:37:10.796Z",
+  "modified": "2024-07-21T10:28:58.948Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Custom Rule Engine</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "18"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>QIDNAME(qid) IN ('Ransomware Decryption Instructions File Created', 'Ransomware File Extension Detected', 'BadRabbit IOC Detected', 'Maze IOC Detected', 'Maze IOC Detected - File Exfiltration', 'Petya / NotPetya IOC Detected', 'REvil IOC Detected', 'WCry IOC Detected', 'Suspicious Amount of Files Renamed on the Same Machine', 'Excessive File Deletion and Creation', 'Suspicious Amount of Files Deleted on the Same Machine', 'Ryuk Process Terminated', 'Ryuk IOC Detected', 'Malware as a Service Behaviour', 'Malware as a Service Hash IOC Detected')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "QIDNAME(qid)%20IN%20('Ransomware%20Decryption%20Instructions%20File%20Created',%20'Ransomware%20File%20Extension%20Detected',%20'BadRabbit%20IOC%20Detected',%20'Maze%20IOC%20Detected',%20'Maze%20IOC%20Detected%20-%20File%20Exfiltration',%20'Petya%20%2F%20NotPetya%20IOC%20Detected',%20'REvil%20IOC%20Detected',%20'WCry%20IOC%20Detected',%20'Suspicious%20Amount%20of%20Files%20Renamed%20on%20the%20Same%20Machine',%20'Excessive%20File%20Deletion%20and%20Creation',%20'Suspicious%20Amount%20of%20Files%20Deleted%20on%20the%20Same%20Machine',%20'Ryuk%20Process%20Terminated',%20'Ryuk%20IOC%20Detected',%20'Malware%20as%20a%20Service%20Behaviour',%20'Malware%20as%20a%20Service%20Hash%20IOC%20Detected')|%5B%22QIDNAME(qid)%20IN%20('Ransomware%20Decryption%20Instructions%20File%20Created',%20'Ransomware%20File%20Extension%20Detected',%20'BadRabbit%20IOC%20Detected',%20'Maze%20IOC%20Detected',%20'Maze%20IOC%20Detected%20-%20File%20Exfiltration',%20'Petya%20%2F%20NotPetya%20IOC%20Detected',%20'REvil%20IOC%20Detected',%20'WCry%20IOC%20Detected',%20'Suspicious%20Amount%20of%20Files%20Renamed%20on%20the%20Same%20Machine',%20'Excessive%20File%20Deletion%20and%20Creation',%20'Suspicious%20Amount%20of%20Files%20Deleted%20on%20the%20Same%20Machine',%20'Ryuk%20Process%20Terminated',%20'Ryuk%20IOC%20Detected',%20'Malware%20as%20a%20Service%20Behaviour',%20'Malware%20as%20a%20Service%20Hash%20IOC%20Detected')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "0",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>QID</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Source Address</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "qidNumber"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "sourceaddress"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "136552",
+                "bb": "Ransomware IOCs Detected on Multiple Machines",
+                "uuid": "78537bdf-787c-469b-9d4a-5dba11e85088",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "136552",
+                "bb": "Ransomware IOCs Detected on Multiple Machines",
+                "uuid": "78537bdf-787c-469b-9d4a-5dba11e85088",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - None",
+            "values": [
+              {
+                "id": "136552",
+                "bb": "Ransomware IOCs Detected on Multiple Machines",
+                "uuid": "78537bdf-787c-469b-9d4a-5dba11e85088",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.727122",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

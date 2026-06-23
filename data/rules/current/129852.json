@@ -1,0 +1,111 @@
+{
+  "rule_doc_id": "129852",
+  "rule_id": "129852",
+  "uuid": "6adeed8f-f743-410a-945a-13fbf07233a3",
+  "rule_name": "Successful Communication to Cryptocurrency Mining Host",
+  "object_type": "rule",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-08-20T17:53:52.330Z",
+  "modified": "2024-07-21T09:42:17.617Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Successful Communication, BB:CategoryDefinition: Firewall or ACL Accept</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1472, SYSTEM-1208"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Communication to Cryptocurrency Mining IP, BB:Threats: Communication to Cryptocurrency Mining URL for Flows, BB:Threats: X-Force Premium: Internal Connection to Host Categorized as Cryptocurrency Mining, BB:Threats: Communication to Cryptocurrency Mining URL for Events, BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Events, BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "8c2fae1d-93e2-4315-92ac-94dfee46cd4a, e906916b-1862-4b97-bd9d-8d5262a21e43, a15aecd4-6fb9-4061-8160-a10ff2b6caf1, dc2fb9d8-731e-411a-a9a6-32bd0ea64dd5, 2ab617b3-8773-460d-a867-c7ee58146fd1, 2d834047-3e90-4b40-a628-52a58c3b8a4a"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1472",
+      "name": "BB:CategoryDefinition: Successful Communication"
+    },
+    {
+      "uuid": "SYSTEM-1208",
+      "name": "BB:CategoryDefinition: Firewall or ACL Accept"
+    },
+    {
+      "uuid": "8c2fae1d-93e2-4315-92ac-94dfee46cd4a",
+      "name": "BB:Threats: Communication to Cryptocurrency Mining IP"
+    },
+    {
+      "uuid": "e906916b-1862-4b97-bd9d-8d5262a21e43",
+      "name": "BB:Threats: Communication to Cryptocurrency Mining URL for Flows"
+    },
+    {
+      "uuid": "a15aecd4-6fb9-4061-8160-a10ff2b6caf1",
+      "name": "BB:Threats: X-Force Premium: Internal Connection to Host Categorized as Cryptocurrency Mining"
+    },
+    {
+      "uuid": "dc2fb9d8-731e-411a-a9a6-32bd0ea64dd5",
+      "name": "BB:Threats: Communication to Cryptocurrency Mining URL for Events"
+    },
+    {
+      "uuid": "2ab617b3-8773-460d-a867-c7ee58146fd1",
+      "name": "BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Events"
+    },
+    {
+      "uuid": "2d834047-3e90-4b40-a628-52a58c3b8a4a",
+      "name": "BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.532660",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

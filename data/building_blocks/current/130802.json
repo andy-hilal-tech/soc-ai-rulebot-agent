@@ -1,0 +1,59 @@
+{
+  "rule_doc_id": "130802",
+  "rule_id": "130802",
+  "uuid": "ef0f5a26-d151-44a0-a3e5-7cba0ba2e8b1",
+  "rule_name": "BB:Threats: Cryptocurrency Mining Ports",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-10-28T15:13:37.085Z",
+  "modified": "2024-07-21T09:42:15.998Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Destination_Test",
+            "uid": "0",
+            "id": "28"
+          },
+          "text": [
+            "when the destination is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "1",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>65530, 65531, 65532, 65533, 3333, 4444, 5555, 7777, 9999, 45700, 8333, 8124, 9333</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "65530, 65531, 65532, 65533, 3333, 4444, 5555, 7777, 9999, 45700, 8333, 8124, 9333"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.299894",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

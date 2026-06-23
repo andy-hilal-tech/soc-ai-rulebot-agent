@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "116202",
+  "rule_id": "116202",
+  "uuid": "f999f163-4926-4a3c-a976-db807e6eccc8",
+  "rule_name": "BB:CategoryDefinition: User Role Assign Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-06-11T18:12:12.978Z",
+  "modified": "2024-04-29T12:45:19.209Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Role Assignment Success, Authentication.Role Creation Success, Authentication.User Account Changed, Authentication.User Policy Attach Success, Authentication.Role Assignment Attempt, Authentication.Role Creation Attempt, Authentication.User Policy Attach Attempt, Authentication.Group Member Add Success, Authentication.Policy Added, Authentication.Group Member Update Success, Authentication.Group Member Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3133, 3127, 3032, 3140, 3135, 3129, 3142, 3154, 3029, 3160, 3036"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.157617",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

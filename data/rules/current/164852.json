@@ -1,0 +1,112 @@
+{
+  "rule_doc_id": "164852",
+  "rule_id": "164852",
+  "uuid": "f95e5614-47dd-46e5-80fa-880b233471b6",
+  "rule_name": "Creation of Suspicious Executable Files",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2025-01-24T07:23:32.244Z",
+  "modified": "2025-03-12T08:31:53.564Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, System.Successful File Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 8014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>( \tLOWER(&quot;Filename&quot;) LIKE '%.bat.exe' \tOR LOWER(&quot;Filename&quot;) LIKE '%.sys.exe' ) OR  ( \tLOWER(&quot;Filename&quot;) LIKE ('%recycle.bin.exe') \tOR LOWER(&quot;Filename&quot;) LIKE ('%documents and settings.exe') \tOR LOWER(&quot;Filename&quot;) LIKE ('%msocache.exe') \tOR LOWER(&quot;Filename&quot;) LIKE ('%recovery.exe') \tOR LOWER(&quot;Filename&quot;) LIKE ('%perflogs.exe') )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Filename%22)%20LIKE%20'%25.bat.exe'%20%09OR%20LOWER(%22Filename%22)%20LIKE%20'%25.sys.exe'%20)%20OR%20%20(%20%09LOWER(%22Filename%22)%20LIKE%20('%25recycle.bin.exe')%20%09OR%20LOWER(%22Filename%22)%20LIKE%20('%25documents%20and%20settings.exe')%20%09OR%20LOWER(%22Filename%22)%20LIKE%20('%25msocache.exe')%20%09OR%20LOWER(%22Filename%22)%20LIKE%20('%25recovery.exe')%20%09OR%20LOWER(%22Filename%22)%20LIKE%20('%25perflogs.exe')%20)|%5B%22(%22,%22%5CtLOWER(%5C%22Filename%5C%22)%20LIKE%20'%25.bat.exe'%22,%22%5CtOR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25.sys.exe'%22,%22)%22,%22OR%20%22,%22(%22,%22%5CtLOWER(%5C%22Filename%5C%22)%20LIKE%20('%25recycle.bin.exe')%22,%22%5CtOR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20('%25documents%20and%20settings.exe')%22,%22%5CtOR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20('%25msocache.exe')%22,%22%5CtOR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20('%25recovery.exe')%22,%22%5CtOR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20('%25perflogs.exe')%22,%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>( &quot;Filename&quot; ilike '%.vbs%' AND (&quot;Image Path&quot;='C:\\Program Files\\Microsoft Monitoring Agent\\Agent\\MonitoringHost.exe') or (&quot;Image Path&quot;='C:\\Program Files\\Microsoft System Center 2016\\Operations Manager\\Server\\MonitoringHost.exe') )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%22Filename%22%20ilike%20'%25.vbs%25'%20AND%20(%22Image%20Path%22%3D'C%3A%5CProgram%20Files%5CMicrosoft%20Monitoring%20Agent%5CAgent%5CMonitoringHost.exe')%20or%20(%22Image%20Path%22%3D'C%3A%5CProgram%20Files%5CMicrosoft%20System%20Center%202016%5COperations%20Manager%5CServer%5CMonitoringHost.exe')%20)|%5B%22%20(%20%5C%22Filename%5C%22%20ilike%20'%25.vbs%25'%20AND%20(%5C%22Image%20Path%5C%22%3D'C%3A%5C%5CProgram%20Files%5C%5CMicrosoft%20Monitoring%20Agent%5C%5CAgent%5C%5CMonitoringHost.exe')%20or%20(%5C%22Image%20Path%5C%22%3D'C%3A%5C%5CProgram%20Files%5C%5CMicrosoft%20System%20Center%202016%5C%5COperations%20Manager%5C%5CServer%5C%5CMonitoringHost.exe')%20)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.169919",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

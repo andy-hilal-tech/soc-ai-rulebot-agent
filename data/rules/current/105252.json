@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "105252",
+  "rule_id": "105252",
+  "uuid": "fdd7b1c6-02da-43b9-b582-011a1b80af2b",
+  "rule_name": "UBA : Browsed to LifeStyle Website",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-05-08T09:54:00.010Z",
+  "modified": "2024-02-19T16:41:09.789Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%controversial%'or &quot;Web Category&quot; ilike '%restaurant%' or &quot;Web Category&quot; ilike '%travel%' or &quot;Web Category&quot; ilike '%vehicle%' or &quot;Web Category&quot; ilike '%garden%' or &quot;Web Category&quot; ilike '%hunting%' or &quot;Web Category&quot; ilike '%fishing%' or &quot;Web Category&quot; ilike '%dining%' or &quot;Web Category&quot; ilike '%DIY%' or &quot;Web Category&quot; ilike '%fashion%' or &quot;Web Category&quot; ilike '%transportation%' or &quot;Web Category&quot; ilike '%astrology%' OR &quot;Web Category&quot; in (7, 8, 17, 20, 21, 27, 84, 85, 86, 101)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Web%20Category%22%20ilike%20'%25controversial%25'or%20%22Web%20Category%22%20ilike%20'%25restaurant%25'%20or%20%22Web%20Category%22%20ilike%20'%25travel%25'%20or%20%22Web%20Category%22%20ilike%20'%25vehicle%25'%20or%20%22Web%20Category%22%20ilike%20'%25garden%25'%20or%20%22Web%20Category%22%20ilike%20'%25hunting%25'%20or%20%22Web%20Category%22%20ilike%20'%25fishing%25'%20or%20%22Web%20Category%22%20ilike%20'%25dining%25'%20or%20%22Web%20Category%22%20ilike%20'%25DIY%25'%20or%20%22Web%20Category%22%20ilike%20'%25fashion%25'%20or%20%22Web%20Category%22%20ilike%20'%25transportation%25'%20or%20%22Web%20Category%22%20ilike%20'%25astrology%25'%20OR%20%22Web%20Category%22%20in%20(7,%208,%2017,%2020,%2021,%2027,%2084,%2085,%2086,%20101)|%5B%22%5C%22Web%20Category%5C%22%20ilike%20'%25controversial%25'or%20%5C%22Web%20Category%5C%22%20ilike%20'%25restaurant%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25travel%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25vehicle%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25garden%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25hunting%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25fishing%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25dining%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25DIY%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25fashion%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25transportation%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25astrology%25'%20OR%20%5C%22Web%20Category%5C%22%20in%20(7,%208,%2017,%2020,%2021,%2027,%2084,%2085,%2086,%20101)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24001",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500244",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=5",
+            "name": "UBA : Browsed to LifeStyle Website"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+      "name": "BB:UBA : URL Category Filter"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "105252",
+                "bb": "UBA : Browsed to LifeStyle Website",
+                "uuid": "fdd7b1c6-02da-43b9-b582-011a1b80af2b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "105252",
+                "bb": "UBA : Browsed to LifeStyle Website",
+                "uuid": "fdd7b1c6-02da-43b9-b582-011a1b80af2b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.575214",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

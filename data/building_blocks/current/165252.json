@@ -1,0 +1,61 @@
+{
+  "rule_doc_id": "165252",
+  "rule_id": "165252",
+  "uuid": "4ab8a0fa-d301-41a7-8f22-618219a7bf2b",
+  "rule_name": "BB:CategoryDefinition: DDoS Attack Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2025-09-22T08:37:48.782Z",
+  "modified": "2025-09-22T08:37:48.782Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "0",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure H360, O365</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "4062, 362"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Distributed DoS, DOS.Distributed High Rate DoS, DOS.Distributed High Rate ICMP DoS, DOS.Distributed High Rate TCP DoS, DOS.Distributed High Rate UDP DoS, DOS.Distributed Low Rate DoS, DOS.Distributed Low Rate ICMP DoS, DOS.Distributed Low Rate TCP DoS, DOS.Distributed Low Rate UDP DoS, DOS.Distributed Medium Rate DoS, DOS.Distributed Medium Rate ICMP DoS, DOS.Distributed Medium Rate TCP DoS, DOS.Distributed Medium Rate UDP DoS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "2008, 2032, 2031, 2029, 2030, 2040, 2039, 2037, 2038, 2036, 2035, 2033, 2034"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.843537",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,154 @@
+{
+  "rule_doc_id": "165004",
+  "rule_id": "165004",
+  "uuid": "0da3c7bf-081c-4428-ac7e-ec3c71374a38",
+  "rule_name": "Suspicious Host File Deletion Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-03T07:57:15.719Z",
+  "modified": "2025-04-03T07:57:15.719Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Linux File Deletion, BB:BehaviorDefinition: Sysinternals SDelete File Deletion, BB:BehaviorDefinition: Prefetch File Deletion, BB:BehaviorDefinition: Suspicious Delete Command, BB:BehaviorDefinition: Delete Application Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "7c9a14bc-b3a3-45ff-b6f0-527f7c50d2bb, 0f9a12ed-2dc3-4d59-a64c-59f5a0850373, aa2b6d8f-5761-4256-8ae9-998180978b57, 15986a69-0c69-4251-97ba-7461d5cc023d, 29a9bd2e-a8c5-4cae-abf4-bc271fbcfd5d"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Path (custom) is not any of C:\\Windows\\System32\\SearchProtocolHost.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process PathNEQanyC:\\Windows\\System32\\SearchProtocolHost.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "7c9a14bc-b3a3-45ff-b6f0-527f7c50d2bb",
+      "name": "BB:BehaviorDefinition: Linux File Deletion"
+    },
+    {
+      "uuid": "0f9a12ed-2dc3-4d59-a64c-59f5a0850373",
+      "name": "BB:BehaviorDefinition: Sysinternals SDelete File Deletion"
+    },
+    {
+      "uuid": "aa2b6d8f-5761-4256-8ae9-998180978b57",
+      "name": "BB:BehaviorDefinition: Prefetch File Deletion"
+    },
+    {
+      "uuid": "15986a69-0c69-4251-97ba-7461d5cc023d",
+      "name": "BB:BehaviorDefinition: Suspicious Delete Command"
+    },
+    {
+      "uuid": "29a9bd2e-a8c5-4cae-abf4-bc271fbcfd5d",
+      "name": "BB:BehaviorDefinition: Delete Application Log"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "Indicator Removal",
+          "STEC": "T1070.004",
+          "TAC": "Defense Evasion",
+          "MAP_C": "high",
+          "MAP_EN": true,
+          "TEC_ID": "T1070",
+          "MAP_S": [
+            {
+              "name": "Defense Evasion - T1070.004",
+              "values": [
+                {
+                  "id": "165004",
+                  "bb": "Suspicious Host File Deletion Activity",
+                  "uuid": "0da3c7bf-081c-4428-ac7e-ec3c71374a38",
+                  "T": "EVENT"
+                },
+                {
+                  "id": "145302",
+                  "bb": "BB:BehaviorDefinition: Prefetch File Deletion",
+                  "uuid": "aa2b6d8f-5761-4256-8ae9-998180978b57",
+                  "T": "EVENT"
+                },
+                {
+                  "id": "150652",
+                  "bb": "BB:BehaviorDefinition: Sysinternals SDelete File Deletion",
+                  "uuid": "0f9a12ed-2dc3-4d59-a64c-59f5a0850373",
+                  "T": "EVENT"
+                },
+                {
+                  "id": "152052",
+                  "bb": "BB:BehaviorDefinition: Linux File Deletion",
+                  "uuid": "7c9a14bc-b3a3-45ff-b6f0-527f7c50d2bb",
+                  "T": "EVENT"
+                },
+                {
+                  "id": "152102",
+                  "bb": "BB:BehaviorDefinition: Suspicious Delete Command",
+                  "uuid": "15986a69-0c69-4251-97ba-7461d5cc023d",
+                  "T": "EVENT"
+                },
+                {
+                  "id": "152152",
+                  "bb": "BB:BehaviorDefinition: Delete Application Log",
+                  "uuid": "29a9bd2e-a8c5-4cae-abf4-bc271fbcfd5d",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.184965",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

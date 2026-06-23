@@ -1,0 +1,141 @@
+{
+  "rule_doc_id": "133202",
+  "rule_id": "133202",
+  "uuid": "28d1ad0c-8671-4445-8fa6-0c2df729a9c2",
+  "rule_name": "QNI : High Number of Emails From Unauthorized Users",
+  "object_type": "rule",
+  "group": "Email",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-02-27T15:52:54.220Z",
+  "modified": "2024-07-21T10:01:54.031Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail in Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Originating User is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131091NENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Whitelisted Email Admins',&quot;Originating User&quot;) == FALSE</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Whitelisted%20Email%20Admins',%22Originating%20User%22)%20%3D%3D%20FALSE|%5B%22REFERENCESETCONTAINS('Whitelisted%20Email%20Admins',%5C%22Originating%20User%5C%22)%20%3D%3D%20FALSE%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>100</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Originating User</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getFlowRules",
+              "value": ""
+            },
+            {
+              "id": "2",
+              "value": "100"
+            },
+            {
+              "id": "3",
+              "method": "getFlowDatabaseFields",
+              "value": "131091"
+            },
+            {
+              "id": "4",
+              "method": "getFlowDatabaseFields",
+              "value": ""
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0c688149-ac7e-4a55-b3c0-d535324a31bc",
+      "name": "BB:CategoryDefinition: Mail Applications in Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.628506",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

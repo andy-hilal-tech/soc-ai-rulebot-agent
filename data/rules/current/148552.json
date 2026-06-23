@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "148552",
+  "rule_id": "148552",
+  "uuid": "425251e9-4c2b-4d1e-be53-4bea76a85752",
+  "rule_name": "Creation or Modification of a new GPO Scheduled Task or Service",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-08T10:06:46.455Z",
+  "modified": "2024-07-21T12:38:41.281Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001830) FileCreate</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001830"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Target File Directory&quot;) MATCHES '(.*\\\\windows\\\\sysvol\\\\domain\\\\policies\\\\.*\\\\machine\\\\preferences\\\\scheduledtasks\\\\scheduledtasks\\.xml$|.*\\\\windows\\\\sysvol\\\\domain\\\\policies\\\\.*\\\\machine\\\\preferences\\\\services\\\\services\\.xml$)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Target%20File%20Directory%22)%20MATCHES%20'(.*%5C%5Cwindows%5C%5Csysvol%5C%5Cdomain%5C%5Cpolicies%5C%5C.*%5C%5Cmachine%5C%5Cpreferences%5C%5Cscheduledtasks%5C%5Cscheduledtasks%5C.xml%24%7C.*%5C%5Cwindows%5C%5Csysvol%5C%5Cdomain%5C%5Cpolicies%5C%5C.*%5C%5Cmachine%5C%5Cpreferences%5C%5Cservices%5C%5Cservices%5C.xml%24)'|%5B%22LOWER(%5C%22Target%20File%20Directory%5C%22)%20MATCHES%20'(.*%5C%5C%5C%5Cwindows%5C%5C%5C%5Csysvol%5C%5C%5C%5Cdomain%5C%5C%5C%5Cpolicies%5C%5C%5C%5C.*%5C%5C%5C%5Cmachine%5C%5C%5C%5Cpreferences%5C%5C%5C%5Cscheduledtasks%5C%5C%5C%5Cscheduledtasks%5C%5C.xml%24%7C.*%5C%5C%5C%5Cwindows%5C%5C%5C%5Csysvol%5C%5C%5C%5Cdomain%5C%5C%5C%5Cpolicies%5C%5C%5C%5C.*%5C%5C%5C%5Cmachine%5C%5C%5C%5Cpreferences%5C%5C%5C%5Cservices%5C%5C%5C%5Cservices%5C%5C.xml%24)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of dfsrs.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanydfsrs.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Persistence - Scheduled Task/Job",
+            "values": [
+              {
+                "id": "148552",
+                "bb": "Creation or Modification of a new GPO Scheduled Task or Service",
+                "uuid": "425251e9-4c2b-4d1e-be53-4bea76a85752",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "T1570",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1570",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1570",
+            "values": [
+              {
+                "id": "148552",
+                "bb": "Creation or Modification of a new GPO Scheduled Task or Service",
+                "uuid": "425251e9-4c2b-4d1e-be53-4bea76a85752",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.065115",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

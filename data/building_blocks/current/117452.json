@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "117452",
+  "rule_id": "117452",
+  "uuid": "21edbfbc-cba8-4a07-8e4d-72310c8969c8",
+  "rule_name": "BB:CategoryDefinition: Virtual Machine Restarted",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-11-26T15:27:22.276Z",
+  "modified": "2024-04-29T12:45:21.533Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Restart Attempt, Audit.Virtual Machine Restart Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19107, 19108"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.173353",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

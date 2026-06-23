@@ -1,0 +1,269 @@
+{
+  "rule_doc_id": "100068",
+  "rule_id": "100068",
+  "uuid": "SYSTEM-1199",
+  "rule_name": "Login Successful After Scan Attempt",
+  "object_type": "rule",
+  "group": "Authentication, Intrusion Detection",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2007-10-14T20:12:00.374Z",
+  "modified": "2023-10-30T02:02:36.587Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "CauseAndEffect_Test",
+            "uid": "0",
+            "id": "71"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Authentication: Login Failures Across Multiple Hosts, Recon: Remote SSH Server Scanner, Recon: Remote Proxy Server Scanner, Recon: Remote RPC Server Scanner, Recon: Remote LDAP Server Scanner, Recon: Remote IRC Server Scanner, Recon: Remote FTP Scanner, Recon: Remote Database Scanner, Recon: Local SSH Server Scanner, Recon: Local IRC Server Scanner, Recon: Local FTP Scanner, Recon: Local Database Scanner, Recon: Local &nbsp;LDAP Server Scanner</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, with the same <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>IP</a> followed by at least <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>1</a> of these <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>in</a> order with the same <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>IP</a> from the previous <a href='javascript:editParameter(\"0\", \"10\")' class='dynamic'>source</a>, within <a href='javascript:editParameter(\"0\", \"11\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"12\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1407, SYSTEM-1166, SYSTEM-1164, SYSTEM-1165, SYSTEM-1162, SYSTEM-1161, SYSTEM-1189, SYSTEM-1159, SYSTEM-1191, SYSTEM-1196, SYSTEM-1397, SYSTEM-1188, SYSTEM-1400, SYSTEM-1586, SYSTEM-1587, SYSTEM-1592, SYSTEM-1585, SYSTEM-1595"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "Source"
+            },
+            {
+              "id": "5",
+              "value": "IP"
+            },
+            {
+              "id": "6",
+              "value": "1"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "SYSTEM-1220"
+            },
+            {
+              "id": "8",
+              "value": "In"
+            },
+            {
+              "id": "9",
+              "value": "IP"
+            },
+            {
+              "id": "10",
+              "value": "Source"
+            },
+            {
+              "id": "11",
+              "value": "30"
+            },
+            {
+              "id": "12",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1407",
+      "name": "Multiple Login Failures from the Same Source"
+    },
+    {
+      "uuid": "SYSTEM-1166",
+      "name": "Remote SSH Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1164",
+      "name": "Remote Proxy Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1165",
+      "name": "Remote RPC Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1162",
+      "name": "Remote LDAP Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1161",
+      "name": "Remote IRC Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1189",
+      "name": "Remote FTP Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1159",
+      "name": "Remote Database Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1191",
+      "name": "Local L2L SSH Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1196",
+      "name": "Local L2L IRC Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1397",
+      "name": "Local L2L FTP Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1188",
+      "name": "Local L2L Database Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1400",
+      "name": "Local L2L LDAP Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1586",
+      "name": "Local L2R SSH Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1587",
+      "name": "Local L2R IRC Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1592",
+      "name": "Local L2R FTP Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1585",
+      "name": "Local L2R Database Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1595",
+      "name": "Local L2R LDAP Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1220",
+      "name": "BB:CategoryDefinition: Authentication Success"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100068",
+                "bb": "Login Successful After Scan Attempt",
+                "uuid": "SYSTEM-1199",
+                "T": "COMMON"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100068",
+                "bb": "Login Successful After Scan Attempt",
+                "uuid": "SYSTEM-1199",
+                "T": "COMMON"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.227620",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

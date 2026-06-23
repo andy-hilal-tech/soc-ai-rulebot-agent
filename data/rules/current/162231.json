@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162231",
+  "rule_id": "162231",
+  "uuid": "477b08df-f38e-4833-b9dc-d69aa1ee69c2",
+  "rule_name": "Uncommon AppX Package Locations",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:10:45.260Z",
+  "modified": "2024-08-04T08:10:45.260Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=854 AND (NOT(((LOWER(\"File Path\") LIKE '%c:\\program files\\windowsapps\\%' OR LOWER(\"File Path\") LIKE '%c:\\program files (x86)\\%' OR LOWER(\"File Path\") LIKE '%c:\\windows\\systemapps\\%' OR LOWER(\"File Path\") LIKE '%c:\\windows\\printdialog\\%' OR LOWER(\"File Path\") LIKE '%c:\\windows\\immersivecontrolpanel\\%' OR LOWER(\"File Path\") LIKE '%x-windowsupdate://%' OR LOWER(\"File Path\") LIKE '%file:///c:/program%20files%') OR (LOWER(\"File Path\") LIKE '%https://statics.teams.cdn.office.net/%' OR LOWER(\"File Path\") LIKE '%microsoft.com%'))))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D854%20AND%20%28NOT%28%28%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cprogram%20files%5Cwindowsapps%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cprogram%20files%20%28x86%29%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Csystemapps%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Cprintdialog%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Cimmersivecontrolpanel%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25x-windowsupdate%3A//%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25file%3A///c%3A/program%2520files%25%27%29%20OR%20%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25https%3A//statics.teams.cdn.office.net/%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25microsoft.com%25%27%29%29%29%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D854%20AND%20%28NOT%28%28%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cprogram%20files%5Cwindowsapps%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cprogram%20files%20%28x86%29%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Csystemapps%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Cprintdialog%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25c%3A%5Cwindows%5Cimmersivecontrolpanel%5C%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25x-windowsupdate%3A//%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25file%3A///c%3A/program%2520files%25%27%29%20OR%20%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25https%3A//statics.teams.cdn.office.net/%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25microsoft.com%25%27%29%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Uncommon AppX Package Locations SIGMA Description: Detects an appx package added the pipeline of the \"to be processed\" packages which is located in uncommon locations  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Uncommon AppX Package Locations"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.562041",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

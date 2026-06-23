@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100269",
+  "rule_id": "100269",
+  "uuid": "SYSTEM-1306",
+  "rule_name": "Policy: New Host Discovered in DMZ",
+  "object_type": "rule",
+  "group": "Policy",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2014-09-04T14:03:09.980Z",
+  "modified": "2023-10-30T02:20:04.675Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>VIS Host Discovery.New Host Discovered, VIS Host Discovery.Bulk Host Discovered</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "17001, 17005"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "NetworkObject_Test",
+            "uid": "2",
+            "id": "1"
+          },
+          "text": [
+            "when the local network is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>DMZ</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getNetworkView",
+              "value": "DMZ"
+            },
+            {
+              "id": "2",
+              "value": "Local"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.346352",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

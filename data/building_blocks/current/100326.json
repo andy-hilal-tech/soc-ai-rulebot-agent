@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100326",
+  "rule_id": "100326",
+  "uuid": "SYSTEM-1308",
+  "rule_name": "BB:CategoryDefinition: Windows Compliance Events",
+  "object_type": "building_block",
+  "group": "Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-08-30T14:13:28.091Z",
+  "modified": "2023-10-30T02:02:36.126Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(10505) Failure assigning special privileges to new logon, (10504) Special privileges assigned to new logon successfully, (10507) Failure Calling Privileged Service, (10506) Privileged Service Called Successfully, (10509) Privileged Object Operation Failed, (10510) User Right Assigned, (10511) User Right Removed, (10512) New Trusted Domain, (10513) Trusted Domain Removed, (10514) Audit Policy Change, (10433) User Account Created, (10434) User Account Type Change, (10435) User Account Enabled, (10437) Change Password Attempt Failed, (10436) Change Password Attempt Succeeded, (10439) User Account password set unsuccessful, (10438) User Account password set successfully, (10441) Group Created, (10440) User Account Deleted, (10461) Group member added or removed, (10527) Per user auditing policy set for user, (1176417) Windows unknown, (1176318) User account privilege change, (1176379) Audit Policy Changed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000074,  5000075,  5000076,  5000077,  14000229,  5000078,  5000079,  14000447,  14000553,  5000110,  5000111,  5000040,  5000113,  5000041,  5000115,  5000116,  5000223,  14000123,  14000019,  5000080,  5000081,  5000082,  5000084,  5000158,  5000085,  5000086,  14000343,  14000345,  14000021,  5000052,  5000053,  5000054,  5000055,  5000161,  5000056,  5000162,  5000098,  14000357,  14000359,  14000033,  14000035,  14000437,  5000100,  14000549,  5000101,  5000103,  5000105,  5000106,  14000113,  5000108,  5000037,  5000038,  5000072,  5000039,  5000073,  14000225"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.951682",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

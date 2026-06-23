@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "144702",
+  "rule_id": "144702",
+  "uuid": "b7447a93-c32a-4c9b-afac-0eb98a0f5480",
+  "rule_name": "BB:BehaviorDefinition: Windows Spooler Service File Deletion",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T15:22:00.868Z",
+  "modified": "2024-07-21T12:38:42.574Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Deleted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8033"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of spoolsv.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyspoolsv.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;File Directory&quot;) LIKE '%c:\\windows\\system32\\spool\\drivers\\x64\\3\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22File%20Directory%22)%20LIKE%20'%25c%3A%5Cwindows%5Csystem32%5Cspool%5Cdrivers%5Cx64%5C3%5C%25'|%5B%22LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25c%3A%5C%5Cwindows%5C%5Csystem32%5C%5Cspool%5C%5Cdrivers%5C%5Cx64%5C%5C3%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Masquerading",
+        "STEC": "T1036.003",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036.003",
+            "values": [
+              {
+                "id": "144702",
+                "bb": "BB:BehaviorDefinition: Windows Spooler Service File Deletion",
+                "uuid": "b7447a93-c32a-4c9b-afac-0eb98a0f5480",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.528987",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

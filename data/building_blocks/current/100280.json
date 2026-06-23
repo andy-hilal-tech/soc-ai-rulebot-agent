@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100280",
+  "rule_id": "100280",
+  "uuid": "SYSTEM-1211",
+  "rule_name": "BB:CategoryDefinition: System Errors and Failures",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-09-29T20:17:49.523Z",
+  "modified": "2023-10-30T02:02:40.912Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Service Failure, System.System Error, System.System Failure , System.Failed Application Modification, System.Failed Configuration Modification, System.Failed File Modification, System.Failed Host-Policy Modification, System.Failed Registry Modification, System.Failed Service Modification, System.Failed Stack Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8011, 8007, 8005, 8023, 8024, 8021, 8020, 8019, 8025, 8022"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

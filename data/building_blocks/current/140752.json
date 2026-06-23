@@ -1,0 +1,121 @@
+{
+  "rule_doc_id": "140752",
+  "rule_id": "140752",
+  "uuid": "e6c4565a-c675-4c67-b53b-c342001830c4",
+  "rule_name": "BB:BehaviorDefinition: Unsigned DLL Loaded from System Directory",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-18T16:33:05.332Z",
+  "modified": "2024-07-21T10:28:50.117Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "5",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Object Load Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19247"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Signed (custom) is any of false</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "SignedEQanyfalse"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>File Extension (custom) matches any of expressions (?i)dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionREXany(?i)dll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Directory (custom) matches any of expressions (?i)\\w:\\\\windows\\\\system32.*</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryREXany(?i)\\w:\\\\windows\\\\system32.*"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.481223",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,129 @@
+{
+  "rule_doc_id": "114502",
+  "rule_id": "114502",
+  "uuid": "bf60ff4f-16e6-4f77-904b-4e4aea2b8d3f",
+  "rule_name": "UBA : Network Traffic : Capture Monitoring and Analysis Program Usage",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2016-09-19T21:26:18.470Z",
+  "modified": "2024-02-19T16:54:08.043Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Object Name (custom), Filename (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>(Shared) UBA : Network Capture, Monitoring and Analysis Program Filenames - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Object Name, Filename"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "81"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24005",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500526",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "10",
+            "severity": "7",
+            "description": "senseValue=15,senseDesc='This rule indicates when a process is created and the process name matches one of the binary names listed in the reference set UBA : Network Capture, Monitoring and Analysis Program Filenames.',usecase_id='bf60ff4f-16e6-4f77-904b-4e4aea2b8d3f'",
+            "name": "UBA : Network Traffic : Capture Monitoring and Analysis Program Usage"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Collection - None",
+            "values": [
+              {
+                "id": "114502",
+                "bb": "UBA : Network Traffic : Capture Monitoring and Analysis Program Usage",
+                "uuid": "bf60ff4f-16e6-4f77-904b-4e4aea2b8d3f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.931875",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

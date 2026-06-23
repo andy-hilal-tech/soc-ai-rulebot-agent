@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100011",
+  "rule_id": "100011",
+  "uuid": "SYSTEM-1183",
+  "rule_name": "BB:PortDefinition: DHCP Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T04:54:43.898Z",
+  "modified": "2023-10-30T02:02:40.847Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>67, 68</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "67, 68"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.545527",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

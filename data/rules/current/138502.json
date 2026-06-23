@@ -1,0 +1,120 @@
+{
+  "rule_doc_id": "138502",
+  "rule_id": "138502",
+  "uuid": "14cd9473-1fa2-4f24-aa87-35523e75834a",
+  "rule_name": "Critical Security Tool Killed (Unix)",
+  "object_type": "rule",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-04-29T14:05:43.944Z",
+  "modified": "2024-07-21T10:28:55.185Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "0",
+            "id": "304"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Critical Security Tool Process Information, BB:BehaviorDefinition: Process Killed</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Record Number (custom)</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>QID</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "abfeabe4-8588-4551-b325-7d3ba020a343, e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb"
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Record Number"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "qidNumber"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "abfeabe4-8588-4551-b325-7d3ba020a343",
+      "name": "BB:BehaviorDefinition: Critical Security Tool Process Information"
+    },
+    {
+      "uuid": "e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb",
+      "name": "BB:BehaviorDefinition: Process Killed"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.001",
+            "values": [
+              {
+                "id": "138502",
+                "bb": "Critical Security Tool Killed (Unix)",
+                "uuid": "14cd9473-1fa2-4f24-aa87-35523e75834a",
+                "T": "EVENT"
+              },
+              {
+                "id": "138602",
+                "bb": "BB:BehaviorDefinition: Process Killed",
+                "uuid": "e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb",
+                "T": "EVENT"
+              },
+              {
+                "id": "138552",
+                "bb": "BB:BehaviorDefinition: Critical Security Tool Process Information",
+                "uuid": "abfeabe4-8588-4551-b325-7d3ba020a343",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.778471",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

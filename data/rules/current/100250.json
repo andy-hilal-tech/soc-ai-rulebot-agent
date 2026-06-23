@@ -1,0 +1,115 @@
+{
+  "rule_doc_id": "100250",
+  "rule_id": "100250",
+  "uuid": "SYSTEM-1268",
+  "rule_name": "Increase Magnitude of Medium Rate Scans",
+  "object_type": "rule",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-06-26T15:06:09.177Z",
+  "modified": "2023-10-30T02:02:35.490Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Classify</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypes",
+              "value": "16"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Recon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "1000"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventPayload_Test",
+            "uid": "3",
+            "id": "3"
+          },
+          "text": [
+            "when the Event Payload contains <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Med</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Med"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setSeverity",
+            "operation": "incSeverity",
+            "value": "2"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setCredibility",
+            "operation": "incCredibility",
+            "value": "2"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setRelevance",
+            "operation": "incRelevance",
+            "value": "2"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Increased Magnitude of Medium Rate Scans. Severity, credibility, and relevance increased by 2"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.330661",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

@@ -1,0 +1,194 @@
+{
+  "rule_doc_id": "141602",
+  "rule_id": "141602",
+  "uuid": "a26e8dac-e7db-4c31-9c2d-f6a2616cffe7",
+  "rule_name": "Detection of Turla Filename IOC in Events",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-02T16:28:09.407Z",
+  "modified": "2024-07-21T10:28:49.518Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>Malware as a Service Hash IOC in Events, Ransomware: Ryuk IOC in Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471, c4851152-1fcd-4965-b3a4-3d3f06b2c9e7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful File Modification, System.File Deleted, System.File Created, Audit.Object Load Success, System.Process Creation Success, System.Information, Access.Permission Change Success, Audit.Object Access Success, Audit.Object Access Failure</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8014, 8033, 8028, 19247, 8110, 8052, 4049, 19081, 19082"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Filename&quot; is not null</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Filename%22%20is%20not%20null|%5B%22%5C%22Filename%5C%22%20is%20not%20null%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Known Turla Filenames', &quot;Filename&quot;)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Known%20Turla%20Filenames',%20%22Filename%22)|%5B%22REFERENCESETCONTAINS('Known%20Turla%20Filenames',%20%5C%22Filename%5C%22)%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471",
+      "name": "Malware as a Service Hash IOC in Events"
+    },
+    {
+      "uuid": "c4851152-1fcd-4965-b3a4-3d3f06b2c9e7",
+      "name": "Ransomware: Ryuk IOC in Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.001",
+            "values": [
+              {
+                "id": "140152",
+                "bb": "Malware as a Service Hash IOC in Events",
+                "uuid": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "140252",
+                "bb": "Ransomware: Ryuk IOC in Events",
+                "uuid": "c4851152-1fcd-4965-b3a4-3d3f06b2c9e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.883481",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

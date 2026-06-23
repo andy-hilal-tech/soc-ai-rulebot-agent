@@ -1,0 +1,64 @@
+{
+  "rule_doc_id": "106652",
+  "rule_id": "106652",
+  "uuid": "a3971a53-4ad9-4761-9c31-5c1116c0d296",
+  "rule_name": "BB:UBA : TGT PAC Forgery Patched Server",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-10-22T15:51:32.630Z",
+  "modified": "2024-02-19T16:43:12.949Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000582) Failure Audit: A Kerberos service ticket was rejected</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000582"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Status Code (custom) is any of [0x3c or 0xf]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Status CodeEQany0x3c�0xf"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.069280",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

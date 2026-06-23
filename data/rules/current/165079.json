@@ -1,0 +1,152 @@
+{
+  "rule_doc_id": "165079",
+  "rule_id": "165079",
+  "uuid": "dd4eeaea-5436-45ab-913e-3ab8d4e0e0e8",
+  "rule_name": "New or Modified Inbox Rules in Exchange",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-27T08:19:44.961Z",
+  "modified": "2025-04-27T08:48:42.969Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Office 365</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "397"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Affected Workload (custom) is any of Exchange</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Affected WorkloadEQanyExchange"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Operation (custom) is any of [New-InboxRule or Set-InboxRule]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "OperationEQanyNew-InboxRule�Set-InboxRule"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "5008",
+            "includeAttackerEventsInterval": "300",
+            "offenseMapping": "3",
+            "forceOffenseCreation": "true",
+            "qid": "67501818",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Detect New or Modified Inbox Rules in Exchange.",
+            "name": "Added or Modified Inbox Rules in Exchange"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Account Manipulation",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1098",
+        "MAP_S": [
+          {
+            "name": "Persistence - Account Manipulation",
+            "values": [
+              {
+                "id": "165079",
+                "bb": "New or Modified Inbox Rules in Exchange",
+                "uuid": "dd4eeaea-5436-45ab-913e-3ab8d4e0e0e8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Office Application Startup",
+        "STEC": "Outlook Rules",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1137",
+        "MAP_S": [
+          {
+            "name": "Persistence - Outlook Rules",
+            "values": [
+              {
+                "id": "165079",
+                "bb": "New or Modified Inbox Rules in Exchange",
+                "uuid": "dd4eeaea-5436-45ab-913e-3ab8d4e0e0e8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.248383",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

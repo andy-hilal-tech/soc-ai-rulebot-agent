@@ -1,0 +1,77 @@
+{
+  "rule_doc_id": "165511",
+  "rule_id": "165511",
+  "uuid": "8f937c03-60de-4f32-bed5-b4c6be8e633f",
+  "rule_name": "H360 - Log source not sending logs - 1 - SRV-APP-H360",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-28T13:52:11.676Z",
+  "modified": "2026-04-28T13:52:11.675Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>WindowsAuthServer @ SRV-APP-H360</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "3775"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "8005",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501884",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "10",
+            "description": "SRV-APP-H360 - Log source not sending logs",
+            "name": "SRV-APP-H360 - Log source not sending logs"
+          },
+          "offenseAnnotation": [
+            {
+              "formatString": [
+                "SRV-APP-H360 - Log source not sending logs"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.468136",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

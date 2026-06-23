@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162446",
+  "rule_id": "162446",
+  "uuid": "5eaca989-ae93-4ee6-82ae-b83cfae942cc",
+  "rule_name": "Account Tampering - Suspicious Failed Logon Reasons",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:08:35.121Z",
+  "modified": "2024-08-06T12:58:44.325Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND ((\"Event ID\" IN('4625', '4776')) AND (Status IN('0xC0000072', '0xC000006F', '0xC0000070', '0xC0000413', '0xC000018C', '0xC000015B'))) AND (NOT(LOWER(UTF8(payload)) LIKE '%s-1-0-0%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%28%22Event%20ID%22%20IN%28%274625%27%2C%20%274776%27%29%29%20AND%20%28Status%20IN%28%270xC0000072%27%2C%20%270xC000006F%27%2C%20%270xC0000070%27%2C%20%270xC0000413%27%2C%20%270xC000018C%27%2C%20%270xC000015B%27%29%29%29%20AND%20%28NOT%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25s-1-0-0%25%27%29%29|%5B%22devicetype%3D12%20AND%20%28%28%22Event%20ID%22%20IN%28%274625%27%2C%20%274776%27%29%29%20AND%20%28Status%20IN%28%270xC0000072%27%2C%20%270xC000006F%27%2C%20%270xC0000070%27%2C%20%270xC0000413%27%2C%20%270xC000018C%27%2C%20%270xC000015B%27%29%29%29%20AND%20%28NOT%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25s-1-0-0%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems) SIGMA Title: Account Tampering - Suspicious Failed Logon Reasons SIGMA Description: This method uses uncommon error codes on failed logons to determine suspicious activity and tampering with accounts that have been disabled or somehow restricted.  False positives: - User using a disabled account  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Account Tampering - Suspicious Failed Logon Reasons"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.058161",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

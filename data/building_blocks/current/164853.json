@@ -1,0 +1,122 @@
+{
+  "rule_doc_id": "164853",
+  "rule_id": "164853",
+  "uuid": "a64ef6a6-9dc9-4654-abf1-01beedc04f01",
+  "rule_name": "BB:CategoryDefinition: Scheduled Task Creation by a Process",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2025-01-28T20:36:46.707Z",
+  "modified": "2025-01-28T20:37:37.881Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5001828) Process Create</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Parent Command&quot; IMATCHES 'C\\:\\\\Windows\\\\system32\\\\svchost\\.exe\\s\\-k\\snetsvcs'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Parent%20Command%22%20IMATCHES%20'C%5C%3A%5C%5CWindows%5C%5Csystem32%5C%5Csvchost%5C.exe%5Cs%5C-k%5Csnetsvcs'|%5B%22%5C%22Parent%20Command%5C%22%20IMATCHES%20'C%5C%5C%3A%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5Csvchost%5C%5C.exe%5C%5Cs%5C%5C-k%5C%5Csnetsvcs'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Process Path&quot; not in ('C:\\Windows\\System32\\taskhost.exe','C:\\Windows\\System32\\consent.exe','C:\\Windows\\System32\\taskhostex.exe','C:\\Windows\\System32\\rundll32.exe','C:\\Windows\\System32\\wbem\\WMIADAP.exe','C:\\Windows\\System32\\wermgr.exe','C:\\Windows\\System32\\wsqmcons.exe','C:\\Windows\\System32\\ServerManagerLauncher.exe','C:\\Windows\\System32\\aitagent.exe','C:\\Windows\\System32\\taskeng.exe','C:\\Windows\\System32\\Defrag.exe','C:\\Windows\\System32\\schtasks.exe','C:\\Windows\\System32\\ceipdata.exe', 'C:\\Windows\\System32\\tzsync.exe', 'C:\\Windows\\System32\\lpremove.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Path%22%20not%20in%20('C%3A%5CWindows%5CSystem32%5Ctaskhost.exe','C%3A%5CWindows%5CSystem32%5Cconsent.exe','C%3A%5CWindows%5CSystem32%5Ctaskhostex.exe','C%3A%5CWindows%5CSystem32%5Crundll32.exe','C%3A%5CWindows%5CSystem32%5Cwbem%5CWMIADAP.exe','C%3A%5CWindows%5CSystem32%5Cwermgr.exe','C%3A%5CWindows%5CSystem32%5Cwsqmcons.exe','C%3A%5CWindows%5CSystem32%5CServerManagerLauncher.exe','C%3A%5CWindows%5CSystem32%5Caitagent.exe','C%3A%5CWindows%5CSystem32%5Ctaskeng.exe','C%3A%5CWindows%5CSystem32%5CDefrag.exe','C%3A%5CWindows%5CSystem32%5Cschtasks.exe','C%3A%5CWindows%5CSystem32%5Cceipdata.exe',%20'C%3A%5CWindows%5CSystem32%5Ctzsync.exe',%20'C%3A%5CWindows%5CSystem32%5Clpremove.exe')|%5B%22%5C%22Process%20Path%5C%22%20not%20in%20('C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ctaskhost.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cconsent.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ctaskhostex.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Crundll32.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwbem%5C%5CWMIADAP.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwermgr.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwsqmcons.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5CServerManagerLauncher.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Caitagent.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ctaskeng.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5CDefrag.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cschtasks.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cceipdata.exe',%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ctzsync.exe',%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Clpremove.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) is any of %systemroot%\\system32\\usoclient.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandEQany%systemroot%\\system32\\usoclient.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.843537",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

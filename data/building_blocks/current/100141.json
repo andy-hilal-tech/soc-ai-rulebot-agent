@@ -1,0 +1,67 @@
+{
+  "rule_doc_id": "100141",
+  "rule_id": "100141",
+  "uuid": "SYSTEM-1042",
+  "rule_name": "BB:Threats: Scanning: Scan High",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T14:50:55.645Z",
+  "modified": "2023-10-30T02:02:39.003Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowType",
+            "uid": "1",
+            "id": "209"
+          },
+          "text": [
+            "when the flow type is one of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Superflow A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "HostCount",
+            "uid": "2",
+            "id": "202"
+          },
+          "text": [
+            "when the number of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>local</a> hosts is <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>greater than</a> than <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>100000</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "local"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "value": "100000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.690262",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

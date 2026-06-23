@@ -1,0 +1,202 @@
+{
+  "rule_doc_id": "161552",
+  "rule_id": "161552",
+  "uuid": "1824fb51-f6f3-402e-a886-fd680dd787fb",
+  "rule_name": "Google Chrome DLL Sideloading",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-25T18:36:39.136Z",
+  "modified": "2024-07-21T12:38:26.530Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001844) Image loaded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001844"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Filename (custom) is any of chrome_frame_helper.dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameEQanychrome_frame_helper.dll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Directory (custom) contains any of [C:\\Program Files\\Google\\Chrome\\Application or C:\\Program Files (x86)\\Google\\Chrome\\Application]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryCONanyC:\\Program Files\\Google\\Chrome\\Application�C:\\Program Files (x86)\\Google\\Chrome\\Application"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>File Directory (custom) contains any of \\AppData\\local\\Google\\Chrome\\Application</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File DirectoryCONany\\AppData\\local\\Google\\Chrome\\Application"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.002",
+            "values": [
+              {
+                "id": "161552",
+                "bb": "Google Chrome DLL Sideloading",
+                "uuid": "1824fb51-f6f3-402e-a886-fd680dd787fb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.002",
+            "values": [
+              {
+                "id": "161552",
+                "bb": "Google Chrome DLL Sideloading",
+                "uuid": "1824fb51-f6f3-402e-a886-fd680dd787fb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.002",
+            "values": [
+              {
+                "id": "161552",
+                "bb": "Google Chrome DLL Sideloading",
+                "uuid": "1824fb51-f6f3-402e-a886-fd680dd787fb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.465990",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

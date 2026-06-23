@@ -1,0 +1,100 @@
+{
+  "rule_doc_id": "130002",
+  "rule_id": "130002",
+  "uuid": "a15aecd4-6fb9-4061-8160-a10ff2b6caf1",
+  "rule_name": "BB:Threats: X-Force Premium: Internal Connection to Host Categorized as Cryptocurrency Mining",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-28T13:41:08.130Z",
+  "modified": "2024-07-21T09:42:16.709Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:Threats: Communication to Cryptocurrency Mining IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "8c2fae1d-93e2-4315-92ac-94dfee46cd4a"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "XForceCategoryByIP_Test",
+            "uid": "0",
+            "id": "113"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Destination IP</a> is categorized by X-Force as <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Cryptocurrency Mining</a> with confidence value <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>75</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getIPCommonDatabaseFields",
+              "value": "destinationIP"
+            },
+            {
+              "id": "2",
+              "method": "getXForceIPCategories",
+              "value": "9"
+            },
+            {
+              "id": "3",
+              "value": "gt"
+            },
+            {
+              "id": "4",
+              "value": "75"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "8c2fae1d-93e2-4315-92ac-94dfee46cd4a",
+      "name": "BB:Threats: Communication to Cryptocurrency Mining IP"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.280996",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "122802",
+  "rule_id": "122802",
+  "uuid": "SYSTEM-1312",
+  "rule_name": "BB:CategoryDefinition: Virus Detected",
+  "object_type": "building_block",
+  "group": "Category Definitions, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-06-19T19:21:20.564Z",
+  "modified": "2024-06-27T13:19:22.765Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Malware.Backdoor Detected, Malware.Hostile Mail Attachment, Malware.Hostile Software Download, Malware.Malicious Software, Malware.Misc Malware, Malware.Spyware Detected, Malware.Trojan Detected, Malware.Unknown Malware, Malware.Virus Detected</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "6002, 6003, 6005, 6004, 6007, 6009, 6008, 6001, 6006"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.236698",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

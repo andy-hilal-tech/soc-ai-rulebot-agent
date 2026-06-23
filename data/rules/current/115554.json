@@ -1,0 +1,98 @@
+{
+  "rule_doc_id": "115554",
+  "rule_id": "115554",
+  "uuid": "e51f647a-96c9-49d5-a19a-f5f13db14fe4",
+  "rule_name": "Process Baselining: Process Started with System User Privileges",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Add to a Reference Set",
+  "created": "2024-02-19T17:03:25.333Z",
+  "modified": "2024-02-19T17:03:25.333Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001828) Process Create</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Username IMATCHES 'NT\\sAUTHORITY\\\\SYSTEM'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Username%20IMATCHES%20'NT%5CsAUTHORITY%5C%5CSYSTEM'|%5B%22Username%20IMATCHES%20'NT%5C%5CsAUTHORITY%5C%5C%5C%5CSYSTEM'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "File Hash",
+            "id": "68",
+            "type": "ALNIC",
+            "name": "ProcessHashesStartedAsSystemUser"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.943611",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162460",
+  "rule_id": "162460",
+  "uuid": "dda32c13-b962-47ec-bf6d-c3bf8d53e111",
+  "rule_name": "Windows Pcap Drivers",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:09:59.462Z",
+  "modified": "2024-08-06T12:58:20.265Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4697 AND (LOWER(\"Service Filename\") LIKE '%pcap%' OR LOWER(\"Service Filename\") LIKE '%npcap%' OR LOWER(\"Service Filename\") LIKE '%npf%' OR LOWER(\"Service Filename\") LIKE '%nm3%' OR LOWER(\"Service Filename\") LIKE '%ndiscap%' OR LOWER(\"Service Filename\") LIKE '%nmnt%' OR LOWER(\"Service Filename\") LIKE '%windivert%' OR LOWER(\"Service Filename\") LIKE '%usbpcap%' OR LOWER(\"Service Filename\") LIKE '%pktmon%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4697%20AND%20%28LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25pcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25npcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25npf%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25nm3%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25ndiscap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25nmnt%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25windivert%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25usbpcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25pktmon%25%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4697%20AND%20%28LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25pcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25npcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25npf%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25nm3%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25ndiscap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25nmnt%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25windivert%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25usbpcap%25%27%20OR%20LOWER%28%22Service%20Filename%22%29%20LIKE%20%27%25pktmon%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Cian Heasley SIGMA Title: Windows Pcap Drivers SIGMA Description: Detects Windows Pcap driver installation based on a list of associated .sys files.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Windows Pcap Drivers"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.090741",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

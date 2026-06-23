@@ -1,0 +1,129 @@
+{
+  "rule_doc_id": "154702",
+  "rule_id": "154702",
+  "uuid": "3bff9e58-210a-46df-9410-9fd8476397f7",
+  "rule_name": "Potential File and Directory Discovery",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-16T17:20:26.934Z",
+  "modified": "2024-07-21T12:38:30.762Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: File and Directory Discovery - Linux, BB:BehaviorDefinition: Turla Group Lateral Movement, BB:BehaviorDefinition: Powershell File and Directory Discovery</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "02c3cb1c-c201-4162-adfa-24f821d75fa2, 00c36571-6fc5-4017-aa68-89d993dd42a2, 6f2f20c8-d8d1-4285-bf8a-91a2a130d4c9"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "02c3cb1c-c201-4162-adfa-24f821d75fa2",
+      "name": "BB:BehaviorDefinition: File and Directory Discovery - Linux"
+    },
+    {
+      "uuid": "00c36571-6fc5-4017-aa68-89d993dd42a2",
+      "name": "BB:BehaviorDefinition: Turla Group Lateral Movement"
+    },
+    {
+      "uuid": "6f2f20c8-d8d1-4285-bf8a-91a2a130d4c9",
+      "name": "BB:BehaviorDefinition: Powershell File and Directory Discovery"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1083",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1083",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1083",
+            "values": [
+              {
+                "id": "154702",
+                "bb": "Potential File and Directory Discovery",
+                "uuid": "3bff9e58-210a-46df-9410-9fd8476397f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "154752",
+                "bb": "BB:BehaviorDefinition: File and Directory Discovery - Linux",
+                "uuid": "02c3cb1c-c201-4162-adfa-24f821d75fa2",
+                "T": "EVENT"
+              },
+              {
+                "id": "154852",
+                "bb": "BB:BehaviorDefinition: Powershell File and Directory Discovery",
+                "uuid": "6f2f20c8-d8d1-4285-bf8a-91a2a130d4c9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "T1570",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1570",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1570",
+            "values": [
+              {
+                "id": "154802",
+                "bb": "BB:BehaviorDefinition: Turla Group Lateral Movement",
+                "uuid": "00c36571-6fc5-4017-aa68-89d993dd42a2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.230402",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

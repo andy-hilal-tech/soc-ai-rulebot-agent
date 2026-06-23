@@ -3,3 +3,11 @@ __pycache__/
 *.pyc
 .env
 .env.local.sh
+# Operational archives / logs
+data/rules/archive/
+data/building_blocks/archive/
+data/logs/
+
+# Optional: if previous snapshots should stay local only in production
+# data/rules/previous/
+# data/building_blocks/previous/

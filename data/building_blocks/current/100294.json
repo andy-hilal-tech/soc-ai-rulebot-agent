@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100294",
+  "rule_id": "100294",
+  "uuid": "SYSTEM-1502",
+  "rule_name": "BB:HostDefinition: Remote Assets",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-06-29T14:45:01.869Z",
+  "modified": "2023-10-30T02:02:35.578Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "0",
+            "id": "12"
+          },
+          "text": [
+            "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.928413",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

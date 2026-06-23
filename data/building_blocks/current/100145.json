@@ -1,0 +1,79 @@
+{
+  "rule_doc_id": "100145",
+  "rule_id": "100145",
+  "uuid": "SYSTEM-1070",
+  "rule_name": "BB:Threats: Port Scans: UDP Port Scan",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-31T15:04:16.684Z",
+  "modified": "2023-10-30T02:02:38.410Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "0",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>UDP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "UDP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "FlowType",
+            "uid": "1",
+            "id": "209"
+          },
+          "text": [
+            "when the flow type is one of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Superflow C</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application is any of Misc.Unknown_UDP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQanyMisc.Unknown_UDP"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.690262",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

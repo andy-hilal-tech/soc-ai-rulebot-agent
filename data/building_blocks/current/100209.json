@@ -1,0 +1,76 @@
+{
+  "rule_doc_id": "100209",
+  "rule_id": "100209",
+  "uuid": "SYSTEM-1311",
+  "rule_name": "BB:FalsePositive: Firewall Deny False Postive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-05-08T16:20:50.328Z",
+  "modified": "2023-10-30T02:02:37.533Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1164104) %ASA-6-106015, (1153240) 106015</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "9750036,  12250509"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Source_Test",
+            "uid": "1",
+            "id": "27"
+          },
+          "text": [
+            "when the source is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "local"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Destination_Test",
+            "uid": "2",
+            "id": "28"
+          },
+          "text": [
+            "when the destination is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.841407",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

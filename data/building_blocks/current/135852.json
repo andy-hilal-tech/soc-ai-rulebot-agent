@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "135852",
+  "rule_id": "135852",
+  "uuid": "dbd603f7-a7c8-44bf-9ae5-8ea80e8b4774",
+  "rule_name": "BB:BehaviorDefinition: Potential Cobalt Strike Traffic",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-02-18T15:04:35.801Z",
+  "modified": "2024-07-21T10:28:55.434Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Cobalt Strike Inbound Traffic, BB:BehaviorDefinition: Cobalt Strike Outbound Traffic</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "23b8d254-b3a9-4f88-a81c-d332bafbbf95, 81ac5e01-fc5e-46df-aa4e-c5bb80cba2f0"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "23b8d254-b3a9-4f88-a81c-d332bafbbf95",
+      "name": "BB:BehaviorDefinition: Cobalt Strike Inbound Traffic"
+    },
+    {
+      "uuid": "81ac5e01-fc5e-46df-aa4e-c5bb80cba2f0",
+      "name": "BB:BehaviorDefinition: Cobalt Strike Outbound Traffic"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.392991",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

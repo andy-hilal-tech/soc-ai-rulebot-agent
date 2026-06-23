@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "161952",
+  "rule_id": "161952",
+  "uuid": "f275a4c8-2a9a-43e6-8bb4-9d66944bc90a",
+  "rule_name": "Get-ADUser User Discovery and Export",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-06-23T12:32:40.137Z",
+  "modified": "2024-07-21T12:38:19.657Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Command&quot; LIKE '%Get-ADUser %' AND &quot;Command&quot; LIKE '% -Filter \\\\*%'  AND &quot;Command&quot; LIKE '% &gt; %' OR &quot;Command&quot; LIKE '% | Select %' OR &quot;Command&quot; LIKE '%Out-File%' OR &quot;Command&quot; LIKE '%Set-Content%' OR &quot;Command&quot; LIKE '%Add-Content%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Command%22%20LIKE%20'%25Get-ADUser%20%25'%20AND%20%22Command%22%20LIKE%20'%25%20-Filter%20%5C%5C*%25'%20%20AND%20%22Command%22%20LIKE%20'%25%20%3E%20%25'%20OR%20%22Command%22%20LIKE%20'%25%20%7C%20Select%20%25'%20OR%20%22Command%22%20LIKE%20'%25Out-File%25'%20OR%20%22Command%22%20LIKE%20'%25Set-Content%25'%20OR%20%22Command%22%20LIKE%20'%25Add-Content%25')|%5B%22%5C%22Command%5C%22%20LIKE%20'%25Get-ADUser%20%25'%20AND%20%5C%22Command%5C%22%20LIKE%20'%25%20-Filter%20%5C%5C%5C%5C*%25'%20%22,%22AND%20%5C%22Command%5C%22%20LIKE%20'%25%20%3E%20%25'%20OR%20%5C%22Command%5C%22%20LIKE%20'%25%20%7C%20Select%20%25'%20OR%20%5C%22Command%5C%22%20LIKE%20'%25Out-File%25'%20OR%20%5C%22Command%5C%22%20LIKE%20'%25Set-Content%25'%20OR%20%5C%22Command%5C%22%20LIKE%20'%25Add-Content%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.477368",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

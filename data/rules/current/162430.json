@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162430",
+  "rule_id": "162430",
+  "uuid": "2182d939-49f4-4ca3-b426-45efe813b73f",
+  "rule_name": "Suspicious Scheduled Task Creation",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:05:47.810Z",
+  "modified": "2024-08-04T13:05:47.810Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4698 AND (LOWER(UTF8(payload)) LIKE '%\\appdata\\local\\temp*%' OR LOWER(UTF8(payload)) LIKE '%\\appdata\\roaming\\%' OR LOWER(UTF8(payload)) LIKE '%\\users\\public\\%' OR LOWER(UTF8(payload)) LIKE '%\\windows\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\temp\\%' OR LOWER(UTF8(payload)) LIKE '%\\desktop\\%' OR LOWER(UTF8(payload)) LIKE '%\\downloads\\%' OR LOWER(UTF8(payload)) LIKE '%\\temporary internet%' OR LOWER(UTF8(payload)) LIKE '%c:\\programdata\\%' OR LOWER(UTF8(payload)) LIKE '%c:\\perflogs\\%') AND (LOWER(UTF8(payload)) LIKE '%regsvr32%' OR LOWER(UTF8(payload)) LIKE '%rundll32%' OR LOWER(UTF8(payload)) LIKE '%cmd.exe</command>%' OR LOWER(UTF8(payload)) LIKE '%cmd</command>%' OR LOWER(UTF8(payload)) LIKE '%<arguments>/c %' OR LOWER(UTF8(payload)) LIKE '%<arguments>/k %' OR LOWER(UTF8(payload)) LIKE '%<arguments>/r %' OR LOWER(UTF8(payload)) LIKE '%powershell%' OR LOWER(UTF8(payload)) LIKE '%pwsh%' OR LOWER(UTF8(payload)) LIKE '%mshta%' OR LOWER(UTF8(payload)) LIKE '%wscript%' OR LOWER(UTF8(payload)) LIKE '%cscript%' OR LOWER(UTF8(payload)) LIKE '%certutil%' OR LOWER(UTF8(payload)) LIKE '%bitsadmin%' OR LOWER(UTF8(payload)) LIKE '%bash.exe%' OR LOWER(UTF8(payload)) LIKE '%bash %' OR LOWER(UTF8(payload)) LIKE '%scrcons%' OR LOWER(UTF8(payload)) LIKE '%wmic %' OR LOWER(UTF8(payload)) LIKE '%wmic.exe%' OR LOWER(UTF8(payload)) LIKE '%forfiles%' OR LOWER(UTF8(payload)) LIKE '%scriptrunner%' OR LOWER(UTF8(payload)) LIKE '%hh.exe%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4698%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Clocal%5Ctemp%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Croaming%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cusers%5Cpublic%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cwindows%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cdesktop%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cdownloads%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Ctemporary%20internet%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cprogramdata%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cperflogs%5C%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25regsvr32%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25rundll32%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cmd.exe%3C/command%3E%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cmd%3C/command%3E%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/c%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/k%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/r%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25powershell%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25pwsh%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25mshta%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25certutil%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bitsadmin%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bash.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bash%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25scrcons%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wmic%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wmic.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25forfiles%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25scriptrunner%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25hh.exe%25%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4698%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Clocal%5Ctemp%2A%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cappdata%5Croaming%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cusers%5Cpublic%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cwindows%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Ctemp%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cdesktop%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cdownloads%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Ctemporary%20internet%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cprogramdata%5C%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c%3A%5Cperflogs%5C%25%27%29%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25regsvr32%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25rundll32%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cmd.exe%3C/command%3E%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cmd%3C/command%3E%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/c%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/k%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3Carguments%3E/r%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25powershell%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25pwsh%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25mshta%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25cscript%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25certutil%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bitsadmin%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bash.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25bash%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25scrcons%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wmic%20%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25wmic.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25forfiles%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25scriptrunner%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25hh.exe%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Suspicious Scheduled Task Creation SIGMA Description: Detects suspicious scheduled task creation events. Based on attributes such as paths, commands line flags, etc.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Suspicious Scheduled Task Creation"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.026577",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

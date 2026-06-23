@@ -1,0 +1,75 @@
+{
+  "rule_doc_id": "100150",
+  "rule_id": "100150",
+  "uuid": "SYSTEM-1071",
+  "rule_name": "BB:Threats: Suspicious IP Protocol Usage: Illegal TCP Flag Combination",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-31T15:07:24.695Z",
+  "modified": "2023-10-30T02:20:04.462Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "TCPFlagsCombo",
+            "uid": "1",
+            "id": "221"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> TCP flags are any of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>SR, SF, FUP, FUPSAR78, SRAFU</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "SR, SF, FUP, FUPSAR78, SRAFU"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "2",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>equal to</a> <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "packets"
+            },
+            {
+              "id": "3",
+              "value": "0"
+            },
+            {
+              "id": "4",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.705308",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

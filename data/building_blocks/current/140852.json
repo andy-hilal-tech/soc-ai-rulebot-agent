@@ -1,0 +1,204 @@
+{
+  "rule_doc_id": "140852",
+  "rule_id": "140852",
+  "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-29T20:10:22.591Z",
+  "modified": "2024-07-21T10:28:46.622Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Elevated Process (Windows)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "af9f1ad0-da96-412b-85f0-28a8c335700e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of dllhost.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanydllhost.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Parent Command (custom) matches any of expressions /Processid:\\{(D2E7041B-2927-42FB-8E9F-7CE93B6DC937|3E5FC7F9-9A51-4367-9063-A120244FBEC7|3E000D72-A845-4CD9-BD83-80C07C3B881F)\\}</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent CommandREXany/Processid:\\{(D2E7041B-2927-42FB-8E9F-7CE93B6DC937|3E5FC7F9-9A51-4367-9063-A120244FBEC7|3E000D72-A845-4CD9-BD83-80C07C3B881F)\\}"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+      "name": "BB:CategoryDefinition: Elevated Process (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.484856",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

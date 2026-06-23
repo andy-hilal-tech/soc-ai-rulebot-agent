@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "104502",
+  "rule_id": "104502",
+  "uuid": "8ab7903e-56f6-4b21-8453-0e8de6551e22",
+  "rule_name": "UBA : Browsed to Government Website",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-06-11T17:07:12.993Z",
+  "modified": "2024-02-19T16:41:09.453Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%goverment%' OR &quot;Web Category&quot; ilike '%military%' OR &quot;Web Category&quot; ilike '%politic%' OR &quot;Web Category&quot; ilike '%society%' OR &quot;Web Category&quot; ilike '%social science' OR &quot;Web Category&quot; ilike '%non-profit%' OR &quot;Web Category&quot; ilike '%charitable organization%' OR &quot;Web Category&quot; in (4, 11, 72, 73, 122, 123, 124, 125, 208)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Web%20Category%22%20ilike%20'%25goverment%25'%20OR%20%22Web%20Category%22%20ilike%20'%25military%25'%20OR%20%22Web%20Category%22%20ilike%20'%25politic%25'%20OR%20%22Web%20Category%22%20ilike%20'%25society%25'%20OR%20%22Web%20Category%22%20ilike%20'%25social%20science'%20OR%20%22Web%20Category%22%20ilike%20'%25non-profit%25'%20OR%20%22Web%20Category%22%20ilike%20'%25charitable%20organization%25'%20OR%20%22Web%20Category%22%20in%20(4,%2011,%2072,%2073,%20122,%20123,%20124,%20125,%20208)|%5B%22%5C%22Web%20Category%5C%22%20ilike%20'%25goverment%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25military%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25politic%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25society%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25social%20science'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25non-profit%25'%20OR%20%5C%22Web%20Category%5C%22%20ilike%20'%25charitable%20organization%25'%20OR%20%5C%22Web%20Category%5C%22%20in%20(4,%2011,%2072,%2073,%20122,%20123,%20124,%20125,%20208)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500230",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=5",
+            "name": "UBA : Browsed to Government Website"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+      "name": "BB:UBA : URL Category Filter"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104502",
+                "bb": "UBA : Browsed to Government Website",
+                "uuid": "8ab7903e-56f6-4b21-8453-0e8de6551e22",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104502",
+                "bb": "UBA : Browsed to Government Website",
+                "uuid": "8ab7903e-56f6-4b21-8453-0e8de6551e22",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.553669",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

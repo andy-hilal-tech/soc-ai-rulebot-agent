@@ -1,0 +1,48 @@
+{
+  "rule_doc_id": "115602",
+  "rule_id": "115602",
+  "uuid": "55d34671-8c08-4172-aab7-5c9ba184c8d1",
+  "rule_name": "User Load Basic Building Blocks",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2024-02-29T12:50:07.735Z",
+  "modified": "2024-02-29T12:50:07.735Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: AV/AM</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.967014",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

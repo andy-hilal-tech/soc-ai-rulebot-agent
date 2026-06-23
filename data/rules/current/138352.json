@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "138352",
+  "rule_id": "138352",
+  "uuid": "c79e45a1-5381-4003-8e92-8f97be7600ab",
+  "rule_name": "Communication with a Potential Hostile IP Address",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-04-17T18:10:16.870Z",
+  "modified": "2024-07-21T10:28:54.611Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "afe6bea0-42c8-48e7-b5bb-f16e836605f0, 60f34547-2463-4c88-806d-e23f1891eb87"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "afe6bea0-42c8-48e7-b5bb-f16e836605f0",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets)"
+    },
+    {
+      "uuid": "60f34547-2463-4c88-806d-e23f1891eb87",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138352",
+                "bb": "Communication with a Potential Hostile IP Address",
+                "uuid": "c79e45a1-5381-4003-8e92-8f97be7600ab",
+                "T": "EVENT"
+              },
+              {
+                "id": "138302",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets)",
+                "uuid": "afe6bea0-42c8-48e7-b5bb-f16e836605f0",
+                "T": "EVENT"
+              },
+              {
+                "id": "138252",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)",
+                "uuid": "60f34547-2463-4c88-806d-e23f1891eb87",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.766267",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

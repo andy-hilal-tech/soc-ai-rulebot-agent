@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "153602",
+  "rule_id": "153602",
+  "uuid": "0fee4ffe-5f96-4f26-9b99-ea204264d6e7",
+  "rule_name": "Mimikatz Execution",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-03-13T11:34:08.542Z",
+  "modified": "2024-07-21T12:38:52.882Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%dumpcreds%' or LOWER(&quot;Command&quot;) LIKE '%mimikatz%') or (LOWER(&quot;Command&quot;) LIKE '%::aadcookie%' or LOWER(&quot;Command&quot;) LIKE '%::detours%' or LOWER(&quot;Command&quot;) LIKE '%::memssp%' or LOWER(&quot;Command&quot;) LIKE '%::mflt%' or LOWER(&quot;Command&quot;) LIKE '%::ncroutemon%' or LOWER(&quot;Command&quot;) LIKE '%::ngcsign%' or LOWER(&quot;Command&quot;) LIKE '%::printnightmare%' or LOWER(&quot;Command&quot;) LIKE '%::skeleton%' or LOWER(&quot;Command&quot;) LIKE '%::preshutdown%' or LOWER(&quot;Command&quot;) LIKE '%::mstsc%' or LOWER(&quot;Command&quot;) LIKE '%::multirdp%') or (LOWER(&quot;Command&quot;) LIKE '%rpc::%' or LOWER(&quot;Command&quot;) LIKE '%token::%' or LOWER(&quot;Command&quot;) LIKE '%crypto::%' or LOWER(&quot;Command&quot;) LIKE '%dpapi::%' or LOWER(&quot;Command&quot;) LIKE '%sekurlsa::%' or LOWER(&quot;Command&quot;) LIKE '%kerberos::%' or LOWER(&quot;Command&quot;) LIKE '%lsadump::%' or LOWER(&quot;Command&quot;) LIKE '%privilege::%' or LOWER(&quot;Command&quot;) LIKE '%process::%' or LOWER(&quot;Command&quot;) LIKE '%vault::%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25dumpcreds%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25mimikatz%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25%3A%3Aaadcookie%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Adetours%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Amemssp%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Amflt%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Ancroutemon%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Angcsign%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Aprintnightmare%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Askeleton%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Apreshutdown%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Amstsc%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%3A%3Amultirdp%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25rpc%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25token%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25crypto%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25dpapi%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25sekurlsa%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25kerberos%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25lsadump%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25privilege%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25process%3A%3A%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25vault%3A%3A%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25dumpcreds%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25mimikatz%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Aaadcookie%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Adetours%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Amemssp%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Amflt%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Ancroutemon%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Angcsign%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Aprintnightmare%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Askeleton%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Apreshutdown%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Amstsc%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3A%3Amultirdp%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25rpc%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25token%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25crypto%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25dpapi%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25sekurlsa%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25kerberos%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25lsadump%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25privilege%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25process%3A%3A%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25vault%3A%3A%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - OS Credential Dumping",
+            "values": [
+              {
+                "id": "153602",
+                "bb": "Mimikatz Execution",
+                "uuid": "0fee4ffe-5f96-4f26-9b99-ea204264d6e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.202497",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

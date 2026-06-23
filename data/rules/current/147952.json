@@ -1,0 +1,236 @@
+{
+  "rule_doc_id": "147952",
+  "rule_id": "147952",
+  "uuid": "c673847d-b064-496b-9388-163a12d062a1",
+  "rule_name": "Suspicious Elevated System Shell",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-14T20:04:24.985Z",
+  "modified": "2024-07-21T12:38:50.317Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [powershell.exe or pwsh.exe or cmd.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanypowershell.exe�pwsh.exe�cmd.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "9",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"9\", \"1\")' class='dynamic'>Username is any of [AUTHORI or AUTORI]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameEQanyAUTHORI�AUTORI"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of [C:\\Windows\\System32\\ or C:\\Program Files (x86)\\ or C:\\Program Files\\], Process Name (custom) is any of [cmd.exe or powershell.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process PathCONanyC:\\Windows\\System32\\�C:\\Program Files (x86)\\�C:\\Program Files\\Process NameEQanycmd.exe�powershell.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Parent Process Path (custom) is any of C:\\ManageEngine\\ADManager Plus\\pgsql\\bin\\postgres.exe, Process Name (custom) is any of cmd.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process PathEQanyC:\\ManageEngine\\ADManager Plus\\pgsql\\bin\\postgres.exeProcess NameEQanycmd.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "5",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of C:\\Windows\\SysWOW64\\config\\systemprofile\\Citrix\\UpdaterBinaries\\, Parent Process Name (custom) is any of CitrixReceiverUpdater.exe, Process Name (custom) is any of cmd.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process PathCONanyC:\\Windows\\SysWOW64\\config\\systemprofile\\Citrix\\UpdaterBinaries\\Parent Process NameEQanyCitrixReceiverUpdater.exeProcess NameEQanycmd.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "6",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"6\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of python.exe, Command (custom) is any of C:\\WINDOWS\\system32\\cmd.exe /c &quot;ver&quot;</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanypython.exeCommandEQanyC:\\WINDOWS\\system32\\cmd.exe /c \"ver\""
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "7",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"7\", \"1\")' class='dynamic'>Parent Process Path (custom) contains any of C:\\Windows\\Temp, Parent Process Name (custom) is any of invcol.exe, Parent Command (custom) contains any of C:\\ProgramData\\Dell\\UpdateService\\, Process Name (custom) is any of cmd.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process PathCONanyC:\\Windows\\TempParent Process NameEQanyinvcol.exeParent CommandCONanyC:\\ProgramData\\Dell\\UpdateService\\Process NameEQanycmd.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "8",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"8\", \"1\")' class='dynamic'>Command (custom) contains any of powershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanypowershell.exe -ExecutionPolicy Restricted -Command Write-Host 'Final result: 1';"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.040129",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

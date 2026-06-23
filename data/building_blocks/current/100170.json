@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100170",
+  "rule_id": "100170",
+  "uuid": "SYSTEM-1205",
+  "rule_name": "BB:FalsePositive: Global False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-08-29T17:41:21.558Z",
+  "modified": "2023-10-30T02:02:39.598Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1000082) DDOS shaft client login to handler, (1004923) ATTACK-RESPONSES 403 Forbidden, (1001335) WEB-MISC PCT Client_Hello overflow attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "1000082,  1004923,  1001335"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.752534",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

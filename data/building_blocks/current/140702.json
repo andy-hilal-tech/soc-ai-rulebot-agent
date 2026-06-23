@@ -1,0 +1,147 @@
+{
+  "rule_doc_id": "140702",
+  "rule_id": "140702",
+  "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-18T17:10:51.137Z",
+  "modified": "2024-07-21T10:28:45.778Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Unsigned DLL Loaded from System Directory, BB:CategoryDefinition: High/System Integrity Process Creation</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "e6c4565a-c675-4c67-b53b-c342001830c4, af9f1ad0-da96-412b-85f0-28a8c335700e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "0",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Process ID (custom), Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Process ID, Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "category"
+            },
+            {
+              "id": "5",
+              "value": "2"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "e6c4565a-c675-4c67-b53b-c342001830c4",
+      "name": "BB:BehaviorDefinition: Unsigned DLL Loaded from System Directory"
+    },
+    {
+      "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+      "name": "BB:CategoryDefinition: Elevated Process (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              },
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.481223",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,83 @@
+{
+  "rule_doc_id": "135752",
+  "rule_id": "135752",
+  "uuid": "f110f769-230e-467f-bc2d-0d3ed0707d93",
+  "rule_name": "BB:BehaviorDefinition: Cobalt Strike Port Usage",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-08-06T18:15:21.818Z",
+  "modified": "2024-07-21T10:28:52.328Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Destination_Test",
+            "uid": "0",
+            "id": "28"
+          },
+          "text": [
+            "when the destination is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Destination Port is 50050</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "destinationPortEQ50050"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Protocol is TCP.tcp_ip</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "protocolEQTCP.tcp_ip"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.388964",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}
