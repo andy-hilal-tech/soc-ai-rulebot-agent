@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
 from openai import AzureOpenAI
@@ -110,6 +110,45 @@ def load_all_rules():
     return all_rules
 
 
+def get_existing_ids():
+    print("🔍 Fetching existing documents from Azure Search...")
+
+    existing_ids = set()
+
+    results = search_client.search(
+        search_text="*",
+        select="rule_doc_id",
+        top=1000
+    )
+
+    # ✅ NEW SDK style iteration
+    for r in results:
+        existing_ids.add(r.get("rule_doc_id"))
+
+    print(f"Found {len(existing_ids)} existing documents")
+    return existing_ids
+
+
+def get_local_ids(rules):
+    return {r["rule_doc_id"] for r in rules}
+
+
+def delete_removed_docs(existing_ids, local_ids):
+    to_delete = existing_ids - local_ids
+
+    print(f"\n🗑️ Deleting {len(to_delete)} removed rules...")
+
+    if not to_delete:
+        print("Nothing to delete ✅")
+        return
+
+    batch = [{"rule_doc_id": rid} for rid in to_delete]
+
+    search_client.delete_documents(documents=batch)
+
+    print("✅ Deletion complete")
+
+
 # --------------------------
 # MAIN
 # --------------------------
@@ -119,6 +158,11 @@ def main():
 
     rules = load_all_rules()
     print(f"Loaded {len(rules)} rules")
+
+    
+    local_ids = get_local_ids(rules)
+    existing_ids = get_existing_ids()
+
 
     docs = []
 
@@ -137,7 +181,9 @@ def main():
             "enabled": rule.get("enabled"),
             "content": content,
             "content_vector": embedding,
-            "last_indexed_utc": datetime.utcnow().isoformat()
+            "last_indexed_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
         }
 
         docs.append(doc)
@@ -151,6 +197,13 @@ def main():
     for i in range(0, len(docs), batch_size):
         batch = docs[i:i + batch_size]
         search_client.upload_documents(documents=batch)
+
+    if len(local_ids) < 100:
+        print("⚠️ Suspiciously low rule count — skipping deletion")
+    else:
+        delete_removed_docs(existing_ids, local_ids)
+
+
 
     print("✅ Sync complete")
 
