@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+# Ensure repo root is in PYTHONPATH
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import json
 from pathlib import Path
 from datetime import datetime, timezone
