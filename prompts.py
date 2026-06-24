@@ -172,14 +172,58 @@ Use exactly this structure and field names:
 Rules:
 - Do not rename any fields.
 - Do not add extra top-level fields.
+- "classification" must be exactly one of:
+  - "likely benign"
+  - "suspicious"
+  - "inconclusive"
 - "reasoning" must be a plain string, not an object.
+- "likely_false_positive" must be a boolean.
+- "tuning_options" must always be a list.
 - Every tuning option must contain exactly:
   - "type"
   - "details"
+- "type" must be a short concrete tuning label such as:
+  - "threshold adjustment"
+  - "condition narrowing"
+  - "failure-only logic"
+  - "shared account exclusion"
+  - "log source scoping"
+  - "QID refinement"
+  - "building block refinement"
+- "details" must be a concrete tuning recommendation that explains what should change in the QRadar rule logic.
+- Do NOT return placeholder text such as:
+  - "Recommendation"
+  - "Tuning option"
+  - "N/A"
+  - empty strings
+- If no safe concrete tuning recommendation can be made, return:
+  "tuning_options": []
+- "compliance_notes" must be a plain string.
 - "validation_steps" must always be a list of strings.
-- "confidence" must be one of: low, medium, high.
-- If no suitable tuning option is found, return an empty list for "tuning_options".
+- "confidence" must be exactly one of:
+  - "low"
+  - "medium"
+  - "high"
 - Do not wrap the JSON in markdown fences.
+""".strip()
+
+
+OFFENSE_ANALYSIS_RECOMMENDATION_RULES = """
+For tuning_options:
+- Return 1 to 3 specific tuning recommendations when possible.
+- Each tuning recommendation must describe an actual QRadar logic change.
+- Prefer recommendations involving:
+  - threshold changes
+  - event outcome changes
+  - QID narrowing
+  - source/destination scoping
+  - username/shared account exclusion
+  - log source scoping
+  - grouping field changes
+  - building block refinement or reuse
+- Do NOT emit placeholders such as "Recommendation".
+- Do NOT emit empty strings.
+- If there is not enough information for a safe recommendation, return an empty list for tuning_options.
 """.strip()
 
 
@@ -216,7 +260,7 @@ Return your answer in structured JSON with these fields:
 - confidence
 
 Return ONLY valid JSON. Do NOT include markdown or code blocks.
-""".strip() + "\n\n" + OFFENSE_ANALYSIS_OUTPUT_SCHEMA
+""".strip() + "\n\n" + OFFENSE_ANALYSIS_RECOMMENDATION_RULES + "\n\n" + OFFENSE_ANALYSIS_OUTPUT_SCHEMA
 
 
 
@@ -258,26 +302,34 @@ Answer as a helpful SOC QRadar assistant.
 
 def build_offense_input_template() -> str:
     return """
-- offense_id:
-- rule_id:
-- event_name:
-- event_description:
-- source_ip:
-- source_port:
-- destination_ip:
-- destination_port:
-- username:
-- log_source:
-- qid:
-- category:
-- magnitude:
-- start_time:
-- event_count:
-- payload_summary:
-- why_false_positive:
-- desired_outcome:
-- analyst_notes:
+
+offense_id:
+client_id:
+rule_id:
+event_name:
+event_description:
+source_ip:
+source_port:
+destination_ip:
+destination_port:
+username:
+log_source:
+qid:
+category:
+magnitude:
+start_time:
+event_count:
+payload_summary:
+why_false_positive:
+desired_outcome:
+analyst_notes:
+
+Minimum required fields for analysis:
+rule_id
+why_false_positive
+desired_outcome
 """.strip()
+
 
 
 def build_grounded_reasoning_prompt(user_text: str, context_chunks: list[str]) -> str:

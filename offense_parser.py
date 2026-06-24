@@ -26,8 +26,18 @@ REQUIRED_OFFENSE_FIELDS = [
     "desired_outcome",
 ]
 
+def normalize_offense_template_text(text: str) -> str:
+    lines = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            stripped = stripped[2:].strip()
+        lines.append(stripped)
+    return "\n".join(lines)
+
 
 def parse_offense_template(text: str) -> dict:
+    text = normalize_offense_template_text(text)
     result = {field: "" for field in EXPECTED_OFFENSE_FIELDS}
 
     print("PARSER INPUT REPR:", repr(text), flush=True)
@@ -38,11 +48,8 @@ def parse_offense_template(text: str) -> dict:
         line = raw_line.strip()
         print("STRIPPED LINE:", repr(line), flush=True)
 
-        if not line.startswith("-"):
-            print("SKIP: does not start with '-'", flush=True)
+        if not line:
             continue
-
-        line = line[1:].strip()
 
         if ":" not in line:
             continue
@@ -55,7 +62,6 @@ def parse_offense_template(text: str) -> dict:
             result[key] = value
 
     return result
-
 
 def get_missing_required_fields(offense_data: dict) -> list[str]:
     missing = []

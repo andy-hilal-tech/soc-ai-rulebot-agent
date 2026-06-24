@@ -1,6 +1,45 @@
 import json
 from pathlib import Path
 
+def sanitize_tuning_options(options):
+    if not options:
+        return []
+
+    cleaned = []
+
+    for item in options:
+        if not item:
+            continue
+
+        # Handle dict-style tuning options from structured output
+        if isinstance(item, dict):
+            option_type = str(item.get("type", "")).strip()
+            details = str(item.get("details", "")).strip()
+
+            # Skip placeholders / empty values
+            if not details:
+                continue
+            if details.lower() in {"recommendation", "tuning option", "n/a", "none", "-"}:
+                continue
+
+            if option_type:
+                cleaned.append(f"{option_type}: {details}")
+            else:
+                cleaned.append(details)
+            continue
+
+        # Handle plain string fallback
+        text = str(item).strip()
+        if not text:
+            continue
+        if text.lower() in {"recommendation", "tuning option", "n/a", "none", "-"}:
+            continue
+
+        cleaned.append(text)
+
+    return cleaned
+
+
 
 def compact_source_label(source: str) -> str:
     if not source:
@@ -164,9 +203,11 @@ def build_offense_reply(
     analyst_notes = _safe_string(offense_data.get("analyst_notes"))
 
     assessment = _extract_assessment_text(analysis)
-    tuning_text = _format_tuning_options(analysis, max_items=2)
     classification = _safe_string(analysis.get("classification"))
     confidence = _safe_string(analysis.get("confidence"))
+
+    tuning_options = analysis.get("tuning_options", [])
+    recommendations = sanitize_tuning_options(tuning_options)
 
     similar_cases = []
     for src in context_sources or []:
@@ -227,13 +268,13 @@ def build_offense_reply(
     lines.extend([
         "",
         "Recommended tuning options:",
-        tuning_text,
-        "",
-        "Suggested next steps:",
-        "- Validate the event context and expected activity",
-        "- Review the recommended tuning option in a controlled scope",
-        "- Monitor post-change alert volume before wider rollout",
     ])
+
+    if recommendations:
+        for rec in recommendations:
+            lines.append(f"- {rec}")
+    else:
+        lines.append("- No concrete tuning recommendation could be generated from the provided context.")
 
     if case_warning:
         lines.extend([
