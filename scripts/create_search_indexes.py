@@ -99,9 +99,20 @@ def qradar_rules_index():
     fields = [
         SimpleField(name="rule_doc_id", type=SearchFieldDataType.String, key=True, filterable=True),
         SimpleField(name="rule_id", type=SearchFieldDataType.String, filterable=True, facetable=True, sortable=True),
+
         SearchableField(name="rule_name", type=SearchFieldDataType.String),
-        SimpleField(name="source_type", type=SearchFieldDataType.String, filterable=True),
+
+        # NEW: distinguish rule vs building_block in the same index
+        SearchableField(name="object_type", type=SearchFieldDataType.String, filterable=True, facetable=True),
+
+        SimpleField(name="group_name", type=SearchFieldDataType.String, filterable=True, facetable=True),
+        SimpleField(name="rule_category", type=SearchFieldDataType.String, filterable=True, facetable=True),
+
+        # NOTE: your sync script sends "enabled", not "rule_enabled"
+        SimpleField(name="enabled", type=SearchFieldDataType.Boolean, filterable=True, facetable=True),
+
         SearchableField(name="content", type=SearchFieldDataType.String),
+
         SearchField(
             name="content_vector",
             type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
@@ -109,19 +120,20 @@ def qradar_rules_index():
             vector_search_dimensions=EMBEDDING_DIMENSIONS,
             vector_search_profile_name=VECTOR_PROFILE_NAME,
         ),
-        SimpleField(name="rule_enabled", type=SearchFieldDataType.Boolean, filterable=True, facetable=True),
-        SimpleField(name="group_name", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SimpleField(name="severity", type=SearchFieldDataType.String, filterable=True, facetable=True),
-        SimpleField(name="last_source_export_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
+
+        # Keep only fields that your sync script really sends
         SimpleField(name="last_indexed_utc", type=SearchFieldDataType.DateTimeOffset, filterable=True, sortable=True),
-        SimpleField(name="version_hash", type=SearchFieldDataType.String, filterable=True),
     ]
 
     return SearchIndex(
         name=RULES_INDEX_NAME,
         fields=fields,
         vector_search=build_vector_search(),
-        semantic_search=build_semantic_search("rule_name", "content", ["rule_id", "group_name"]),
+        semantic_search=build_semantic_search(
+            "rule_name",
+            "content",
+            ["rule_id", "group_name", "rule_category", "object_type"]
+        ),
     )
 
 def analyst_memory_index():
@@ -174,13 +186,6 @@ def analyst_memory_index():
         fields=fields,
         vector_search=build_vector_search(),
         semantic_search=build_semantic_search("title", "content", ["client_id", "rule_id", "author"]),
-    )
-
-    return SearchIndex(
-        name=CASE_MEMORY_INDEX_NAME,
-        fields=fields,
-        vector_search=build_vector_search(),
-        semantic_search=build_semantic_search("", "summary_text", ["client_id", "rule_id"]),
     )
 
 
