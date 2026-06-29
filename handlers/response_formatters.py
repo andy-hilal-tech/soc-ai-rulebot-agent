@@ -214,12 +214,15 @@ def build_offense_reply(
         if src.startswith("case_memory:"):
             similar_cases.append(compact_source_label(src))
 
+    
     lines = [
         "Offense Analysis Summary",
+        "[formatter-v2-sanitized]",
         "",
         f"Event: {event_name}",
         f"Rule ID: {rule_id}",
     ]
+
 
     if classification:
         lines.append(f"Classification: {classification}")
