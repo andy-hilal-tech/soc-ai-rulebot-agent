@@ -301,33 +301,30 @@ Answer as a helpful SOC QRadar assistant.
 
 
 def build_offense_input_template() -> str:
-    return """
+    return """Offense analysis requested.
 
-offense_id:
-client_id:
-rule_id:
-event_name:
-event_description:
-source_ip:
-source_port:
-destination_ip:
-destination_port:
-username:
-log_source:
-qid:
-category:
-magnitude:
-start_time:
-event_count:
-payload_summary:
-why_false_positive:
-desired_outcome:
-analyst_notes:
+Please provide the offense/event details using this template:
 
-Minimum required fields for analysis:
-rule_id
-why_false_positive
-desired_outcome
+- offense_id:
+- client_id:
+- rule_id:
+- event_name:
+- event_description:
+- source_ip:
+- source_port:
+- destination_ip:
+- destination_port:
+- username:
+- log_source:
+- qid:
+- category:
+- magnitude:
+- start_time:
+- event_count:
+- payload_summary:
+- why_false_positive:
+- desired_outcome:
+- analyst_notes:
 """.strip()
 
 

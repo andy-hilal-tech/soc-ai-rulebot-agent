@@ -217,7 +217,6 @@ def build_offense_reply(
     
     lines = [
         "Offense Analysis Summary",
-        "[formatter-v2-sanitized]",
         "",
         f"Event: {event_name}",
         f"Rule ID: {rule_id}",
