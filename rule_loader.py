@@ -1,18 +1,37 @@
 import json
-import os
-
-BASE_DIR = os.path.dirname(__file__)
-RULES_PATH = os.path.join(BASE_DIR, "data", "rules")
-
-rules = {}
-
-for file in os.listdir(RULES_PATH):
-    if file.endswith(".json"):
-        with open(os.path.join(RULES_PATH, file), encoding="utf-8") as f:
-            r = json.load(f)
-            if r.get("id"):
-                rules[str(r["id"])] = r
+from pathlib import Path
 
 
-def get_rule(rule_id):
-    return rules.get(str(rule_id))
+RULE_LOOKUP_DIRS = [
+    Path("data/rules/current"),
+    Path("data/building_blocks/current"),
+    Path("data/rules"),
+    Path("data/building_blocks"),
+]
+
+
+def get_rule(rule_id: str) -> dict | None:
+    """
+    Load a QRadar rule or building block JSON by rule_id.
+
+    Supports both the new folder structure:
+      data/rules/current/
+      data/building_blocks/current/
+
+    and the older fallback folders:
+      data/rules/
+      data/building_blocks/
+    """
+    rule_id = str(rule_id).strip()
+
+    if not rule_id:
+        return None
+
+    for folder in RULE_LOOKUP_DIRS:
+        candidate = folder / f"{rule_id}.json"
+
+        if candidate.exists():
+            with open(candidate, "r", encoding="utf-8") as f:
+                return json.load(f)
+
+    return None
