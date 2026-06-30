@@ -187,6 +187,13 @@ Daily exports from QRadar Use Case Manager:
 * Rule-Data ZIP for Rules containing `rules.js`
 * Rule-Data ZIP for Building Blocks containing `rules.js`
 
+When extracting QRadar Rule-Data folders, rename folders using suffixes only:
+
+- Rule export folder should end with " - Rules"
+- Building Block export folder should end with " - BB"
+
+Do not add custom prefixes, because enrichment discovery expects suffix-based classification.
+
 CSV exports provide clean metadata. `rules.js` exports provide logic, dependencies, actions, responses, limiter details, and MITRE mappings.
 
 ### Snapshot lifecycle
@@ -212,6 +219,7 @@ rulebotenv
 python scripts/rotate_rule_snapshots.py
 python scripts/parse_qradar_csv.py
 python scripts/enrich_from_js.py
+```Cloud CLI
 python scripts/sync_rule_base.py
 ```
 
