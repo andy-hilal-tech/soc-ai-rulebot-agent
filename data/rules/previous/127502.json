@@ -1,0 +1,85 @@
+{
+  "rule_doc_id": "127502",
+  "rule_id": "127502",
+  "uuid": "SYSTEM-1335",
+  "rule_name": "Single IP with Multiple MAC Addresses",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-08-05T14:01:16.482Z",
+  "modified": "2024-07-21T09:34:35.192Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FieldChangeFunction_Test",
+            "uid": "0",
+            "id": "101"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>MAC</a> changes more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>6</a> times within <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>hours</a> on a single host"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "MAC"
+            },
+            {
+              "id": "2",
+              "value": "gt"
+            },
+            {
+              "id": "3",
+              "value": "6"
+            },
+            {
+              "id": "4",
+              "value": "1"
+            },
+            {
+              "id": "5",
+              "value": "h"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: DHCP Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1369"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1369",
+      "name": "BB:HostDefinition: DHCP Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.416234",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

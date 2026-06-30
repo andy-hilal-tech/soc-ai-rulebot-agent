@@ -1,0 +1,115 @@
+{
+  "rule_doc_id": "100249",
+  "rule_id": "100249",
+  "uuid": "SYSTEM-1269",
+  "rule_name": "Increase Magnitude of High Rate Scans",
+  "object_type": "rule",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-06-26T15:09:22.002Z",
+  "modified": "2023-10-30T02:02:37.367Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Classify</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypes",
+              "value": "16"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Recon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "1000"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventPayload_Test",
+            "uid": "3",
+            "id": "3"
+          },
+          "text": [
+            "when the Event Payload contains <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>High</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "High"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setSeverity",
+            "operation": "incSeverity",
+            "value": "4"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setCredibility",
+            "operation": "incCredibility",
+            "value": "4"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setRelevance",
+            "operation": "incRelevance",
+            "value": "4"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Increased Magnitude of High Rate Scans. Severity, credibility, and relevance increased by 4"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.330661",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

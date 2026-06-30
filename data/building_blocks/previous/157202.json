@@ -1,0 +1,147 @@
+{
+  "rule_doc_id": "157202",
+  "rule_id": "157202",
+  "uuid": "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+  "rule_name": "BB:BehaviorDefinition: Atbroker Registry Change",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T14:43:14.126Z",
+  "modified": "2024-07-21T12:38:14.095Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%') or (LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%' or LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Target%20Object%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cats%25'%20or%20LOWER(%22Target%20Object%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cconfiguration%25')%20or%20(LOWER(%22Registry%20Key%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cats%25'%20or%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cconfiguration%25')|%5B%22(LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cats%25'%20or%20LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cconfiguration%25')%20or%20(LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cats%25'%20or%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cconfiguration%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Process Name (custom) is any of atbroker.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyatbroker.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>(((LOWER(&quot;Target Object&quot;) LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and &quot;target details&quot;='(empty)') or (LOWER(&quot;Process File File Path&quot;) LIKE 'c:\\windows\\installer\\msi%' and LOWER(&quot;Target Object&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%'))) or (((LOWER(&quot;Registry Key&quot;) LIKE '%\\microsoft\\windows nt\\currentversion\\accessibility\\configuration%' and &quot;registry value data&quot;='(empty)') or (LOWER(&quot;Process File File Path&quot;) LIKE 'c:\\windows\\installer\\msi%' and LOWER(&quot;Registry Key&quot;) LIKE '%software\\microsoft\\windows nt\\currentversion\\accessibility\\ats%')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(((LOWER(%22Target%20Object%22)%20LIKE%20'%25%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cconfiguration%25'%20and%20%22target%20details%22%3D'(empty)')%20or%20(LOWER(%22Process%20Path%22)%20LIKE%20'c%3A%5Cwindows%5Cinstaller%5Cmsi%25'%20and%20LOWER(%22Target%20Object%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cats%25')))%20or%20(((LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cconfiguration%25'%20and%20%22registry%20value%20data%22%3D'(empty)')%20or%20(LOWER(%22Process%20Path%22)%20LIKE%20'c%3A%5Cwindows%5Cinstaller%5Cmsi%25'%20and%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25software%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Caccessibility%5Cats%25')))|%5B%22(((LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cconfiguration%25'%20and%20%5C%22target%20details%5C%22%3D'(empty)')%20or%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'c%3A%5C%5Cwindows%5C%5Cinstaller%5C%5Cmsi%25'%20and%20LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cats%25')))%20or%20(((LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cconfiguration%25'%20and%20%5C%22registry%20value%20data%5C%22%3D'(empty)')%20or%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'c%3A%5C%5Cwindows%5C%5Cinstaller%5C%5Cmsi%25'%20and%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25software%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Caccessibility%5C%5Cats%25')))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "157202",
+                "bb": "BB:BehaviorDefinition: Atbroker Registry Change",
+                "uuid": "78cfbd7d-32f5-43cc-b423-b0373fdc6582",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.787096",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

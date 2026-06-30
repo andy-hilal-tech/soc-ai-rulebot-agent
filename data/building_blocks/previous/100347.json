@@ -1,0 +1,83 @@
+{
+  "rule_doc_id": "100347",
+  "rule_id": "100347",
+  "uuid": "7b1c0f64-1609-4618-a6c3-338dc979c39d",
+  "rule_name": "BB:Mobile Worker Failed Events",
+  "object_type": "building_block",
+  "group": "Suspicious",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2012-10-31T18:10:33.130Z",
+  "modified": "2023-10-30T02:20:02.251Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:Failed Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "8d30923b-03c4-422f-ac08-a52b8eedf256"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Mobile Worker - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "24"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "8d30923b-03c4-422f-ac08-a52b8eedf256",
+      "name": "BB:Failed Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.983272",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

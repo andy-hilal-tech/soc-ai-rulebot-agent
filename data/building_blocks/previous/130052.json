@@ -1,0 +1,83 @@
+{
+  "rule_doc_id": "130052",
+  "rule_id": "130052",
+  "uuid": "dc2fb9d8-731e-411a-a9a6-32bd0ea64dd5",
+  "rule_name": "BB:Threats: Communication to Cryptocurrency Mining URL for Events",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-09-03T10:56:49.800Z",
+  "modified": "2024-07-21T09:42:16.991Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Proxy</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "41ba2a03-cd17-4cb4-986b-28140db49974"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>URL Host (custom), URL (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Hosts - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "URL Host, URL"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "191"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "41ba2a03-cd17-4cb4-986b-28140db49974",
+      "name": "BB:DeviceDefinition: Proxy"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.284143",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

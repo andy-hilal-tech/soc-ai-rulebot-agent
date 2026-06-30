@@ -1,0 +1,215 @@
+{
+  "rule_doc_id": "137052",
+  "rule_id": "137052",
+  "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+  "rule_name": "Critical File Deleted",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-25T19:40:22.579Z",
+  "modified": "2024-07-21T10:28:46.316Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System, BB:CategoryDefinition: Critical Files and Directories for Endpoint, BB:BehaviorDefinition: Multiple File Deletions on Endpoint System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f, 42faa723-ea73-4f93-a4b6-e76c20d00eff, c98476dd-9b17-4d2e-b097-a7a2bc788285"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+      "name": "BB:CategoryDefinition: Critical Files and Directories for Endpoint"
+    },
+    {
+      "uuid": "c98476dd-9b17-4d2e-b097-a7a2bc788285",
+      "name": "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "T1485",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1485",
+        "MAP_S": [
+          {
+            "name": "Impact - T1485",
+            "values": [
+              {
+                "id": "137052",
+                "bb": "Critical File Deleted",
+                "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+                "T": "EVENT"
+              },
+              {
+                "id": "137002",
+                "bb": "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System",
+                "uuid": "c98476dd-9b17-4d2e-b097-a7a2bc788285",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Data Manipulation",
+        "STEC": "T1565.001",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1565",
+        "MAP_S": [
+          {
+            "name": "Impact - T1565.001",
+            "values": [
+              {
+                "id": "137052",
+                "bb": "Critical File Deleted",
+                "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.004",
+            "values": [
+              {
+                "id": "137052",
+                "bb": "Critical File Deleted",
+                "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+                "T": "EVENT"
+              },
+              {
+                "id": "137002",
+                "bb": "BB:BehaviorDefinition: Multiple File Deletions on Endpoint System",
+                "uuid": "c98476dd-9b17-4d2e-b097-a7a2bc788285",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1222",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222",
+            "values": [
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "Unsecured Credentials",
+        "STEC": "T1552.003",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1552",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1552.003",
+            "values": [
+              {
+                "id": "137052",
+                "bb": "Critical File Deleted",
+                "uuid": "3465cf6e-9348-41f0-8743-b81944de7ed7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.008",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.008",
+            "values": [
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.757161",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

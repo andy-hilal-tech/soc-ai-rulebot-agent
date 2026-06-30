@@ -1,0 +1,94 @@
+{
+  "rule_doc_id": "165058",
+  "rule_id": "165058",
+  "uuid": "5ec9f15d-c944-4cf9-9e6d-e714792effa0",
+  "rule_name": "Not Reciving logs from main Server",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-17T13:26:39.914Z",
+  "modified": "2025-04-18T04:00:14.781Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>WinCollect @ VM-DMS-Live, WinCollect @ H360-DC2, WinCollect @ H360-DC3, WinCollect @ H360-TALLY, WinCollect @ SRV-APP-H360, WinCollect @ H360FS</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "3870, 3812, 4066, 4068, 3863, 3734"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "4015",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67501792",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "Detecting any of main servers that not reciving logs for 15 minutes",
+            "name": "Not Reciving logs from main Server"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "Disable Windows Event Logging",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Disable Windows Event Logging",
+            "values": [
+              {
+                "id": "165058",
+                "bb": "Not Reciving logs from main Server",
+                "uuid": "5ec9f15d-c944-4cf9-9e6d-e714792effa0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.216947",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

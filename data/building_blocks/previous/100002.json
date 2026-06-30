@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100002",
+  "rule_id": "100002",
+  "uuid": "SYSTEM-1300",
+  "rule_name": "BB:DeviceDefinition: Devices to Monitor for High Event Rates",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-08-13T17:33:07.874Z",
+  "modified": "2023-10-30T02:02:40.681Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "0",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Flow Classification Engine-5 :: acme21</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.532118",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

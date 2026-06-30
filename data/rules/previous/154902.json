@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "154902",
+  "rule_id": "154902",
+  "uuid": "3384272f-358e-4a2c-8d39-b7fc55b6bea7",
+  "rule_name": "Suspicious Program Location with Network Connections",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-18T09:16:42.999Z",
+  "modified": "2024-07-21T12:38:40.721Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Path (custom) contains any of [\\Users\\All Users or \\Users\\Default or \\Users\\Public or \\Users\\Contacts or \\Users\\Searches or \\config\\systemprofile or \\Windows\\Fonts or \\Windows\\IME or \\Windows\\addins or \\$Recycle.bin or 'C:\\Perflogs]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process PathCONany\\Users\\All Users�\\Users\\Default�\\Users\\Public�\\Users\\Contacts�\\Users\\Searches�\\config\\systemprofile�\\Windows\\Fonts�\\Windows\\IME�\\Windows\\addins�\\$Recycle.bin�'C:\\Perflogs"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "154902",
+                "bb": "Suspicious Program Location with Network Connections",
+                "uuid": "3384272f-358e-4a2c-8d39-b7fc55b6bea7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.230402",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

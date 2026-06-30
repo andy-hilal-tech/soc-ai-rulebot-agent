@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "124902",
+  "rule_id": "124902",
+  "uuid": "7df94416-1892-483a-abbe-2c80eb395bc1",
+  "rule_name": "QRadar Audit: Expensive Custom Properties",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-10-05T18:34:41.653Z",
+  "modified": "2024-07-21T08:29:28.768Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>QID is 38,750,138</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidNumberEQ38750138"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "69"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.312425",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

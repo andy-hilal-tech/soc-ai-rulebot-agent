@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "100166",
+  "rule_id": "100166",
+  "uuid": "SYSTEM-1354",
+  "rule_name": "BB:FalsePositive: DNS Server False Positive Categories",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-12-21T00:58:51.888Z",
+  "modified": "2023-10-30T02:02:38.383Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: DNS Servers, BB:HostReference: DNS Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1357, 38bbf8ff-e374-4cf2-927c-6df53a183713"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events, BB:CategoryDefinition: DDoS Attack Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1202, SYSTEM-1179, SYSTEM-1303"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1357",
+      "name": "BB:HostDefinition: DNS Servers"
+    },
+    {
+      "uuid": "38bbf8ff-e374-4cf2-927c-6df53a183713",
+      "name": "BB:HostReference: DNS Servers"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    },
+    {
+      "uuid": "SYSTEM-1303",
+      "name": "BB:CategoryDefinition: DDoS Attack Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.736773",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

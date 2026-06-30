@@ -1,0 +1,144 @@
+{
+  "rule_doc_id": "133752",
+  "rule_id": "133752",
+  "uuid": "c08f1c25-ff27-4f64-a43a-9f368a63afe4",
+  "rule_name": "Malware: Potential Trickbot Traffic",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-02-15T20:13:40.338Z",
+  "modified": "2024-07-21T10:28:45.634Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IS NOT NULL AND &quot;tls ja3s hash&quot; IS NOT NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22tls%20ja3%20hash%22%20IS%20NOT%20NULL%20AND%20%22tls%20ja3s%20hash%22%20IS%20NOT%20NULL|%5B%22%5C%22tls%20ja3%20hash%5C%22%20IS%20NOT%20NULL%20AND%20%5C%22tls%20ja3s%20hash%5C%22%20IS%20NOT%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IN ('6734f37431670b3ab4292b8f60f29984','72a589da586844d7f0818ce684948eea')  AND &quot;tls ja3s hash&quot; IN ('623de93db17d313345d7ea481e7443cf','0eec924176fb005dfa419c80ab72d27c','46df52e211001fa8da188599db66e0db','e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22tls%20ja3%20hash%22%20IN%20('6734f37431670b3ab4292b8f60f29984','72a589da586844d7f0818ce684948eea')%20%20AND%20%22tls%20ja3s%20hash%22%20IN%20('623de93db17d313345d7ea481e7443cf','0eec924176fb005dfa419c80ab72d27c','46df52e211001fa8da188599db66e0db','e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')|%5B%22%5C%22tls%20ja3%20hash%5C%22%20IN%20('6734f37431670b3ab4292b8f60f29984','72a589da586844d7f0818ce684948eea')%20%22,%22AND%20%5C%22tls%20ja3s%20hash%5C%22%20IN%20('623de93db17d313345d7ea481e7443cf','0eec924176fb005dfa419c80ab72d27c','46df52e211001fa8da188599db66e0db','e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "System Services",
+        "STEC": "T1569.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1569",
+        "MAP_S": [
+          {
+            "name": "Execution - T1569.002",
+            "values": [
+              {
+                "id": "133752",
+                "bb": "Malware: Potential Trickbot Traffic",
+                "uuid": "c08f1c25-ff27-4f64-a43a-9f368a63afe4",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1203",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1203",
+        "MAP_S": [
+          {
+            "name": "Execution - T1203",
+            "values": [
+              {
+                "id": "133752",
+                "bb": "Malware: Potential Trickbot Traffic",
+                "uuid": "c08f1c25-ff27-4f64-a43a-9f368a63afe4",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1211",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1211",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1211",
+            "values": [
+              {
+                "id": "133752",
+                "bb": "Malware: Potential Trickbot Traffic",
+                "uuid": "c08f1c25-ff27-4f64-a43a-9f368a63afe4",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.644648",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

@@ -1,0 +1,117 @@
+{
+  "rule_doc_id": "126302",
+  "rule_id": "126302",
+  "uuid": "0b54aaeb-a346-4f96-a689-879e79b389b6",
+  "rule_name": "Deletion of a Privileged Role for Container",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Remove from a Reference Set",
+  "created": "2019-11-18T17:50:45.549Z",
+  "modified": "2024-07-21T09:33:21.147Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Role Removal Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3130"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Resource Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Privileged Role - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Resource Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "180"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSetRemove": "true"
+      },
+      "removeFromReferenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Resource Name",
+            "id": "180",
+            "type": "ALN",
+            "name": "Privileged Role"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.375899",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

@@ -1,0 +1,81 @@
+{
+  "rule_doc_id": "137452",
+  "rule_id": "137452",
+  "uuid": "d4750153-e6f5-4a1d-9554-b3477c9e6ba8",
+  "rule_name": "BB:BehaviorDefinition: Admin Privileges Added (Windows)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-03-30T12:26:16.052Z",
+  "modified": "2024-07-21T10:28:47.319Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "3",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.Group Member Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3036"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Group Name (custom) is any of Administrators</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Group NameEQanyAdministrators"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.415841",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

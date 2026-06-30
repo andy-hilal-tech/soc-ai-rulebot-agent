@@ -1,0 +1,119 @@
+{
+  "rule_doc_id": "156052",
+  "rule_id": "156052",
+  "uuid": "07193587-8f7a-4064-a3a3-278319ae600b",
+  "rule_name": "Microsoft Office Template Creation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-23T17:58:52.736Z",
+  "modified": "2024-07-21T12:38:31.629Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Microsoft Excel Template Creation, BB:BehaviorDefinition: Microsoft Word Template Creation</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "902b5c2e-49f4-44ae-bb91-c02e5a0f59e0, 04eebe0f-ef41-4d3a-b2b4-0c005dbea56c"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "902b5c2e-49f4-44ae-bb91-c02e5a0f59e0",
+      "name": "BB:BehaviorDefinition: Microsoft Excel Template Creation"
+    },
+    {
+      "uuid": "04eebe0f-ef41-4d3a-b2b4-0c005dbea56c",
+      "name": "BB:BehaviorDefinition: Microsoft Word Template Creation"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Resource Development": [
+      {
+        "TEC": "Develop Capabilities",
+        "STEC": "T1587.001",
+        "TAC": "Resource Development",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1587",
+        "MAP_S": [
+          {
+            "name": "Resource Development - T1587.001",
+            "values": [
+              {
+                "id": "156052",
+                "bb": "Microsoft Office Template Creation",
+                "uuid": "07193587-8f7a-4064-a3a3-278319ae600b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Office Application Startup",
+        "STEC": "T1137.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1137",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1137.001",
+            "values": [
+              {
+                "id": "156102",
+                "bb": "BB:BehaviorDefinition: Microsoft Excel Template Creation",
+                "uuid": "902b5c2e-49f4-44ae-bb91-c02e5a0f59e0",
+                "T": "EVENT"
+              },
+              {
+                "id": "156152",
+                "bb": "BB:BehaviorDefinition: Microsoft Word Template Creation",
+                "uuid": "04eebe0f-ef41-4d3a-b2b4-0c005dbea56c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.265303",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

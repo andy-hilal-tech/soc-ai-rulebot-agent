@@ -1,0 +1,111 @@
+{
+  "rule_doc_id": "161852",
+  "rule_id": "161852",
+  "uuid": "45fbda19-077b-4ef7-9557-6b1e82e4d69d",
+  "rule_name": "Executable File Created by another Executable",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-06-23T11:46:59.447Z",
+  "modified": "2024-07-21T12:38:14.803Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, System.Successful File Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 8014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>File Extension (custom) is any of exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionEQanyexe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\System32\\msiexec.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\system32\\cleanmgr.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\explorer.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\WINDOWS\\system32\\dxgiadaptercache.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\WINDOWS\\system32\\Dism.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\System32\\wuauclt.exe') OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\WINDOWS\\system32\\svchost.exe' AND LOWER(&quot;File Directory&quot;) LIKE 'C:\\Windows\\SoftwareDistribution\\Download\\%') OR (LOWER(&quot;Process File File Path&quot;) LIKE'C:\\Windows\\system32\\svchost.exe' AND (LOWER(&quot;File Directory&quot;) LIKE '%:\\WUDownloadCache\\%' AND LOWER(&quot;Filename&quot;) LIKE '%WindowsUpdateBox.exe%')) OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\WINDOWS\\SoftwareDistribution\\Download\\%' AND LOWER(&quot;Process Full Full Name&quot;) LIKE '%WindowsUpdateBox.Exe' AND LOWER(&quot;File Directory&quot;) LIKE 'C:\\$WINDOWS.~BT\\Sources\\%')  OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\WinSxS\\%' AND LOWER(&quot;Process Full Full Name&quot;) LIKE '%TiWorker.exe') OR ((LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files (x86)\\%') OR (LOWER(&quot;File Directory&quot;) LIKE 'C:\\Application Files\\%' OR LOWER(&quot;File Directory&quot;) LIKE 'C:\\Application Files (x86)\\%'))  OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\ProgramData\\Microsoft\\Windows Defender\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files\\Windows Defender\\%') OR LOWER(&quot;File Directory&quot;) LIKE '%\\Microsoft\\WindowsApps\\%' OR (LOWER(&quot;Process File File Path&quot;) LIKE '%\\AppData\\Local\\Microsoft\\Teams\\Update.exe' AND (LOWER(&quot;File Directory&quot;) LIKE '%\\AppData\\Local\\Microsoft\\Teams\\stage\\Teams.exe' OR LOWER(&quot;File Directory&quot;) LIKE '%\\AppData\\Local\\Microsoft\\Teams\\stage\\Squirrel.exe' OR LOWER(&quot;File Directory&quot;) LIKE '%\\AppData\\Local\\Microsoft\\SquirrelTemp\\tempb\\')) OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\Microsoft.NET\\Framework\\%' AND LOWER(&quot;Process Full Full Name&quot;) LIKE '%mscorsvw.exe' AND LOWER(&quot;File Directory&quot;) LIKE 'C:\\Windows\\assembly\\NativeImages_%')  OR (LOWER(&quot;Process File File Path&quot;) LIKE '%\\AppData\\Local\\%' AND LOWER(&quot;Process File File Path&quot;) LIKE '%\\Microsoft VS Code\\Code.exe' AND LOWER(&quot;File Directory&quot;) LIKE '%\\.vscode\\extensions\\%') OR (LOWER(&quot;Process File File Path&quot;) LIKE '%\\AppData\\Local\\GitHubDesktop\\Update.exe' AND LOWER(&quot;File Directory&quot;) LIKE '%\\AppData\\Local\\SquirrelTemp\\%') OR LOWER(&quot;File Directory&quot;) LIKE 'C:\\WINDOWS\\TEMP\\%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CSystem32%5Cmsiexec.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5Csystem32%5Ccleanmgr.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5Cexplorer.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWINDOWS%5Csystem32%5Cdxgiadaptercache.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWINDOWS%5Csystem32%5CDism.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CSystem32%5Cwuauclt.exe')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWINDOWS%5Csystem32%5Csvchost.exe'%20AND%20LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5CWindows%5CSoftwareDistribution%5CDownload%5C%25')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE'C%3A%5CWindows%5Csystem32%5Csvchost.exe'%20AND%20(LOWER(%22File%20Directory%22)%20LIKE%20'%25%3A%5CWUDownloadCache%5C%25'%20AND%20LOWER(%22Filename%22)%20LIKE%20'%25WindowsUpdateBox.exe%25'))%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWINDOWS%5CSoftwareDistribution%5CDownload%5C%25'%20AND%20LOWER(%22Process%20Name%22)%20LIKE%20'%25WindowsUpdateBox.Exe'%20AND%20LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5C%24WINDOWS.%7EBT%5CSources%5C%25')%20%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CWinSxS%5C%25'%20AND%20LOWER(%22Process%20Name%22)%20LIKE%20'%25TiWorker.exe')%20OR%20((LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%20(x86)%5C%25')%20OR%20(LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5CProgram%20Files%5C%25'%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5CProgram%20Files%20(x86)%5C%25'))%20%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgramData%5CMicrosoft%5CWindows%20Defender%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%5CWindows%20Defender%5C%25')%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5CMicrosoft%5CWindowsApps%5C%25'%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CAppData%5CLocal%5CMicrosoft%5CTeams%5CUpdate.exe'%20AND%20(LOWER(%22File%20Directory%22)%20LIKE%20'%25%5CAppData%5CLocal%5CMicrosoft%5CTeams%5Cstage%5CTeams.exe'%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5CAppData%5CLocal%5CMicrosoft%5CTeams%5Cstage%5CSquirrel.exe'%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5CAppData%5CLocal%5CMicrosoft%5CSquirrelTemp%5Ctempb%5C'))%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CMicrosoft.NET%5CFramework%5C%25'%20AND%20LOWER(%22Process%20Name%22)%20LIKE%20'%25mscorsvw.exe'%20AND%20LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5CWindows%5Cassembly%5CNativeImages_%25')%20%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CAppData%5CLocal%5C%25'%20AND%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CMicrosoft%20VS%20Code%5CCode.exe'%20AND%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5C.vscode%5Cextensions%5C%25')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CAppData%5CLocal%5CGitHubDesktop%5CUpdate.exe'%20AND%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%5CAppData%5CLocal%5CSquirrelTemp%5C%25')%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'C%3A%5CWINDOWS%5CTEMP%5C%25')|%5B%22((LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cmsiexec.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5Csystem32%5C%5Ccleanmgr.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5Cexplorer.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5Csystem32%5C%5Cdxgiadaptercache.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5Csystem32%5C%5CDism.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwuauclt.exe')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5Csystem32%5C%5Csvchost.exe'%20AND%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CSoftwareDistribution%5C%5CDownload%5C%5C%25')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE'C%3A%5C%5CWindows%5C%5Csystem32%5C%5Csvchost.exe'%20AND%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%3A%5C%5CWUDownloadCache%5C%5C%25'%20AND%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25WindowsUpdateBox.exe%25'))%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5CSoftwareDistribution%5C%5CDownload%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25WindowsUpdateBox.Exe'%20AND%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5C%24WINDOWS.%7EBT%5C%5CSources%5C%5C%25')%20%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CWinSxS%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25TiWorker.exe')%20OR%20((LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%20(x86)%5C%5C%25')%20OR%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5C%25'%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%20(x86)%5C%5C%25'))%20%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgramData%5C%5CMicrosoft%5C%5CWindows%20Defender%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5CWindows%20Defender%5C%5C%25')%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindowsApps%5C%5C%25'%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CMicrosoft%5C%5CTeams%5C%5CUpdate.exe'%20AND%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CMicrosoft%5C%5CTeams%5C%5Cstage%5C%5CTeams.exe'%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CMicrosoft%5C%5CTeams%5C%5Cstage%5C%5CSquirrel.exe'%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CMicrosoft%5C%5CSquirrelTemp%5C%5Ctempb%5C%5C'))%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CMicrosoft.NET%5C%5CFramework%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25mscorsvw.exe'%20AND%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5Cassembly%5C%5CNativeImages_%25')%20%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%20VS%20Code%5C%5CCode.exe'%20AND%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5C.vscode%5C%5Cextensions%5C%5C%25')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CGitHubDesktop%5C%5CUpdate.exe'%20AND%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%5C%5CAppData%5C%5CLocal%5C%5CSquirrelTemp%5C%5C%25')%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5CTEMP%5C%5C%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.477368",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

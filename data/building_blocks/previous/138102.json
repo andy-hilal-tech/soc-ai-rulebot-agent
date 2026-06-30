@@ -1,0 +1,156 @@
+{
+  "rule_doc_id": "138102",
+  "rule_id": "138102",
+  "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+  "rule_name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-06-09T13:29:51.233Z",
+  "modified": "2024-07-21T10:28:54.658Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.General Audit Event, System.Process Creation Success, Audit.Command Execution Success, Audit.Command Execution Attempt, Application.DNS In Progress</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19001, 8110, 19250, 19252, 18081"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>URL Host (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "URL HostNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>XFORCE_URL_CATEGORY(&quot;URL Host&quot;) in ('Anonymization Services','Malware', 'Botnet Command and Control Server', 'Spam URLs', 'Cryptocurrency Mining', 'Bots', 'Phishing URLs')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_URL_CATEGORY(%22URL%20Host%22)%20in%20('Anonymization%20Services'%2C'Malware'%2C%20'Botnet%20Command%20and%20Control%20Server'%2C%20'Spam%20URLs'%2C%20'Cryptocurrency%20Mining'%2C%20'Bots'%2C%20'Phishing%20URLs')|%5B%22XFORCE_URL_CATEGORY(%5C%22URL%20Host%5C%22)%20in%20('Anonymization%20Services'%2C'Malware'%2C%20'Botnet%20Command%20and%20Control%20Server'%2C%20'Spam%20URLs'%2C%20'Cryptocurrency%20Mining'%2C%20'Bots'%2C%20'Phishing%20URLs')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Application Layer Protocol",
+            "values": [
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.443402",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

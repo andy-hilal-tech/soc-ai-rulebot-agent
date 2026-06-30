@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "165459",
+  "rule_id": "165459",
+  "uuid": "5101181e-8bb7-4a39-ab85-280a443d98d9",
+  "rule_name": "MSSP - OS - MS - 25 - L - Windows Account ID Deleted",
+  "object_type": "rule",
+  "group": "MSSP - Rules, OS - MS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-03-11T15:50:51.109Z",
+  "modified": "2026-06-06T18:07:38.742Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4726</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidEventIdEQany4726"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Subject Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Subject Account Name"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "85"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - OS - MS - 25 - L - Windows Account ID Deleted"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - OS - MS - 25 - L - Windows Account ID Deleted"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.387393",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

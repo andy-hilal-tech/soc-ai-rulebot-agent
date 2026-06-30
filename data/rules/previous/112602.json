@@ -1,0 +1,100 @@
+{
+  "rule_doc_id": "112602",
+  "rule_id": "112602",
+  "uuid": "575ba560-ba24-4d23-90ff-c1c609480cf1",
+  "rule_name": "Network Share Added to a Compromised Host",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-09-12T23:51:09.590Z",
+  "modified": "2024-02-19T16:49:25.995Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001528) Network Share Object Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001528"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "3",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Compromised Hosts - IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "69"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.814347",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

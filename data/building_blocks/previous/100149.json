@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "100149",
+  "rule_id": "100149",
+  "uuid": "SYSTEM-1017",
+  "rule_name": "BB:Flowshape: Outbound Only",
+  "object_type": "building_block",
+  "group": "Flowshape",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-18T15:40:23.216Z",
+  "modified": "2023-10-30T02:02:37.158Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowBiasTest",
+            "uid": "0",
+            "id": "200"
+          },
+          "text": [
+            "when the flow bias is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>outbound</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.705308",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

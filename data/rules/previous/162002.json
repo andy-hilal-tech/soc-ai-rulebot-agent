@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "162002",
+  "rule_id": "162002",
+  "uuid": "1d95e58c-3b39-438b-925b-39f94d588624",
+  "rule_name": "Malicious Named Pipe",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-06-29T13:43:19.663Z",
+  "modified": "2024-07-21T12:38:23.166Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001837) PipeEvent (Pipe Connected), (5001836) PipeEvent (Pipe Created)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001837,                                                                                                                                                                                                                                                                                    5001836"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Pipe Full Full Name&quot;) in ('atctl', 'userpipe', 'iehelper', 'sdlrpc', 'comnap', 'isapi_http', 'isapi_dg', 'isapi_dg2', 'ahexec', 'winsession', 'lsassw', '46a676ab7f179e511e30dd2dc41bd388', '9f81f59bc58452127884ce513865ed20', 'e710f28d59aa529d6792ca6ff0ca1b34', 'rpchlp_3', 'NamePipe_MoreWindows', 'pcheap_reuse', 'msagent_*', 'gruntsvc')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Pipe%20Name%22)%20in%20('atctl'%2C%20'userpipe'%2C%20'iehelper'%2C%20'sdlrpc'%2C%20'comnap'%2C%20'isapi_http'%2C%20'isapi_dg'%2C%20'isapi_dg2'%2C%20'ahexec'%2C%20'winsession'%2C%20'lsassw'%2C%20'46a676ab7f179e511e30dd2dc41bd388'%2C%20'9f81f59bc58452127884ce513865ed20'%2C%20'e710f28d59aa529d6792ca6ff0ca1b34'%2C%20'rpchlp_3'%2C%20'NamePipe_MoreWindows'%2C%20'pcheap_reuse'%2C%20'msagent_*'%2C%20'gruntsvc')|%5B%22LOWER(%5C%22Pipe%20Name%5C%22)%20in%20('atctl'%2C%20'userpipe'%2C%20'iehelper'%2C%20'sdlrpc'%2C%20'comnap'%2C%20'isapi_http'%2C%20'isapi_dg'%2C%20'isapi_dg2'%2C%20'ahexec'%2C%20'winsession'%2C%20'lsassw'%2C%20'46a676ab7f179e511e30dd2dc41bd388'%2C%20'9f81f59bc58452127884ce513865ed20'%2C%20'e710f28d59aa529d6792ca6ff0ca1b34'%2C%20'rpchlp_3'%2C%20'NamePipe_MoreWindows'%2C%20'pcheap_reuse'%2C%20'msagent_*'%2C%20'gruntsvc')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1055",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055",
+            "values": [
+              {
+                "id": "162002",
+                "bb": "Malicious Named Pipe",
+                "uuid": "1d95e58c-3b39-438b-925b-39f94d588624",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "162002",
+                "bb": "Malicious Named Pipe",
+                "uuid": "1d95e58c-3b39-438b-925b-39f94d588624",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.477368",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

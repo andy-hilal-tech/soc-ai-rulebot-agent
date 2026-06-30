@@ -1,0 +1,373 @@
+{
+  "rule_doc_id": "108652",
+  "rule_id": "108652",
+  "uuid": "adf601c5-b563-4a34-8818-ae43b7eee8c5",
+  "rule_name": "BB:UBA : Compromised Account - Execution",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-10-23T22:36:34.605Z",
+  "modified": "2024-02-19T16:44:53.077Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>UBA : User Geography Change, UBA : Unauthorized Access, UBA : User Access - Failed Access to Critical Assets, UBA : User Access Login Anomaly, UBA : User Accessing Account from Anonymous Source, UBA : Account or Group or Privileges Added, UBA : Account or Group or Privileges Modified, UBA : User Account Created and Deleted in a Short Period of Time, UBA : Dormant Account Use Attempted, UBA : Dormant Account Used, UBA : User Time, Access at Unusual Times, UBA : Suspicious Privileged Activity (Rarely Used Privilege)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "06bd0239-ae61-4846-8685-6f48bbe760db, 9c1c3036-1dcb-4972-88cd-fba31c440a82, 09349955-1776-4545-bdc4-8aeee6bfb0f7, b4397bc8-8541-4f61-a2b9-4369cc3b3689, 52dca274-5833-42af-9c5d-00b7369106ba, 069ef417-aaae-4442-83eb-989f8c94dacf, 8927074a-581f-41ae-93b0-3ea054bdca50, fa609090-598b-4058-9a3e-daed5d574320, 35729450-d697-4789-a805-4869af580eca, 08787241-c480-48ce-9f2a-295977435977, 90fd4769-6bb5-4534-b233-e4b0503eaf3e, e9726a50-9352-4eaf-ad6a-bc8eecc40c9a"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+      "name": "UBA : User Geography Change"
+    },
+    {
+      "uuid": "9c1c3036-1dcb-4972-88cd-fba31c440a82",
+      "name": "UBA : Unauthorized Access"
+    },
+    {
+      "uuid": "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+      "name": "UBA : User Access - Failed Access to Critical Assets"
+    },
+    {
+      "uuid": "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+      "name": "UBA : Login Anomaly"
+    },
+    {
+      "uuid": "52dca274-5833-42af-9c5d-00b7369106ba",
+      "name": "UBA : User Accessing Account from Anonymous Source"
+    },
+    {
+      "uuid": "069ef417-aaae-4442-83eb-989f8c94dacf",
+      "name": "UBA : Account or Group or Privileges Added"
+    },
+    {
+      "uuid": "8927074a-581f-41ae-93b0-3ea054bdca50",
+      "name": "UBA : Account or Group or Privileges Modified"
+    },
+    {
+      "uuid": "fa609090-598b-4058-9a3e-daed5d574320",
+      "name": "UBA : User Account Created and Deleted in a Short Period of Time"
+    },
+    {
+      "uuid": "35729450-d697-4789-a805-4869af580eca",
+      "name": "UBA : Dormant Account Use Attempted"
+    },
+    {
+      "uuid": "08787241-c480-48ce-9f2a-295977435977",
+      "name": "UBA : Dormant Account Used"
+    },
+    {
+      "uuid": "90fd4769-6bb5-4534-b233-e4b0503eaf3e",
+      "name": "UBA : User Access at Unusual Times"
+    },
+    {
+      "uuid": "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a",
+      "name": "UBA : Suspicious Privileged Activity (Rarely Used Privilege)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "103752",
+                "bb": "UBA : Account or Group or Privileges Added",
+                "uuid": "069ef417-aaae-4442-83eb-989f8c94dacf",
+                "T": "EVENT"
+              },
+              {
+                "id": "104052",
+                "bb": "UBA : Suspicious Privileged Activity (Rarely Used Privilege)",
+                "uuid": "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a",
+                "T": "EVENT"
+              },
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "100303",
+                "bb": "BB:CategoryDefinition: Privileged Escalations",
+                "uuid": "SYSTEM-1570",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "102852",
+                "bb": "UBA : Dormant Account Use Attempted",
+                "uuid": "35729450-d697-4789-a805-4869af580eca",
+                "T": "EVENT"
+              },
+              {
+                "id": "102902",
+                "bb": "UBA : Dormant Account Used",
+                "uuid": "08787241-c480-48ce-9f2a-295977435977",
+                "T": "EVENT"
+              },
+              {
+                "id": "102352",
+                "bb": "UBA : Unauthorized Access",
+                "uuid": "9c1c3036-1dcb-4972-88cd-fba31c440a82",
+                "T": "EVENT"
+              },
+              {
+                "id": "102502",
+                "bb": "UBA : Login Anomaly",
+                "uuid": "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "102202",
+                "bb": "UBA : User Access - Failed Access to Critical Assets",
+                "uuid": "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              },
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "124405",
+                "bb": "UBA : User Accessing Account from Anonymous Source",
+                "uuid": "308c3b0b-5c50-4b84-8ba7-1aa1393d5f30",
+                "T": "EVENT"
+              },
+              {
+                "id": "110002",
+                "bb": "UBA : User Geography Change",
+                "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+                "T": "EVENT"
+              },
+              {
+                "id": "102102",
+                "bb": "UBA : User Access at Unusual Times",
+                "uuid": "90fd4769-6bb5-4534-b233-e4b0503eaf3e",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              },
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "104102",
+                "bb": "UBA : Account or Group or Privileges Modified",
+                "uuid": "8927074a-581f-41ae-93b0-3ea054bdca50",
+                "T": "EVENT"
+              },
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "103102",
+                "bb": "UBA : User Account Created and Deleted in a Short Period of Time",
+                "uuid": "fa609090-598b-4058-9a3e-daed5d574320",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.095305",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

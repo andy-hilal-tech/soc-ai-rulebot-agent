@@ -1,0 +1,231 @@
+{
+  "rule_doc_id": "160752",
+  "rule_id": "160752",
+  "uuid": "74f410a2-7d9e-405f-95b4-9d4b90a3f0ee",
+  "rule_name": "Potential Indicator Removal Activity on Host",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-15T20:13:53.382Z",
+  "modified": "2024-07-21T12:38:28.260Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Fsutil Suspicious Invocation, BB:BehaviorDefinition: Possible Unauthorized MBR Modifications, BB:BehaviorDefinition: Suspicious Load of Advapi31, BB:BehaviorDefinition: Disable of ETW Trace, BB:BehaviorDefinition: Sysmon Driver Unload, BB:BehaviorDefinition: Clearing Windows Console History, BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "dfae1837-e5a4-488e-993a-96c1cca0751b, 3d6f2fb1-dfb1-4359-b86c-8188f615b5dd, 1243ee88-122a-47ff-b7ba-158b9eea0724, 075a0ce7-b308-4492-bbd6-45f84dfbf413, 39db027f-3709-4807-8664-51173f9b93e3, da47a940-da7c-4ec4-8870-135706955c16, 6caa6d18-f2ad-4ddd-9116-ffd5112956e8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "dfae1837-e5a4-488e-993a-96c1cca0751b",
+      "name": "BB:BehaviorDefinition: Fsutil Suspicious Invocation"
+    },
+    {
+      "uuid": "3d6f2fb1-dfb1-4359-b86c-8188f615b5dd",
+      "name": "BB:BehaviorDefinition: Possible Unauthorized MBR Modifications"
+    },
+    {
+      "uuid": "1243ee88-122a-47ff-b7ba-158b9eea0724",
+      "name": "BB:BehaviorDefinition: Suspicious Load of Advapi31"
+    },
+    {
+      "uuid": "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+      "name": "BB:BehaviorDefinition: Disable of ETW Trace"
+    },
+    {
+      "uuid": "39db027f-3709-4807-8664-51173f9b93e3",
+      "name": "BB:BehaviorDefinition: Sysmon Driver Unload"
+    },
+    {
+      "uuid": "da47a940-da7c-4ec4-8870-135706955c16",
+      "name": "BB:BehaviorDefinition: Clearing Windows Console History"
+    },
+    {
+      "uuid": "6caa6d18-f2ad-4ddd-9116-ffd5112956e8",
+      "name": "BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.003",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.003",
+            "values": [
+              {
+                "id": "160752",
+                "bb": "Potential Indicator Removal Activity on Host",
+                "uuid": "74f410a2-7d9e-405f-95b4-9d4b90a3f0ee",
+                "T": "EVENT"
+              },
+              {
+                "id": "151852",
+                "bb": "BB:BehaviorDefinition: Clearing Windows Console History",
+                "uuid": "da47a940-da7c-4ec4-8870-135706955c16",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1562",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562",
+            "values": [
+              {
+                "id": "152602",
+                "bb": "BB:BehaviorDefinition: Sysmon Driver Unload",
+                "uuid": "39db027f-3709-4807-8664-51173f9b93e3",
+                "T": "EVENT"
+              },
+              {
+                "id": "160452",
+                "bb": "BB:BehaviorDefinition: Fsutil Suspicious Invocation",
+                "uuid": "dfae1837-e5a4-488e-993a-96c1cca0751b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.006",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.006",
+            "values": [
+              {
+                "id": "154652",
+                "bb": "BB:BehaviorDefinition: Disable of ETW Trace",
+                "uuid": "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Indicator Removal",
+            "values": [
+              {
+                "id": "157502",
+                "bb": "BB:BehaviorDefinition: Terminal Server Client Connection History Cleared - Registry",
+                "uuid": "6caa6d18-f2ad-4ddd-9116-ffd5112956e8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "Native API",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1106",
+        "MAP_S": [
+          {
+            "name": "Execution - Native API",
+            "values": [
+              {
+                "id": "152802",
+                "bb": "BB:BehaviorDefinition: Suspicious Load of Advapi31",
+                "uuid": "1243ee88-122a-47ff-b7ba-158b9eea0724",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Impact": [
+      {
+        "TEC": "T1490",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1490",
+        "MAP_S": [
+          {
+            "name": "Impact - T1490",
+            "values": [
+              {
+                "id": "159502",
+                "bb": "BB:BehaviorDefinition: Possible Unauthorized MBR Modifications",
+                "uuid": "3d6f2fb1-dfb1-4359-b86c-8188f615b5dd",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.430334",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

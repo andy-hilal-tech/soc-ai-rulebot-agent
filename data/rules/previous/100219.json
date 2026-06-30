@@ -1,0 +1,73 @@
+{
+  "rule_doc_id": "100219",
+  "rule_id": "100219",
+  "uuid": "SYSTEM-1012",
+  "rule_name": "Destination Asset Port is Open",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:37:49.051Z",
+  "modified": "2023-10-30T02:02:35.819Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "PortOpen_Test",
+            "uid": "0",
+            "id": "29"
+          },
+          "text": [
+            "when the local <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>destination</a> host destination port is open <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Either Actively or Passively seen</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Destination"
+            },
+            {
+              "id": "2",
+              "value": "Either"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setCredibility",
+            "operation": "incCredibility",
+            "value": "2"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setRelevance",
+            "operation": "incRelevance",
+            "value": "2"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Credibility and Relevance has been increased by 2 because the destination assets port is open."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.299038",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

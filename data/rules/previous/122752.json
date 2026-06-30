@@ -1,0 +1,221 @@
+{
+  "rule_doc_id": "122752",
+  "rule_id": "122752",
+  "uuid": "SYSTEM-1182",
+  "rule_name": "Multiple Vector Attack Source",
+  "object_type": "rule",
+  "group": "Intrusion Detection, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2008-08-20T15:16:27.883Z",
+  "modified": "2024-06-27T13:19:21.831Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "SequenceFunction_Test",
+            "uid": "1",
+            "id": "51"
+          },
+          "text": [
+            "when a subset of at least <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>4</a> of these <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Compromise Activities, BB:CategoryDefinition: Authentication Failures, BB:CategoryDefinition: Authentication to Disabled Account, BB:CategoryDefinition: Authentication to Expired Account, BB:CategoryDefinition: Countries/Regions with no Remote Access, BB:CategoryDefinition: DDoS Attack Events, BB:CategoryDefinition: Exploits Backdoors and Trojans, BB:CategoryDefinition: Firewall or ACL Denies, BB:CategoryDefinition: Key Loggers, BB:CategoryDefinition: Mail Policy Violation, BB:CategoryDefinition: Network DoS Attack, BB:CategoryDefinition: Service DoS, BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Virus Detected, BB:CategoryDefinition: Worm Events, BB:CategoryDefinition: Database Access Denied, BB:Database: System Action Deny, BB:NetworkDefinition: Darknet Addresses, BB:NetworkDefinition: Honeypot like Addresses, BB:NetworkDefinition: Undefined IP Space, BB:NetworkDefinition: Watch List Addresses, BB:PortDefinition: Common Worm Ports</a>, <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>in any</a> order, from <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>source IP</a>  to  <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>any</a> <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>destination IP</a>, over <a href='javascript:editParameter(\"1\", \"8\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"9\")' class='dynamic'>days</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "4"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1325, SYSTEM-1201, SYSTEM-1286, SYSTEM-1351, SYSTEM-1270, SYSTEM-1303, SYSTEM-1204, SYSTEM-1217, SYSTEM-1305, SYSTEM-1236, SYSTEM-1289, SYSTEM-1235, SYSTEM-1202, SYSTEM-1312, SYSTEM-1234, SYSTEM-1449, SYSTEM-1437, SYSTEM-1181, SYSTEM-1271, SYSTEM-1256, SYSTEM-1323, SYSTEM-1326"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "same"
+            },
+            {
+              "id": "5",
+              "value": "SourceIP"
+            },
+            {
+              "id": "6",
+              "value": "any"
+            },
+            {
+              "id": "7",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "8",
+              "value": "1"
+            },
+            {
+              "id": "9",
+              "value": "d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "300",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1325",
+      "name": "BB:BehaviorDefinition: Compromise Activities"
+    },
+    {
+      "uuid": "SYSTEM-1201",
+      "name": "BB:CategoryDefinition: Authentication Failures"
+    },
+    {
+      "uuid": "SYSTEM-1286",
+      "name": "BB:CategoryDefinition: Authentication to Disabled Account"
+    },
+    {
+      "uuid": "SYSTEM-1351",
+      "name": "BB:CategoryDefinition: Authentication to Expired Account"
+    },
+    {
+      "uuid": "SYSTEM-1270",
+      "name": "BB:CategoryDefinition: Countries/Regions with no Remote Access"
+    },
+    {
+      "uuid": "SYSTEM-1303",
+      "name": "BB:CategoryDefinition: DDoS Attack Events"
+    },
+    {
+      "uuid": "SYSTEM-1204",
+      "name": "BB:CategoryDefinition: Exploits Backdoors and Trojans"
+    },
+    {
+      "uuid": "SYSTEM-1217",
+      "name": "BB:CategoryDefinition: Firewall or ACL Denies"
+    },
+    {
+      "uuid": "SYSTEM-1305",
+      "name": "BB:CategoryDefinition: Key Loggers"
+    },
+    {
+      "uuid": "SYSTEM-1236",
+      "name": "BB:CategoryDefinition: Mail Policy Violation"
+    },
+    {
+      "uuid": "SYSTEM-1289",
+      "name": "BB:CategoryDefinition: Network DoS Attack"
+    },
+    {
+      "uuid": "SYSTEM-1235",
+      "name": "BB:CategoryDefinition: Service DoS"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1312",
+      "name": "BB:CategoryDefinition: Virus Detected"
+    },
+    {
+      "uuid": "SYSTEM-1234",
+      "name": "BB:CategoryDefinition: Worm Events"
+    },
+    {
+      "uuid": "SYSTEM-1449",
+      "name": "BB:CategoryDefinition: Database Access Denied"
+    },
+    {
+      "uuid": "SYSTEM-1437",
+      "name": "BB:Database: System Action Deny"
+    },
+    {
+      "uuid": "SYSTEM-1181",
+      "name": "BB:NetworkDefinition: Darknet Addresses"
+    },
+    {
+      "uuid": "SYSTEM-1271",
+      "name": "BB:NetworkDefinition: Honeypot like Addresses"
+    },
+    {
+      "uuid": "SYSTEM-1256",
+      "name": "BB:NetworkDefinition: Undefined IP Space"
+    },
+    {
+      "uuid": "SYSTEM-1323",
+      "name": "BB:NetworkDefinition: Watch List Addresses"
+    },
+    {
+      "uuid": "SYSTEM-1326",
+      "name": "BB:PortDefinition: Common Worm Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.155780",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

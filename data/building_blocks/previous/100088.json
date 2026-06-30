@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100088",
+  "rule_id": "100088",
+  "uuid": "SYSTEM-1439",
+  "rule_name": "BB:Database: User Addition or Change",
+  "object_type": "building_block",
+  "group": "Database",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-08-10T17:03:55.133Z",
+  "modified": "2023-10-30T02:02:35.620Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.User Account Added, Authentication.User Account Changed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3031, 3032"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1374, 5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1374",
+      "name": "BB:HostDefinition: Database Servers"
+    },
+    {
+      "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+      "name": "BB:HostReference: Database Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

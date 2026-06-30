@@ -1,0 +1,91 @@
+{
+  "rule_doc_id": "154602",
+  "rule_id": "154602",
+  "uuid": "f51a88e7-6df9-4766-ad1d-63a5bc5a04f4",
+  "rule_name": "Suspicious Subprocess from RazerInstaller",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T12:37:08.847Z",
+  "modified": "2024-07-21T12:38:43.406Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>( \tLOWER(&quot;Parent Process Full Full Name&quot;) == 'razerinstaller.exe' \tAND LOWER(&quot;Integrity Level&quot;) == 'system' ) AND LOWER(&quot;Process File File Path&quot;) NOT LIKE 'c:\\\\windows\\\\installer\\\\razer\\\\installer\\\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Parent%20Process%20Name%22)%20%3D%3D%20'razerinstaller.exe'%20%09AND%20LOWER(%22Integrity%20Level%22)%20%3D%3D%20'system'%20)%20AND%20LOWER(%22Process%20Path%22)%20NOT%20LIKE%20'c%3A%5C%5Cwindows%5C%5Cinstaller%5C%5Crazer%5C%5Cinstaller%5C%5C%25'|%5B%22(%22%2C%22%5CtLOWER(%5C%22Parent%20Process%20Name%5C%22)%20%3D%3D%20'razerinstaller.exe'%22%2C%22%5CtAND%20LOWER(%5C%22Integrity%20Level%5C%22)%20%3D%3D%20'system'%22%2C%22)%22%2C%22AND%20LOWER(%5C%22Process%20Path%5C%22)%20NOT%20LIKE%20'c%3A%5C%5C%5C%5Cwindows%5C%5C%5C%5Cinstaller%5C%5C%5C%5Crazer%5C%5C%5C%5Cinstaller%5C%5C%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.230402",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

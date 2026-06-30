@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "153502",
+  "rule_id": "153502",
+  "uuid": "1ea1ffbd-4b31-470c-b88b-0f688dd4f688",
+  "rule_name": "Lookup System Locale",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-17T13:34:49.263Z",
+  "modified": "2024-07-21T12:38:28.434Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, System.File Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 8028"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Parent Process Full Full Name&quot;) == 'cmd.exe' AND  (     LOWER(&quot;Parent Command&quot;) LIKE '% /c %'     OR LOWER(&quot;Parent Command&quot;) LIKE '% /r %'     OR LOWER(&quot;Parent Command&quot;) LIKE '% /k %' ) AND LOWER(&quot;Process Full Full Name&quot;) == 'chcp.com' AND LOWER(&quot;Command&quot;) MATCHES '.*?(chcp)_s*?'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Parent%20Process%20Name%22)%20%3D%3D%20'cmd.exe'%20AND%20%20(%20%20%20%20%20LOWER(%22Parent%20Command%22)%20LIKE%20'%25%20%2Fc%20%25'%20%20%20%20%20OR%20LOWER(%22Parent%20Command%22)%20LIKE%20'%25%20%2Fr%20%25'%20%20%20%20%20OR%20LOWER(%22Parent%20Command%22)%20LIKE%20'%25%20%2Fk%20%25'%20)%20AND%20LOWER(%22Process%20Name%22)%20%3D%3D%20'chcp.com'%20AND%20LOWER(%22Command%22)%20MATCHES%20'.*%3F(chcp)_s*%3F'|%5B%22LOWER(%5C%22Parent%20Process%20Name%5C%22)%20%3D%3D%20'cmd.exe'%22%2C%22AND%20%22%2C%22(%22%2C%22%20%20%20%20LOWER(%5C%22Parent%20Command%5C%22)%20LIKE%20'%25%20%2Fc%20%25'%22%2C%22%20%20%20%20OR%20LOWER(%5C%22Parent%20Command%5C%22)%20LIKE%20'%25%20%2Fr%20%25'%22%2C%22%20%20%20%20OR%20LOWER(%5C%22Parent%20Command%5C%22)%20LIKE%20'%25%20%2Fk%20%25'%22%2C%22)%22%2C%22AND%20LOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'chcp.com'%22%2C%22AND%20LOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3F(chcp)_s*%3F'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "System Location Discovery",
+        "STEC": "T1614.001",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1614",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1614.001",
+            "values": [
+              {
+                "id": "153502",
+                "bb": "Lookup System Locale",
+                "uuid": "1ea1ffbd-4b31-470c-b88b-0f688dd4f688",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.202497",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

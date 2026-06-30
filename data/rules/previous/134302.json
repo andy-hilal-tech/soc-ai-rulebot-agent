@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "134302",
+  "rule_id": "134302",
+  "uuid": "1b21da63-3b14-4867-bf2a-508f46e115c4",
+  "rule_name": "PPID Spoofing Detected",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-05-18T13:58:48.027Z",
+  "modified": "2024-07-21T10:28:54.194Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Exploit.Command Execution, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 5034, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES '.*?(ppid-spoof|ppid_spoof|spoof-ppid|spoof_ppid|ppidspoof|spoofppid|spoofedppid| -spawnto )' OR LOWER(&quot;Filename&quot;) MATCHES '.*?(ppid-spoof|ppid_spoof|spoof-ppid|spoof_ppid|ppidspoof|spoofppid|spoofedppid)' OR LOWER(&quot;Description&quot;) LIKE '%selectmyparent%' OR LOWER(&quot;IMP Hash&quot;) in ('04d974875bd225f00902b4cad9af3fbc','a782af154c9e743ddf3f3eb2b8f3d16e','89059503d7fbf470e68f7e63313da3ad','ca28337632625c8281ab8a130b3d6bad')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20'.*%3F(ppid-spoof%7Cppid_spoof%7Cspoof-ppid%7Cspoof_ppid%7Cppidspoof%7Cspoofppid%7Cspoofedppid%7C%20-spawnto%20)'%20OR%20LOWER(%22Filename%22)%20MATCHES%20'.*%3F(ppid-spoof%7Cppid_spoof%7Cspoof-ppid%7Cspoof_ppid%7Cppidspoof%7Cspoofppid%7Cspoofedppid)'%20OR%20LOWER(%22Description%22)%20LIKE%20'%25selectmyparent%25'%20OR%20LOWER(%22IMP%20Hash%22)%20in%20('04d974875bd225f00902b4cad9af3fbc'%2C'a782af154c9e743ddf3f3eb2b8f3d16e'%2C'89059503d7fbf470e68f7e63313da3ad'%2C'ca28337632625c8281ab8a130b3d6bad')|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3F(ppid-spoof%7Cppid_spoof%7Cspoof-ppid%7Cspoof_ppid%7Cppidspoof%7Cspoofppid%7Cspoofedppid%7C%20-spawnto%20)'%22%2C%22OR%22%2C%22LOWER(%5C%22Filename%5C%22)%20MATCHES%20'.*%3F(ppid-spoof%7Cppid_spoof%7Cspoof-ppid%7Cspoof_ppid%7Cppidspoof%7Cspoofppid%7Cspoofedppid)'%22%2C%22OR%22%2C%22LOWER(%5C%22Description%5C%22)%20LIKE%20'%25selectmyparent%25'%22%2C%22OR%22%2C%22LOWER(%5C%22IMP%20Hash%5C%22)%20in%20('04d974875bd225f00902b4cad9af3fbc'%2C'a782af154c9e743ddf3f3eb2b8f3d16e'%2C'89059503d7fbf470e68f7e63313da3ad'%2C'ca28337632625c8281ab8a130b3d6bad')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "52"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1134.004",
+            "values": [
+              {
+                "id": "134302",
+                "bb": "PPID Spoofing Detected",
+                "uuid": "1b21da63-3b14-4867-bf2a-508f46e115c4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1134.004",
+            "values": [
+              {
+                "id": "134302",
+                "bb": "PPID Spoofing Detected",
+                "uuid": "1b21da63-3b14-4867-bf2a-508f46e115c4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.646176",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

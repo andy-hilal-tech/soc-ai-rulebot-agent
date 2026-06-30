@@ -1,0 +1,168 @@
+{
+  "rule_doc_id": "138852",
+  "rule_id": "138852",
+  "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+  "rule_name": "BB:BehaviorDefinition: Component Object Model Hijacking",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-05-04T15:45:48.071Z",
+  "modified": "2024-07-21T10:28:51.559Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Object Name Lowercase (custom), Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Object Name Lowercase, Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "category"
+            },
+            {
+              "id": "5",
+              "value": "2"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.015",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.015",
+            "values": [
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1546",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546",
+            "values": [
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.003",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.003",
+            "values": [
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.452541",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "133902",
+  "rule_id": "133902",
+  "uuid": "b1c4b8c2-fa26-4a72-9875-e7001b7e3112",
+  "rule_name": "BB:BehaviorDefinition: Cloud Firewall Modified or Stopped",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-06-02T12:19:36.301Z",
+  "modified": "2024-07-21T10:28:49.635Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "290df59b-44ef-452a-9633-2d52e74dbc97"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001056) Success Audit: The Windows Firewall Service has been stopped, (5001064) Success Audit: The Windows Firewall Driver has been stopped, (105250841) Create or update a firewall rule., (105250829) Create or update a firewall rule., (105250235) Create or update server firewall rule that controls IP address range allowed to connect to the server, (105250238) MICROSOFT.SQL/SERVERS/MICROSOFT.SQL/SERVERS/FIREWALLRULES/WRITE, (105252998) Create/update Azure Firewall, (105253071) Create/update Firewall Policy, (105253070) Create/update Firewall Policy Rule Group, (105254639) Create/update firewall rule, (105254682) Create/update firewall rule, (105254727) Create/update firewall rule, (105254761) Create/update firewall rule, (105253884) Create/update web application firewall, (105253097) Create/update Web Application Firewall Policy, (105250840) Delete a firewall rule., (105250828) Delete a firewall rule., (105252996) Delete Azure Firewall, (105253065) Delete Firewall Policy, (105253068) Delete Firewall Policy Rule Group, (105254680) Delete firewall rule, (105254759) Delete firewall rule, (105254637) Delete firewall rule, (105254725) Delete firewall rule, (105250234) Delete firewall rule from the server, (105251713) Delete IP firewall rules, (105253882) Delete web application firewall, (105253095) Delete Web Application Firewall Policy, (105250180) DELETESERVERFIREWALLRULE, (105250249) UPDATESERVERFIREWALLRULE, (105250251) UPSERTSERVERFIREWALLRULE, (105253066) Join Firewall Policy</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001056,                                                                                                                                                                                                                                                                                                                   5001064,                                                                                                                                                                                                                                                                                                                   105250841,                                                                                                                                                                                                                                                                                                                   105250829,                                                                                                                                                                                                                                                                                                                   105250235,                                                                                                                                                                                                                                                                                                                   105250238,                                                                                                                                                                                                                                                                                                                   105252998,                                                                                                                                                                                                                                                                                                                   105253071,                                                                                                                                                                                                                                                                                                                   105253070,                                                                                                                                                                                                                                                                                                                   105254639,                                                                                                                                                                                                                                                                                                                   105254682,                                                                                                                                                                                                                                                                                                                   105254727,                                                                                                                                                                                                                                                                                                                   105254761,                                                                                                                                                                                                                                                                                                                   105253884,                                                                                                                                                                                                                                                                                                                   105253097,                                                                                                                                                                                                                                                                                                                   105250840,                                                                                                                                                                                                                                                                                                                   105250828,                                                                                                                                                                                                                                                                                                                   105252996,                                                                                                                                                                                                                                                                                                                   105253065,                                                                                                                                                                                                                                                                                                                   105253068,                                                                                                                                                                                                                                                                                                                   105254680,                                                                                                                                                                                                                                                                                                                   105254759,                                                                                                                                                                                                                                                                                                                   105254637,                                                                                                                                                                                                                                                                                                                   105254725,                                                                                                                                                                                                                                                                                                                   105250234,                                                                                                                                                                                                                                                                                                                   105251713,                                                                                                                                                                                                                                                                                                                   105253882,                                                                                                                                                                                                                                                                                                                   105253095,                                                                                                                                                                                                                                                                                                                   105250180,                                                                                                                                                                                                                                                                                                                   105250249,                                                                                                                                                                                                                                                                                                                   105250251,                                                                                                                                                                                                                                                                                                                   105253066"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.346998",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

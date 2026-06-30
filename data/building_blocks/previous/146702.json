@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "146702",
+  "rule_id": "146702",
+  "uuid": "c11e64dd-f81a-490a-9f72-4aa068a0df34",
+  "rule_name": "BB:BehaviorDefinition: Pass the Hash Activity in NewCredentials Logons",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-24T14:30:02.674Z",
+  "modified": "2024-07-21T12:38:15.595Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000830) Success Audit: An account was successfully logged on</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000830"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Logon Type (custom) is any of 9</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon TypeEQany9"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Logon Process (custom) is any of seclogo</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon ProcessEQanyseclogo"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Use Alternate Authentication Material",
+        "STEC": "T1550.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1550",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1550.002",
+            "values": [
+              {
+                "id": "146702",
+                "bb": "BB:BehaviorDefinition: Pass the Hash Activity in NewCredentials Logons",
+                "uuid": "c11e64dd-f81a-490a-9f72-4aa068a0df34",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.591044",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

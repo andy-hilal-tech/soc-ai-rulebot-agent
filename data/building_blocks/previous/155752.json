@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "155752",
+  "rule_id": "155752",
+  "uuid": "c93a6e91-1dd4-43f4-8849-3a4ac2ea4cde",
+  "rule_name": "BB:BehaviorDefinition: Carbon Filenames",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-16T17:29:41.163Z",
+  "modified": "2024-07-21T12:38:19.128Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.Object Access Attempt, Audit.Object Access Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 19080, 19081"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) in ('asmcerts.rs', 'getcerts.rs', 'miniport.dat', 'msximl.dll', 'a67ncodc.ax', 'b9s3coff.ax', 'bootmisc.sdi', 'qavscr.dat', 'vndkrmn.dic', 'ximarsh.dll', 'c_56743.nls') OR LOWER(&quot;Filename&quot;) in ('cifrado.xml','encodebase.inf','dsntype.gif', 'asmlang.jpg', 'fsbootfail.dat', 'mkfieldsec.dll', 'preinsta.jpg', 'wkstrend.xml', 'xmlrts.png', 'zcerterror.png')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Filename%22)%20in%20('asmcerts.rs',%20'getcerts.rs',%20'miniport.dat',%20'msximl.dll',%20'a67ncodc.ax',%20'b9s3coff.ax',%20'bootmisc.sdi',%20'qavscr.dat',%20'vndkrmn.dic',%20'ximarsh.dll',%20'c_56743.nls')%20OR%20LOWER(%22Filename%22)%20in%20('cifrado.xml','encodebase.inf','dsntype.gif',%20'asmlang.jpg',%20'fsbootfail.dat',%20'mkfieldsec.dll',%20'preinsta.jpg',%20'wkstrend.xml',%20'xmlrts.png',%20'zcerterror.png')|%5B%22LOWER(%5C%22Filename%5C%22)%20in%20('asmcerts.rs',%20'getcerts.rs',%20'miniport.dat',%20'msximl.dll',%20'a67ncodc.ax',%20'b9s3coff.ax',%20'bootmisc.sdi',%20'qavscr.dat',%20'vndkrmn.dic',%20'ximarsh.dll',%20'c_56743.nls')%22,%22OR%22,%22LOWER(%5C%22Filename%5C%22)%20in%20('cifrado.xml','encodebase.inf','dsntype.gif',%20'asmlang.jpg',%20'fsbootfail.dat',%20'mkfieldsec.dll',%20'preinsta.jpg',%20'wkstrend.xml',%20'xmlrts.png',%20'zcerterror.png')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1027",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1027",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1027",
+            "values": [
+              {
+                "id": "155752",
+                "bb": "BB:BehaviorDefinition: Carbon Filenames",
+                "uuid": "c93a6e91-1dd4-43f4-8849-3a4ac2ea4cde",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.761150",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

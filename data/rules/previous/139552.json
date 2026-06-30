@@ -1,0 +1,196 @@
+{
+  "rule_doc_id": "139552",
+  "rule_id": "139552",
+  "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+  "rule_name": "Excessive File Deletion and Creation",
+  "object_type": "rule",
+  "group": "Ransomware, Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-08-28T17:34:09.066Z",
+  "modified": "2024-07-21T10:28:51.192Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "304"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:BehaviorDefinition: File Creation and Deletion</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>File Directory (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>3</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "58c55c95-e12c-4182-bbf9-267bb29080fc"
+            },
+            {
+              "id": "2",
+              "value": "20"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "File Directory"
+            },
+            {
+              "id": "5",
+              "value": "3"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "58c55c95-e12c-4182-bbf9-267bb29080fc",
+      "name": "BB:BehaviorDefinition: File Creation and Deletion"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "Data Manipulation",
+        "STEC": "T1565.001",
+        "TAC": "Impact",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1565",
+        "MAP_S": [
+          {
+            "name": "Impact - T1565.001",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1485",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1485",
+        "MAP_S": [
+          {
+            "name": "Impact - T1485",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              },
+              {
+                "id": "139602",
+                "bb": "BB:BehaviorDefinition: File Creation and Deletion",
+                "uuid": "58c55c95-e12c-4182-bbf9-267bb29080fc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1027",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1027",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1027",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.004",
+            "values": [
+              {
+                "id": "139602",
+                "bb": "BB:BehaviorDefinition: File Creation and Deletion",
+                "uuid": "58c55c95-e12c-4182-bbf9-267bb29080fc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.819474",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

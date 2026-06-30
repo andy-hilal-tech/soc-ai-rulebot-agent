@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "149052",
+  "rule_id": "149052",
+  "uuid": "5f492d3e-a5ca-4760-acba-7d209e700ca0",
+  "rule_name": "BB:BehaviorDefinition: Security Software Discovery - Linux",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T15:04:39.846Z",
+  "modified": "2024-07-21T12:38:13.061Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19252"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [grep or egrep]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanygrep�egrep"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%nessusd%' or LOWER(&quot;Command&quot;) LIKE '%td-agent%' or LOWER(&quot;Command&quot;) LIKE '%packetbeat%' or LOWER(&quot;Command&quot;) LIKE '%filebeat%' or LOWER(&quot;Command&quot;) LIKE '%auditbeat%' or LOWER(&quot;Command&quot;) LIKE '%osqueryd%' or LOWER(&quot;Command&quot;) LIKE '%cbagentd%' or LOWER(&quot;Command&quot;) LIKE '%falcond%') or (LOWER(&quot;Command Arguments&quot;) LIKE '%nessusd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%td-agent%' or LOWER(&quot;Command Arguments&quot;) LIKE '%packetbeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%filebeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%auditbeat%' or LOWER(&quot;Command Arguments&quot;) LIKE '%osqueryd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%cbagentd%' or LOWER(&quot;Command Arguments&quot;) LIKE '%falcond%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25nessusd%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25td-agent%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25packetbeat%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25filebeat%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25auditbeat%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25osqueryd%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25cbagentd%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25falcond%25')%20or%20(LOWER(%22Command%20Arguments%22)%20LIKE%20'%25nessusd%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25td-agent%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25packetbeat%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25filebeat%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25auditbeat%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25osqueryd%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25cbagentd%25'%20or%20LOWER(%22Command%20Arguments%22)%20LIKE%20'%25falcond%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25nessusd%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25td-agent%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25packetbeat%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25filebeat%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25auditbeat%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25osqueryd%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25cbagentd%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25falcond%25')%20or%20(LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25nessusd%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25td-agent%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25packetbeat%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25filebeat%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25auditbeat%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25osqueryd%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25cbagentd%25'%20or%20LOWER(%5C%22Command%20Arguments%5C%22)%20LIKE%20'%25falcond%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Software Discovery",
+        "STEC": "T1518.001",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1518",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1518.001",
+            "values": [
+              {
+                "id": "149052",
+                "bb": "BB:BehaviorDefinition: Security Software Discovery - Linux",
+                "uuid": "5f492d3e-a5ca-4760-acba-7d209e700ca0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.658880",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

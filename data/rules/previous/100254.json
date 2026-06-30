@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "100254",
+  "rule_id": "100254",
+  "uuid": "SYSTEM-1209",
+  "rule_name": "Default-Response-Syslog: Offense SYSLOG Sender",
+  "object_type": "rule",
+  "group": "Response",
+  "rule_category": "Custom Rule",
+  "type": "OFFENSE",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Send to Local Syslog",
+  "created": "2005-09-13T20:37:38.273Z",
+  "modified": "2023-10-30T02:02:38.849Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "offenseSeverity",
+            "uid": "0",
+            "id": "9"
+          },
+          "text": [
+            "where the offense severity is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>5</a>"
+          ],
+          "accessor": [
+            "$1.getSeverity()"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "offenseCredibility",
+            "uid": "1",
+            "id": "10"
+          },
+          "text": [
+            "where the offense Credibility is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>5</a>"
+          ],
+          "accessor": [
+            "$1.getCredibility()"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "5"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "offenseRelevance",
+            "uid": "2",
+            "id": "11"
+          },
+          "text": [
+            "where the offense Relevance is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a>"
+          ],
+          "accessor": [
+            "$1.getRelevance()"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "log": "true"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.346352",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

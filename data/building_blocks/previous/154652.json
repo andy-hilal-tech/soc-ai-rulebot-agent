@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "154652",
+  "rule_id": "154652",
+  "uuid": "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+  "rule_name": "BB:BehaviorDefinition: Disable of ETW Trace",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T19:44:49.381Z",
+  "modified": "2024-07-21T12:38:52.688Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%cl%' and LOWER(&quot;Command&quot;) LIKE '%/trace%') or (LOWER(&quot;Command&quot;) LIKE '%clear-log%' and LOWER(&quot;Command&quot;) LIKE '%/trace%') or (LOWER(&quot;Command&quot;) LIKE '%sl%' and LOWER(&quot;Command&quot;) LIKE '%/e:false%') or (LOWER(&quot;Command&quot;) LIKE '%set-log%' and LOWER(&quot;Command&quot;) LIKE '%/e:false%') or (LOWER(&quot;Command&quot;) LIKE '%logman%' and LOWER(&quot;Command&quot;) LIKE '%update%' and LOWER(&quot;Command&quot;) LIKE '%trace%' and LOWER(&quot;Command&quot;) LIKE '%--p%' and LOWER(&quot;Command&quot;) LIKE '%-ets%') or LOWER(&quot;Command&quot;) LIKE '%remove-etwtraceprovider%' or (LOWER(&quot;Command&quot;) LIKE '%set-etwtraceprovider%' and LOWER(&quot;Command&quot;) LIKE '%0x11%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Command%22)%20LIKE%20'%25cl%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Ftrace%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25clear-log%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Ftrace%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25sl%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Fe%3Afalse%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25set-log%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Fe%3Afalse%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25logman%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25update%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25trace%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25--p%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25-ets%25')%20or%20LOWER(%22Command%22)%20LIKE%20'%25remove-etwtraceprovider%25'%20or%20(LOWER(%22Command%22)%20LIKE%20'%25set-etwtraceprovider%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%250x11%25'))|%5B%22((LOWER(%5C%22Command%5C%22)%20LIKE%20'%25cl%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Ftrace%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25clear-log%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Ftrace%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25sl%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fe%3Afalse%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25set-log%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fe%3Afalse%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25logman%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25update%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25trace%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25--p%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25-ets%25')%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25remove-etwtraceprovider%25'%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25set-etwtraceprovider%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%250x11%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.006",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.006",
+            "values": [
+              {
+                "id": "154652",
+                "bb": "BB:BehaviorDefinition: Disable of ETW Trace",
+                "uuid": "075a0ce7-b308-4492-bbd6-45f84dfbf413",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.745182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

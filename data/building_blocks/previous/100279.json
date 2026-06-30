@@ -1,0 +1,48 @@
+{
+  "rule_doc_id": "100279",
+  "rule_id": "100279",
+  "uuid": "SYSTEM-1254",
+  "rule_name": "BB:NetworkDefinition: Server Networks",
+  "object_type": "building_block",
+  "group": "Network Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-09T20:21:33.992Z",
+  "modified": "2023-10-30T02:02:37.691Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkObject_Test",
+            "uid": "0",
+            "id": "1"
+          },
+          "text": [
+            "when the local network is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>DMZ, Server_Network, Proxy_Servers, Regulatory_Compliance_Servers, VoIP_Networks</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getNetworkView",
+              "value": "DMZ, Server_Network, Proxy_Servers, Regulatory_Compliance_Servers, VoIP_Networks"
+            },
+            {
+              "id": "2",
+              "value": "Local"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

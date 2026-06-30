@@ -1,0 +1,95 @@
+{
+  "rule_doc_id": "132302",
+  "rule_id": "132302",
+  "uuid": "5bda6dac-7a0d-4e86-83c4-369088100622",
+  "rule_name": "BB:BehaviorDefinition: Potentially Hostile Originating Host",
+  "object_type": "building_block",
+  "group": "Email",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-11-05T18:16:23.510Z",
+  "modified": "2024-07-21T10:01:53.326Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Mail</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Sender Host (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Sender HostNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "XForceCategoryByURL_Test",
+            "uid": "1",
+            "id": "114"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Sender Host (custom)</a> is categorized by X-Force as <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Phishing URLs, Spam URLs, Malware, Botnet Command and Control Server, Cryptocurrency Mining</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getStringEventDatabaseFields",
+              "value": "Originating Host"
+            },
+            {
+              "id": "2",
+              "method": "getXForceURLCategories",
+              "value": "61, 59, 60, 81, 68"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+      "name": "BB:DeviceDefinition: Mail"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.323037",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

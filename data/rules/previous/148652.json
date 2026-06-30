@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "148652",
+  "rule_id": "148652",
+  "uuid": "6f314ec4-f76e-4f4a-a08f-bbaaf7cd6286",
+  "rule_name": "Suspicious Behavior by SOURGUM Actor",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T16:06:10.621Z",
+  "modified": "2024-07-21T12:38:34.708Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>((     LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\physmem.sys%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\shared\\wimbootconfigurations.ini%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\imejp\\wimbootconfigurations.ini%' \tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime\\imetc\\wimbootconfigurations.ini%'\t ) OR ( \t( \t\t( \t\t\tLOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\filepath2%' \t\t\tOR LOWER(&quot;Process File File Path&quot;) LIKE '%windows\\system32\\ime%' \t\t)  \t\tAND LOWER(&quot;Command&quot;) LIKE '% reg add%' \t) \tAND  \t( \t\tLOWER(&quot;Command&quot;) LIKE '%hkey_local_machine\\software\\classes\\clsid\\{7c857801-7381-11cf-884d-00aa004b2e24}\\inprocserver32%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%hkey_local_machine\\software\\classes\\clsid\\{cf4cc405-e2c5-4ddd-b3ce-5e7582d8c9fa}\\inprocserver32%' \t) ))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((%20%20%20%20%20LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cphysmem.sys%25'%20%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cime%5Cshared%5Cwimbootconfigurations.ini%25'%20%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cime%5Cimejp%5Cwimbootconfigurations.ini%25'%20%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cime%5Cimetc%5Cwimbootconfigurations.ini%25'%09%20)%20OR%20(%20%09(%20%09%09(%20%09%09%09LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cfilepath2%25'%20%09%09%09OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25windows%5Csystem32%5Cime%25'%20%09%09)%20%20%09%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20reg%20add%25'%20%09)%20%09AND%20%20%09(%20%09%09LOWER(%22Command%22)%20LIKE%20'%25hkey_local_machine%5Csoftware%5Cclasses%5Cclsid%5C%7B7c857801-7381-11cf-884d-00aa004b2e24%7D%5Cinprocserver32%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25hkey_local_machine%5Csoftware%5Cclasses%5Cclsid%5C%7Bcf4cc405-e2c5-4ddd-b3ce-5e7582d8c9fa%7D%5Cinprocserver32%25'%20%09)%20))|%5B%22((%22%2C%22%20%20%20%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cphysmem.sys%25'%22%2C%22%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cime%5C%5Cshared%5C%5Cwimbootconfigurations.ini%25'%22%2C%22%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cime%5C%5Cimejp%5C%5Cwimbootconfigurations.ini%25'%22%2C%22%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cime%5C%5Cimetc%5C%5Cwimbootconfigurations.ini%25'%5Ct%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5Ct(%22%2C%22%5Ct%5Ct(%22%2C%22%5Ct%5Ct%5CtLOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cfilepath2%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25windows%5C%5Csystem32%5C%5Cime%25'%22%2C%22%5Ct%5Ct)%20%22%2C%22%5Ct%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20reg%20add%25'%22%2C%22%5Ct)%22%2C%22%5CtAND%20%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25hkey_local_machine%5C%5Csoftware%5C%5Cclasses%5C%5Cclsid%5C%5C%7B7c857801-7381-11cf-884d-00aa004b2e24%7D%5C%5Cinprocserver32%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25hkey_local_machine%5C%5Csoftware%5C%5Cclasses%5C%5Cclsid%5C%5C%7Bcf4cc405-e2c5-4ddd-b3ce-5e7582d8c9fa%7D%5C%5Cinprocserver32%25'%22%2C%22%5Ct)%22%2C%22))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.015",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.015",
+            "values": [
+              {
+                "id": "148652",
+                "bb": "Suspicious Behavior by SOURGUM Actor",
+                "uuid": "6f314ec4-f76e-4f4a-a08f-bbaaf7cd6286",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.015",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1546.015",
+            "values": [
+              {
+                "id": "148652",
+                "bb": "Suspicious Behavior by SOURGUM Actor",
+                "uuid": "6f314ec4-f76e-4f4a-a08f-bbaaf7cd6286",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.065115",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

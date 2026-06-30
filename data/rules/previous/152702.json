@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "152702",
+  "rule_id": "152702",
+  "uuid": "3bc68ef5-b91d-4b49-941f-a7a1b8ebbb48",
+  "rule_name": "Masquerading Task or Service",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-08T19:25:54.818Z",
+  "modified": "2024-07-21T12:38:27.777Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Object Load Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19247"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>( \tLOWER(&quot;Filename&quot;) LIKE 'winmail.da%' \tOR \tLOWER(&quot;Filename&quot;) LIKE 'w64time%' \tOR  \t( \t\tLOWER(&quot;Registry Value Data&quot;) MATCHES '%w64time%' \t\tOR LOWER(&quot;Registry Key&quot;) LIKE '%w64time%' \t) ) OR ( \tLOWER(&quot;Service Full Name Full Full Name Full Full Name&quot;) LIKE 'pythonupdatesrvc' \tOR LOWER(&quot;Process Full Full Name&quot;) LIKE 'pythonupdatesrvc' ) OR ( \tLOWER(&quot;File Directory&quot;) LIKE 'c:\\intel\\' OR LOWER(&quot;File Directory&quot;) LIKE 'c:\\amd\\temp\\') \tAND (LOWER(&quot;Filename&quot;) == 'outlook.dat' OR LOWER(&quot;Filename&quot;) == 'outlib.dll' )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Filename%22)%20LIKE%20'winmail.da%25'%20%09OR%20%09LOWER(%22Filename%22)%20LIKE%20'w64time%25'%20%09OR%20%20%09(%20%09%09LOWER(%22Registry%20Value%20Data%22)%20MATCHES%20'%25w64time%25'%20%09%09OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25w64time%25'%20%09)%20)%20OR%20(%20%09LOWER(%22Service%20Name%22)%20LIKE%20'pythonupdatesrvc'%20%09OR%20LOWER(%22Process%20Name%22)%20LIKE%20'pythonupdatesrvc'%20)%20OR%20(%20%09LOWER(%22File%20Directory%22)%20LIKE%20'c%3A%5Cintel%5C'%20OR%20LOWER(%22File%20Directory%22)%20LIKE%20'c%3A%5Camd%5Ctemp%5C')%20%09AND%20(LOWER(%22Filename%22)%20%3D%3D%20'outlook.dat'%20OR%20LOWER(%22Filename%22)%20%3D%3D%20'outlib.dll'%20)|%5B%22(%22%2C%22%5CtLOWER(%5C%22Filename%5C%22)%20LIKE%20'winmail.da%25'%22%2C%22%5CtOR%22%2C%22%5CtLOWER(%5C%22Filename%5C%22)%20LIKE%20'w64time%25'%22%2C%22%5CtOR%20%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Registry%20Value%20Data%5C%22)%20MATCHES%20'%25w64time%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25w64time%25'%22%2C%22%5Ct)%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Service%20Name%5C%22)%20LIKE%20'pythonupdatesrvc'%22%2C%22%5CtOR%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'pythonupdatesrvc'%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5CtLOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'c%3A%5C%5Cintel%5C%5C'%20OR%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'c%3A%5C%5Camd%5C%5Ctemp%5C%5C')%22%2C%22%5CtAND%20(LOWER(%5C%22Filename%5C%22)%20%3D%3D%20'outlook.dat'%20OR%20LOWER(%5C%22Filename%5C%22)%20%3D%3D%20'outlib.dll'%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Masquerading",
+        "STEC": "T1036.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036.004",
+            "values": [
+              {
+                "id": "152702",
+                "bb": "Masquerading Task or Service",
+                "uuid": "3bc68ef5-b91d-4b49-941f-a7a1b8ebbb48",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.167262",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

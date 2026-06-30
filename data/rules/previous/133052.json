@@ -1,0 +1,128 @@
+{
+  "rule_doc_id": "133052",
+  "rule_id": "133052",
+  "uuid": "96f62bb3-5900-4326-a63b-d5d0527d5840",
+  "rule_name": "QNI : Email Attachment with Executable",
+  "object_type": "rule",
+  "group": "Email",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-02-21T17:24:04.279Z",
+  "modified": "2024-07-21T10:01:52.694Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>QNI : Email Attachment with Executable Hidden in Double File Extensions</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "a5e07943-6b44-436f-8e8d-24bf83bce95f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:CategoryDefinition: Mail Applications in Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "0c688149-ac7e-4a55-b3c0-d535324a31bc"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>File Name is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131143NENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Executable Extensions',REPLACEALL('.*\\.(.+?)$',&quot;file name&quot;,'$1'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Executable%20Extensions',REPLACEALL('.*%5C.(.%2B%3F)%24',%22file%20name%22,'%241'))|%5B%22REFERENCESETCONTAINS('Executable%20Extensions',REPLACEALL('.*%5C%5C.(.%2B%3F)%24',%5C%22file%20name%5C%22,'%241'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a5e07943-6b44-436f-8e8d-24bf83bce95f",
+      "name": "QNI : Email Attachment with Executable Hidden in Double File Extensions"
+    },
+    {
+      "uuid": "0c688149-ac7e-4a55-b3c0-d535324a31bc",
+      "name": "BB:CategoryDefinition: Mail Applications in Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.625437",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

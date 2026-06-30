@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100179",
+  "rule_id": "100179",
+  "uuid": "SYSTEM-1350",
+  "rule_name": "BB:FalsePositive: Proxy Server False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-12-21T00:35:41.711Z",
+  "modified": "2023-10-30T02:20:03.316Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(4254401) PROXY:WEB-GET, (4254404) PROXY:WEB-POST</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "4254401,    4254404"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Proxy Servers, BB:HostReference: Proxy Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1222, 5eed76c4-d314-4008-88a9-7088c37cf424"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1222",
+      "name": "BB:HostDefinition: Proxy Servers"
+    },
+    {
+      "uuid": "5eed76c4-d314-4008-88a9-7088c37cf424",
+      "name": "BB:HostReference: Proxy Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.770897",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

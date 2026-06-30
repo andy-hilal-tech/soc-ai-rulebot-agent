@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "149352",
+  "rule_id": "149352",
+  "uuid": "3babcd24-5c64-4d40-b1f0-3ef33ff08f28",
+  "rule_name": "Suspicious NTDS Process Patterns Exfiltration",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-07T11:38:10.128Z",
+  "modified": "2024-07-21T12:38:53.722Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(((LOWER(&quot;Process Full Full Name&quot;) LIKE 'ntdsDump.exe' OR LOWER(&quot;Process Full Full Name&quot;) LIKE 'ntdsdumpex.exe') OR (LOWER(&quot;Command&quot;) LIKE '%ntds.dit%' AND LOWER(&quot;Command&quot;) LIKE '%system.hiv%') OR LOWER(&quot;Command&quot;) LIKE '%ntdsgrab.ps1%') OR (LOWER(&quot;Command&quot;) LIKE '%ac i ntds%' AND LOWER(&quot;Command&quot;) LIKE '%create full%') OR (LOWER(&quot;Command&quot;) LIKE '%/c copy %' AND LOWER(&quot;Command&quot;) LIKE '%\\windows\\ntds\\ntds.dit%') OR (LOWER(&quot;Command&quot;) LIKE '%activate instance ntds%' AND LOWER(&quot;Command&quot;) LIKE '%create full%') OR (LOWER(&quot;Command&quot;) LIKE '%powershell%' AND LOWER(&quot;Command&quot;) LIKE '%ntds.dit%')) OR (LOWER(&quot;Command&quot;) LIKE '%ntds.dit%' AND ((LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\apache%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\tomcat%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\appdata\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\temp\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\public\\%' OR LOWER(&quot;Parent Process File File Path&quot;) LIKE '%\\perflogs\\%') OR (LOWER(&quot;Process File File Path&quot;) LIKE '%\\apache%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\tomcat%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\appdata\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\temp\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\public\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE '%\\perflogs\\%')))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(((LOWER(%22Process%20Name%22)%20LIKE%20'ntdsDump.exe'%20OR%20LOWER(%22Process%20Name%22)%20LIKE%20'ntdsdumpex.exe')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25ntds.dit%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25system.hiv%25')%20OR%20LOWER(%22Command%22)%20LIKE%20'%25ntdsgrab.ps1%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25ac%20i%20ntds%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25create%20full%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25%2Fc%20copy%20%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25%5Cwindows%5Cntds%5Cntds.dit%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25activate%20instance%20ntds%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25create%20full%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25powershell%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25ntds.dit%25'))%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25ntds.dit%25'%20AND%20((LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Capache%25'%20OR%20LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Ctomcat%25'%20OR%20LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Cappdata%5C%25'%20OR%20LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Ctemp%5C%25'%20OR%20LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Cpublic%5C%25'%20OR%20LOWER(%22Parent%20Process%20Path%22)%20LIKE%20'%25%5Cperflogs%5C%25')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Capache%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Ctomcat%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cappdata%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Ctemp%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cpublic%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5Cperflogs%5C%25')))|%5B%22(((LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'ntdsDump.exe'%20OR%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'ntdsdumpex.exe')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25ntds.dit%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25system.hiv%25')%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25ntdsgrab.ps1%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25ac%20i%20ntds%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25create%20full%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fc%20copy%20%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Cntds%5C%5Cntds.dit%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25activate%20instance%20ntds%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25create%20full%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25powershell%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25ntds.dit%25'))%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25ntds.dit%25'%20AND%20((LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Capache%25'%20OR%20LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Ctomcat%25'%20OR%20LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%20OR%20LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Ctemp%5C%5C%25'%20OR%20LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cpublic%5C%5C%25'%20OR%20LOWER(%5C%22Parent%20Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cperflogs%5C%5C%25')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Capache%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Ctomcat%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Ctemp%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cpublic%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5Cperflogs%5C%5C%25')))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.003",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.003",
+            "values": [
+              {
+                "id": "149352",
+                "bb": "Suspicious NTDS Process Patterns Exfiltration",
+                "uuid": "3babcd24-5c64-4d40-b1f0-3ef33ff08f28",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.075521",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

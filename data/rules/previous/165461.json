@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "165461",
+  "rule_id": "165461",
+  "uuid": "c65736cf-0dbd-4099-8d8a-be2dec51119b",
+  "rule_name": "MSSP - OS - MS - 23 - L - Windows Local Account ID created",
+  "object_type": "rule",
+  "group": "MSSP - Rules, OS - MS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event, Add to a Reference Set",
+  "created": "2026-03-11T16:04:13.377Z",
+  "modified": "2026-06-06T17:19:59.888Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4720</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidEventIdEQany4720"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyMatch_Test",
+            "uid": "2",
+            "id": "321"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Domain</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>equals</a> <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Hostname (custom)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "domainID"
+            },
+            {
+              "id": "2",
+              "value": "equals"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Hostname"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Domain</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "domainID"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "1"
+      },
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - OS - MS - 23 - L - Windows Local Account ID created"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.387393",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

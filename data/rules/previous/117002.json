@@ -1,0 +1,94 @@
+{
+  "rule_doc_id": "117002",
+  "rule_id": "117002",
+  "uuid": "0d8d7e61-3fac-45d6-a427-b72e51ece372",
+  "rule_name": "Potential Privilege Escalation via Instance Profile (AWS)",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-07-13T15:32:26.782Z",
+  "modified": "2024-04-29T12:45:18.390Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Regular Virtualization Administration</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Profile (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviourDefinition: Modification in Instance Profile (AWS)</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "a3928e1a-66f1-4e1d-acb2-1e4f08afa112"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Profile"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "ef204064-681d-4908-b904-cb99185284d5"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "61"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a3928e1a-66f1-4e1d-acb2-1e4f08afa112",
+      "name": "BB:BehaviorDefinition: Regular Virtualization Administration"
+    },
+    {
+      "uuid": "ef204064-681d-4908-b904-cb99185284d5",
+      "name": "BB:BehaviourDefinition: Modification in Instance Profile (AWS)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.995294",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

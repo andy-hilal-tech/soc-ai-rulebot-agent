@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100263",
+  "rule_id": "100263",
+  "uuid": "41ba2a03-cd17-4cb4-986b-28140db49974",
+  "rule_name": "BB:DeviceDefinition: Proxy",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-03-20T14:07:28.280Z",
+  "modified": "2023-10-30T02:20:03.090Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Squid Web Proxy, Blue Coat SG Appliance, Cisco IronPort, Cisco Cloud Web Security, Forcepoint V Series, Microsoft ISA, McAfee Web Gateway</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "46, 103, 179, 419, 198, 191, 220"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.873817",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

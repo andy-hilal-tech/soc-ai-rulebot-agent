@@ -1,0 +1,162 @@
+{
+  "rule_doc_id": "144552",
+  "rule_id": "144552",
+  "uuid": "ab83bd19-7020-4ebd-ace5-1593f955cd84",
+  "rule_name": "BB:BehaviorDefinition: Svchost Incoming Connection",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-03T16:52:39.736Z",
+  "modified": "2024-07-21T12:38:25.315Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.ACL Permit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of svchost.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanysvchost.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Initiated (custom) is any of false</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "InitiatedEQanyfalse"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;sourceport&quot; &gt;= 49152 AND &quot;destinationport&quot; &gt;= 49152</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22sourceport%22%20%3E%3D%2049152%20AND%20%22destinationport%22%20%3E%3D%2049152|%5B%22%5C%22sourceport%5C%22%20%3E%3D%2049152%20AND%20%5C%22destinationport%5C%22%20%3E%3D%2049152%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "SrcHost_Test",
+            "uid": "5",
+            "id": "8",
+            "negate": "true"
+          },
+          "text": [
+            "when the source IP is one of the following <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>127.0.0.1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Masquerading",
+        "STEC": "T1036.005",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036.005",
+            "values": [
+              {
+                "id": "144552",
+                "bb": "BB:BehaviorDefinition: Svchost Incoming Connection",
+                "uuid": "ab83bd19-7020-4ebd-ace5-1593f955cd84",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.516296",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

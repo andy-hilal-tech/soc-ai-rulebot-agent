@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "101952",
+  "rule_id": "101952",
+  "uuid": "0ebee01a-da91-47c2-ac75-3a60658414df",
+  "rule_name": "BB:UBA : VPN Mapping (logic)",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-05-02T16:10:17.250Z",
+  "modified": "2024-02-19T16:39:42.912Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Cisco Adaptive Security Appliance (ASA)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "41"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.015182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

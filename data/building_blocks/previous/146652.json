@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "146652",
+  "rule_id": "146652",
+  "uuid": "56391100-6119-4989-9c22-1248008d79ea",
+  "rule_name": "BB:BehaviorDefinition: Pass the Hash Activity in Network Logons",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-24T14:27:40.184Z",
+  "modified": "2024-07-21T12:38:26.889Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000830) Success Audit: An account was successfully logged on</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000830"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Logon Type (custom) is any of 3</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon TypeEQany3"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Logon Process (custom) is any of NtLmSsp</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon ProcessEQanyNtLmSsp"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "5",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Account Security ID (custom) contains any of NULL SID</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Account Security IDCONanyNULL SID"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Use Alternate Authentication Material",
+        "STEC": "T1550.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1550",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1550.002",
+            "values": [
+              {
+                "id": "146652",
+                "bb": "BB:BehaviorDefinition: Pass the Hash Activity in Network Logons",
+                "uuid": "56391100-6119-4989-9c22-1248008d79ea",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.586869",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,144 @@
+{
+  "rule_doc_id": "134502",
+  "rule_id": "134502",
+  "uuid": "94288bed-606e-4e15-a5eb-912793d7e9dc",
+  "rule_name": "Malware: Potential Dridex Traffic",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-02-15T20:37:23.717Z",
+  "modified": "2024-07-21T10:28:54.321Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IS NOT NULL AND &quot;tls ja3s hash&quot; IS NOT NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22tls%20ja3%20hash%22%20IS%20NOT%20NULL%20AND%20%22tls%20ja3s%20hash%22%20IS%20NOT%20NULL|%5B%22%5C%22tls%20ja3%20hash%5C%22%20IS%20NOT%20NULL%20AND%20%5C%22tls%20ja3s%20hash%5C%22%20IS%20NOT%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;tls ja3 hash&quot; IN ('51c64c77e60f3980eea90869b68c58a8')  AND &quot;tls ja3s hash&quot; IN ('e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22tls%20ja3%20hash%22%20IN%20('51c64c77e60f3980eea90869b68c58a8')%20%20AND%20%22tls%20ja3s%20hash%22%20IN%20('e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')|%5B%22%5C%22tls%20ja3%20hash%5C%22%20IN%20('51c64c77e60f3980eea90869b68c58a8')%20%22,%22AND%20%5C%22tls%20ja3s%20hash%5C%22%20IN%20('e35df3e00ca4ef31d42b34bebaa2f86e','ec74a5c51106f0419184d0dd08fb05bc','fd4bc6cea4877646ccd62f0792ec0b62')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "System Services",
+        "STEC": "T1569.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1569",
+        "MAP_S": [
+          {
+            "name": "Execution - T1569.002",
+            "values": [
+              {
+                "id": "134502",
+                "bb": "Malware: Potential Dridex Traffic",
+                "uuid": "94288bed-606e-4e15-a5eb-912793d7e9dc",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1203",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1203",
+        "MAP_S": [
+          {
+            "name": "Execution - T1203",
+            "values": [
+              {
+                "id": "134502",
+                "bb": "Malware: Potential Dridex Traffic",
+                "uuid": "94288bed-606e-4e15-a5eb-912793d7e9dc",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1211",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1211",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1211",
+            "values": [
+              {
+                "id": "134502",
+                "bb": "Malware: Potential Dridex Traffic",
+                "uuid": "94288bed-606e-4e15-a5eb-912793d7e9dc",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.661290",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

@@ -1,0 +1,239 @@
+{
+  "rule_doc_id": "142102",
+  "rule_id": "142102",
+  "uuid": "f724bde6-6217-4bdc-8c29-33aa9f494852",
+  "rule_name": "Access Token Abuse",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-17T14:55:40.794Z",
+  "modified": "2024-07-21T12:38:48.294Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000830) Success Audit: An account was successfully logged on</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000830"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Logon Type (custom) is any of 9</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon TypeEQany9"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Logon Process (custom) is any of Advapi</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Logon ProcessEQanyAdvapi"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Authentication Package (custom) is any of Negotiate</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Authentication PackageEQanyNegotiate"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "5",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Impersonation Level (custom) is any of Impersonation</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Impersonation LevelEQanyImpersonation"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1134.002",
+            "values": [
+              {
+                "id": "142102",
+                "bb": "Access Token Abuse",
+                "uuid": "f724bde6-6217-4bdc-8c29-33aa9f494852",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1134.001",
+            "values": [
+              {
+                "id": "142102",
+                "bb": "Access Token Abuse",
+                "uuid": "f724bde6-6217-4bdc-8c29-33aa9f494852",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1134.002",
+            "values": [
+              {
+                "id": "142102",
+                "bb": "Access Token Abuse",
+                "uuid": "f724bde6-6217-4bdc-8c29-33aa9f494852",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1134.001",
+            "values": [
+              {
+                "id": "142102",
+                "bb": "Access Token Abuse",
+                "uuid": "f724bde6-6217-4bdc-8c29-33aa9f494852",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.905692",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

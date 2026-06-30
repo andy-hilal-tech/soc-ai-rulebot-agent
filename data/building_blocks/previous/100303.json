@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "100303",
+  "rule_id": "100303",
+  "uuid": "SYSTEM-1570",
+  "rule_name": "BB:CategoryDefinition: Privileged Escalations",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-08-10T18:43:57.686Z",
+  "modified": "2023-10-30T02:20:01.609Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Privilege Escalation Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3007"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "100303",
+                "bb": "BB:CategoryDefinition: Privileged Escalations",
+                "uuid": "SYSTEM-1570",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.935962",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

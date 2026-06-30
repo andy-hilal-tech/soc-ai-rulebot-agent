@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "108102",
+  "rule_id": "108102",
+  "uuid": "f80ed253-1b07-4cb1-9ac8-6df3d8a3a70e",
+  "rule_name": "BB:PortDefinition: Telnet Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-05-30T08:54:31.790Z",
+  "modified": "2024-02-19T16:44:09.195Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>23</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "23"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.080667",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

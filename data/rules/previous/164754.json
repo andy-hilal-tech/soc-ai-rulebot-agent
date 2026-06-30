@@ -1,0 +1,89 @@
+{
+  "rule_doc_id": "164754",
+  "rule_id": "164754",
+  "uuid": "f0fb6d85-2003-44d3-bd7b-1b761be468e5",
+  "rule_name": "application misconfiguration issue - DB -BDF",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2024-11-25T15:28:31.462Z",
+  "modified": "2024-11-25T15:28:31.460Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "SrcHost_Test",
+            "uid": "0",
+            "id": "8"
+          },
+          "text": [
+            "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>172.21.1.66</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "172.21.1.66"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstHost_Test",
+            "uid": "1",
+            "id": "9"
+          },
+          "text": [
+            "when the destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>172.21.1.66</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "172.21.1.66"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Shared) misconfigured DB - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "310"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.162729",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

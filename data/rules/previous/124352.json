@@ -1,0 +1,79 @@
+{
+  "rule_doc_id": "124352",
+  "rule_id": "124352",
+  "uuid": "1aad6168-6da7-4b16-877b-d224f2c599f4",
+  "rule_name": "Microsoft Windows RCE Vulnerability - Suspicious IPs",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-10-03T10:36:17.762Z",
+  "modified": "2024-06-27T13:19:26.106Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Source Address, Destination Address</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Windows RCE IPs - IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "sourceaddress, destinationaddress"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "177"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "5026",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67500731",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "9",
+            "credibility": "9",
+            "severity": "9",
+            "description": "Detects when RCE IPs are seen.",
+            "name": "Microsoft Windows RCE Vulnerability - Suspicious IPs"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.232521",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

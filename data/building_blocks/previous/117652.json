@@ -1,0 +1,97 @@
+{
+  "rule_doc_id": "117652",
+  "rule_id": "117652",
+  "uuid": "479e5323-a9f5-4a7d-a2b9-d4f7d35c5a06",
+  "rule_name": "BB:BehaviorDefinition: Medium or High Severity Virtualization Events",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-01-14T15:19:12.615Z",
+  "modified": "2024-04-29T12:45:21.579Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Virtualization, BB:DeviceDefinition: Cloud</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "edf618f4-9e8c-4068-88aa-2675753eb003, 290df59b-44ef-452a-9633-2d52e74dbc97"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Alert Severity&quot; is not Null</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Alert%20Severity%22%20is%20not%20Null|%5B%22%5C%22Alert%20Severity%5C%22%20is%20not%20Null%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Alert Severity&quot; matches '((?:[4-9]|1[0])(?:\\.\\d+){0,1})' or &quot;Alert Severity&quot; imatches '(Medium|High)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Alert%20Severity%22%20matches%20'((%3F%3A%5B4-9%5D%7C1%5B0%5D)(%3F%3A%5C.%5Cd%2B)%7B0,1%7D)'%20or%20%22Alert%20Severity%22%20imatches%20'(Medium%7CHigh)'|%5B%22%5C%22Alert%20Severity%5C%22%20matches%20'((%3F%3A%5B4-9%5D%7C1%5B0%5D)(%3F%3A%5C%5C.%5C%5Cd%2B)%7B0,1%7D)'%20or%20%5C%22Alert%20Severity%5C%22%20imatches%20'(Medium%7CHigh)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+      "name": "BB:DeviceDefinition: Virtualization"
+    },
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.173353",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,120 @@
+{
+  "rule_doc_id": "100078",
+  "rule_id": "100078",
+  "uuid": "SYSTEM-1512",
+  "rule_name": "Local Flood (TCP)",
+  "object_type": "rule",
+  "group": "D\\DoS",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2010-07-06T18:17:22.671Z",
+  "modified": "2023-10-30T02:02:36.935Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowBiasTest",
+            "uid": "0",
+            "id": "200"
+          },
+          "text": [
+            "when the flow bias is any of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>outbound</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PacketRate",
+            "uid": "1",
+            "id": "203"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> packet rate is <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>1000</a> packets/second"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "value": "1000"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "3",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>TCP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "TCP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "4",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>60000</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "packets"
+            },
+            {
+              "id": "3",
+              "value": "1"
+            },
+            {
+              "id": "4",
+              "value": "60000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.237392",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

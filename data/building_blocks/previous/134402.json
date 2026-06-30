@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "134402",
+  "rule_id": "134402",
+  "uuid": "5f0d30e6-2de8-4283-97b7-9aee8c6f1061",
+  "rule_name": "BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-09T17:19:59.872Z",
+  "modified": "2024-07-21T12:38:21.689Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000584) Failure Audit: Kerberos pre-authentication failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000584"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Username is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Error Code (custom) is any of 0x18</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Error CodeEQany0x18"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.004",
+            "values": [
+              {
+                "id": "134402",
+                "bb": "BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication",
+                "uuid": "5f0d30e6-2de8-4283-97b7-9aee8c6f1061",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.001",
+        "TAC": "Credential Access",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.001",
+            "values": [
+              {
+                "id": "134402",
+                "bb": "BB:BehaviorDefinition: Invalid Password during Kerberos Pre-Authentication",
+                "uuid": "5f0d30e6-2de8-4283-97b7-9aee8c6f1061",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.355485",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,135 @@
+{
+  "rule_doc_id": "138152",
+  "rule_id": "138152",
+  "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+  "rule_name": "Communication with a Potential Hostile Host",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-04-17T18:07:13.314Z",
+  "modified": "2024-07-21T10:28:45.508Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "e796c0ed-7839-4997-bf7a-ca4576c25d83, 5661cc7f-324c-42e9-8112-acd9f73b023a"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "e796c0ed-7839-4997-bf7a-ca4576c25d83",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets)"
+    },
+    {
+      "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Application Layer Protocol",
+            "values": [
+              {
+                "id": "138152",
+                "bb": "Communication with a Potential Hostile Host",
+                "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+                "T": "EVENT"
+              },
+              {
+                "id": "138202",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets)",
+                "uuid": "e796c0ed-7839-4997-bf7a-ca4576c25d83",
+                "T": "EVENT"
+              },
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138152",
+                "bb": "Communication with a Potential Hostile Host",
+                "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+                "T": "EVENT"
+              },
+              {
+                "id": "138202",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets)",
+                "uuid": "e796c0ed-7839-4997-bf7a-ca4576c25d83",
+                "T": "EVENT"
+              },
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.766267",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

@@ -1,0 +1,204 @@
+{
+  "rule_doc_id": "140802",
+  "rule_id": "140802",
+  "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-29T19:46:06.200Z",
+  "modified": "2024-07-21T10:28:58.008Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Elevated Process (Windows)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "af9f1ad0-da96-412b-85f0-28a8c335700e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of ieinstal.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanyieinstal.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Parent Command (custom) contains any of  -Embedding</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent CommandCONany -Embedding"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+      "name": "BB:CategoryDefinition: Elevated Process (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.484856",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

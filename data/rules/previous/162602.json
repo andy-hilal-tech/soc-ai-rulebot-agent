@@ -1,0 +1,65 @@
+{
+  "rule_doc_id": "162602",
+  "rule_id": "162602",
+  "uuid": "d3a64cb8-1da1-47b7-94fd-047fd4694f76",
+  "rule_name": "QNI : Access to Improperly Secured Service - RDP Session Without Encryption",
+  "object_type": "rule",
+  "group": "QRadar Network Insights (QNI)",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-03-31T02:35:56.704Z",
+  "modified": "2024-08-08T12:19:53.334Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;rdp encryption level&quot; IS NOT NULL AND &quot;rdp encryption level&quot; = 'No Encryption'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22rdp%20encryption%20level%22%20IS%20NOT%20NULL%20AND%20%22rdp%20encryption%20level%22%20%3D%20'No%20Encryption'|%5B%22%5C%22rdp%20encryption%20level%5C%22%20IS%20NOT%20NULL%20AND%20%5C%22rdp%20encryption%20level%5C%22%20%3D%20'No%20Encryption'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "10",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.105790",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

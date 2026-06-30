@@ -1,0 +1,140 @@
+{
+  "rule_doc_id": "100079",
+  "rule_id": "100079",
+  "uuid": "SYSTEM-1362",
+  "rule_name": "Network DoS Attack Detected",
+  "object_type": "rule",
+  "group": "D\\DoS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-11-29T22:53:21.579Z",
+  "modified": "2023-10-30T02:02:39.364Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "0",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Network DoS Attack</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>QID</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>3</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>0</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1289"
+            },
+            {
+              "id": "2",
+              "value": "Qid"
+            },
+            {
+              "id": "3",
+              "value": "3"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "0"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "5"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "300",
+        "offenseMapping": "2"
+      },
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "The system has identified a network DoS attack."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1289",
+      "name": "BB:CategoryDefinition: Network DoS Attack"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100079",
+                "bb": "Network DoS Attack Detected",
+                "uuid": "SYSTEM-1362",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "100079",
+                "bb": "Network DoS Attack Detected",
+                "uuid": "SYSTEM-1362",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.237392",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

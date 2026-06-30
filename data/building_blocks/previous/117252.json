@@ -1,0 +1,81 @@
+{
+  "rule_doc_id": "117252",
+  "rule_id": "117252",
+  "uuid": "e60dd432-9d7f-40f7-b6fd-9d556cc17d45",
+  "rule_name": "BB:BehaviorDefinition: Default Policy Creation (AWS)",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-01-28T21:28:47.192Z",
+  "modified": "2024-04-29T12:45:22.482Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "2",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Amazon AWS CloudTrail</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "347"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Policy Change</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit Flags (custom) matches any of expressions (?i)true</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Audit FlagsREXany(?i)true"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.173353",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

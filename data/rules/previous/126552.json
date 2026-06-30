@@ -1,0 +1,82 @@
+{
+  "rule_doc_id": "126552",
+  "rule_id": "126552",
+  "uuid": "ccd7b948-889e-4274-a804-a08c99d1b645",
+  "rule_name": "Communication from an Insecure Port",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-11-25T18:05:27.273Z",
+  "modified": "2024-07-21T09:33:21.386Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Username is any of system:unsecured</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameEQanysystem:unsecured"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.379965",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

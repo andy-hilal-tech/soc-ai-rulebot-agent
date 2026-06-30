@@ -1,0 +1,235 @@
+{
+  "rule_doc_id": "141002",
+  "rule_id": "141002",
+  "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+  "rule_name": "BB:CategoryDefinition: UAC Bypass Registry Key",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-18T17:07:03.269Z",
+  "modified": "2024-07-21T10:28:54.554Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "3",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(CONCAT(&quot;Registry Key&quot;, '\\', &quot;Registry Value Name&quot;)) MATCHES '.*\\\\((folder|ms-settings|launcher.systemsettings|ms-windows-store|appx82a6gwre4fdg3bt635tn5ctqjf8msdd2)\\\\(shell\\\\open\\\\command|curver|url protocol)|environment\\\\(windir|cor_profiler)|microsoft\\\\windows nt\\\\currentversion\\\\icm\\\\calibration\\\\displaycalibrator).*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(CONCAT(%22Registry%20Key%22,%20'%5C',%20%22Registry%20Value%20Name%22))%20MATCHES%20'.*%5C%5C((folder%7Cms-settings%7Clauncher.systemsettings%7Cms-windows-store%7Cappx82a6gwre4fdg3bt635tn5ctqjf8msdd2)%5C%5C(shell%5C%5Copen%5C%5Ccommand%7Ccurver%7Curl%20protocol)%7Cenvironment%5C%5C(windir%7Ccor_profiler)%7Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Cicm%5C%5Ccalibration%5C%5Cdisplaycalibrator).*'|%5B%22LOWER(CONCAT(%5C%22Registry%20Key%5C%22,%20'%5C%5C',%20%5C%22Registry%20Value%20Name%5C%22))%20MATCHES%20'.*%5C%5C%5C%5C((folder%7Cms-settings%7Clauncher.systemsettings%7Cms-windows-store%7Cappx82a6gwre4fdg3bt635tn5ctqjf8msdd2)%5C%5C%5C%5C(shell%5C%5C%5C%5Copen%5C%5C%5C%5Ccommand%7Ccurver%7Curl%20protocol)%7Cenvironment%5C%5C%5C%5C(windir%7Ccor_profiler)%7Cmicrosoft%5C%5C%5C%5Cwindows%20nt%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Cicm%5C%5C%5C%5Ccalibration%5C%5C%5C%5Cdisplaycalibrator).*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.484856",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

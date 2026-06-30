@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "119502",
+  "rule_id": "119502",
+  "uuid": "ab0bd345-c462-40b4-ab9d-5b82b22edb19",
+  "rule_name": "Suspicious DNS Query Length",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-06-25T18:09:41.024Z",
+  "modified": "2024-06-27T13:19:22.606Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: DNS, BB:DeviceDefinition: Web Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "b7151386-d7dc-41ab-9371-e474591a5c21, 59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.DNS In Progress, Application.Request Successful, Application.Request In Progress</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18081, 18466, 18467"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>STRLEN(URL Host) &gt; 40</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "STRLEN(%22URL%20Host%22)%20%3E%2040|%5B%22STRLEN(%5C%22URL%20Host%5C%22)%20%3E%2040%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "b7151386-d7dc-41ab-9371-e474591a5c21",
+      "name": "BB:DeviceDefinition: DNS"
+    },
+    {
+      "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+      "name": "BB:DeviceDefinition: Web Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.056789",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

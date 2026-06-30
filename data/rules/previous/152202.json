@@ -1,0 +1,152 @@
+{
+  "rule_doc_id": "152202",
+  "rule_id": "152202",
+  "uuid": "746e2f5e-9d77-4df0-b373-1a86de253e0b",
+  "rule_name": "Suspicious Cron Scheduled Task/Job",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-17T17:34:45.084Z",
+  "modified": "2024-07-21T12:38:53.600Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Creation of Cron Files, BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux, BB:BehaviorDefinition: Scheduled Cron Task</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "f05c2351-08ff-40fc-8c61-89ae8a15f123, 2d7e7d07-89e5-4006-a09d-231689f67f15, 482bbcd1-17cc-438b-923a-464e110dea9e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f05c2351-08ff-40fc-8c61-89ae8a15f123",
+      "name": "BB:BehaviorDefinition: Creation of Cron Files"
+    },
+    {
+      "uuid": "2d7e7d07-89e5-4006-a09d-231689f67f15",
+      "name": "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux"
+    },
+    {
+      "uuid": "482bbcd1-17cc-438b-923a-464e110dea9e",
+      "name": "BB:BehaviorDefinition: Scheduled Cron Task"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.005",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1053.005",
+            "values": [
+              {
+                "id": "152202",
+                "bb": "Suspicious Cron Scheduled Task/Job",
+                "uuid": "746e2f5e-9d77-4df0-b373-1a86de253e0b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1053.003",
+            "values": [
+              {
+                "id": "152202",
+                "bb": "Suspicious Cron Scheduled Task/Job",
+                "uuid": "746e2f5e-9d77-4df0-b373-1a86de253e0b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.003",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.003",
+            "values": [
+              {
+                "id": "151802",
+                "bb": "BB:BehaviorDefinition: Scheduled Cron Task",
+                "uuid": "482bbcd1-17cc-438b-923a-464e110dea9e",
+                "T": "EVENT"
+              },
+              {
+                "id": "152252",
+                "bb": "BB:BehaviorDefinition: Creation of Cron Files",
+                "uuid": "f05c2351-08ff-40fc-8c61-89ae8a15f123",
+                "T": "EVENT"
+              },
+              {
+                "id": "152302",
+                "bb": "BB:BehaviorDefinition: Scheduled Cron Task/Job - Linux",
+                "uuid": "2d7e7d07-89e5-4006-a09d-231689f67f15",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.151423",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

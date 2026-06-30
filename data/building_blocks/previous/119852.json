@@ -1,0 +1,64 @@
+{
+  "rule_doc_id": "119852",
+  "rule_id": "119852",
+  "uuid": "16acd79e-a26e-434e-b477-d524322118c1",
+  "rule_name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Flows X-Force Categorization)",
+  "object_type": "building_block",
+  "group": "Category Definitions, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-06-09T17:33:27.425Z",
+  "modified": "2024-06-27T13:19:25.277Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25",
+            "negate": "true"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>XFORCE_IP_CONFIDENCE('Anonymization Services',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Anonymization Services',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Malware',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Malware',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Botnet Command and Control Server',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Botnet Command and Control Server',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Spam',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Spam',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Cryptocurrency Mining',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Cryptocurrency Mining',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Scanning IPs',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Scanning IPs',destinationip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Bots',sourceip) &gt; 75 OR XFORCE_IP_CONFIDENCE('Bots',destinationip) &gt; 75</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Anonymization%20Services',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',destinationip)%20%3E%2075|%5B%22XFORCE_IP_CONFIDENCE('Anonymization%20Services',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Anonymization%20Services',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Malware',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Botnet%20Command%20and%20Control%20Server',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Spam',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Cryptocurrency%20Mining',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Scanning%20IPs',destinationip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',sourceip)%20%3E%2075%20OR%20XFORCE_IP_CONFIDENCE('Bots',destinationip)%20%3E%2075%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.221591",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

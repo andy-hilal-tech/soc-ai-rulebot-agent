@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "150852",
+  "rule_id": "150852",
+  "uuid": "91a6daeb-9010-408f-8644-51284987fef7",
+  "rule_name": "BB:BehaviorDefinition: TaskCache Registry Modification",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-03T16:59:46.363Z",
+  "modified": "2024-07-21T12:38:33.960Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "3",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001832"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Target Object&quot;) LIKE '%SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\%' OR LOWER(&quot;Registry Key&quot;) LIKE '%SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Target%20Object%22)%20LIKE%20'%25SOFTWARE%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5C%25'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25SOFTWARE%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5C%25'|%5B%22LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25SOFTWARE%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5C%25'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25SOFTWARE%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>((LOWER(&quot;Registry Value Data&quot;) LIKE '%Microsoft\\Windows\\UpdateOrchestrator%' OR LOWER(&quot;Registry Value Data&quot;) LIKE '%Microsoft\\Windows\\SoftwareProtectionPlatform\\SvcRestartTask\\Index%' OR LOWER(&quot;Registry Value Data&quot;) LIKE '%Microsoft\\Windows\\Flighting\\OneSettings\\RefreshCache\\Index%') OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\%' AND LOWER(&quot;Process Full Full Name&quot;) LIKE '%TiWorker.exe') OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\WINDOWS\\system32\\svchost.exe' OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\Microsoft.NET\\Framework%' AND LOWER(&quot;Process Full Full Name&quot;) LIKE '%ngen.exe' AND (LOWER(&quot;Target Object&quot;) LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tasks\\{B66B135D-DA06-4FC4-95F8-7458E1D10129}%' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tasks\\{B66B135D-DA06-4FC4-95F8-7458E1D10129}%' OR LOWER(&quot;Target Object&quot;) LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN%' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\Microsoft\\Windows\\.NET Framework\\.NET Framework NGEN%')) OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files\\Microsoft Office\\root\\Integration\\Integrator.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files (x86)\\Microsoft Office\\root\\Integration\\Integrator.exe') OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\System32\\msiexec.exe'  OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files (x86)\\Dropbox\\Update\\DropboxUpdate.exe' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files\\Dropbox\\Update\\DropboxUpdate.exe') OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\explorer.exe' AND &quot;Target Object&quot; LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\Microsoft\\Windows\\PLA\\Server Manager Performance Monitor\\%' OR LOWER(&quot;Registry Key&quot;) LIKE '%\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\Microsoft\\Windows\\PLA\\Server Manager Performance Monitor\\%') OR LOWER(&quot;Process File File Path&quot;) LIKE 'System')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25Microsoft%5CWindows%5CUpdateOrchestrator%25'%20OR%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25Microsoft%5CWindows%5CSoftwareProtectionPlatform%5CSvcRestartTask%5CIndex%25'%20OR%20LOWER(%22Registry%20Value%20Data%22)%20LIKE%20'%25Microsoft%5CWindows%5CFlighting%5COneSettings%5CRefreshCache%5CIndex%25')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5C%25'%20AND%20LOWER(%22Process%20Name%22)%20LIKE%20'%25TiWorker.exe')%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWINDOWS%5Csystem32%5Csvchost.exe'%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CMicrosoft.NET%5CFramework%25'%20AND%20LOWER(%22Process%20Name%22)%20LIKE%20'%25ngen.exe'%20AND%20(LOWER(%22Target%20Object%22)%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTasks%5C%7BB66B135D-DA06-4FC4-95F8-7458E1D10129%7D%25'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTasks%5C%7BB66B135D-DA06-4FC4-95F8-7458E1D10129%7D%25'%20OR%20LOWER(%22Target%20Object%22)%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTree%5CMicrosoft%5CWindows%5C.NET%20Framework%5C.NET%20Framework%20NGEN%25'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTree%5CMicrosoft%5CWindows%5C.NET%20Framework%5C.NET%20Framework%20NGEN%25'))%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%5CMicrosoft%20Office%5Croot%5CIntegration%5CIntegrator.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%20(x86)%5CMicrosoft%20Office%5Croot%5CIntegration%5CIntegrator.exe')%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5CSystem32%5Cmsiexec.exe'%20%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%20(x86)%5CDropbox%5CUpdate%5CDropboxUpdate.exe'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%5CDropbox%5CUpdate%5CDropboxUpdate.exe')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5Cexplorer.exe'%20AND%20%22Target%20Object%22%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTree%5CMicrosoft%5CWindows%5CPLA%5CServer%20Manager%20Performance%20Monitor%5C%25'%20OR%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5CMicrosoft%5CWindows%20NT%5CCurrentVersion%5CSchedule%5CTaskCache%5CTree%5CMicrosoft%5CWindows%5CPLA%5CServer%20Manager%20Performance%20Monitor%5C%25')%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'System')|%5B%22((LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25Microsoft%5C%5CWindows%5C%5CUpdateOrchestrator%25'%20OR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25Microsoft%5C%5CWindows%5C%5CSoftwareProtectionPlatform%5C%5CSvcRestartTask%5C%5CIndex%25'%20OR%20LOWER(%5C%22Registry%20Value%20Data%5C%22)%20LIKE%20'%25Microsoft%5C%5CWindows%5C%5CFlighting%5C%5COneSettings%5C%5CRefreshCache%5C%5CIndex%25')%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25TiWorker.exe')%22%2C%22OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWINDOWS%5C%5Csystem32%5C%5Csvchost.exe'%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CMicrosoft.NET%5C%5CFramework%25'%20AND%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25ngen.exe'%20AND%20(LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTasks%5C%5C%7BB66B135D-DA06-4FC4-95F8-7458E1D10129%7D%25'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTasks%5C%5C%7BB66B135D-DA06-4FC4-95F8-7458E1D10129%7D%25'%20OR%20LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTree%5C%5CMicrosoft%5C%5CWindows%5C%5C.NET%20Framework%5C%5C.NET%20Framework%20NGEN%25'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTree%5C%5CMicrosoft%5C%5CWindows%5C%5C.NET%20Framework%5C%5C.NET%20Framework%20NGEN%25'))%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5CMicrosoft%20Office%5C%5Croot%5C%5CIntegration%5C%5CIntegrator.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%20(x86)%5C%5CMicrosoft%20Office%5C%5Croot%5C%5CIntegration%5C%5CIntegrator.exe')%22%2C%22OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cmsiexec.exe'%20%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%20(x86)%5C%5CDropbox%5C%5CUpdate%5C%5CDropboxUpdate.exe'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5CDropbox%5C%5CUpdate%5C%5CDropboxUpdate.exe')%22%2C%22OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5Cexplorer.exe'%20AND%20%5C%22Target%20Object%5C%22%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTree%5C%5CMicrosoft%5C%5CWindows%5C%5CPLA%5C%5CServer%20Manager%20Performance%20Monitor%5C%5C%25'%20OR%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5CMicrosoft%5C%5CWindows%20NT%5C%5CCurrentVersion%5C%5CSchedule%5C%5CTaskCache%5C%5CTree%5C%5CMicrosoft%5C%5CWindows%5C%5CPLA%5C%5CServer%20Manager%20Performance%20Monitor%5C%5C%25')%22%2C%22OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'System')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.005",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.005",
+            "values": [
+              {
+                "id": "150852",
+                "bb": "BB:BehaviorDefinition: TaskCache Registry Modification",
+                "uuid": "91a6daeb-9010-408f-8644-51284987fef7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.686718",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

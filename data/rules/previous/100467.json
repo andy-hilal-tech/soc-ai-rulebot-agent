@@ -1,0 +1,53 @@
+{
+  "rule_doc_id": "100467",
+  "rule_id": "100467",
+  "uuid": "33286d9d-72a7-437a-9ab7-c31ce2a81308",
+  "rule_name": "Vulnerabilities: Vulnerability Reported by Scanner",
+  "object_type": "rule",
+  "group": "Exploit",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-01-16T13:34:13.434Z",
+  "modified": "2024-01-16T13:34:13.434Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>VIS Host Discovery.New Vuln Discovered</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "17004"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.440397",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

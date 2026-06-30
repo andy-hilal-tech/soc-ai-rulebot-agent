@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162304",
+  "rule_id": "162304",
+  "uuid": "f90893a1-1f2c-4a4f-9cf6-6a217ea061f8",
+  "rule_name": "Potential XXE Exploitation Attempt In JVM Based Application",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T11:59:49.137Z",
+  "modified": "2024-08-07T13:47:46.989Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(UTF8(payload)) LIKE '%saxparseexception%' OR LOWER(UTF8(payload)) LIKE '%domexception%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25saxparseexception%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25domexception%25%27|%5B%22LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25saxparseexception%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25domexception%25%27%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Moti Harmats SIGMA Title: Potential XXE Exploitation Attempt In JVM Based Application SIGMA Description: Detects XML parsing issues, if the application expects to work with XML make sure that the parser is initialized safely.  False positives: - If the application expects to work with XML there may be parsing issues that don't necessarily mean XXE.  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Potential XXE Exploitation Attempt In JVM Based Application"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.705285",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

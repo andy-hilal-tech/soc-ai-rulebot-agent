@@ -1,0 +1,196 @@
+{
+  "rule_doc_id": "134902",
+  "rule_id": "134902",
+  "uuid": "140d9b72-b010-4c51-9d60-d1f714c2e3e3",
+  "rule_name": "Suspicious Valid Accounts Logon",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-16T14:17:13.052Z",
+  "modified": "2024-07-21T12:38:51.663Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials, BB:BehaviorDefinition: User Added to Local Administrators, BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "9297e213-3440-4899-97b3-bd99cffa1e6b, 662495cf-a61b-4e23-801b-baad340a5268, 59aca9fe-a4a4-4564-82d5-30db3036c1f5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+      "name": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials"
+    },
+    {
+      "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+      "name": "BB:BehaviorDefinition: User Added to Local Administrators"
+    },
+    {
+      "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+      "name": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.004",
+            "values": [
+              {
+                "id": "134952",
+                "bb": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+                "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+                "T": "EVENT"
+              },
+              {
+                "id": "135002",
+                "bb": "BB:BehaviorDefinition: User Added to Local Administrators",
+                "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+                "T": "EVENT"
+              },
+              {
+                "id": "135052",
+                "bb": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons",
+                "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1110",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110",
+            "values": [
+              {
+                "id": "135052",
+                "bb": "BB:BehaviorDefinition: Account Tampering - Suspicious Failed Logon Reasons",
+                "uuid": "59aca9fe-a4a4-4564-82d5-30db3036c1f5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "T1078",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1078",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1078",
+            "values": [
+              {
+                "id": "134902",
+                "bb": "Suspicious Valid Accounts Logon",
+                "uuid": "140d9b72-b010-4c51-9d60-d1f714c2e3e3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "T1021",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021",
+            "values": [
+              {
+                "id": "134952",
+                "bb": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+                "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Create Account",
+        "STEC": "T1136.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136.001",
+            "values": [
+              {
+                "id": "135002",
+                "bb": "BB:BehaviorDefinition: User Added to Local Administrators",
+                "uuid": "662495cf-a61b-4e23-801b-baad340a5268",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.677359",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

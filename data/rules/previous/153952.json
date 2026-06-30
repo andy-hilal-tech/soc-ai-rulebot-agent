@@ -1,0 +1,78 @@
+{
+  "rule_doc_id": "153952",
+  "rule_id": "153952",
+  "uuid": "21511f9a-60cc-4cf4-83cc-80f353bdd87a",
+  "rule_name": "Communication to EquationGroup C2 Tools",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T18:00:45.253Z",
+  "modified": "2024-07-21T12:38:15.823Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "0",
+            "id": "12"
+          },
+          "text": [
+            "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>69.42.98.86, 89.185.234.145</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "69.42.98.86, 89.185.234.145"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.215278",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

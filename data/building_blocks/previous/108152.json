@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "108152",
+  "rule_id": "108152",
+  "uuid": "83987bc1-4a4e-46e3-9ad2-f9a128eff270",
+  "rule_name": "BB:PortDefinition: TFTP Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-05-30T08:57:20.650Z",
+  "modified": "2024-02-19T16:44:09.812Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>69</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "69"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.080667",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

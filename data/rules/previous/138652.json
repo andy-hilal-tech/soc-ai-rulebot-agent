@@ -1,0 +1,133 @@
+{
+  "rule_doc_id": "138652",
+  "rule_id": "138652",
+  "uuid": "6a378fe6-bb89-45c7-b604-853e81ed6a6c",
+  "rule_name": "Critical Security Tool Stopped",
+  "object_type": "rule",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-02-13T19:25:18.507Z",
+  "modified": "2024-07-21T10:28:51.650Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Service Stopped</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8010"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Critical Security Tool Processes - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Process Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "213"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.001",
+            "values": [
+              {
+                "id": "138652",
+                "bb": "Critical Security Tool Stopped",
+                "uuid": "6a378fe6-bb89-45c7-b604-853e81ed6a6c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.778471",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

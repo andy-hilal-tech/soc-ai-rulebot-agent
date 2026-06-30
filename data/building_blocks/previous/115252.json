@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "115252",
+  "rule_id": "115252",
+  "uuid": "73b878ec-5543-46e1-b5ed-fc52b0ab8d0e",
+  "rule_name": "BB:UBA : Detect WannaCry Using URL",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-01-15T09:55:39.430Z",
+  "modified": "2024-02-19T16:54:41.027Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>URL (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : Malware Activity WannaCry - URL's - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "URL"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "86"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.141901",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

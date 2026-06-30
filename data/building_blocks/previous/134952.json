@@ -1,0 +1,149 @@
+{
+  "rule_doc_id": "134952",
+  "rule_id": "134952",
+  "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-16T14:04:55.843Z",
+  "modified": "2024-07-21T12:38:30.709Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Login Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3115"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Process Full Full Name&quot; in ('cmd.exe', 'powershell.exe', 'pwsh.exe', 'winrs.exe', 'wmic.exe', 'net.exe', 'net1.exe', 'reg.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Name%22%20in%20('cmd.exe'%2C%20'powershell.exe'%2C%20'pwsh.exe'%2C%20'winrs.exe'%2C%20'wmic.exe'%2C%20'net.exe'%2C%20'net1.exe'%2C%20'reg.exe')|%5B%22%5C%22Process%20Name%5C%22%20in%20('cmd.exe'%2C%20'powershell.exe'%2C%20'pwsh.exe'%2C%20'winrs.exe'%2C%20'wmic.exe'%2C%20'net.exe'%2C%20'net1.exe'%2C%20'reg.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Machine Identifier&quot; ILIKE '%localhost%' OR (&quot;Account Full Full Name&quot; ILIKE '%$' AND &quot;Target Username&quot; ILIKE '%$'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Machine%20Identifier%22%20ILIKE%20'%25localhost%25'%20OR%20(%22Account%20Name%22%20ILIKE%20'%25%24'%20AND%20%22Target%20Username%22%20ILIKE%20'%25%24'))|%5B%22(%5C%22Machine%20Identifier%5C%22%20ILIKE%20'%25localhost%25'%20OR%20(%5C%22Account%20Name%5C%22%20ILIKE%20'%25%24'%20AND%20%5C%22Target%20Username%5C%22%20ILIKE%20'%25%24'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Brute Force",
+        "STEC": "T1110.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110.004",
+            "values": [
+              {
+                "id": "134952",
+                "bb": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+                "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "T1021",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021",
+            "values": [
+              {
+                "id": "134952",
+                "bb": "BB:BehaviorDefinition: Suspicious Remote Logon with Explicit Credentials",
+                "uuid": "9297e213-3440-4899-97b3-bd99cffa1e6b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.363115",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

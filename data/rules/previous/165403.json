@@ -1,0 +1,109 @@
+{
+  "rule_doc_id": "165403",
+  "rule_id": "165403",
+  "uuid": "940d151c-1554-4bf4-b8bc-4d358c1bc214",
+  "rule_name": "All Exploits Become Offenses - Al Haddad Motors",
+  "object_type": "rule",
+  "group": "Intrusion Detection",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2026-01-28T14:05:49.854Z",
+  "modified": "2026-02-05T13:25:59.503Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Exploit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "5000"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "4",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>ESET Remote Administrator @ APPLICATION</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "6045"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "5",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>ESET AV Action (custom) is any of Blocked</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ESET AV ActionEQanyBlocked"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "3",
+            "id": "19",
+            "negate": "true"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(6500591) Information - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500591"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "80"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.343077",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

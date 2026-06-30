@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "165484",
+  "rule_id": "165484",
+  "uuid": "9331e8a9-52bc-40d6-8f71-382024cbb1be",
+  "rule_name": "Fortigate Firewall Configuration Changes QIDs - DND",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2026-03-30T10:11:51.566Z",
+  "modified": "2026-03-30T10:11:51.563Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(20253081) Administration Edit Event, (20257879) Administration Edit Event, (20253190) System Edit Event, (20257825) System Edit Event, (20253078) Administration Delete Event, (20257869) Administration Delete Event, (20253189) System Delete Event, (20257823) System Delete Event, (20279076) Config Add Event, (20286913) Configuration changed, (20285922) Configuration is changed, (20286256) Configuration manually saved, (20257842) Add User, (20253169) Add User, (20279074) Admin Add Event, (20253188) System Add Event, (20257822) System Add Event</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "20253081, 20257879, 20253190, 20257825, 20253078, 20257869, 20253189, 20257823, 20279076, 20286913, 20285922, 20286256, 20257842, 20253169, 20279074, 20253188, 20257822"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.450240",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

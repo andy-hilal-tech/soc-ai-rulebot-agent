@@ -1,0 +1,182 @@
+{
+  "rule_doc_id": "100456",
+  "rule_id": "100456",
+  "uuid": "44f9c307-1878-4892-a71f-88656a2b6cc4",
+  "rule_name": "Remote Flood (TCP)",
+  "object_type": "rule",
+  "group": "D\\DoS",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-01-16T13:30:16.119Z",
+  "modified": "2024-01-16T13:30:16.119Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowBiasTest",
+            "uid": "0",
+            "id": "200"
+          },
+          "text": [
+            "when the flow bias is any of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>inbound</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>3</a> flows are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP, Destination IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getFlowRules",
+              "value": ""
+            },
+            {
+              "id": "2",
+              "value": "3"
+            },
+            {
+              "id": "3",
+              "method": "getFlowDatabaseFields",
+              "value": "sourceIP, destinationIP"
+            },
+            {
+              "id": "4",
+              "method": "getFlowDatabaseFields",
+              "value": ""
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "IPProtocol_Test",
+            "uid": "3",
+            "id": "2"
+          },
+          "text": [
+            "when the IP protocol is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>TCP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "TCP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketCount",
+            "uid": "1",
+            "id": "201"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>packets</a> is <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>60000</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "packets"
+            },
+            {
+              "id": "3",
+              "value": "1"
+            },
+            {
+              "id": "4",
+              "value": "60000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100456",
+                "bb": "Remote Flood (TCP)",
+                "uuid": "44f9c307-1878-4892-a71f-88656a2b6cc4",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "100456",
+                "bb": "Remote Flood (TCP)",
+                "uuid": "44f9c307-1878-4892-a71f-88656a2b6cc4",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.424660",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

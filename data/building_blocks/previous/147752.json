@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "147752",
+  "rule_id": "147752",
+  "uuid": "eba9760e-30eb-4ce0-8a85-f4b5c23b769d",
+  "rule_name": "BB:BehaviorDefinition: Suspicious ZipExec Execution",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T19:33:36.088Z",
+  "modified": "2024-07-21T12:38:48.216Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%/generic:microsoft_windows_shell_zipfolder:filename=%' and LOWER(&quot;Command&quot;) LIKE '%.zip%' and LOWER(&quot;Command&quot;) LIKE '%/pass:%' and LOWER(&quot;Command&quot;) LIKE '%/user:%') or (LOWER(&quot;Command&quot;) LIKE '%/delete%' and LOWER(&quot;Command&quot;) LIKE '%microsoft_windows_shell_zipfolder:filename=%' and LOWER(&quot;Command&quot;) LIKE '%.zip%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Command%22)%20LIKE%20'%25%2Fgeneric%3Amicrosoft_windows_shell_zipfolder%3Afilename%3D%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25.zip%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Fpass%3A%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Fuser%3A%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25%2Fdelete%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25microsoft_windows_shell_zipfolder%3Afilename%3D%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25.zip%25'))|%5B%22((LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fgeneric%3Amicrosoft_windows_shell_zipfolder%3Afilename%3D%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.zip%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fpass%3A%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fuser%3A%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fdelete%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25microsoft_windows_shell_zipfolder%3Afilename%3D%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.zip%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "147752",
+                "bb": "BB:BehaviorDefinition: Suspicious ZipExec Execution",
+                "uuid": "eba9760e-30eb-4ce0-8a85-f4b5c23b769d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.627241",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

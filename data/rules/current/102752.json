@@ -148,7 +148,16 @@
       "name": "BB:UBA : Common Event Filters"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "h",
+        "intervalCount": "24",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Credential Access": [
       {
@@ -220,6 +229,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.503752",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.916721",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

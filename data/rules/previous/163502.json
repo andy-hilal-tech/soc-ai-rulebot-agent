@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "163502",
+  "rule_id": "163502",
+  "uuid": "17f619bd-abe0-4296-a4cc-bdbecae35513",
+  "rule_name": "Suspicious Double File Extension Process",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-12T12:12:29.185Z",
+  "modified": "2024-08-14T14:33:46.020Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) LIKE '%.doc.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.docx.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.xls.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.xlsx.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.ppt.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.pptx.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.rtf.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.pdf.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.txt.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%      .exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%______.exe' OR  LOWER(&quot;Process Name&quot;) LIKE '%.doc.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.docx.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.xls.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.xlsx.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.ppt.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.pptx.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.rtf.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.pdf.js' OR  LOWER(&quot;Process Name&quot;) LIKE '%.txt.js'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20LIKE%20'%25.doc.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.docx.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.xls.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.xlsx.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.ppt.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.pptx.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.rtf.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.pdf.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.txt.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25%20%20%20%20%20%20.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25______.exe'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.doc.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.docx.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.xls.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.xlsx.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.ppt.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.pptx.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.rtf.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.pdf.js'%20OR%20%20LOWER(%22Process%20Name%22)%20LIKE%20'%25.txt.js'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.doc.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.docx.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.xls.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.xlsx.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.ppt.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.pptx.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.rtf.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.pdf.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.txt.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25%20%20%20%20%20%20.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25______.exe'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.doc.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.docx.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.xls.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.xlsx.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.ppt.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.pptx.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.rtf.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.pdf.js'%20OR%20%22,%22LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25.txt.js'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%.doc.exe%' or LOWER(&quot;Command&quot;) LIKE '%.docx.exe%' or LOWER(&quot;Command&quot;) LIKE '%.xls.exe%' or LOWER(&quot;Command&quot;) LIKE '%.xlsx.exe%' or LOWER(&quot;Command&quot;) LIKE '%.ppt.exe%' or LOWER(&quot;Command&quot;) LIKE '%.pptx.exe%' or LOWER(&quot;Command&quot;) LIKE '%.rtf.exe%' or LOWER(&quot;Command&quot;) LIKE '%.pdf.exe%' or LOWER(&quot;Command&quot;) LIKE '%.txt.exe%' or LOWER(&quot;Command&quot;) LIKE '%      .exe%' or LOWER(&quot;Command&quot;) LIKE '%______.exe%' or LOWER(&quot;Command&quot;) LIKE '%.doc.js%' or LOWER(&quot;Command&quot;) LIKE '%.docx.js%' or LOWER(&quot;Command&quot;) LIKE '%.xls.js%' or LOWER(&quot;Command&quot;) LIKE '%.xlsx.js%' or LOWER(&quot;Command&quot;) LIKE '%.ppt.js%' or LOWER(&quot;Command&quot;) LIKE '%.pptx.js%' or LOWER(&quot;Command&quot;) LIKE '%.rtf.js%' or LOWER(&quot;Command&quot;) LIKE '%.pdf.js%' or LOWER(&quot;Command&quot;) LIKE '%.txt.js%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25.doc.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.docx.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.xls.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.xlsx.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.ppt.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.pptx.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.rtf.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.pdf.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.txt.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%20%20%20%20%20%20.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25______.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.doc.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.docx.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.xls.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.xlsx.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.ppt.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.pptx.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.rtf.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.pdf.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.txt.js%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.doc.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.docx.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.xls.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.xlsx.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ppt.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pptx.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.rtf.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pdf.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.txt.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%20%20%20%20%20.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25______.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.doc.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.docx.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.xls.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.xlsx.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ppt.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pptx.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.rtf.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pdf.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.txt.js%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Masquerading",
+        "STEC": "T1036.007",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036.007",
+            "values": [
+              {
+                "id": "163502",
+                "bb": "Suspicious Double File Extension Process",
+                "uuid": "17f619bd-abe0-4296-a4cc-bdbecae35513",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.139322",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

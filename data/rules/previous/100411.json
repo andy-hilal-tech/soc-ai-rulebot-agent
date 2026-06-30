@@ -1,0 +1,52 @@
+{
+  "rule_doc_id": "100411",
+  "rule_id": "100411",
+  "uuid": "030e69b8-374c-4c10-b912-28f052430611",
+  "rule_name": "Compliance Events Become Offenses",
+  "object_type": "rule",
+  "group": "Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2023-11-22T14:53:07.732Z",
+  "modified": "2023-11-22T14:53:07.732Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Policy.Compliance Policy Violation</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "9013"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.410099",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

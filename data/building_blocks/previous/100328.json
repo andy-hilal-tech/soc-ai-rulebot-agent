@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100328",
+  "rule_id": "100328",
+  "uuid": "65ede0fd-20d7-4e01-a297-c759cbd1c1a5",
+  "rule_name": "BB:DeviceDefinition: Endpoint Protection Devices",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-03-12T11:51:00.054Z",
+  "modified": "2024-07-21T07:32:59.803Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Symantec System Center, McAfee ePolicy Orchestrator, Trend InterScan VirusWall, Trend Micro Office Scan, FireEye, VMware vShield, Microsoft Endpoint Protection, Trend Micro Deep Discovery Inspector, HBGary Active Defense, Kaspersky Security Center, ThreatGRID Malware Threat Intelligence Platform, IBM Security Trusteer Apex Advanced Malware Protection, Lastline Enterprise, Carbon Black, Trend Micro Deep Discovery Email Inspector, Cisco Firepower Management Center, CrowdStrike Falcon, Microsoft 365 Defender</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "87, 93, 100, 165, 214, 247, 253, 265, 271, 288, 303, 346, 378, 400, 401, 197, 407, 433"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.951682",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,263 @@
+{
+  "rule_doc_id": "160652",
+  "rule_id": "160652",
+  "uuid": "9415cf99-18dd-4372-b572-faeeab8807a8",
+  "rule_name": "Potential HyperStack Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-22T16:04:57.632Z",
+  "modified": "2024-07-21T12:38:48.141Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: HyperStack Filenames, BB:BehaviorDefinition: HyperStack Registry, BB:BehaviorDefinition: HyperStack Pipe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7, 4f6953df-ef24-4dc1-9256-4631da522672, b07f6eb1-e9ea-47a0-b7fd-e24683f00668"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+      "name": "BB:BehaviorDefinition: HyperStack Filenames"
+    },
+    {
+      "uuid": "4f6953df-ef24-4dc1-9256-4631da522672",
+      "name": "BB:BehaviorDefinition: HyperStack Registry"
+    },
+    {
+      "uuid": "b07f6eb1-e9ea-47a0-b7fd-e24683f00668",
+      "name": "BB:BehaviorDefinition: HyperStack Pipe"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "152852",
+                "bb": "BB:BehaviorDefinition: HyperStack Registry",
+                "uuid": "4f6953df-ef24-4dc1-9256-4631da522672",
+                "T": "EVENT"
+              },
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.002",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.002",
+            "values": [
+              {
+                "id": "152852",
+                "bb": "BB:BehaviorDefinition: HyperStack Registry",
+                "uuid": "4f6953df-ef24-4dc1-9256-4631da522672",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "Account Discovery",
+        "STEC": "T1087.001",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Encrypted Channel",
+        "STEC": "T1573.001",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1573",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1573.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "T1559",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1559",
+        "MAP_S": [
+          {
+            "name": "Execution - T1559",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Native API",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1106",
+        "MAP_S": [
+          {
+            "name": "Execution - Native API",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              },
+              {
+                "id": "146302",
+                "bb": "BB:BehaviorDefinition: HyperStack Pipe",
+                "uuid": "b07f6eb1-e9ea-47a0-b7fd-e24683f00668",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "160652",
+                "bb": "Potential HyperStack Activity",
+                "uuid": "9415cf99-18dd-4372-b572-faeeab8807a8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "Valid Accounts",
+        "STEC": "T1078.001",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1078",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1078.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.430334",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

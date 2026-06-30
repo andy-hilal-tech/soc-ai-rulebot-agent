@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103402",
+  "rule_id": "103402",
+  "uuid": "de9666ec-3c73-4527-b401-2dd38a038930",
+  "rule_name": "BB:VMware: User Account, Role and Permission Removal Activity",
+  "object_type": "building_block",
+  "group": "VMware Virtual Infrastructure",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2013-08-05T20:54:22.240Z",
+  "modified": "2024-02-19T16:40:37.369Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(54500003) Account Removed Event, (54500155) Permission Removed Event, (54500165) Role Removed Event, (78250041) Role Deleted, (78250049) User Deleted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "54500003,                                                                                                                                                                                                                                                                                                                                                                                                                54500155,                                                                                                                                                                                                                                                                                                                                                                                                                54500165,                                                                                                                                                                                                                                                                                                                                                                                                                78250041,                                                                                                                                                                                                                                                                                                                                                                                                                78250049"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.030508",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

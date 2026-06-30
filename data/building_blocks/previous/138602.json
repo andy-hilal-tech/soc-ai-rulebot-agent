@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "138602",
+  "rule_id": "138602",
+  "uuid": "e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb",
+  "rule_name": "BB:BehaviorDefinition: Process Killed",
+  "object_type": "building_block",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-29T13:45:39.017Z",
+  "modified": "2024-07-21T10:28:48.870Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Architecture (custom) is not N/A, Call Type (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ArchitectureNENA$_NULL_$Call TypeNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Architecture&quot; IN ('40000003', '40000028') AND &quot;Call Type&quot; = '37') OR (&quot;Architecture&quot; = 'c000003e' AND &quot;Call Type&quot; = '62') OR (&quot;Architecture&quot; = 'c00000b7' AND &quot;Call Type&quot; = '129')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Architecture%22%20IN%20('40000003',%20'40000028')%20AND%20%22Call%20Type%22%20%3D%20'37')%20OR%20(%22Architecture%22%20%3D%20'c000003e'%20AND%20%22Call%20Type%22%20%3D%20'62')%20OR%20(%22Architecture%22%20%3D%20'c00000b7'%20AND%20%22Call%20Type%22%20%3D%20'129')|%5B%22(%5C%22Architecture%5C%22%20IN%20('40000003',%20'40000028')%20AND%20%5C%22Call%20Type%5C%22%20%3D%20'37')%20OR%20(%5C%22Architecture%5C%22%20%3D%20'c000003e'%20AND%20%5C%22Call%20Type%5C%22%20%3D%20'62')%20OR%20(%5C%22Architecture%5C%22%20%3D%20'c00000b7'%20AND%20%5C%22Call%20Type%5C%22%20%3D%20'129')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.001",
+            "values": [
+              {
+                "id": "138602",
+                "bb": "BB:BehaviorDefinition: Process Killed",
+                "uuid": "e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.452541",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

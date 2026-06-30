@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162237",
+  "rule_id": "162237",
+  "uuid": "52642bee-3ce9-4074-b590-7abb1bfc32a3",
+  "rule_name": "BITS Transfer Job Download From Direct IP",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:19:00.714Z",
+  "modified": "2024-08-04T08:19:00.713Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=16403 AND (LOWER(UTF8(payload)) LIKE '%http://1%' OR LOWER(UTF8(payload)) LIKE '%http://2%' OR LOWER(UTF8(payload)) LIKE '%http://3%' OR LOWER(UTF8(payload)) LIKE '%http://4%' OR LOWER(UTF8(payload)) LIKE '%http://5%' OR LOWER(UTF8(payload)) LIKE '%http://6%' OR LOWER(UTF8(payload)) LIKE '%http://7%' OR LOWER(UTF8(payload)) LIKE '%http://8%' OR LOWER(UTF8(payload)) LIKE '%http://9%' OR LOWER(UTF8(payload)) LIKE '%https://1%' OR LOWER(UTF8(payload)) LIKE '%https://2%' OR LOWER(UTF8(payload)) LIKE '%https://3%' OR LOWER(UTF8(payload)) LIKE '%https://4%' OR LOWER(UTF8(payload)) LIKE '%https://5%' OR LOWER(UTF8(payload)) LIKE '%https://6%' OR LOWER(UTF8(payload)) LIKE '%https://7%' OR LOWER(UTF8(payload)) LIKE '%https://8%' OR LOWER(UTF8(payload)) LIKE '%https://9%')) AND (NOT(((LOWER(UTF8(payload)) LIKE '%://10.%' OR LOWER(UTF8(payload)) LIKE '%://192.168.%' OR LOWER(UTF8(payload)) LIKE '%://172.16.%' OR LOWER(UTF8(payload)) LIKE '%://172.17.%' OR LOWER(UTF8(payload)) LIKE '%://172.18.%' OR LOWER(UTF8(payload)) LIKE '%://172.19.%' OR LOWER(UTF8(payload)) LIKE '%://172.20.%' OR LOWER(UTF8(payload)) LIKE '%://172.21.%' OR LOWER(UTF8(payload)) LIKE '%://172.22.%' OR LOWER(UTF8(payload)) LIKE '%://172.23.%' OR LOWER(UTF8(payload)) LIKE '%://172.24.%' OR LOWER(UTF8(payload)) LIKE '%://172.25.%' OR LOWER(UTF8(payload)) LIKE '%://172.26.%' OR LOWER(UTF8(payload)) LIKE '%://172.27.%' OR LOWER(UTF8(payload)) LIKE '%://172.28.%' OR LOWER(UTF8(payload)) LIKE '%://172.29.%' OR LOWER(UTF8(payload)) LIKE '%://172.30.%' OR LOWER(UTF8(payload)) LIKE '%://172.31.%' OR LOWER(UTF8(payload)) LIKE '%://127.%' OR LOWER(UTF8(payload)) LIKE '%://169.254.%') OR (LOWER(UTF8(payload)) LIKE '%https://7-%' OR LOWER(UTF8(payload)) LIKE '%http://7-%'))))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%3D16403%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//1%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//3%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//5%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//6%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//7%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//8%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//9%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//1%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//3%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//5%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//6%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//7%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//8%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//9%25%27%29%29%20AND%20%28NOT%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//10.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//192.168.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.16.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.17.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.18.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.19.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.20.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.21.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.22.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.23.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.24.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.25.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.26.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.27.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.28.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.29.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.30.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.31.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//127.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//169.254.%25%27%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//7-%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//7-%25%27%29%29%29%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%3D16403%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//1%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//3%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//5%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//6%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//7%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//8%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//9%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//1%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//3%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//5%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//6%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//7%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//8%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//9%25%27%29%29%20AND%20%28NOT%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//10.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//192.168.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.16.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.17.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.18.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.19.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.20.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.21.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.22.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.23.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.24.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.25.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.26.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.27.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.28.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.29.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.30.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//172.31.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//127.%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%3A//169.254.%25%27%29%20OR%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25https%3A//7-%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25http%3A//7-%25%27%29%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: BITS Transfer Job Download From Direct IP SIGMA Description: Detects a BITS transfer job downloading file(s) from a direct IP address.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "BITS Transfer Job Download From Direct IP"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.571134",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

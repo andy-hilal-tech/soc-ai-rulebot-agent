@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "165007",
+  "rule_id": "165007",
+  "uuid": "071bf242-e31d-489d-8098-f9a5d07ad15e",
+  "rule_name": "Failed Login Attempts to Critical Assets",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-06T13:08:59.280Z",
+  "modified": "2025-04-06T15:38:59.897Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND &quot;Event ID&quot;=4625</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4625|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4625%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "1",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>WindowsAuthServer @ H360-DC2, WindowsAuthServer @ H360-DC3, WindowsAuthServer @ H360-TALLY, WindowsAuthServer @ H360FS, WindowsAuthServer @ SRV-APP-H360</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "3776, 4065, 4067, 3733, 3775"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Amelia - Cybersecurity Analyst (ChatGPT) SIGMA Title: Failed Login Attempts to Critical Machine SIGMA Description: Detects multiple failed login attempts which may indicate a brute-force attack or probing.  False positives: - User mistypes - Expired credentials  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Failed Login Attempts to Critical Machine"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.200697",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

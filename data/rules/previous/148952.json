@@ -1,0 +1,127 @@
+{
+  "rule_doc_id": "148952",
+  "rule_id": "148952",
+  "uuid": "1f159910-4c25-4592-8df1-c29ddd1c7079",
+  "rule_name": "Potential Security Software Discovery",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-17T15:14:05.095Z",
+  "modified": "2024-07-21T12:38:24.171Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Security Software Discovery - Powershell, BB:BehaviorDefinition: Security Software Discovery - Linux, BB:BehaviorDefinition: Discovery Via Default Driver Altitude - Sysmon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "b90c56ec-2669-4736-9d75-9f11650f9ee3, 5f492d3e-a5ca-4760-acba-7d209e700ca0, a9703b50-2544-4f40-bb50-25addb483d2d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "b90c56ec-2669-4736-9d75-9f11650f9ee3",
+      "name": "BB:BehaviorDefinition: Security Software Discovery - Powershell"
+    },
+    {
+      "uuid": "5f492d3e-a5ca-4760-acba-7d209e700ca0",
+      "name": "BB:BehaviorDefinition: Security Software Discovery - Linux"
+    },
+    {
+      "uuid": "a9703b50-2544-4f40-bb50-25addb483d2d",
+      "name": "BB:BehaviorDefinition: Discovery Via Default Driver Altitude - Sysmon"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Software Discovery",
+        "STEC": "T1518.001",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1518",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1518.001",
+            "values": [
+              {
+                "id": "148952",
+                "bb": "Potential Security Software Discovery",
+                "uuid": "1f159910-4c25-4592-8df1-c29ddd1c7079",
+                "T": "EVENT"
+              },
+              {
+                "id": "149002",
+                "bb": "BB:BehaviorDefinition: Security Software Discovery - Powershell",
+                "uuid": "b90c56ec-2669-4736-9d75-9f11650f9ee3",
+                "T": "EVENT"
+              },
+              {
+                "id": "149052",
+                "bb": "BB:BehaviorDefinition: Security Software Discovery - Linux",
+                "uuid": "5f492d3e-a5ca-4760-acba-7d209e700ca0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1083",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1083",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1083",
+            "values": [
+              {
+                "id": "149102",
+                "bb": "BB:BehaviorDefinition: Discovery Via Default Driver Altitude - Sysmon",
+                "uuid": "a9703b50-2544-4f40-bb50-25addb483d2d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.072463",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

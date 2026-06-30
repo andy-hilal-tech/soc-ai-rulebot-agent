@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "100178",
+  "rule_id": "100178",
+  "uuid": "SYSTEM-1385",
+  "rule_name": "BB:FalsePositive: Proxy Server False Positive Categories",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T05:49:02.402Z",
+  "modified": "2023-10-30T02:20:02.437Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Proxy Servers, BB:HostReference: Proxy Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1222, 5eed76c4-d314-4008-88a9-7088c37cf424"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1202, SYSTEM-1179"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1222",
+      "name": "BB:HostDefinition: Proxy Servers"
+    },
+    {
+      "uuid": "5eed76c4-d314-4008-88a9-7088c37cf424",
+      "name": "BB:HostReference: Proxy Servers"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.761038",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

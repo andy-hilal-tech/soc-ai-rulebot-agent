@@ -1,0 +1,78 @@
+{
+  "rule_doc_id": "100221",
+  "rule_id": "100221",
+  "uuid": "SYSTEM-1008",
+  "rule_name": "Destination Asset Weight is Low",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:33:48.895Z",
+  "modified": "2023-10-30T02:20:04.784Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "0",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>destination</a> asset has a weight <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>4</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "lt"
+            },
+            {
+              "id": "2",
+              "value": "4"
+            },
+            {
+              "id": "3",
+              "value": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "false",
+        "offenseMapping": "0",
+        "drop": "false"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "2",
+            "operation": "decRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance has been decreased by 2 because the destination network weight is low."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.299038",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "158102",
+  "rule_id": "158102",
+  "uuid": "2354cce4-54e9-4146-b0e8-99c37626bd18",
+  "rule_name": "Symlink to passwd Created",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-17T13:44:51.047Z",
+  "modified": "2024-07-21T12:38:21.546Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>&quot;Command&quot; LIKE '%ln -s -f /etc/passwd%' OR &quot;Command&quot; LIKE '%ln -s /etc/passwd%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Command%22%20LIKE%20'%25ln%20-s%20-f%20%2Fetc%2Fpasswd%25'%20OR%20%22Command%22%20LIKE%20'%25ln%20-s%20%2Fetc%2Fpasswd%25'|%5B%22%5C%22Command%5C%22%20LIKE%20'%25ln%20-s%20-f%20%2Fetc%2Fpasswd%25'%20OR%20%5C%22Command%5C%22%20LIKE%20'%25ln%20-s%20%2Fetc%2Fpasswd%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.001",
+            "values": [
+              {
+                "id": "158102",
+                "bb": "Symlink to passwd Created",
+                "uuid": "2354cce4-54e9-4146-b0e8-99c37626bd18",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.336222",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

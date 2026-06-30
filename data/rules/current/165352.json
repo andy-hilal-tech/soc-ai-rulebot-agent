@@ -134,7 +134,16 @@
       "name": "BB:CategoryDefinition: Object Access Events"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "m",
+        "intervalCount": "15",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "undefined": [
       [
@@ -185,6 +194,6 @@
       ]
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:36.343077",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:39.244541",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

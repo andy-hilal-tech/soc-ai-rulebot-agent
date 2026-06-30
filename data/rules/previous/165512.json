@@ -1,0 +1,123 @@
+{
+  "rule_doc_id": "165512",
+  "rule_id": "165512",
+  "uuid": "3ceefb52-85f2-483c-8168-18bfc7a44b24",
+  "rule_name": "MSSP - SW - CAN - 01 - M - Multiple Instances are Detected from Different Source IPs within a Short Time period",
+  "object_type": "rule",
+  "group": "Switches, SW - CISCO Aironet",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-29T13:02:27.495Z",
+  "modified": "2026-04-29T13:03:50.157Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Cisco Aironet</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "182"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(47500074) Interface power granted, (47500073) Interface Power detected</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "47500074, 47500073"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>7</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Log Source Type</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Interface_CAN (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "7"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "deviceType"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Interface_CAN"
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - SW - CAN - 01 - M - Multiple Instances are Detected from Different Source IPs within a Short Time period"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - SW - CAN - 01 - M - Multiple Instances are Detected from Different Source IPs within a Short Time period"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.468136",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

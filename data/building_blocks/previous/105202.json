@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "105202",
+  "rule_id": "105202",
+  "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+  "rule_name": "BB:UBA : URL Category Filter",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-03-22T15:26:05.370Z",
+  "modified": "2024-02-19T16:41:09.387Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Blue Coat SG Appliance, Cisco IronPort, McAfee Web Gateway, Check Point, Palo Alto PA Series, Forcepoint V Series, Fortinet FortiGate Security Gateway</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "103, 179, 220, 3, 206, 198, 73"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Web Category (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Web CategoryNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.046249",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

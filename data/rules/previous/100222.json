@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "100222",
+  "rule_id": "100222",
+  "uuid": "SYSTEM-1011",
+  "rule_name": "Destination Asset Weight is Medium",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:34:17.242Z",
+  "modified": "2023-10-30T02:19:59.565Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "0",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>destination</a> asset has a weight <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>7</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "lt"
+            },
+            {
+              "id": "2",
+              "value": "7"
+            },
+            {
+              "id": "3",
+              "value": "target"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "1",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>destination</a> asset has a weight <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>3</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "3"
+            },
+            {
+              "id": "3",
+              "value": "target"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "false",
+        "offenseMapping": "0",
+        "drop": "false"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "1",
+            "operation": "incRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance has been increased by 1 because the destination network weight is medium."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.299038",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

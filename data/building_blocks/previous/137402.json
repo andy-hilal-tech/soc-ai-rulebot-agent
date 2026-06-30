@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "137402",
+  "rule_id": "137402",
+  "uuid": "19712f5f-1817-4f55-b268-4af14cbbccd7",
+  "rule_name": "BB:BehaviorDefinition: Admin Privileges Added (Unix)",
+  "object_type": "building_block",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-23T12:39:57.390Z",
+  "modified": "2024-07-21T10:28:55.383Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "5",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"5\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Group Member Add Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3154"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Application (custom) is any of usermod</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "ApplicationEQanyusermod"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Group Name (custom) is any of sudo</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Group NameEQanysudo"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.003",
+            "values": [
+              {
+                "id": "137402",
+                "bb": "BB:BehaviorDefinition: Admin Privileges Added (Unix)",
+                "uuid": "19712f5f-1817-4f55-b268-4af14cbbccd7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.414739",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

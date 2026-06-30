@@ -59,7 +59,16 @@
       "name": "BB:CategoryDefinition: Successful Communication"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "m",
+        "intervalCount": "5",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Lateral Movement": [
       {
@@ -131,6 +140,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.672415",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.808090",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

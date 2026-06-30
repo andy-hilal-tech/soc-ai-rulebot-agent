@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "116252",
+  "rule_id": "116252",
+  "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+  "rule_name": "BB:DeviceDefinition: Virtualization",
+  "object_type": "building_block",
+  "group": "Virtualization, Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-11-20T15:35:14.188Z",
+  "modified": "2024-04-29T12:45:21.877Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>EMC VMWare, VMware vCenter, VMware vCloud Director, VMware vShield, IBM SmartCloud Orchestrator</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "210, 315, 305, 247, 366"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.157617",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

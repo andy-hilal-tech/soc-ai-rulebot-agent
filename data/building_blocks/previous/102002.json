@@ -1,0 +1,67 @@
+{
+  "rule_doc_id": "102002",
+  "rule_id": "102002",
+  "uuid": "5fc3b7bd-434a-420d-9612-983cf319ce84",
+  "rule_name": "BB:UBA : Unusual Times, Evening",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2016-06-16T14:29:02.360Z",
+  "modified": "2024-02-19T16:39:43.665Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Time_Test",
+            "uid": "0",
+            "id": "18"
+          },
+          "text": [
+            "when the flow(s) or event(s) occur <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>after</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>18:00</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "18:00"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Time_Test",
+            "uid": "1",
+            "id": "18"
+          },
+          "text": [
+            "when the flow(s) or event(s) occur <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>before</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>23:59</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "lt"
+            },
+            {
+              "id": "2",
+              "value": "23:59"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.015182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

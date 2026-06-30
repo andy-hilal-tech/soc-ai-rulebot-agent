@@ -1,0 +1,131 @@
+{
+  "rule_doc_id": "100322",
+  "rule_id": "100322",
+  "uuid": "SYSTEM-1595",
+  "rule_name": "Local L2R LDAP Server Scanner",
+  "object_type": "rule",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2006-05-05T07:09:22.422Z",
+  "modified": "2023-10-30T02:02:38.610Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:PortDefinition: LDAP Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1245"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "4",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a> with the same <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>59</a> <a href='javascript:editParameter(\"4\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"4\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"4\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1202, SYSTEM-1179"
+            },
+            {
+              "id": "2",
+              "value": "SourceIP"
+            },
+            {
+              "id": "3",
+              "value": "5"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "59"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "10"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1245",
+      "name": "BB:PortDefinition: LDAP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.393582",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

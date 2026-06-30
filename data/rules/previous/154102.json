@@ -1,0 +1,179 @@
+{
+  "rule_doc_id": "154102",
+  "rule_id": "154102",
+  "uuid": "8ed35582-d613-4ab5-8e03-b6cd0f00c19e",
+  "rule_name": "RDP Communication over Loopback Address",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-21T14:37:20.846Z",
+  "modified": "2024-07-21T12:38:50.973Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.Access Permitted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(sourceport==3389 and (str(destinationaddress) matches '127.*' or str(destinationaddress) matches '::1')) OR (destinationport == 3389 and (str(sourceaddress) matches '127.*' or str(sourceaddress) matches '::1'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(sourceport%3D%3D3389%20and%20(str(destinationaddress)%20matches%20'127.*'%20or%20str(destinationaddress)%20matches%20'%3A%3A1'))%20OR%20(destinationport%20%3D%3D%203389%20and%20(str(sourceaddress)%20matches%20'127.*'%20or%20str(sourceaddress)%20matches%20'%3A%3A1'))|%5B%22(sourceport%3D%3D3389%20and%20(str(destinationaddress)%20matches%20'127.*'%20or%20str(destinationaddress)%20matches%20'%3A%3A1'))%22,%22OR%22,%22(destinationport%20%3D%3D%203389%20and%20(str(sourceaddress)%20matches%20'127.*'%20or%20str(sourceaddress)%20matches%20'%3A%3A1'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Process Full Full Name&quot;) LIKE '%thor.exe' OR LOWER(&quot;Process Full Full Name&quot;) LIKE '%thor64.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Process%20Name%22)%20LIKE%20'%25thor.exe'%20OR%20LOWER(%22Process%20Name%22)%20LIKE%20'%25thor64.exe')|%5B%22(LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25thor.exe'%20OR%20LOWER(%5C%22Process%20Name%5C%22)%20LIKE%20'%25thor64.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Proxy",
+        "STEC": "T1090.001",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1090",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1090.001",
+            "values": [
+              {
+                "id": "154102",
+                "bb": "RDP Communication over Loopback Address",
+                "uuid": "8ed35582-d613-4ab5-8e03-b6cd0f00c19e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Proxy",
+        "STEC": "T1090.002",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1090",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1090.002",
+            "values": [
+              {
+                "id": "154102",
+                "bb": "RDP Communication over Loopback Address",
+                "uuid": "8ed35582-d613-4ab5-8e03-b6cd0f00c19e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.001",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.001",
+            "values": [
+              {
+                "id": "154102",
+                "bb": "RDP Communication over Loopback Address",
+                "uuid": "8ed35582-d613-4ab5-8e03-b6cd0f00c19e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.215278",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

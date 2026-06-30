@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "100084",
+  "rule_id": "100084",
+  "uuid": "SYSTEM-1432",
+  "rule_name": "Database Attempted Configuration Modification by a remote host",
+  "object_type": "rule",
+  "group": "Post-Intrusion Activity, Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2007-08-10T14:18:43.969Z",
+  "modified": "2023-10-30T02:02:40.395Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1374, 5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "Source_Test",
+            "uid": "1",
+            "id": "27"
+          },
+          "text": [
+            "when the source is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Successful Configuration Modification, System.Failed Configuration Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8017, 8024"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "300",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1374",
+      "name": "BB:HostDefinition: Database Servers"
+    },
+    {
+      "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+      "name": "BB:HostReference: Database Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.237392",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

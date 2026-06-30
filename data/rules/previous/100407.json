@@ -1,0 +1,77 @@
+{
+  "rule_doc_id": "100407",
+  "rule_id": "100407",
+  "uuid": "4b46d6cb-3781-466c-b2c4-8926ca4b3725",
+  "rule_name": "Treat Backdoor Trojans and Virus Events as Offenses",
+  "object_type": "rule",
+  "group": "Malware",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2023-11-22T14:52:50.630Z",
+  "modified": "2023-11-22T14:52:50.630Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Malware.Backdoor Detected, Malware.Trojan Detected, Malware.Virus Detected</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "6002, 6008, 6006"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "100407",
+                "bb": "Treat Backdoor Trojans and Virus Events as Offenses",
+                "uuid": "4b46d6cb-3781-466c-b2c4-8926ca4b3725",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.410099",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

@@ -1,0 +1,61 @@
+{
+  "rule_doc_id": "105802",
+  "rule_id": "105802",
+  "uuid": "9d30d366-5550-4fa2-9865-c92c90a8a241",
+  "rule_name": "BB:UBA : Remove Mailbox Permission Succeeded",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-08-13T13:47:20.371Z",
+  "modified": "2024-02-19T16:41:56.275Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Office 365</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "397"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(101250509) Remove MailboxPermission Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "101250509"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.062082",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

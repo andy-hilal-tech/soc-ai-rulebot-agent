@@ -1,0 +1,128 @@
+{
+  "rule_doc_id": "144002",
+  "rule_id": "144002",
+  "uuid": "b449fa62-b657-435d-8abf-13651c875a16",
+  "rule_name": "MITRE.LIN.T1005.RULE Data from Local System",
+  "object_type": "rule",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Linux Auditd Key (custom) is any of siem-data-from-local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Linux Auditd KeyEQanysiem-data-from-local"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Linux UID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>MITRE: Linux Users - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Linux UID"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "238"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "Data from Local System",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1005",
+        "MAP_S": [
+          {
+            "name": "Collection - Data from Local System",
+            "values": [
+              {
+                "id": "144002",
+                "bb": "MITRE.LIN.T1005.RULE Data from Local System",
+                "uuid": "b449fa62-b657-435d-8abf-13651c875a16",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.977346",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

@@ -1,0 +1,127 @@
+{
+  "rule_doc_id": "112902",
+  "rule_id": "112902",
+  "uuid": "01337e1e-0aab-44cc-95d1-bf6bc93752e7",
+  "rule_name": "Network Share Accessed from a Compromised Host",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-09-12T23:46:40.820Z",
+  "modified": "2024-02-19T16:49:26.899Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001108) Success Audit: A network share object was accessed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001108"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "3",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Source IP</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Compromised Hosts - IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "69"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>An Administrative share Has Been Accessed From a Compromised Machine</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "edb708c4-54ce-4a3c-a854-9c03a5e0e803"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "edb708c4-54ce-4a3c-a854-9c03a5e0e803",
+      "name": "Administrative Share Accessed from a Compromised Host"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.832161",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

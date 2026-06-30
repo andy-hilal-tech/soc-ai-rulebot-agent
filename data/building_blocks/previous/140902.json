@@ -1,0 +1,250 @@
+{
+  "rule_doc_id": "140902",
+  "rule_id": "140902",
+  "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+  "rule_name": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-03-30T18:39:50.562Z",
+  "modified": "2024-07-21T10:28:51.409Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Image Loaded from Mock System Directory, BB:CategoryDefinition: Elevated Process (Windows)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d11c5659-cf79-4df8-a4c5-f6c102dd321c, af9f1ad0-da96-412b-85f0-28a8c335700e"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "0",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Process ID (custom), Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Process ID, Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "category"
+            },
+            {
+              "id": "5",
+              "value": "2"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+      "name": "BB:BehaviorDefinition: Image Loaded from Mock System Directory"
+    },
+    {
+      "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+      "name": "BB:CategoryDefinition: Elevated Process (Windows)"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574",
+            "values": [
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.484856",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,164 @@
+{
+  "rule_doc_id": "131502",
+  "rule_id": "131502",
+  "uuid": "40d0d764-21c4-4118-8287-687255480900",
+  "rule_name": "Sensitive File Uploaded to a Publicly Accessible Folder",
+  "object_type": "rule",
+  "group": "Exfiltration",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-07-31T15:09:25.020Z",
+  "modified": "2024-07-21T09:43:21.360Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: Object Upload Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d82c4f1c-0b2e-424f-abe6-e34403436682"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Exfiltration: Files in Sensitive Directories</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "7e9d4fd7-2803-4952-ac24-c215b0888ee2"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "3",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>File Directory (custom), Storage Name (custom)</a> are contained in <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Publicly Accessible Folders - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "File Directory, Storage Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "196"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d82c4f1c-0b2e-424f-abe6-e34403436682",
+      "name": "BB:CategoryDefinition: Object Upload Events"
+    },
+    {
+      "uuid": "7e9d4fd7-2803-4952-ac24-c215b0888ee2",
+      "name": "BB:Exfiltration: Files in Sensitive Directories"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "Exfiltration Over Alternative Protocol",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1048",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - Exfiltration Over Alternative Protocol",
+            "values": [
+              {
+                "id": "131502",
+                "bb": "Sensitive File Uploaded to a Publicly Accessible Folder",
+                "uuid": "40d0d764-21c4-4118-8287-687255480900",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "File and Directory Permissions Modification",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - File and Directory Permissions Modification",
+            "values": [
+              {
+                "id": "131502",
+                "bb": "Sensitive File Uploaded to a Publicly Accessible Folder",
+                "uuid": "40d0d764-21c4-4118-8287-687255480900",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.549664",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

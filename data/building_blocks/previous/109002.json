@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109002",
+  "rule_id": "109002",
+  "uuid": "b336cfa0-5111-4d7a-b57d-abdcf05ce5fe",
+  "rule_name": "BB:UBA : File Transfer to Print",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-19T10:47:30.880Z",
+  "modified": "2024-02-19T16:44:53.579Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(11751042) File Print, (69000033) Print, (69000054) ADE Print Screen, (69000102) Print, (6501037) File Print - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "11751042,             69000033,             69000054,             69000102,             6501037"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

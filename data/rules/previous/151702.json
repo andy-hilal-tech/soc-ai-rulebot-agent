@@ -1,0 +1,160 @@
+{
+  "rule_doc_id": "151702",
+  "rule_id": "151702",
+  "uuid": "affaf7c8-51ab-47f5-b4f6-e64f568fe3cf",
+  "rule_name": "Service Registry Permissions Weakness Check",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-03-27T09:24:15.073Z",
+  "modified": "2024-07-21T12:38:39.003Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%get-acl%' AND LOWER(&quot;Command&quot;) LIKE '%REGISTRY::HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25get-acl%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25REGISTRY%3A%3AHKLM%5C%5CSYSTEM%5C%5CCurrentControlSet%5C%5CServices%5C%5C%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-acl%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25REGISTRY%3A%3AHKLM%5C%5C%5C%5CSYSTEM%5C%5C%5C%5CCurrentControlSet%5C%5C%5C%5CServices%5C%5C%5C%5C%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.011",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.011",
+            "values": [
+              {
+                "id": "151702",
+                "bb": "Service Registry Permissions Weakness Check",
+                "uuid": "affaf7c8-51ab-47f5-b4f6-e64f568fe3cf",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.011",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.011",
+            "values": [
+              {
+                "id": "151702",
+                "bb": "Service Registry Permissions Weakness Check",
+                "uuid": "affaf7c8-51ab-47f5-b4f6-e64f568fe3cf",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.011",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.011",
+            "values": [
+              {
+                "id": "151702",
+                "bb": "Service Registry Permissions Weakness Check",
+                "uuid": "affaf7c8-51ab-47f5-b4f6-e64f568fe3cf",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.151423",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,84 @@
+{
+  "rule_doc_id": "118102",
+  "rule_id": "118102",
+  "uuid": "9b015b6f-d277-476e-9d81-2068997eba5b",
+  "rule_name": "BB: AWS Cloud: API Request Has Been Denied",
+  "object_type": "building_block",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-07-25T14:29:58.093Z",
+  "modified": "2024-04-29T12:45:20.979Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "3",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Amazon AWS CloudTrail</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "347"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Error Code (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Error CodeNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Error Code (custom) is any of [AccessDenied or Client.UnauthorizedOperation]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Error CodeEQanyAccessDenied�Client.UnauthorizedOperation"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.189183",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

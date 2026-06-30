@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "117802",
+  "rule_id": "117802",
+  "uuid": "421bc201-f483-4719-806f-b94d4024149c",
+  "rule_name": "BB:CategoryDefinition: Virtual Machine Deleted",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-12-03T14:56:01.076Z",
+  "modified": "2024-04-29T12:45:21.311Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Deletion Attempt, Audit.Virtual Machine Deletion Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19098, 19099"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.189183",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

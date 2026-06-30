@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "157902",
+  "rule_id": "157902",
+  "uuid": "1e3d558e-a84f-4952-a1a4-9baf1ca8a5eb",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Script Execution From Temp Folder",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T14:18:55.061Z",
+  "modified": "2024-07-21T12:38:42.051Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [powershell.exe or pwsh.exe or mshta.exe or wscript.exe or cscript.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanypowershell.exe�pwsh.exe�mshta.exe�wscript.exe�cscript.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%\\windows\\temp%' or LOWER(&quot;Command&quot;) LIKE '%\\temporary internet%' or LOWER(&quot;Command&quot;) LIKE '%\\appdata\\local\\temp%' or LOWER(&quot;Command&quot;) LIKE '%\\appdata\\roaming\\temp%' or LOWER(&quot;Command&quot;) LIKE '%%temp%%' or LOWER(&quot;Command&quot;) LIKE '%%tmp%%' or LOWER(&quot;Command&quot;) LIKE '%%localappdata%\\temp%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25%5Cwindows%5Ctemp%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%5Ctemporary%20internet%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%5Cappdata%5Clocal%5Ctemp%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%5Cappdata%5Croaming%5Ctemp%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%25temp%25%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%25tmp%25%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%25localappdata%25%5Ctemp%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Ctemp%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Ctemporary%20internet%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5Clocal%5C%5Ctemp%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5Croaming%5C%5Ctemp%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%25temp%25%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%25tmp%25%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%25localappdata%25%5C%5Ctemp%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '% &gt;%' or LOWER(&quot;Command&quot;) LIKE '%out-file%' or LOWER(&quot;Command&quot;) LIKE '%convertto-json%' or LOWER(&quot;Command&quot;) LIKE '%-windowstyle hidden -verb runas%' or LOWER(&quot;Command&quot;) LIKE '%\\windows\\system32\\config\\systemprofile\\appdata\\local\\temp\\amazon\\ec2-windows\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25%20%3E%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25out-file%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25convertto-json%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25-windowstyle%20hidden%20-verb%20runas%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25%5Cwindows%5Csystem32%5Cconfig%5Csystemprofile%5Cappdata%5Clocal%5Ctemp%5Camazon%5Cec2-windows%5C%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%3E%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25out-file%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25convertto-json%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25-windowstyle%20hidden%20-verb%20runas%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cwindows%5C%5Csystem32%5C%5Cconfig%5C%5Csystemprofile%5C%5Cappdata%5C%5Clocal%5C%5Ctemp%5C%5Camazon%5C%5Cec2-windows%5C%5C%25'%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "157902",
+                "bb": "BB:BehaviorDefinition: Suspicious Script Execution From Temp Folder",
+                "uuid": "1e3d558e-a84f-4952-a1a4-9baf1ca8a5eb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.804574",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

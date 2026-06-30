@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "154252",
+  "rule_id": "154252",
+  "uuid": "78bf6d29-edd5-4bc5-9e0f-2c1561d7249d",
+  "rule_name": "Suspicious File Download Using Office Application",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-18T10:18:40.663Z",
+  "modified": "2024-07-21T12:38:43.011Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES '(powerpnt|winword|excel)\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20MATCHES%20'(powerpnt%7Cwinword%7Cexcel)%5C.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20MATCHES%20'(powerpnt%7Cwinword%7Cexcel)%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Command (custom) contains any of http</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanyhttp"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1202",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1202",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1202",
+            "values": [
+              {
+                "id": "154252",
+                "bb": "Suspicious File Download Using Office Application",
+                "uuid": "78bf6d29-edd5-4bc5-9e0f-2c1561d7249d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.215278",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

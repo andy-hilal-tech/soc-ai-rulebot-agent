@@ -1,0 +1,87 @@
+{
+  "rule_doc_id": "101102",
+  "rule_id": "101102",
+  "uuid": "406d04a7-a42c-42c5-85e7-3fb981565b4b",
+  "rule_name": "BB:UBA : Workstation Unlocked",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-10-11T11:22:20.454Z",
+  "modified": "2024-02-19T16:39:29.788Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000965) Success Audit: The workstation was unlocked</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000965"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.999126",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

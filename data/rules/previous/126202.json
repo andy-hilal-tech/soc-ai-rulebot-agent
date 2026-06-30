@@ -1,0 +1,119 @@
+{
+  "rule_doc_id": "126202",
+  "rule_id": "126202",
+  "uuid": "38d9c250-1617-423e-ae59-52a5d894d5bf",
+  "rule_name": "Command Execution in Critical Namespaces by Non-System User",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-11-06T19:47:36.490Z",
+  "modified": "2024-07-21T09:33:20.901Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:DeviceDefiniton: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Procedure/Trigger Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19009"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Username is not any of system:serviceaccount</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameNEQanysystem:serviceaccount"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Namespace (custom) is any of [kube-system or kube-public]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "NamespaceEQanykube-system�kube-public"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.368782",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

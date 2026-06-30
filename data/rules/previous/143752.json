@@ -1,0 +1,128 @@
+{
+  "rule_doc_id": "143752",
+  "rule_id": "143752",
+  "uuid": "31449fad-513a-46a1-934d-434384e2aa0e",
+  "rule_name": "MITRE.LIN.T1485.RULE Data Destruction",
+  "object_type": "rule",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Linux Auditd Key (custom) is any of siem-destruction</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Linux Auditd KeyEQanysiem-destruction"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Linux UID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>MITRE: Linux Users - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Linux UID"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "238"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "Data Destruction",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1485",
+        "MAP_S": [
+          {
+            "name": "Impact - Data Destruction",
+            "values": [
+              {
+                "id": "143752",
+                "bb": "MITRE.LIN.T1485.RULE Data Destruction",
+                "uuid": "31449fad-513a-46a1-934d-434384e2aa0e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.960587",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

@@ -1,0 +1,225 @@
+{
+  "rule_doc_id": "157802",
+  "rule_id": "157802",
+  "uuid": "43814329-979c-47b2-a52a-6dffcf66f25c",
+  "rule_name": "Potential Command and Scripting Interpreters",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-15T15:25:36.835Z",
+  "modified": "2024-07-21T12:38:23.115Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Obfuscation Character in Commandline, BB:BehaviorDefinition: Atlassian Confluence Spawning, BB:BehaviorDefinition: Suspicious Script Execution From Temp Folder, BB:BehaviorDefinition: Suspicious Loaders, BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder, BB:BehaviorDefinition: Script Interpreter Execution From Suspicious Folder</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "6db45d08-a78c-475d-9720-5a566da5c02e, 409f1e0c-de36-4a28-8dc8-f3d7348aed0f, 1e3d558e-a84f-4952-a1a4-9baf1ca8a5eb, e02eb310-67bf-4ff5-9633-13b5ba0d3bb8, 4ef2e038-d0ec-4888-86b0-ad5a80cedbae, 9e6152c5-9d26-4314-bdfa-a5bdb11fa91e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "6db45d08-a78c-475d-9720-5a566da5c02e",
+      "name": "BB:BehaviorDefinition: Suspicious Obfuscation Character in Commandline"
+    },
+    {
+      "uuid": "409f1e0c-de36-4a28-8dc8-f3d7348aed0f",
+      "name": "BB:BehaviorDefinition: Atlassian Confluence Spawning"
+    },
+    {
+      "uuid": "1e3d558e-a84f-4952-a1a4-9baf1ca8a5eb",
+      "name": "BB:BehaviorDefinition: Suspicious Script Execution From Temp Folder"
+    },
+    {
+      "uuid": "e02eb310-67bf-4ff5-9633-13b5ba0d3bb8",
+      "name": "BB:BehaviorDefinition: Suspicious Loaders"
+    },
+    {
+      "uuid": "4ef2e038-d0ec-4888-86b0-ad5a80cedbae",
+      "name": "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder"
+    },
+    {
+      "uuid": "9e6152c5-9d26-4314-bdfa-a5bdb11fa91e",
+      "name": "BB:BehaviorDefinition: Script Interpreter Execution From Suspicious Folder"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "157802",
+                "bb": "Potential Command and Scripting Interpreters",
+                "uuid": "43814329-979c-47b2-a52a-6dffcf66f25c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "153702",
+                "bb": "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder",
+                "uuid": "4ef2e038-d0ec-4888-86b0-ad5a80cedbae",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "157902",
+                "bb": "BB:BehaviorDefinition: Suspicious Script Execution From Temp Folder",
+                "uuid": "1e3d558e-a84f-4952-a1a4-9baf1ca8a5eb",
+                "T": "EVENT"
+              },
+              {
+                "id": "157952",
+                "bb": "BB:BehaviorDefinition: Script Interpreter Execution From Suspicious Folder",
+                "uuid": "9e6152c5-9d26-4314-bdfa-a5bdb11fa91e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "JavaScript",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - JavaScript",
+            "values": [
+              {
+                "id": "157952",
+                "bb": "BB:BehaviorDefinition: Script Interpreter Execution From Suspicious Folder",
+                "uuid": "9e6152c5-9d26-4314-bdfa-a5bdb11fa91e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "150352",
+                "bb": "BB:BehaviorDefinition: Atlassian Confluence Spawning",
+                "uuid": "409f1e0c-de36-4a28-8dc8-f3d7348aed0f",
+                "T": "EVENT"
+              },
+              {
+                "id": "154052",
+                "bb": "BB:BehaviorDefinition: Suspicious Loaders",
+                "uuid": "e02eb310-67bf-4ff5-9633-13b5ba0d3bb8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Obfuscated Files or Information",
+        "STEC": "T1027.010",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1027",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1027.010",
+            "values": [
+              {
+                "id": "157852",
+                "bb": "BB:BehaviorDefinition: Suspicious Obfuscation Character in Commandline",
+                "uuid": "6db45d08-a78c-475d-9720-5a566da5c02e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.326157",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

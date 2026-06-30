@@ -1,0 +1,164 @@
+{
+  "rule_doc_id": "139052",
+  "rule_id": "139052",
+  "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+  "rule_name": "Potential Component Object Model (COM) Hijacking",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-04-30T16:39:25.239Z",
+  "modified": "2024-07-21T10:28:48.801Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Component Object Model Hijacking, BB:BehaviorDefinition: Component Object Model Hijacking Rules</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "b6091a00-5a16-4987-9422-175bb697ce94, 85cf8a29-7a67-4826-99fd-a9558987e599"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+      "name": "BB:BehaviorDefinition: Component Object Model Hijacking"
+    },
+    {
+      "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+      "name": "BB:BehaviorDefinition: Component Object Model Hijacking Rules"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.015",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.015",
+            "values": [
+              {
+                "id": "139052",
+                "bb": "Potential Component Object Model (COM) Hijacking",
+                "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+                "T": "EVENT"
+              },
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1546",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546",
+            "values": [
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.003",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.003",
+            "values": [
+              {
+                "id": "139052",
+                "bb": "Potential Component Object Model (COM) Hijacking",
+                "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+                "T": "EVENT"
+              },
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.796709",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

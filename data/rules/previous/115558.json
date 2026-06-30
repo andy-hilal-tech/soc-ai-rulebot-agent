@@ -1,0 +1,98 @@
+{
+  "rule_doc_id": "115558",
+  "rule_id": "115558",
+  "uuid": "1418583d-b3e0-48dd-a466-c4f5662adfb9",
+  "rule_name": "Process Baselining: Process Hash",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Add to a Reference Set",
+  "created": "2024-02-19T17:08:07.847Z",
+  "modified": "2024-02-19T17:08:07.847Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5001828) Process Create</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001828"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>File Hash (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File HashNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "File Hash",
+            "id": "73",
+            "type": "ALNIC",
+            "name": "Profiled Process Hashes"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.949110",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

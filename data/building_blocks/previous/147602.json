@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "147602",
+  "rule_id": "147602",
+  "uuid": "de3ee44f-1968-4364-9690-01ba4803946f",
+  "rule_name": "BB:BehaviorDefinition: Abuse of Print Executable",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T13:40:59.281Z",
+  "modified": "2024-07-21T12:38:24.567Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of print.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyprint.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE 'print%' and LOWER(&quot;Command&quot;) LIKE '%/d%' and LOWER(&quot;Command&quot;) LIKE '%.exe%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'print%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%2Fd%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25.exe%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'print%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%2Fd%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.exe%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%print.exe%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25print.exe%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25print.exe%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Ingress Tool Transfer",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1105",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Ingress Tool Transfer",
+            "values": [
+              {
+                "id": "147602",
+                "bb": "BB:BehaviorDefinition: Abuse of Print Executable",
+                "uuid": "de3ee44f-1968-4364-9690-01ba4803946f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.620592",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

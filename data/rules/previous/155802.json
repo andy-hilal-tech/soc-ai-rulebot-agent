@@ -1,0 +1,273 @@
+{
+  "rule_doc_id": "155802",
+  "rule_id": "155802",
+  "uuid": "b319afa8-03ad-4e0e-928e-fbafc47f0cf7",
+  "rule_name": "File and Directory Permission Modification after Download",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-15T14:57:54.051Z",
+  "modified": "2024-07-21T12:38:47.729Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Endpoint Devices, BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "394d38b7-9043-454a-a50a-12358b91838e, 73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "1",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:CategoryDefinition: File Permission Changed</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"1\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Download Utilities in Events, BB:BehaviorDefinition: PowerShell File Download Activity, BB:CategoryDefinition: Object Download Events</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "5d2969b1-7da9-4034-a358-428b8d3f74fa, e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67, 2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "394d38b7-9043-454a-a50a-12358b91838e",
+      "name": "BB:DeviceDefinition: Endpoint Devices"
+    },
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+      "name": "BB:CategoryDefinition: File Permission Changed"
+    },
+    {
+      "uuid": "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+      "name": "BB:BehaviorDefinition: Download Utilities in Events"
+    },
+    {
+      "uuid": "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67",
+      "name": "BB:BehaviorDefinition: PowerShell File Download Activity"
+    },
+    {
+      "uuid": "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6",
+      "name": "BB:CategoryDefinition: Object Download Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.008",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.008",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1222",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              },
+              {
+                "id": "155802",
+                "bb": "File and Directory Permission Modification after Download",
+                "uuid": "b319afa8-03ad-4e0e-928e-fbafc47f0cf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1140",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1140",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1140",
+            "values": [
+              {
+                "id": "138052",
+                "bb": "BB:BehaviorDefinition: PowerShell File Download Activity",
+                "uuid": "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67",
+                "T": "EVENT"
+              },
+              {
+                "id": "137252",
+                "bb": "BB:BehaviorDefinition: Download Utilities in Events",
+                "uuid": "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "File and Directory Permissions Modification",
+        "STEC": "T1222.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222.002",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Ingress Tool Transfer",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1105",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Ingress Tool Transfer",
+            "values": [
+              {
+                "id": "155802",
+                "bb": "File and Directory Permission Modification after Download",
+                "uuid": "b319afa8-03ad-4e0e-928e-fbafc47f0cf7",
+                "T": "EVENT"
+              },
+              {
+                "id": "118502",
+                "bb": "BB:CategoryDefinition: Object Download Events",
+                "uuid": "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6",
+                "T": "EVENT"
+              },
+              {
+                "id": "137252",
+                "bb": "BB:BehaviorDefinition: Download Utilities in Events",
+                "uuid": "5d2969b1-7da9-4034-a358-428b8d3f74fa",
+                "T": "EVENT"
+              },
+              {
+                "id": "138052",
+                "bb": "BB:BehaviorDefinition: PowerShell File Download Activity",
+                "uuid": "e3e1ad0a-5bb2-4dcd-9665-65eabcfccd67",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.265303",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

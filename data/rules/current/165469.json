@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-03-15T07:04:59.059Z",
-  "modified": "2026-06-06T14:54:53.697Z",
+  "modified": "2026-06-24T12:46:42.638Z",
   "logic": [
     {
       "test": [
@@ -102,6 +102,13 @@
         "forceOffenseCreation": "true",
         "offenseMapping": "85"
       },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - OS - MS - 15 - H - Kerberos policy was changed"
+          ]
+        }
+      ],
       "offenseAnnotation": [
         {
           "formatString": [
@@ -112,8 +119,17 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "SUBJECTUSERNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.418474",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.305767",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109102",
+  "rule_id": "109102",
+  "uuid": "12567cb0-ef0d-44d7-a8a3-302238e1a53e",
+  "rule_name": "BB:UBA : File Transfer to CD",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-19T10:43:38.990Z",
+  "modified": "2024-02-19T16:44:53.633Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(69000010) CD Burn, (69000117) CD Burn, (69000059) CD Burn</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "69000010,             69000117,             69000059"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

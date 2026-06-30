@@ -1,0 +1,130 @@
+{
+  "rule_doc_id": "124419",
+  "rule_id": "124419",
+  "uuid": "77d7f6e7-cd3a-4be4-aacb-18876fdca5d6",
+  "rule_name": "UBA : Detect IOCs For Locky",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-08T09:28:26.023Z",
+  "modified": "2024-07-08T09:28:26.023Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c18f0605-67d5-4100-8710-885ca7a393f7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Detect Locky Using IP, BB:UBA : Detect Locky Using URL</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "a8ed072a-f9f2-49ec-83a0-a7029fc3f2f0, f579d0d6-1e6a-4f5b-b840-9450e33c71ec"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24006",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500549",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=10",
+            "name": "UBA : Detect IOCs For Locky"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+      "name": "BB:UBA : Common Log Source Filters"
+    },
+    {
+      "uuid": "a8ed072a-f9f2-49ec-83a0-a7029fc3f2f0",
+      "name": "BB:UBA : Detect Locky Using IP"
+    },
+    {
+      "uuid": "f579d0d6-1e6a-4f5b-b840-9450e33c71ec",
+      "name": "BB:UBA : Detect Locky Using URL"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "None",
+          "STEC": "None",
+          "TAC": "Execution",
+          "MAP_C": "medium",
+          "MAP_EN": true,
+          "TEC_ID": "None",
+          "MAP_S": [
+            {
+              "name": "Execution - None",
+              "values": [
+                {
+                  "id": "124419",
+                  "bb": "UBA : Detect IOCs For Locky",
+                  "uuid": "77d7f6e7-cd3a-4be4-aacb-18876fdca5d6",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.271577",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

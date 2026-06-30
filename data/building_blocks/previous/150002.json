@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "150002",
+  "rule_id": "150002",
+  "uuid": "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1",
+  "rule_name": "BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T18:35:05.548Z",
+  "modified": "2024-07-21T12:38:45.146Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% /c %' and LOWER(&quot;Command&quot;) LIKE '%curl %' and LOWER(&quot;Command&quot;) LIKE '%http%' and LOWER(&quot;Command&quot;) LIKE '%-o%' and LOWER(&quot;Command&quot;) LIKE '%&amp;%') or (LOWER(&quot;Command&quot;) LIKE '%\\syncappvpublishingserver.vbs%' and LOWER(&quot;Command&quot;) LIKE '%;%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25%20%2Fc%20%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25curl%20%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25http%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25-o%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%26%25')%20or%20(LOWER(%22Command%22)%20LIKE%20'%25%5Csyncappvpublishingserver.vbs%25'%20and%20LOWER(%22Command%22)%20LIKE%20'%25%3B%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Fc%20%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25curl%20%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25http%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25-o%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%26%25')%20or%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Csyncappvpublishingserver.vbs%25'%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%3B%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "150002",
+                "bb": "BB:BehaviorDefinition: Curl Start Combination and VBS Execute Arbitrary PowerShell Code",
+                "uuid": "3c3d2ae4-a44c-45da-8930-ae17d17c7ad1",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.674438",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

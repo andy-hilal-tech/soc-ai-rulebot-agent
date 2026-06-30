@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100169",
+  "rule_id": "100169",
+  "uuid": "SYSTEM-1389",
+  "rule_name": "BB:FalsePositive: FTP Server False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T05:57:46.995Z",
+  "modified": "2023-10-30T02:02:38.956Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: FTP Servers, BB:HostReference: FTP Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1391, 042d16a5-8e51-4170-bdf0-61ff233abce4"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6500120) Custom User 9 - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500120"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1391",
+      "name": "BB:HostDefinition: FTP Servers"
+    },
+    {
+      "uuid": "042d16a5-8e51-4170-bdf0-61ff233abce4",
+      "name": "BB:HostReference: FTP Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.736773",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

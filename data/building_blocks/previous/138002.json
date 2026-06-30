@@ -1,0 +1,198 @@
+{
+  "rule_doc_id": "138002",
+  "rule_id": "138002",
+  "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+  "rule_name": "BB:CategoryDefinition: File Permission Changed",
+  "object_type": "building_block",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-28T15:41:44.207Z",
+  "modified": "2024-07-21T12:38:53.578Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Audit ID (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Audit IDNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Call Type (custom) is 268</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Call TypeEQ268"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Process Name (custom) is any of chmod</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanychmod"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.008",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.008",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1222",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "File and Directory Permissions Modification",
+        "STEC": "T1222.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222.002",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.443402",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "123202",
+  "rule_id": "123202",
+  "uuid": "SYSTEM-1256",
+  "rule_name": "BB:NetworkDefinition: Undefined IP Space",
+  "object_type": "building_block",
+  "group": "Network Definition, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-09T20:28:10.908Z",
+  "modified": "2024-06-27T13:19:24.709Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EitherHost_Test",
+            "uid": "1",
+            "id": "12"
+          },
+          "text": [
+            "when either the source or destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.252418",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

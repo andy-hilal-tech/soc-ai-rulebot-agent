@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "151802",
+  "rule_id": "151802",
+  "uuid": "482bbcd1-17cc-438b-923a-464e110dea9e",
+  "rule_name": "BB:BehaviorDefinition: Scheduled Cron Task",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T17:42:39.586Z",
+  "modified": "2024-07-21T12:38:34.417Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Attempt, System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19252, 8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [sh or bash or zsh]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanysh�bash�zsh"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Command&quot; ILIKE '%crontab &ndash;l%' AND &quot;Command&quot; ILIKE '%egrep -v &lsquo;^(#|$)&rsquo;%' AND &quot;Command&quot; ILIKE '%/.Library/SystemServices/updateSystem%') OR (&quot;Command Arguments&quot; ILIKE '%crontab &ndash;l%' AND &quot;Command Arguments&quot; ILIKE '%egrep -v &lsquo;^(#|$)&rsquo;%' AND &quot;Command Arguments&quot; ILIKE '%/.Library/SystemServices/updateSystem%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Command%22%20ILIKE%20'%25crontab%20%E2%80%93l%25'%20AND%20%22Command%22%20ILIKE%20'%25egrep%20-v%20%E2%80%98%5E(%23%7C%24)%E2%80%99%25'%20AND%20%22Command%22%20ILIKE%20'%25%2F.Library%2FSystemServices%2FupdateSystem%25')%20OR%20(%22Command%20Arguments%22%20ILIKE%20'%25crontab%20%E2%80%93l%25'%20AND%20%22Command%20Arguments%22%20ILIKE%20'%25egrep%20-v%20%E2%80%98%5E(%23%7C%24)%E2%80%99%25'%20AND%20%22Command%20Arguments%22%20ILIKE%20'%25%2F.Library%2FSystemServices%2FupdateSystem%25')|%5B%22(%5C%22Command%5C%22%20ILIKE%20'%25crontab%20%E2%80%93l%25'%20AND%20%5C%22Command%5C%22%20ILIKE%20'%25egrep%20-v%20%E2%80%98%5E(%23%7C%24)%E2%80%99%25'%20AND%20%5C%22Command%5C%22%20ILIKE%20'%25%2F.Library%2FSystemServices%2FupdateSystem%25')%20OR%20(%5C%22Command%20Arguments%5C%22%20ILIKE%20'%25crontab%20%E2%80%93l%25'%20AND%20%5C%22Command%20Arguments%5C%22%20ILIKE%20'%25egrep%20-v%20%E2%80%98%5E(%23%7C%24)%E2%80%99%25'%20AND%20%5C%22Command%20Arguments%5C%22%20ILIKE%20'%25%2F.Library%2FSystemServices%2FupdateSystem%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.003",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.003",
+            "values": [
+              {
+                "id": "151802",
+                "bb": "BB:BehaviorDefinition: Scheduled Cron Task",
+                "uuid": "482bbcd1-17cc-438b-923a-464e110dea9e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.698267",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

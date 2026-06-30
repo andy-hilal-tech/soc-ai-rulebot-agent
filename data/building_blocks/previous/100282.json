@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "100282",
+  "rule_id": "100282",
+  "uuid": "SYSTEM-1565",
+  "rule_name": "BB:CategoryDefinition: Application or Service Installed or Modified",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-08-03T18:54:24.879Z",
+  "modified": "2023-10-30T02:02:40.698Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Successful Application Modification, System.Service Installed, System.Registry Addition, System.Application Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8016, 8030, 8026, 8029"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.903896",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

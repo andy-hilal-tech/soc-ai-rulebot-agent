@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "118602",
+  "rule_id": "118602",
+  "uuid": "b0e7989e-d2da-4d61-9048-4cfdf72202f4",
+  "rule_name": "BB:CategoryDefinition: Object Access Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-01-22T14:47:36.590Z",
+  "modified": "2024-04-29T12:45:22.429Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.File Access Attempt, Audit.File Access Failure, Audit.File Access Success, Audit.Object Access Attempt, Audit.Object Access Failure, Audit.Object Access Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19074, 19076, 19075, 19080, 19082, 19081"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.204998",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

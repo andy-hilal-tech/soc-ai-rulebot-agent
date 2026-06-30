@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "146502",
+  "rule_id": "146502",
+  "uuid": "58c26527-353c-44ca-a7dd-c6755202447f",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Activity in Shell Commands",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T17:12:35.368Z",
+  "modified": "2024-07-21T12:38:43.082Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Command&quot; ILIKE 'wget * - http* | perl' OR &quot;Command&quot; ILIKE 'wget * - http* | sh' OR &quot;Command&quot; ILIKE 'wget * - http* | bash' OR &quot;Command&quot; ILIKE 'python -m SimpleHTTPServer' OR &quot;Command&quot; ILIKE '-m http.server' OR &quot;Command&quot; ILIKE 'import pty; pty.spawn*' OR &quot;Command&quot; ILIKE 'socat exec:*' OR &quot;Command&quot; ILIKE 'socat -O /tmp/*' OR &quot;Command&quot; ILIKE 'socat tcp-connect*' OR &quot;Command&quot; ILIKE '*echo binary &gt;&gt;*' OR &quot;Command&quot; ILIKE '*wget *; chmod +x*' OR &quot;Command&quot; ILIKE '*wget *; chmod 777 *' OR &quot;Command&quot; ILIKE '*cd /tmp || cd /var/run || cd /mnt*' OR &quot;Command&quot; ILIKE '*stop;service iptables stop;*' OR &quot;Command&quot; ILIKE '*stop;SuSEfirewall2 stop;*' OR &quot;Command&quot; ILIKE 'chmod 777 2020*' OR &quot;Command&quot; ILIKE '*&gt;&gt;/etc/rc.local' OR &quot;Command&quot; ILIKE '*base64 -d /tmp/*' OR &quot;Command&quot; ILIKE '* | base64 -d *' OR &quot;Command&quot; ILIKE '*/chmod u+s *' OR &quot;Command&quot; ILIKE '*chmod +s /tmp/*' OR &quot;Command&quot; ILIKE '*chmod u+s /tmp/*' OR &quot;Command&quot; ILIKE '* /tmp/haxhax*' OR &quot;Command&quot; ILIKE '* /tmp/ns_sploit*' OR &quot;Command&quot; ILIKE 'nc -l -p *' OR &quot;Command&quot; ILIKE 'cp /bin/ksh *' OR &quot;Command&quot; ILIKE 'cp /bin/sh *' OR &quot;Command&quot; ILIKE '* /tmp/*.b64 *' OR &quot;Command&quot; ILIKE '*/tmp/ysocereal.jar*' OR &quot;Command&quot; ILIKE '*/tmp/x *' OR &quot;Command&quot; ILIKE '*; chmod +x /tmp/*' OR &quot;Command&quot; ILIKE '*;chmod +x /tmp/*')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Command%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20perl'%20OR%20%22Command%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20sh'%20OR%20%22Command%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20bash'%20OR%20%22Command%22%20ILIKE%20'python%20-m%20SimpleHTTPServer'%20OR%20%22Command%22%20ILIKE%20'-m%20http.server'%20OR%20%22Command%22%20ILIKE%20'import%20pty%3B%20pty.spawn*'%20OR%20%22Command%22%20ILIKE%20'socat%20exec%3A*'%20OR%20%22Command%22%20ILIKE%20'socat%20-O%20%2Ftmp%2F*'%20OR%20%22Command%22%20ILIKE%20'socat%20tcp-connect*'%20OR%20%22Command%22%20ILIKE%20'*echo%20binary%20%3E%3E*'%20OR%20%22Command%22%20ILIKE%20'*wget%20*%3B%20chmod%20%2Bx*'%20OR%20%22Command%22%20ILIKE%20'*wget%20*%3B%20chmod%20777%20*'%20OR%20%22Command%22%20ILIKE%20'*cd%20%2Ftmp%20%7C%7C%20cd%20%2Fvar%2Frun%20%7C%7C%20cd%20%2Fmnt*'%20OR%20%22Command%22%20ILIKE%20'*stop%3Bservice%20iptables%20stop%3B*'%20OR%20%22Command%22%20ILIKE%20'*stop%3BSuSEfirewall2%20stop%3B*'%20OR%20%22Command%22%20ILIKE%20'chmod%20777%202020*'%20OR%20%22Command%22%20ILIKE%20'*%3E%3E%2Fetc%2Frc.local'%20OR%20%22Command%22%20ILIKE%20'*base64%20-d%20%2Ftmp%2F*'%20OR%20%22Command%22%20ILIKE%20'*%20%7C%20base64%20-d%20*'%20OR%20%22Command%22%20ILIKE%20'*%2Fchmod%20u%2Bs%20*'%20OR%20%22Command%22%20ILIKE%20'*chmod%20%2Bs%20%2Ftmp%2F*'%20OR%20%22Command%22%20ILIKE%20'*chmod%20u%2Bs%20%2Ftmp%2F*'%20OR%20%22Command%22%20ILIKE%20'*%20%2Ftmp%2Fhaxhax*'%20OR%20%22Command%22%20ILIKE%20'*%20%2Ftmp%2Fns_sploit*'%20OR%20%22Command%22%20ILIKE%20'nc%20-l%20-p%20*'%20OR%20%22Command%22%20ILIKE%20'cp%20%2Fbin%2Fksh%20*'%20OR%20%22Command%22%20ILIKE%20'cp%20%2Fbin%2Fsh%20*'%20OR%20%22Command%22%20ILIKE%20'*%20%2Ftmp%2F*.b64%20*'%20OR%20%22Command%22%20ILIKE%20'*%2Ftmp%2Fysocereal.jar*'%20OR%20%22Command%22%20ILIKE%20'*%2Ftmp%2Fx%20*'%20OR%20%22Command%22%20ILIKE%20'*%3B%20chmod%20%2Bx%20%2Ftmp%2F*'%20OR%20%22Command%22%20ILIKE%20'*%3Bchmod%20%2Bx%20%2Ftmp%2F*')|%5B%22(%5C%22Command%5C%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20perl'%20OR%20%5C%22Command%5C%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20sh'%20OR%20%5C%22Command%5C%22%20ILIKE%20'wget%20*%20-%20http*%20%7C%20bash'%20OR%20%5C%22Command%5C%22%20ILIKE%20'python%20-m%20SimpleHTTPServer'%20OR%20%5C%22Command%5C%22%20ILIKE%20'-m%20http.server'%20OR%20%5C%22Command%5C%22%20ILIKE%20'import%20pty%3B%20pty.spawn*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'socat%20exec%3A*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'socat%20-O%20%2Ftmp%2F*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'socat%20tcp-connect*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*echo%20binary%20%3E%3E*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*wget%20*%3B%20chmod%20%2Bx*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*wget%20*%3B%20chmod%20777%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*cd%20%2Ftmp%20%7C%7C%20cd%20%2Fvar%2Frun%20%7C%7C%20cd%20%2Fmnt*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*stop%3Bservice%20iptables%20stop%3B*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*stop%3BSuSEfirewall2%20stop%3B*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'chmod%20777%202020*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%3E%3E%2Fetc%2Frc.local'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*base64%20-d%20%2Ftmp%2F*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%20%7C%20base64%20-d%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%2Fchmod%20u%2Bs%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*chmod%20%2Bs%20%2Ftmp%2F*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*chmod%20u%2Bs%20%2Ftmp%2F*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%20%2Ftmp%2Fhaxhax*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%20%2Ftmp%2Fns_sploit*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'nc%20-l%20-p%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'cp%20%2Fbin%2Fksh%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'cp%20%2Fbin%2Fsh%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%20%2Ftmp%2F*.b64%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%2Ftmp%2Fysocereal.jar*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%2Ftmp%2Fx%20*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%3B%20chmod%20%2Bx%20%2Ftmp%2F*'%20OR%20%5C%22Command%5C%22%20ILIKE%20'*%3Bchmod%20%2Bx%20%2Ftmp%2F*')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.004",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.004",
+            "values": [
+              {
+                "id": "146502",
+                "bb": "BB:BehaviorDefinition: Suspicious Activity in Shell Commands",
+                "uuid": "58c26527-353c-44ca-a7dd-c6755202447f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.579233",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

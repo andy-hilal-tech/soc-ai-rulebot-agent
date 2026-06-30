@@ -1,0 +1,178 @@
+{
+  "rule_doc_id": "100952",
+  "rule_id": "100952",
+  "uuid": "25ea2626-1fdd-4aee-a962-016792758ec3",
+  "rule_name": "UBA : Detected Activity from a Locked Machine",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-10-14T06:14:31.952Z",
+  "modified": "2024-02-19T16:39:42.411Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "308"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Suspicious Event Categories</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:UBA : Workstation Locked</a> match with the same <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>Source IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1478"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "dc6f2608-77e3-428c-b735-a22ebd64331e"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerTimeout",
+            "uid": "4",
+            "id": "314"
+          },
+          "text": [
+            "when none of <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>BB:UBA : Workstation Unlocked</a> match in <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>6</a> <a href='javascript:editParameter(\"4\", \"3\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"4\", \"4\")' class='dynamic'>BB:UBA : Workstation Locked</a> match with the same <a href='javascript:editParameter(\"4\", \"5\")' class='dynamic'>Source IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "406d04a7-a42c-42c5-85e7-3fb981565b4b"
+            },
+            {
+              "id": "2",
+              "value": "6"
+            },
+            {
+              "id": "3",
+              "value": "m"
+            },
+            {
+              "id": "4",
+              "method": "getEventRules",
+              "value": "dc6f2608-77e3-428c-b735-a22ebd64331e"
+            },
+            {
+              "id": "5",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "5",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "5",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "5",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1478",
+      "name": "BB:CategoryDefinition: Suspicious Event Categories"
+    },
+    {
+      "uuid": "dc6f2608-77e3-428c-b735-a22ebd64331e",
+      "name": "BB:UBA : Workstation Locked"
+    },
+    {
+      "uuid": "406d04a7-a42c-42c5-85e7-3fb981565b4b",
+      "name": "BB:UBA : Workstation Unlocked"
+    },
+    {
+      "uuid": "dc6f2608-77e3-428c-b735-a22ebd64331e",
+      "name": "BB:UBA : Workstation Locked"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100952",
+                "bb": "UBA : Detected Activity from a Locked Machine",
+                "uuid": "25ea2626-1fdd-4aee-a962-016792758ec3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.468686",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

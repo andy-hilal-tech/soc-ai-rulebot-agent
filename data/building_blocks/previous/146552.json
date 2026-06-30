@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "146552",
+  "rule_id": "146552",
+  "uuid": "a8c4b146-f14b-4a1b-84a0-3d8738302676",
+  "rule_name": "BB:BehaviorDefinition: Possible Linux Privilege Escalation",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T16:01:29.933Z",
+  "modified": "2024-07-21T12:38:27.420Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE 'cat /etc/issue' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/*-release' or LOWER(&quot;Command&quot;) LIKE 'cat /proc/version' or LOWER(&quot;Command&quot;) LIKE 'uname -a' or LOWER(&quot;Command&quot;) LIKE 'uname -mrs' or LOWER(&quot;Command&quot;) LIKE 'rpm -q kernel' or LOWER(&quot;Command&quot;) LIKE 'dmesg | grep linux' or LOWER(&quot;Command&quot;) LIKE 'ls /boot | grep vmlinuz-' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/profile' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/bashrc' or LOWER(&quot;Command&quot;) LIKE 'cat ~/.bash_profile' or LOWER(&quot;Command&quot;) LIKE 'cat ~/.bashrc' or LOWER(&quot;Command&quot;) LIKE 'cat ~/.bash_logout' or LOWER(&quot;Command&quot;) LIKE 'ps -aux | grep root' or LOWER(&quot;Command&quot;) LIKE 'ps -ef | grep root' or LOWER(&quot;Command&quot;) LIKE 'crontab -l' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/cron*' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/cron.allow' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/cron.deny' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/crontab' or LOWER(&quot;Command&quot;) LIKE 'grep -i user *' or LOWER(&quot;Command&quot;) LIKE 'grep -i pass *' or LOWER(&quot;Command&quot;) LIKE 'ifconfig' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/network/interfaces' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/sysconfig/network' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/resolv.conf' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/networks' or LOWER(&quot;Command&quot;) LIKE 'iptables -l' or LOWER(&quot;Command&quot;) LIKE 'ip6tables -l' or LOWER(&quot;Command&quot;) LIKE 'lsof -i' or LOWER(&quot;Command&quot;) LIKE 'netstat -antup' or LOWER(&quot;Command&quot;) LIKE 'netstat -antpx' or LOWER(&quot;Command&quot;) LIKE 'netstat -tulpn' or LOWER(&quot;Command&quot;) LIKE 'arp -e' or LOWER(&quot;Command&quot;) LIKE 'route' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/passwd' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/group' or LOWER(&quot;Command&quot;) LIKE 'cat /etc/shadow' or LOWER(&quot;Command&quot;) LIKE 'find / -perm -u=s' or LOWER(&quot;Command&quot;) LIKE 'find / -perm -g=s' or LOWER(&quot;Command&quot;) LIKE 'find / -perm -4000' or LOWER(&quot;Command&quot;) LIKE 'find / -perm -2000' or LOWER(&quot;Command&quot;) LIKE 'find / -perm -o+w')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fissue'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2F*-release'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fproc%2Fversion'%20or%20LOWER(%22Command%22)%20LIKE%20'uname%20-a'%20or%20LOWER(%22Command%22)%20LIKE%20'uname%20-mrs'%20or%20LOWER(%22Command%22)%20LIKE%20'rpm%20-q%20kernel'%20or%20LOWER(%22Command%22)%20LIKE%20'dmesg%20%7C%20grep%20linux'%20or%20LOWER(%22Command%22)%20LIKE%20'ls%20%2Fboot%20%7C%20grep%20vmlinuz-'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fprofile'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fbashrc'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20~%2F.bash_profile'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20~%2F.bashrc'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20~%2F.bash_logout'%20or%20LOWER(%22Command%22)%20LIKE%20'ps%20-aux%20%7C%20grep%20root'%20or%20LOWER(%22Command%22)%20LIKE%20'ps%20-ef%20%7C%20grep%20root'%20or%20LOWER(%22Command%22)%20LIKE%20'crontab%20-l'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fcron*'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fcron.allow'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fcron.deny'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fcrontab'%20or%20LOWER(%22Command%22)%20LIKE%20'grep%20-i%20user%20*'%20or%20LOWER(%22Command%22)%20LIKE%20'grep%20-i%20pass%20*'%20or%20LOWER(%22Command%22)%20LIKE%20'ifconfig'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fnetwork%2Finterfaces'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fsysconfig%2Fnetwork'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fresolv.conf'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fnetworks'%20or%20LOWER(%22Command%22)%20LIKE%20'iptables%20-l'%20or%20LOWER(%22Command%22)%20LIKE%20'ip6tables%20-l'%20or%20LOWER(%22Command%22)%20LIKE%20'lsof%20-i'%20or%20LOWER(%22Command%22)%20LIKE%20'netstat%20-antup'%20or%20LOWER(%22Command%22)%20LIKE%20'netstat%20-antpx'%20or%20LOWER(%22Command%22)%20LIKE%20'netstat%20-tulpn'%20or%20LOWER(%22Command%22)%20LIKE%20'arp%20-e'%20or%20LOWER(%22Command%22)%20LIKE%20'route'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fpasswd'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fgroup'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%2Fetc%2Fshadow'%20or%20LOWER(%22Command%22)%20LIKE%20'find%20%2F%20-perm%20-u%3Ds'%20or%20LOWER(%22Command%22)%20LIKE%20'find%20%2F%20-perm%20-g%3Ds'%20or%20LOWER(%22Command%22)%20LIKE%20'find%20%2F%20-perm%20-4000'%20or%20LOWER(%22Command%22)%20LIKE%20'find%20%2F%20-perm%20-2000'%20or%20LOWER(%22Command%22)%20LIKE%20'find%20%2F%20-perm%20-o%2Bw')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fissue'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2F*-release'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fproc%2Fversion'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'uname%20-a'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'uname%20-mrs'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'rpm%20-q%20kernel'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'dmesg%20%7C%20grep%20linux'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ls%20%2Fboot%20%7C%20grep%20vmlinuz-'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fprofile'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fbashrc'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20~%2F.bash_profile'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20~%2F.bashrc'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20~%2F.bash_logout'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ps%20-aux%20%7C%20grep%20root'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ps%20-ef%20%7C%20grep%20root'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'crontab%20-l'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fcron*'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fcron.allow'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fcron.deny'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fcrontab'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'grep%20-i%20user%20*'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'grep%20-i%20pass%20*'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ifconfig'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fnetwork%2Finterfaces'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fsysconfig%2Fnetwork'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fresolv.conf'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fnetworks'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'iptables%20-l'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ip6tables%20-l'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'lsof%20-i'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'netstat%20-antup'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'netstat%20-antpx'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'netstat%20-tulpn'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'arp%20-e'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'route'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fpasswd'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fgroup'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%2Fetc%2Fshadow'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'find%20%2F%20-perm%20-u%3Ds'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'find%20%2F%20-perm%20-g%3Ds'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'find%20%2F%20-perm%20-4000'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'find%20%2F%20-perm%20-2000'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'find%20%2F%20-perm%20-o%2Bw')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "146552",
+                "bb": "BB:BehaviorDefinition: Possible Linux Privilege Escalation",
+                "uuid": "a8c4b146-f14b-4a1b-84a0-3d8738302676",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.586869",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

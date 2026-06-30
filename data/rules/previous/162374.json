@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162374",
+  "rule_id": "162374",
+  "uuid": "11e964fc-1a9e-40df-b5bc-99140dff78da",
+  "rule_name": "ADCS Certificate Template Configuration Vulnerability with Risky EKU",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:56:40.443Z",
+  "modified": "2024-08-04T12:56:40.443Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (((\"Event ID\"=4898 AND (LOWER(UTF8(payload)) LIKE '%1.3.6.1.5.5.7.3.2%' OR LOWER(UTF8(payload)) LIKE '%1.3.6.1.5.2.3.4%' OR LOWER(UTF8(payload)) LIKE '%1.3.6.1.4.1.311.20.2.2%' OR LOWER(UTF8(payload)) LIKE '%2.5.29.37.0%')) AND LOWER(UTF8(payload)) LIKE '%ct_flag_enrollee_supplies_subject%') OR ((\"Event ID\"=4899 AND (LOWER(UTF8(payload)) LIKE '%1.3.6.1.5.5.7.3.2%' OR LOWER(UTF8(payload)) LIKE '%1.3.6.1.5.2.3.4%' OR LOWER(UTF8(payload)) LIKE '%1.3.6.1.4.1.311.20.2.2%' OR LOWER(UTF8(payload)) LIKE '%2.5.29.37.0%')) AND LOWER(UTF8(payload)) LIKE '%ct_flag_enrollee_supplies_subject%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%28%28%22Event%20ID%22%3D4898%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.5.7.3.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.2.3.4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.4.1.311.20.2.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%252.5.29.37.0%25%27%29%29%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ct_flag_enrollee_supplies_subject%25%27%29%20OR%20%28%28%22Event%20ID%22%3D4899%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.5.7.3.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.2.3.4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.4.1.311.20.2.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%252.5.29.37.0%25%27%29%29%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ct_flag_enrollee_supplies_subject%25%27%29%29|%5B%22devicetype%3D12%20AND%20%28%28%28%22Event%20ID%22%3D4898%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.5.7.3.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.2.3.4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.4.1.311.20.2.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%252.5.29.37.0%25%27%29%29%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ct_flag_enrollee_supplies_subject%25%27%29%20OR%20%28%28%22Event%20ID%22%3D4899%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.5.7.3.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.5.2.3.4%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251.3.6.1.4.1.311.20.2.2%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%252.5.29.37.0%25%27%29%29%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ct_flag_enrollee_supplies_subject%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Orlinum , BlueDefenZer SIGMA Title: ADCS Certificate Template Configuration Vulnerability with Risky EKU SIGMA Description: Detects certificate creation with template allowing risk permission subject and risky EKU  False positives: - Administrator activity - Proxy SSL certificate with subject modification - Smart card enrollement  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "ADCS Certificate Template Configuration Vulnerability with Risky EKU"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.885641",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

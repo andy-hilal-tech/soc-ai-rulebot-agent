@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "120302",
+  "rule_id": "120302",
+  "uuid": "SYSTEM-1035",
+  "rule_name": "BB:Threats: DoS: Potential Multihost Attack",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-23T14:43:56.033Z",
+  "modified": "2024-06-27T13:19:26.259Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "FlowType",
+            "uid": "0",
+            "id": "209"
+          },
+          "text": [
+            "when the flow type is one of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Superflow B</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.221591",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

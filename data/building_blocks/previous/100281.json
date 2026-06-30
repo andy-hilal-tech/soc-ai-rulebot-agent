@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100281",
+  "rule_id": "100281",
+  "uuid": "SYSTEM-1317",
+  "rule_name": "BB:DeviceDefinition: Database",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-10T19:04:21.598Z",
+  "modified": "2023-10-30T02:20:00.411Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Oracle RDBMS Audit Record, Microsoft SQL Server, Application Security DbProtect, IBM DB2, IBM Informix Audit, Oracle Audit Vault, Oracle Database Listener, Oracle Fine Grained Auditing, Sybase ASE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "48, 101, 280, 195, 216, 196, 141, 314, 189"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "148602",
+  "rule_id": "148602",
+  "uuid": "e9da1669-ec30-4afa-a3bd-c632bc992c1b",
+  "rule_name": "BB:BehaviorDefinition:  Hide Schedule Task Via Index Value Tamper",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-23T12:58:38.477Z",
+  "modified": "2024-07-21T12:38:33.630Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Target Object&quot;) LIKE '%\\software\\microsoft\\windows nt\\currentversion\\schedule\\taskcache\\tree\\%' and LOWER(&quot;Target Object&quot;) LIKE '%index%' and &quot;target details&quot;='dword (0x00000000)') or (LOWER(&quot;Registry Key&quot;) LIKE '%\\software\\microsoft\\windows nt\\currentversion\\schedule\\taskcache\\tree\\%' and LOWER(&quot;Registry Key&quot;) LIKE '%index%' and &quot;registry value data&quot; ='dword (0x00000000)')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Target%20Object%22)%20LIKE%20'%25%5Csoftware%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Cschedule%5Ctaskcache%5Ctree%5C%25'%20and%20LOWER(%22Target%20Object%22)%20LIKE%20'%25index%25'%20and%20%22target%20details%22%3D'dword%20(0x00000000)')%20or%20(LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Csoftware%5Cmicrosoft%5Cwindows%20nt%5Ccurrentversion%5Cschedule%5Ctaskcache%5Ctree%5C%25'%20and%20LOWER(%22Registry%20Key%22)%20LIKE%20'%25index%25'%20and%20%22registry%20value%20data%22%20%3D'dword%20(0x00000000)')|%5B%22(LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Cschedule%5C%5Ctaskcache%5C%5Ctree%5C%5C%25'%20and%20LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25index%25'%20and%20%5C%22target%20details%5C%22%3D'dword%20(0x00000000)')%20or%20(LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwindows%20nt%5C%5Ccurrentversion%5C%5Cschedule%5C%5Ctaskcache%5C%5Ctree%5C%5C%25'%20and%20LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25index%25'%20and%20%5C%22registry%20value%20data%5C%22%20%3D'dword%20(0x00000000)')%20%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Persistence - Scheduled Task/Job",
+            "values": [
+              {
+                "id": "148602",
+                "bb": "BB:BehaviorDefinition:  Hide Schedule Task Via Index Value Tamper",
+                "uuid": "e9da1669-ec30-4afa-a3bd-c632bc992c1b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.639669",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

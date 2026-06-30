@@ -1,0 +1,78 @@
+{
+  "rule_doc_id": "100227",
+  "rule_id": "100227",
+  "uuid": "SYSTEM-1003",
+  "rule_name": "Source Asset Weight is Low",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:30:22.096Z",
+  "modified": "2023-10-30T02:20:03.007Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AssetValue_Test",
+            "uid": "0",
+            "id": "40",
+            "negate": "false"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>source</a> asset has a weight <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>less than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>4</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "lt"
+            },
+            {
+              "id": "2",
+              "value": "4"
+            },
+            {
+              "id": "3",
+              "value": "attacker"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "false",
+        "offenseMapping": "0",
+        "drop": "false"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "2",
+            "operation": "decRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance has been decreased by 2 because the source network weight is low."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.324618",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

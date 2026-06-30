@@ -1,0 +1,93 @@
+{
+  "rule_doc_id": "129952",
+  "rule_id": "129952",
+  "uuid": "e906916b-1862-4b97-bd9d-8d5262a21e43",
+  "rule_name": "BB:Threats: Communication to Cryptocurrency Mining URL for Flows",
+  "object_type": "building_block",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-23T17:23:02.580Z",
+  "modified": "2024-07-21T09:42:17.113Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "2",
+            "id": "25"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131105NENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>HTTP Host</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>Cryptocurrency Mining Hosts - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowDatabaseFields",
+              "value": "131105"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "191"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.269771",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

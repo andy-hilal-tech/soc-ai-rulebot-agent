@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162251",
+  "rule_id": "162251",
+  "uuid": "b6108d93-962e-4402-945e-b66ed924446c",
+  "rule_name": "Loading Diagcab Package From Remote Path",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:35:27.055Z",
+  "modified": "2024-08-04T08:35:27.055Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=101 AND LOWER(UTF8(payload)) LIKE '%\\%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D101%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5C%25%27|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D101%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5C%25%27%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Loading Diagcab Package From Remote Path SIGMA Description: Detects loading of diagcab packages from a remote path, as seen in DogWalk vulnerability  False positives: - Legitimate package hosted on a known and authorized remote location  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Loading Diagcab Package From Remote Path"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.604612",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "138302",
+  "rule_id": "138302",
+  "uuid": "afe6bea0-42c8-48e7-b5bb-f16e836605f0",
+  "rule_name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets)",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-06-09T16:31:00.571Z",
+  "modified": "2024-07-21T10:28:55.917Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25",
+            "negate": "true"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('XFE ATPF-mw_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-mw_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-scanning_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-scanning_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-cryptomining_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-cryptomining_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-anonsvcs_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-anonsvcs_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-bots_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-bots_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-c2server_ipv4',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-c2server_ipv6',destinationaddress) OR  REFERENCESETCONTAINS('XFE ATPF-mw_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-mw_ipv6',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-scanning_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-scanning_ipv6',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-cryptomining_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-cryptomining_ipv6',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-anonsvcs_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-anonsvcs_ipv6',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-bots_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-bots_ipv6',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-c2server_ipv4',sourceaddress) OR  REFERENCESETCONTAINS('XFE ATPF-c2server_ipv6',sourceaddress) OR REFERENCESETCONTAINS('Malware IPs',destinationip) OR  REFERENCESETCONTAINS('Botnet IPs',destinationip) OR  REFERENCESETCONTAINS('Botnet C&amp;C IPs',destinationip) OR  REFERENCESETCONTAINS('Phishing IPs',destinationip) OR  REFERENCESETCONTAINS('Anonymizer IPs',destinationip) OR  REFERENCESETCONTAINS('Malware IPs',sourceip) OR  REFERENCESETCONTAINS('Botnet IPs',sourceip) OR  REFERENCESETCONTAINS('Botnet C&amp;C IPs',sourceip) OR  REFERENCESETCONTAINS('Phishing IPs',sourceip) OR  REFERENCESETCONTAINS('Anonymizer IPs',sourceip)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv4',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv6',destinationaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv6',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv6',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv6',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv6',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv6',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv4',sourceaddress)%20OR%20%20REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv6',sourceaddress)%20OR%20REFERENCESETCONTAINS('Malware%20IPs',destinationip)%20OR%20%20REFERENCESETCONTAINS('Botnet%20IPs',destinationip)%20OR%20%20REFERENCESETCONTAINS('Botnet%20C%26C%20IPs',destinationip)%20OR%20%20REFERENCESETCONTAINS('Phishing%20IPs',destinationip)%20OR%20%20REFERENCESETCONTAINS('Anonymizer%20IPs',destinationip)%20OR%20%20REFERENCESETCONTAINS('Malware%20IPs',sourceip)%20OR%20%20REFERENCESETCONTAINS('Botnet%20IPs',sourceip)%20OR%20%20REFERENCESETCONTAINS('Botnet%20C%26C%20IPs',sourceip)%20OR%20%20REFERENCESETCONTAINS('Phishing%20IPs',sourceip)%20OR%20%20REFERENCESETCONTAINS('Anonymizer%20IPs',sourceip)|%5B%22REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv4',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv6',destinationaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-mw_ipv6',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-scanning_ipv6',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-cryptomining_ipv6',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-anonsvcs_ipv6',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-bots_ipv6',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv4',sourceaddress)%20OR%20%22,%22REFERENCESETCONTAINS('XFE%20ATPF-c2server_ipv6',sourceaddress)%20OR%22,%22REFERENCESETCONTAINS('Malware%20IPs',destinationip)%20OR%20%22,%22REFERENCESETCONTAINS('Botnet%20IPs',destinationip)%20OR%20%22,%22REFERENCESETCONTAINS('Botnet%20C%26C%20IPs',destinationip)%20OR%20%22,%22REFERENCESETCONTAINS('Phishing%20IPs',destinationip)%20OR%20%22,%22REFERENCESETCONTAINS('Anonymizer%20IPs',destinationip)%20OR%20%22,%22REFERENCESETCONTAINS('Malware%20IPs',sourceip)%20OR%20%22,%22REFERENCESETCONTAINS('Botnet%20IPs',sourceip)%20OR%20%22,%22REFERENCESETCONTAINS('Botnet%20C%26C%20IPs',sourceip)%20OR%20%22,%22REFERENCESETCONTAINS('Phishing%20IPs',sourceip)%20OR%20%22,%22REFERENCESETCONTAINS('Anonymizer%20IPs',sourceip)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138302",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets)",
+                "uuid": "afe6bea0-42c8-48e7-b5bb-f16e836605f0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.452541",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

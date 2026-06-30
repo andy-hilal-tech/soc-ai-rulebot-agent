@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "160052",
+  "rule_id": "160052",
+  "uuid": "153520b3-b825-43e0-97b2-e9df6fc1d0d5",
+  "rule_name": "UAC Remote Restrictions Disabled",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-12-12T15:19:32.469Z",
+  "modified": "2024-07-21T12:38:43.285Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) MATCHES '(hklm\\\\.*\\\\localaccounttokenfilterpolicy|\\\\registry\\\\machine\\\\.*\\\\localaccounttokenfilterpolicy)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Key%22)%20MATCHES%20'(hklm%5C%5C.*%5C%5Clocalaccounttokenfilterpolicy%7C%5C%5Cregistry%5C%5Cmachine%5C%5C.*%5C%5Clocalaccounttokenfilterpolicy)'|%5B%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20'(hklm%5C%5C%5C%5C.*%5C%5C%5C%5Clocalaccounttokenfilterpolicy%7C%5C%5C%5C%5Cregistry%5C%5C%5C%5Cmachine%5C%5C%5C%5C.*%5C%5C%5C%5Clocalaccounttokenfilterpolicy)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Registry Value Data (custom) contains any of [1 or 0x00000001]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Registry Value DataCONany[1 or 0x00000001]"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "160052",
+                "bb": "UAC Remote Restrictions Disabled",
+                "uuid": "153520b3-b825-43e0-97b2-e9df6fc1d0d5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.414508",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

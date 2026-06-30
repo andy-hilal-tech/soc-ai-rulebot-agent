@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "100107",
+  "rule_id": "100107",
+  "uuid": "5022e221-08aa-4c78-b7c3-225509af05e0",
+  "rule_name": "BB:ReconDetected: Basic Recon Rules",
+  "object_type": "building_block",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2015-07-30T20:17:03.170Z",
+  "modified": "2023-10-30T02:20:02.085Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Host Port Scan Detected by Remote Host, Local L2L Scanner Detected, Remote Scanner Detected, Remote Windows Server Scanner, Local L2R RPC Server Scanner, Local L2R Windows Server Scanner, Local L2R Scanner Detected, Local L2L Suspicious Probe Events Detected, Excessive Firewall Denies from Local Host</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1152, SYSTEM-1360, SYSTEM-1363, SYSTEM-1168, SYSTEM-1577, SYSTEM-1579, SYSTEM-1589, SYSTEM-1180, SYSTEM-1197"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1152",
+      "name": "Host Port Scan Detected by Remote Host"
+    },
+    {
+      "uuid": "SYSTEM-1360",
+      "name": "Local L2L Scanner Detected"
+    },
+    {
+      "uuid": "SYSTEM-1363",
+      "name": "Remote Scanner Detected"
+    },
+    {
+      "uuid": "SYSTEM-1168",
+      "name": "Remote Windows Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1577",
+      "name": "Local L2R RPC Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1579",
+      "name": "Local L2R Windows Server Scanner"
+    },
+    {
+      "uuid": "SYSTEM-1589",
+      "name": "Local L2R Scanner Detected"
+    },
+    {
+      "uuid": "SYSTEM-1180",
+      "name": "Local L2L Suspicious Probe Events Detected"
+    },
+    {
+      "uuid": "SYSTEM-1197",
+      "name": "Excessive Firewall Denies from Local Host"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100110",
+                "bb": "Local L2L Scanner Detected",
+                "uuid": "SYSTEM-1360",
+                "T": "COMMON"
+              },
+              {
+                "id": "100111",
+                "bb": "Remote Scanner Detected",
+                "uuid": "SYSTEM-1363",
+                "T": "COMMON"
+              },
+              {
+                "id": "100114",
+                "bb": "Local L2R Windows Server Scanner",
+                "uuid": "SYSTEM-1579",
+                "T": "COMMON"
+              },
+              {
+                "id": "100115",
+                "bb": "Local L2R Scanner Detected",
+                "uuid": "SYSTEM-1589",
+                "T": "COMMON"
+              },
+              {
+                "id": "100107",
+                "bb": "BB:ReconDetected: Basic Recon Rules",
+                "uuid": "5022e221-08aa-4c78-b7c3-225509af05e0",
+                "T": "COMMON"
+              },
+              {
+                "id": "165515",
+                "bb": "Excessive Firewall Denies from Local Host",
+                "uuid": "7ccb1c2a-eeb0-4263-88c1-7d2b3d226cb9",
+                "T": "EVENT"
+              },
+              {
+                "id": "100109",
+                "bb": "Host Port Scan Detected by Remote Host",
+                "uuid": "SYSTEM-1152",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.657749",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

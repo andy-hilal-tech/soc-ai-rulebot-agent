@@ -1,0 +1,133 @@
+{
+  "rule_doc_id": "110752",
+  "rule_id": "110752",
+  "uuid": "d5e3cece-244f-4e28-af33-8cb75b6cb97a",
+  "rule_name": "Suspicious Access to lsass Process From Unknown Call Trace",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-08-26T17:25:14.990Z",
+  "modified": "2024-02-19T16:49:27.086Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001829) ProcessAccess</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001829"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Target Process Name&quot; IMATCHES 'lsass\\.exe' and &quot;Granted Access&quot; IMATCHES '(0x1010)|(0x1410)|(0x143A)|(0x1400)|(0x147a)|(0x143a)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Process%20Name%22%20IMATCHES%20'lsass%5C.exe'%20and%20%22Granted%20Access%22%20IMATCHES%20'(0x1010)%7C(0x1410)%7C(0x143A)%7C(0x1400)%7C(0x147a)%7C(0x143a)'|%5B%22%5C%22Target%20Process%20Name%5C%22%20IMATCHES%20'lsass%5C%5C.exe'%20and%20%5C%22Granted%20Access%5C%22%20IMATCHES%20'(0x1010)%7C(0x1410)%7C(0x143A)%7C(0x1400)%7C(0x147a)%7C(0x143a)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Call Trace&quot; IMATCHES '.*\\\\Windows\\\\system32\\\\KERNELBASE\\.dll\\+\\w+\\|UNKNOWN.*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Call%20Trace%22%20IMATCHES%20'.*%5C%5CWindows%5C%5Csystem32%5C%5CKERNELBASE%5C.dll%5C%2B%5Cw%2B%5C%7CUNKNOWN.*'|%5B%22%5C%22Call%20Trace%5C%22%20IMATCHES%20'.*%5C%5C%5C%5CWindows%5C%5C%5C%5Csystem32%5C%5C%5C%5CKERNELBASE%5C%5C.dll%5C%5C%2B%5C%5Cw%2B%5C%5C%7CUNKNOWN.*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.737132",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

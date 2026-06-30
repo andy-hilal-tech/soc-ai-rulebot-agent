@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "152802",
+  "rule_id": "152802",
+  "uuid": "1243ee88-122a-47ff-b7ba-158b9eea0724",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Load of Advapi31",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T19:56:49.297Z",
+  "modified": "2024-07-21T12:38:52.070Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Object Load Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19247"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Filename (custom) is any of advapi32.dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameEQanyadvapi32.dll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Windows\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files (x86)\\%' OR LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Application Files\\%') OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\ProgramData_Microsoft\\Windows Defender\\platform\\%' AND LOWER(&quot;Process File File Path&quot;) LIKE '%\\MpCmdRun.exe') OR (LOWER(&quot;Process File File Path&quot;) LIKE 'C:\\Users\\%' AND LOWER(&quot;Process File File Path&quot;) LIKE '%\\AppData_Local\\Microsoft_OneDrive\\%' AND LOWER(&quot;Process File File Path&quot;) LIKE '%FileCoAuth.exe'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CWindows%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%20(x86)%5C%25'%20OR%20LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgram%20Files%5C%25')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CProgramData_Microsoft%5CWindows%20Defender%5Cplatform%5C%25'%20AND%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CMpCmdRun.exe')%20OR%20(LOWER(%22Process%20Path%22)%20LIKE%20'C%3A%5CUsers%5C%25'%20AND%20LOWER(%22Process%20Path%22)%20LIKE%20'%25%5CAppData_Local%5CMicrosoft_OneDrive%5C%25'%20AND%20LOWER(%22Process%20Path%22)%20LIKE%20'%25FileCoAuth.exe'))|%5B%22((LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CWindows%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%20(x86)%5C%5C%25'%20OR%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgram%20Files%5C%5C%25')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CProgramData_Microsoft%5C%5CWindows%20Defender%5C%5Cplatform%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CMpCmdRun.exe')%20OR%20(LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'C%3A%5C%5CUsers%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25%5C%5CAppData_Local%5C%5CMicrosoft_OneDrive%5C%5C%25'%20AND%20LOWER(%5C%22Process%20Path%5C%22)%20LIKE%20'%25FileCoAuth.exe'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Native API",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1106",
+        "MAP_S": [
+          {
+            "name": "Execution - Native API",
+            "values": [
+              {
+                "id": "152802",
+                "bb": "BB:BehaviorDefinition: Suspicious Load of Advapi31",
+                "uuid": "1243ee88-122a-47ff-b7ba-158b9eea0724",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.714059",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

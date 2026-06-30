@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "164803",
+  "rule_id": "164803",
+  "uuid": "963bb4c9-4ba9-462d-84be-8df55c186138",
+  "rule_name": "BB:CategoryDefinition: Countries/Regions with no Remote Access",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2024-12-22T08:08:41.917Z",
+  "modified": "2025-01-08T10:38:25.449Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Geographic_Test",
+            "uid": "0",
+            "id": "39"
+          },
+          "text": [
+            "when the source is located in <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Africa,    Antarctic,    Asia,    CentralAmerica,    Europe,    Oceania,    SouthAmerica,    misc,  Europe, Asia</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getGeographicView",
+              "value": "Africa,    Antarctic,    Asia,    CentralAmerica,    Europe,    Oceania,    SouthAmerica,    misc,  Europe, Asia"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.843537",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "152252",
+  "rule_id": "152252",
+  "uuid": "f05c2351-08ff-40fc-8c61-89ae8a15f123",
+  "rule_name": "BB:BehaviorDefinition: Creation of Cron Files",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-17T17:13:59.071Z",
+  "modified": "2024-07-21T12:38:25.475Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.File Access Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19075"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>((LOWER(&quot;Filename&quot;) LIKE 'cron.d%' or LOWER(&quot;Filename&quot;) LIKE 'cron.daily%' or LOWER(&quot;Filename&quot;) LIKE 'cron.hourly%' or LOWER(&quot;Filename&quot;) LIKE 'cron.monthly%' or LOWER(&quot;Filename&quot;) LIKE 'cron.weekly%' or LOWER(&quot;Filename&quot;) LIKE 'crontabs%') or (LOWER(&quot;File Directory&quot;) LIKE '/etc/cron.d/%' or LOWER(&quot;File Directory&quot;) LIKE '/etc/cron.daily/%' or LOWER(&quot;File Directory&quot;) LIKE '/etc/cron.hourly/%' or LOWER(&quot;File Directory&quot;) LIKE '/etc/cron.monthly/%' or LOWER(&quot;File Directory&quot;) LIKE '/etc/cron.weekly/%' or LOWER(&quot;File Directory&quot;) LIKE '/var/spool/cron/crontabs/%')) or ((LOWER(&quot;Filename&quot;) LIKE '%cron.allow%' or LOWER(&quot;Filename&quot;) LIKE '%cron.deny%' or LOWER(&quot;Filename&quot;) LIKE '%rontab%') or (LOWER(&quot;File Directory&quot;) LIKE '%/etc/cron.allow%' or LOWER(&quot;File Directory&quot;) LIKE '%/etc/cron.deny%' or LOWER(&quot;File Directory&quot;) LIKE '%/etc/crontab%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Filename%22)%20LIKE%20'cron.d%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'cron.daily%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'cron.hourly%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'cron.monthly%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'cron.weekly%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'crontabs%25')%20or%20(LOWER(%22File%20Directory%22)%20LIKE%20'%2Fetc%2Fcron.d%2F%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%2Fetc%2Fcron.daily%2F%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%2Fetc%2Fcron.hourly%2F%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%2Fetc%2Fcron.monthly%2F%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%2Fetc%2Fcron.weekly%2F%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%2Fvar%2Fspool%2Fcron%2Fcrontabs%2F%25'))%20or%20((LOWER(%22Filename%22)%20LIKE%20'%25cron.allow%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'%25cron.deny%25'%20or%20LOWER(%22Filename%22)%20LIKE%20'%25rontab%25')%20or%20(LOWER(%22File%20Directory%22)%20LIKE%20'%25%2Fetc%2Fcron.allow%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%2Fetc%2Fcron.deny%25'%20or%20LOWER(%22File%20Directory%22)%20LIKE%20'%25%2Fetc%2Fcrontab%25'))|%5B%22((LOWER(%5C%22Filename%5C%22)%20LIKE%20'cron.d%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'cron.daily%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'cron.hourly%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'cron.monthly%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'cron.weekly%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'crontabs%25')%20or%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fetc%2Fcron.d%2F%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fetc%2Fcron.daily%2F%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fetc%2Fcron.hourly%2F%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fetc%2Fcron.monthly%2F%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fetc%2Fcron.weekly%2F%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%2Fvar%2Fspool%2Fcron%2Fcrontabs%2F%25'))%20or%20((LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25cron.allow%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25cron.deny%25'%20or%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25rontab%25')%20or%20(LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%2Fetc%2Fcron.allow%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%2Fetc%2Fcron.deny%25'%20or%20LOWER(%5C%22File%20Directory%5C%22)%20LIKE%20'%25%2Fetc%2Fcrontab%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.003",
+        "TAC": "Execution",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.003",
+            "values": [
+              {
+                "id": "152252",
+                "bb": "BB:BehaviorDefinition: Creation of Cron Files",
+                "uuid": "f05c2351-08ff-40fc-8c61-89ae8a15f123",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.714059",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

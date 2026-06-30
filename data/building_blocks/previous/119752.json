@@ -1,0 +1,84 @@
+{
+  "rule_doc_id": "119752",
+  "rule_id": "119752",
+  "uuid": "69901f9d-85ae-4681-b96d-03494c2471c4",
+  "rule_name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Flows X-Force Categorization)",
+  "object_type": "building_block",
+  "group": "Category Definitions, Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-06-09T15:12:45.968Z",
+  "modified": "2024-06-27T13:19:21.872Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25",
+            "negate": "true"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>HTTP Host is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131105NENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "318"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>XFORCE_URL_CATEGORY(&quot;HTTP Host&quot;) in ('Anonymization Services','Malware', 'Botnet Command and Control Server', 'Spam URLs', 'Cryptocurrency Mining', 'Bots', 'Phishing URLs')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_URL_CATEGORY(%22HTTP%20Host%22)%20in%20('Anonymization%20Services','Malware',%20'Botnet%20Command%20and%20Control%20Server',%20'Spam%20URLs',%20'Cryptocurrency%20Mining',%20'Bots',%20'Phishing%20URLs')|%5B%22XFORCE_URL_CATEGORY(%5C%22HTTP%20Host%5C%22)%20in%20('Anonymization%20Services','Malware',%20'Botnet%20Command%20and%20Control%20Server',%20'Spam%20URLs',%20'Cryptocurrency%20Mining',%20'Bots',%20'Phishing%20URLs')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.208098",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

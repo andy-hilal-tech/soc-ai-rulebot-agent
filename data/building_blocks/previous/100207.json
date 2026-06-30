@@ -1,0 +1,82 @@
+{
+  "rule_doc_id": "100207",
+  "rule_id": "100207",
+  "uuid": "SYSTEM-1429",
+  "rule_name": "BB:FalsePositive: Broadcast Address False Positive Categories",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2007-01-02T21:09:13.875Z",
+  "modified": "2023-10-30T02:02:35.858Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:NetworkDefinition: Broadcast Address Space</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1288"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1202, SYSTEM-1179"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1288",
+      "name": "BB:NetworkDefinition: Broadcast Address Space"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.828241",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

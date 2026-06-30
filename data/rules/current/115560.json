@@ -117,8 +117,17 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "FILEHASH",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:33.949110",
-  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+  "last_parsed_utc": "2026-06-30T08:59:37.216226",
+  "last_enriched_utc": "2026-06-30T09:40:02.879546Z"
 }

@@ -1,0 +1,87 @@
+{
+  "rule_doc_id": "133602",
+  "rule_id": "133602",
+  "uuid": "SYSTEM-1055",
+  "rule_name": "BB:BehaviorDefinition: Remote Desktop Access from a Remote Host",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-31T14:02:38.662Z",
+  "modified": "2024-07-21T10:28:51.933Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application is any of [RemoteAccess.MSTerminalServices or RemoteAccess.RDP or RemoteAccess.Citrix or RemoteAccess.CitrixICA]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQanyRemoteAccess.MSTerminalServices�RemoteAccess.RDP�RemoteAccess.Citrix�RemoteAccess.CitrixICA"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.001",
+        "TAC": "Lateral Movement",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.001",
+            "values": [
+              {
+                "id": "133602",
+                "bb": "BB:BehaviorDefinition: Remote Desktop Access from a Remote Host",
+                "uuid": "SYSTEM-1055",
+                "T": "FLOW"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.337467",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

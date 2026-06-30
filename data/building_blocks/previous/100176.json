@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100176",
+  "rule_id": "100176",
+  "uuid": "SYSTEM-1386",
+  "rule_name": "BB:FalsePositive: Mail Server False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T05:53:42.947Z",
+  "modified": "2023-10-30T02:02:38.939Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Mail Servers, BB:HostReference: Mail Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1356, c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6500120) Custom User 9 - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500120"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1356",
+      "name": "BB:HostDefinition: Mail Servers"
+    },
+    {
+      "uuid": "c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83",
+      "name": "BB:HostReference: Mail Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.761038",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,73 @@
+{
+  "rule_doc_id": "100031",
+  "rule_id": "100031",
+  "uuid": "SYSTEM-1216",
+  "rule_name": "BB:HostDefinition: Windows Servers",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-10-14T05:35:33.139Z",
+  "modified": "2023-10-30T02:02:37.045Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:PortDefinition: Windows Ports, BB:ProtocolDefinition: Windows Protocols</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1232, SYSTEM-1287"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstHost_Test",
+            "uid": "2",
+            "id": "9"
+          },
+          "text": [
+            "when the destination IP is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1232",
+      "name": "BB:PortDefinition: Windows Ports"
+    },
+    {
+      "uuid": "SYSTEM-1287",
+      "name": "BB:ProtocolDefinition: Windows Protocols"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.593455",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

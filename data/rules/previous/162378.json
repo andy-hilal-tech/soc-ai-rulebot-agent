@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162378",
+  "rule_id": "162378",
+  "uuid": "15f2b9e6-8858-4738-bbcb-d31a1bdda159",
+  "rule_name": "Weak Encryption Enabled and Kerberoast",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:57:03.707Z",
+  "modified": "2024-08-04T12:57:03.706Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4738 AND (((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8___%' OR LOWER(UTF8(payload)) LIKE '%9___%' OR LOWER(UTF8(payload)) LIKE '%a___%' OR LOWER(UTF8(payload)) LIKE '%b___%' OR LOWER(UTF8(payload)) LIKE '%c___%' OR LOWER(UTF8(payload)) LIKE '%d___%' OR LOWER(UTF8(payload)) LIKE '%e___%' OR LOWER(UTF8(payload)) LIKE '%f___%')))) OR ((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%') AND (NOT((LOWER(UTF8(payload)) LIKE '%1____%' OR LOWER(UTF8(payload)) LIKE '%3____%' OR LOWER(UTF8(payload)) LIKE '%5____%' OR LOWER(UTF8(payload)) LIKE '%7____%' OR LOWER(UTF8(payload)) LIKE '%9____%' OR LOWER(UTF8(payload)) LIKE '%b____%' OR LOWER(UTF8(payload)) LIKE '%d____%' OR LOWER(UTF8(payload)) LIKE '%f____%')))) OR ((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%') AND (NOT((LOWER(UTF8(payload)) LIKE '%8__%' OR LOWER(UTF8(payload)) LIKE '%9__%' OR LOWER(UTF8(payload)) LIKE '%a__%' OR LOWER(UTF8(payload)) LIKE '%b__%' OR LOWER(UTF8(payload)) LIKE '%c__%' OR LOWER(UTF8(payload)) LIKE '%d__%' OR LOWER(UTF8(payload)) LIKE '%e__%' OR LOWER(UTF8(payload)) LIKE '%f__%')))))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4738%20AND%20%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f___%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f___%25%27%29%29%29%29%20OR%20%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%253____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%255____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f____%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%253____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%255____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f____%25%27%29%29%29%29%20OR%20%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f__%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f__%25%27%29%29%29%29%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4738%20AND%20%28%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f___%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e___%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f___%25%27%29%29%29%29%20OR%20%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%253____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%255____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f____%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%251____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%253____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%255____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d____%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f____%25%27%29%29%29%29%20OR%20%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f__%25%27%29%20AND%20%28NOT%28%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%258__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%259__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25a__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25b__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25c__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25d__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25e__%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25f__%25%27%29%29%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: @neu5ron SIGMA Title: Weak Encryption Enabled and Kerberoast SIGMA Description: Detects scenario where weak encryption is enabled for a user profile which could be used for hash/password cracking.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Weak Encryption Enabled and Kerberoast"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.900692",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

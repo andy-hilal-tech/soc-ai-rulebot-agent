@@ -1,0 +1,87 @@
+{
+  "rule_doc_id": "100075",
+  "rule_id": "100075",
+  "uuid": "SYSTEM-1272",
+  "rule_name": "BB:CategoryDefinition: High Magnitude Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-07-06T10:51:21.656Z",
+  "modified": "2023-10-30T02:02:39.232Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventSeverity_Test",
+            "uid": "0",
+            "id": "22"
+          },
+          "text": [
+            "where the Event Severity is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>6</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCredibility_Test",
+            "uid": "1",
+            "id": "23"
+          },
+          "text": [
+            "where the Event Credibility is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>7</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "8"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventRelevance_Test",
+            "uid": "2",
+            "id": "24"
+          },
+          "text": [
+            "where the Event Relevance is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>greater than</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>7</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "gt"
+            },
+            {
+              "id": "2",
+              "value": "8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.627717",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

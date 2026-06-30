@@ -1,3 +1,5 @@
+import os
+import stat
 from pathlib import Path
 from datetime import datetime, timezone
 import shutil
@@ -15,6 +17,14 @@ def utc_stamp() -> str:
 
 def ensure_dir(path: Path):
     path.mkdir(parents=True, exist_ok=True)
+
+
+def remove_readonly(func, path, exc_info):
+    try:
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+    except Exception:
+        raise
 
 
 def rotate_dataset(base_dir: Path, stamp: str):

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103452",
+  "rule_id": "103452",
+  "uuid": "88a260e2-74a4-463b-aaab-f3659991b4ef",
+  "rule_name": "BB:VMware: User Account, Role and Permission Created Activity",
+  "object_type": "building_block",
+  "group": "VMware Virtual Infrastructure",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2013-08-05T20:48:11.300Z",
+  "modified": "2024-02-19T16:40:37.525Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(54500002) Account Created Event, (54500164) Role Event, (54500163) Role Added Event, (54500153) Permission Added Event, (54500154) Permission Event, (78250040) Role Created, (78250048) User Created</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "54500002,                                                                                                                                                                                                                                                                                                                                                                                                                54500164,                                                                                                                                                                                                                                                                                                                                                                                                                54500163,                                                                                                                                                                                                                                                                                                                                                                                                                54500153,                                                                                                                                                                                                                                                                                                                                                                                                                54500154,                                                                                                                                                                                                                                                                                                                                                                                                                78250040,                                                                                                                                                                                                                                                                                                                                                                                                                78250048"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.030508",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

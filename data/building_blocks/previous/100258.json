@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100258",
+  "rule_id": "100258",
+  "uuid": "SYSTEM-1321",
+  "rule_name": "BB:DeviceDefinition: IDS / IPS",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-10T19:20:18.310Z",
+  "modified": "2023-10-30T02:19:58.936Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Snort Open Source IDS, Ambiron TrustWave ipAngel Intrusion Prevention System (IPS), McAfee IntruShield Network IPS Appliance, Extreme Dragon Network IPS, IBM Proventia Management SiteProtector, IBM Proventia Network Intrusion Prevention System (IPS), Juniper Networks Intrusion Detection and Prevention (IDP), TippingPoint Intrusion Prevention System (IPS), Top Layer IPS, Cisco Intrusion Prevention System (IPS), Extreme NetsightASM, TippingPoint X Series Appliances, Palo Alto PA Series, Cisco FireSIGHT Management Center, IBM QRadar Network Security XGS, IBM Security Network IPS (GX), Cisco Cloud Web Security, Blue Coat Web Security Service, CloudLock Cloud Security Fabric, Enterprise-IT-Security.com SF-Sherlock, Juniper vGW, Juniper Networks Network and Security Manager, LightCyber Magna, Niksun 2005 v3.5, Nortel Threat Protection System (TPS) Intrusion Sensor, Radware AppWall, Riverbed SteelCentral NetProfiler, Symantec Critical System Protection, Trend Micro Deep Discovery Analyzer, Vectra Networks Vectra</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "2, 47, 25, 9, 33, 15, 17, 19, 38, 30, 156, 96, 206, 197, 294, 297, 419, 399, 409, 396, 235, 45, 422, 42, 108, 406, 370, 374, 362, 410"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.873817",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,91 @@
+{
+  "rule_doc_id": "108902",
+  "rule_id": "108902",
+  "uuid": "f38934fd-a05c-40ec-8b99-25162c78eef8",
+  "rule_name": "BB:UBA : Data Loss Events",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-05-10T17:15:58.285Z",
+  "modified": "2024-02-19T16:44:53.439Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.Firewall Permit, Access.Firewall Deny, Access.Access Denied, Suspicious Activity.Information Leak, Policy.Web Policy Violation</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4002, 4003, 4015, 7024, 9002"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "2",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Event Name</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>DLP|dlp|Dlp|dLp</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "qid"
+            },
+            {
+              "id": "2",
+              "value": "DLP|dlp|Dlp|dLp"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.095305",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

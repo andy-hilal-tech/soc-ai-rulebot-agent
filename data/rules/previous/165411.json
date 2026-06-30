@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "165411",
+  "rule_id": "165411",
+  "uuid": "caa19161-fd8a-4b8d-8c58-3bd42a8fd0c8",
+  "rule_name": "O365 not sending logs for last hour - H360",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-02-16T07:37:09.722Z",
+  "modified": "2026-04-20T10:24:10.624Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Health360 O365</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "3770"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "8005",
+            "offenseMapping": "6",
+            "forceOffenseCreation": "false",
+            "qid": "67501842",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "10",
+            "description": "O365 - H360 - Not sending logs",
+            "name": "O365l - H360 - Not sending logs"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.370545",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

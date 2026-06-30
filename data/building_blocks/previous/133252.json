@@ -1,0 +1,47 @@
+{
+  "rule_doc_id": "133252",
+  "rule_id": "133252",
+  "uuid": "0c688149-ac7e-4a55-b3c0-d535324a31bc",
+  "rule_name": "BB:CategoryDefinition: Mail Applications in Flows",
+  "object_type": "building_block",
+  "group": "Email",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-02-27T15:45:15.793Z",
+  "modified": "2024-07-21T10:01:54.532Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "0",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application is any of [Mail or HttpWeb.FreeEmailSites or HttpWeb.Gmail or HttpWeb.Yahoo!Mail or HttpWeb.AOLMail or HttpWeb.Outlook or HttpWeb.T-OnlineMail or HttpWeb.QQMail]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "applicationEQanyMail�HttpWeb.FreeEmailSites�HttpWeb.Gmail�HttpWeb.Yahoo%21Mail�HttpWeb.AOLMail�HttpWeb.Outlook�HttpWeb.T-OnlineMail�HttpWeb.QQMail"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.328576",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

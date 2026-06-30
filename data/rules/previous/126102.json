@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "126102",
+  "rule_id": "126102",
+  "uuid": "18b00fca-f08c-4de7-8366-0ffd25097ae5",
+  "rule_name": "Creation of Resources in Critical Namespaces",
+  "object_type": "rule",
+  "group": "Container",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-11-05T13:43:16.741Z",
+  "modified": "2024-07-21T09:33:20.855Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Containers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "94fbba56-99ff-407e-a84d-827a99baf6fd"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Network Peering Success, Authentication.Access Key Creation Success, Authentication.Role Creation Success, Authentication.Role Assignment Success, Audit.Machine Creation Success, System.Task Creation Success, System.Cron Successful, Audit.Create Activity Succeeded, Audit.Configure Activity Succeeded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19126, 3148, 3127, 3133, 19216, 8106, 8042, 19012, 19030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Namespace (custom) is any of [kube-system or kube-public]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "NamespaceEQanykube-system�kube-public"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "94fbba56-99ff-407e-a84d-827a99baf6fd",
+      "name": "BB:DeviceDefinition: Containers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.362361",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

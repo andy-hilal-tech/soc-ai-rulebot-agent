@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "156352",
+  "rule_id": "156352",
+  "uuid": "17225028-f335-4c92-adcb-01200c87a915",
+  "rule_name": "Execution of Tap Installer Software",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T18:04:56.148Z",
+  "modified": "2024-07-21T12:38:45.883Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) == 'tapinstall.exe' AND  ( \tLOWER(&quot;Process File File Path&quot;) != 'c:\\\\program files\\\\avast software\\\\secureline vpn\\\\tapinstall.exe' \tAND LOWER(&quot;Process File File Path&quot;) != 'c:\\\\program files (x86)\\\\avast software\\\\secureline vpn\\\\tapinstall.exe' )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20%3D%3D%20'tapinstall.exe'%20AND%20%20(%20%09LOWER(%22Process%20Path%22)%20!%3D%20'c%3A%5C%5Cprogram%20files%5C%5Cavast%20software%5C%5Csecureline%20vpn%5C%5Ctapinstall.exe'%20%09AND%20LOWER(%22Process%20Path%22)%20!%3D%20'c%3A%5C%5Cprogram%20files%20(x86)%5C%5Cavast%20software%5C%5Csecureline%20vpn%5C%5Ctapinstall.exe'%20)|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'tapinstall.exe'%22%2C%22AND%20%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Path%5C%22)%20!%3D%20'c%3A%5C%5C%5C%5Cprogram%20files%5C%5C%5C%5Cavast%20software%5C%5C%5C%5Csecureline%20vpn%5C%5C%5C%5Ctapinstall.exe'%22%2C%22%5CtAND%20LOWER(%5C%22Process%20Path%5C%22)%20!%3D%20'c%3A%5C%5C%5C%5Cprogram%20files%20(x86)%5C%5C%5C%5Cavast%20software%5C%5C%5C%5Csecureline%20vpn%5C%5C%5C%5Ctapinstall.exe'%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "T1048",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1048",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - T1048",
+            "values": [
+              {
+                "id": "156352",
+                "bb": "Execution of Tap Installer Software",
+                "uuid": "17225028-f335-4c92-adcb-01200c87a915",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.278399",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

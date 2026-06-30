@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "100022",
+  "rule_id": "100022",
+  "uuid": "SYSTEM-1376",
+  "rule_name": "BB:HostDefinition: RPC Servers",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T05:17:35.821Z",
+  "modified": "2023-10-30T02:02:38.572Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:PortDefinition: RPC Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1230"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstHost_Test",
+            "uid": "1",
+            "id": "9"
+          },
+          "text": [
+            "when the destination IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1230",
+      "name": "BB:PortDefinition: RPC Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.570630",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,286 @@
+{
+  "rule_doc_id": "155052",
+  "rule_id": "155052",
+  "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+  "rule_name": "Suspicious Process from Microsoft HTML Help",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-23T16:26:42.807Z",
+  "modified": "2024-07-21T12:38:17.041Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>( \tLOWER(&quot;Parent Process Full Full Name&quot;) == 'hh.exe' \tAND  \tLOWER(&quot;Process Full Full Name&quot;) IN ('cmd.exe','powershell.exe','pwsh.exe','wscript.exe','cscript.exe','regsvr32.exe','wmic.exe','rundll32.exe','mshta.exe','certutil.exe','certreq.exe','msbuild.exe','installutil.exe','schtasks.exe','msiexec.exe') ) OR ( \tLOWER(&quot;Process Full Full Name&quot;) == 'hh.exe' \tAND  \t( \t\tLOWER(&quot;Command&quot;) LIKE '%.application%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%\\downloads\\%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%\\content.outlook\\%' \t\tOR LOWER(&quot;Command&quot;) LIKE '%\\appdata\\local\\temp\\%' \t) )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09LOWER(%22Parent%20Process%20Name%22)%20%3D%3D%20'hh.exe'%20%09AND%20%20%09LOWER(%22Process%20Name%22)%20IN%20('cmd.exe'%2C'powershell.exe'%2C'pwsh.exe'%2C'wscript.exe'%2C'cscript.exe'%2C'regsvr32.exe'%2C'wmic.exe'%2C'rundll32.exe'%2C'mshta.exe'%2C'certutil.exe'%2C'certreq.exe'%2C'msbuild.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'msiexec.exe')%20)%20OR%20(%20%09LOWER(%22Process%20Name%22)%20%3D%3D%20'hh.exe'%20%09AND%20%20%09(%20%09%09LOWER(%22Command%22)%20LIKE%20'%25.application%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25%5Cdownloads%5C%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25%5Ccontent.outlook%5C%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25%5Cappdata%5Clocal%5Ctemp%5C%25'%20%09)%20)|%5B%22(%22%2C%22%5CtLOWER(%5C%22Parent%20Process%20Name%5C%22)%20%3D%3D%20'hh.exe'%22%2C%22%5CtAND%20%22%2C%22%5CtLOWER(%5C%22Process%20Name%5C%22)%20IN%20('cmd.exe'%2C'powershell.exe'%2C'pwsh.exe'%2C'wscript.exe'%2C'cscript.exe'%2C'regsvr32.exe'%2C'wmic.exe'%2C'rundll32.exe'%2C'mshta.exe'%2C'certutil.exe'%2C'certreq.exe'%2C'msbuild.exe'%2C'installutil.exe'%2C'schtasks.exe'%2C'msiexec.exe')%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'hh.exe'%22%2C%22%5CtAND%20%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25.application%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cdownloads%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Ccontent.outlook%5C%5C%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cappdata%5C%5Clocal%5C%5Ctemp%5C%5C%25'%22%2C%22%5Ct)%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "T1047",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1047",
+        "MAP_S": [
+          {
+            "name": "Execution - T1047",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.003",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.003",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.005",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.005",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "JavaScript",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - JavaScript",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.001",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.010",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.010",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.011",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.011",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "Phishing",
+        "STEC": "T1566.001",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1566",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1566.001",
+            "values": [
+              {
+                "id": "155052",
+                "bb": "Suspicious Process from Microsoft HTML Help",
+                "uuid": "a5f5810f-0c5a-40d4-a8ee-0fdadd4d502d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.246058",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,101 @@
+{
+  "rule_doc_id": "116902",
+  "rule_id": "116902",
+  "uuid": "a3928e1a-66f1-4e1d-acb2-1e4f08afa112",
+  "rule_name": "BB:BehaviorDefinition: Regular Virtualization Administration",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-01-14T15:42:24.055Z",
+  "modified": "2024-04-29T12:45:22.109Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Virtual Machine Created, BB:CategoryDefinition: Virtual Machine Deleted, BB:CategoryDefinition: Virtual Machine Restarted, BB:CategoryDefinition: Virtual Machine Started, BB:CategoryDefinition: Virtual Machine Stopped, BB:CategoryDefinition: Cloud Object Shared (O365), BB:CategoryDefinition: User Role Assign Events, BB:CategoryDefinition: Virtual Machine Configuration Change, BB:BehaviorDefinition: Default Policy Version Modification (AWS), BB:BehaviorDefinition: Default Policy Creation (AWS), BB:BehaviorDefinition: Access Key Creation for Another User (AWS), BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure), BB:BehaviorDefinition: Change To AWS Trail Logging Configurations</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "712eb67c-f6ac-409f-ac4c-d2b9c1ea0253, 421bc201-f483-4719-806f-b94d4024149c, 21edbfbc-cba8-4a07-8e4d-72310c8969c8, 6daa32e6-6dbd-491e-924b-21bb87198e01, 2042962f-df39-4627-af54-59bdca9a4280, 4d2a9b22-b602-4422-81ff-15acffd3aebe, f999f163-4926-4a3c-a976-db807e6eccc8, 84501e1b-53ea-4e4d-b852-4cc9bae9a643, c16ab523-35e5-4bf8-bb82-4c54cf2ad549, e60dd432-9d7f-40f7-b6fd-9d556cc17d45, 3a108b8b-36d6-421b-a2ca-00f52bcc494c, b1138b4c-389e-48d5-9431-7681ad4fb687, f8c5883c-f35d-4fc6-a4a3-d883071c7a4e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "712eb67c-f6ac-409f-ac4c-d2b9c1ea0253",
+      "name": "BB:CategoryDefinition: Virtual Machine Created"
+    },
+    {
+      "uuid": "421bc201-f483-4719-806f-b94d4024149c",
+      "name": "BB:CategoryDefinition: Virtual Machine Deleted"
+    },
+    {
+      "uuid": "21edbfbc-cba8-4a07-8e4d-72310c8969c8",
+      "name": "BB:CategoryDefinition: Virtual Machine Restarted"
+    },
+    {
+      "uuid": "6daa32e6-6dbd-491e-924b-21bb87198e01",
+      "name": "BB:CategoryDefinition: Virtual Machine Started"
+    },
+    {
+      "uuid": "2042962f-df39-4627-af54-59bdca9a4280",
+      "name": "BB:CategoryDefinition: Virtual Machine Stopped"
+    },
+    {
+      "uuid": "4d2a9b22-b602-4422-81ff-15acffd3aebe",
+      "name": "BB:CategoryDefinition: Cloud Object Shared (O365)"
+    },
+    {
+      "uuid": "f999f163-4926-4a3c-a976-db807e6eccc8",
+      "name": "BB:CategoryDefinition: User Role Assign Events"
+    },
+    {
+      "uuid": "84501e1b-53ea-4e4d-b852-4cc9bae9a643",
+      "name": "BB:CategoryDefinition: Virtual Machine Configuration Change"
+    },
+    {
+      "uuid": "c16ab523-35e5-4bf8-bb82-4c54cf2ad549",
+      "name": "BB:BehaviorDefinition: Default Policy Version Modification (AWS)"
+    },
+    {
+      "uuid": "e60dd432-9d7f-40f7-b6fd-9d556cc17d45",
+      "name": "BB:BehaviorDefinition: Default Policy Creation (AWS)"
+    },
+    {
+      "uuid": "3a108b8b-36d6-421b-a2ca-00f52bcc494c",
+      "name": "BB:BehaviorDefinition: Access Key Creation for Another User (AWS)"
+    },
+    {
+      "uuid": "b1138b4c-389e-48d5-9431-7681ad4fb687",
+      "name": "BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure)"
+    },
+    {
+      "uuid": "f8c5883c-f35d-4fc6-a4a3-d883071c7a4e",
+      "name": "BB:BehaviorDefinition: Change To AWS Trail Logging Configurations"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.173353",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "107852",
+  "rule_id": "107852",
+  "uuid": "bdb7814a-60d8-41b5-94e6-4235d6ca6aee",
+  "rule_name": "BB:UBA : Application or Service Installed",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-10-13T10:00:25.680Z",
+  "modified": "2024-02-19T16:44:10.279Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(25000054) Instant Messaging Installed, (25000082) Antivirus Installed, (25000089) Applications Installed, (25000190) Peer-to-peer Installed, (25000196) Microsoft Applications Installed, (25000208) Windows Services Installed, (5000515) Failure Audit: A service was installed in the system, (5001613) A service was installed in a system</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "25000054,                                                                                                                                                                                                                                                   25000082,                                                                                                                                                                                                                                                   25000089,                                                                                                                                                                                                                                                   25000190,                                                                                                                                                                                                                                                   25000196,                                                                                                                                                                                                                                                   25000208,                                                                                                                                                                                                                                                   5000515,                                                                                                                                                                                                                                                   5001613"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.078075",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

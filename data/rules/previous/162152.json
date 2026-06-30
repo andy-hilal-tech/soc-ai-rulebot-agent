@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "162152",
+  "rule_id": "162152",
+  "uuid": "782e6a4c-52a5-499d-b86e-f0b97feaba2b",
+  "rule_name": "Turla Service Installed",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-06-29T13:56:51.973Z",
+  "modified": "2024-07-21T12:38:22.145Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Service Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Service Full Name Full Full Name Full Full Name&quot;) in ('srservice', 'ipvpn', 'hkmsvc')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Service%20Name%22)%20in%20('srservice'%2C%20'ipvpn'%2C%20'hkmsvc')|%5B%22LOWER(%5C%22Service%20Name%5C%22)%20in%20('srservice'%2C%20'ipvpn'%2C%20'hkmsvc')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1543",
+            "values": [
+              {
+                "id": "162152",
+                "bb": "Turla Service Installed",
+                "uuid": "782e6a4c-52a5-499d-b86e-f0b97feaba2b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.493037",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

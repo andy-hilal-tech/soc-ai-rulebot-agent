@@ -1,0 +1,109 @@
+{
+  "rule_doc_id": "109902",
+  "rule_id": "109902",
+  "uuid": "9c9e9cd7-a797-413f-9bb4-278409844293",
+  "rule_name": "UBA : User Geography Map",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set, Add to a Reference Map",
+  "created": "2017-06-08T19:45:46.690Z",
+  "modified": "2024-02-19T16:45:45.350Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters, BB:UBA : Excluded Geographic Locations</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80, 5ee6fcf9-2c17-4c59-8797-533542c06992"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceDataTest",
+            "uid": "3",
+            "id": "109",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>Username</a> is the key and <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"4\")' class='dynamic'>Source Geographic Country/Region</a> is the value in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>UBA : Users Last Country - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "sourceGeographic"
+            },
+            {
+              "id": "5",
+              "value": "any"
+            },
+            {
+              "id": "6",
+              "method": "getReferenceDataMaps",
+              "value": "63"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "2",
+            "operation": "incSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "5ee6fcf9-2c17-4c59-8797-533542c06992",
+      "name": "BB:UBA : Excluded Geographic Locations"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.719596",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

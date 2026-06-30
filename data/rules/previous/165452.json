@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "165452",
+  "rule_id": "165452",
+  "uuid": "ae22f18a-e0d3-42e8-bdd4-aa1a5e861a9c",
+  "rule_name": "Microsoft Azure not sending logs for last 15 minutes - H360",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-03-01T17:10:57.613Z",
+  "modified": "2026-04-20T10:22:04.815Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Azure H360</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>900</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "4062"
+            },
+            {
+              "id": "2",
+              "value": "900"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "8005",
+            "offenseMapping": "6",
+            "forceOffenseCreation": "true",
+            "qid": "67501843",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "true",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "10",
+            "description": "Microsoft Azure - H360 - Not sending logs",
+            "name": "Microsoft Azure - H360 - Not sending logs"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.378684",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

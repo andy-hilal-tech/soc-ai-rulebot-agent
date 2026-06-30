@@ -1,0 +1,117 @@
+{
+  "rule_doc_id": "134252",
+  "rule_id": "134252",
+  "uuid": "07a78192-ed46-43b1-973f-c18db1702cfc",
+  "rule_name": "SID History Injection",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-05-18T14:43:56.607Z",
+  "modified": "2024-07-21T10:28:50.231Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5000934) Success Audit: SID History was added to an account, (5000935) Success Audit: An attempt to add SID History to an account failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000934,                                                                                                       5000935"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "52"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.005",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1134.005",
+            "values": [
+              {
+                "id": "134252",
+                "bb": "SID History Injection",
+                "uuid": "07a78192-ed46-43b1-973f-c18db1702cfc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "Access Token Manipulation",
+        "STEC": "T1134.005",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1134",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1134.005",
+            "values": [
+              {
+                "id": "134252",
+                "bb": "SID History Injection",
+                "uuid": "07a78192-ed46-43b1-973f-c18db1702cfc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.646176",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

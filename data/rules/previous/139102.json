@@ -1,0 +1,220 @@
+{
+  "rule_doc_id": "139102",
+  "rule_id": "139102",
+  "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+  "rule_name": "Potential DLL Hijacking",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-02-18T17:15:00.834Z",
+  "modified": "2024-07-21T10:28:56.558Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "5",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.File Created, Audit.Object Load Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 19247"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Extension (custom) is any of dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File ExtensionEQanydll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Process Name (custom) is any of [backgroundTaskHost.exe or cleanmgr.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanybackgroundTaskHost.exe�cleanmgr.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Filename (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>2</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Filename"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "category"
+            },
+            {
+              "id": "5",
+              "value": "2"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.800265",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

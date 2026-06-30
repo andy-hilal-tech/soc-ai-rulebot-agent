@@ -1,0 +1,75 @@
+{
+  "rule_doc_id": "106702",
+  "rule_id": "106702",
+  "uuid": "5e6b6e33-5620-49f4-a3f4-a514cca10a33",
+  "rule_name": "BB:UBA : TGT PAC Forgery Unpatched Server",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-10-22T16:02:02.180Z",
+  "modified": "2024-02-19T16:43:13.457Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5000502) Failure Audit: Special privileges assigned to new logon, (5002028) Special privileges assigned to new logon., (5000858) Success Audit: Successful logon with administrative or special privileges</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000502,             5002028,             5000858"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Username</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Domain Controller Administrators - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "53"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.069280",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

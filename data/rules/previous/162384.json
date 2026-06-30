@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162384",
+  "rule_id": "162384",
+  "uuid": "a2879375-dfa9-4398-bbd1-7a5f7552ec03",
+  "rule_name": "DCOM InternetExplorer.Application Iertutil DLL Hijack - Security",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T12:57:51.319Z",
+  "modified": "2024-08-04T12:57:51.318Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\"=5145 AND LOWER(UTF8(payload)) LIKE '%\\internet explorer\\iertutil.dll%') AND (NOT(LOWER(UTF8(payload)) LIKE '%$%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%3D5145%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cinternet%20explorer%5Ciertutil.dll%25%27%29%20AND%20%28NOT%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%24%25%27%29%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%3D5145%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cinternet%20explorer%5Ciertutil.dll%25%27%29%20AND%20%28NOT%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%24%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Roberto Rodriguez @Cyb3rWard0g, Open Threat Research (OTR) SIGMA Title: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security SIGMA Description: Detects a threat actor creating a file named `iertutil.dll` in the `C:\\Program Files\\Internet Explorer\\` directory over the network for a DCOM InternetExplorer DLL Hijack scenario.  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "DCOM InternetExplorer.Application Iertutil DLL Hijack - Security"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.916509",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

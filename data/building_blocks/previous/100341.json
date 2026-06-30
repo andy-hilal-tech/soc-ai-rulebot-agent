@@ -1,0 +1,88 @@
+{
+  "rule_doc_id": "100341",
+  "rule_id": "100341",
+  "uuid": "SYSTEM-1150",
+  "rule_name": "BB:Suspicious: Local: Unidirectional UDP or Misc Flows",
+  "object_type": "building_block",
+  "group": "Suspicious",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-04-15T19:33:58.382Z",
+  "modified": "2023-10-30T02:19:58.859Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25",
+            "negate": "false"
+          },
+          "text": [
+            "when the flow context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "302"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>BB:Threats: Suspicious IP Protocol Usage:Unidirectional UDP and Misc Flows</a> match at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>15</a> times in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1049"
+            },
+            {
+              "id": "2",
+              "value": "15"
+            },
+            {
+              "id": "3",
+              "method": "getFlowDatabaseFields",
+              "value": ""
+            },
+            {
+              "id": "4",
+              "method": "getFlowDatabaseFields",
+              "value": ""
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1049",
+      "name": "BB:Threats: Suspicious IP Protocol Usage:Unidirectional UDP and Misc Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.967485",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

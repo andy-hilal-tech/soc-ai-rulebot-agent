@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "108352",
+  "rule_id": "108352",
+  "uuid": "0fb19a99-f328-4cbf-b38f-01c9ccdd2bf1",
+  "rule_name": "BB:UBA : Multiple Blocked File Uploads",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-05-20T12:13:06.583Z",
+  "modified": "2024-02-19T16:44:53.509Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.FTP Action Denied, Access.Firewall Session Closed, Access.Access Denied</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4032, 4008, 4015"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "3",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>443, 21, 80</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "443, 21, 80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>10</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "10"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.094222",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

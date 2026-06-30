@@ -1,0 +1,48 @@
+{
+  "rule_doc_id": "100351",
+  "rule_id": "100351",
+  "uuid": "747e59f0-f18a-4ce8-b152-a4f3eec135c7",
+  "rule_name": "BB:NetworkDefinition: Trusted Source Network Segment",
+  "object_type": "building_block",
+  "group": "Network Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2016-03-31T16:31:14.065Z",
+  "modified": "2024-07-21T07:32:58.732Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkObject_Test",
+            "uid": "0",
+            "id": "108"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>source</a> network is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'> Server_Network,  Regulatory_Compliance_Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getNetworkView",
+              "value": " Server_Network,  Regulatory_Compliance_Servers"
+            },
+            {
+              "id": "2",
+              "value": "Source"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.983272",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

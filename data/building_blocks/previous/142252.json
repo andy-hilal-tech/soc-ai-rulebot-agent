@@ -1,0 +1,87 @@
+{
+  "rule_doc_id": "142252",
+  "rule_id": "142252",
+  "uuid": "f477d9b6-c2d7-46db-b306-e8f87430474c",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Changing of User Agent",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-06-02T12:25:35.631Z",
+  "modified": "2024-07-21T10:29:00.023Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: User Agent Changed via Curl, BB:BehaviorDefinition: User Agent Changed via Powershell</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "88ad4d45-09af-4506-a7d8-1073ef609eb0, eda76d71-8719-454c-accf-d958c538d151"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "88ad4d45-09af-4506-a7d8-1073ef609eb0",
+      "name": "BB:BehaviorDefinition: User Agent Changed via Curl"
+    },
+    {
+      "uuid": "eda76d71-8719-454c-accf-d958c538d151",
+      "name": "BB:BehaviorDefinition: User Agent Changed via Powershell"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "T1071.001",
+        "TAC": "Command and Control",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1071.001",
+            "values": [
+              {
+                "id": "133402",
+                "bb": "BB:BehaviorDefinition: User Agent Changed via Curl",
+                "uuid": "88ad4d45-09af-4506-a7d8-1073ef609eb0",
+                "T": "EVENT"
+              },
+              {
+                "id": "133552",
+                "bb": "BB:BehaviorDefinition: User Agent Changed via Powershell",
+                "uuid": "eda76d71-8719-454c-accf-d958c538d151",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.500274",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

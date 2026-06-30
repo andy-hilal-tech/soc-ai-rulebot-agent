@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "165253",
+  "rule_id": "165253",
+  "uuid": "c744471e-1c67-4555-a892-c03e03b3604d",
+  "rule_name": "Sysmon File Executable Creation Detected",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-09-22T09:04:00.209Z",
+  "modified": "2025-09-22T09:40:44.775Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND &quot;Event ID&quot;=29</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceGroupID_Test",
+            "uid": "1",
+            "id": "93"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Bahrain Duty Free, Health360, NOMAC</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getSensorDevicesTreeRoot",
+              "value": "100075, 101875, 100126"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "4",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "5",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.311966",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

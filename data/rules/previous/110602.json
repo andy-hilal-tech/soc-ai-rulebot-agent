@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "110602",
+  "rule_id": "110602",
+  "uuid": "240f12d7-5565-4326-93d4-9b2b7744bcb2",
+  "rule_name": "Potential Credential Dumping Tool Detected",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event, Add to a Reference Set",
+  "created": "2017-08-18T00:48:50.830Z",
+  "modified": "2024-02-19T16:49:26.515Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Suspicious Access to lsass Process, Suspicious Access to lsass Process From Unknown Call Trace, Thread Creation into lsass Process, Mimikatz IMP Hash Observed, Remote Management Service Connected to lsass Pipe, Lsass Process Connected to a Pipe, Unsigned Executable Loaded In lsass</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "ebeb8d03-fe74-495f-8e3d-82c6861d121f, d5e3cece-244f-4e28-af33-8cb75b6cb97a, d5c1b55d-1fee-485e-84b5-2cd992b3d648, 279ea028-0346-410f-9c22-3ae8773be689, e219dd04-d372-4fd8-94d7-a50b66add261, bd3b3315-d628-43d5-9eaf-161acc1af4ae, a8eaede7-d733-4f42-8d03-b8cd353f72d2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "7",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "ebeb8d03-fe74-495f-8e3d-82c6861d121f",
+      "name": "Suspicious Access to lsass Process"
+    },
+    {
+      "uuid": "d5e3cece-244f-4e28-af33-8cb75b6cb97a",
+      "name": "Suspicious Access to lsass Process From Unknown Call Trace"
+    },
+    {
+      "uuid": "d5c1b55d-1fee-485e-84b5-2cd992b3d648",
+      "name": "Thread Creation into lsass Process"
+    },
+    {
+      "uuid": "279ea028-0346-410f-9c22-3ae8773be689",
+      "name": "Mimikatz IMP Hash Observed"
+    },
+    {
+      "uuid": "e219dd04-d372-4fd8-94d7-a50b66add261",
+      "name": "Remote Management Service Connected to lsass Pipe"
+    },
+    {
+      "uuid": "bd3b3315-d628-43d5-9eaf-161acc1af4ae",
+      "name": "Lsass Process Connected to a Pipe"
+    },
+    {
+      "uuid": "a8eaede7-d733-4f42-8d03-b8cd353f72d2",
+      "name": "Unsigned Executable Loaded In lsass"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.734821",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

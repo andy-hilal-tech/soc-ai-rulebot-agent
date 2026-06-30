@@ -1,0 +1,78 @@
+{
+  "rule_doc_id": "129602",
+  "rule_id": "129602",
+  "uuid": "SYSTEM-1404",
+  "rule_name": "Single Merged Recon Events Local Scanner",
+  "object_type": "rule",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-10T14:11:14.354Z",
+  "modified": "2024-07-21T09:37:03.752Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:ReconDetected: Devices That Merge Recon into Single Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1257"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Local to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l, l2r"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1257",
+      "name": "BB:ReconDetected: Devices That Merge Recon into Single Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.518418",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

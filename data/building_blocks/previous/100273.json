@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100273",
+  "rule_id": "100273",
+  "uuid": "SYSTEM-1600",
+  "rule_name": "BB:CategoryDefinition: Logout Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2012-03-20T19:59:54.124Z",
+  "modified": "2023-10-30T02:02:39.142Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Admin Logout, Authentication.Auth Server Logout, Authentication.FTP Logout, Authentication.Host Logout, Authentication.Misc Logout, Authentication.Remote Access Logout, Authentication.Samba Logout, Authentication.SSH Logout, Authentication.Telnet Logout, Authentication.VoIP Logout, Authentication.Web Service Logout</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3060, 3058, 3061, 3056, 3057, 3063, 3065, 3062, 3064, 3068, 3059"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.880375",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

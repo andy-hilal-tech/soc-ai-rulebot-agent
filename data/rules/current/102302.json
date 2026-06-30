@@ -86,7 +86,16 @@
       "name": "UBA : Unauthorized Access"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "m",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Credential Access": [
       {
@@ -118,6 +127,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.487960",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.916721",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

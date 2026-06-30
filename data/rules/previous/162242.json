@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162242",
+  "rule_id": "162242",
+  "uuid": "870fc5eb-1fec-4b1b-9722-4b7ac116fc5a",
+  "rule_name": "CodeIntegrity - Disallowed File For Protected Processes Has Been Blocked",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:24:51.515Z",
+  "modified": "2024-08-04T08:24:51.514Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=3104</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D3104|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D3104%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: CodeIntegrity - Disallowed File For Protected Processes Has Been Blocked SIGMA Description: Detects block events for files that are disallowed by code integrity for protected processes  False positives: - Unlikely  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "CodeIntegrity - Disallowed File For Protected Processes Has Been Blocked"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.586329",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

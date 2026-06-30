@@ -1,0 +1,47 @@
+{
+  "rule_doc_id": "100352",
+  "rule_id": "100352",
+  "uuid": "SYSTEM-1554",
+  "rule_name": "BB:CategoryDefinition: Superuser Accounts",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-07-16T13:59:33.984Z",
+  "modified": "2024-07-21T07:33:03.884Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Regex_Test",
+            "uid": "0",
+            "id": "100"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>event username</a> matches the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>admin, superuser, root, toor, init, Admin, Administrator, ADMINISTRATOR, ADMIN, ROOT, SYS, SYSTEM</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "EventUserName"
+            },
+            {
+              "id": "2",
+              "value": "admin, superuser, root, toor, init, Admin, Administrator, ADMINISTRATOR, ADMIN, ROOT, SYS, SYSTEM"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.983272",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

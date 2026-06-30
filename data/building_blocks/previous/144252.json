@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "144252",
+  "rule_id": "144252",
+  "uuid": "37fcfcbd-d1e5-43c4-a050-146fe4873988",
+  "rule_name": "BB:MITRE.LIN.T1190: Public-Facing Application",
+  "object_type": "building_block",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Apache HTTP Server, NGINX HTTP Server, Squid Web Proxy, Microsoft SQL Server, Oracle Database Listener, Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "10, 439, 46, 101, 141, 11"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "Exploit Public-Facing Application",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1190",
+        "MAP_S": [
+          {
+            "name": "Initial Access - Exploit Public-Facing Application",
+            "values": [
+              {
+                "id": "144252",
+                "bb": "BB:MITRE.LIN.T1190: Public-Facing Application",
+                "uuid": "37fcfcbd-d1e5-43c4-a050-146fe4873988",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.516296",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

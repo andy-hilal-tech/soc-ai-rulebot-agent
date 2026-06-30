@@ -1,0 +1,133 @@
+{
+  "rule_doc_id": "116652",
+  "rule_id": "116652",
+  "uuid": "b1138b4c-389e-48d5-9431-7681ad4fb687",
+  "rule_name": "BB:BehaviorDefinition: Role Assigned to a Resource with Managed Identity (Azure)",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-02-24T20:39:40.132Z",
+  "modified": "2024-04-29T12:45:18.771Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "290df59b-44ef-452a-9633-2d52e74dbc97, edf618f4-9e8c-4068-88aa-2675753eb003"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Role Creation Success, Authentication.Role Assignment Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3127, 3133"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Object Type (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Object TypeNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Object ID (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Object Type (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Object ID"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Object Type"
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    },
+    {
+      "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+      "name": "BB:DeviceDefinition: Virtualization"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.157617",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

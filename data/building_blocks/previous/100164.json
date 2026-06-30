@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100164",
+  "rule_id": "100164",
+  "uuid": "SYSTEM-1478",
+  "rule_name": "BB:CategoryDefinition: Suspicious Event Categories",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-05-06T18:14:00.339Z",
+  "modified": "2023-10-30T02:02:35.411Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "where the Event Category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Suspicious, Potential Exploit, Access.ACL Deny, Access.Firewall  Deny, Access.IPS Deny, Access.No Translation Group Found, Flow.Empty Packet Flows, Flow.High number of Empty Packet Flows, Flow.High number of Unidirectional Flows, Flow.High number of Unidirectional ICMP Flows, Flow.High number of Unidirectional TCP Flows, Flow.Low number of Empty Packet Flows, Flow.Low number of Unidirectional Flows, Flow.Low number of Unidirectional ICMP Flows, Flow.Low number of Unidirectional TCP Flows, Flow.Medium number of Empty Packet Flows, Flow.Medium number of Unidirectional Flows, Flow.Medium number of Unidirectional ICMP Flows, Flow.Medium number of Unidirectional TCP Flows, Flow.Suspicious Flow, Flow.Suspicious ICMP Flow, Flow.Suspicious TCP Flow, Flow.Suspicious UDP Flow, Flow.Unidirectional Flow, Flow.Unidirectional ICMP Flow, Flow.Unidirectional TCP Flow, Authentication.Admin Login Failure, Authentication.Auth Server Login Failed, Authentication.FTP Login Failed, Authentication.General Authentication Failed, Authentication.Host Login Failed, Authentication.Login with username/password defaults failed, Authentication.Mail Service Login Failed, Authentication.Misc Login Failed, Authentication.Privilege Escalation  Failed, Authentication.Remote Access Login Failed, Authentication.Samba Login Failed, Authentication.SSH Login Failed, Authentication.Suspicious Password, Authentication.Suspicious Username, Authentication.Telnet Login Failed, Authentication.Web Service Login Failed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "7000, 13000, 4013, 4003, 4006, 4010, 14017, 14020, 14004, 14012, 14008, 14018, 14002, 14010, 14006, 14019, 14003, 14011, 14007, 14016, 14013, 14015, 14014, 14001, 14009, 14005, 3015, 3010, 3020, 3047, 3003, 3018, 3009, 3005, 3006, 3045, 3052, 3022, 3050, 3016, 3049, 3013"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.736773",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

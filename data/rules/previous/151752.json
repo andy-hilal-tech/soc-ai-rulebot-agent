@@ -1,0 +1,155 @@
+{
+  "rule_doc_id": "151752",
+  "rule_id": "151752",
+  "uuid": "9b7b2c44-3ea6-4dbc-8900-f9f33579bba8",
+  "rule_name": "SMB Create Remote File Admin Share",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-17T14:07:48.926Z",
+  "modified": "2024-07-21T12:38:27.097Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001471) Success Audit: Network Share Object Checked for Access</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001471"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Share Full Full Name&quot;) == 'c$'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Share%20Name%22)%20%3D%3D%20'c%24'|%5B%22LOWER(%5C%22Share%20Name%5C%22)%20%3D%3D%20'c%24'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Access Mask (custom) is any of 0x2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Access MaskEQany0x2"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "5",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"5\", \"1\")' class='dynamic'>&quot;Subject Account Full Full Name&quot; MATCHES '.*\\$$'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Subject%20Account%20Name%22%20MATCHES%20'.*%5C%24%24'|%5B%22%5C%22Subject%20Account%20Name%5C%22%20MATCHES%20'.*%5C%5C%24%24'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.002",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.002",
+            "values": [
+              {
+                "id": "151752",
+                "bb": "SMB Create Remote File Admin Share",
+                "uuid": "9b7b2c44-3ea6-4dbc-8900-f9f33579bba8",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.151423",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

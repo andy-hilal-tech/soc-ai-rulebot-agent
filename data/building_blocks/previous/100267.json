@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100267",
+  "rule_id": "100267",
+  "uuid": "fa36fecd-20b2-4f91-ba12-02b89ce38b3e",
+  "rule_name": "BB:DeviceDefinition: Mail",
+  "object_type": "building_block",
+  "group": "Email, Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-10-24T14:03:37.935Z",
+  "modified": "2023-10-30T02:20:02.227Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Cisco IronPort, PostFix MailTransferAgent, Microsoft Exchange Server, IBM Lotus Domino, Solaris Operating System Sendmail Logs, Trend Micro Deep Discovery Email Inspector, Proofpoint Enterprise Protection/Enterprise Privacy, Barracuda Spam &amp; Virus Firewall, Microsoft Office 365</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "179, 313, 99, 186, 29, 401, 332, 278, 397"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.880375",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

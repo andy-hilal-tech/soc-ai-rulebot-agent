@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162229",
+  "rule_id": "162229",
+  "uuid": "56e190c2-2f15-4941-8487-8b5dfc4962b1",
+  "rule_name": "Suspicious Remote AppX Package Locations",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:09:02.637Z",
+  "modified": "2024-08-04T08:09:02.635Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=854 AND (LOWER(\"File Path\") LIKE '%.githubusercontent.com%' OR LOWER(\"File Path\") LIKE '%anonfiles.com%' OR LOWER(\"File Path\") LIKE '%cdn.discordapp.com%' OR LOWER(\"File Path\") LIKE '%cdn.discordapp.com/attachments/%' OR LOWER(\"File Path\") LIKE '%ddns.net%' OR LOWER(\"File Path\") LIKE '%dl.dropboxusercontent.com%' OR LOWER(\"File Path\") LIKE '%ghostbin.co%' OR LOWER(\"File Path\") LIKE '%glitch.me%' OR LOWER(\"File Path\") LIKE '%gofile.io%' OR LOWER(\"File Path\") LIKE '%hastebin.com%' OR LOWER(\"File Path\") LIKE '%mediafire.com%' OR LOWER(\"File Path\") LIKE '%mega.nz%' OR LOWER(\"File Path\") LIKE '%onrender.com%' OR LOWER(\"File Path\") LIKE '%paste.ee%' OR LOWER(\"File Path\") LIKE '%pastebin.com%' OR LOWER(\"File Path\") LIKE '%pastebin.pl%' OR LOWER(\"File Path\") LIKE '%pastetext.net%' OR LOWER(\"File Path\") LIKE '%privatlab.com%' OR LOWER(\"File Path\") LIKE '%privatlab.net%' OR LOWER(\"File Path\") LIKE '%send.exploit.in%' OR LOWER(\"File Path\") LIKE '%sendspace.com%' OR LOWER(\"File Path\") LIKE '%storage.googleapis.com%' OR LOWER(\"File Path\") LIKE '%storjshare.io%' OR LOWER(\"File Path\") LIKE '%supabase.co%' OR LOWER(\"File Path\") LIKE '%temp.sh%' OR LOWER(\"File Path\") LIKE '%transfer.sh%' OR LOWER(\"File Path\") LIKE '%ufile.io%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D854%20AND%20%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25.githubusercontent.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25anonfiles.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25cdn.discordapp.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25cdn.discordapp.com/attachments/%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ddns.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25dl.dropboxusercontent.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ghostbin.co%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25glitch.me%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25gofile.io%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25hastebin.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25mediafire.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25mega.nz%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25onrender.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25paste.ee%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastebin.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastebin.pl%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastetext.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25privatlab.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25privatlab.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25send.exploit.in%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25sendspace.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25storage.googleapis.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25storjshare.io%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25supabase.co%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25temp.sh%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25transfer.sh%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ufile.io%25%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D854%20AND%20%28LOWER%28%22File%20Path%22%29%20LIKE%20%27%25.githubusercontent.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25anonfiles.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25cdn.discordapp.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25cdn.discordapp.com/attachments/%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ddns.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25dl.dropboxusercontent.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ghostbin.co%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25glitch.me%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25gofile.io%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25hastebin.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25mediafire.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25mega.nz%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25onrender.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25paste.ee%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastebin.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastebin.pl%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25pastetext.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25privatlab.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25privatlab.net%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25send.exploit.in%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25sendspace.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25storage.googleapis.com%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25storjshare.io%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25supabase.co%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25temp.sh%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25transfer.sh%25%27%20OR%20LOWER%28%22File%20Path%22%29%20LIKE%20%27%25ufile.io%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: Suspicious Remote AppX Package Locations SIGMA Description: Detects an appx package added the pipeline of the \"to be processed\" packages which is downloaded from a suspicious domain  False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Suspicious Remote AppX Package Locations"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.553741",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

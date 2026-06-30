@@ -1,0 +1,218 @@
+{
+  "rule_doc_id": "108252",
+  "rule_id": "108252",
+  "uuid": "8696e4d2-9c6c-45da-a9f7-2c2b700eb957",
+  "rule_name": "UBA : Multiple blocked file uploads followed by a successful upload",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-05-20T13:36:46.313Z",
+  "modified": "2024-02-19T16:44:52.884Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c18f0605-67d5-4100-8710-885ca7a393f7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "305"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:UBA : Successful File Upload</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after any of <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:UBA : Multiple Blocked File Uploads</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "7b851b26-adfb-42f8-bbe8-1bea35824211"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "0fb19a99-f328-4cbf-b38f-01c9ccdd2bf1"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP, Destination IP</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP, destinationIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500337",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=10",
+            "name": "UBA : Multiple blocked file uploads followed by a successful upload"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+      "name": "BB:UBA : Common Log Source Filters"
+    },
+    {
+      "uuid": "7b851b26-adfb-42f8-bbe8-1bea35824211",
+      "name": "BB:UBA : Successful File Upload"
+    },
+    {
+      "uuid": "0fb19a99-f328-4cbf-b38f-01c9ccdd2bf1",
+      "name": "BB:UBA : Multiple Blocked File Uploads"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - None",
+            "values": [
+              {
+                "id": "108252",
+                "bb": "UBA : Multiple blocked file uploads followed by a successful upload",
+                "uuid": "8696e4d2-9c6c-45da-a9f7-2c2b700eb957",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "108252",
+                "bb": "UBA : Multiple blocked file uploads followed by a successful upload",
+                "uuid": "8696e4d2-9c6c-45da-a9f7-2c2b700eb957",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.675503",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

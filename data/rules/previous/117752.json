@@ -1,0 +1,101 @@
+{
+  "rule_doc_id": "117752",
+  "rule_id": "117752",
+  "uuid": "d783ab9c-9319-4055-9848-c01ec167ffe9",
+  "rule_name": "High Privilege User Performing Suspicious Actions",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-06-10T18:39:53.753Z",
+  "modified": "2024-04-29T12:45:20.715Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Virtualization Activities</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "6bc4f9c5-fb7e-4d29-a5fb-46857adf0f93"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Username, Target Username (custom), User ID (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Users with High Privilege Role Names - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "userName, Target Username, User ID"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "164"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "2",
+            "operation": "incSeverity",
+            "metric": "setSeverity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "6bc4f9c5-fb7e-4d29-a5fb-46857adf0f93",
+      "name": "BB:BehaviorDefinition: Suspicious Virtualization Activities"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.010655",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

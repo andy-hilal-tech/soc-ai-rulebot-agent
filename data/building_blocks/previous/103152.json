@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103152",
+  "rule_id": "103152",
+  "uuid": "ef826f3a-4acb-46a6-8829-1fb3c4671eeb",
+  "rule_name": "BB:UBA : User Account Created",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-09-19T07:17:15.380Z",
+  "modified": "2024-02-19T16:45:45.400Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Added, Authentication.User Account Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3041, 3031"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.030508",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

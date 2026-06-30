@@ -1,0 +1,155 @@
+{
+  "rule_doc_id": "137552",
+  "rule_id": "137552",
+  "uuid": "7ebad559-6365-4381-8a94-d9e7f50f24a0",
+  "rule_name": "BB:BehaviorDefinition: Group or Account Discovery",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-28T17:17:27.021Z",
+  "modified": "2024-07-21T10:28:55.753Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19252"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;Command Arguments&quot; is not NULL or &quot;Command&quot; is not NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Command%20Arguments%22%20is%20not%20NULL%20or%20%22Command%22%20is%20not%20NULL|%5B%22%5C%22Command%20Arguments%5C%22%20is%20not%20NULL%20or%20%5C%22Command%5C%22%20is%20not%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Command Arguments&quot;) MATCHES '.*&quot;(groups|users|w(ho(ami)?)?|ldapsearch|id)&quot;.*' OR &quot;Command&quot; MATCHES '.*?net(\\.exe\\&quot;)?\\s+(localgroup|group.*?\\/domain).*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%20Arguments%22)%20MATCHES%20'.*%22(groups%7Cusers%7Cw(ho(ami)%3F)%3F%7Cldapsearch%7Cid)%22.*'%20OR%20%22Command%22%20MATCHES%20'.*%3Fnet(%5C.exe%5C%22)%3F%5Cs%2B(localgroup%7Cgroup.*%3F%5C%2Fdomain).*'|%5B%22LOWER(%5C%22Command%20Arguments%5C%22)%20MATCHES%20'.*%5C%22(groups%7Cusers%7Cw(ho(ami)%3F)%3F%7Cldapsearch%7Cid)%5C%22.*'%20OR%20%5C%22Command%5C%22%20MATCHES%20'.*%3Fnet(%5C%5C.exe%5C%5C%5C%22)%3F%5C%5Cs%2B(localgroup%7Cgroup.*%3F%5C%5C%2Fdomain).*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1615",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1615",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1615",
+            "values": [
+              {
+                "id": "137552",
+                "bb": "BB:BehaviorDefinition: Group or Account Discovery",
+                "uuid": "7ebad559-6365-4381-8a94-d9e7f50f24a0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1087",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087",
+            "values": [
+              {
+                "id": "137552",
+                "bb": "BB:BehaviorDefinition: Group or Account Discovery",
+                "uuid": "7ebad559-6365-4381-8a94-d9e7f50f24a0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.420270",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

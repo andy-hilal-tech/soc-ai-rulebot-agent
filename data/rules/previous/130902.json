@@ -1,0 +1,95 @@
+{
+  "rule_doc_id": "130902",
+  "rule_id": "130902",
+  "uuid": "ce3ccb65-5572-41ff-81f7-31ab7e450f28",
+  "rule_name": "Files Deleted from Sensitive File Directories",
+  "object_type": "rule",
+  "group": "Exfiltration",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Remove from a Reference Set",
+  "created": "2019-03-07T13:24:50.818Z",
+  "modified": "2024-07-21T09:43:21.635Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:CategoryDefinition: File Deleted Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "d52104ba-8cf8-4a02-a7bd-d7f4dd708b67"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Exfiltration: Files in Sensitive Directories</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "7e9d4fd7-2803-4952-ac24-c215b0888ee2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSetRemove": "true"
+      },
+      "removeFromReferenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Filename",
+            "id": "195",
+            "type": "ALN",
+            "name": "Files in Sensitive Directories"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "d52104ba-8cf8-4a02-a7bd-d7f4dd708b67",
+      "name": "BB:CategoryDefinition: Object Deleted Events"
+    },
+    {
+      "uuid": "7e9d4fd7-2803-4952-ac24-c215b0888ee2",
+      "name": "BB:Exfiltration: Files in Sensitive Directories"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.549664",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

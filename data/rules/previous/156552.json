@@ -1,0 +1,178 @@
+{
+  "rule_doc_id": "156552",
+  "rule_id": "156552",
+  "uuid": "71c476bb-ff42-4931-aed9-06acebfc2bb6",
+  "rule_name": "Suspicious Svchost Execution Anomaly",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-27T14:53:02.154Z",
+  "modified": "2024-07-21T12:38:42.126Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) == 'svchost.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20%3D%3D%20'svchost.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20%3D%3D%20'svchost.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Command (custom) matches any of expressions svchost\\.exe$</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandREXanysvchost\\.exe$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Parent Process Full Full Name&quot;) MATCHES '(rpcnet|rpcnetp)\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Parent%20Process%20Name%22)%20MATCHES%20'(rpcnet%7Crpcnetp)%5C.exe'|%5B%22LOWER(%5C%22Parent%20Process%20Name%5C%22)%20MATCHES%20'(rpcnet%7Crpcnetp)%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1055",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1055",
+            "values": [
+              {
+                "id": "156552",
+                "bb": "Suspicious Svchost Execution Anomaly",
+                "uuid": "71c476bb-ff42-4931-aed9-06acebfc2bb6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "T1055",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055",
+            "values": [
+              {
+                "id": "156552",
+                "bb": "Suspicious Svchost Execution Anomaly",
+                "uuid": "71c476bb-ff42-4931-aed9-06acebfc2bb6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.278399",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

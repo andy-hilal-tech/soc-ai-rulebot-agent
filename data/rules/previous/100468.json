@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "100468",
+  "rule_id": "100468",
+  "uuid": "da9460f2-a5d0-48ab-936b-41a50768d04d",
+  "rule_name": "Device Stopped Sending Events",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-01-16T13:34:35.586Z",
+  "modified": "2024-01-16T13:34:35.586Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "LackOfDeviceEvents_Test",
+            "uid": "0",
+            "id": "92"
+          },
+          "text": [
+            "when the event(s) have not been detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Flow Classification Engine-5 :: vm175</a> for <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>3600</a> seconds"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "5"
+            },
+            {
+              "id": "2",
+              "value": "3600"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.456204",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "151302",
+  "rule_id": "151302",
+  "uuid": "5b93f963-d2e9-4df2-9e25-9405469e49ef",
+  "rule_name": "BB:BehaviorDefinition: Execution DLL of Choice Using WAB",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T20:10:12.365Z",
+  "modified": "2024-07-21T12:38:39.880Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Target Object&quot;) LIKE '%\\software\\microsoft\\wab\\dllpath') or (LOWER(&quot;Registry Key&quot;) LIKE '%\\software\\microsoft\\wab\\dllpath')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Target%20Object%22)%20LIKE%20'%25%5Csoftware%5Cmicrosoft%5Cwab%5Cdllpath')%20or%20(LOWER(%22Registry%20Key%22)%20LIKE%20'%25%5Csoftware%5Cmicrosoft%5Cwab%5Cdllpath')|%5B%22(LOWER(%5C%22Target%20Object%5C%22)%20LIKE%20'%25%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwab%5C%5Cdllpath')%20or%20(LOWER(%5C%22Registry%20Key%5C%22)%20LIKE%20'%25%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwab%5C%5Cdllpath')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(&quot;Registry Value Data&quot;=='%CommonProgramFiles%\\System\\wab32.dll')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Registry%20Value%20Data%22%3D%3D'%25CommonProgramFiles%25%5CSystem%5Cwab32.dll')|%5B%22(%5C%22Registry%20Value%20Data%5C%22%3D%3D'%25CommonProgramFiles%25%5C%5CSystem%5C%5Cwab32.dll')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "151302",
+                "bb": "BB:BehaviorDefinition: Execution DLL of Choice Using WAB",
+                "uuid": "5b93f963-d2e9-4df2-9e25-9405469e49ef",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.686718",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

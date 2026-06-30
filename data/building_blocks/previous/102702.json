@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "102702",
+  "rule_id": "102702",
+  "uuid": "4a57352e-09e4-476c-9755-bd4f107b356d",
+  "rule_name": "BB:UBA : Access Denies",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-08-18T06:11:22.090Z",
+  "modified": "2024-02-19T16:39:42.265Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Access.Access Denied, Access.ACL Deny, Access.Database Action Denied, Access.Firewall Deny, Access.FTP Action Denied, Access.IPS Deny, Access.Misc Application Action Denied, Access.PII Access Denied, Access.Session Denied, Access.Unauthorized Access Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4015, 4013, 4030, 4003, 4032, 4006, 4028, 4038, 4020, 4026"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.015182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

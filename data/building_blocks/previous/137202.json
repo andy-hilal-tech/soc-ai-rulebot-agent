@@ -1,0 +1,140 @@
+{
+  "rule_doc_id": "137202",
+  "rule_id": "137202",
+  "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+  "rule_name": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-04-28T15:38:43.932Z",
+  "modified": "2024-07-21T10:28:54.784Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Filename (custom) is not N/A, File Directory (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameNENA$_NULL_$File DirectoryNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>LOWER(&quot;File Directory&quot;) IN ('/boot', '/etc/pam.d', '/etc/rsyslog', '/etc/openldap', '/etc/sysconfig/network-scripts', '/var/spool/cron', '/etc/cron%', '/etc/init.d', '/usr/bin', '/usr/sbin', '/bin', '/boot', '/usr/local/bin', '/usr/local/sbin', '/opt/bin', '/opt/sbin')  OR (LOWER(&quot;File Directory&quot;) IN ('/etc') AND LOWER(&quot;Filename&quot;) IN ('shadow', 'passwd', 'sudoers', '%.conf', 'crontab', 'gshadow', 'group'))  OR (LOWER(&quot;File Directory&quot;) IN ('/etc') AND LOWER(&quot;Filename&quot;) IN ('login', 'passwd')) OR (LOWER(&quot;File Directory&quot;) IN ('/etc/sysconfig') AND LOWER(&quot;Filename&quot;) IN ('syslog'))  OR (LOWER(&quot;File Directory&quot;) IN ('/etc/security') AND LOWER(&quot;Filename&quot;) IN ('opasswd')) OR (LOWER(&quot;File Directory&quot;) IN ('/etc/default') AND LOWER(&quot;Filename&quot;) IN ('ufw')) OR LOWER(&quot;Filename&quot;) IN ('.bash_history') OR (LOWER(&quot;File Directory&quot;) IN ('c:') AND LOWER(&quot;Filename&quot;) IN ('autoexec.bat', 'boot.ini', 'config.sys')) OR (LOWER(&quot;File Directory&quot;) IN ('c:\\windows') AND LOWER(&quot;Filename&quot;) IN ('system.ini', 'win.ini', 'regedit.exe', 'explorer.exe')) OR (LOWER(&quot;File Directory&quot;) IN ('c:\\windows\\system32') AND LOWER(&quot;Filename&quot;) IN ('userinit.exe')) OR (LOWER(&quot;File Directory&quot;) IN ('c:\\program files\\microsoft security client') AND LOWER(&quot;Filename&quot;) IN ('msseces.exe'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22File%20Directory%22)%20IN%20('%2Fboot',%20'%2Fetc%2Fpam.d',%20'%2Fetc%2Frsyslog',%20'%2Fetc%2Fopenldap',%20'%2Fetc%2Fsysconfig%2Fnetwork-scripts',%20'%2Fvar%2Fspool%2Fcron',%20'%2Fetc%2Fcron%25',%20'%2Fetc%2Finit.d',%20'%2Fusr%2Fbin',%20'%2Fusr%2Fsbin',%20'%2Fbin',%20'%2Fboot',%20'%2Fusr%2Flocal%2Fbin',%20'%2Fusr%2Flocal%2Fsbin',%20'%2Fopt%2Fbin',%20'%2Fopt%2Fsbin')%20%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('%2Fetc')%20AND%20LOWER(%22Filename%22)%20IN%20('shadow',%20'passwd',%20'sudoers',%20'%25.conf',%20'crontab',%20'gshadow',%20'group'))%20%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('%2Fetc')%20AND%20LOWER(%22Filename%22)%20IN%20('login',%20'passwd'))%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('%2Fetc%2Fsysconfig')%20AND%20LOWER(%22Filename%22)%20IN%20('syslog'))%20%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('%2Fetc%2Fsecurity')%20AND%20LOWER(%22Filename%22)%20IN%20('opasswd'))%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('%2Fetc%2Fdefault')%20AND%20LOWER(%22Filename%22)%20IN%20('ufw'))%20OR%20LOWER(%22Filename%22)%20IN%20('.bash_history')%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('c%3A')%20AND%20LOWER(%22Filename%22)%20IN%20('autoexec.bat',%20'boot.ini',%20'config.sys'))%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('c%3A%5Cwindows')%20AND%20LOWER(%22Filename%22)%20IN%20('system.ini',%20'win.ini',%20'regedit.exe',%20'explorer.exe'))%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('c%3A%5Cwindows%5Csystem32')%20AND%20LOWER(%22Filename%22)%20IN%20('userinit.exe'))%20OR%20(LOWER(%22File%20Directory%22)%20IN%20('c%3A%5Cprogram%20files%5Cmicrosoft%20security%20client')%20AND%20LOWER(%22Filename%22)%20IN%20('msseces.exe'))|%5B%22LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fboot',%20'%2Fetc%2Fpam.d',%20'%2Fetc%2Frsyslog',%20'%2Fetc%2Fopenldap',%20'%2Fetc%2Fsysconfig%2Fnetwork-scripts',%20'%2Fvar%2Fspool%2Fcron',%20'%2Fetc%2Fcron%25',%20'%2Fetc%2Finit.d',%20'%2Fusr%2Fbin',%20'%2Fusr%2Fsbin',%20'%2Fbin',%20'%2Fboot',%20'%2Fusr%2Flocal%2Fbin',%20'%2Fusr%2Flocal%2Fsbin',%20'%2Fopt%2Fbin',%20'%2Fopt%2Fsbin')%20%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fetc')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('shadow',%20'passwd',%20'sudoers',%20'%25.conf',%20'crontab',%20'gshadow',%20'group'))%20%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fetc')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('login',%20'passwd'))%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fetc%2Fsysconfig')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('syslog'))%20%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fetc%2Fsecurity')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('opasswd'))%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('%2Fetc%2Fdefault')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('ufw'))%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20IN%20('.bash_history')%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('c%3A')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('autoexec.bat',%20'boot.ini',%20'config.sys'))%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('c%3A%5C%5Cwindows')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('system.ini',%20'win.ini',%20'regedit.exe',%20'explorer.exe'))%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('c%3A%5C%5Cwindows%5C%5Csystem32')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('userinit.exe'))%22,%22OR%20(LOWER(%5C%22File%20Directory%5C%22)%20IN%20('c%3A%5C%5Cprogram%20files%5C%5Cmicrosoft%20security%20client')%20AND%20LOWER(%5C%22Filename%5C%22)%20IN%20('msseces.exe'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.008",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.008",
+            "values": [
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1222",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222",
+            "values": [
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.407122",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,73 @@
+{
+  "rule_doc_id": "100225",
+  "rule_id": "100225",
+  "uuid": "SYSTEM-1002",
+  "rule_name": "Source Asset Exists",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T19:25:45.252Z",
+  "modified": "2023-10-30T02:02:35.328Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "HostExists_Test",
+            "uid": "1",
+            "id": "30"
+          },
+          "text": [
+            "when the local <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>source</a> host exists <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Either Actively or Passively seen</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Source"
+            },
+            {
+              "id": "2",
+              "value": "Either"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setCredibility",
+            "operation": "incCredibility",
+            "value": "8"
+          }
+        },
+        {
+          "_$": {
+            "metric": "setRelevance",
+            "operation": "incRelevance",
+            "value": "8"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance and Credibility have been increased by 8 because the source asset exists."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.320974",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

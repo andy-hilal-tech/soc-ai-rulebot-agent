@@ -1,0 +1,97 @@
+{
+  "rule_doc_id": "165008",
+  "rule_id": "165008",
+  "uuid": "ea8f5905-26d1-4ac5-a89c-38ef6ed72d66",
+  "rule_name": "External IP Access to Internal Servers- H360",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-06T15:53:38.893Z",
+  "modified": "2025-08-13T12:49:55.846Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "SrcHost_Test",
+            "uid": "0",
+            "id": "8",
+            "negate": "true"
+          },
+          "text": [
+            "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 0:0:0:0:0:0:0:1, ::1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 0:0:0:0:0:0:0:1, ::1"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107",
+            "negate": "false"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Destination IP</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Health360) Health360 Servers - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "destinationIP"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "325"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "1",
+            "forceOffenseCreation": "true",
+            "qid": "67501780",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "8",
+            "credibility": "8",
+            "severity": "8",
+            "description": "External IP Access to Servers  - H360 , any activity",
+            "name": "External IP Access to Servers  - H360"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.200697",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

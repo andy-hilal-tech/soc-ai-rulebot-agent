@@ -1,0 +1,133 @@
+{
+  "rule_doc_id": "118452",
+  "rule_id": "118452",
+  "uuid": "eceba149-894f-4a7f-ac07-a592db681639",
+  "rule_name": "Same Management Policy Added and Deleted within a Short Period of Time (Office 365)",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-03-12T14:00:49.078Z",
+  "modified": "2024-04-29T12:45:21.054Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>2</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Policy Name (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>Low Level Category</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "2"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Policy Name"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "category"
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "0",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Removed (Office 365)</a> match at least <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Policy Name (custom)</a> in <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>minutes</a> after <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>BB:BehaviorDefinition: Management Role Assignment Added (Office 365)</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "50ca1088-5295-4ee5-8745-40b43bc6ed6f"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Policy Name"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "3e12025b-31c9-46a3-a342-9f3c6d7ee85e"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "60"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "50ca1088-5295-4ee5-8745-40b43bc6ed6f",
+      "name": "BB:BehaviorDefinition: Management Role Assignment Removed (Office 365)"
+    },
+    {
+      "uuid": "3e12025b-31c9-46a3-a342-9f3c6d7ee85e",
+      "name": "BB:BehaviorDefinition: Management Role Assignment Added (Office 365)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.025211",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

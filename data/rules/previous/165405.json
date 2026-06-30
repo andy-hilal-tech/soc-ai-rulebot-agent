@@ -1,0 +1,156 @@
+{
+  "rule_doc_id": "165405",
+  "rule_id": "165405",
+  "uuid": "ded1b55b-095e-4267-a698-f7d11bf73751",
+  "rule_name": "Transferring Files with Credential Data via Network Shares",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-02-01T12:51:00.981Z",
+  "modified": "2026-04-24T08:13:11.438Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Payload Contains is Relative Target Name: samr, Event Name is any of [Failure Audit: Network Share Object Checked for Access or Success Audit: Network Share Object Checked for Access]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "payloadContainsEQRelative Target Name: samrqidEQany5001469�5001471"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001471) Success Audit: Network Share Object Checked for Access, (5001469) Failure Audit: Network Share Object Checked for Access</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001471,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   5001469"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>File Path (custom) contains any of [mimidrv or lsass or minidump or hiberfil or sqldmpr or sam or ntds.dit or \\security]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "File PathCONanymimidrv�lsass�minidump�hiberfil�sqldmpr�sam�ntds.dit�\\security"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.002",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.002",
+            "values": [
+              {
+                "id": "165405",
+                "bb": "Transferring Files with Credential Data via Network Shares",
+                "uuid": "ded1b55b-095e-4267-a698-f7d11bf73751",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.003",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.003",
+            "values": [
+              {
+                "id": "165405",
+                "bb": "Transferring Files with Credential Data via Network Shares",
+                "uuid": "ded1b55b-095e-4267-a698-f7d11bf73751",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.359014",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

@@ -1,0 +1,75 @@
+{
+  "rule_doc_id": "100238",
+  "rule_id": "100238",
+  "uuid": "SYSTEM-1472",
+  "rule_name": "BB:CategoryDefinition: Successful Communication",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-04-22T13:46:58.534Z",
+  "modified": "2023-10-30T02:02:36.640Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "BytePacketRatio",
+            "uid": "2",
+            "id": "211"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>source</a> byte/packet ratio is <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>greater than</a> than <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>80</a> bytes/packet"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "src"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "value": "80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "BytePacketRatio",
+            "uid": "0",
+            "id": "211"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>destination</a> byte/packet ratio is <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>greater than</a> than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>80</a> bytes/packet"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "dst"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "value": "80"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.857235",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

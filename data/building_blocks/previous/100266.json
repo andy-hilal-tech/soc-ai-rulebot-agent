@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100266",
+  "rule_id": "100266",
+  "uuid": "57991ff5-1cbc-4259-8804-87080973b5c3",
+  "rule_name": "BB:DeviceDefinition: DLP Devices",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-03-25T18:40:11.116Z",
+  "modified": "2023-10-30T02:19:59.710Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>IBM Guardium, Symantec DLP, Vormetric Data Security, Vericept Content 360, Zscaler Nss, Verdasys Digital Guardian</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "249, 236, 340, 79, 331, 268"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.880375",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "148502",
+  "rule_id": "148502",
+  "uuid": "e5c56806-f0d1-485f-b762-e7f6dfa86095",
+  "rule_name": "BB:BehaviorDefinition: Mosquito Registry Installation (2)",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-14T15:24:28.343Z",
+  "modified": "2024-07-21T12:38:54.616Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Service Installed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Registry Key&quot;) MATCHES ('.*?\\\\software\\\\microsoft\\\\windows\\\\currentversion\\\\run\\\\local_update_check')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Registry%20Key%22)%20MATCHES%20('.*%3F%5C%5Csoftware%5C%5Cmicrosoft%5C%5Cwindows%5C%5Ccurrentversion%5C%5Crun%5C%5Clocal_update_check')|%5B%22LOWER(%5C%22Registry%20Key%5C%22)%20MATCHES%20('.*%3F%5C%5C%5C%5Csoftware%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Cwindows%5C%5C%5C%5Ccurrentversion%5C%5C%5C%5Crun%5C%5C%5C%5Clocal_update_check')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "148502",
+                "bb": "BB:BehaviorDefinition: Mosquito Registry Installation (2)",
+                "uuid": "e5c56806-f0d1-485f-b762-e7f6dfa86095",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.639669",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

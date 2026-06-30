@@ -103,7 +103,16 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Privilege Escalation": [
       {
@@ -129,6 +138,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:35.303852",
-  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+  "last_parsed_utc": "2026-06-30T08:59:38.310581",
+  "last_enriched_utc": "2026-06-30T09:40:02.879546Z"
 }

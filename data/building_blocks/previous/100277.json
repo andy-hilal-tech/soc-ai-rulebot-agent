@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "100277",
+  "rule_id": "100277",
+  "uuid": "SYSTEM-1181",
+  "rule_name": "BB:NetworkDefinition: Darknet Addresses",
+  "object_type": "building_block",
+  "group": "Network Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T17:38:39.010Z",
+  "modified": "2023-10-30T02:02:36.534Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "NetworkView_Test",
+            "uid": "0",
+            "id": "104"
+          },
+          "text": [
+            "when the <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any IP</a> is a part of any of the following <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>Bogon</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Any"
+            },
+            {
+              "id": "2",
+              "value": "Any"
+            },
+            {
+              "id": "3",
+              "method": "getRemoteNetworkView",
+              "value": "Bogon"
+            },
+            {
+              "id": "4",
+              "value": "Remote"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

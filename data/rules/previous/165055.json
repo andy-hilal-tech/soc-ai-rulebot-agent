@@ -1,0 +1,79 @@
+{
+  "rule_doc_id": "165055",
+  "rule_id": "165055",
+  "uuid": "3eec08ef-3d19-4e1b-86da-c9ced7df2707",
+  "rule_name": "TI-IOC Match - Domain Names",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-10T08:06:38.537Z",
+  "modified": "2025-04-13T06:27:09.176Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Hostname (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>(Shared) OpenCTI - Domain Names - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Hostname"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "317"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "6004",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501785",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "8",
+            "credibility": "8",
+            "severity": "8",
+            "description": "Catch access to known malicious domains via DNS logs or HTTP proxy logs.",
+            "name": "Threat Intel Match - Domain Names"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.205389",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

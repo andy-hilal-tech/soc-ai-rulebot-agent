@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "100283",
+  "rule_id": "100283",
+  "uuid": "SYSTEM-1463",
+  "rule_name": "BB:CategoryDefinition: Post DMZ Jump",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-10-21T18:18:29.628Z",
+  "modified": "2023-10-30T02:02:37.742Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:NetworkDefinition: DMZ Addresses</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1341"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1341",
+      "name": "BB:NetworkDefinition: DMZ Addresses"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.903896",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

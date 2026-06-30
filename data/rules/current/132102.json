@@ -131,8 +131,17 @@
       "name": "BB:BehaviorDefinition: External Originating Host"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ORIGINATING_USER",
+        "intervalType": "m",
+        "intervalCount": "15",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:34.588373",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:37.722863",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

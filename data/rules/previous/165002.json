@@ -1,0 +1,156 @@
+{
+  "rule_doc_id": "165002",
+  "rule_id": "165002",
+  "uuid": "7e64b012-c987-462c-9a32-41ef73ddc97e",
+  "rule_name": "Potential Windows Command Shell Interpreter",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-03-23T06:36:12.856Z",
+  "modified": "2025-03-23T09:47:48.831Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Parent Process Name (custom) is any of cmd.exe, Parent Command (custom) contains any of [/c or /k or /r or /../../]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Parent Process NameEQanycmd.exeParent CommandCONany/c�/k�/r�/../../"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Command (custom) contains any of \\Tasktop\\keycloak\\bin\\/../../jre\\bin\\java</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONany\\Tasktop\\keycloak\\bin\\/../../jre\\bin\\java"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of [\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1 or \\system32\\conhost.exe 0xffffffff -ForceV1]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONany\\??\\C:\\Windows\\system32\\conhost.exe 0xffffffff -ForceV1�\\system32\\conhost.exe 0xffffffff -ForceV1"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.003",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.003",
+            "values": [
+              {
+                "id": "165002",
+                "bb": "Potential Windows Command Shell Interpreter",
+                "uuid": "7e64b012-c987-462c-9a32-41ef73ddc97e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.184965",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

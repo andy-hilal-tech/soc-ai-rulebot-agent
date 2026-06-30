@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "124420",
+  "rule_id": "124420",
+  "uuid": "474399d6-12c6-452a-9d02-2d965028234e",
+  "rule_name": "UBA : Detect IOCs for WannaCry",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-08T09:28:26.114Z",
+  "modified": "2024-07-08T09:28:26.114Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Log Source Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "c18f0605-67d5-4100-8710-885ca7a393f7"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Detect WannaCry Using Hashes, BB:UBA : Detect WannaCry Using IP, BB:UBA : Detect WannaCry Using URL</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "744d274f-88d6-4cb1-92c2-31f0be63ffb6, eff4e017-280c-4112-a083-c9088d2031c0, 73b878ec-5543-46e1-b5ed-fc52b0ab8d0e"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24006",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500550",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=10",
+            "name": "UBA : Detect IOCs for WannaCry"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+      "name": "BB:UBA : Common Log Source Filters"
+    },
+    {
+      "uuid": "744d274f-88d6-4cb1-92c2-31f0be63ffb6",
+      "name": "BB:UBA : Detect WannaCry Using Hashes"
+    },
+    {
+      "uuid": "eff4e017-280c-4112-a083-c9088d2031c0",
+      "name": "BB:UBA : Detect WannaCry Using IP"
+    },
+    {
+      "uuid": "73b878ec-5543-46e1-b5ed-fc52b0ab8d0e",
+      "name": "BB:UBA : Detect WannaCry Using URL"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "None",
+          "STEC": "None",
+          "TAC": "Execution",
+          "MAP_C": "medium",
+          "MAP_EN": true,
+          "TEC_ID": "None",
+          "MAP_S": [
+            {
+              "name": "Execution - None",
+              "values": [
+                {
+                  "id": "124420",
+                  "bb": "UBA : Detect IOCs for WannaCry",
+                  "uuid": "474399d6-12c6-452a-9d02-2d965028234e",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.279487",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

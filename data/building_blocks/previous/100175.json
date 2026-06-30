@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "100175",
+  "rule_id": "100175",
+  "uuid": "SYSTEM-1373",
+  "rule_name": "BB:FalsePositive: Mail Server False Positive Categories",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T01:29:10.449Z",
+  "modified": "2023-10-30T02:02:38.899Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Mail Servers, BB:HostReference: Mail Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1356, c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Recon Events, BB:CategoryDefinition: Suspicious Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1202, SYSTEM-1179"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1356",
+      "name": "BB:HostDefinition: Mail Servers"
+    },
+    {
+      "uuid": "c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83",
+      "name": "BB:HostReference: Mail Servers"
+    },
+    {
+      "uuid": "SYSTEM-1202",
+      "name": "BB:CategoryDefinition: Recon Events"
+    },
+    {
+      "uuid": "SYSTEM-1179",
+      "name": "BB:CategoryDefinition: Suspicious Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.761038",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

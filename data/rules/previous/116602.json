@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "116602",
+  "rule_id": "116602",
+  "uuid": "2249c792-0a39-4f90-a07c-ab44e75025de",
+  "rule_name": "Virtual Machine High Privilege Role Assigned",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set",
+  "created": "2021-02-18T11:46:41.059Z",
+  "modified": "2024-04-29T12:45:19.788Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Cloud, BB:DeviceDefinition: Virtualization</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "290df59b-44ef-452a-9633-2d52e74dbc97, edf618f4-9e8c-4068-88aa-2675753eb003"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "3",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Authentication.Role Assignment Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3133"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Machine Identifier (custom) is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Machine IdentifierNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Role Name (custom)</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Low Privilege Role Names - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Role Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "162"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Machine Identifier",
+            "id": "167",
+            "type": "ALNIC",
+            "name": "Resources with High Privilege Roles"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    },
+    {
+      "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+      "name": "BB:DeviceDefinition: Virtualization"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.980540",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

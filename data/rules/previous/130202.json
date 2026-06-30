@@ -1,0 +1,66 @@
+{
+  "rule_doc_id": "130202",
+  "rule_id": "130202",
+  "uuid": "29915876-f0e8-49d9-a816-c1a497b9de81",
+  "rule_name": "Cryptocurrency Mining File Hash",
+  "object_type": "rule",
+  "group": "Cryptocurrency Mining, Threats",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2018-09-04T14:59:36.490Z",
+  "modified": "2024-07-21T09:42:16.136Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Cryptocurrency Mining Threat Hashes for Events, BB:Threats: Cryptocurrency Mining Threat Hashes for Flows</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "a443da40-73b2-46e4-96ea-7fbb0fed1bca, 443d52de-b29a-4954-b92d-2d34136bd81b"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a443da40-73b2-46e4-96ea-7fbb0fed1bca",
+      "name": "BB:Threats: Cryptocurrency Mining Threat Hashes for Events"
+    },
+    {
+      "uuid": "443d52de-b29a-4954-b92d-2d34136bd81b",
+      "name": "BB:Threats: Cryptocurrency Mining Threat Hashes for Flows"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.535447",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

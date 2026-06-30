@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "165516",
+  "rule_id": "165516",
+  "uuid": "d7446e6c-6430-4892-bcf2-bbf64533baec",
+  "rule_name": "Excessive Firewall Denies from Remote Host",
+  "object_type": "rule",
+  "group": "Recon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-05-13T05:33:51.561Z",
+  "modified": "2026-05-13T05:33:51.561Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Domain_Test",
+            "uid": "1",
+            "id": "317"
+          },
+          "text": [
+            "when the domain is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Array</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDomainsWithAnyDomainOption",
+              "value": "4"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote to Local, Remote to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l, r2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "2",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:CategoryDefinition: Firewall or ACL Denies</a> with the same <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>source IP</a> more than <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>40</a> times, across <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>40</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>destination IP</a> within <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"2\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1217"
+            },
+            {
+              "id": "2",
+              "value": "SourceIP"
+            },
+            {
+              "id": "3",
+              "value": "40"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "40"
+            },
+            {
+              "id": "6",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "7",
+              "value": "5"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "1004",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67501890",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "8",
+            "credibility": "8",
+            "severity": "7",
+            "description": "Detected excessive attempts from a remote host, across multiple hosts, to access the firewall and access is denied. More than 40 attempts are detected across at least 40 destination IP addresses in 5 minutes.",
+            "name": "Excessive Firewall Denies Across Multiple Hosts From A Remote Host"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1217",
+      "name": "BB:CategoryDefinition: Firewall or ACL Denies"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "undefined": [
+      [
+        {
+          "TEC": "None",
+          "STEC": "None",
+          "TAC": "Discovery",
+          "MAP_C": "high",
+          "MAP_EN": true,
+          "TEC_ID": "None",
+          "MAP_S": [
+            {
+              "name": "Discovery - None",
+              "values": [
+                {
+                  "id": "165516",
+                  "bb": "Excessive Firewall Denies from Remote Host",
+                  "uuid": "d7446e6c-6430-4892-bcf2-bbf64533baec",
+                  "T": "EVENT"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.481996",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

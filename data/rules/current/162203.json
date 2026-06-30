@@ -111,7 +111,16 @@
       "name": "BB:CategoryDefinition: Authentication Success"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "m",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "undefined": [
       [
@@ -214,6 +223,6 @@
       ]
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:35.493037",
-  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+  "last_parsed_utc": "2026-06-30T08:59:38.487139",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

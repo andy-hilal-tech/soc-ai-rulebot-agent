@@ -1,0 +1,107 @@
+{
+  "rule_doc_id": "108752",
+  "rule_id": "108752",
+  "uuid": "a730cca3-9200-4eee-aa23-f54a42b39c17",
+  "rule_name": "UBA : Data Loss Possible",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-05-10T17:18:33.292Z",
+  "modified": "2024-02-19T16:44:53.180Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Data Loss Categories, BB:UBA : Data Loss Devices, BB:UBA : Data Loss Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "0ae61ead-1646-4cbe-ab8e-f4d61afa3d38, 0bfc4895-8ea8-442e-8a5c-bb0f56d8cf12, f38934fd-a05c-40ec-8b99-25162c78eef8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "4015",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500342",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=15",
+            "name": "UBA : Data Loss Possible"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0ae61ead-1646-4cbe-ab8e-f4d61afa3d38",
+      "name": "BB:UBA : Data Loss Categories"
+    },
+    {
+      "uuid": "0bfc4895-8ea8-442e-8a5c-bb0f56d8cf12",
+      "name": "BB:UBA : Data Loss Devices"
+    },
+    {
+      "uuid": "f38934fd-a05c-40ec-8b99-25162c78eef8",
+      "name": "BB:UBA : Data Loss Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - None",
+            "values": [
+              {
+                "id": "108752",
+                "bb": "UBA : Data Loss Possible",
+                "uuid": "a730cca3-9200-4eee-aa23-f54a42b39c17",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.688468",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

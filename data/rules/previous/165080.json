@@ -1,0 +1,154 @@
+{
+  "rule_doc_id": "165080",
+  "rule_id": "165080",
+  "uuid": "b5492f4a-99f8-45d4-96fa-20c7f0ac87c3",
+  "rule_name": "Unauthorized Mailbox Access Detection",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-27T08:24:19.164Z",
+  "modified": "2025-04-27T09:08:38.177Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Office 365</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "397"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Affected Workload (custom) is any of Exchange</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Affected WorkloadEQanyExchange"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Operation (custom) is any of [Add-MailboxPermission or Set-Mailbox]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "OperationEQanyAdd-MailboxPermission�Set-Mailbox"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "5008",
+            "includeAttackerEventsInterval": "300",
+            "offenseMapping": "3",
+            "forceOffenseCreation": "true",
+            "qid": "67501819",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Detects when mailbox access permissions are added or modified, a technique attackers use to maintain persistent access.",
+            "name": "Added or Modified Inbox Rules in Exchange"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "Email Collection",
+        "STEC": "Local Email Collection",
+        "TAC": "Collection",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1114",
+        "MAP_S": [
+          {
+            "name": "Collection - Local Email Collection",
+            "values": [
+              {
+                "id": "165080",
+                "bb": "Unauthorized Mailbox Access Detection",
+                "uuid": "b5492f4a-99f8-45d4-96fa-20c7f0ac87c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Valid Accounts",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1078",
+        "MAP_S": [
+          {
+            "name": "Persistence - Valid Accounts",
+            "values": [
+              {
+                "id": "165080",
+                "bb": "Unauthorized Mailbox Access Detection",
+                "uuid": "b5492f4a-99f8-45d4-96fa-20c7f0ac87c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.264110",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

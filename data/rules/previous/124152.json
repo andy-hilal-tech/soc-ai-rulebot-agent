@@ -1,0 +1,90 @@
+{
+  "rule_doc_id": "124152",
+  "rule_id": "124152",
+  "uuid": "5cce7106-a4e4-4c1f-a846-66acc454b178",
+  "rule_name": "Microsoft Windows RCE Vulnerability - File Modification",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-09-30T19:02:53.867Z",
+  "modified": "2024-06-27T13:19:25.843Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "2",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log, Microsoft Exchange Server</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12, 99"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.Successful File Modification</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8014"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(&quot;File Directory&quot; = 'C:\\\\ProgramFiles\\\\Microsoft\\\\Exchange Server\\\\V15\\\\FrontEnd\\\\HttpProxy\\\\owa\\\\auth' AND &quot;Filename&quot; IN ('RedirSuiteServiceProxy.aspx', 'pxh4HG1v.ashx')) OR (&quot;File Directory&quot; = 'C:\\\\inetpub\\\\wwwroot\\\\aspnet_client' AND &quot;Filename&quot; = 'Xml.ashx')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22File%20Directory%22%20%3D%20'C%3A%5C%5CProgramFiles%5C%5CMicrosoft%5C%5CExchange%20Server%5C%5CV15%5C%5CFrontEnd%5C%5CHttpProxy%5C%5Cowa%5C%5Cauth'%20AND%20%22Filename%22%20IN%20('RedirSuiteServiceProxy.aspx',%20'pxh4HG1v.ashx'))%20OR%20(%22File%20Directory%22%20%3D%20'C%3A%5C%5Cinetpub%5C%5Cwwwroot%5C%5Caspnet_client'%20AND%20%22Filename%22%20%3D%20'Xml.ashx')|%5B%22(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5C%5C%5CProgramFiles%5C%5C%5C%5CMicrosoft%5C%5C%5C%5CExchange%20Server%5C%5C%5C%5CV15%5C%5C%5C%5CFrontEnd%5C%5C%5C%5CHttpProxy%5C%5C%5C%5Cowa%5C%5C%5C%5Cauth'%20AND%20%5C%22Filename%5C%22%20IN%20('RedirSuiteServiceProxy.aspx',%20'pxh4HG1v.ashx'))%20OR%20(%5C%22File%20Directory%5C%22%20%3D%20'C%3A%5C%5C%5C%5Cinetpub%5C%5C%5C%5Cwwwroot%5C%5C%5C%5Caspnet_client'%20AND%20%5C%22Filename%5C%22%20%3D%20'Xml.ashx')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.215913",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

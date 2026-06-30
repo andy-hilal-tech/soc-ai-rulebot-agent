@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "153702",
+  "rule_id": "153702",
+  "uuid": "4ef2e038-d0ec-4888-86b0-ad5a80cedbae",
+  "rule_name": "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T14:52:36.724Z",
+  "modified": "2024-07-21T12:38:53.221Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%echo%' or LOWER(&quot;Command&quot;) LIKE '%copy%' or LOWER(&quot;Command&quot;) LIKE '%type%' or LOWER(&quot;Command&quot;) LIKE '%file createnew%' or LOWER(&quot;Command&quot;) LIKE '%cacls%') and LOWER(&quot;Command&quot;) LIKE '%c:\\windows\\fonts\\%' and (LOWER(&quot;Command&quot;) LIKE '%.sh%' or LOWER(&quot;Command&quot;) LIKE '%.exe%' or LOWER(&quot;Command&quot;) LIKE '%.dll%' or LOWER(&quot;Command&quot;) LIKE '%.bin%' or LOWER(&quot;Command&quot;) LIKE '%.bat%' or LOWER(&quot;Command&quot;) LIKE '%.cmd%' or LOWER(&quot;Command&quot;) LIKE '%.js%' or LOWER(&quot;Command&quot;) LIKE '%.msh%' or LOWER(&quot;Command&quot;) LIKE '%.reg%' or LOWER(&quot;Command&quot;) LIKE '%.scr%' or LOWER(&quot;Command&quot;) LIKE '%.ps%' or LOWER(&quot;Command&quot;) LIKE '%.vb%' or LOWER(&quot;Command&quot;) LIKE '%.jar%' or LOWER(&quot;Command&quot;) LIKE '%.pl%' or LOWER(&quot;Command&quot;) LIKE '%.inf%' or LOWER(&quot;Command&quot;) LIKE '%.cpl%' or LOWER(&quot;Command&quot;) LIKE '%.hta%' or LOWER(&quot;Command&quot;) LIKE '%.msi%' or LOWER(&quot;Command&quot;) LIKE '%.vbs%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25echo%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25copy%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25type%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25file%20createnew%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25cacls%25')%20and%20LOWER(%22Command%22)%20LIKE%20'%25c%3A%5Cwindows%5Cfonts%5C%25'%20and%20(LOWER(%22Command%22)%20LIKE%20'%25.sh%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.exe%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.dll%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.bin%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.bat%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.cmd%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.js%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.msh%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.reg%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.scr%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.ps%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.vb%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.jar%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.pl%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.inf%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.cpl%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.hta%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.msi%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25.vbs%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25echo%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25copy%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25type%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25file%20createnew%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25cacls%25')%20and%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3A%5C%5Cwindows%5C%5Cfonts%5C%5C%25'%20and%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.sh%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.exe%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.dll%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.bin%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.bat%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.cmd%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.js%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.msh%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.reg%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.scr%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.ps%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.vb%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.jar%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.pl%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.inf%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.cpl%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.hta%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.msi%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25.vbs%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "153702",
+                "bb": "BB:BehaviorDefinition: Malicious Files Written to the Fonts Folder",
+                "uuid": "4ef2e038-d0ec-4888-86b0-ad5a80cedbae",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.729249",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

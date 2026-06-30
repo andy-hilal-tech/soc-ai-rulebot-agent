@@ -1,0 +1,147 @@
+{
+  "rule_doc_id": "107102",
+  "rule_id": "107102",
+  "uuid": "d9d1afd9-112f-4225-97fb-6e5dce13f98b",
+  "rule_name": "UBA : Kerberos Account Mapping",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set, Add to a Reference Map",
+  "created": "2018-05-21T06:25:25.690Z",
+  "modified": "2024-02-19T16:43:13.491Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "SrcHost_Test",
+            "uid": "3",
+            "id": "8",
+            "negate": "true"
+          },
+          "text": [
+            "when the source IP is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>127.0.0.1</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.1"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Account Name (custom)</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : Kerberos Account Name - AlphaNumeric</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Account Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "55"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5000937) Success Audit: A Kerberos authentication ticket (TGT) was granted</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000937"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceMap": "true",
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "Account Name",
+            "id": "55",
+            "type": "ALN",
+            "name": "UBA : Kerberos Account Name"
+          }
+        }
+      ],
+      "referenceDataResponse": [
+        {
+          "_$": {
+            "key1": "Account Name",
+            "Filter": "sourceIP",
+            "domainResponse": "0",
+            "id": "56",
+            "name": "UBA : Kerberos Accounts and IPs"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.625038",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

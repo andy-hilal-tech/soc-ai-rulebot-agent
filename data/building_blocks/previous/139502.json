@@ -1,0 +1,2726 @@
+{
+  "rule_doc_id": "139502",
+  "rule_id": "139502",
+  "uuid": "cd6f89e3-ce4e-4f86-bec1-a0195b3dbf87",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Endpoint Activities",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-03-30T12:32:47.244Z",
+  "modified": "2024-07-21T10:28:58.076Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Communication with a Potential Hostile Host, Communication with a Potential Hostile IP Address, Credential Dumping Activities Discovered, Critical File Permission Changed, Critical Security Tool Killed (Unix), Critical Security Tool Stopped, Detection of Malicious IOC in Events, File Created with Right to Left Override, File Created with Space After Filename, Potential Component Object Model (COM) Hijacking, Potential DLL Hijacking, Potential Malicious Application Shimming, Programming Environment Spawned by a Suspicious Process, Process Masquerading (Unix), Process Masquerading (Windows), Recommended Blocked Process is Running, User Account Creation followed by Account Deletion (Unix), User Account Creation followed by Account Deletion (Windows), Attempt to Delete Shadow Copies, Cobalt Strike Behaviour Detected, Excessive Administrative Share Access Failures from the Same Host, Excessive File Deletion and Creation, Excessive Login Failures via Network Connection, Excessive Login Failures via Network Connection to Multiple Machines, Excessive Nslookup Usage, Ransomware Decryption Instructions Created, Ransomware Encrypted File Extension, Ransomware: Maze IOC in Events, Ransomware: REvil IOC in Events, RDP Hijacking Tool Detected, Reconnaissance Tool Detected, Recovery Disabled in Boot Configuration Data, Search for Password Files using findstr (Windows), Search for Password Files using grep or find (Unix), Search for Password Files using Select-String (Windows), SharpHound PowerShell Detected, Suspicious Amount of Files Deleted on the Same Machine, Suspicious Amount of Files Renamed on the Same Machine (Windows), Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix), Suspicious PSExec Module Usage Detected, Potential UAC Bypass, Potential Mailto Ransomware Behavior (Windows), Shortcut (lnk) File Executing Commands (Windows), Potential Windows Exploit via MSDT</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "ed72c66d-c837-49d6-9590-ea7f84f86998, c79e45a1-5381-4003-8e92-8f97be7600ab, 0637476c-38ce-455a-96dc-8a3846391970, 23ea0cd6-a869-4ca5-80f3-36daf8966749, 14cd9473-1fa2-4f24-aa87-35523e75834a, 6a378fe6-bb89-45c7-b604-853e81ed6a6c, f6d184fd-7111-4ca9-b22c-155886a35e7e, 00f3bed4-318b-41e5-a963-0da38984e651, e440b009-cf83-45a7-bc09-310f924cf165, 04c76e40-1ea2-494b-b9ec-1a89348d830d, 0dfe1f3a-907d-4886-9442-c6ea44e8385f, 187ca0c9-b098-491a-9a2b-182d194289d3, 740ffd27-8d73-40e5-a549-6d25a3a05ea2, 2dbd0173-49b4-4e6f-b5ce-6f9d23fad796, 42ebf95a-601f-467c-96dd-9d144f7cb154, 61fd6eae-3604-4012-b1a6-a73f29b36e74, 86096a58-f4f0-4cee-9ee2-16e8faf56414, 45e655ff-d9db-4ab2-892d-8b0e6c621d03, d7e4e83c-d675-4adc-95e9-c12df78a7216, a500b856-5352-459e-ad68-4fc89aa325ce, 3b8ff4da-e5f1-453d-81e1-13dbf1adbb85, 99a35b91-f518-4ba2-9802-f2eee42afb1a, 651ba245-bdaf-49cc-8b73-b3d80361b129, f2fb44fc-d976-4993-a7f1-36a9e7325590, 4b060222-2630-4721-b118-f3e748d8456a, a6af9386-21e5-49e1-a8c8-ceb35d0caea3, f94185d6-5958-4984-a9b3-b4c8b8e7131e, 80486fa8-a926-428a-832e-aac36369cc11, e7526ce0-3907-4ce4-931d-a4f768b0c4a4, 3e679e6d-d554-4954-b455-085c410db84f, 1db2f2ed-a9a8-450d-be1f-981f3ca62974, fb01f595-7cae-4865-8f42-29d4b11df933, e1fdc83a-68fb-45b0-aa06-0841eafbe4c5, 0bccac7b-c910-4ec8-abd4-1e453786d56b, 588c253c-8075-46bb-981e-c97284f0c4e6, 3f4015ef-1aa5-4dd6-9427-0601239a63c3, 6f433984-93de-4927-9653-5765486bfd6d, 665a4510-d83b-46bc-b3e9-a8551f58c6e2, b944381f-646a-458a-a15b-3d1534d790b9, e932e293-86d3-4f88-876c-a031e8c7c549, 518cebbc-7793-4223-a62d-7eef2cf2d2f7, e989a321-6fa9-4f54-9c93-6dd6465f14f4, e70efac3-e1c2-4c6f-baed-06ead4b33220, acec194a-3761-492f-8740-97f24ddf4efe"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    },
+    {
+      "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+      "name": "Communication with a Potential Hostile Host"
+    },
+    {
+      "uuid": "c79e45a1-5381-4003-8e92-8f97be7600ab",
+      "name": "Communication with a Potential Hostile IP Address"
+    },
+    {
+      "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+      "name": "Credential Dumping Activities Discovered"
+    },
+    {
+      "uuid": "23ea0cd6-a869-4ca5-80f3-36daf8966749",
+      "name": "Critical File Permission Changed"
+    },
+    {
+      "uuid": "14cd9473-1fa2-4f24-aa87-35523e75834a",
+      "name": "Critical Security Tool Killed (Unix)"
+    },
+    {
+      "uuid": "6a378fe6-bb89-45c7-b604-853e81ed6a6c",
+      "name": "Critical Security Tool Stopped"
+    },
+    {
+      "uuid": "f6d184fd-7111-4ca9-b22c-155886a35e7e",
+      "name": "Detection of Malicious IOC in Events"
+    },
+    {
+      "uuid": "00f3bed4-318b-41e5-a963-0da38984e651",
+      "name": "File Created with Right to Left Override"
+    },
+    {
+      "uuid": "e440b009-cf83-45a7-bc09-310f924cf165",
+      "name": "File Created with Space After Filename"
+    },
+    {
+      "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+      "name": "Potential Component Object Model (COM) Hijacking"
+    },
+    {
+      "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+      "name": "Potential DLL Hijacking"
+    },
+    {
+      "uuid": "187ca0c9-b098-491a-9a2b-182d194289d3",
+      "name": "Potential Malicious Application Shimming"
+    },
+    {
+      "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+      "name": "Programming Environment Spawned by a Suspicious Process"
+    },
+    {
+      "uuid": "2dbd0173-49b4-4e6f-b5ce-6f9d23fad796",
+      "name": "Process Masquerading (Unix)"
+    },
+    {
+      "uuid": "42ebf95a-601f-467c-96dd-9d144f7cb154",
+      "name": "Process Masquerading (Windows)"
+    },
+    {
+      "uuid": "61fd6eae-3604-4012-b1a6-a73f29b36e74",
+      "name": "Recommended Blocked Process is Running"
+    },
+    {
+      "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+      "name": "User Account Creation followed by Account Deletion (Unix)"
+    },
+    {
+      "uuid": "45e655ff-d9db-4ab2-892d-8b0e6c621d03",
+      "name": "User Account Creation followed by Account Deletion (Windows)"
+    },
+    {
+      "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+      "name": "Attempt to Delete Shadow Copies"
+    },
+    {
+      "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+      "name": "Cobalt Strike Behaviour Detected"
+    },
+    {
+      "uuid": "3b8ff4da-e5f1-453d-81e1-13dbf1adbb85",
+      "name": "Excessive Administrative Share Access Failures from the Same Host"
+    },
+    {
+      "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+      "name": "Excessive File Deletion and Creation"
+    },
+    {
+      "uuid": "651ba245-bdaf-49cc-8b73-b3d80361b129",
+      "name": "Excessive Login Failures via Network Connection"
+    },
+    {
+      "uuid": "f2fb44fc-d976-4993-a7f1-36a9e7325590",
+      "name": "Excessive Login Failures via Network Connection to Multiple Machines"
+    },
+    {
+      "uuid": "4b060222-2630-4721-b118-f3e748d8456a",
+      "name": "Excessive Nslookup Usage"
+    },
+    {
+      "uuid": "a6af9386-21e5-49e1-a8c8-ceb35d0caea3",
+      "name": "Ransomware Decryption Instructions Created"
+    },
+    {
+      "uuid": "f94185d6-5958-4984-a9b3-b4c8b8e7131e",
+      "name": "Ransomware Encrypted File Extension"
+    },
+    {
+      "uuid": "80486fa8-a926-428a-832e-aac36369cc11",
+      "name": "Ransomware: Maze IOC in Events"
+    },
+    {
+      "uuid": "e7526ce0-3907-4ce4-931d-a4f768b0c4a4",
+      "name": "Ransomware: REvil IOC in Events"
+    },
+    {
+      "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+      "name": "RDP Hijacking Tool Detected"
+    },
+    {
+      "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+      "name": "Reconnaissance Tool Detected"
+    },
+    {
+      "uuid": "fb01f595-7cae-4865-8f42-29d4b11df933",
+      "name": "Recovery Disabled in Boot Configuration Data"
+    },
+    {
+      "uuid": "e1fdc83a-68fb-45b0-aa06-0841eafbe4c5",
+      "name": "Search for Password Files using findstr (Windows)"
+    },
+    {
+      "uuid": "0bccac7b-c910-4ec8-abd4-1e453786d56b",
+      "name": "Search for Password Files using grep or find (Unix)"
+    },
+    {
+      "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+      "name": "Search for Password Files using Select-String (Windows)"
+    },
+    {
+      "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+      "name": "SharpHound PowerShell Detected"
+    },
+    {
+      "uuid": "6f433984-93de-4927-9653-5765486bfd6d",
+      "name": "Suspicious Amount of Files Deleted on the Same Machine"
+    },
+    {
+      "uuid": "665a4510-d83b-46bc-b3e9-a8551f58c6e2",
+      "name": "Suspicious Amount of Files Renamed on the Same Machine (Windows)"
+    },
+    {
+      "uuid": "b944381f-646a-458a-a15b-3d1534d790b9",
+      "name": "Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix)"
+    },
+    {
+      "uuid": "e932e293-86d3-4f88-876c-a031e8c7c549",
+      "name": "Suspicious PSExec Module Usage Detected"
+    },
+    {
+      "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+      "name": "Potential UAC Bypass"
+    },
+    {
+      "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+      "name": "Potential Mailto Ransomware Behavior (Windows)"
+    },
+    {
+      "uuid": "e70efac3-e1c2-4c6f-baed-06ead4b33220",
+      "name": "Shortcut (lnk) File Executing Commands (Windows)"
+    },
+    {
+      "uuid": "acec194a-3761-492f-8740-97f24ddf4efe",
+      "name": "Potential Windows Exploit via MSDT"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "T1003.008",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1003.008",
+            "values": [
+              {
+                "id": "138452",
+                "bb": "Critical File Permission Changed",
+                "uuid": "23ea0cd6-a869-4ca5-80f3-36daf8966749",
+                "T": "EVENT"
+              },
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              },
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1555",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555",
+            "values": [
+              {
+                "id": "135502",
+                "bb": "Search for Password Files using findstr (Windows)",
+                "uuid": "e1fdc83a-68fb-45b0-aa06-0841eafbe4c5",
+                "T": "EVENT"
+              },
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              },
+              {
+                "id": "136502",
+                "bb": "Search for Password Files using grep or find (Unix)",
+                "uuid": "0bccac7b-c910-4ec8-abd4-1e453786d56b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Unsecured Credentials",
+        "STEC": "T1552.001",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1552",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1552.001",
+            "values": [
+              {
+                "id": "135502",
+                "bb": "Search for Password Files using findstr (Windows)",
+                "uuid": "e1fdc83a-68fb-45b0-aa06-0841eafbe4c5",
+                "T": "EVENT"
+              },
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              },
+              {
+                "id": "136502",
+                "bb": "Search for Password Files using grep or find (Unix)",
+                "uuid": "0bccac7b-c910-4ec8-abd4-1e453786d56b",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "OS Credential Dumping",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1003",
+        "MAP_S": [
+          {
+            "name": "Credential Access - OS Credential Dumping",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Unsecured Credentials",
+        "STEC": "T1552.002",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1552",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1552.002",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1110",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1110",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1110",
+            "values": [
+              {
+                "id": "135352",
+                "bb": "Excessive Login Failures via Network Connection to Multiple Machines",
+                "uuid": "f2fb44fc-d976-4993-a7f1-36a9e7325590",
+                "T": "EVENT"
+              },
+              {
+                "id": "165528",
+                "bb": "Login Failures via Network Connection",
+                "uuid": "f4840bf1-a31f-441f-a431-007c320c328e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "135652",
+                "bb": "BB:BehaviorDefinition: Administrative Share Accessed",
+                "uuid": "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1087",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1482",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1482",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1482",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1083",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1083",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1083",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "136302",
+                "bb": "Ransomware: REvil IOC in Events",
+                "uuid": "e7526ce0-3907-4ce4-931d-a4f768b0c4a4",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Network Service Discovery",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1046",
+        "MAP_S": [
+          {
+            "name": "Discovery - Network Service Discovery",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "135302",
+                "bb": "Excessive Nslookup Usage",
+                "uuid": "4b060222-2630-4721-b118-f3e748d8456a",
+                "T": "EVENT"
+              },
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1069",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1069",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1069",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1018",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1018",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1018",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "135302",
+                "bb": "Excessive Nslookup Usage",
+                "uuid": "4b060222-2630-4721-b118-f3e748d8456a",
+                "T": "EVENT"
+              },
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1082",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1082",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1082",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1049",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1049",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1049",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1016",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1016",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1016",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "135302",
+                "bb": "Excessive Nslookup Usage",
+                "uuid": "4b060222-2630-4721-b118-f3e748d8456a",
+                "T": "EVENT"
+              },
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1012",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1012",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1012",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1135",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1135",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1135",
+            "values": [
+              {
+                "id": "113152",
+                "bb": "Excessive Administrative Share Access Failures from the Same Host",
+                "uuid": "3b8ff4da-e5f1-453d-81e1-13dbf1adbb85",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1222",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222",
+            "values": [
+              {
+                "id": "138452",
+                "bb": "Critical File Permission Changed",
+                "uuid": "23ea0cd6-a869-4ca5-80f3-36daf8966749",
+                "T": "EVENT"
+              },
+              {
+                "id": "137202",
+                "bb": "BB:CategoryDefinition: Critical Files and Directories for Endpoint",
+                "uuid": "42faa723-ea73-4f93-a4b6-e76c20d00eff",
+                "T": "EVENT"
+              },
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.002",
+            "values": [
+              {
+                "id": "136452",
+                "bb": "Recovery Disabled in Boot Configuration Data",
+                "uuid": "fb01f595-7cae-4865-8f42-29d4b11df933",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1027",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1027",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1027",
+            "values": [
+              {
+                "id": "138752",
+                "bb": "File Created with Right to Left Override",
+                "uuid": "00f3bed4-318b-41e5-a963-0da38984e651",
+                "T": "EVENT"
+              },
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              },
+              {
+                "id": "136902",
+                "bb": "Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix)",
+                "uuid": "b944381f-646a-458a-a15b-3d1534d790b9",
+                "T": "EVENT"
+              },
+              {
+                "id": "136402",
+                "bb": "Ransomware Decryption Instructions Created",
+                "uuid": "a6af9386-21e5-49e1-a8c8-ceb35d0caea3",
+                "T": "EVENT"
+              },
+              {
+                "id": "136252",
+                "bb": "Ransomware Encrypted File Extension",
+                "uuid": "f94185d6-5958-4984-a9b3-b4c8b8e7131e",
+                "T": "EVENT"
+              },
+              {
+                "id": "134852",
+                "bb": "Suspicious Amount of Files Renamed on the Same Machine (Windows)",
+                "uuid": "665a4510-d83b-46bc-b3e9-a8551f58c6e2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1036",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036",
+            "values": [
+              {
+                "id": "138752",
+                "bb": "File Created with Right to Left Override",
+                "uuid": "00f3bed4-318b-41e5-a963-0da38984e651",
+                "T": "EVENT"
+              },
+              {
+                "id": "139252",
+                "bb": "Process Masquerading (Unix)",
+                "uuid": "2dbd0173-49b4-4e6f-b5ce-6f9d23fad796",
+                "T": "EVENT"
+              },
+              {
+                "id": "137302",
+                "bb": "Process Masquerading (Windows)",
+                "uuid": "42ebf95a-601f-467c-96dd-9d144f7cb154",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.005",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.005",
+            "values": [
+              {
+                "id": "162207",
+                "bb": "Recommended Blocked Process is Running",
+                "uuid": "19ef3b07-6338-4c61-af60-ff2f69ae5ded",
+                "T": "EVENT"
+              },
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Indicator Removal",
+            "values": [
+              {
+                "id": "135552",
+                "bb": "Attempt to Delete Shadow Copies",
+                "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.001",
+            "values": [
+              {
+                "id": "138502",
+                "bb": "Critical Security Tool Killed (Unix)",
+                "uuid": "14cd9473-1fa2-4f24-aa87-35523e75834a",
+                "T": "EVENT"
+              },
+              {
+                "id": "138652",
+                "bb": "Critical Security Tool Stopped",
+                "uuid": "6a378fe6-bb89-45c7-b604-853e81ed6a6c",
+                "T": "EVENT"
+              },
+              {
+                "id": "138602",
+                "bb": "BB:BehaviorDefinition: Process Killed",
+                "uuid": "e1bd833b-e74a-4c57-b6da-a1d2d0ecdbeb",
+                "T": "EVENT"
+              },
+              {
+                "id": "138552",
+                "bb": "BB:BehaviorDefinition: Critical Security Tool Process Information",
+                "uuid": "abfeabe4-8588-4551-b325-7d3ba020a343",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Masquerading",
+        "STEC": "T1036.006",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1036",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1036.006",
+            "values": [
+              {
+                "id": "138802",
+                "bb": "File Created with Space After Filename",
+                "uuid": "e440b009-cf83-45a7-bc09-310f924cf165",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.010",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.010",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.011",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.011",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.004",
+            "values": [
+              {
+                "id": "139652",
+                "bb": "Suspicious Amount of Files Deleted on the Same Machine",
+                "uuid": "6f433984-93de-4927-9653-5765486bfd6d",
+                "T": "EVENT"
+              },
+              {
+                "id": "139602",
+                "bb": "BB:BehaviorDefinition: File Creation and Deletion",
+                "uuid": "58c55c95-e12c-4182-bbf9-267bb29080fc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "File and Directory Permissions Modification",
+        "STEC": "T1222.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1222",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1222.002",
+            "values": [
+              {
+                "id": "138002",
+                "bb": "BB:CategoryDefinition: File Permission Changed",
+                "uuid": "ca0e9b8a-cd9a-4c39-bb2f-05d1fd0c0d70",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Impact": [
+      {
+        "TEC": "T1490",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1490",
+        "MAP_S": [
+          {
+            "name": "Impact - T1490",
+            "values": [
+              {
+                "id": "136452",
+                "bb": "Recovery Disabled in Boot Configuration Data",
+                "uuid": "fb01f595-7cae-4865-8f42-29d4b11df933",
+                "T": "EVENT"
+              },
+              {
+                "id": "141102",
+                "bb": "Potential Mailto Ransomware Behavior (Windows)",
+                "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+                "T": "EVENT"
+              },
+              {
+                "id": "135552",
+                "bb": "Attempt to Delete Shadow Copies",
+                "uuid": "d7e4e83c-d675-4adc-95e9-c12df78a7216",
+                "T": "EVENT"
+              },
+              {
+                "id": "141252",
+                "bb": "BB:BehaviorDefinition: New Registry Added to HKLM/HKCU (Windows)",
+                "uuid": "59a72349-bd17-48d5-bcd7-f8a779a187bd",
+                "T": "EVENT"
+              },
+              {
+                "id": "141152",
+                "bb": "BB:BehaviorDefinition: New File Created in Temporary Directory",
+                "uuid": "db74f8bd-bcf2-4880-8e62-faa9c697969e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "136302",
+                "bb": "Ransomware: REvil IOC in Events",
+                "uuid": "e7526ce0-3907-4ce4-931d-a4f768b0c4a4",
+                "T": "EVENT"
+              },
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              },
+              {
+                "id": "141102",
+                "bb": "Potential Mailto Ransomware Behavior (Windows)",
+                "uuid": "e989a321-6fa9-4f54-9c93-6dd6465f14f4",
+                "T": "EVENT"
+              },
+              {
+                "id": "136902",
+                "bb": "Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix)",
+                "uuid": "b944381f-646a-458a-a15b-3d1534d790b9",
+                "T": "EVENT"
+              },
+              {
+                "id": "136402",
+                "bb": "Ransomware Decryption Instructions Created",
+                "uuid": "a6af9386-21e5-49e1-a8c8-ceb35d0caea3",
+                "T": "EVENT"
+              },
+              {
+                "id": "136252",
+                "bb": "Ransomware Encrypted File Extension",
+                "uuid": "f94185d6-5958-4984-a9b3-b4c8b8e7131e",
+                "T": "EVENT"
+              },
+              {
+                "id": "134852",
+                "bb": "Suspicious Amount of Files Renamed on the Same Machine (Windows)",
+                "uuid": "665a4510-d83b-46bc-b3e9-a8551f58c6e2",
+                "T": "EVENT"
+              },
+              {
+                "id": "141202",
+                "bb": "BB:BehaviorDefinition: Excessive File Modifications",
+                "uuid": "a5cbcb32-3d0b-4a14-95cb-d470236f1325",
+                "T": "EVENT"
+              },
+              {
+                "id": "141152",
+                "bb": "BB:BehaviorDefinition: New File Created in Temporary Directory",
+                "uuid": "db74f8bd-bcf2-4880-8e62-faa9c697969e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Data Manipulation",
+        "STEC": "T1565.001",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1565",
+        "MAP_S": [
+          {
+            "name": "Impact - T1565.001",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              },
+              {
+                "id": "136902",
+                "bb": "Suspicious Amount of Files Renamed/Moved on the Same Machine (Unix)",
+                "uuid": "b944381f-646a-458a-a15b-3d1534d790b9",
+                "T": "EVENT"
+              },
+              {
+                "id": "139652",
+                "bb": "Suspicious Amount of Files Deleted on the Same Machine",
+                "uuid": "6f433984-93de-4927-9653-5765486bfd6d",
+                "T": "EVENT"
+              },
+              {
+                "id": "134852",
+                "bb": "Suspicious Amount of Files Renamed on the Same Machine (Windows)",
+                "uuid": "665a4510-d83b-46bc-b3e9-a8551f58c6e2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1485",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1485",
+        "MAP_S": [
+          {
+            "name": "Impact - T1485",
+            "values": [
+              {
+                "id": "139552",
+                "bb": "Excessive File Deletion and Creation",
+                "uuid": "99a35b91-f518-4ba2-9802-f2eee42afb1a",
+                "T": "EVENT"
+              },
+              {
+                "id": "139652",
+                "bb": "Suspicious Amount of Files Deleted on the Same Machine",
+                "uuid": "6f433984-93de-4927-9653-5765486bfd6d",
+                "T": "EVENT"
+              },
+              {
+                "id": "139602",
+                "bb": "BB:BehaviorDefinition: File Creation and Deletion",
+                "uuid": "58c55c95-e12c-4182-bbf9-267bb29080fc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Reconnaissance": [
+      {
+        "TEC": "T1595",
+        "STEC": "None",
+        "TAC": "Reconnaissance",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1595",
+        "MAP_S": [
+          {
+            "name": "Reconnaissance - T1595",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "Software Deployment Tools",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1072",
+        "MAP_S": [
+          {
+            "name": "Execution - Software Deployment Tools",
+            "values": [
+              {
+                "id": "135102",
+                "bb": "Reconnaissance Tool Detected",
+                "uuid": "1db2f2ed-a9a8-450d-be1f-981f3ca62974",
+                "T": "EVENT"
+              },
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              },
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "135502",
+                "bb": "Search for Password Files using findstr (Windows)",
+                "uuid": "e1fdc83a-68fb-45b0-aa06-0841eafbe4c5",
+                "T": "EVENT"
+              },
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              },
+              {
+                "id": "136502",
+                "bb": "Search for Password Files using grep or find (Unix)",
+                "uuid": "0bccac7b-c910-4ec8-abd4-1e453786d56b",
+                "T": "EVENT"
+              },
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1203",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1203",
+        "MAP_S": [
+          {
+            "name": "Execution - T1203",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "136052",
+                "bb": "Search for Password Files using Select-String (Windows)",
+                "uuid": "588c253c-8075-46bb-981e-c97284f0c4e6",
+                "T": "EVENT"
+              },
+              {
+                "id": "136102",
+                "bb": "SharpHound PowerShell Detected",
+                "uuid": "3f4015ef-1aa5-4dd6-9427-0601239a63c3",
+                "T": "EVENT"
+              },
+              {
+                "id": "133452",
+                "bb": "Encoded Command Malicious Usage in a Programming Environment",
+                "uuid": "a8da84b4-884c-492e-aa86-bc61aa4301c4",
+                "T": "EVENT"
+              },
+              {
+                "id": "138952",
+                "bb": "Service Configured to Use Powershell",
+                "uuid": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "136302",
+                "bb": "Ransomware: REvil IOC in Events",
+                "uuid": "e7526ce0-3907-4ce4-931d-a4f768b0c4a4",
+                "T": "EVENT"
+              },
+              {
+                "id": "135152",
+                "bb": "Ransomware: Maze IOC in Events",
+                "uuid": "80486fa8-a926-428a-832e-aac36369cc11",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1204",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204",
+            "values": [
+              {
+                "id": "138902",
+                "bb": "Suspicious PSExec Module Usage Detected",
+                "uuid": "e932e293-86d3-4f88-876c-a031e8c7c549",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1569",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1569",
+        "MAP_S": [
+          {
+            "name": "Execution - T1569",
+            "values": [
+              {
+                "id": "162207",
+                "bb": "Recommended Blocked Process is Running",
+                "uuid": "19ef3b07-6338-4c61-af60-ff2f69ae5ded",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              },
+              {
+                "id": "138702",
+                "bb": "Detection of Malicious IOC in Events",
+                "uuid": "f6d184fd-7111-4ca9-b22c-155886a35e7e",
+                "T": "EVENT"
+              },
+              {
+                "id": "140252",
+                "bb": "Ransomware: Ryuk IOC in Events",
+                "uuid": "c4851152-1fcd-4965-b3a4-3d3f06b2c9e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.001",
+            "values": [
+              {
+                "id": "140152",
+                "bb": "Malware as a Service Hash IOC in Events",
+                "uuid": "8bbb2bff-5ba3-4a45-85d7-5a049f6dc471",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "T1055",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055",
+            "values": [
+              {
+                "id": "136002",
+                "bb": "Cobalt Strike Behaviour Detected",
+                "uuid": "a500b856-5352-459e-ad68-4fc89aa325ce",
+                "T": "COMMON"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "141052",
+                "bb": "Potential Windows Exploit via MSDT",
+                "uuid": "acec194a-3761-492f-8740-97f24ddf4efe",
+                "T": "EVENT"
+              },
+              {
+                "id": "141302",
+                "bb": "Shortcut (lnk) File Executing Commands (Windows)",
+                "uuid": "e70efac3-e1c2-4c6f-baed-06ead4b33220",
+                "T": "EVENT"
+              },
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141402",
+                "bb": "BB:BehaviorDefinition: Critical Process Created",
+                "uuid": "cd729d5a-847e-4e30-b02b-89fddb6c193f",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              },
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "141302",
+                "bb": "Shortcut (lnk) File Executing Commands (Windows)",
+                "uuid": "e70efac3-e1c2-4c6f-baed-06ead4b33220",
+                "T": "EVENT"
+              },
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141452",
+                "bb": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File",
+                "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1068",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1068",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1068",
+            "values": [
+              {
+                "id": "141302",
+                "bb": "Shortcut (lnk) File Executing Commands (Windows)",
+                "uuid": "e70efac3-e1c2-4c6f-baed-06ead4b33220",
+                "T": "EVENT"
+              },
+              {
+                "id": "141452",
+                "bb": "BB:BehaviorDefinition: Critical Process Created by Shortcut (lnk) File",
+                "uuid": "9e582cc3-2d3b-46a4-a94a-216879e4f5ee",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.011",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574.011",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.011",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1546.011",
+            "values": [
+              {
+                "id": "139152",
+                "bb": "Potential Malicious Application Shimming",
+                "uuid": "187ca0c9-b098-491a-9a2b-182d194289d3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Create or Modify System Process",
+        "STEC": "T1543.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543.003",
+            "values": [
+              {
+                "id": "138952",
+                "bb": "Service Configured to Use Powershell",
+                "uuid": "3c17abbf-0797-4dc5-8917-6d4cbc1b4c93",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Application Layer Protocol",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1071",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Application Layer Protocol",
+            "values": [
+              {
+                "id": "138152",
+                "bb": "Communication with a Potential Hostile Host",
+                "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+                "T": "EVENT"
+              },
+              {
+                "id": "138202",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets)",
+                "uuid": "e796c0ed-7839-4997-bf7a-ca4576c25d83",
+                "T": "EVENT"
+              },
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1102",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1102",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1102",
+            "values": [
+              {
+                "id": "138152",
+                "bb": "Communication with a Potential Hostile Host",
+                "uuid": "ed72c66d-c837-49d6-9590-ea7f84f86998",
+                "T": "EVENT"
+              },
+              {
+                "id": "138352",
+                "bb": "Communication with a Potential Hostile IP Address",
+                "uuid": "c79e45a1-5381-4003-8e92-8f97be7600ab",
+                "T": "EVENT"
+              },
+              {
+                "id": "138302",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Reference Sets)",
+                "uuid": "afe6bea0-42c8-48e7-b5bb-f16e836605f0",
+                "T": "EVENT"
+              },
+              {
+                "id": "138252",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (X-force Categorization)",
+                "uuid": "60f34547-2463-4c88-806d-e23f1891eb87",
+                "T": "EVENT"
+              },
+              {
+                "id": "138202",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (Reference Sets)",
+                "uuid": "e796c0ed-7839-4997-bf7a-ca4576c25d83",
+                "T": "EVENT"
+              },
+              {
+                "id": "138102",
+                "bb": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)",
+                "uuid": "5661cc7f-324c-42e9-8112-acd9f73b023a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Hijack Execution Flow",
+        "STEC": "T1574.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574.001",
+            "values": [
+              {
+                "id": "139102",
+                "bb": "Potential DLL Hijacking",
+                "uuid": "0dfe1f3a-907d-4886-9442-c6ea44e8385f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1136",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136",
+            "values": [
+              {
+                "id": "139452",
+                "bb": "User Account Creation followed by Account Deletion (Windows)",
+                "uuid": "45e655ff-d9db-4ab2-892d-8b0e6c621d03",
+                "T": "EVENT"
+              },
+              {
+                "id": "139352",
+                "bb": "User Account Creation followed by Account Deletion (Unix)",
+                "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+                "T": "EVENT"
+              },
+              {
+                "id": "137952",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Windows)",
+                "uuid": "96ab922b-456c-4329-b19a-5de405354717",
+                "T": "EVENT"
+              },
+              {
+                "id": "137852",
+                "bb": "BB:BehaviorDefinition: User Account Added (Windows)",
+                "uuid": "f5fbd2d5-5812-42c1-a32d-2162cab26a1b",
+                "T": "EVENT"
+              },
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              },
+              {
+                "id": "137802",
+                "bb": "BB:BehaviorDefinition: User Account Added (Unix)",
+                "uuid": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.015",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.015",
+            "values": [
+              {
+                "id": "139052",
+                "bb": "Potential Component Object Model (COM) Hijacking",
+                "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+                "T": "EVENT"
+              },
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1133",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1133",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1133",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              },
+              {
+                "id": "134702",
+                "bb": "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account",
+                "uuid": "a138d39e-431a-4911-8db4-8e0966a628a9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.011",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.011",
+            "values": [
+              {
+                "id": "139152",
+                "bb": "Potential Malicious Application Shimming",
+                "uuid": "187ca0c9-b098-491a-9a2b-182d194289d3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1098",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1098",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1098",
+            "values": [
+              {
+                "id": "139352",
+                "bb": "User Account Creation followed by Account Deletion (Unix)",
+                "uuid": "86096a58-f4f0-4cee-9ee2-16e8faf56414",
+                "T": "EVENT"
+              },
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              },
+              {
+                "id": "137802",
+                "bb": "BB:BehaviorDefinition: User Account Added (Unix)",
+                "uuid": "eba6e5c5-c8f5-4ae3-920e-7d83df1f42bc",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1546",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546",
+            "values": [
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.003",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.003",
+            "values": [
+              {
+                "id": "139052",
+                "bb": "Potential Component Object Model (COM) Hijacking",
+                "uuid": "04c76e40-1ea2-494b-b9ec-1a89348d830d",
+                "T": "EVENT"
+              },
+              {
+                "id": "138852",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking",
+                "uuid": "b6091a00-5a16-4987-9422-175bb697ce94",
+                "T": "EVENT"
+              },
+              {
+                "id": "139002",
+                "bb": "BB:BehaviorDefinition: Component Object Model Hijacking Rules",
+                "uuid": "85cf8a29-7a67-4826-99fd-a9558987e599",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1021",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              },
+              {
+                "id": "135352",
+                "bb": "Excessive Login Failures via Network Connection to Multiple Machines",
+                "uuid": "f2fb44fc-d976-4993-a7f1-36a9e7325590",
+                "T": "EVENT"
+              },
+              {
+                "id": "165528",
+                "bb": "Login Failures via Network Connection",
+                "uuid": "f4840bf1-a31f-441f-a431-007c320c328e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1210",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1210",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1210",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.001",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.001",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              },
+              {
+                "id": "135352",
+                "bb": "Excessive Login Failures via Network Connection to Multiple Machines",
+                "uuid": "f2fb44fc-d976-4993-a7f1-36a9e7325590",
+                "T": "EVENT"
+              },
+              {
+                "id": "165528",
+                "bb": "Login Failures via Network Connection",
+                "uuid": "f4840bf1-a31f-441f-a431-007c320c328e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1563",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1563",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1563",
+            "values": [
+              {
+                "id": "136152",
+                "bb": "RDP Hijacking Tool Detected",
+                "uuid": "3e679e6d-d554-4954-b455-085c410db84f",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Remote Services",
+        "STEC": "T1021.002",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021.002",
+            "values": [
+              {
+                "id": "135652",
+                "bb": "BB:BehaviorDefinition: Administrative Share Accessed",
+                "uuid": "66067912-26f8-4899-ac0c-1c9c1a259a8c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Collection": [
+      {
+        "TEC": "T1005",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1005",
+        "MAP_S": [
+          {
+            "name": "Collection - T1005",
+            "values": [
+              {
+                "id": "138402",
+                "bb": "Credential Dumping Activities Discovered",
+                "uuid": "0637476c-38ce-455a-96dc-8a3846391970",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1074",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1074",
+        "MAP_S": [
+          {
+            "name": "Collection - T1074",
+            "values": [
+              {
+                "id": "135152",
+                "bb": "Ransomware: Maze IOC in Events",
+                "uuid": "80486fa8-a926-428a-832e-aac36369cc11",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1119",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1119",
+        "MAP_S": [
+          {
+            "name": "Collection - T1119",
+            "values": [
+              {
+                "id": "135152",
+                "bb": "Ransomware: Maze IOC in Events",
+                "uuid": "80486fa8-a926-428a-832e-aac36369cc11",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "T1133",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1133",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1133",
+            "values": [
+              {
+                "id": "134702",
+                "bb": "BB:BehaviorDefinition: Programming Environment Started with a Privileged Account",
+                "uuid": "a138d39e-431a-4911-8db4-8e0966a628a9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.452541",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

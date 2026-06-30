@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "165005",
+  "rule_id": "165005",
+  "uuid": "75cbd1b5-cc60-4015-9636-302eddadf9ab",
+  "rule_name": "Suspicious Windows Shutdown or Restart - Possible Persistence",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-04-06T12:40:58.250Z",
+  "modified": "2025-04-23T06:04:40.194Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceID_Test",
+            "uid": "1",
+            "id": "13"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>WindowsAuthServer @ H360-DC3, WindowsAuthServer @ H360-TALLY, WindowsAuthServer @ H360FS, WindowsAuthServer @ SRV-APP-H360, WindowsAuthServer @ H360-DC2, WindowsAuthServer @ VM-DMS-Live</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDevices",
+              "value": "4065, 4067, 3733, 3775, 3776, 3869"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(5001592) Status Shutdown Clean</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001592"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>shutdown reason (custom) contains any of (Planned)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "shutdown reasonCONany(Planned)"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "includeAttackerEventsInterval": "900",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501799",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Detects suspicious system shutdowns or restarts which may be used for establishing persistence or evading detection. \nFalse positives: - Legitimate shutdowns by update processes - Scheduled maintenance windows",
+            "name": "Suspicious Windows Shutdown or Restart - Possible Persistence"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.184965",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

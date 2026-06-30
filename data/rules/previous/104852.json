@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "104852",
+  "rule_id": "104852",
+  "uuid": "8a68eca1-6c92-4d42-8f84-bc77336ff51a",
+  "rule_name": "UBA : Browsed to Mixed Content/Potentially Adult Website",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-04-28T18:55:07.580Z",
+  "modified": "2024-02-19T16:41:10.605Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%adult%' or &quot;Web Category&quot; ilike '%extrem%' or &quot;Web Category&quot; ilike '%gruesome%' or &quot;Web Category&quot; ilike '%profanity%' or &quot;Web Category&quot; ilike '%hate%' or &quot;Web Category&quot; ilike '%discrimination%' or &quot;Web Category&quot; ilike '%abortion%' or &quot;Web Category&quot; ilike '%weapon%' or &quot;Web Category&quot; ilike '%violen%' or &quot;Web Category&quot; ilike '%alcohol%' or &quot;Web Category&quot; ilike '%drug%' or &quot;Web Category&quot; ilike '%tabacco%' or &quot;Web Category&quot; ilike '%marijuana%' or &quot;Web Category&quot; ilike '%controlled substance%' OR &quot;Web Category&quot; in (1, 10, 19, 22, 23, 24, 25, 26, 66, 87, 88, 89, 90, 92, 93, 111)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Web%20Category%22%20ilike%20'%25adult%25'%20or%20%22Web%20Category%22%20ilike%20'%25extrem%25'%20or%20%22Web%20Category%22%20ilike%20'%25gruesome%25'%20or%20%22Web%20Category%22%20ilike%20'%25profanity%25'%20or%20%22Web%20Category%22%20ilike%20'%25hate%25'%20or%20%22Web%20Category%22%20ilike%20'%25discrimination%25'%20or%20%22Web%20Category%22%20ilike%20'%25abortion%25'%20or%20%22Web%20Category%22%20ilike%20'%25weapon%25'%20or%20%22Web%20Category%22%20ilike%20'%25violen%25'%20or%20%22Web%20Category%22%20ilike%20'%25alcohol%25'%20or%20%22Web%20Category%22%20ilike%20'%25drug%25'%20or%20%22Web%20Category%22%20ilike%20'%25tabacco%25'%20or%20%22Web%20Category%22%20ilike%20'%25marijuana%25'%20or%20%22Web%20Category%22%20ilike%20'%25controlled%20substance%25'%20OR%20%22Web%20Category%22%20in%20(1,%2010,%2019,%2022,%2023,%2024,%2025,%2026,%2066,%2087,%2088,%2089,%2090,%2092,%2093,%20111)|%5B%22%5C%22Web%20Category%5C%22%20ilike%20'%25adult%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25extrem%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25gruesome%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25profanity%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25hate%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25discrimination%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25abortion%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25weapon%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25violen%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25alcohol%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25drug%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25tabacco%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25marijuana%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25controlled%20substance%25'%20OR%20%5C%22Web%20Category%5C%22%20in%20(1,%2010,%2019,%2022,%2023,%2024,%2025,%2026,%2066,%2087,%2088,%2089,%2090,%2092,%2093,%20111)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500237",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "7",
+            "description": "senseValue=10,senseDesc='User access to Risky Resource Category - Mixed Content/Potentially Adult',usecase_id='8a68eca1-6c92-4d42-8f84-bc77336ff51a'",
+            "name": "UBA : Browsed to Mixed Content/Potentially Adult Website"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+      "name": "BB:UBA : URL Category Filter"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104852",
+                "bb": "UBA : Browsed to Mixed Content/Potentially Adult Website",
+                "uuid": "8a68eca1-6c92-4d42-8f84-bc77336ff51a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104852",
+                "bb": "UBA : Browsed to Mixed Content/Potentially Adult Website",
+                "uuid": "8a68eca1-6c92-4d42-8f84-bc77336ff51a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.570660",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

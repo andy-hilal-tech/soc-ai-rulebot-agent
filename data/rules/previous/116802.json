@@ -1,0 +1,94 @@
+{
+  "rule_doc_id": "116802",
+  "rule_id": "116802",
+  "uuid": "d356a614-2034-4662-8596-6d0dde36aa49",
+  "rule_name": "Credential Exfiltration and Administration Task from the Same User",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-01-21T18:18:07.314Z",
+  "modified": "2024-04-29T12:45:20.164Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "SequenceFunction_Test",
+            "uid": "0",
+            "id": "50"
+          },
+          "text": [
+            "when all of these <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Regular Virtualization Administration, BB:BehaviorDefinition: Credential Exfiltration in Amazon GuardDuty</a>, <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>in any</a> order, from <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>username</a>  to  <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>the same</a> <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>username</a>, over <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>1800</a> <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>seconds</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "0"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "a3928e1a-66f1-4e1d-acb2-1e4f08afa112, c04afd5c-1185-4651-b28f-6e4e0a8e4e8e"
+            },
+            {
+              "id": "3",
+              "value": "Any"
+            },
+            {
+              "id": "4",
+              "value": "same"
+            },
+            {
+              "id": "5",
+              "value": "UserName"
+            },
+            {
+              "id": "6",
+              "value": "same"
+            },
+            {
+              "id": "7",
+              "value": "UserName"
+            },
+            {
+              "id": "8",
+              "value": "1800"
+            },
+            {
+              "id": "9",
+              "value": "s"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a3928e1a-66f1-4e1d-acb2-1e4f08afa112",
+      "name": "BB:BehaviorDefinition: Regular Virtualization Administration"
+    },
+    {
+      "uuid": "c04afd5c-1185-4651-b28f-6e4e0a8e4e8e",
+      "name": "BB:BehaviorDefinition: Credential Exfiltration in Amazon GuardDuty"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.995294",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

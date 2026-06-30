@@ -1,0 +1,127 @@
+{
+  "rule_doc_id": "158252",
+  "rule_id": "158252",
+  "uuid": "bdd8940f-3669-481c-b381-4bc639a46226",
+  "rule_name": "Suspicious EventLog Cleared",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-17T16:18:22.081Z",
+  "modified": "2024-07-21T12:38:17.956Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Eventlog Cleared via PowerShell, BB:MITREDefinition: Suspicious Eventlog Cleared via Wevtutil, BB:MITREDefinition: Suspicious Eventlog Cleared via WMIC</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "1466d363-08db-4ebb-8bd2-4bc54050a0ba, e053cefe-1efa-468b-a513-dfeaa0981a7e, 138d9d90-cd9a-4fb4-a74e-6dd14710349d"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "1466d363-08db-4ebb-8bd2-4bc54050a0ba",
+      "name": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via PowerShell"
+    },
+    {
+      "uuid": "e053cefe-1efa-468b-a513-dfeaa0981a7e",
+      "name": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via Wevtutil"
+    },
+    {
+      "uuid": "138d9d90-cd9a-4fb4-a74e-6dd14710349d",
+      "name": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via WMIC"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Indicator Removal",
+        "STEC": "T1070.001",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1070",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1070.001",
+            "values": [
+              {
+                "id": "158252",
+                "bb": "Suspicious EventLog Cleared",
+                "uuid": "bdd8940f-3669-481c-b381-4bc639a46226",
+                "T": "EVENT"
+              },
+              {
+                "id": "153852",
+                "bb": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via Wevtutil",
+                "uuid": "e053cefe-1efa-468b-a513-dfeaa0981a7e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Impair Defenses",
+        "STEC": "T1562.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1562",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1562.002",
+            "values": [
+              {
+                "id": "150602",
+                "bb": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via PowerShell",
+                "uuid": "1466d363-08db-4ebb-8bd2-4bc54050a0ba",
+                "T": "EVENT"
+              },
+              {
+                "id": "157652",
+                "bb": "BB:BehaviorDefinition: Suspicious Eventlog Cleared via WMIC",
+                "uuid": "138d9d90-cd9a-4fb4-a74e-6dd14710349d",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.336222",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

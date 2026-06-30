@@ -1,0 +1,74 @@
+{
+  "rule_doc_id": "100191",
+  "rule_id": "100191",
+  "uuid": "SYSTEM-1203",
+  "rule_name": "BB:FalsePositive: Windows Server False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-10-13T04:32:28.574Z",
+  "modified": "2023-10-30T02:02:38.702Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(6752880) HTTP: ASN.1 Bitstring Processing Heap Overflow, (2518668) DELETED SPECIFIC-THREATS Microsoft SPNEGO ASN.1 library heap corruption overflow attempt, (5751094) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (13255327) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2503392) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode asn1 overflow attempt, (2503393) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP andx asn1 overflow attempt, (2503394) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP unicode andx asn1 overflow attempt, (2503395) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode asn1 overflow attempt, (2503396) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP andx asn1 overflow attempt, (2503397) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP unicode andx asn1 overflow attempt, (13252932) NETBIOS SMB Session Setup NTMLSSP andx asn1 overflow attempt, (2502741) NETBIOS SMB-DS Session Setup unicode andx username overflow attempt, (2502717) OS-WINDOWS Microsoft Windows SMB Session Setup NTLMSSP asn1 overflow attempt, (2502718) OS-WINDOWS Microsoft Windows SMB-DS Session Setup NTLMSSP asn1 overflow attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6752880,  2518668,  5751094,  13255327,  2503392,  2503393,  2503394,  2503395,  2503396,  2503397,  13252932,  2502741,  2502717,  2502718"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: Windows Servers, BB:HostReference: Windows Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1216, 7164b6e2-ef35-40e8-a731-84e63a80a1ca"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1216",
+      "name": "BB:HostDefinition: Windows Servers"
+    },
+    {
+      "uuid": "7164b6e2-ef35-40e8-a731-84e63a80a1ca",
+      "name": "BB:HostReference: Windows Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.793708",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

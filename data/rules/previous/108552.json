@@ -1,0 +1,514 @@
+{
+  "rule_doc_id": "108552",
+  "rule_id": "108552",
+  "uuid": "a52dab00-45f6-40a4-a349-157e60a6304a",
+  "rule_name": "UBA : Initial Access Followed by Suspicious Activity",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2019-10-24T18:56:58.060Z",
+  "modified": "2024-02-19T16:44:53.697Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.TriggerMatchCount",
+            "uid": "2",
+            "id": "306"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>BB:UBA : Compromised Account - Execution</a> match at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> times with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>24</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>hour(s)</a> after <a href='javascript:editParameter(\"2\", \"7\")' class='dynamic'>BB:UBA : Compromised Account - Initial Access</a> match"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "adf601c5-b563-4a34-8818-ae43b7eee8c5"
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "24"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            },
+            {
+              "id": "7",
+              "method": "getEventRules",
+              "value": "989cb025-0928-4a85-9ab9-2e340035a9a1"
+            },
+            {
+              "id": "8",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24006",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500341",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=15",
+            "name": "UBA : Initial Access Followed by Suspicious Activity"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "adf601c5-b563-4a34-8818-ae43b7eee8c5",
+      "name": "BB:UBA : Compromised Account - Execution"
+    },
+    {
+      "uuid": "989cb025-0928-4a85-9ab9-2e340035a9a1",
+      "name": "BB:UBA : Compromised Account - Initial Access"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - None",
+            "values": [
+              {
+                "id": "103752",
+                "bb": "UBA : Account or Group or Privileges Added",
+                "uuid": "069ef417-aaae-4442-83eb-989f8c94dacf",
+                "T": "EVENT"
+              },
+              {
+                "id": "104052",
+                "bb": "UBA : Suspicious Privileged Activity (Rarely Used Privilege)",
+                "uuid": "e9726a50-9352-4eaf-ad6a-bc8eecc40c9a",
+                "T": "EVENT"
+              },
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "100303",
+                "bb": "BB:CategoryDefinition: Privileged Escalations",
+                "uuid": "SYSTEM-1570",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "102852",
+                "bb": "UBA : Dormant Account Use Attempted",
+                "uuid": "35729450-d697-4789-a805-4869af580eca",
+                "T": "EVENT"
+              },
+              {
+                "id": "102902",
+                "bb": "UBA : Dormant Account Used",
+                "uuid": "08787241-c480-48ce-9f2a-295977435977",
+                "T": "EVENT"
+              },
+              {
+                "id": "102352",
+                "bb": "UBA : Unauthorized Access",
+                "uuid": "9c1c3036-1dcb-4972-88cd-fba31c440a82",
+                "T": "EVENT"
+              },
+              {
+                "id": "102502",
+                "bb": "UBA : Login Anomaly",
+                "uuid": "b4397bc8-8541-4f61-a2b9-4369cc3b3689",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "102202",
+                "bb": "UBA : User Access - Failed Access to Critical Assets",
+                "uuid": "09349955-1776-4545-bdc4-8aeee6bfb0f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "100063",
+                "bb": "BB:CategoryDefinition: Authentication Failures",
+                "uuid": "SYSTEM-1201",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              },
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              },
+              {
+                "id": "118652",
+                "bb": "UBA : Browsed to Phishing Website",
+                "uuid": "e34d39ad-e64f-4180-9c08-bf89719ab69e",
+                "T": "EVENT"
+              },
+              {
+                "id": "105002",
+                "bb": "UBA : Browsed to Scam/Questionable/Illegal Website",
+                "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124405",
+                "bb": "UBA : User Accessing Account from Anonymous Source",
+                "uuid": "308c3b0b-5c50-4b84-8ba7-1aa1393d5f30",
+                "T": "EVENT"
+              },
+              {
+                "id": "124404",
+                "bb": "UBA : User Accessing Risky IP Botnet",
+                "uuid": "e3974ff9-bc7c-44ac-bc9c-4dfd0d07260a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124417",
+                "bb": "UBA : User Accessing Risky IP Malware",
+                "uuid": "73d9fdb5-2d73-4f98-91da-e71083bb4058",
+                "T": "EVENT"
+              },
+              {
+                "id": "110002",
+                "bb": "UBA : User Geography Change",
+                "uuid": "06bd0239-ae61-4846-8685-6f48bbe760db",
+                "T": "EVENT"
+              },
+              {
+                "id": "102102",
+                "bb": "UBA : User Access at Unusual Times",
+                "uuid": "90fd4769-6bb5-4534-b233-e4b0503eaf3e",
+                "T": "EVENT"
+              },
+              {
+                "id": "108552",
+                "bb": "UBA : Initial Access Followed by Suspicious Activity",
+                "uuid": "a52dab00-45f6-40a4-a349-157e60a6304a",
+                "T": "EVENT"
+              },
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              },
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              },
+              {
+                "id": "118652",
+                "bb": "UBA : Browsed to Phishing Website",
+                "uuid": "e34d39ad-e64f-4180-9c08-bf89719ab69e",
+                "T": "EVENT"
+              },
+              {
+                "id": "105002",
+                "bb": "UBA : Browsed to Scam/Questionable/Illegal Website",
+                "uuid": "eb59a2ad-864c-4978-8635-491123aca19a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124404",
+                "bb": "UBA : User Accessing Risky IP Botnet",
+                "uuid": "e3974ff9-bc7c-44ac-bc9c-4dfd0d07260a",
+                "T": "EVENT"
+              },
+              {
+                "id": "124417",
+                "bb": "UBA : User Accessing Risky IP Malware",
+                "uuid": "73d9fdb5-2d73-4f98-91da-e71083bb4058",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "104102",
+                "bb": "UBA : Account or Group or Privileges Modified",
+                "uuid": "8927074a-581f-41ae-93b0-3ea054bdca50",
+                "T": "EVENT"
+              },
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "103102",
+                "bb": "UBA : User Account Created and Deleted in a Short Period of Time",
+                "uuid": "fa609090-598b-4058-9a3e-daed5d574320",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Exfiltration": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - None",
+            "values": [
+              {
+                "id": "108552",
+                "bb": "UBA : Initial Access Followed by Suspicious Activity",
+                "uuid": "a52dab00-45f6-40a4-a349-157e60a6304a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Persistence - None",
+            "values": [
+              {
+                "id": "100282",
+                "bb": "BB:CategoryDefinition: Application or Service Installed or Modified",
+                "uuid": "SYSTEM-1565",
+                "T": "EVENT"
+              },
+              {
+                "id": "104252",
+                "bb": "BB:UBA : Privileged Activity",
+                "uuid": "ea27230a-2ab3-48b0-a512-c27311e8c66e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.685418",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

@@ -1,0 +1,43 @@
+{
+  "rule_doc_id": "108202",
+  "rule_id": "108202",
+  "uuid": "031f08f5-f26c-49ce-a933-664b01328ca5",
+  "rule_name": "BB:PortDefinition: BGP Ports",
+  "object_type": "building_block",
+  "group": "Port\\Protocol Definition",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-05-30T08:58:25.530Z",
+  "modified": "2024-02-19T16:44:09.283Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>179</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "179"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.080667",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

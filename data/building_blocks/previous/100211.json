@@ -1,0 +1,95 @@
+{
+  "rule_doc_id": "100211",
+  "rule_id": "100211",
+  "uuid": "SYSTEM-1492",
+  "rule_name": "BB:FalsePositive: Windows AD Source Authentication Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-05-14T16:14:36.575Z",
+  "modified": "2024-07-21T07:32:55.048Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "3",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "SrcHost_Test",
+            "uid": "0",
+            "id": "8"
+          },
+          "text": [
+            "when the source IP is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>127.0.0.0/8</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.0/8"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3000"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "2",
+            "id": "19",
+            "negate": "true"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(5000543) Failure Audit: A member was added to a security-enabled global group, (5000899) Success Audit: A member was added to a security-enabled global group, (5000570) Failure Audit: A member was added to a security-enabled universal group, (5000926) Success Audit: A member was added to a security-enabled universal group, (5000547) Failure Audit: A member was added to a security-enabled local group, (5000903) Success Audit: A member was added to a security-enabled local group, (5000910) Success Audit: A user account was locked out, (5000094) User Account Locked Out</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5000543,  5000899,  5000570,  5000926,  5000547,  5000903,  5000910,  5000094"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.841407",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,63 @@
+{
+  "rule_doc_id": "100602",
+  "rule_id": "100602",
+  "uuid": "c18f0605-67d5-4100-8710-885ca7a393f7",
+  "rule_name": "BB:UBA : Common Log Source Filters",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-01-30T18:28:34.300Z",
+  "modified": "2024-07-21T07:53:23.332Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "2",
+            "id": "14",
+            "negate": "true"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>IBM Sense, Health Metrics, SIM Audit, System Notification, Anomaly Detection Engine, CRE System, Event CRE Injected, Flow Classification Engine, Asset Profiler, Search Results, Custom Rule Engine</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "408,  368,  105,  147,  207,  275,  262,  16,  267,  355,  18"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceGroupID_Test",
+            "uid": "3",
+            "id": "93",
+            "negate": "true"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>UBA : Trusted Log Source Group</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getSensorDevicesTreeRoot",
+              "value": "100175"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.983272",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

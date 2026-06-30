@@ -1,0 +1,70 @@
+{
+  "rule_doc_id": "100184",
+  "rule_id": "100184",
+  "uuid": "SYSTEM-1382",
+  "rule_name": "BB:FalsePositive: SNMP Sender or Receiver False Positive Events",
+  "object_type": "building_block",
+  "group": "False Positive",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-05-05T05:44:20.345Z",
+  "modified": "2023-10-30T02:02:36.902Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when we see an event match <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:HostDefinition: SNMP Sender or Receiver</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1366"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(1159448) Custom User 9 - Event CRE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "6500120"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1366",
+      "name": "BB:HostDefinition: SNMP Sender or Receiver"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.777507",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

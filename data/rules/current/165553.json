@@ -2,7 +2,7 @@
   "rule_doc_id": "165553",
   "rule_id": "165553",
   "uuid": "6a0f2d48-6322-4d36-92cc-2e13ea68e203",
-  "rule_name": "MSSP -OS -MS -31 - M-  Domain Password Policy Modification",
+  "rule_name": "MSSP - OS - MS - 31 - M - Domain Password Policy Modification",
   "object_type": "rule",
   "group": "MSSP - Rules, OS - MS",
   "rule_category": "Custom Rule",
@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-06-22T12:41:20.729Z",
-  "modified": "2026-06-22T12:41:20.727Z",
+  "modified": "2026-06-23T11:41:16.175Z",
   "logic": [
     {
       "test": [
@@ -100,26 +100,35 @@
       "newevent": [
         {
           "_$": {
-            "lowLevelCategory": "4015",
+            "lowLevelCategory": "3147",
             "offenseMapping": "0",
             "forceOffenseCreation": "false",
-            "qid": "67501937",
+            "qid": "67501939",
             "contributeOffenseName": "false",
             "overrideOffenseName": "false",
             "describeOffense": "false",
             "relevance": "10",
             "credibility": "10",
             "severity": "5",
-            "description": "MSSP -OS -MS -31 - M-  Domain Password Policy Modification",
-            "name": "MSSP -OS -MS -31 - M-  Domain Password Policy Modification"
+            "description": "MSSP - OS - MS - 31 - M - Domain Password Policy Modification",
+            "name": "MSSP - OS - MS - 31 - M - Domain Password Policy Modification"
           }
         }
       ]
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.513786",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.398452",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

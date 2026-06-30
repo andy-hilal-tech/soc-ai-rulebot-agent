@@ -1,0 +1,157 @@
+{
+  "rule_doc_id": "146802",
+  "rule_id": "146802",
+  "uuid": "62bcab9e-fe00-4323-8382-d3cd8324ec3a",
+  "rule_name": "Powershell Remote Thread Creation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-04T16:37:48.829Z",
+  "modified": "2024-07-21T12:38:30.861Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001845"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Path (custom) contains any of [powershell_ise.exe or powershell.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process PathCONanypowershell_ise.exe�powershell.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Target Process Full Full Name&quot; ILIKE 'svchost.exe' OR &quot;Target Process Full Full Name&quot; ILIKE 'csrss.exe' OR &quot;Target Process Full Full Name&quot; ILIKE 'gpupdate.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'explorer.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'services.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'winlogon.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'smss.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'wininit.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'userinit.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'spoolsv.exe' OR &quot;Target Process Full Full Full Full Full Full Name&quot; ILIKE 'taskhost.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Process%20Name%22%20ILIKE%20'svchost.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'csrss.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'gpupdate.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'explorer.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'services.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'winlogon.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'smss.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'wininit.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'userinit.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'spoolsv.exe'%20OR%20%22Target%20Process%20Name%22%20ILIKE%20'taskhost.exe'|%5B%22%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'svchost.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'csrss.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'gpupdate.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'explorer.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'services.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'winlogon.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'smss.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'wininit.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'userinit.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'spoolsv.exe'%20OR%20%5C%22Target%20Process%20Name%5C%22%20ILIKE%20'taskhost.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Process Injection",
+        "STEC": "T1055.003",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1055.003",
+            "values": [
+              {
+                "id": "146802",
+                "bb": "Powershell Remote Thread Creation",
+                "uuid": "62bcab9e-fe00-4323-8382-d3cd8324ec3a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Privilege Escalation": [
+      {
+        "TEC": "Process Injection",
+        "STEC": "T1055.003",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055.003",
+            "values": [
+              {
+                "id": "146802",
+                "bb": "Powershell Remote Thread Creation",
+                "uuid": "62bcab9e-fe00-4323-8382-d3cd8324ec3a",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.025563",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

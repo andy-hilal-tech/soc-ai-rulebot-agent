@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "153302",
+  "rule_id": "153302",
+  "uuid": "6f65e2d1-f6a7-4ab2-9cdd-f3edddcaea37",
+  "rule_name": "System Owner or User Discovery (Windows)",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-08T16:03:47.037Z",
+  "modified": "2024-07-21T12:38:47.755Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>( \t&quot;Process Full Full Name&quot; == 'cmd.exe' \tAND \t( \t\tLOWER(&quot;Command&quot;) LIKE '% dir %' \t\tOR LOWER(&quot;Command&quot;) LIKE '% /c%'  \t\tOR LOWER(&quot;Command&quot;) LIKE '%\\users\\%' \t) ) OR ( \t( \t\t&quot;Process Full Full Name&quot; == 'net.exe'  \t\tOR  \t\t&quot;Process Full Full Name&quot; == 'net1.exe' \t) \tAND  \t\tLOWER(&quot;Command&quot;) LIKE '%user%' ) AND NOT ( \tLOWER(&quot;Command&quot;) MATCHES '.*?\\/(domain|add|delete|active|expires|passwordreq|scriptpath|times|workstations).*?' ) OR \t&quot;Process Full Full Name&quot; in ('whoami.exe', 'quser.exe', 'qwinsta.exe') OR \t( \t\t&quot;Process Full Full Name&quot; == 'wmic.exe'  \t\tAND  \t\t( \t\t\tLOWER(&quot;Command&quot;) LIKE '%useraccount%' \t\t\tOR LOWER(&quot;Command&quot;) LIKE '%get%' \t\t) \t) OR \t( \t\t&quot;Process Full Full Name&quot; == 'cmdkey.exe' \t\tAND LOWER(&quot;Command&quot;) LIKE '% /l%' \t)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%20%09%22Process%20Name%22%20%3D%3D%20'cmd.exe'%20%09AND%20%09(%20%09%09LOWER(%22Command%22)%20LIKE%20'%25%20dir%20%25'%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25%20%2Fc%25'%20%20%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25%5Cusers%5C%25'%20%09)%20)%20OR%20(%20%09(%20%09%09%22Process%20Name%22%20%3D%3D%20'net.exe'%20%20%09%09OR%20%20%09%09%22Process%20Name%22%20%3D%3D%20'net1.exe'%20%09)%20%09AND%20%20%09%09LOWER(%22Command%22)%20LIKE%20'%25user%25'%20)%20AND%20NOT%20(%20%09LOWER(%22Command%22)%20MATCHES%20'.*%3F%5C%2F(domain%7Cadd%7Cdelete%7Cactive%7Cexpires%7Cpasswordreq%7Cscriptpath%7Ctimes%7Cworkstations).*%3F'%20)%20OR%20%09%22Process%20Name%22%20in%20('whoami.exe'%2C%20'quser.exe'%2C%20'qwinsta.exe')%20OR%20%09(%20%09%09%22Process%20Name%22%20%3D%3D%20'wmic.exe'%20%20%09%09AND%20%20%09%09(%20%09%09%09LOWER(%22Command%22)%20LIKE%20'%25useraccount%25'%20%09%09%09OR%20LOWER(%22Command%22)%20LIKE%20'%25get%25'%20%09%09)%20%09)%20OR%20%09(%20%09%09%22Process%20Name%22%20%3D%3D%20'cmdkey.exe'%20%09%09AND%20LOWER(%22Command%22)%20LIKE%20'%25%20%2Fl%25'%20%09)|%5B%22(%22%2C%22%5Ct%5C%22Process%20Name%5C%22%20%3D%3D%20'cmd.exe'%22%2C%22%5CtAND%22%2C%22%5Ct(%22%2C%22%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20dir%20%25'%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Fc%25'%20%22%2C%22%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%5C%5Cusers%5C%5C%25'%22%2C%22%5Ct)%22%2C%22)%22%2C%22OR%22%2C%22(%22%2C%22%5Ct(%22%2C%22%5Ct%5Ct%5C%22Process%20Name%5C%22%20%3D%3D%20'net.exe'%20%22%2C%22%5Ct%5CtOR%20%22%2C%22%5Ct%5Ct%5C%22Process%20Name%5C%22%20%3D%3D%20'net1.exe'%22%2C%22%5Ct)%22%2C%22%5CtAND%20%22%2C%22%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25user%25'%22%2C%22)%22%2C%22AND%20NOT%22%2C%22(%22%2C%22%5CtLOWER(%5C%22Command%5C%22)%20MATCHES%20'.*%3F%5C%5C%2F(domain%7Cadd%7Cdelete%7Cactive%7Cexpires%7Cpasswordreq%7Cscriptpath%7Ctimes%7Cworkstations).*%3F'%22%2C%22)%22%2C%22OR%22%2C%22%5Ct%5C%22Process%20Name%5C%22%20in%20('whoami.exe'%2C%20'quser.exe'%2C%20'qwinsta.exe')%22%2C%22OR%22%2C%22%5Ct(%22%2C%22%5Ct%5Ct%5C%22Process%20Name%5C%22%20%3D%3D%20'wmic.exe'%20%22%2C%22%5Ct%5CtAND%20%22%2C%22%5Ct%5Ct(%22%2C%22%5Ct%5Ct%5CtLOWER(%5C%22Command%5C%22)%20LIKE%20'%25useraccount%25'%22%2C%22%5Ct%5Ct%5CtOR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get%25'%22%2C%22%5Ct%5Ct)%22%2C%22%5Ct)%22%2C%22OR%22%2C%22%5Ct(%22%2C%22%5Ct%5Ct%5C%22Process%20Name%5C%22%20%3D%3D%20'cmdkey.exe'%22%2C%22%5Ct%5CtAND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20%2Fl%25'%22%2C%22%5Ct)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1033",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1033",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1033",
+            "values": [
+              {
+                "id": "153302",
+                "bb": "System Owner or User Discovery (Windows)",
+                "uuid": "6f65e2d1-f6a7-4ab2-9cdd-f3edddcaea37",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.183021",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "149952",
+  "rule_id": "149952",
+  "uuid": "2cb770a8-87f0-43c2-9ba6-a86bb429e52e",
+  "rule_name": "CLR DLL Loaded Via Office Application",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-16T10:57:15.407Z",
+  "modified": "2024-07-21T12:38:37.502Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001844) Image loaded</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001844"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Filename (custom) is any of clr.dll</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "FilenameEQanyclr.dll"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Process Full Full Name&quot;) MATCHES '(excel|mspub|onenote|onenoteim|outlook|powerpnt|winword)\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20MATCHES%20'(excel%7Cmspub%7Conenote%7Conenoteim%7Coutlook%7Cpowerpnt%7Cwinword)%5C.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20MATCHES%20'(excel%7Cmspub%7Conenote%7Conenoteim%7Coutlook%7Cpowerpnt%7Cwinword)%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "Process Injection",
+        "STEC": "T1055.001",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1055",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1055.001",
+            "values": [
+              {
+                "id": "149952",
+                "bb": "CLR DLL Loaded Via Office Application",
+                "uuid": "2cb770a8-87f0-43c2-9ba6-a86bb429e52e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.088499",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

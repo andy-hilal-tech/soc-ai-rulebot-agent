@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100259",
+  "rule_id": "100259",
+  "uuid": "SYSTEM-1316",
+  "rule_name": "BB:DeviceDefinition: VPN",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-10T19:02:46.017Z",
+  "modified": "2023-10-30T02:20:00.675Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Array Networks SSL VPN Access Gateways, Nortel Contivity VPN Switch, Nortel Contivity VPN Switch (obsolete), Nortel VPN Gateway, Pulse Secure Pulse Connect Secure, Cisco VPN 3000 Series Concentrator, CyberGuard TSP Firewall/VPN, SonicWALL SonicOS, Cisco Adaptive Security Appliance (ASA), Avaya VPN Gateway, Cisco PIX Firewall, Citrix Access Gateway, F5 Networks FirePass, Juniper Networks Firewall and VPN, Juniper Networks Infranet Controller, Juniper Networks Network and Security Manager, Microsoft ISA, WatchGuard Fireware OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "55, 37, 21, 107, 36, 23, 35, 78, 41, 354, 6, 270, 232, 5, 59, 45, 191, 360"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.873817",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

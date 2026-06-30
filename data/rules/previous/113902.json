@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "113902",
+  "rule_id": "113902",
+  "uuid": "96c0c23c-1ad9-4863-b0e4-bb9a5c1340c0",
+  "rule_name": "UBA : MaaS360 detected device with low encryption level",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-05-13T16:34:15.609Z",
+  "modified": "2024-02-19T16:53:50.198Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM MaaS360 Security</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "361"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "3",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Event ID</a> match <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>ENCRYPTION_LEVEL</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "qidEventId"
+            },
+            {
+              "id": "2",
+              "value": "ENCRYPTION_LEVEL"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "PropertyRegex",
+            "uid": "2",
+            "id": "225"
+          },
+          "text": [
+            "when any of <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Event Category</a> match <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>VULNERABILITY</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventDatabaseFields",
+              "value": "qidEventCategory"
+            },
+            {
+              "id": "2",
+              "value": "VULNERABILITY"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "20007",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500510",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "5",
+            "description": "senseValue=5,senseDesc='MaaS360 device out of compliance due to encryption level'",
+            "name": "UBA : MaaS360 detected device with low encryption level"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.891559",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

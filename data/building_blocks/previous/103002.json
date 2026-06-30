@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103002",
+  "rule_id": "103002",
+  "uuid": "c5d4f530-15f3-4202-8bd8-e452303538bc",
+  "rule_name": "BB:UBA : Authentication User or Group or Policy Changed",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-17T07:43:22.150Z",
+  "modified": "2024-02-19T16:40:37.064Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Changed, Authentication.Group Changed, Authentication.Group Member\n Added, Authentication.Group Member Removed, Authentication.Password Change Succeeded, Authentication.Policy Change, Authentication.User Account Changed, Aut\nhentication.User Right Assigned, Authentication.User Right Removed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3042, 3039, 3036, 3037, 3034, 3030, 3032, 3023, 3024"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.015182",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

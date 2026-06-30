@@ -1,0 +1,101 @@
+{
+  "rule_doc_id": "110502",
+  "rule_id": "110502",
+  "uuid": "21e3a7b5-4495-48e3-baed-88578a8606a3",
+  "rule_name": "BB:BehaviorDefinition: Remote Thread Creation False-Positives",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-08-30T20:52:32.530Z",
+  "modified": "2024-02-19T16:49:26.242Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001845"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Start Function (custom) is any of [EtwpNotificationThread or CtrlRoutine]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Start FunctionEQanyEtwpNotificationThread�CtrlRoutine"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(Start Function = 'EtwpNotificationThread' and Start Module ilike 'C:\\Windows\\system32\\ntdll.dll') or (Start Function = 'CtrlRoutine' and Process Path ilike 'C:\\Windows\\System32\\csrss.exe' and (Start Module ilike 'C:\\Windows\\System32\\KERNELBASE.dll' or Start Module ilike 'C:\\Windows\\system32\\kernel32.dll'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Start%20Function%22%20%3D%20'EtwpNotificationThread'%20and%20%22Start%20Module%22%20ilike%20'C%3A%5CWindows%5Csystem32%5Cntdll.dll')%20or%20(%22Start%20Function%22%20%3D%20'CtrlRoutine'%20and%20%22Process%20Path%22%20ilike%20'C%3A%5CWindows%5CSystem32%5Ccsrss.exe'%20and%20(%22Start%20Module%22%20ilike%20'C%3A%5CWindows%5CSystem32%5CKERNELBASE.dll'%20or%20%22Start%20Module%22%20ilike%20'C%3A%5CWindows%5Csystem32%5Ckernel32.dll'))|%5B%22(%5C%22Start%20Function%5C%22%20%3D%20'EtwpNotificationThread'%20and%20%5C%22Start%20Module%5C%22%20ilike%20'C%3A%5C%5CWindows%5C%5Csystem32%5C%5Cntdll.dll')%20or%20(%5C%22Start%20Function%5C%22%20%3D%20'CtrlRoutine'%20and%20%5C%22Process%20Path%5C%22%20ilike%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ccsrss.exe'%20and%20(%5C%22Start%20Module%5C%22%20ilike%20'C%3A%5C%5CWindows%5C%5CSystem32%5C%5CKERNELBASE.dll'%20or%20%5C%22Start%20Module%5C%22%20ilike%20'C%3A%5C%5CWindows%5C%5Csystem32%5C%5Ckernel32.dll'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.128775",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

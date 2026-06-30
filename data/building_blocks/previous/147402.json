@@ -1,0 +1,125 @@
+{
+  "rule_doc_id": "147402",
+  "rule_id": "147402",
+  "uuid": "ba8dde02-1e7a-4c1d-922e-cdc54eb244da",
+  "rule_name": "BB:BehaviorDefinition: Exchange PowerShell Snap-Ins Usage",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-01-19T20:03:12.734Z",
+  "modified": "2024-07-21T12:38:39.906Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Command (custom) contains any of Add-PSSnapin</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanyAdd-PSSnapin"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Command (custom) contains any of [Microsoft.Exchange.Powershell.Snapin or Microsoft.Exchange.Management.PowerShell.SnapIn]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanyMicrosoft.Exchange.Powershell.Snapin�Microsoft.Exchange.Management.PowerShell.SnapIn"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "T1059.001",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - T1059.001",
+            "values": [
+              {
+                "id": "147402",
+                "bb": "BB:BehaviorDefinition: Exchange PowerShell Snap-Ins Usage",
+                "uuid": "ba8dde02-1e7a-4c1d-922e-cdc54eb244da",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.615331",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

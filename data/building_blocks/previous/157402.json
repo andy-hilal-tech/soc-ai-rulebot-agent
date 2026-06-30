@@ -1,0 +1,188 @@
+{
+  "rule_doc_id": "157402",
+  "rule_id": "157402",
+  "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Net Execution",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-04-12T10:50:01.233Z",
+  "modified": "2024-07-21T12:38:43.996Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of [net.exe or net1.exe]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanynet.exe�net1.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '% group%' OR LOWER(&quot;Command&quot;) LIKE '% localgroup%' OR LOWER(&quot;Command&quot;) LIKE '% user%' OR LOWER(&quot;Command&quot;) LIKE '% view%' OR LOWER(&quot;Command&quot;) LIKE '% share%' OR LOWER(&quot;Command&quot;) LIKE '% accounts%' OR LOWER(&quot;Command&quot;) LIKE '% stop %' OR LOWER(&quot;Command&quot;) LIKE '% start%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25%20group%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20localgroup%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20user%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20view%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20share%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20accounts%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20stop%20%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25%20start%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20group%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20localgroup%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20user%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20view%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20share%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20accounts%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20stop%20%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25%20start%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "T1201",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1201",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1201",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Network Service Discovery",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1046",
+        "MAP_S": [
+          {
+            "name": "Discovery - Network Service Discovery",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1049",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1049",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1049",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1135",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1135",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1135",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.787096",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

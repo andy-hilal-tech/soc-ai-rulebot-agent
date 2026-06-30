@@ -1,0 +1,237 @@
+{
+  "rule_doc_id": "158002",
+  "rule_id": "158002",
+  "uuid": "e914c113-771c-4d79-8440-a2a81f1454df",
+  "rule_name": "Suspicious Group And Account Reconnaissance Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-04-12T12:40:54.722Z",
+  "modified": "2024-07-21T12:38:27.145Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Suspicious Net Execution, BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "9acd838b-db55-4f99-b733-1e3941e7cc08, 0dc352b7-3847-4bdf-82b2-90f37c97c2bb"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+      "name": "BB:BehaviorDefinition: Suspicious Net Execution"
+    },
+    {
+      "uuid": "0dc352b7-3847-4bdf-82b2-90f37c97c2bb",
+      "name": "BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Account Discovery",
+        "STEC": "T1087.001",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087.001",
+            "values": [
+              {
+                "id": "158002",
+                "bb": "Suspicious Group And Account Reconnaissance Activity",
+                "uuid": "e914c113-771c-4d79-8440-a2a81f1454df",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Account Discovery",
+        "STEC": "T1087.002",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087.002",
+            "values": [
+              {
+                "id": "158002",
+                "bb": "Suspicious Group And Account Reconnaissance Activity",
+                "uuid": "e914c113-771c-4d79-8440-a2a81f1454df",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1201",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1201",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1201",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Network Service Discovery",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1046",
+        "MAP_S": [
+          {
+            "name": "Discovery - Network Service Discovery",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1049",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1049",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1049",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1135",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1135",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1135",
+            "values": [
+              {
+                "id": "157402",
+                "bb": "BB:BehaviorDefinition: Suspicious Net Execution",
+                "uuid": "9acd838b-db55-4f99-b733-1e3941e7cc08",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1615",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1615",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1615",
+            "values": [
+              {
+                "id": "158052",
+                "bb": "BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE",
+                "uuid": "0dc352b7-3847-4bdf-82b2-90f37c97c2bb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1087",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087",
+            "values": [
+              {
+                "id": "158052",
+                "bb": "BB:BehaviorDefinition: Suspicious Group And Account Reconnaissance Activity Using Net.EXE",
+                "uuid": "0dc352b7-3847-4bdf-82b2-90f37c97c2bb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.336222",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

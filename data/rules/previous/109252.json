@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "109252",
+  "rule_id": "109252",
+  "uuid": "b5aad029-7558-43fa-978b-682bf0ec0456",
+  "rule_name": "UBA : Data Exfiltration by Cloud Services",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-10-04T08:08:02.070Z",
+  "modified": "2024-02-19T16:44:53.050Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>all</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:UBA : Common Event Filters,BB:UBA : File Transfer to Cloud services</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "all"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "aefca8e3-0782-4321-98f0-1ee3497c7a80, e54a0b13-631d-41ea-b814-e661c847d246"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500345",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "senseValue=5",
+            "name": "UBA : Data Exfiltration by Cloud Services"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "aefca8e3-0782-4321-98f0-1ee3497c7a80",
+      "name": "BB:UBA : Common Event Filters"
+    },
+    {
+      "uuid": "e54a0b13-631d-41ea-b814-e661c847d246",
+      "name": "BB:UBA : File Transfer to Cloud services"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Exfiltration": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Exfiltration",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Exfiltration - None",
+            "values": [
+              {
+                "id": "109252",
+                "bb": "UBA : Data Exfiltration by Cloud Services",
+                "uuid": "b5aad029-7558-43fa-978b-682bf0ec0456",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.697549",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

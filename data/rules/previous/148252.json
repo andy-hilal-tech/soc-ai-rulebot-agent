@@ -1,0 +1,134 @@
+{
+  "rule_doc_id": "148252",
+  "rule_id": "148252",
+  "uuid": "ca840db0-eb6c-435f-afe1-272056fafd87",
+  "rule_name": "New Certificate Added to Certificate Store",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-24T15:06:30.844Z",
+  "modified": "2024-07-21T12:38:40.894Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001832"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Registry Key (custom) is any of [\\SOFTWARE\\Microsoft\\SystemCertificates\\Root\\Certificates or \\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\Root\\Certificates or \\SOFTWARE\\Microsoft\\EnterpriseCertificates\\Root\\Certificates or \\SOFTWARE\\Microsoft\\SystemCertificates\\CA\\Certificates or \\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\CA\\Certificates or \\SOFTWARE\\Microsoft\\EnterpriseCertificates\\CA\\Certificates or \\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates or \\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates or \\SOFTWARE\\Microsoft\\EnterpriseCertificates\\AuthRoot\\Certificates]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Registry KeyEQany\\SOFTWARE\\Microsoft\\SystemCertificates\\Root\\Certificates�\\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\Root\\Certificates�\\SOFTWARE\\Microsoft\\EnterpriseCertificates\\Root\\Certificates�\\SOFTWARE\\Microsoft\\SystemCertificates\\CA\\Certificates�\\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\CA\\Certificates�\\SOFTWARE\\Microsoft\\EnterpriseCertificates\\CA\\Certificates�\\SOFTWARE\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates�\\SOFTWARE\\Policies\\Microsoft\\SystemCertificates\\AuthRoot\\Certificates�\\SOFTWARE\\Microsoft\\EnterpriseCertificates\\AuthRoot\\Certificates"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Registry Value Data (custom) is any of Binary Data</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Registry Value DataEQanyBinary Data"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "Subvert Trust Controls",
+        "STEC": "T1553.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1553",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1553.004",
+            "values": [
+              {
+                "id": "148252",
+                "bb": "New Certificate Added to Certificate Store",
+                "uuid": "ca840db0-eb6c-435f-afe1-272056fafd87",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.055967",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

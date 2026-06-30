@@ -1,0 +1,92 @@
+{
+  "rule_doc_id": "165413",
+  "rule_id": "165413",
+  "uuid": "d4b9d5f0-f685-4afc-9542-f1495a79288f",
+  "rule_name": "Potential Botnet Events Become Offenses",
+  "object_type": "rule",
+  "group": "Botnet, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "",
+  "created": "2026-02-18T05:28:40.867Z",
+  "modified": "2026-02-18T05:28:40.867Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Potential Exploit.Potential Botnet Connection</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "13012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Firewall action - BB - EN (custom) contains any of drop</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Firewall action - BB - ENCONanydrop"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14",
+            "negate": "true"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Custom Rule Engine</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "18"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.378684",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

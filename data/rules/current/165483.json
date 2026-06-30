@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-03-18T06:55:13.300Z",
-  "modified": "2026-06-07T12:13:16.032Z",
+  "modified": "2026-06-23T12:13:57.326Z",
   "logic": [
     {
       "test": [
@@ -140,8 +140,17 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "SUBJECTACCOUNTNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.450240",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.336769",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

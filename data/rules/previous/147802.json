@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "147802",
+  "rule_id": "147802",
+  "uuid": "83c87e1d-d359-43a1-9c07-7fdae687374c",
+  "rule_name": "Potential Malicious MSExchange Transport Agent Installation",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-05T16:02:43.283Z",
+  "modified": "2024-07-21T12:38:29.831Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: MSExchange Transport Agent Installation, BB:BehaviorDefinition: MSExchange Transport Agent Registration</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9, 6e533f3d-911b-47ba-baf8-cf2d8c6aaca6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9",
+      "name": "BB:BehaviorDefinition: MSExchange Transport Agent Installation"
+    },
+    {
+      "uuid": "6e533f3d-911b-47ba-baf8-cf2d8c6aaca6",
+      "name": "BB:BehaviorDefinition: MSExchange Transport Agent Registration"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Server Software Component",
+        "STEC": "T1505.002",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1505",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1505.002",
+            "values": [
+              {
+                "id": "147802",
+                "bb": "Potential Malicious MSExchange Transport Agent Installation",
+                "uuid": "83c87e1d-d359-43a1-9c07-7fdae687374c",
+                "T": "EVENT"
+              },
+              {
+                "id": "147902",
+                "bb": "BB:BehaviorDefinition: MSExchange Transport Agent Registration",
+                "uuid": "6e533f3d-911b-47ba-baf8-cf2d8c6aaca6",
+                "T": "EVENT"
+              },
+              {
+                "id": "147852",
+                "bb": "BB:BehaviorDefinition: MSExchange Transport Agent Installation",
+                "uuid": "7b305de1-fe36-443a-9bdb-eb2bdc4edfd9",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.040129",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

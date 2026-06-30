@@ -1,0 +1,110 @@
+{
+  "rule_doc_id": "165513",
+  "rule_id": "165513",
+  "uuid": "9adface6-9010-43b5-867b-de5535b39dd0",
+  "rule_name": "MSSP - FW - FG - 16 - M - IPsec Tunnel - Down Status",
+  "object_type": "rule",
+  "group": "MSSP - Rules, Firewall, FW - FortiGate",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-05-05T08:41:52.062Z",
+  "modified": "2026-05-09T14:40:05.928Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Fortinet FortiGate Security Gateway</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "73"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "6",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"6\", \"1\")' class='dynamic'>(20257915) Tunnel Down</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "20257915"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Tunnel Type_FG (custom) is any of ipsec</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Tunnel Type_FGEQanyipsec"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "4014",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "true",
+            "qid": "67501887",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "10",
+            "credibility": "10",
+            "severity": "5",
+            "description": "MSSP - FW - FG - 16 - M - IPsec Tunnel - Down Status",
+            "name": "MSSP - FW - FG - 16 - M - IPsec Tunnel - Down Status"
+          },
+          "offenseAnnotation": [
+            {
+              "formatString": [
+                "MSSP - FW - FG - 16 - M - IPsec Tunnel - Down Status"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.468136",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

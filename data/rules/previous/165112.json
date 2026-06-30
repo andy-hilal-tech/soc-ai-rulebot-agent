@@ -1,0 +1,137 @@
+{
+  "rule_doc_id": "165112",
+  "rule_id": "165112",
+  "uuid": "974ead72-c1f4-44f1-b6aa-c943db5be140",
+  "rule_name": "Suspicious PsExec Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-05-06T11:51:37.178Z",
+  "modified": "2025-05-06T11:51:37.178Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "3",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(5002297) A Network Share Object Was Checked To See Whether Client Can Be Granted Desired Access</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5002297"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;Share Full Full Name&quot; LIKE '\\\\*\\IPC$' AND  (     (         (             LOWER(&quot;Relative Target Full Full Name&quot;) LIKE '%-stdin'             OR LOWER(&quot;Relative Target Full Full Name&quot;) LIKE '%-stdout'             OR LOWER(&quot;Relative Target Full Full Name&quot;) LIKE '%-stderr'         )         AND LOWER(&quot;Relative Target Full Full Name&quot;) NOT LIKE 'psexesvc%'     )     OR      (         LOWER(&quot;Relative Target Full Full Name&quot;) LIKE 'remcom_stdin'         OR LOWER(&quot;Relative Target Full Full Name&quot;) LIKE 'remcom_stdout'         OR LOWER(&quot;Relative Target Full Full Name&quot;) LIKE 'remcom_stderr'     ) )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Share%20Name%22%20LIKE%20'%5C%5C*%5CIPC%24'%20AND%20%20(%20%20%20%20%20(%20%20%20%20%20%20%20%20%20(%20%20%20%20%20%20%20%20%20%20%20%20%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'%25-stdin'%20%20%20%20%20%20%20%20%20%20%20%20%20OR%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'%25-stdout'%20%20%20%20%20%20%20%20%20%20%20%20%20OR%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'%25-stderr'%20%20%20%20%20%20%20%20%20)%20%20%20%20%20%20%20%20%20AND%20LOWER(%22Relative%20Target%20Name%22)%20NOT%20LIKE%20'psexesvc%25'%20%20%20%20%20)%20%20%20%20%20OR%20%20%20%20%20%20(%20%20%20%20%20%20%20%20%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'remcom_stdin'%20%20%20%20%20%20%20%20%20OR%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'remcom_stdout'%20%20%20%20%20%20%20%20%20OR%20LOWER(%22Relative%20Target%20Name%22)%20LIKE%20'remcom_stderr'%20%20%20%20%20)%20)|%5B%22%5C%22Share%20Name%5C%22%20LIKE%20'%5C%5C%5C%5C*%5C%5CIPC%24'%22%2C%22AND%20%22%2C%22(%22%2C%22%20%20%20%20(%22%2C%22%20%20%20%20%20%20%20%20(%22%2C%22%20%20%20%20%20%20%20%20%20%20%20%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'%25-stdin'%22%2C%22%20%20%20%20%20%20%20%20%20%20%20%20OR%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'%25-stdout'%22%2C%22%20%20%20%20%20%20%20%20%20%20%20%20OR%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'%25-stderr'%22%2C%22%20%20%20%20%20%20%20%20)%22%2C%22%20%20%20%20%20%20%20%20AND%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20NOT%20LIKE%20'psexesvc%25'%22%2C%22%20%20%20%20)%22%2C%22%20%20%20%20OR%20%22%2C%22%20%20%20%20(%22%2C%22%20%20%20%20%20%20%20%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'remcom_stdin'%22%2C%22%20%20%20%20%20%20%20%20OR%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'remcom_stdout'%22%2C%22%20%20%20%20%20%20%20%20OR%20LOWER(%5C%22Relative%20Target%20Name%5C%22)%20LIKE%20'remcom_stderr'%22%2C%22%20%20%20%20)%22%2C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "System Services",
+        "STEC": "T1569.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1569",
+        "MAP_S": [
+          {
+            "name": "Execution - T1569.002",
+            "values": [
+              {
+                "id": "165112",
+                "bb": "Suspicious PsExec Activity",
+                "uuid": "974ead72-c1f4-44f1-b6aa-c943db5be140",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Lateral Movement": [
+      {
+        "TEC": "T1021",
+        "STEC": "None",
+        "TAC": "Lateral Movement",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1021",
+        "MAP_S": [
+          {
+            "name": "Lateral Movement - T1021",
+            "values": [
+              {
+                "id": "165112",
+                "bb": "Suspicious PsExec Activity",
+                "uuid": "974ead72-c1f4-44f1-b6aa-c943db5be140",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:36.296142",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

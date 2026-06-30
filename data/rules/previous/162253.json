@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162253",
+  "rule_id": "162253",
+  "uuid": "33e9c958-1bd1-4d2b-a540-069da8cc28d4",
+  "rule_name": "DNS Query for Anonfiles.com Domain - DNS Client",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:41:25.787Z",
+  "modified": "2024-08-04T08:41:25.786Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=3008 AND LOWER(UTF8(payload)) LIKE '%.anonfiles.com%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D3008%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.anonfiles.com%25%27|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D3008%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25.anonfiles.com%25%27%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: DNS Query for Anonfiles.com Domain - DNS Client SIGMA Description: Detects DNS queries for anonfiles.com, which is an anonymous file upload platform often used for malicious purposes  False positives: - Rare legitimate access to anonfiles.com  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "DNS Query for Anonfiles.com Domain - DNS Client"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.610152",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

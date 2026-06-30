@@ -1,0 +1,107 @@
+{
+  "rule_doc_id": "112852",
+  "rule_id": "112852",
+  "uuid": "db1e8d13-9084-4965-9146-60394dbba5b9",
+  "rule_name": "Service Binary Located in a Shared Folder",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-09-10T22:52:29.200Z",
+  "modified": "2024-02-19T16:49:27.541Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set), (5002197) A service was installed in a system</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001832,                                                                              5002197"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(qid = 5002197 and &quot;Service Filename&quot; MATCHES '\\\\\\\\.*' ) or (qid = 5001832 and &quot;Target Object&quot; MATCHES '.*\\\\Services\\\\.*\\\\ImagePath' and &quot;Target Details&quot; MATCHES '\\\\\\\\.*')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(qid%20%3D%205002197%20and%20%22Service%20Filename%22%20MATCHES%20'%5C%5C%5C%5C.*'%20)%20or%20(qid%20%3D%205001832%20and%20%22Target%20Object%22%20MATCHES%20'.*%5C%5CServices%5C%5C.*%5C%5CImagePath'%20and%20%22Target%20Details%22%20MATCHES%20'%5C%5C%5C%5C.*')|%5B%22(qid%20%3D%205002197%20and%20%5C%22Service%20Filename%5C%22%20MATCHES%20'%5C%5C%5C%5C%5C%5C%5C%5C.*'%20)%20or%20(qid%20%3D%205001832%20and%20%5C%22Target%20Object%5C%22%20MATCHES%20'.*%5C%5C%5C%5CServices%5C%5C%5C%5C.*%5C%5C%5C%5CImagePath'%20and%20%5C%22Target%20Details%5C%22%20MATCHES%20'%5C%5C%5C%5C%5C%5C%5C%5C.*')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "6",
+            "operation": "setRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.832161",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

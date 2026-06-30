@@ -1,0 +1,201 @@
+{
+  "rule_doc_id": "100085",
+  "rule_id": "100085",
+  "uuid": "SYSTEM-1441",
+  "rule_name": "Database Concurrent Logins from Multiple Locations",
+  "object_type": "rule",
+  "group": "Post-Intrusion Activity, Compliance",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2007-08-10T17:20:50.795Z",
+  "modified": "2023-10-30T02:02:35.892Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Source_Test",
+            "uid": "3",
+            "id": "27"
+          },
+          "text": [
+            "when the source is <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "remote"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "4",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"4\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostReference: Database Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1374, 5e49bf4e-ec00-4443-bedf-aff5285a2b1d"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ThresholdFunction_Test",
+            "uid": "0",
+            "id": "80"
+          },
+          "text": [
+            "when any of these <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a> with the same <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>destination IP</a> more than <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>5</a> times, across <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>more than</a> <a href='javascript:editParameter(\"0\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"0\", \"6\")' class='dynamic'>source IP</a> within <a href='javascript:editParameter(\"0\", \"7\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": "SYSTEM-1220"
+            },
+            {
+              "id": "2",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "3",
+              "value": "5"
+            },
+            {
+              "id": "4",
+              "value": "gt"
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "SourceIP"
+            },
+            {
+              "id": "7",
+              "value": "10"
+            },
+            {
+              "id": "8",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "300",
+        "offenseMapping": "1"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1374",
+      "name": "BB:HostDefinition: Database Servers"
+    },
+    {
+      "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+      "name": "BB:HostReference: Database Servers"
+    },
+    {
+      "uuid": "SYSTEM-1220",
+      "name": "BB:CategoryDefinition: Authentication Success"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.251579",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

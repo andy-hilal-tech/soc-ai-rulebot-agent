@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "100077",
+  "rule_id": "100077",
+  "uuid": "SYSTEM-1414",
+  "rule_name": "DoS Events with High Magnitude Become Offenses",
+  "object_type": "rule",
+  "group": "D\\DoS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2006-07-06T11:01:36.183Z",
+  "modified": "2023-10-30T02:20:04.134Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>DOS.Brute force login, DOS.Database DoS, DOS.DNS Service DoS, DOS.FTP DoS, DOS.High Rate DoS, DOS.High Rate ICMP DoS, DOS.High Rate ICMP Scan, DOS.High Rate Scan, DOS.High Rate TCP DoS, DOS.High Rate TCP Scan, DOS.High Rate UDP DoS, DOS.High Rate UDP Scan, DOS.ICMP DoS, DOS.Infrastructure DoS, DOS.Low Rate DoS, DOS.Low Rate ICMP DoS, DOS.Low Rate ICMP Scan, DOS.Low Rate Scan, DOS.Low Rate TCP DoS, DOS.Low Rate TCP Scan, DOS.Low Rate UDP DoS, DOS.Low Rate UDP Scan, DOS.Mail Service DoS, DOS.Medium Rate DoS, DOS.Medium Rate ICMP DoS, DOS.Medium Rate ICMP Scan, DOS.Medium Rate Scan, DOS.Medium Rate TCP DoS, DOS.Medium Rate TCP Scan, DOS.Medium Rate UDP DoS, DOS.Medium Rate UDP Scan, DOS.Misc DoS, DOS.TCP DoS, DOS.Telnet DoS, DOS.UDP DoS, DOS.Unix DOS, DOS.Unknown DoS Attack, DOS.VoIP DoS, DOS.Web Service DoS, DOS.Windows DoS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "2016, 2012, 2005, 2013, 2020, 2019, 2043, 2044, 2017, 2041, 2018, 2042, 2002, 2014, 2028, 2027, 2051, 2052, 2025, 2049, 2026, 2050, 2007, 2024, 2023, 2047, 2048, 2021, 2045, 2022, 2046, 2009, 2003, 2015, 2004, 2010, 2001, 2053, 2006, 2011"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:CategoryDefinition: Medium Magnitude Events</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "f866712c-ad99-4d17-a831-c49c810a3016"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "f866712c-ad99-4d17-a831-c49c810a3016",
+      "name": "BB:CategoryDefinition: Medium Magnitude Events"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100077",
+                "bb": "DoS Events with High Magnitude Become Offenses",
+                "uuid": "SYSTEM-1414",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - None",
+            "values": [
+              {
+                "id": "100077",
+                "bb": "DoS Events with High Magnitude Become Offenses",
+                "uuid": "SYSTEM-1414",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.237392",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

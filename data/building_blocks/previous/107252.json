@@ -1,0 +1,158 @@
+{
+  "rule_doc_id": "107252",
+  "rule_id": "107252",
+  "uuid": "c853d370-7b32-4167-ab33-06f3f71ffa1e",
+  "rule_name": "BB:UBA : Insecure Ports",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-05-30T09:08:56.340Z",
+  "modified": "2024-02-19T16:44:10.060Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DstPort_Test",
+            "uid": "0",
+            "id": "5",
+            "negate": "true"
+          },
+          "text": [
+            "when the destination port is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>0</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "1",
+            "id": "107",
+            "negate": "true"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>Destination Port</a> are contained in <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>UBA : Ports Of Authorized Protocols - Port</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonDatabaseFields",
+              "value": "destinationPort"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "62"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:PortDefinition: Authorized L2R Ports, BB:PortDefinition: BGP Ports, BB:PortDefinition: DHCP Ports, BB:PortDefinition: DNS Ports, BB:PortDefinition: FTP OverTSL/SSL Ports, BB:PortDefinition: FTP Ports, BB:PortDefinition: LDAP Ports, BB:PortDefinition: Mail Ports, BB:PortDefinition: SNMP Ports, BB:PortDefinition: SSH Ports, BB:PortDefinition: Syslog Ports, BB:PortDefinition: Telnet Ports, BB:PortDefinition: TFTP Ports, BB:PortDefinition: Web Ports, BB:PortDefinition: Windows Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1328, 031f08f5-f26c-49ce-a933-664b01328ca5, SYSTEM-1183, SYSTEM-1229, f7d13a6f-cd8b-438b-8351-87ae5eb76374, SYSTEM-1227, SYSTEM-1245, SYSTEM-1228, SYSTEM-1231, SYSTEM-1248, SYSTEM-1273, f80ed253-1b07-4cb1-9ac8-6df3d8a3a70e, 83987bc1-4a4e-46e3-9ad2-f9a128eff270, SYSTEM-1225, SYSTEM-1232"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1328",
+      "name": "BB:PortDefinition: Authorized L2R Ports"
+    },
+    {
+      "uuid": "031f08f5-f26c-49ce-a933-664b01328ca5",
+      "name": "BB:PortDefinition: BGP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1183",
+      "name": "BB:PortDefinition: DHCP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1229",
+      "name": "BB:PortDefinition: DNS Ports"
+    },
+    {
+      "uuid": "f7d13a6f-cd8b-438b-8351-87ae5eb76374",
+      "name": "BB:PortDefinition: FTP OverTSL/SSL Ports"
+    },
+    {
+      "uuid": "SYSTEM-1227",
+      "name": "BB:PortDefinition: FTP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1245",
+      "name": "BB:PortDefinition: LDAP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1228",
+      "name": "BB:PortDefinition: Mail Ports"
+    },
+    {
+      "uuid": "SYSTEM-1231",
+      "name": "BB:PortDefinition: SNMP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1248",
+      "name": "BB:PortDefinition: SSH Ports"
+    },
+    {
+      "uuid": "SYSTEM-1273",
+      "name": "BB:PortDefinition: Syslog Ports"
+    },
+    {
+      "uuid": "f80ed253-1b07-4cb1-9ac8-6df3d8a3a70e",
+      "name": "BB:PortDefinition: Telnet Ports"
+    },
+    {
+      "uuid": "83987bc1-4a4e-46e3-9ad2-f9a128eff270",
+      "name": "BB:PortDefinition: TFTP Ports"
+    },
+    {
+      "uuid": "SYSTEM-1225",
+      "name": "BB:PortDefinition: Web Ports"
+    },
+    {
+      "uuid": "SYSTEM-1232",
+      "name": "BB:PortDefinition: Windows Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.069280",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

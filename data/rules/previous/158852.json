@@ -1,0 +1,129 @@
+{
+  "rule_doc_id": "158852",
+  "rule_id": "158852",
+  "uuid": "4cfb4c10-d0c3-4f2f-acb7-235bcf4e7cd5",
+  "rule_name": "Potential ComRAT Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-11-09T15:42:01.929Z",
+  "modified": "2024-07-21T12:38:15.412Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) MATCHES ('.*?(hklm(?::\\\\)+software\\\\microsoft\\\\sqmclient\\\\windows).*') AND LOWER(&quot;Command&quot;) MATCHES ('.*?(wsqmcons).*') AND  LOWER(&quot;Command&quot;) MATCHES ('.*?(frombase64string).*')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20MATCHES%20('.*%3F(hklm(%3F%3A%3A%5C%5C)%2Bsoftware%5C%5Cmicrosoft%5C%5Csqmclient%5C%5Cwindows).*')%20AND%20LOWER(%22Command%22)%20MATCHES%20('.*%3F(wsqmcons).*')%20AND%20%20LOWER(%22Command%22)%20MATCHES%20('.*%3F(frombase64string).*')|%5B%22LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3F(hklm(%3F%3A%3A%5C%5C%5C%5C)%2Bsoftware%5C%5C%5C%5Cmicrosoft%5C%5C%5C%5Csqmclient%5C%5C%5C%5Cwindows).*')%22,%22AND%22,%22LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3F(wsqmcons).*')%22,%22AND%20%22,%22LOWER(%5C%22Command%5C%22)%20MATCHES%20('.*%3F(frombase64string).*')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.005",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Execution - T1053.005",
+            "values": [
+              {
+                "id": "158852",
+                "bb": "Potential ComRAT Activity",
+                "uuid": "4cfb4c10-d0c3-4f2f-acb7-235bcf4e7cd5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "Scheduled Task/Job",
+        "STEC": "T1053.005",
+        "TAC": "Persistence",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1053",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1053.005",
+            "values": [
+              {
+                "id": "158852",
+                "bb": "Potential ComRAT Activity",
+                "uuid": "4cfb4c10-d0c3-4f2f-acb7-235bcf4e7cd5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.367762",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

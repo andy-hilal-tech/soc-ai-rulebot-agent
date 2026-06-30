@@ -1,0 +1,195 @@
+{
+  "rule_doc_id": "135252",
+  "rule_id": "135252",
+  "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+  "rule_name": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-08-05T14:05:42.407Z",
+  "modified": "2024-07-21T10:28:58.856Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "4",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) matches any of expressions (?i)nslookup(\\.exe)?</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameREXany(?i)nslookup(\\.exe)?"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "5"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Network Service Discovery",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1046",
+        "MAP_S": [
+          {
+            "name": "Discovery - Network Service Discovery",
+            "values": [
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1016",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1016",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1016",
+            "values": [
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1018",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1018",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1018",
+            "values": [
+              {
+                "id": "135252",
+                "bb": "BB:BehaviorDefinition: Repeated Nslookup Usage",
+                "uuid": "b4ca857e-a703-4fd5-8713-fce32944dceb",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.374866",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

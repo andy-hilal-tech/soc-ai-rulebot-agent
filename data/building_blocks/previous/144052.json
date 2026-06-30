@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "144052",
+  "rule_id": "144052",
+  "uuid": "33fedd1a-5f69-4bb2-8cec-7b430cac3866",
+  "rule_name": "BB:MITRE.LIN.T1212: Exploitation for Credential Access",
+  "object_type": "building_block",
+  "group": "Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "",
+  "created": "2020-11-18T00:00:00.000Z",
+  "modified": "2020-11-18T00:00:00.000Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Novell eDirectory, Linux OS, Open LDAP Software, Sun ONE LDAP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "245, 11, 279, 284"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Exploitation for Credential Access",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1212",
+        "MAP_S": [
+          {
+            "name": "Credential Access - Exploitation for Credential Access",
+            "values": [
+              {
+                "id": "144052",
+                "bb": "BB:MITRE.LIN.T1212: Exploitation for Credential Access",
+                "uuid": "33fedd1a-5f69-4bb2-8cec-7b430cac3866",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.516296",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

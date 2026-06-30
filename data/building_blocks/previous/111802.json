@@ -1,0 +1,81 @@
+{
+  "rule_doc_id": "111802",
+  "rule_id": "111802",
+  "uuid": "6b885afd-3669-434f-8a8f-3e77c3debbd1",
+  "rule_name": "BB:BehaviorDefinition: Service Binary Path Set or Update",
+  "object_type": "building_block",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2017-08-17T23:19:20.590Z",
+  "modified": "2024-02-19T16:49:28.045Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001832) RegistryEvent (Value Set)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001832"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Target Object&quot; IMATCHES '.*services\\\\.*\\\\ImagePath'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Target%20Object%22%20IMATCHES%20'.*services%5C%5C.*%5C%5CImagePath'|%5B%22%5C%22Target%20Object%5C%22%20IMATCHES%20'.*services%5C%5C%5C%5C.*%5C%5C%5C%5CImagePath'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.128775",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

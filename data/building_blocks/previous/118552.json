@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "118552",
+  "rule_id": "118552",
+  "uuid": "d82c4f1c-0b2e-424f-abe6-e34403436682",
+  "rule_name": "BB:CategoryDefinition: Object Upload Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-01-22T14:50:49.150Z",
+  "modified": "2024-04-29T12:45:18.263Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.File Upload Attempt, Audit.File Upload Failure, Audit.File Upload Success, Audit.Object Upload Attempt, Audit.Object Upload Failure, Audit.Object Upload Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19068, 19070, 19069, 19086, 19088, 19087"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.204998",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

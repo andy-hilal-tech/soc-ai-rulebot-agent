@@ -1,0 +1,91 @@
+{
+  "rule_doc_id": "103502",
+  "rule_id": "103502",
+  "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+  "rule_name": "BB:VMware: Session Activity",
+  "object_type": "building_block",
+  "group": "VMware Virtual Infrastructure",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2013-08-05T21:21:34.790Z",
+  "modified": "2024-02-19T16:40:37.190Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(54500178) Session Event, (54500179) Session Terminated Event, (54500019) Already Authenticated Session Event, (54500292) Begin Session, (54500302) Finish Session, (54500177) Server Started Session Event, (54500191) User Login Session Event, (54500192) User Logout Session Event, (78250043) Login Session</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "54500178,                                                                                                                                                                                                                                                                                                                                                                                                                54500179,                                                                                                                                                                                                                                                                                                                                                                                                                54500019,                                                                                                                                                                                                                                                                                                                                                                                                                54500292,                                                                                                                                                                                                                                                                                                                                                                                                                54500302,                                                                                                                                                                                                                                                                                                                                                                                                                54500177,                                                                                                                                                                                                                                                                                                                                                                                                                54500191,                                                                                                                                                                                                                                                                                                                                                                                                                54500192,                                                                                                                                                                                                                                                                                                                                                                                                                78250043"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "103502",
+                "bb": "BB:VMware: Session Activity",
+                "uuid": "4af72e17-705c-4a4c-a625-5ee4919c1c53",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.030508",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

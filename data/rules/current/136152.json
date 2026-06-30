@@ -92,7 +92,16 @@
       "name": "BB:DeviceDefinition: Operating System"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "MACHINEID",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Privilege Escalation": [
       {
@@ -227,6 +236,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.710095",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.840627",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

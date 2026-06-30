@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "103052",
+  "rule_id": "103052",
+  "uuid": "84fc557e-f26e-47a2-86da-e80927528a60",
+  "rule_name": "BB:UBA : Authentication User or Group or Policy Added",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-08-17T07:43:22.150Z",
+  "modified": "2024-02-19T16:40:36.990Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Added, Authentication.Group Added, Authentication.Policy Added, Authentication.User Account Added</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3041, 3038, 3029, 3031"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.028735",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "115052",
+  "rule_id": "115052",
+  "uuid": "a8ed072a-f9f2-49ec-83a0-a7029fc3f2f0",
+  "rule_name": "BB:UBA : Detect Locky Using IP",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-01-15T08:33:51.690Z",
+  "modified": "2024-02-19T16:54:41.722Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "0",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>Source or Destination IP</a> are contained in <a href='javascript:editParameter(\"0\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"0\", \"4\")' class='dynamic'>UBA : IOCs-Locky IP - IP</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "sourceOrDestinationIPColumn"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "87"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.141901",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

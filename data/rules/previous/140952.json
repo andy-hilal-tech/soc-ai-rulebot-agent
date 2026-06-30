@@ -1,0 +1,471 @@
+{
+  "rule_doc_id": "140952",
+  "rule_id": "140952",
+  "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+  "rule_name": "Potential UAC Bypass",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-03-18T17:15:33.864Z",
+  "modified": "2024-07-21T10:28:50.937Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory), BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory), BB:BehaviorDefinition: UAC Bypass - Elevated COM Object, BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer, BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image), BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process), BB:CategoryDefinition: UAC Bypass Registry Key</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "68f4f049-b29d-4749-ad36-d1b00b6b6b27, 96a15cbb-59a7-4797-93bf-59d619c49806, a96746d3-e082-4170-b8f7-b350317ecab4, 8031721a-2671-4804-9ed1-ffaa98cd4e7c, 08c21bf9-d8f4-43fb-b47d-5d544d73f199, ea3ef312-d1a8-421f-9ad8-c09565fb0698, 72d22596-4c49-42ba-a21d-7904d3804d6a"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+      "name": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)"
+    },
+    {
+      "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+      "name": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)"
+    },
+    {
+      "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+      "name": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object"
+    },
+    {
+      "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+      "name": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer"
+    },
+    {
+      "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+      "name": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)"
+    },
+    {
+      "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+      "name": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)"
+    },
+    {
+      "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+      "name": "BB:CategoryDefinition: UAC Bypass Registry Key"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Privilege Escalation": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1574",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1543",
+        "STEC": "None",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1543",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1543",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140652",
+                "bb": "BB:CategoryDefinition: Elevated Process (Windows)",
+                "uuid": "af9f1ad0-da96-412b-85f0-28a8c335700e",
+                "T": "EVENT"
+              },
+              {
+                "id": "140702",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (System Directory)",
+                "uuid": "96a15cbb-59a7-4797-93bf-59d619c49806",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.002",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Privilege Escalation",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Privilege Escalation - T1548.004",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1574",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.002",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.002",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Abuse Elevation Control Mechanism",
+        "STEC": "T1548.004",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1548",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1548.004",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140802",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - IE Add-On Installer",
+                "uuid": "8031721a-2671-4804-9ed1-ffaa98cd4e7c",
+                "T": "EVENT"
+              },
+              {
+                "id": "140852",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Elevated COM Object",
+                "uuid": "a96746d3-e082-4170-b8f7-b350317ecab4",
+                "T": "EVENT"
+              },
+              {
+                "id": "140552",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - DLL Hijacking (Non-System Directory)",
+                "uuid": "68f4f049-b29d-4749-ad36-d1b00b6b6b27",
+                "T": "EVENT"
+              },
+              {
+                "id": "140902",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Image)",
+                "uuid": "08c21bf9-d8f4-43fb-b47d-5d544d73f199",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Persistence": [
+      {
+        "TEC": "T1574",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1574",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1574",
+            "values": [
+              {
+                "id": "140952",
+                "bb": "Potential UAC Bypass",
+                "uuid": "518cebbc-7793-4223-a62d-7eef2cf2d2f7",
+                "T": "EVENT"
+              },
+              {
+                "id": "141002",
+                "bb": "BB:CategoryDefinition: UAC Bypass Registry Key",
+                "uuid": "72d22596-4c49-42ba-a21d-7904d3804d6a",
+                "T": "EVENT"
+              },
+              {
+                "id": "140602",
+                "bb": "BB:BehaviorDefinition: UAC Bypass - Mock System Directory (Process)",
+                "uuid": "ea3ef312-d1a8-421f-9ad8-c09565fb0698",
+                "T": "EVENT"
+              },
+              {
+                "id": "140502",
+                "bb": "BB:BehaviorDefinition: Image Loaded from Mock System Directory",
+                "uuid": "d11c5659-cf79-4df8-a4c5-f6c102dd321c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.870690",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

@@ -79,7 +79,16 @@
       "name": "BB:MITRE.LIN.T1210: Exploitation of Remote Services"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ALL",
+        "intervalCount": "30",
+        "intervalType": "s",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Lateral Movement": [
       {
@@ -111,6 +120,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.944830",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:37.994858",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

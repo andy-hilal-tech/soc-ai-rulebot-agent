@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "116302",
+  "rule_id": "116302",
+  "uuid": "6daa32e6-6dbd-491e-924b-21bb87198e01",
+  "rule_name": "BB:CategoryDefinition: Virtual Machine Started",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-12-03T13:13:41.678Z",
+  "modified": "2024-04-29T12:45:22.232Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Start Attempt, Audit.Virtual Machine Start Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19101, 19102"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.157617",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

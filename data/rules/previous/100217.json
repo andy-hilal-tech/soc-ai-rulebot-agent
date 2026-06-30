@@ -1,0 +1,62 @@
+{
+  "rule_doc_id": "100217",
+  "rule_id": "100217",
+  "uuid": "SYSTEM-1001",
+  "rule_name": "Context is Remote to Local",
+  "object_type": "rule",
+  "group": "Magnitude Adjustment",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-03-10T18:58:31.279Z",
+  "modified": "2023-10-30T02:02:36.716Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "0",
+            "id": "25"
+          },
+          "text": [
+            "when the context is <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "alterMetric": [
+        {
+          "_$": {
+            "metric": "setRelevance",
+            "operation": "incRelevance",
+            "value": "2"
+          }
+        }
+      ],
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "Relevance has been increased by 2 because the context is Remote to Local."
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.299038",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

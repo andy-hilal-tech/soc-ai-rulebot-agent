@@ -1,0 +1,126 @@
+{
+  "rule_doc_id": "165506",
+  "rule_id": "165506",
+  "uuid": "52302365-3633-44c1-9302-cf6353963143",
+  "rule_name": "MSSP - AV - ESET - M - 03 - Same Type of Activity Blocked on Different Systems",
+  "object_type": "rule",
+  "group": "EDR & EPP, EPP - ESET",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-27T12:26:54.390Z",
+  "modified": "2026-04-27T12:32:52.580Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "415"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Action_EST (custom) contains any of [Block or Blocked or Drop or Dropped or Deny or Denied]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Action_ESTCONanyBlock�Blocked�Drop�Dropped�Deny�Denied"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>RuleID_EST (custom)</a> and different <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>accountName_EST (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "RuleID_EST"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "accountName_EST"
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "89"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 03 - Same Type of Activity Blocked on Different Systems"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 03 - Same Type of Activity Blocked on Different Systems"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.450240",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

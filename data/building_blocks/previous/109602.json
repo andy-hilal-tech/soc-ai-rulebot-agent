@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "109602",
+  "rule_id": "109602",
+  "uuid": "eaab6c66-5e92-4bbd-88cf-055f45c50e31",
+  "rule_name": "BB:UBA : Cloud Endpoints",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-12-26T12:04:21.640Z",
+  "modified": "2024-02-19T16:45:45.238Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>IBM Bluemix Platform, Microsoft Office 365, Box, Salesforce Security Monitoring, Amazon AWS CloudTrail, Microsoft Azure</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "365, 397, 405, 352, 347, 413"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.110352",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

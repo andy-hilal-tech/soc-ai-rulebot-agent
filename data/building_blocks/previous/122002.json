@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "122002",
+  "rule_id": "122002",
+  "uuid": "881680b3-e376-4183-8ed2-c07080eeb6a3",
+  "rule_name": "BB:Threats: HTTP Client Status",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-10-29T18:54:15.044Z",
+  "modified": "2024-06-27T13:19:24.895Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "2",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>BB:DeviceDefinition: Web Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l, r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Application.Malformed Client Request</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18470"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+      "name": "BB:DeviceDefinition: Web Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.228641",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

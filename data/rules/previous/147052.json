@@ -1,0 +1,164 @@
+{
+  "rule_doc_id": "147052",
+  "rule_id": "147052",
+  "uuid": "066d27d9-9ab3-4885-a754-88906f5b6dd5",
+  "rule_name": "Potential LOLBIN Activity",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-22T20:32:06.755Z",
+  "modified": "2024-07-21T12:38:25.221Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe, BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN, BB:BehaviorDefinition: Squirrel Lolbin, BB:BehaviorDefinition: Windows Update Client LOLBIN, BB:BehaviorDefintion: Lolbin PressAnyKey and Download Activity</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "8560aab0-9a53-487f-858c-8aaafc16d561, eb6d5897-41f8-4452-a393-6f3846d5069d, ac0d774b-fd91-4394-bfad-3b5487950864, 5e4462a9-c052-4629-a612-57cc5b7425f3, be26d83c-5fae-4f34-b78e-20a79946dbe3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "8560aab0-9a53-487f-858c-8aaafc16d561",
+      "name": "BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe"
+    },
+    {
+      "uuid": "eb6d5897-41f8-4452-a393-6f3846d5069d",
+      "name": "BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN"
+    },
+    {
+      "uuid": "ac0d774b-fd91-4394-bfad-3b5487950864",
+      "name": "BB:BehaviorDefinition: Squirrel Lolbin"
+    },
+    {
+      "uuid": "5e4462a9-c052-4629-a612-57cc5b7425f3",
+      "name": "BB:BehaviorDefinition: Windows Update Client LOLBIN"
+    },
+    {
+      "uuid": "be26d83c-5fae-4f34-b78e-20a79946dbe3",
+      "name": "BB:BehaviorDefinition: Lolbin PressAnyKey and Download Activity"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Boot or Logon Autostart Execution",
+        "STEC": "T1547.001",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1547",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1547.001",
+            "values": [
+              {
+                "id": "147102",
+                "bb": "BB:BehaviorDefinition: WinDbg/CDB LOLBIN Usage and Application Whitelisting Bypass via Dxcap.exe",
+                "uuid": "8560aab0-9a53-487f-858c-8aaafc16d561",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - System Binary Proxy Execution",
+            "values": [
+              {
+                "id": "147152",
+                "bb": "BB:BehaviorDefinition: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN",
+                "uuid": "eb6d5897-41f8-4452-a393-6f3846d5069d",
+                "T": "EVENT"
+              },
+              {
+                "id": "147202",
+                "bb": "BB:BehaviorDefinition: Squirrel Lolbin",
+                "uuid": "ac0d774b-fd91-4394-bfad-3b5487950864",
+                "T": "EVENT"
+              },
+              {
+                "id": "147252",
+                "bb": "BB:BehaviorDefinition: Windows Update Client LOLBIN",
+                "uuid": "5e4462a9-c052-4629-a612-57cc5b7425f3",
+                "T": "EVENT"
+              },
+              {
+                "id": "147052",
+                "bb": "Potential LOLBIN Activity",
+                "uuid": "066d27d9-9ab3-4885-a754-88906f5b6dd5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Trusted Developer Utilities Proxy Execution",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1127",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - Trusted Developer Utilities Proxy Execution",
+            "values": [
+              {
+                "id": "147302",
+                "bb": "BB:BehaviorDefinition: Lolbin PressAnyKey and Download Activity",
+                "uuid": "be26d83c-5fae-4f34-b78e-20a79946dbe3",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.025563",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

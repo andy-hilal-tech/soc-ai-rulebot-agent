@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "148302",
+  "rule_id": "148302",
+  "uuid": "e6c20cd5-513e-475c-b062-443aa7c0cf8c",
+  "rule_name": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript Registry",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-09T19:08:09.413Z",
+  "modified": "2024-07-21T12:38:26.998Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Successful Registry Modification, System.Registry Addition</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8012, 8026"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Target Object (custom) contains any of Environment\\UserInitMprLogonScript</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Target ObjectCONanyEnvironment\\UserInitMprLogonScript"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "148302",
+                "bb": "BB:BehaviorDefinition: Logon Scripts with UserInitMprLogonScript Registry",
+                "uuid": "e6c20cd5-513e-475c-b062-443aa7c0cf8c",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.635634",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

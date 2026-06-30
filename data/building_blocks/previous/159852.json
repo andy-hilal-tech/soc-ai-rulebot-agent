@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "159852",
+  "rule_id": "159852",
+  "uuid": "dcb438d4-2dfc-4c9c-8de2-dd01d7a18149",
+  "rule_name": "BB:BehaviorDefinition: Potential Equation Group Indicators",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T15:50:20.221Z",
+  "modified": "2024-07-21T12:38:27.906Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE 'chown root*chmod 4777 ' or LOWER(&quot;Command&quot;) LIKE 'cp /bin/sh .;chown' or LOWER(&quot;Command&quot;) LIKE 'chmod 4777 /tmp/.scsi/dev/bin/gsh' or LOWER(&quot;Command&quot;) LIKE 'chown root:root /tmp/.scsi/dev/bin/' or LOWER(&quot;Command&quot;) LIKE 'chown root:root x;' or LOWER(&quot;Command&quot;) LIKE '/bin/telnet locip locport &lt; /dev/console | /bin/sh' or LOWER(&quot;Command&quot;) LIKE '/tmp/ratload' or LOWER(&quot;Command&quot;) LIKE 'ewok -t ' or LOWER(&quot;Command&quot;) LIKE 'xspy -display ' or LOWER(&quot;Command&quot;) LIKE 'cat &gt; /dev/tcp/127.0.0.1/80 &lt;&lt;end' or LOWER(&quot;Command&quot;) LIKE 'rm -f /current/tmp/ftshell.latest' or LOWER(&quot;Command&quot;) LIKE 'ghost_* -v ' or LOWER(&quot;Command&quot;) LIKE ' --wipe &gt; /dev/null' or LOWER(&quot;Command&quot;) LIKE 'ping -c 2 *; grep * /proc/net/arp &gt;/tmp/gx' or LOWER(&quot;Command&quot;) LIKE 'iptables * output -p tcp -d 127.0.0.1 --tcp-flags rst rst -j drop;' or LOWER(&quot;Command&quot;) LIKE '&gt; /var/log/audit/audit.log; rm -f .' or LOWER(&quot;Command&quot;) LIKE 'cp /var/log/audit/audit.log .tmp' or LOWER(&quot;Command&quot;) LIKE 'sh &gt;/dev/tcp/* &lt;&amp;1 2&gt;&amp;1' or LOWER(&quot;Command&quot;) LIKE 'ncat -vv -l -p * &lt;' or LOWER(&quot;Command&quot;) LIKE 'nc -vv -l -p * &lt;' or LOWER(&quot;Command&quot;) LIKE '&lt; /dev/console | uudecode &amp;&amp; uncompress' or LOWER(&quot;Command&quot;) LIKE 'sendmail -osendmail;chmod +x sendmail' or LOWER(&quot;Command&quot;) LIKE '/usr/bin/wget -o /tmp/a http* &amp;&amp; chmod 755 /tmp/cron' or LOWER(&quot;Command&quot;) LIKE 'chmod 666 /var/run/utmp~' or LOWER(&quot;Command&quot;) LIKE 'chmod 700 nscd crond' or LOWER(&quot;Command&quot;) LIKE 'cp /etc/shadow /tmp/.' or LOWER(&quot;Command&quot;) LIKE '&lt;/dev/console |uudecode &gt; /dev/null 2&gt;&amp;1 &amp;&amp; uncompress' or LOWER(&quot;Command&quot;) LIKE 'chmod 700 jp&amp;&amp;netstat -an|grep' or LOWER(&quot;Command&quot;) LIKE 'uudecode &gt; /dev/null 2&gt;&amp;1 &amp;&amp; uncompress -f * &amp;&amp; chmod 755' or LOWER(&quot;Command&quot;) LIKE 'chmod 700 crond' or LOWER(&quot;Command&quot;) LIKE 'wget http*; chmod +x /tmp/sendmail' or LOWER(&quot;Command&quot;) LIKE 'chmod 700 fp sendmail pt' or LOWER(&quot;Command&quot;) LIKE 'chmod 755 /usr/vmsys/bin/pipe' or LOWER(&quot;Command&quot;) LIKE 'chmod -r 755 /usr/vmsys' or LOWER(&quot;Command&quot;) LIKE 'chmod 755 $opbin/*tunnel' or LOWER(&quot;Command&quot;) LIKE 'chmod 700 sendmail' or LOWER(&quot;Command&quot;) LIKE 'chmod 0700 sendmail' or LOWER(&quot;Command&quot;) LIKE '/usr/bin/wget http*sendmail;chmod +x sendmail;' or LOWER(&quot;Command&quot;) LIKE '&amp;&amp; telnet * 2&gt;&amp;1 &lt;/dev/console')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'chown%20root*chmod%204777%20'%20or%20LOWER(%22Command%22)%20LIKE%20'cp%20%2Fbin%2Fsh%20.%3Bchown'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%204777%20%2Ftmp%2F.scsi%2Fdev%2Fbin%2Fgsh'%20or%20LOWER(%22Command%22)%20LIKE%20'chown%20root%3Aroot%20%2Ftmp%2F.scsi%2Fdev%2Fbin%2F'%20or%20LOWER(%22Command%22)%20LIKE%20'chown%20root%3Aroot%20x%3B'%20or%20LOWER(%22Command%22)%20LIKE%20'%2Fbin%2Ftelnet%20locip%20locport%20%3C%20%2Fdev%2Fconsole%20%7C%20%2Fbin%2Fsh'%20or%20LOWER(%22Command%22)%20LIKE%20'%2Ftmp%2Fratload'%20or%20LOWER(%22Command%22)%20LIKE%20'ewok%20-t%20'%20or%20LOWER(%22Command%22)%20LIKE%20'xspy%20-display%20'%20or%20LOWER(%22Command%22)%20LIKE%20'cat%20%3E%20%2Fdev%2Ftcp%2F127.0.0.1%2F80%20%3C%3Cend'%20or%20LOWER(%22Command%22)%20LIKE%20'rm%20-f%20%2Fcurrent%2Ftmp%2Fftshell.latest'%20or%20LOWER(%22Command%22)%20LIKE%20'ghost_*%20-v%20'%20or%20LOWER(%22Command%22)%20LIKE%20'%20--wipe%20%3E%20%2Fdev%2Fnull'%20or%20LOWER(%22Command%22)%20LIKE%20'ping%20-c%202%20*%3B%20grep%20*%20%2Fproc%2Fnet%2Farp%20%3E%2Ftmp%2Fgx'%20or%20LOWER(%22Command%22)%20LIKE%20'iptables%20*%20output%20-p%20tcp%20-d%20127.0.0.1%20--tcp-flags%20rst%20rst%20-j%20drop%3B'%20or%20LOWER(%22Command%22)%20LIKE%20'%3E%20%2Fvar%2Flog%2Faudit%2Faudit.log%3B%20rm%20-f%20.'%20or%20LOWER(%22Command%22)%20LIKE%20'cp%20%2Fvar%2Flog%2Faudit%2Faudit.log%20.tmp'%20or%20LOWER(%22Command%22)%20LIKE%20'sh%20%3E%2Fdev%2Ftcp%2F*%20%3C%261%202%3E%261'%20or%20LOWER(%22Command%22)%20LIKE%20'ncat%20-vv%20-l%20-p%20*%20%3C'%20or%20LOWER(%22Command%22)%20LIKE%20'nc%20-vv%20-l%20-p%20*%20%3C'%20or%20LOWER(%22Command%22)%20LIKE%20'%3C%20%2Fdev%2Fconsole%20%7C%20uudecode%20%26%26%20uncompress'%20or%20LOWER(%22Command%22)%20LIKE%20'sendmail%20-osendmail%3Bchmod%20%2Bx%20sendmail'%20or%20LOWER(%22Command%22)%20LIKE%20'%2Fusr%2Fbin%2Fwget%20-o%20%2Ftmp%2Fa%20http*%20%26%26%20chmod%20755%20%2Ftmp%2Fcron'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20666%20%2Fvar%2Frun%2Futmp~'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20700%20nscd%20crond'%20or%20LOWER(%22Command%22)%20LIKE%20'cp%20%2Fetc%2Fshadow%20%2Ftmp%2F.'%20or%20LOWER(%22Command%22)%20LIKE%20'%3C%2Fdev%2Fconsole%20%7Cuudecode%20%3E%20%2Fdev%2Fnull%202%3E%261%20%26%26%20uncompress'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20700%20jp%26%26netstat%20-an%7Cgrep'%20or%20LOWER(%22Command%22)%20LIKE%20'uudecode%20%3E%20%2Fdev%2Fnull%202%3E%261%20%26%26%20uncompress%20-f%20*%20%26%26%20chmod%20755'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20700%20crond'%20or%20LOWER(%22Command%22)%20LIKE%20'wget%20http*%3B%20chmod%20%2Bx%20%2Ftmp%2Fsendmail'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20700%20fp%20sendmail%20pt'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20755%20%2Fusr%2Fvmsys%2Fbin%2Fpipe'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20-r%20755%20%2Fusr%2Fvmsys'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20755%20%24opbin%2F*tunnel'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%20700%20sendmail'%20or%20LOWER(%22Command%22)%20LIKE%20'chmod%200700%20sendmail'%20or%20LOWER(%22Command%22)%20LIKE%20'%2Fusr%2Fbin%2Fwget%20http*sendmail%3Bchmod%20%2Bx%20sendmail%3B'%20or%20LOWER(%22Command%22)%20LIKE%20'%26%26%20telnet%20*%202%3E%261%20%3C%2Fdev%2Fconsole')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'chown%20root*chmod%204777%20'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cp%20%2Fbin%2Fsh%20.%3Bchown'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%204777%20%2Ftmp%2F.scsi%2Fdev%2Fbin%2Fgsh'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chown%20root%3Aroot%20%2Ftmp%2F.scsi%2Fdev%2Fbin%2F'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chown%20root%3Aroot%20x%3B'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%2Fbin%2Ftelnet%20locip%20locport%20%3C%20%2Fdev%2Fconsole%20%7C%20%2Fbin%2Fsh'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%2Ftmp%2Fratload'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ewok%20-t%20'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'xspy%20-display%20'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cat%20%3E%20%2Fdev%2Ftcp%2F127.0.0.1%2F80%20%3C%3Cend'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'rm%20-f%20%2Fcurrent%2Ftmp%2Fftshell.latest'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ghost_*%20-v%20'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%20--wipe%20%3E%20%2Fdev%2Fnull'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ping%20-c%202%20*%3B%20grep%20*%20%2Fproc%2Fnet%2Farp%20%3E%2Ftmp%2Fgx'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'iptables%20*%20output%20-p%20tcp%20-d%20127.0.0.1%20--tcp-flags%20rst%20rst%20-j%20drop%3B'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%3E%20%2Fvar%2Flog%2Faudit%2Faudit.log%3B%20rm%20-f%20.'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cp%20%2Fvar%2Flog%2Faudit%2Faudit.log%20.tmp'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'sh%20%3E%2Fdev%2Ftcp%2F*%20%3C%261%202%3E%261'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'ncat%20-vv%20-l%20-p%20*%20%3C'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'nc%20-vv%20-l%20-p%20*%20%3C'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%3C%20%2Fdev%2Fconsole%20%7C%20uudecode%20%26%26%20uncompress'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'sendmail%20-osendmail%3Bchmod%20%2Bx%20sendmail'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%2Fusr%2Fbin%2Fwget%20-o%20%2Ftmp%2Fa%20http*%20%26%26%20chmod%20755%20%2Ftmp%2Fcron'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20666%20%2Fvar%2Frun%2Futmp~'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20700%20nscd%20crond'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'cp%20%2Fetc%2Fshadow%20%2Ftmp%2F.'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%3C%2Fdev%2Fconsole%20%7Cuudecode%20%3E%20%2Fdev%2Fnull%202%3E%261%20%26%26%20uncompress'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20700%20jp%26%26netstat%20-an%7Cgrep'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'uudecode%20%3E%20%2Fdev%2Fnull%202%3E%261%20%26%26%20uncompress%20-f%20*%20%26%26%20chmod%20755'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20700%20crond'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'wget%20http*%3B%20chmod%20%2Bx%20%2Ftmp%2Fsendmail'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20700%20fp%20sendmail%20pt'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20755%20%2Fusr%2Fvmsys%2Fbin%2Fpipe'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20-r%20755%20%2Fusr%2Fvmsys'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20755%20%24opbin%2F*tunnel'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%20700%20sendmail'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'chmod%200700%20sendmail'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%2Fusr%2Fbin%2Fwget%20http*sendmail%3Bchmod%20%2Bx%20sendmail%3B'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%26%26%20telnet%20*%202%3E%261%20%3C%2Fdev%2Fconsole')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "159852",
+                "bb": "BB:BehaviorDefinition: Potential Equation Group Indicators",
+                "uuid": "dcb438d4-2dfc-4c9c-8de2-dd01d7a18149",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.820742",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,146 @@
+{
+  "rule_doc_id": "147702",
+  "rule_id": "147702",
+  "uuid": "b6175b84-289b-430a-b53e-286173d44965",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Atbroker Execution",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-22T19:43:56.114Z",
+  "modified": "2024-07-21T12:38:46.806Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Process Name (custom) is any of AtBroker.exe</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Process NameEQanyAtBroker.exe"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;Command&quot;) LIKE '%start%'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Command%22)%20LIKE%20'%25start%25'|%5B%22LOWER(%5C%22Command%5C%22)%20LIKE%20'%25start%25'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>((LOWER(&quot;Command&quot;) LIKE '%animations%' or LOWER(&quot;Command&quot;) LIKE '%audiodescription%' or LOWER(&quot;Command&quot;) LIKE '%caretbrowsing%' or LOWER(&quot;Command&quot;) LIKE '%caretwidth%' or LOWER(&quot;Command&quot;) LIKE '%colorfiltering%' or LOWER(&quot;Command&quot;) LIKE '%cursorscheme%' or LOWER(&quot;Command&quot;) LIKE '%filterkeys%' or LOWER(&quot;Command&quot;) LIKE '%focusborderheight%' or LOWER(&quot;Command&quot;) LIKE '%focusborderwidth%' or LOWER(&quot;Command&quot;) LIKE '%highcontrast%' or LOWER(&quot;Command&quot;) LIKE '%keyboardcues%' or LOWER(&quot;Command&quot;) LIKE '%keyboardpref%' or LOWER(&quot;Command&quot;) LIKE '%magnifierpane%' or LOWER(&quot;Command&quot;) LIKE '%messageduration%' or LOWER(&quot;Command&quot;) LIKE '%minimumhitradius%' or LOWER(&quot;Command&quot;) LIKE '%mousekeys%' or LOWER(&quot;Command&quot;) LIKE '%narrator%' or LOWER(&quot;Command&quot;) LIKE '%osk%' or LOWER(&quot;Command&quot;) LIKE '%overlappedcontent%' or LOWER(&quot;Command&quot;) LIKE '%showsounds%' or LOWER(&quot;Command&quot;) LIKE '%soundsentry%' or LOWER(&quot;Command&quot;) LIKE '%stickykeys%' or LOWER(&quot;Command&quot;) LIKE '%togglekeys%' or LOWER(&quot;Command&quot;) LIKE '%windowarranging%' or LOWER(&quot;Command&quot;) LIKE '%windowtracking%' or LOWER(&quot;Command&quot;) LIKE '%windowtrackingtimeout%' or LOWER(&quot;Command&quot;) LIKE '%windowtrackingzorder%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "((LOWER(%22Command%22)%20LIKE%20'%25animations%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25audiodescription%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25caretbrowsing%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25caretwidth%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25colorfiltering%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25cursorscheme%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25filterkeys%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25focusborderheight%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25focusborderwidth%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25highcontrast%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25keyboardcues%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25keyboardpref%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25magnifierpane%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25messageduration%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25minimumhitradius%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25mousekeys%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25narrator%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25osk%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25overlappedcontent%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25showsounds%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25soundsentry%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25stickykeys%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25togglekeys%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25windowarranging%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25windowtracking%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25windowtrackingtimeout%25'%20or%20LOWER(%22Command%22)%20LIKE%20'%25windowtrackingzorder%25'))|%5B%22((LOWER(%5C%22Command%5C%22)%20LIKE%20'%25animations%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25audiodescription%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25caretbrowsing%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25caretwidth%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25colorfiltering%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25cursorscheme%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25filterkeys%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25focusborderheight%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25focusborderwidth%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25highcontrast%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25keyboardcues%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25keyboardpref%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25magnifierpane%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25messageduration%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25minimumhitradius%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25mousekeys%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25narrator%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25osk%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25overlappedcontent%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25showsounds%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25soundsentry%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25stickykeys%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25togglekeys%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windowarranging%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windowtracking%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windowtrackingtimeout%25'%20or%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windowtrackingzorder%25'))%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "Event Triggered Execution",
+        "STEC": "T1546.008",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1546",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1546.008",
+            "values": [
+              {
+                "id": "147702",
+                "bb": "BB:BehaviorDefinition: Suspicious Atbroker Execution",
+                "uuid": "b6175b84-289b-430a-b53e-286173d44965",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.625021",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

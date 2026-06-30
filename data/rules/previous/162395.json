@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162395",
+  "rule_id": "162395",
+  "uuid": "c4d5b82c-df8d-47cc-b635-d31c431d62df",
+  "rule_name": "HackTool - NoFilter Execution",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:00:16.990Z",
+  "modified": "2024-08-07T08:30:31.844Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND ((\"Event ID\"=5447 AND LOWER(UTF8(payload)) LIKE '%ronpolicy%') OR (\"Event ID\"=5449 AND LOWER(UTF8(payload)) LIKE '%ronpolicy%'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%28%22Event%20ID%22%3D5447%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ronpolicy%25%27%29%20OR%20%28%22Event%20ID%22%3D5449%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ronpolicy%25%27%29%29|%5B%22devicetype%3D12%20AND%20%28%28%22Event%20ID%22%3D5447%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ronpolicy%25%27%29%20OR%20%28%22Event%20ID%22%3D5449%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25ronpolicy%25%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Stamatis Chatzimangou (st0pp3r) SIGMA Title: HackTool - NoFilter Execution SIGMA Description: Detects execution of NoFilter, a tool for abusing the Windows Filtering Platform for privilege escalation via hardcoded policy name indicators   False positives: - Unknown  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "HackTool - NoFilter Execution"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.944307",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

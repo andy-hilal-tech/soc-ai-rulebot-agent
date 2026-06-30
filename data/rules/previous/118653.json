@@ -1,0 +1,174 @@
+{
+  "rule_doc_id": "118653",
+  "rule_id": "118653",
+  "uuid": "af31539b-0379-41fa-8e9c-e2e5fac6648e",
+  "rule_name": "Thread Creation into a System Process",
+  "object_type": "rule",
+  "group": "Sysmon",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-05-24T12:39:12.583Z",
+  "modified": "2024-05-24T12:39:12.583Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "1",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>(5001845) CreateRemoteThread</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "5001845"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "3",
+            "id": "46",
+            "negate": "true"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Remote Thread Creation False-Positives, Thread Creation into lsass Process</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "21e3a7b5-4495-48e3-baed-88578a8606a3, d5c1b55d-1fee-485e-84b5-2cd992b3d648"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ReferenceSetTest",
+            "uid": "2",
+            "id": "107"
+          },
+          "text": [
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>Target Process Name (custom)</a> are contained in <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>any</a> of <a href='javascript:editParameter(\"2\", \"4\")' class='dynamic'>(Shared) Windows Sensitive Processes - AlphaNumeric (Ignore Case)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventDatabaseFields",
+              "value": "Target Process Name"
+            },
+            {
+              "id": "3",
+              "value": "any"
+            },
+            {
+              "id": "4",
+              "method": "getReferenceSets",
+              "value": "71"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>&quot;Process Path&quot; not in ('C:\\Windows\\VeeamVssSupport\\VeeamGuestHelper.exe','C:\\Windows\\System32\\wbem\\WmiPrvSE.exe','C:\\Windows\\System32\\svchost.exe','C:\\Windows\\System32\\wininit.exe','C:\\Windows\\System32\\csrss.exe','C:\\Windows\\System32\\services.exe','C:\\Windows\\System32\\winlogon.exe','C:\\Windows\\System32\\audiodg.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Path%22%20not%20in%20('C%3A%5CWindows%5CVeeamVssSupport%5CVeeamGuestHelper.exe','C%3A%5CWindows%5CSystem32%5Cwbem%5CWmiPrvSE.exe','C%3A%5CWindows%5CSystem32%5Csvchost.exe','C%3A%5CWindows%5CSystem32%5Cwininit.exe','C%3A%5CWindows%5CSystem32%5Ccsrss.exe','C%3A%5CWindows%5CSystem32%5Cservices.exe','C%3A%5CWindows%5CSystem32%5Cwinlogon.exe','C%3A%5CWindows%5CSystem32%5Caudiodg.exe')|%5B%22%5C%22Process%20Path%5C%22%20not%20in%20('C%3A%5C%5CWindows%5C%5CVeeamVssSupport%5C%5CVeeamGuestHelper.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwbem%5C%5CWmiPrvSE.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Csvchost.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwininit.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Ccsrss.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cservices.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Cwinlogon.exe','C%3A%5C%5CWindows%5C%5CSystem32%5C%5Caudiodg.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "alterMetric": [
+        {
+          "_$": {
+            "value": "10",
+            "operation": "incSeverity",
+            "metric": "setSeverity"
+          }
+        },
+        {
+          "_$": {
+            "value": "10",
+            "operation": "incCredibility",
+            "metric": "setCredibility"
+          }
+        },
+        {
+          "_$": {
+            "value": "10",
+            "operation": "incRelevance",
+            "metric": "setRelevance"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "21e3a7b5-4495-48e3-baed-88578a8606a3",
+      "name": "BB:BehaviorDefinition: Remote Thread Creation False-Positives"
+    },
+    {
+      "uuid": "d5c1b55d-1fee-485e-84b5-2cd992b3d648",
+      "name": "Thread Creation into lsass Process"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.025211",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

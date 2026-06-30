@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "130952",
+  "rule_id": "130952",
+  "uuid": "d52104ba-8cf8-4a02-a7bd-d7f4dd708b67",
+  "rule_name": "BB:CategoryDefinition: Object Deleted Events",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-04-16T12:26:41.408Z",
+  "modified": "2024-07-21T09:43:21.477Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>System.File Deleted, Audit.Delete Activity Attempted, Audit.Delete Activity Succeeded, Audit.Object Removal Attempt, Audit.Object Removal Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8033, 19020, 19021, 19178, 19176"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.299894",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

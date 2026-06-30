@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-03-11T17:37:05.814Z",
-  "modified": "2026-06-07T15:10:29.521Z",
+  "modified": "2026-06-25T06:40:36.863Z",
   "logic": [
     {
       "test": [
@@ -59,12 +59,12 @@
             "id": "316"
           },
           "text": [
-            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Sub Status (custom) is any of 0xc0000072</a>"
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Sub Status Code (custom) is any of 0xC0000072</a>"
           ],
           "parameter": [
             {
               "id": "1",
-              "value": "Sub StatusEQany0xc0000072"
+              "value": "Sub Status CodeEQany0xC0000072"
             },
             {
               "id": "2",
@@ -116,30 +116,40 @@
   ],
   "actions": [
     {
-      "_$": {},
-      "newevent": [
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "eventAnnotation": [
         {
-          "_$": {
-            "lowLevelCategory": "4015",
-            "offenseMapping": "0",
-            "forceOffenseCreation": "false",
-            "qid": "67501935",
-            "contributeOffenseName": "false",
-            "overrideOffenseName": "false",
-            "describeOffense": "false",
-            "relevance": "10",
-            "credibility": "10",
-            "severity": "5",
-            "description": "asd",
-            "name": "MSSP - OS - MS - 18 - H - Login Attempts from Disabled Account"
-          }
+          "formatString": [
+            "MSSP - OS - MS - 18 - H - Login Attempts from Disabled Account"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - OS - MS - 18 - H - Login Attempts from Disabled Account"
+          ]
         }
       ]
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "SUBJECTUSERNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.406460",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.300509",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

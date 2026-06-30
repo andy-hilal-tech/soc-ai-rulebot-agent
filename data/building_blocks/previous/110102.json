@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "110102",
+  "rule_id": "110102",
+  "uuid": "b0cb9a75-185f-44e2-8877-1aaf1aafc72e",
+  "rule_name": "BB:UBA : Unusual Source Locations",
+  "object_type": "building_block",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2016-06-03T17:48:37.000Z",
+  "modified": "2024-02-19T16:45:44.910Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "Geographic_Test",
+            "uid": "0",
+            "id": "39"
+          },
+          "text": [
+            "when the source is located in <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>misc.SatelliteProvider,   misc.AnonymousProxy,   Antarctic.Antarctica</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getGeographicView",
+              "value": "misc.SatelliteProvider,   misc.AnonymousProxy,   Antarctic.Antarctica"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.128775",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

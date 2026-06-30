@@ -1,0 +1,220 @@
+{
+  "rule_doc_id": "139202",
+  "rule_id": "139202",
+  "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+  "rule_name": "Programming Environment Spawned by a Suspicious Process",
+  "object_type": "rule",
+  "group": "Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2020-02-13T20:11:24.371Z",
+  "modified": "2024-07-21T10:28:59.879Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Process Name&quot;) MATCHES '(cmd|powershell|rundll32|scrcons|(w|c)script|(ba)?sh)\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Process%20Name%22)%20MATCHES%20'(cmd%7Cpowershell%7Crundll32%7Cscrcons%7C(w%7Cc)script%7C(ba)%3Fsh)%5C.exe'|%5B%22LOWER(%5C%22Process%20Name%5C%22)%20MATCHES%20'(cmd%7Cpowershell%7Crundll32%7Cscrcons%7C(w%7Cc)script%7C(ba)%3Fsh)%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Parent Process Name&quot;) MATCHES '(spoolsv|mshta|wscript|wuapp|taskeng|rundll32|regsvr32|iexplore|winword|powerpnt|excel|access|notepad|outlook|calc|iexplore|mspub|psexesvc|wsmprovhost|wmiprvse|visio|acrord\\d\\d)\\.exe'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Parent%20Process%20Name%22)%20MATCHES%20'(spoolsv%7Cmshta%7Cwscript%7Cwuapp%7Ctaskeng%7Crundll32%7Cregsvr32%7Ciexplore%7Cwinword%7Cpowerpnt%7Cexcel%7Caccess%7Cnotepad%7Coutlook%7Ccalc%7Ciexplore%7Cmspub%7Cpsexesvc%7Cwsmprovhost%7Cwmiprvse%7Cvisio%7Cacrord%5Cd%5Cd)%5C.exe'|%5B%22LOWER(%5C%22Parent%20Process%20Name%5C%22)%20MATCHES%20'(spoolsv%7Cmshta%7Cwscript%7Cwuapp%7Ctaskeng%7Crundll32%7Cregsvr32%7Ciexplore%7Cwinword%7Cpowerpnt%7Cexcel%7Caccess%7Cnotepad%7Coutlook%7Ccalc%7Ciexplore%7Cmspub%7Cpsexesvc%7Cwsmprovhost%7Cwmiprvse%7Cvisio%7Cacrord%5C%5Cd%5C%5Cd)%5C%5C.exe'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.005",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.005",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.010",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.010",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "System Binary Proxy Execution",
+        "STEC": "T1218.011",
+        "TAC": "Defense Evasion",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1218",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1218.011",
+            "values": [
+              {
+                "id": "139202",
+                "bb": "Programming Environment Spawned by a Suspicious Process",
+                "uuid": "740ffd27-8d73-40e5-a549-6d25a3a05ea2",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.803568",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

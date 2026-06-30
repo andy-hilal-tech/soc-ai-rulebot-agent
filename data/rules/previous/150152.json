@@ -1,0 +1,135 @@
+{
+  "rule_doc_id": "150152",
+  "rule_id": "150152",
+  "uuid": "e5657294-01d2-411c-80d9-2437130653af",
+  "rule_name": "New Port Forwarding Rule Added Via Netsh",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-02-20T17:48:03.127Z",
+  "modified": "2024-07-21T12:38:53.013Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success, Audit.Command Execution Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110, 19250"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316",
+            "negate": "false"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Command (custom) contains any of netsh</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "CommandCONanynetsh"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%interface%' AND LOWER(&quot;Command&quot;) LIKE '%portproxy%' AND LOWER(&quot;Command&quot;) LIKE '%add%' AND LOWER(&quot;Command&quot;) LIKE '%v4tov4%') OR (LOWER(&quot;Command&quot;) LIKE '%connectp%' AND LOWER(&quot;Command&quot;) LIKE '%listena%' AND LOWER(&quot;Command&quot;) LIKE '%c=%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25interface%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25portproxy%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25add%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25v4tov4%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25connectp%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25listena%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25c%3D%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25interface%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25portproxy%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25add%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25v4tov4%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25connectp%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25listena%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25c%3D%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Proxy",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1090",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Proxy",
+            "values": [
+              {
+                "id": "150152",
+                "bb": "New Port Forwarding Rule Added Via Netsh",
+                "uuid": "e5657294-01d2-411c-80d9-2437130653af",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.103543",
+  "last_enriched_utc": "2026-06-23T12:40:55.059435"
+}

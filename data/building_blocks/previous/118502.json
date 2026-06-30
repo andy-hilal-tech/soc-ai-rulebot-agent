@@ -1,0 +1,68 @@
+{
+  "rule_doc_id": "118502",
+  "rule_id": "118502",
+  "uuid": "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6",
+  "rule_name": "BB:CategoryDefinition: Object Download Events",
+  "object_type": "building_block",
+  "group": "Endpoint, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-01-22T14:49:28.017Z",
+  "modified": "2024-07-21T12:38:53.105Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.File Download Attempt, Audit.File Download Failure, Audit.File Download Success, Audit.Object Download Attempt, Audit.Object Download Failure, Audit.Object Download Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19071, 19073, 19072, 19083, 19085, 19084"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Command and Control": [
+      {
+        "TEC": "Ingress Tool Transfer",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "low",
+        "MAP_EN": true,
+        "TEC_ID": "T1105",
+        "MAP_S": [
+          {
+            "name": "Command and Control - Ingress Tool Transfer",
+            "values": [
+              {
+                "id": "118502",
+                "bb": "BB:CategoryDefinition: Object Download Events",
+                "uuid": "2a75eab0-f2d8-40c4-a8dc-d3e96bc603a6",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.189183",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

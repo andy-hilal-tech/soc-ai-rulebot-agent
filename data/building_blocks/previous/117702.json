@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "117702",
+  "rule_id": "117702",
+  "uuid": "2042962f-df39-4627-af54-59bdca9a4280",
+  "rule_name": "BB:CategoryDefinition: Virtual Machine Stopped",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2018-12-03T13:42:47.026Z",
+  "modified": "2024-04-29T12:45:20.876Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Audit.Virtual Machine Stop Attempt, Audit.Virtual Machine Stop Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19104, 19105"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.189183",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,122 @@
+{
+  "rule_doc_id": "142452",
+  "rule_id": "142452",
+  "uuid": "eedfa092-9335-478c-bf0e-639323c54e71",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Outbound SMTP Connections",
+  "object_type": "building_block",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-06-02T12:26:37.621Z",
+  "modified": "2024-07-21T10:28:57.451Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Access.ACL Permit</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "4012"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "2",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Destination Port is any of [25 or 587 or 465 or 2525]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "destinationPortEQany25�587�465�2525"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "4",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>Initiated (custom) is any of true</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "InitiatedEQanytrue"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>&quot;Process Name&quot; ILIKE 'thunderbird.exe' OR &quot;Process Name&quot; ILIKE 'outlook.exe' OR &quot;Process Path&quot; ILIKE '%\\Program Files\\Microsoft\\Exchange Server\\%' OR (&quot;Process Path&quot; ILIKE '%\\Program Files\\WindowsApps\\microsoft.windowscommunicationsapps%' AND &quot;Process Name&quot; ILIKE 'HxTsr.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Process%20Name%22%20ILIKE%20'thunderbird.exe'%20OR%20%22Process%20Name%22%20ILIKE%20'outlook.exe'%20OR%20%22Process%20Path%22%20ILIKE%20'%25%5CProgram%20Files%5CMicrosoft%5CExchange%20Server%5C%25'%20OR%20(%22Process%20Path%22%20ILIKE%20'%25%5CProgram%20Files%5CWindowsApps%5Cmicrosoft.windowscommunicationsapps%25'%20AND%20%22Process%20Name%22%20ILIKE%20'HxTsr.exe')|%5B%22%5C%22Process%20Name%5C%22%20ILIKE%20'thunderbird.exe'%20OR%20%5C%22Process%20Name%5C%22%20ILIKE%20'outlook.exe'%20OR%20%5C%22Process%20Path%5C%22%20ILIKE%20'%25%5C%5CProgram%20Files%5C%5CMicrosoft%5C%5CExchange%20Server%5C%5C%25'%20OR%20(%5C%22Process%20Path%5C%22%20ILIKE%20'%25%5C%5CProgram%20Files%5C%5CWindowsApps%5C%5Cmicrosoft.windowscommunicationsapps%25'%20AND%20%5C%22Process%20Name%5C%22%20ILIKE%20'HxTsr.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.500274",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

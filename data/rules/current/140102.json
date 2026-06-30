@@ -87,7 +87,16 @@
       "name": "BB:BehaviorDefinition: Malware as a Service Path IOC"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "MACHINEID",
+        "intervalType": "m",
+        "intervalCount": "15",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Initial Access": [
       {
@@ -180,6 +189,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.851654",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:37.940697",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

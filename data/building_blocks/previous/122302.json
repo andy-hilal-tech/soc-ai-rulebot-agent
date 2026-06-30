@@ -1,0 +1,106 @@
+{
+  "rule_doc_id": "122302",
+  "rule_id": "122302",
+  "uuid": "0a2108ff-8cfd-476a-a545-9da524adbc58",
+  "rule_name": "BB:Threats: Unsafe HTTP Methods",
+  "object_type": "building_block",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-10-29T18:27:26.696Z",
+  "modified": "2024-06-27T13:19:24.859Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Web Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "3",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Local to Local, Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2l, r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Application.Request Received, Application.Request Successful, Application.Request In Progress</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "18465, 18466, 18467"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Method&quot;) MATCHES'(post|delete|patch|options|trace)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Method%22)%20MATCHES'(post%7Cdelete%7Cpatch%7Coptions%7Ctrace)'|%5B%22LOWER(%5C%22Method%5C%22)%20MATCHES'(post%7Cdelete%7Cpatch%7Coptions%7Ctrace)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+      "name": "BB:DeviceDefinition: Web Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.236698",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

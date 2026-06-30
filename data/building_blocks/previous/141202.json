@@ -1,0 +1,133 @@
+{
+  "rule_doc_id": "141202",
+  "rule_id": "141202",
+  "uuid": "a5cbcb32-3d0b-4a14-95cb-d470236f1325",
+  "rule_name": "BB:BehaviorDefinition: Excessive File Modifications",
+  "object_type": "building_block",
+  "group": "Endpoint, Windows, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-07-22T17:50:11.496Z",
+  "modified": "2024-07-21T10:28:45.898Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>System.Successful File Modification, Audit.Update Activity Attempted, Audit.Update Activity Succeeded, Audit.Object Access Attempt, Audit.Object Access Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8014, 19017, 19018, 19080, 19081"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "301"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>20</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Machine Identifier (custom)</a> and different <a href='javascript:editParameter(\"1\", \"4\")' class='dynamic'>Filename (custom)</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>1</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>hour(s)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "20"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "Machine Identifier"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": "Filename"
+            },
+            {
+              "id": "5",
+              "value": "1"
+            },
+            {
+              "id": "6",
+              "value": "h"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Impact": [
+      {
+        "TEC": "T1486",
+        "STEC": "None",
+        "TAC": "Impact",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1486",
+        "MAP_S": [
+          {
+            "name": "Impact - T1486",
+            "values": [
+              {
+                "id": "141202",
+                "bb": "BB:BehaviorDefinition: Excessive File Modifications",
+                "uuid": "a5cbcb32-3d0b-4a14-95cb-d470236f1325",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.484856",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,145 @@
+{
+  "rule_doc_id": "100007",
+  "rule_id": "100007",
+  "uuid": "SYSTEM-1358",
+  "rule_name": "BB:HostDefinition: Servers",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-11-23T20:19:42.001Z",
+  "modified": "2023-10-30T02:20:02.034Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:HostDefinition: Database Servers, BB:HostDefinition: DHCP Servers, BB:HostDefinition: DNS Servers, BB:HostDefinition: FTP Servers, BB:HostDefinition: LDAP Servers, BB:HostDefinition: Mail Servers, BB:HostDefinition: Network Management Servers, BB:HostDefinition: Proxy Servers, BB:HostDefinition: RPC Servers, BB:HostDefinition: SNMP Sender or Receiver, BB:HostDefinition: SSH Servers, BB:HostDefinition: Virus Definition and Other Update Servers, BB:HostDefinition: Web Servers, BB:HostDefinition: Windows Servers, BB:HostReference: Database Servers, BB:HostReference: DHCP Servers, BB:HostReference: DNS Servers, BB:HostReference: FTP Servers, BB:HostReference: LDAP Servers, BB:HostReference: Mail Servers, BB:HostReference: Proxy Servers, BB:HostReference: SSH Servers, BB:HostReference: Web Servers, BB:HostReference: Windows Servers</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1374, SYSTEM-1369, SYSTEM-1357, SYSTEM-1391, SYSTEM-1375, SYSTEM-1356, SYSTEM-1224, SYSTEM-1222, SYSTEM-1376, SYSTEM-1366, SYSTEM-1377, SYSTEM-1251, SYSTEM-1277, SYSTEM-1216, 5e49bf4e-ec00-4443-bedf-aff5285a2b1d, c7e7dee5-a8a5-4656-8a1e-9062653d521f, 38bbf8ff-e374-4cf2-927c-6df53a183713, 042d16a5-8e51-4170-bdf0-61ff233abce4, 9bf7752a-36cb-4a12-bffb-092ef7257e79, c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83, 5eed76c4-d314-4008-88a9-7088c37cf424, 4f81bbe0-b456-489b-a98f-7865b5c23847, 5dd9d066-f801-4bab-823d-9bb0bb311186, 7164b6e2-ef35-40e8-a731-84e63a80a1ca"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1374",
+      "name": "BB:HostDefinition: Database Servers"
+    },
+    {
+      "uuid": "SYSTEM-1369",
+      "name": "BB:HostDefinition: DHCP Servers"
+    },
+    {
+      "uuid": "SYSTEM-1357",
+      "name": "BB:HostDefinition: DNS Servers"
+    },
+    {
+      "uuid": "SYSTEM-1391",
+      "name": "BB:HostDefinition: FTP Servers"
+    },
+    {
+      "uuid": "SYSTEM-1375",
+      "name": "BB:HostDefinition: LDAP Servers"
+    },
+    {
+      "uuid": "SYSTEM-1356",
+      "name": "BB:HostDefinition: Mail Servers"
+    },
+    {
+      "uuid": "SYSTEM-1224",
+      "name": "BB:HostDefinition: Network Management Servers"
+    },
+    {
+      "uuid": "SYSTEM-1222",
+      "name": "BB:HostDefinition: Proxy Servers"
+    },
+    {
+      "uuid": "SYSTEM-1376",
+      "name": "BB:HostDefinition: RPC Servers"
+    },
+    {
+      "uuid": "SYSTEM-1366",
+      "name": "BB:HostDefinition: SNMP Sender or Receiver"
+    },
+    {
+      "uuid": "SYSTEM-1377",
+      "name": "BB:HostDefinition: SSH Servers"
+    },
+    {
+      "uuid": "SYSTEM-1251",
+      "name": "BB:HostDefinition: Virus Definition and Other Update Servers"
+    },
+    {
+      "uuid": "SYSTEM-1277",
+      "name": "BB:HostDefinition: Web Servers"
+    },
+    {
+      "uuid": "SYSTEM-1216",
+      "name": "BB:HostDefinition: Windows Servers"
+    },
+    {
+      "uuid": "5e49bf4e-ec00-4443-bedf-aff5285a2b1d",
+      "name": "BB:HostReference: Database Servers"
+    },
+    {
+      "uuid": "c7e7dee5-a8a5-4656-8a1e-9062653d521f",
+      "name": "BB:HostReference: DHCP Servers"
+    },
+    {
+      "uuid": "38bbf8ff-e374-4cf2-927c-6df53a183713",
+      "name": "BB:HostReference: DNS Servers"
+    },
+    {
+      "uuid": "042d16a5-8e51-4170-bdf0-61ff233abce4",
+      "name": "BB:HostReference: FTP Servers"
+    },
+    {
+      "uuid": "9bf7752a-36cb-4a12-bffb-092ef7257e79",
+      "name": "BB:HostReference: LDAP Servers"
+    },
+    {
+      "uuid": "c3eacf7c-e2da-415e-98ce-2a1cc3a0ec83",
+      "name": "BB:HostReference: Mail Servers"
+    },
+    {
+      "uuid": "5eed76c4-d314-4008-88a9-7088c37cf424",
+      "name": "BB:HostReference: Proxy Servers"
+    },
+    {
+      "uuid": "4f81bbe0-b456-489b-a98f-7865b5c23847",
+      "name": "BB:HostReference: SSH Servers"
+    },
+    {
+      "uuid": "5dd9d066-f801-4bab-823d-9bb0bb311186",
+      "name": "BB:HostReference: Web Servers"
+    },
+    {
+      "uuid": "7164b6e2-ef35-40e8-a731-84e63a80a1ca",
+      "name": "BB:HostReference: Windows Servers"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.540843",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "121952",
+  "rule_id": "121952",
+  "uuid": "59dbbad8-cb15-4a91-9164-5461c1ab1ce9",
+  "rule_name": "BB:DeviceDefinition: Web Servers",
+  "object_type": "building_block",
+  "group": "Log Source Definitions, Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2021-10-22T18:56:21.836Z",
+  "modified": "2024-06-27T13:19:22.029Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Apache HTTP Server, Microsoft IIS, NGINX HTTP Server, Amazon AWS Route 53</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "10, 13, 439, 507"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.228641",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

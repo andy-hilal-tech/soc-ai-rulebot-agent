@@ -1,0 +1,61 @@
+{
+  "rule_doc_id": "124602",
+  "rule_id": "124602",
+  "uuid": "8edcb9e4-5db6-4942-a8fa-53fba70c4ac0",
+  "rule_name": "QRadar Audit: QRadar Hosts",
+  "object_type": "rule",
+  "group": "System",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Set",
+  "created": "2018-01-30T15:11:34.520Z",
+  "modified": "2024-07-21T08:29:28.929Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Health Metrics</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "368"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceSet": "true"
+      },
+      "referenseSetResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "filter": "sourceIP",
+            "id": "27",
+            "type": "IP",
+            "name": "QRadar Deployment"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.281088",
+  "last_enriched_utc": "2026-06-23T12:40:55.055419"
+}

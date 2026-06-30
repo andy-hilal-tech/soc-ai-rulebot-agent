@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "162234",
+  "rule_id": "162234",
+  "uuid": "3e53aa97-5ac9-4b79-9212-530d8e27c7d6",
+  "rule_name": "New BITS Job Created Via PowerShell",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T08:13:28.512Z",
+  "modified": "2024-08-12T11:13:34.140Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "1",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND &quot;Event ID&quot;=3 AND (LOWER(UTF8(payload)) LIKE '%\\powershell.exe%' OR LOWER(UTF8(payload)) LIKE '%\\pwsh.exe%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D3%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cpowershell.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cpwsh.exe%25%27%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D3%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cpowershell.exe%25%27%20OR%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25%5Cpwsh.exe%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: frack113 SIGMA Title: New BITS Job Created Via PowerShell SIGMA Description: Detects the creation of a new bits job by PowerShell  False positives: - Administrator PowerShell scripts  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "New BITS Job Created Via PowerShell"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:35.562041",
+  "last_enriched_utc": "2026-06-23T12:40:55.061093"
+}

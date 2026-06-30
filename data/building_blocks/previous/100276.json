@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100276",
+  "rule_id": "100276",
+  "uuid": "SYSTEM-1313",
+  "rule_name": "BB:CategoryDefinition: System Configuration",
+  "object_type": "building_block",
+  "group": "Virtualization, Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-06-19T19:26:34.699Z",
+  "modified": "2023-10-30T02:02:40.526Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Authentication.Computer Account Added, Authentication.Computer Account Changed, Authentication.Computer Account Removed, Authentication.Group Added, Authentication.Group Changed, Authentication.Group Member Added, Authentication.Group Member Removed, Authentication.Group Removed, Authentication.Policy Added, Authentication.Policy Change, Authentication.System Security Access Granted, Authentication.System Security Access Removed, Authentication.Trusted Domain Added, Authentication.Trusted Domain Removed, Authentication.User Account Added, Authentication.User Account Changed, Authentication.User Account Removed, Authentication.User Right Assigned, Authentication.User Right Removed, System.Application Installed, System.Application Uninstalled, System.Failed Application Modification, System.Failed Configuration Modification, System.Failed File Modification, System.Failed Host-Policy Modification, System.Failed Registry Modification, System.Failed Service Modification, System.Failed Stack Modification, System.File Created, System.File Deleted, System.Host-Policy Created, System.Host-Policy Deleted, System.Registry Addition, System.Registry Deletion, System.Service Installed, System.Service Uninstalled, System.Successful Application Modification, System.Successful Configuration Modification, System.Successful File Modification, System.Successful Host-Policy Modification, System.Successful Registry Modification, System.Successful Service Modification, System.Successful Stack Modification, System.System Configuration</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3041, 3042, 3043, 3038, 3039, 3036, 3037, 3040, 3029, 3030, 3027, 3028, 3025, 3026, 3031, 3032, 3035, 3023, 3024, 8029, 8034, 8023, 8024, 8021, 8020, 8019, 8025, 8022, 8028, 8033, 8027, 8032, 8026, 8031, 8030, 8035, 8016, 8017, 8014, 8013, 8012, 8018, 8015, 8003"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.890531",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

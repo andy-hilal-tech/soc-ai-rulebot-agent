@@ -1,0 +1,99 @@
+{
+  "rule_doc_id": "165307",
+  "rule_id": "165307",
+  "uuid": "795f3d27-a1d7-4af6-b63a-307b79a3c2a4",
+  "rule_name": "EC Down - NOMAC",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event, Email to hilalsoc@pmgdn.com",
+  "created": "2025-10-20T07:50:06.829Z",
+  "modified": "2026-01-19T06:50:51.577Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "QID_Test",
+            "uid": "0",
+            "id": "19"
+          },
+          "text": [
+            "when the event QID is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>(38750003) Information Message</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getQidsByLowLevelCategory",
+              "value": "38750003"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventPayload_Test",
+            "uid": "1",
+            "id": "3"
+          },
+          "text": [
+            "when the Event Payload contains <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>UNKNOWN</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "UNKNOWN"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventPayload_Test",
+            "uid": "2",
+            "id": "3"
+          },
+          "text": [
+            "when the Event Payload contains <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>172.28.60.40</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "172.28.60.40"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "2"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "EC Down - NOMAC"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "EC Down - NOMAC"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.311966",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

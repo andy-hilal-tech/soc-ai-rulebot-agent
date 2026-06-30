@@ -1,0 +1,135 @@
+{
+  "rule_doc_id": "137902",
+  "rule_id": "137902",
+  "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+  "rule_name": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+  "object_type": "building_block",
+  "group": "Endpoint, Linux",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-03-25T19:29:04.838Z",
+  "modified": "2024-07-21T10:28:55.587Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Account Removed</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3035"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "4",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"4\", \"1\")' class='dynamic'>LOWER(&quot;Application&quot;) MATCHES '.*(userdel|deluser).*'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Application%22)%20MATCHES%20'.*(userdel%7Cdeluser).*'|%5B%22LOWER(%5C%22Application%5C%22)%20MATCHES%20'.*(userdel%7Cdeluser).*'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Persistence": [
+      {
+        "TEC": "T1136",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1136",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1136",
+            "values": [
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "T1098",
+        "STEC": "None",
+        "TAC": "Persistence",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1098",
+        "MAP_S": [
+          {
+            "name": "Persistence - T1098",
+            "values": [
+              {
+                "id": "137902",
+                "bb": "BB:BehaviorDefinition: User Account Deleted (Unix)",
+                "uuid": "a7804230-a991-4195-abbe-65a5faf56433",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.441392",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

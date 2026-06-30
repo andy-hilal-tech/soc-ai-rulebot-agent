@@ -1,0 +1,119 @@
+{
+  "rule_doc_id": "165503",
+  "rule_id": "165503",
+  "uuid": "664f3008-6f82-43f0-8e2f-204f7035e48b",
+  "rule_name": "MSSP - AV - ESET - M - 01 - Multipe Blocked Suspicious Activities Observed from Single Host",
+  "object_type": "rule",
+  "group": "EDR & EPP, EPP - ESET",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-04-27T12:05:56.671Z",
+  "modified": "2026-04-27T12:05:56.664Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>ESET Remote Administrator</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "415"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Action_EST (custom) contains any of [block or blocked or Blocked or Block or Deny or Dropped or Drop or Denied]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "Action_ESTCONanyblock�blocked�Blocked�Block�Deny�Dropped�Drop�Denied"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "2",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>5</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>accountName_EST (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>15</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "5"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "accountName_EST"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "15"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "87"
+      },
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - AV - ESET - M - 01 - Multipe Blocked Suspicious Activities Observed from Single Host"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.450240",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

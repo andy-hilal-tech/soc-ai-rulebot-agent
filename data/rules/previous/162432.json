@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162432",
+  "rule_id": "162432",
+  "uuid": "2bae446c-b1a9-4125-9921-597232dcb4ba",
+  "rule_name": "Unauthorized System Time Modification",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:06:13.982Z",
+  "modified": "2024-08-04T13:06:13.981Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND \"Event ID\"=4616 AND (NOT(((\"Process Name\" IN('C:\\Program Files\\VMware\\VMware Tools\\vmtoolsd.exe', 'C:\\Windows\\System32\\VBoxService.exe', 'C:\\Windows\\System32\\oobe\\msoobe.exe')) OR (\"Process Name\"='C:\\Windows\\System32\\svchost.exe' AND LOWER(UTF8(payload)) LIKE '%s-1-5-19%'))))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%22Event%20ID%22%3D4616%20AND%20%28NOT%28%28%28%22Process%20Name%22%20IN%28%27C%3A%5CProgram%20Files%5CVMware%5CVMware%20Tools%5Cvmtoolsd.exe%27%2C%20%27C%3A%5CWindows%5CSystem32%5CVBoxService.exe%27%2C%20%27C%3A%5CWindows%5CSystem32%5Coobe%5Cmsoobe.exe%27%29%29%20OR%20%28%22Process%20Name%22%3D%27C%3A%5CWindows%5CSystem32%5Csvchost.exe%27%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25s-1-5-19%25%27%29%29%29%29|%5B%22devicetype%3D12%20AND%20%22Event%20ID%22%3D4616%20AND%20%28NOT%28%28%28%22Process%20Name%22%20IN%28%27C%3A%5CProgram%20Files%5CVMware%5CVMware%20Tools%5Cvmtoolsd.exe%27%2C%20%27C%3A%5CWindows%5CSystem32%5CVBoxService.exe%27%2C%20%27C%3A%5CWindows%5CSystem32%5Coobe%5Cmsoobe.exe%27%29%29%20OR%20%28%22Process%20Name%22%3D%27C%3A%5CWindows%5CSystem32%5Csvchost.exe%27%20AND%20LOWER%28UTF8%28payload%29%29%20LIKE%20%27%25s-1-5-19%25%27%29%29%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: @neu5ron SIGMA Title: Unauthorized System Time Modification SIGMA Description: Detect scenarios where a potentially unauthorized application or user is modifying the system time.  False positives: - HyperV or other virtualization technologies with binary not listed in filter portion of detection  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Unauthorized System Time Modification"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.026577",
+  "last_enriched_utc": "2026-06-23T12:40:55.062103"
+}

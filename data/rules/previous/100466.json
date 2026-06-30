@@ -1,0 +1,53 @@
+{
+  "rule_doc_id": "100466",
+  "rule_id": "100466",
+  "uuid": "0bce2137-53ec-4ce1-bae4-53f83ac2fa40",
+  "rule_name": "Policy: New Host Discovered",
+  "object_type": "rule",
+  "group": "Policy",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-01-16T13:34:02.478Z",
+  "modified": "2024-01-16T13:34:02.478Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>VIS Host Discovery.New Host Discovered, VIS Host Discovery.Bulk Host Discovered</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "17001, 17005"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "forceOffenseCreation": "true",
+        "includeAttackerEventsInterval": "0",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.440397",
+  "last_enriched_utc": "2026-06-23T12:40:55.052799"
+}

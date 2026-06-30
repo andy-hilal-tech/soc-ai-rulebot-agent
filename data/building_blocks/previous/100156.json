@@ -1,0 +1,57 @@
+{
+  "rule_doc_id": "100156",
+  "rule_id": "100156",
+  "uuid": "SYSTEM-1548",
+  "rule_name": "BB:CategoryDefinition: Unidirectional Flow",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2010-07-14T20:25:03.277Z",
+  "modified": "2023-10-30T02:20:04.929Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Unidirectional Flow DST, BB:CategoryDefinition: Unidirectional Flow SRC</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "SYSTEM-1547, SYSTEM-1546"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1547",
+      "name": "BB:CategoryDefinition: Unidirectional Flow DST"
+    },
+    {
+      "uuid": "SYSTEM-1546",
+      "name": "BB:CategoryDefinition: Unidirectional Flow SRC"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.721052",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

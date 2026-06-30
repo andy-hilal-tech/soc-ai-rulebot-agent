@@ -1,0 +1,82 @@
+{
+  "rule_doc_id": "142602",
+  "rule_id": "142602",
+  "uuid": "9ae1a7df-b4fa-49ae-90d6-734ac922e6bf",
+  "rule_name": "MOVEit Transfer Vulnerability Exploit Filenames",
+  "object_type": "rule",
+  "group": "Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-07-10T13:28:38.923Z",
+  "modified": "2024-07-21T10:28:49.093Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Operating System</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "1",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) LIKE 'human2.aspx' OR LOWER(&quot;Filename&quot;) LIKE 'human2.aspx.lnk' OR    ( LOWER(&quot;File Directory&quot;) MATCHES '(c:\\\\windows\\\\temp\\\\[^\\\\]*)' AND LOWER(&quot;Filename&quot;) LIKE '%.cmdline') OR    ( LOWER(&quot;File Directory&quot;) MATCHES 'c:\\\\windows\\\\microsoft.net\\\\framework 64\\\\v4.0.30319\\\\temporary asp.net files\\\\root\\\\[^\\\\]*?\\\\[^\\\\]*?' AND LOWER(&quot;Filename&quot;) LIKE 'a' )</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Filename%22)%20LIKE%20'human2.aspx'%20OR%20LOWER(%22Filename%22)%20LIKE%20'human2.aspx.lnk'%20OR%20%20%20%20(%20LOWER(%22File%20Directory%22)%20MATCHES%20'(c%3A%5C%5Cwindows%5C%5Ctemp%5C%5C%5B%5E%5C%5C%5D*)'%20AND%20LOWER(%22Filename%22)%20LIKE%20'%25.cmdline')%20OR%20%20%20%20(%20LOWER(%22File%20Directory%22)%20MATCHES%20'c%3A%5C%5Cwindows%5C%5Cmicrosoft.net%5C%5Cframework%2064%5C%5Cv4.0.30319%5C%5Ctemporary%20asp.net%20files%5C%5Croot%5C%5C%5B%5E%5C%5C%5D*%3F%5C%5C%5B%5E%5C%5C%5D*%3F'%20AND%20LOWER(%22Filename%22)%20LIKE%20'a'%20)|%5B%22LOWER(%5C%22Filename%5C%22)%20LIKE%20'human2.aspx'%20OR%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'human2.aspx.lnk'%22,%22OR%20%22,%22%20%20(%20LOWER(%5C%22File%20Directory%5C%22)%20MATCHES%20'(c%3A%5C%5C%5C%5Cwindows%5C%5C%5C%5Ctemp%5C%5C%5C%5C%5B%5E%5C%5C%5C%5C%5D*)'%20AND%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'%25.cmdline')%22,%22OR%20%22,%22%20%20(%20LOWER(%5C%22File%20Directory%5C%22)%20MATCHES%20'c%3A%5C%5C%5C%5Cwindows%5C%5C%5C%5Cmicrosoft.net%5C%5C%5C%5Cframework%2064%5C%5C%5C%5Cv4.0.30319%5C%5C%5C%5Ctemporary%20asp.net%20files%5C%5C%5C%5Croot%5C%5C%5C%5C%5B%5E%5C%5C%5C%5C%5D*%3F%5C%5C%5C%5C%5B%5E%5C%5C%5C%5C%5D*%3F'%20AND%20LOWER(%5C%22Filename%5C%22)%20LIKE%20'a'%20)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "73022aff-8dd2-4bc0-b316-d86bd7e3ac7f",
+      "name": "BB:DeviceDefinition: Operating System"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.924355",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

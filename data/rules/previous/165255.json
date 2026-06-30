@@ -1,0 +1,86 @@
+{
+  "rule_doc_id": "165255",
+  "rule_id": "165255",
+  "uuid": "23f7781b-6ddc-4022-a533-331532557f24",
+  "rule_name": "7Zip Compressing Dump Filess",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-09-22T09:58:55.409Z",
+  "modified": "2025-09-24T12:50:49.407Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceGroupID_Test",
+            "uid": "1",
+            "id": "93"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Bahrain Duty Free, Health360, NOMAC, Array</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getSensorDevicesTreeRoot",
+              "value": "100075, 101875, 100126, 101775"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (LOWER(UTF8(payload)) LIKE '%7-zip%' OR ((LOWER(&quot;Process Path&quot;) LIKE '%\\7z.exe' OR LOWER(&quot;Process Path&quot;) LIKE '%\\7zr.exe' OR LOWER(&quot;Process Path&quot;) LIKE '%\\7za.exe') OR (LOWER(&quot;Process Name&quot;) LIKE '%\\7z.exe' OR LOWER(&quot;Process Name&quot;) LIKE '%\\7zr.exe' OR LOWER(&quot;Process Name&quot;) LIKE '%\\7za.exe')) OR (Filename IN('7z.exe', '7za.exe'))) AND (LOWER(Command) LIKE '%.dmp%' OR LOWER(Command) LIKE '%.dump%' OR LOWER(Command) LIKE '%.hdmp%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257-zip%25%27%20OR%20%28%28LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7z.exe%27%20OR%20LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7zr.exe%27%20OR%20LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7za.exe%27%29%20OR%20%28LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7z.exe%27%20OR%20LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7zr.exe%27%20OR%20LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7za.exe%27%29%29%20OR%20%28Filename%20IN%28%277z.exe%27,%20%277za.exe%27%29%29%29%20AND%20%28LOWER%28Command%29%20LIKE%20%27%25.dmp%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.dump%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.hdmp%25%27%29|%5B%22devicetype%3D12%20AND%20%28LOWER%28UTF8%28payload%29%29%20LIKE%20%27%257-zip%25%27%20OR%20%28%28LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7z.exe%27%20OR%20LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7zr.exe%27%20OR%20LOWER%28%22Process%20Path%22%29%20LIKE%20%27%25%5C7za.exe%27%29%20OR%20%28LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7z.exe%27%20OR%20LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7zr.exe%27%20OR%20LOWER%28%22Process%20Name%22%29%20LIKE%20%27%25%5C7za.exe%27%29%29%20OR%20%28Filename%20IN%28%277z.exe%27,%20%277za.exe%27%29%29%29%20AND%20%28LOWER%28Command%29%20LIKE%20%27%25.dmp%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.dump%25%27%20OR%20LOWER%28Command%29%20LIKE%20%27%25.hdmp%25%27%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Nasreddine Bencherchali (Nextron Systems) SIGMA Title: 7Zip Compressing Dump Files SIGMA Description: Detects execution of 7z in order to compress a file with a \".dmp\"/\".dump\" extension, which could be a step in a process of dump file exfiltration.  False positives: - Legitimate use of 7z with a command line in which \".dmp\" or \".dump\" appears accidentally - Legitimate use of 7z to compress WER \".dmp\" files for troubleshooting  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "7Zip Compressing Dump Filess"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.311966",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

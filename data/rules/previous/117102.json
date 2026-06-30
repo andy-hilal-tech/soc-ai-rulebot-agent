@@ -1,0 +1,103 @@
+{
+  "rule_doc_id": "117102",
+  "rule_id": "117102",
+  "uuid": "0bbe300f-5f9f-4b34-9f69-f7c2aeb48776",
+  "rule_name": "Multi-Factor Authentication Bypass",
+  "object_type": "rule",
+  "group": "Virtualization",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-01-11T15:36:22.709Z",
+  "modified": "2024-04-29T12:45:20.085Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:DeviceDefinition: Virtualization, BB:DeviceDefinition: Cloud</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "edf618f4-9e8c-4068-88aa-2675753eb003, 290df59b-44ef-452a-9633-2d52e74dbc97"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Authentication.User Login Success, Authentication.User Login Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3115, 3114"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>LOWER(&quot;MFA Used&quot;) MATCHES '(no|false)'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22MFA%20Used%22)%20MATCHES%20'(no%7Cfalse)'|%5B%22LOWER(%5C%22MFA%20Used%5C%22)%20MATCHES%20'(no%7Cfalse)'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "3"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "edf618f4-9e8c-4068-88aa-2675753eb003",
+      "name": "BB:DeviceDefinition: Virtualization"
+    },
+    {
+      "uuid": "290df59b-44ef-452a-9633-2d52e74dbc97",
+      "name": "BB:DeviceDefinition: Cloud"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:33.998829",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

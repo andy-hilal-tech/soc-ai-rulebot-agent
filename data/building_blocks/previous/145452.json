@@ -1,0 +1,218 @@
+{
+  "rule_doc_id": "145452",
+  "rule_id": "145452",
+  "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+  "rule_name": "BB:BehaviorDefinition: HyperStack Filenames",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2022-11-22T16:06:30.223Z",
+  "modified": "2024-07-21T12:38:46.256Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.File Created, Audit.File Move Success, Audit.File Move Attempt, Audit.File Download Success, Audit.File Download Attempt, Audit.File Access Success, Audit.File Access Attempt, Audit.Object Access Success, Audit.Object Access Attempt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8028, 19152, 19154, 19072, 19071, 19075, 19074, 19081, 19080"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>LOWER(&quot;Filename&quot;) MATCHES ('backport.inf') OR LOWER(&quot;Filename&quot;) MATCHES ('adschemeintegrity.exe')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "LOWER(%22Filename%22)%20MATCHES%20('backport.inf')%20OR%20LOWER(%22Filename%22)%20MATCHES%20('adschemeintegrity.exe')|%5B%22LOWER(%5C%22Filename%5C%22)%20MATCHES%20('backport.inf')%22,%22OR%20LOWER(%5C%22Filename%5C%22)%20MATCHES%20('adschemeintegrity.exe')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Discovery": [
+      {
+        "TEC": "Account Discovery",
+        "STEC": "T1087.001",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1087",
+        "MAP_S": [
+          {
+            "name": "Discovery - T1087.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "Encrypted Channel",
+        "STEC": "T1573.001",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1573",
+        "MAP_S": [
+          {
+            "name": "Command and Control - T1573.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Execution": [
+      {
+        "TEC": "T1559",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1559",
+        "MAP_S": [
+          {
+            "name": "Execution - T1559",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TEC": "Native API",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1106",
+        "MAP_S": [
+          {
+            "name": "Execution - Native API",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Defense Evasion": [
+      {
+        "TEC": "T1112",
+        "STEC": "None",
+        "TAC": "Defense Evasion",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1112",
+        "MAP_S": [
+          {
+            "name": "Defense Evasion - T1112",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "Valid Accounts",
+        "STEC": "T1078.001",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1078",
+        "MAP_S": [
+          {
+            "name": "Initial Access - T1078.001",
+            "values": [
+              {
+                "id": "145452",
+                "bb": "BB:BehaviorDefinition: HyperStack Filenames",
+                "uuid": "c22126cf-02e9-48c1-a2c6-3080f0c0caf7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.552888",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

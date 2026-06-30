@@ -1,0 +1,246 @@
+{
+  "rule_doc_id": "126852",
+  "rule_id": "126852",
+  "uuid": "a9c9b67f-d91a-455d-a12d-76cf24ff4ff4",
+  "rule_name": "Successful Login from Specific City",
+  "object_type": "rule",
+  "group": "Anomaly",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Add to a Reference Table",
+  "created": "2022-01-26T14:49:27.432Z",
+  "modified": "2024-07-21T09:34:35.159Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:CategoryDefinition: Authentication Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "SYSTEM-1220"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Username is not N/A</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "userNameNENA$_NULL_$"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "2",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Remote to Local</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "r2l"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>GEO::LOOKUP(sourceip, 'city_name') != '{&quot;city&quot;:{&quot;name&quot;:null}}' AND GEO::LOOKUP(sourceip, 'city_name') != '{}'</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "GEO%3A%3ALOOKUP(sourceip,%20'city_name')%20!%3D%20'%7B%22city%22%3A%7B%22name%22%3Anull%7D%7D'%20AND%20GEO%3A%3ALOOKUP(sourceip,%20'city_name')%20!%3D%20'%7B%7D'|%5B%22GEO%3A%3ALOOKUP(sourceip,%20'city_name')%20!%3D%20'%7B%5C%22city%5C%22%3A%7B%5C%22name%5C%22%3Anull%7D%7D'%20AND%20GEO%3A%3ALOOKUP(sourceip,%20'city_name')%20!%3D%20'%7B%7D'%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "referenceTable": "true"
+      },
+      "referenceDataResponse": [
+        {
+          "_$": {
+            "domainResponse": "0",
+            "id": "186",
+            "name": "Impossible Travel"
+          },
+          "key1Entry": [
+            {
+              "_$": {
+                "value": "userName",
+                "source": "PROPERTY"
+              },
+              "key2Entry": [
+                {
+                  "_$": {
+                    "value": "usernameKey",
+                    "source": "USER_DEFINED"
+                  },
+                  "dataEntry": [
+                    {
+                      "_$": {
+                        "value": "userName",
+                        "source": "PROPERTY"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "_$": {
+                    "value": "ipKey",
+                    "source": "USER_DEFINED"
+                  },
+                  "dataEntry": [
+                    {
+                      "_$": {
+                        "value": "sourceIP",
+                        "source": "PROPERTY"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "_$": {
+                    "value": "dateKey",
+                    "source": "USER_DEFINED"
+                  },
+                  "dataEntry": [
+                    {
+                      "_$": {
+                        "value": "startDate",
+                        "source": "PROPERTY"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1220",
+      "name": "BB:CategoryDefinition: Authentication Success"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Credential Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Credential Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Discovery": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Discovery",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Discovery - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "100005",
+                "bb": "BB:CategoryDefinition: Authentication Success",
+                "uuid": "SYSTEM-1220",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.379965",
+  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+}

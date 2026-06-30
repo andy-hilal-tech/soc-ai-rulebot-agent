@@ -1,0 +1,102 @@
+{
+  "rule_doc_id": "159302",
+  "rule_id": "159302",
+  "uuid": "a837dc88-a0b4-4606-a07d-144d20452e43",
+  "rule_name": "Automated Collection Commands",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2023-01-23T15:16:06.553Z",
+  "modified": "2024-07-21T12:38:48.715Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Automated Collection Command PowerShell, BB:BehaviorDefinition: Automated Collection Command Prompt</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "86afc4f3-b954-4a34-8ab1-e9d8d4e62061, 69441c64-f39e-4a5e-8329-d516148418d5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "86afc4f3-b954-4a34-8ab1-e9d8d4e62061",
+      "name": "BB:BehaviorDefinition: Automated Collection Command PowerShell"
+    },
+    {
+      "uuid": "69441c64-f39e-4a5e-8329-d516148418d5",
+      "name": "BB:BehaviorDefinition: Automated Collection Command Prompt"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Collection": [
+      {
+        "TEC": "T1119",
+        "STEC": "None",
+        "TAC": "Collection",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1119",
+        "MAP_S": [
+          {
+            "name": "Collection - T1119",
+            "values": [
+              {
+                "id": "159302",
+                "bb": "Automated Collection Commands",
+                "uuid": "a837dc88-a0b4-4606-a07d-144d20452e43",
+                "T": "EVENT"
+              },
+              {
+                "id": "159352",
+                "bb": "BB:BehaviorDefinition: Automated Collection Command PowerShell",
+                "uuid": "86afc4f3-b954-4a34-8ab1-e9d8d4e62061",
+                "T": "EVENT"
+              },
+              {
+                "id": "159402",
+                "bb": "BB:BehaviorDefinition: Automated Collection Command Prompt",
+                "uuid": "69441c64-f39e-4a5e-8329-d516148418d5",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:35.383543",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

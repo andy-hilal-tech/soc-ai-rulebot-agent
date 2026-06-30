@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "100097",
+  "rule_id": "100097",
+  "uuid": "SYSTEM-1325",
+  "rule_name": "BB:BehaviorDefinition: Compromise Activities",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2008-07-11T17:44:02.511Z",
+  "modified": "2023-10-30T02:02:35.208Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "0",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>DOS.Brute force login, Exploit, Malware.Malicious Software, Malware.Virus Detected, Potential Exploit, Suspicious Activity.Executable Code Detected, Suspicious Activity.IDS Evasion</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "2016, 5000, 6004, 6006, 13000, 7022, 7015"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.641770",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

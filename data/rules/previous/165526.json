@@ -1,0 +1,143 @@
+{
+  "rule_doc_id": "165526",
+  "rule_id": "165526",
+  "uuid": "64bc77b1-da57-493c-8d59-977f9a3896ee",
+  "rule_name": "MSSP - SW - CM - 01 - M - Allowed Inbound Flow Observed from Suspicious IPs",
+  "object_type": "rule",
+  "group": "MSSP - Rules, Switches, SW - CISCO Meraki",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-05-19T13:26:56.725Z",
+  "modified": "2026-05-19T13:26:56.723Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>MSSP - SW - CM - 01(a) - M - Inbound Flow Observed from Anonymization Services, MSSP - SW - CM - 01(b) - M - Inbound Flow Observed from Botnet CnC Server, MSSP - SW - CM - 01(c) - M - Inbound Flow Observed from Bots, MSSP - SW - CM - 01(d) - M - Inbound Flow Observed from Cryptocurrency Mining, MSSP - SW - CM - 01(e) - M - Inbound Flow Observed from Dynamic IPs, MSSP - SW - CM - 01(f) - M - Inbound Flow Observed from Malware, MSSP - SW - CM - 01(g) - M - Inbound Flow Observed from Scanning IPs, MSSP - SW - CM - 01(h) - M - Inbound Flow Observed from Spam</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "4dac8bc5-5a25-4739-b9ce-545be5368065, 1b855cf0-78b9-477a-be51-3108b37dbc28, 9de46bfc-c16a-4738-9bc3-a3bfaea01c2b, 9b7a896c-5028-4238-8ebd-e69523733446, 31ca2121-5290-49ec-b68e-c7baa72f9436, 1a39f170-c5d6-4c00-834a-60718edea2e4, 378945ea-9823-4245-a28e-d13371f05dcf, d8ab24f5-b942-4904-abd9-7f3616409866"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "1",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"1\", \"3\")' class='dynamic'>Source IP</a> in <a href='javascript:editParameter(\"1\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"1\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "sourceIP"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "30"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      },
+      "eventAnnotation": [
+        {
+          "formatString": [
+            "MSSP - SW - CM - 01 - M - Allowed Inbound Flow Observed from Suspicious IPs"
+          ]
+        }
+      ],
+      "offenseAnnotation": [
+        {
+          "formatString": [
+            "MSSP - SW - CM - 01 - M - Allowed Inbound Flow Observed from Suspicious IPs"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "4dac8bc5-5a25-4739-b9ce-545be5368065",
+      "name": "MSSP - SW - CM - 01(a) - M - Inbound Flow Observed from Anonymization Services"
+    },
+    {
+      "uuid": "1b855cf0-78b9-477a-be51-3108b37dbc28",
+      "name": "MSSP - SW - CM - 01(b) - M - Inbound Flow Observed from Botnet CnC Server"
+    },
+    {
+      "uuid": "9de46bfc-c16a-4738-9bc3-a3bfaea01c2b",
+      "name": "MSSP - SW - CM - 01(c) - M - Inbound Flow Observed from Bots"
+    },
+    {
+      "uuid": "9b7a896c-5028-4238-8ebd-e69523733446",
+      "name": "MSSP - SW - CM - 01(d) - M - Inbound Flow Observed from Cryptocurrency Mining"
+    },
+    {
+      "uuid": "31ca2121-5290-49ec-b68e-c7baa72f9436",
+      "name": "MSSP - SW - CM - 01(e) - M - Inbound Flow Observed from Dynamic IPs"
+    },
+    {
+      "uuid": "1a39f170-c5d6-4c00-834a-60718edea2e4",
+      "name": "MSSP - SW - CM - 01(f) - M - Inbound Flow Observed from Malware"
+    },
+    {
+      "uuid": "378945ea-9823-4245-a28e-d13371f05dcf",
+      "name": "MSSP - SW - CM - 01(g) - M - Inbound Flow Observed from Scanning IPs"
+    },
+    {
+      "uuid": "d8ab24f5-b942-4904-abd9-7f3616409866",
+      "name": "MSSP - SW - CM - 01(h) - M - Inbound Flow Observed from Spam"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.498031",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

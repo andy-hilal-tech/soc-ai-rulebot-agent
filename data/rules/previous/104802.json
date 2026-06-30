@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "104802",
+  "rule_id": "104802",
+  "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+  "rule_name": "UBA : Browsed to Malicious Website",
+  "object_type": "rule",
+  "group": "User Behavior Analytics",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2017-04-28T18:54:03.130Z",
+  "modified": "2024-02-19T16:41:10.318Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "1",
+            "id": "46"
+          },
+          "text": [
+            "when an event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"1\", \"2\")' class='dynamic'>BB:UBA : URL Category Filter</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "bb5c167e-584c-4c1b-99f5-7f987026d28b"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>&quot;Web Category&quot; ilike '%malicious%' or &quot;Web Category&quot; ilike '%anonymiz%' or &quot;Web Category&quot; ilike '%parked%' or &quot;Web Category&quot; ilike '%spam%' or &quot;Web Category&quot; ilike '%exploit%' or &quot;Web Category&quot; ilike '%PUP%' or &quot;Web Category&quot; ilike '%spyware%' or &quot;Web Category&quot; ilike '%malware%' or &quot;Web Category&quot; ilike '%avoidance%' or &quot;Web Category&quot; ilike '%unwanted software%' or &quot;Web Category&quot; ilike '%suspicious%' or &quot;Web Category&quot; ilike '%non-viewable%' or &quot;Web Category&quot; ilike '%residential%' OR &quot;Web Category&quot; in (75, 126, 127, 154, 166, 167, 172, 192, 193, 194, 200, 202, 205, 206, 207, 213, 214, 216, 217, 218, 219, 220)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22Web%20Category%22%20ilike%20'%25malicious%25'%20or%20%22Web%20Category%22%20ilike%20'%25anonymiz%25'%20or%20%22Web%20Category%22%20ilike%20'%25parked%25'%20or%20%22Web%20Category%22%20ilike%20'%25spam%25'%20or%20%22Web%20Category%22%20ilike%20'%25exploit%25'%20or%20%22Web%20Category%22%20ilike%20'%25PUP%25'%20or%20%22Web%20Category%22%20ilike%20'%25spyware%25'%20or%20%22Web%20Category%22%20ilike%20'%25malware%25'%20or%20%22Web%20Category%22%20ilike%20'%25avoidance%25'%20or%20%22Web%20Category%22%20ilike%20'%25unwanted%20software%25'%20or%20%22Web%20Category%22%20ilike%20'%25suspicious%25'%20or%20%22Web%20Category%22%20ilike%20'%25non-viewable%25'%20or%20%22Web%20Category%22%20ilike%20'%25residential%25'%20OR%20%22Web%20Category%22%20in%20(75,%20126,%20127,%20154,%20166,%20167,%20172,%20192,%20193,%20194,%20200,%20202,%20205,%20206,%20207,%20213,%20214,%20216,%20217,%20218,%20219,%20220)|%5B%22%5C%22Web%20Category%5C%22%20ilike%20'%25malicious%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25anonymiz%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25parked%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25spam%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25exploit%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25PUP%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25spyware%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25malware%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25avoidance%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25unwanted%20software%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25suspicious%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25non-viewable%25'%20or%20%5C%22Web%20Category%5C%22%20ilike%20'%25residential%25'%20OR%20%5C%22Web%20Category%5C%22%20in%20(75,%20126,%20127,%20154,%20166,%20167,%20172,%20192,%20193,%20194,%20200,%20202,%20205,%20206,%20207,%20213,%20214,%20216,%20217,%20218,%20219,%20220)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "24008",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67500236",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "5",
+            "credibility": "5",
+            "severity": "7",
+            "description": "senseValue=15,senseDesc='User access to Risky Resource Category - Malicious Outbound Data or Botnets',usecase_id='22a95fda-b76a-488d-adc6-10cf2ac60821'",
+            "name": "UBA : Browsed to Malicious Website"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "bb5c167e-584c-4c1b-99f5-7f987026d28b",
+      "name": "BB:UBA : URL Category Filter"
+    }
+  ],
+  "limiter": null,
+  "mitre": {
+    "Initial Access": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Initial Access",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Initial Access - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Command and Control": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Command and Control",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Command and Control - None",
+            "values": [
+              {
+                "id": "104802",
+                "bb": "UBA : Browsed to Malicious Website",
+                "uuid": "22a95fda-b76a-488d-adc6-10cf2ac60821",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:33.566854",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

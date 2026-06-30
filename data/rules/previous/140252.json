@@ -1,0 +1,117 @@
+{
+  "rule_doc_id": "140252",
+  "rule_id": "140252",
+  "uuid": "c4851152-1fcd-4965-b3a4-3d3f06b2c9e7",
+  "rule_name": "Ransomware: Ryuk IOC in Events",
+  "object_type": "rule",
+  "group": "Ransomware, Endpoint, Windows",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-06-14T17:52:10.056Z",
+  "modified": "2024-07-21T10:28:54.504Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>&quot;MD5 Hash&quot; is NOT NULL OR &quot;SHA256 Hash&quot; is NOT null OR &quot;SHA1 Hash&quot;is NOT NULL OR &quot;Filename&quot; is NOT NULL</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "%22MD5%20Hash%22%20is%20NOT%20NULL%20OR%20%22SHA256%20Hash%22%20is%20NOT%20null%20OR%20%22SHA1%20Hash%22is%20NOT%20NULL%20OR%20%22Filename%22%20is%20NOT%20NULL|%5B%22%5C%22MD5%20Hash%5C%22%20is%20NOT%20NULL%20OR%20%5C%22SHA256%20Hash%5C%22%20is%20NOT%20null%20OR%20%5C%22SHA1%20Hash%5C%22is%20NOT%20NULL%20OR%20%5C%22Filename%5C%22%20is%20NOT%20NULL%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "3",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>REFERENCESETCONTAINS('Ryuk_MD5', &quot;MD5 Hash&quot;) or  REFERENCESETCONTAINS('Ryuk_SHA256', &quot;SHA256 Hash&quot;) or REFERENCESETCONTAINS('Ryuk_SHA1', &quot;SHA1 Hash&quot;)</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "REFERENCESETCONTAINS('Ryuk_MD5',%20%22MD5%20Hash%22)%20or%20%20REFERENCESETCONTAINS('Ryuk_SHA256',%20%22SHA256%20Hash%22)%20or%20REFERENCESETCONTAINS('Ryuk_SHA1',%20%22SHA1%20Hash%22)|%5B%22REFERENCESETCONTAINS('Ryuk_MD5',%20%5C%22MD5%20Hash%5C%22)%20or%20%22,%22REFERENCESETCONTAINS('Ryuk_SHA256',%20%5C%22SHA256%20Hash%5C%22)%20or%22,%22REFERENCESETCONTAINS('Ryuk_SHA1',%20%5C%22SHA1%20Hash%5C%22)%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "64"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "User Execution",
+        "STEC": "T1204.002",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1204",
+        "MAP_S": [
+          {
+            "name": "Execution - T1204.002",
+            "values": [
+              {
+                "id": "140252",
+                "bb": "Ransomware: Ryuk IOC in Events",
+                "uuid": "c4851152-1fcd-4965-b3a4-3d3f06b2c9e7",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.857694",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

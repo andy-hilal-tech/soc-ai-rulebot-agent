@@ -1,0 +1,105 @@
+{
+  "rule_doc_id": "144952",
+  "rule_id": "144952",
+  "uuid": "1e5865ca-4315-4f2c-a045-3d3c0c3a64c0",
+  "rule_name": "BB:BehaviorDefinition: Suspicious Reverse Shell Command Line",
+  "object_type": "building_block",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2023-02-15T16:16:52.016Z",
+  "modified": "2024-07-21T12:38:41.915Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Linux OS</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "11"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>System.Process Creation Success</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "8110"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(&quot;Command&quot; ILIKE 'BEGIN {s = _/inet/tcp/0/' OR &quot;Command&quot; ILIKE 'bash -i &gt;&amp; /dev/tcp/' OR &quot;Command&quot; ILIKE 'bash -i &gt;&amp; /dev/udp/' OR &quot;Command&quot; ILIKE 'sh -i &gt;$ /dev/udp/' OR &quot;Command&quot; ILIKE 'sh -i &gt;$ /dev/tcp/' OR &quot;Command&quot; ILIKE '&amp;&amp; while read line 0&lt;&amp;5; do' OR &quot;Command&quot; ILIKE '/bin/bash -c exec 5&lt;&gt;/dev/tcp/' OR &quot;Command&quot; ILIKE '/bin/bash -c exec 5&lt;&gt;/dev/udp/' OR &quot;Command&quot; ILIKE 'nc -e /bin/sh ' OR &quot;Command&quot; ILIKE '/bin/sh | nc' OR &quot;Command&quot; ILIKE 'rm -f backpipe; mknod /tmp/backpipe p &amp;&amp; nc ' OR &quot;Command&quot; ILIKE ';socket(S,PF_INET,SOCK_STREAM,getprotobyname(_tcp_));if(connect(S,sockaddr_in($p,inet_aton($i))))' OR &quot;Command&quot; ILIKE ';STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;' OR &quot;Command&quot; ILIKE '/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3' OR &quot;Command&quot; ILIKE 'uname -a; w; id; /bin/bash -i' OR &quot;Command&quot; ILIKE '$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2); $stream.Write($sendbyte,0,$sendbyte.Length); $stream.Flush()};' OR &quot;Command&quot; ILIKE ';os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);os.putenv(''HISTFILE'',''/dev/null'');' OR &quot;Command&quot; ILIKE '.to_i;exec sprintf(_/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d_,f,f,f)' OR &quot;Command&quot; ILIKE ';while(cmd=c.gets);IO.popen(cmd,_r_){|io|c.print' OR &quot;Command&quot; ILIKE 'socat exec:''bash -li'',pty,stderr,setsid,sigint,sane tcp:' OR &quot;Command&quot; ILIKE 'rm -f /tmp/p; mknod /tmp/p p &amp;&amp;' OR &quot;Command&quot; ILIKE ' | /bin/bash | telnet ' OR &quot;Command&quot; ILIKE ',echo=0,raw tcp-listen:' OR &quot;Command&quot; ILIKE 'nc -lvvp ' OR &quot;Command&quot; ILIKE 'xterm -display 1')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(%22Command%22%20ILIKE%20'BEGIN%20%7Bs%20%3D%20_%2Finet%2Ftcp%2F0%2F'%20OR%20%22Command%22%20ILIKE%20'bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F'%20OR%20%22Command%22%20ILIKE%20'bash%20-i%20%3E%26%20%2Fdev%2Fudp%2F'%20OR%20%22Command%22%20ILIKE%20'sh%20-i%20%3E%24%20%2Fdev%2Fudp%2F'%20OR%20%22Command%22%20ILIKE%20'sh%20-i%20%3E%24%20%2Fdev%2Ftcp%2F'%20OR%20%22Command%22%20ILIKE%20'%26%26%20while%20read%20line%200%3C%265%3B%20do'%20OR%20%22Command%22%20ILIKE%20'%2Fbin%2Fbash%20-c%20exec%205%3C%3E%2Fdev%2Ftcp%2F'%20OR%20%22Command%22%20ILIKE%20'%2Fbin%2Fbash%20-c%20exec%205%3C%3E%2Fdev%2Fudp%2F'%20OR%20%22Command%22%20ILIKE%20'nc%20-e%20%2Fbin%2Fsh%20'%20OR%20%22Command%22%20ILIKE%20'%2Fbin%2Fsh%20%7C%20nc'%20OR%20%22Command%22%20ILIKE%20'rm%20-f%20backpipe%3B%20mknod%20%2Ftmp%2Fbackpipe%20p%20%26%26%20nc%20'%20OR%20%22Command%22%20ILIKE%20'%3Bsocket(S,PF_INET,SOCK_STREAM,getprotobyname(_tcp_))%3Bif(connect(S,sockaddr_in(%24p,inet_aton(%24i))))'%20OR%20%22Command%22%20ILIKE%20'%3BSTDIN-%3Efdopen(%24c,r)%3B%24%7E-%3Efdopen(%24c,w)%3Bsystem%24_%20while%3C%3E%3B'%20OR%20%22Command%22%20ILIKE%20'%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263'%20OR%20%22Command%22%20ILIKE%20'uname%20-a%3B%20w%3B%20id%3B%20%2Fbin%2Fbash%20-i'%20OR%20%22Command%22%20ILIKE%20'%24sendbyte%20%3D%20(%5Btext.encoding%5D%3A%3AASCII).GetBytes(%24sendback2)%3B%20%24stream.Write(%24sendbyte,0,%24sendbyte.Length)%3B%20%24stream.Flush()%7D%3B'%20OR%20%22Command%22%20ILIKE%20'%3Bos.dup2(s.fileno(),0)%3Bos.dup2(s.fileno(),1)%3Bos.dup2(s.fileno(),2)%3Bos.putenv(''HISTFILE'',''%2Fdev%2Fnull'')%3B'%20OR%20%22Command%22%20ILIKE%20'.to_i%3Bexec%20sprintf(_%2Fbin%2Fsh%20-i%20%3C%26%25d%20%3E%26%25d%202%3E%26%25d_,f,f,f)'%20OR%20%22Command%22%20ILIKE%20'%3Bwhile(cmd%3Dc.gets)%3BIO.popen(cmd,_r_)%7B%7Cio%7Cc.print'%20OR%20%22Command%22%20ILIKE%20'socat%20exec%3A''bash%20-li'',pty,stderr,setsid,sigint,sane%20tcp%3A'%20OR%20%22Command%22%20ILIKE%20'rm%20-f%20%2Ftmp%2Fp%3B%20mknod%20%2Ftmp%2Fp%20p%20%26%26'%20OR%20%22Command%22%20ILIKE%20'%20%7C%20%2Fbin%2Fbash%20%7C%20telnet%20'%20OR%20%22Command%22%20ILIKE%20',echo%3D0,raw%20tcp-listen%3A'%20OR%20%22Command%22%20ILIKE%20'nc%20-lvvp%20'%20OR%20%22Command%22%20ILIKE%20'xterm%20-display%201')|%5B%22(%5C%22Command%5C%22%20ILIKE%20'BEGIN%20%7Bs%20%3D%20_%2Finet%2Ftcp%2F0%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'bash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'bash%20-i%20%3E%26%20%2Fdev%2Fudp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'sh%20-i%20%3E%24%20%2Fdev%2Fudp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'sh%20-i%20%3E%24%20%2Fdev%2Ftcp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%26%26%20while%20read%20line%200%3C%265%3B%20do'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%2Fbin%2Fbash%20-c%20exec%205%3C%3E%2Fdev%2Ftcp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%2Fbin%2Fbash%20-c%20exec%205%3C%3E%2Fdev%2Fudp%2F'%20OR%20%5C%22Command%5C%22%20ILIKE%20'nc%20-e%20%2Fbin%2Fsh%20'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%2Fbin%2Fsh%20%7C%20nc'%20OR%20%5C%22Command%5C%22%20ILIKE%20'rm%20-f%20backpipe%3B%20mknod%20%2Ftmp%2Fbackpipe%20p%20%26%26%20nc%20'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%3Bsocket(S,PF_INET,SOCK_STREAM,getprotobyname(_tcp_))%3Bif(connect(S,sockaddr_in(%24p,inet_aton(%24i))))'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%3BSTDIN-%3Efdopen(%24c,r)%3B%24%7E-%3Efdopen(%24c,w)%3Bsystem%24_%20while%3C%3E%3B'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%2Fbin%2Fsh%20-i%20%3C%263%20%3E%263%202%3E%263'%20OR%20%5C%22Command%5C%22%20ILIKE%20'uname%20-a%3B%20w%3B%20id%3B%20%2Fbin%2Fbash%20-i'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%24sendbyte%20%3D%20(%5Btext.encoding%5D%3A%3AASCII).GetBytes(%24sendback2)%3B%20%24stream.Write(%24sendbyte,0,%24sendbyte.Length)%3B%20%24stream.Flush()%7D%3B'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%3Bos.dup2(s.fileno(),0)%3Bos.dup2(s.fileno(),1)%3Bos.dup2(s.fileno(),2)%3Bos.putenv(''HISTFILE'',''%2Fdev%2Fnull'')%3B'%20OR%20%5C%22Command%5C%22%20ILIKE%20'.to_i%3Bexec%20sprintf(_%2Fbin%2Fsh%20-i%20%3C%26%25d%20%3E%26%25d%202%3E%26%25d_,f,f,f)'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%3Bwhile(cmd%3Dc.gets)%3BIO.popen(cmd,_r_)%7B%7Cio%7Cc.print'%20OR%20%5C%22Command%5C%22%20ILIKE%20'socat%20exec%3A''bash%20-li'',pty,stderr,setsid,sigint,sane%20tcp%3A'%20OR%20%5C%22Command%5C%22%20ILIKE%20'rm%20-f%20%2Ftmp%2Fp%3B%20mknod%20%2Ftmp%2Fp%20p%20%26%26'%20OR%20%5C%22Command%5C%22%20ILIKE%20'%20%7C%20%2Fbin%2Fbash%20%7C%20telnet%20'%20OR%20%5C%22Command%5C%22%20ILIKE%20',echo%3D0,raw%20tcp-listen%3A'%20OR%20%5C%22Command%5C%22%20ILIKE%20'nc%20-lvvp%20'%20OR%20%5C%22Command%5C%22%20ILIKE%20'xterm%20-display%201')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Execution": [
+      {
+        "TEC": "Command and Scripting Interpreter",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "T1059",
+        "MAP_S": [
+          {
+            "name": "Execution - Command and Scripting Interpreter",
+            "values": [
+              {
+                "id": "144952",
+                "bb": "BB:BehaviorDefinition: Suspicious Reverse Shell Command Line",
+                "uuid": "1e5865ca-4315-4f2c-a045-3d3c0c3a64c0",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:37.537956",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

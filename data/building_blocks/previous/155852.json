@@ -1,0 +1,44 @@
+{
+  "rule_doc_id": "155852",
+  "rule_id": "155852",
+  "uuid": "394d38b7-9043-454a-a50a-12358b91838e",
+  "rule_name": "BB:DeviceDefinition: Endpoint Devices",
+  "object_type": "building_block",
+  "group": "Log Source Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2020-02-27T14:20:04.813Z",
+  "modified": "2024-07-21T12:38:13.662Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log, Linux OS, Mac OS X</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12, 11, 102"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.761150",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

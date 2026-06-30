@@ -1,0 +1,63 @@
+{
+  "rule_doc_id": "132052",
+  "rule_id": "132052",
+  "uuid": "aabc4092-69c9-4834-bd11-007a9c764c00",
+  "rule_name": "BB:CategoryDefinition: Communication with Potential Hostile Destination IPs",
+  "object_type": "building_block",
+  "group": "Category Definitions",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2019-03-15T13:34:38.986Z",
+  "modified": "2024-07-21T09:43:21.447Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AttackContext_Test",
+            "uid": "1",
+            "id": "25"
+          },
+          "text": [
+            "when the event context is <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Local to Remote, Remote to Local, Remote to Remote</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "l2r, r2l, r2r"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>XFORCE_IP_CATEGORY(destinationip) in ('Malware', 'Botnet Command and Control Server', 'Spam', 'Cryptocurrency Mining', 'Scanning IPs', 'Bots', 'Phishing')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "XFORCE_IP_CATEGORY(destinationip)%20in%20('Malware',%20'Botnet%20Command%20and%20Control%20Server',%20'Spam',%20'Cryptocurrency%20Mining',%20'Scanning%20IPs',%20'Bots',%20'Phishing')|%5B%22XFORCE_IP_CATEGORY(destinationip)%20in%20('Malware',%20'Botnet%20Command%20and%20Control%20Server',%20'Spam',%20'Cryptocurrency%20Mining',%20'Scanning%20IPs',%20'Bots',%20'Phishing')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:37.315565",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

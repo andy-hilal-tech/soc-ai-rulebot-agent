@@ -1,0 +1,94 @@
+{
+  "rule_doc_id": "122352",
+  "rule_id": "122352",
+  "uuid": "6aabcdaf-82a6-4672-93db-aab42906177c",
+  "rule_name": "Potential Continued Risky Web Server Activity",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2021-10-29T18:43:42.148Z",
+  "modified": "2024-06-27T13:19:25.693Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "SequenceFunction_Test",
+            "uid": "0",
+            "id": "52"
+          },
+          "text": [
+            "when this sequence of <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:Threats: Unsafe HTTP Methods, Potential Website Content Update</a>, involving the same source and destination hosts in <a href='javascript:editParameter(\"0\", \"8\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"0\", \"9\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "0"
+            },
+            {
+              "id": "2",
+              "method": "getEventRules",
+              "value": "0a2108ff-8cfd-476a-a545-9da524adbc58, b13cc467-5805-41fd-8a9e-7155fd2ac414"
+            },
+            {
+              "id": "3",
+              "value": "In"
+            },
+            {
+              "id": "4",
+              "value": "same"
+            },
+            {
+              "id": "5",
+              "value": "SourceIP"
+            },
+            {
+              "id": "6",
+              "value": "same"
+            },
+            {
+              "id": "7",
+              "value": "DestinationIP"
+            },
+            {
+              "id": "8",
+              "value": "30"
+            },
+            {
+              "id": "9",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "0a2108ff-8cfd-476a-a545-9da524adbc58",
+      "name": "BB:Threats: Unsafe HTTP Methods"
+    },
+    {
+      "uuid": "b13cc467-5805-41fd-8a9e-7155fd2ac414",
+      "name": "Potential Website Content Update"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:34.132774",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}

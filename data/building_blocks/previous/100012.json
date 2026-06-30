@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "100012",
+  "rule_id": "100012",
+  "uuid": "SYSTEM-1357",
+  "rule_name": "BB:HostDefinition: DNS Servers",
+  "object_type": "building_block",
+  "group": "Host Definitions",
+  "rule_category": "Custom Rule",
+  "type": "COMMON",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "",
+  "created": "2005-11-23T20:17:45.083Z",
+  "modified": "2023-10-30T02:20:03.549Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow or an event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:PortDefinition: DNS Ports</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getCommonRules",
+              "value": "SYSTEM-1229"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "DstHost_Test",
+            "uid": "2",
+            "id": "9"
+          },
+          "text": [
+            "when the destination IP is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>127.0.0.2</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "127.0.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": null,
+  "dependencies": [
+    {
+      "uuid": "SYSTEM-1229",
+      "name": "BB:PortDefinition: DNS Ports"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.553470",
+  "last_enriched_utc": "2026-06-23T12:40:55.067269"
+}

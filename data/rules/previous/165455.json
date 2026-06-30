@@ -1,0 +1,142 @@
+{
+  "rule_doc_id": "165455",
+  "rule_id": "165455",
+  "uuid": "06ce16ed-760f-4513-a657-4509e24140d1",
+  "rule_name": "MSSP - OS - MS - 28 - H - Domain Policy was Changed",
+  "object_type": "rule",
+  "group": "MSSP - Rules, OS - MS",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2026-03-07T06:54:48.996Z",
+  "modified": "2026-06-07T12:38:27.668Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Event ID is any of 4739</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "qidEventIdEQany4739"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "2",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Authentication.Policy Change</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "3030"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "functions.MatchCount",
+            "uid": "3",
+            "id": "300"
+          },
+          "text": [
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Username</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getEventRules",
+              "value": " "
+            },
+            {
+              "id": "2",
+              "value": "1"
+            },
+            {
+              "id": "3",
+              "method": "getEventDatabaseFields",
+              "value": "userName"
+            },
+            {
+              "id": "4",
+              "method": "getEventDatabaseFields",
+              "value": " "
+            },
+            {
+              "id": "5",
+              "value": "10"
+            },
+            {
+              "id": "6",
+              "value": "m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "3030",
+            "offenseMapping": "0",
+            "forceOffenseCreation": "false",
+            "qid": "67501933",
+            "contributeOffenseName": "false",
+            "overrideOffenseName": "false",
+            "describeOffense": "false",
+            "relevance": "0",
+            "credibility": "0",
+            "severity": "8",
+            "description": "fas",
+            "name": "MSSP - OS - MS - 28 - H - Domain Policy was Changed"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.386742",
+  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+}

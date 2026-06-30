@@ -1,0 +1,69 @@
+{
+  "rule_doc_id": "162442",
+  "rule_id": "162442",
+  "uuid": "90bb9707-ac19-4655-a4a3-4514a1fb4d57",
+  "rule_name": "Kerberos Manipulation",
+  "object_type": "rule",
+  "group": "",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "USER",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-08-04T13:08:08.313Z",
+  "modified": "2024-08-06T13:01:31.800Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "0",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>devicetype=12 AND (\"Event ID\" IN('675', '4768', '4769', '4771')) AND (Status IN('0x9', '0xA', '0xB', '0xF', '0x10', '0x11', '0x13', '0x14', '0x1A', '0x1F', '0x21', '0x22', '0x23', '0x24', '0x26', '0x27', '0x28', '0x29', '0x2C', '0x2D', '0x2E', '0x2F', '0x31', '0x32', '0x3E', '0x3F', '0x40', '0x41', '0x43', '0x44'))</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%27675%27%2C%20%274768%27%2C%20%274769%27%2C%20%274771%27%29%29%20AND%20%28Status%20IN%28%270x9%27%2C%20%270xA%27%2C%20%270xB%27%2C%20%270xF%27%2C%20%270x10%27%2C%20%270x11%27%2C%20%270x13%27%2C%20%270x14%27%2C%20%270x1A%27%2C%20%270x1F%27%2C%20%270x21%27%2C%20%270x22%27%2C%20%270x23%27%2C%20%270x24%27%2C%20%270x26%27%2C%20%270x27%27%2C%20%270x28%27%2C%20%270x29%27%2C%20%270x2C%27%2C%20%270x2D%27%2C%20%270x2E%27%2C%20%270x2F%27%2C%20%270x31%27%2C%20%270x32%27%2C%20%270x3E%27%2C%20%270x3F%27%2C%20%270x40%27%2C%20%270x41%27%2C%20%270x43%27%2C%20%270x44%27%29%29|%5B%22devicetype%3D12%20AND%20%28%22Event%20ID%22%20IN%28%27675%27%2C%20%274768%27%2C%20%274769%27%2C%20%274771%27%29%29%20AND%20%28Status%20IN%28%270x9%27%2C%20%270xA%27%2C%20%270xB%27%2C%20%270xF%27%2C%20%270x10%27%2C%20%270x11%27%2C%20%270x13%27%2C%20%270x14%27%2C%20%270x1A%27%2C%20%270x1F%27%2C%20%270x21%27%2C%20%270x22%27%2C%20%270x23%27%2C%20%270x24%27%2C%20%270x26%27%2C%20%270x27%27%2C%20%270x28%27%2C%20%270x29%27%2C%20%270x2C%27%2C%20%270x2D%27%2C%20%270x2E%27%2C%20%270x2F%27%2C%20%270x31%27%2C%20%270x32%27%2C%20%270x3E%27%2C%20%270x3F%27%2C%20%270x40%27%2C%20%270x41%27%2C%20%270x43%27%2C%20%270x44%27%29%29%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {},
+      "newevent": [
+        {
+          "_$": {
+            "lowLevelCategory": "7006",
+            "offenseMapping": "2",
+            "forceOffenseCreation": "true",
+            "qid": "67500133",
+            "contributeOffenseName": "true",
+            "overrideOffenseName": "false",
+            "describeOffense": "true",
+            "relevance": "7",
+            "credibility": "7",
+            "severity": "7",
+            "description": "Converted from SIGMA Rule.  Original Author: Florian Roth (Nextron Systems) SIGMA Title: Kerberos Manipulation SIGMA Description: Detects failed Kerberos TGT issue operation. This can be a sign of manipulations of TGT messages by an attacker.  False positives: - Faulty legacy applications  This rule may be covered under the Detection Rule License: https://ibm.biz/SigmaDetectionRuleLicense",
+            "name": "Kerberos Manipulation"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.042424",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

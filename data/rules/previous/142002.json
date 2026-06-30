@@ -1,0 +1,114 @@
+{
+  "rule_doc_id": "142002",
+  "rule_id": "142002",
+  "uuid": "bfce7e64-7ae2-4b6a-9880-9ab7f34a7a7e",
+  "rule_name": "Dump Credentials from Windows Credential Manager With PowerShell",
+  "object_type": "rule",
+  "group": "Turla, Endpoint",
+  "rule_category": "Custom Rule",
+  "type": "EVENT",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-12-13T14:55:47.593Z",
+  "modified": "2024-07-21T12:38:32.557Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "DeviceTypeID_Test",
+            "uid": "0",
+            "id": "14"
+          },
+          "text": [
+            "when the event(s) were detected by one or more of <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>Microsoft Windows Security Event Log</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getDeviceTypeDescs",
+              "value": "12"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "EventCategory_Test",
+            "uid": "1",
+            "id": "21"
+          },
+          "text": [
+            "when the event category for the event is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Audit.Command Execution Success, Exploit.Command Execution</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "method": "getCategories",
+              "value": "19250, 5034"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "AQL_Test",
+            "uid": "2",
+            "id": "320"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>(LOWER(&quot;Command&quot;) LIKE '%get-passwordvaultcredentials%' OR LOWER(&quot;Command&quot;) LIKE '%get-credmancreds%') OR (LOWER(&quot;Command&quot;) LIKE '%new-object%' AND LOWER(&quot;Command&quot;) LIKE '%windows.security.credentials.passwordvault%') OR (LOWER(&quot;Command&quot;) LIKE '%new-object%' AND LOWER(&quot;Command&quot;) LIKE '%microsoft.csharp.csharpcodeprovider%' AND LOWER(&quot;Command&quot;) LIKE '%runtime.interopservices.runtimeenvironment]::getruntimedirectory(%' AND LOWER(&quot;Command&quot;) LIKE '%collections.arraylist%' AND LOWER(&quot;Command&quot;) LIKE '%codedom.compiler.compilerparameters%')</a> AQL filter query"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "(LOWER(%22Command%22)%20LIKE%20'%25get-passwordvaultcredentials%25'%20OR%20LOWER(%22Command%22)%20LIKE%20'%25get-credmancreds%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25new-object%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25windows.security.credentials.passwordvault%25')%20OR%20(LOWER(%22Command%22)%20LIKE%20'%25new-object%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25microsoft.csharp.csharpcodeprovider%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25runtime.interopservices.runtimeenvironment%5D%3A%3Agetruntimedirectory(%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25collections.arraylist%25'%20AND%20LOWER(%22Command%22)%20LIKE%20'%25codedom.compiler.compilerparameters%25')|%5B%22(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-passwordvaultcredentials%25'%20OR%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25get-credmancreds%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25new-object%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25windows.security.credentials.passwordvault%25')%20OR%20(LOWER(%5C%22Command%5C%22)%20LIKE%20'%25new-object%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25microsoft.csharp.csharpcodeprovider%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25runtime.interopservices.runtimeenvironment%5D%3A%3Agetruntimedirectory(%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25collections.arraylist%25'%20AND%20LOWER(%5C%22Command%5C%22)%20LIKE%20'%25codedom.compiler.compilerparameters%25')%22%5D"
+            },
+            {
+              "id": "2",
+              "value": "events"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": {
+    "Credential Access": [
+      {
+        "TEC": "Credentials from Password Stores",
+        "STEC": "T1555.004",
+        "TAC": "Credential Access",
+        "MAP_C": "medium",
+        "MAP_EN": true,
+        "TEC_ID": "T1555",
+        "MAP_S": [
+          {
+            "name": "Credential Access - T1555.004",
+            "values": [
+              {
+                "id": "142002",
+                "bb": "Dump Credentials from Windows Credential Manager With PowerShell",
+                "uuid": "bfce7e64-7ae2-4b6a-9880-9ab7f34a7a7e",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "last_parsed_utc": "2026-06-23T11:24:34.901670",
+  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+}

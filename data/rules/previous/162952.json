@@ -1,0 +1,56 @@
+{
+  "rule_doc_id": "162952",
+  "rule_id": "162952",
+  "uuid": "0058d2f9-c030-49af-86f4-93684dedb4cb",
+  "rule_name": "QNI : Access to Improperly Secured Service - Deprecated TLS Version in Use",
+  "object_type": "rule",
+  "group": "QRadar Network Insights (QNI)",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "SYSTEM",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2022-03-30T03:56:29.219Z",
+  "modified": "2024-08-08T12:19:52.234Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "3",
+            "id": "223"
+          },
+          "text": [
+            "when the flow matches <a href='javascript:editParameter(\"3\", \"1\")' class='dynamic'>Protocol Name is not N/A, Protocol Name is any of TLS, Protocol Version is not N/A, Protocol Version is any of [1.0 or 1.1]</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "131230NENA$_NULL_$131230EQanyTLS131231NENA$_NULL_$131231EQany1.0�1.1"
+            },
+            {
+              "id": "2",
+              "value": "flows"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.121539",
+  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+}

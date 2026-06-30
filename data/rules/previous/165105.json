@@ -1,0 +1,66 @@
+{
+  "rule_doc_id": "165105",
+  "rule_id": "165105",
+  "uuid": "502ef4ad-d039-4f7d-9c58-905000c51711",
+  "rule_name": "Communication with a Potential Hostile IP Address (Flows)",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Custom Rule",
+  "type": "FLOW",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2025-05-06T09:19:09.800Z",
+  "modified": "2026-05-05T05:53:13.823Z",
+  "logic": [
+    {
+      "test": [
+        {
+          "_$": {
+            "name": "RuleMatch_Test",
+            "uid": "0",
+            "id": "46"
+          },
+          "text": [
+            "when a flow matches <a href='javascript:editParameter(\"0\", \"1\")' class='dynamic'>any</a> of the following <a href='javascript:editParameter(\"0\", \"2\")' class='dynamic'>BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Flows Reference Sets), BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Flows X-Force Categorization)</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "any"
+            },
+            {
+              "id": "2",
+              "method": "getFlowRules",
+              "value": "a730ad55-e0e0-4ded-a479-02a0c6afe25e, 16acd79e-a26e-434e-b477-d524322118c1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "_$": {
+        "flowAnalysisInterval": "0",
+        "includeAttackerEventsInterval": "0",
+        "forceOffenseCreation": "true",
+        "offenseMapping": "0"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "a730ad55-e0e0-4ded-a479-02a0c6afe25e",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Flows Reference Sets)"
+    },
+    {
+      "uuid": "16acd79e-a26e-434e-b477-d524322118c1",
+      "name": "BB:BehaviorDefinition: Communication with a Potential Hostile IP Address (Flows X-Force Categorization)"
+    }
+  ],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-23T11:24:36.280107",
+  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+}
