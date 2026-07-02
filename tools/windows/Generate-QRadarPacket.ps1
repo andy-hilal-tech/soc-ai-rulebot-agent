@@ -1,4 +1,4 @@
-# Generate-QRadarPacket.ps1
+﻿# Generate-QRadarPacket.ps1
 # Clean Rulebot offense template generator
 # Purpose:
 #   - Pull offense details from QRadar
@@ -48,6 +48,126 @@ $Instances = @{
 # ----------------------------
 # Helpers
 # ----------------------------
+function Convert-MsEpochToUtcDateTime {
+    param($Ms)
+
+    if ([string]::IsNullOrWhiteSpace("$Ms")) {
+        return $null
+    }
+
+    try {
+        return :FromUnixTimeMilliseconds([int64]$Ms).UtcDateTime
+    }
+    catch {
+        return $null
+    }
+}
+
+
+function Format-AqlUtcDateTime {
+    param([datetime]$DateTime)
+
+    # QRadar AQL START/STOP generally expects a readable timestamp string.
+    return $DateTime.ToString("yyyy-MM-dd HH:mm:ss")
+}
+
+
+function Get-OffenseAqlTimeScope {
+    param(
+        $Offense,
+        [int]$BeforeMinutes = 30,
+        [int]$AfterMinutes = 90
+    )
+
+    $startMs = $Offense.start_time
+
+    if ([string]::IsNullOrWhiteSpace("$startMs")) {
+        return $null
+    }
+
+    $offenseStartUtc = Convert-MsEpochToUtcDateTime $startMs
+
+    if ($null -eq $offenseStartUtc) {
+        return $null
+    }
+
+    $windowStart = $offenseStartUtc.AddMinutes(-1 * $BeforeMinutes)
+    $windowEnd   = $offenseStartUtc.AddMinutes($AfterMinutes)
+
+    $startText = Format-AqlUtcDateTime $windowStart
+    $endText   = Format-AqlUtcDateTime $windowEnd
+
+    return @{
+        Scope = "START '$startText' STOP '$endText'"
+        Label = "$startText UTC to $endText UTC"
+    }
+}
+
+
+function Get-FirstArielEvent {
+    param($Result)
+
+    if ($null -eq $Result) {
+        return $null
+    }
+
+    if ($Result.events -and $Result.events.Count -gt 0) {
+        return $Result.events[0]
+    }
+
+    if ($Result.rows -and $Result.rows.Count -gt 0) {
+        return $Result.rows[0]
+    }
+
+    return $null
+}
+
+
+function Invoke-ArielAql {
+    param(
+        [string]$BaseUrl,
+        [string]$Token,
+        [string]$Aql,
+        [int]$MaxWaitSeconds = 30
+    )
+
+    Write-Host "AQL:" -ForegroundColor DarkYellow
+    Write-Host $Aql
+
+    $search = Invoke-Qradar `
+        -BaseUrl $BaseUrl `
+        -Token $Token `
+        -Method "POST" `
+        -Path ("/api/ariel/searches?query_expression=" + [uri]::EscapeDataString($Aql))
+
+    $searchId = Get-QradarSearchId -SearchResponse $search
+
+    if ([string]::IsNullOrWhiteSpace($searchId)) {
+        Write-Host "WARNING: Ariel search_id was empty." -ForegroundColor Red
+        return $null
+    }
+
+    $ready = Wait-QradarSearch `
+        -BaseUrl $BaseUrl `
+        -Token $Token `
+        -SearchId $searchId `
+        -MaxWaitSeconds $MaxWaitSeconds
+
+    if (-not $ready) {
+        Write-Host "WARNING: Ariel search did not complete successfully." -ForegroundColor Red
+        return $null
+    }
+
+    $result = Invoke-Qradar `
+        -BaseUrl $BaseUrl `
+        -Token $Token `
+        -Method "GET" `
+        -Path "/api/ariel/searches/$searchId/results"
+
+    return $result
+}
+
+
 function Wait-QradarSearch {
     param(
         [string]$BaseUrl,
@@ -388,7 +508,11 @@ $sampleEvent = $null
 $freq = "unknown"
 
 $COUNT_HOURS_BACK = 4
-$SAMPLE_HOURS_BACK = 24
+$FALLBACK_SAMPLE_HOURS_BACK = 24
+
+# Primary sample/count window around the offense start time
+$OFFENSE_WINDOW_BEFORE_MINUTES = 30
+$OFFENSE_WINDOW_AFTER_MINUTES  = 90
 
 
 $logSourceIds = @()
@@ -402,137 +526,118 @@ if ($logSourceIds.Count -gt 0) {
     $logSourceFilter = " AND logsourceid IN ($idList)"
 }
 
+$sampleSelectFields = "starttime, qid, username, sourceip, sourceport, destinationip, destinationport, logsourceid, category"
+
 if (-not [string]::IsNullOrWhiteSpace($qidOpt)) {
-    $aqlCount  = "SELECT COUNT(*) AS cnt FROM events WHERE qid = $qidOpt $logSourceFilter LAST $COUNT_HOURS_BACK HOURS"
-    $aqlSample = "SELECT starttime, qid, username, sourceip, sourceport, destinationip, destinationport, logsourceid, category FROM events WHERE qid = $qidOpt $logSourceFilter LAST $SAMPLE_HOURS_BACK HOURS"}
+    $whereFilter = "qid = $qidOpt $logSourceFilter"
+}
 else {
-    $aqlCount  = "SELECT COUNT(*) AS cnt FROM events WHERE 1=1 $logSourceFilter LAST $COUNT_HOURS_BACK HOURS"
-    $aqlSample = "SELECT starttime, qid, username, sourceip, sourceport, destinationip, destinationport, logsourceid, category FROM events WHERE 1=1 $logSourceFilter LAST $SAMPLE_HOURS_BACK HOURS"}
+    $whereFilter = "1=1 $logSourceFilter"
+}
+
+$offenseTimeScope = Get-OffenseAqlTimeScope `
+    -Offense $offense `
+    -BeforeMinutes $OFFENSE_WINDOW_BEFORE_MINUTES `
+    -AfterMinutes $OFFENSE_WINDOW_AFTER_MINUTES
+
+if ($offenseTimeScope) {
+    $primaryTimeScope = $offenseTimeScope.Scope
+    $primaryTimeLabel = $offenseTimeScope.Label
+}
+else {
+    $primaryTimeScope = "LAST $FALLBACK_SAMPLE_HOURS_BACK HOURS"
+    $primaryTimeLabel = "LAST $FALLBACK_SAMPLE_HOURS_BACK HOURS"
+}
+
+$aqlCountPrimary = "SELECT COUNT(*) AS cnt FROM events WHERE $whereFilter $primaryTimeScope"
+$aqlSamplePrimary = "SELECT $sampleSelectFields FROM events WHERE $whereFilter $primaryTimeScope"
+
+$aqlCountFallback = "SELECT COUNT(*) AS cnt FROM events WHERE $whereFilter LAST $COUNT_HOURS_BACK HOURS"
+$aqlSampleFallback = "SELECT $sampleSelectFields FROM events WHERE $whereFilter LAST $FALLBACK_SAMPLE_HOURS_BACK HOURS"
 
 try {
-    Write-Host ""
-    #Write-Host "DEBUG: Count AQL:" -ForegroundColor Yellow
-    #Write-Host $aqlCount
-    Write-Host ""
-    #Write-Host "DEBUG: Sample AQL:" -ForegroundColor Yellow
-    #Write-Host $aqlSample
-    Write-Host ""
-
     # ----------------------------
     # COUNT SEARCH
     # ----------------------------
-    $search1 = Invoke-Qradar `
+
+    Write-Host ""
+    Write-Host "Running primary count query around offense time..." -ForegroundColor Yellow
+
+    $result1 = Invoke-ArielAql `
         -BaseUrl $inst.BaseUrl `
         -Token $inst.Token `
-        -Method "POST" `
-        -Path ("/api/ariel/searches?query_expression=" + [uri]::EscapeDataString($aqlCount))
+        -Aql $aqlCountPrimary `
+        -MaxWaitSeconds 30
 
-    #Write-Host "DEBUG: Count search response:" -ForegroundColor Yellow
-    #$search1 | ConvertTo-Json -Depth 20
-    Write-Host ""
-
-    $search1Id = Get-QradarSearchId -SearchResponse $search1
-
-    if (-not [string]::IsNullOrWhiteSpace($search1Id)) {
-        $countReady = Wait-QradarSearch `
-            -BaseUrl $inst.BaseUrl `
-            -Token $inst.Token `
-            -SearchId $search1Id `
-            -MaxWaitSeconds 30
-
-        if ($countReady) {
-            $result1 = Invoke-Qradar `
-                -BaseUrl $inst.BaseUrl `
-                -Token $inst.Token `
-                -Method "GET" `
-                -Path "/api/ariel/searches/$search1Id/results"
-
-            #Write-Host "DEBUG: Count result raw:" -ForegroundColor Yellow
-            #$result1 | ConvertTo-Json -Depth 20
-            Write-Host ""
-
-            if ($result1.rows -and $result1.rows.Count -gt 0 -and $result1.rows[0].cnt) {
-                $freq = "$($result1.rows[0].cnt)"
-            }
-            elseif ($result1.events -and $result1.events.Count -gt 0 -and $result1.events[0].cnt) {
-                $freq = "$($result1.events[0].cnt)"
-            }
-        }
-        else {
-            Write-Host "WARNING: Ariel count search did not complete successfully." -ForegroundColor Red
-        }
+    if ($result1 -and $result1.events -and $result1.events.Count -gt 0 -and $result1.events[0].cnt) {
+        $freq = "$($result1.events[0].cnt)"
+        $freqWindowLabel = $primaryTimeLabel
+    }
+    elseif ($result1 -and $result1.rows -and $result1.rows.Count -gt 0 -and $result1.rows[0].cnt) {
+        $freq = "$($result1.rows[0].cnt)"
+        $freqWindowLabel = $primaryTimeLabel
     }
     else {
-        Write-Host "WARNING: Count search_id was empty." -ForegroundColor Red
+        Write-Host "Primary count query returned no count. Trying fallback count window..." -ForegroundColor Yellow
+
+        $result1Fallback = Invoke-ArielAql `
+            -BaseUrl $inst.BaseUrl `
+            -Token $inst.Token `
+            -Aql $aqlCountFallback `
+            -MaxWaitSeconds 30
+
+        if ($result1Fallback -and $result1Fallback.events -and $result1Fallback.events.Count -gt 0 -and $result1Fallback.events[0].cnt) {
+            $freq = "$($result1Fallback.events[0].cnt)"
+            $freqWindowLabel = "LAST $COUNT_HOURS_BACK HOURS"
+        }
+        elseif ($result1Fallback -and $result1Fallback.rows -and $result1Fallback.rows.Count -gt 0 -and $result1Fallback.rows[0].cnt) {
+            $freq = "$($result1Fallback.rows[0].cnt)"
+            $freqWindowLabel = "LAST $COUNT_HOURS_BACK HOURS"
+        }
     }
 
     # ----------------------------
     # SAMPLE SEARCH
     # ----------------------------
-    $search2 = Invoke-Qradar `
+
+    Write-Host ""
+    Write-Host "Running primary sample query around offense time..." -ForegroundColor Yellow
+
+    $result2 = Invoke-ArielAql `
         -BaseUrl $inst.BaseUrl `
         -Token $inst.Token `
-        -Method "POST" `
-        -Path ("/api/ariel/searches?query_expression=" + [uri]::EscapeDataString($aqlSample))
+        -Aql $aqlSamplePrimary `
+        -MaxWaitSeconds 30
 
-    #Write-Host "DEBUG: Sample search response:" -ForegroundColor Yellow
-    #$search2 | ConvertTo-Json -Depth 20
-    Write-Host ""
+    $sampleEvent = Get-FirstArielEvent -Result $result2
+    $sampleWindowLabel = $primaryTimeLabel
 
-    $search2Id = Get-QradarSearchId -SearchResponse $search2
+    if (-not $sampleEvent) {
+        Write-Host "Primary sample query returned no event. Trying fallback sample window..." -ForegroundColor Yellow
 
-    if (-not [string]::IsNullOrWhiteSpace($search2Id)) {
-        $sampleReady = Wait-QradarSearch `
+        $result2Fallback = Invoke-ArielAql `
             -BaseUrl $inst.BaseUrl `
             -Token $inst.Token `
-            -SearchId $search2Id `
+            -Aql $aqlSampleFallback `
             -MaxWaitSeconds 30
 
-        if ($sampleReady) {
-            $result2 = Invoke-Qradar `
-                -BaseUrl $inst.BaseUrl `
-                -Token $inst.Token `
-                -Method "GET" `
-                -Path "/api/ariel/searches/$search2Id/results"
+        $sampleEvent = Get-FirstArielEvent -Result $result2Fallback
+        $sampleWindowLabel = "LAST $FALLBACK_SAMPLE_HOURS_BACK HOURS"
+    }
 
-            Write-Host ""
-            #Write-Host "DEBUG: Ariel sample result raw:" -ForegroundColor Yellow
-            #$result2 | ConvertTo-Json -Depth 20
-            Write-Host ""
-
-            if ($result2.events -and $result2.events.Count -gt 0) {
-                $sampleEvent = $result2.events[0]
-            }
-            elseif ($result2.rows -and $result2.rows.Count -gt 0) {
-                $sampleEvent = $result2.rows[0]
-            }
-
-            if ($sampleEvent) {
-                Write-Host ""
-                #Write-Host "DEBUG: Sample event fields returned:" -ForegroundColor Yellow
-                #$sampleEvent.PSObject.Properties.Name | ForEach-Object { Write-Host " - $_" }
-                Write-Host ""
-
-                #Write-Host "DEBUG: Sample event JSON:" -ForegroundColor Yellow
-                #$sampleEvent | ConvertTo-Json -Depth 20
-                Write-Host ""
-            }
-            else {
-                Write-Host "DEBUG: No sample event was returned from Ariel." -ForegroundColor Red
-            }
-        }
-        else {
-            Write-Host "WARNING: Ariel sample search did not complete successfully." -ForegroundColor Red
-        }
+    if ($sampleEvent) {
+        Write-Host "Ariel sample event found. Populating offense fields..." -ForegroundColor Green
     }
     else {
-        Write-Host "WARNING: Sample search_id was empty." -ForegroundColor Red
+        Write-Host "WARNING: No Ariel sample event found." -ForegroundColor Red
     }
 }
 catch {
     Write-Host "WARNING: Ariel failed - check permissions / query syntax / endpoint behavior." -ForegroundColor Red
     Write-Host $_.Exception.Message -ForegroundColor Red
     $freq = "unknown"
+    $freqWindowLabel = "unknown"
+    $sampleWindowLabel = "unknown"
 }
 
 # 4) Derive current Rulebot offense template fields
@@ -576,7 +681,9 @@ $payloadSummaryParts += "Relevance=$($offense.relevance)"
 $payloadSummaryParts += "Credibility=$($offense.credibility)"
 $payloadSummaryParts += "EventCount=$($offense.event_count)"
 $payloadSummaryParts += "LogSourceCount=$($offense.log_sources.Count)"
-$payloadSummaryParts += "FrequencyLast1h=$freq"
+$payloadSummaryParts += "Frequency=$freq"
+$payloadSummaryParts += "FrequencyWindow=$freqWindowLabel"
+$payloadSummaryParts += "SampleWindow=$sampleWindowLabel"
 
 if ($sampleEvent) {
     $payloadSummaryParts += "SampleEvent=" + (Truncate-Json -Object $sampleEvent -MaxLen 600)
