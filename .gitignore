@@ -7,6 +7,7 @@ __pycache__/
 data/rules/archive/
 data/building_blocks/archive/
 data/logs/
+tools/windows/output/
 
 # Optional: if previous snapshots should stay local only in production
 # data/rules/previous/
