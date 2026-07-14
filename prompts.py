@@ -205,6 +205,10 @@ Rules:
   - "medium"
   - "high"
 - Do not wrap the JSON in markdown fences.
+- In "reasoning", explicitly mention dominant vs minority evidence when distributions are provided.
+- If top_qids or combined_distribution are present, identify the dominant QID by event_count.
+- If representative_events differ from the dominant distribution, state that representative_events are examples and not the primary basis for tuning.
+- If evidence_mode is INOFFENSE_ONLY, state that the analysis is based on offense-linked evidence.
 """.strip()
 
 
@@ -241,6 +245,19 @@ Operating principles:
 - If the information is insufficient, clearly identify missing data.
 - Do not fabricate QRadar-specific facts.
 
+OFFENSE_EVIDENCE_INTERPRETATION_RULES = 
+Evidence interpretation rules:
+- If evidence_mode is INOFFENSE_ONLY, treat the provided evidence as offense-linked QRadar/Ariel evidence.
+- Prioritize evidence_summary, top_qids, top_source_ips, top_destination_ips, top_log_sources, top_categories, qid_logsource_category_distribution, combined_distribution, and representative_events over legacy single-value fields.
+- Treat source_ip, destination_ip, qid, category, username, and log_source_id as legacy compatibility fields derived from dominant offense-linked evidence.
+- Do not base a tuning recommendation primarily on a single representative event.
+- Use representative_events only as concrete examples supporting the distributions.
+- If top_qids or combined_distribution show multiple QIDs, identify which QID is dominant and which QIDs are minority subsets.
+- Do not recommend tuning solely against a minority QID, category, log source, or sample event unless explicitly explaining that it represents a minority subset of the offense.
+- If legacy single-value fields conflict with top_* distributions or combined_distribution, trust the distributions.
+- If evidence_mode is missing, treat confidence as lower and state that offense-linked evidence mode was not confirmed.
+- If INOFFENSE evidence is absent or empty, do not infer tuning from contextual/sample evidence unless clearly labelled and justified.
+
 Your goal is to determine:
 1. Whether the offense appears likely benign / suspicious / unclear
 2. Why it may be firing
@@ -252,7 +269,6 @@ Return your answer in structured JSON with these fields:
 
 - classification
 - reasoning
-
 - likely_false_positive
 - tuning_options
 - compliance_notes
@@ -307,7 +323,10 @@ Please provide the offense/event details using this template:
 
 - offense_id:
 - client_id:
+- evidence_mode:
+- evidence_summary:
 - rule_id:
+- rule_ids:
 - event_name:
 - event_description:
 - source_ip:
@@ -316,11 +335,24 @@ Please provide the offense/event details using this template:
 - destination_port:
 - username:
 - log_source:
+- log_source_id:
 - qid:
 - category:
 - magnitude:
+- severity:
+- relevance:
+- credibility:
 - start_time:
 - event_count:
+- top_source_ips:
+- top_destination_ips:
+- top_qids:
+- top_usernames:
+- top_log_sources:
+- top_categories:
+- qid_logsource_category_distribution:
+- combined_distribution:
+- representative_events:
 - payload_summary:
 - why_false_positive:
 - desired_outcome:
@@ -359,6 +391,8 @@ Please provide the offense/event details using this template:
 
 Minimum required fields for analysis:
 - rule_id
+- evidence_mode
+- evidence_summary or combined_distribution
 - why_false_positive
 - desired_outcome
 """.strip()
@@ -377,6 +411,12 @@ def build_offense_analysis_prompt(
 
     return f"""
 Analyze the following offense and recommend tuning guidance.
+
+Important evidence handling:
+- Prioritize offense-linked distributions such as top_qids, top_source_ips, top_destination_ips, top_log_sources, top_categories, qid_logsource_category_distribution, and combined_distribution.
+- Treat representative_events as examples only.
+- Treat legacy fields such as source_ip, destination_ip, qid, and category as compatibility fields.
+- If evidence_mode is INOFFENSE_ONLY, do not infer tuning from unrelated contextual evidence.
 
 Offense data:
 {json.dumps(offense_data, indent=2)}

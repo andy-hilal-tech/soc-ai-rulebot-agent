@@ -1,19 +1,47 @@
 EXPECTED_OFFENSE_FIELDS = [
+    # Core identifiers
     "offense_id",
+    "client_id",
+    "evidence_mode",
+
+    # Human-readable evidence block / summary fields
+    "evidence_summary",
+
+    # Rule / offense metadata
     "rule_id",
+    "rule_ids",
     "event_name",
     "event_description",
+
+    # Legacy compatibility fields
     "source_ip",
     "source_port",
     "destination_ip",
     "destination_port",
     "username",
     "log_source",
+    "log_source_id",
     "qid",
     "category",
     "magnitude",
+    "severity",
+    "relevance",
+    "credibility",
     "start_time",
     "event_count",
+
+    # New offense-linked evidence fields
+    "top_source_ips",
+    "top_destination_ips",
+    "top_qids",
+    "top_usernames",
+    "top_log_sources",
+    "top_categories",
+    "qid_logsource_category_distribution",
+    "combined_distribution",
+    "representative_events",
+
+    # Compact summary / analyst input
     "payload_summary",
     "why_false_positive",
     "desired_outcome",
@@ -69,16 +97,22 @@ def get_missing_required_fields(offense_data: dict) -> list[str]:
 
 
 def looks_like_offense_template(text: str) -> bool:
-    lowered = text.lower()
+    normalized = normalize_offense_template_text(text).lower()
 
-    # Strong indicators that this is a filled offense template
-    has_rule_id = "- rule_id:" in lowered
-    has_false_positive = "- why_false_positive:" in lowered
-    has_desired_outcome = "- desired_outcome:" in lowered
-    has_analyst_notes = "- analyst_notes:" in lowered
+    has_rule_id = "rule_id:" in normalized
+    has_false_positive = "why_false_positive:" in normalized
+    has_desired_outcome = "desired_outcome:" in normalized
+    has_analyst_notes = "analyst_notes:" in normalized
+    has_offense_id = "offense_id:" in normalized
+    has_evidence_mode = "evidence_mode:" in normalized
 
-    # Treat as offense template if rule_id is present and at least
-    # one of the key analyst context fields is also present
-    return has_rule_id and (
-        has_false_positive or has_desired_outcome or has_analyst_notes
+    return (
+        has_rule_id
+        and (
+            has_false_positive
+            or has_desired_outcome
+            or has_analyst_notes
+            or has_offense_id
+            or has_evidence_mode
+        )
     )
