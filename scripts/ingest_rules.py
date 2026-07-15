@@ -3,6 +3,7 @@ import hashlib
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
+from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
@@ -19,12 +20,12 @@ from config.search_config import (
 CONTENT_ROOTS = [
     {
         "root": Path("data/rules"),
-        "source_type": "rule_json",
-        "doc_prefix": "",
+        "object_type": "rule",
+        "doc_prefix": "rule-",
     },
     {
         "root": Path("data/building_blocks"),
-        "source_type": "building_block_json",
+        "object_type": "building_block",
         "doc_prefix": "bb-",
     },
 ]
@@ -79,7 +80,7 @@ def save_state(state: dict):
     STATE_FILE.write_text(json.dumps(state, indent=2), encoding="utf-8")
 
 
-def first_nonempty(data: dict, *keys, default=""):
+def first_nonempty(data: dict, *keys, default: Any = ""):
     for key in keys:
         value = data.get(key)
 
@@ -89,7 +90,7 @@ def first_nonempty(data: dict, *keys, default=""):
     return default
 
 
-def normalize_rule(rule_json: dict, source_type: str, doc_prefix: str) -> tuple[str, dict]:
+def normalize_rule(rule_json: dict, object_type: str, doc_prefix: str) -> tuple[str, dict]:
     raw_id = str(
         first_nonempty(
             rule_json,
@@ -108,11 +109,11 @@ def normalize_rule(rule_json: dict, source_type: str, doc_prefix: str) -> tuple[
             rule_json,
             "name",
             "rule_name",
-            default=f"{source_type}-{raw_id}",
+            default=f"{object_type}-{raw_id}",
         )
     )
 
-    rule_enabled = bool(
+    enabled = bool(
         first_nonempty(
             rule_json,
             "enabled",
@@ -130,11 +131,13 @@ def normalize_rule(rule_json: dict, source_type: str, doc_prefix: str) -> tuple[
         )
     )
 
-    severity = str(
+    rule_category = str(
         first_nonempty(
             rule_json,
-            "severity",
-            "magnitude",
+            "rule_category",
+            "category",
+            "group",
+            "group_name",
             default="",
         )
     )
@@ -145,12 +148,11 @@ def normalize_rule(rule_json: dict, source_type: str, doc_prefix: str) -> tuple[
         "rule_doc_id": doc_id,
         "rule_id": raw_id,
         "rule_name": rule_name,
-        "source_type": source_type,
-        "content": content,
-        "rule_enabled": rule_enabled,
+        "object_type": object_type,
         "group_name": group_name,
-        "severity": severity,
-        "last_source_export_utc": utc_now(),
+        "rule_category": rule_category,
+        "enabled": enabled,
+        "content": content,
         "last_indexed_utc": utc_now(),
         "version_hash": stable_hash(content),
     }
@@ -163,14 +165,14 @@ def load_documents_from_content_roots() -> dict:
 
     for content_root in CONTENT_ROOTS:
         root = content_root["root"]
-        source_type = content_root["source_type"]
+        object_type = content_root["object_type"]
         doc_prefix = content_root["doc_prefix"]
 
         if not root.exists():
             print(f"Skipping missing content root: {root}")
             continue
 
-        print(f"Scanning {root} as {source_type}")
+        print(f"Scanning {root} as {object_type}")
 
         for file_path in root.rglob("*.json"):
             try:
@@ -181,7 +183,7 @@ def load_documents_from_content_roots() -> dict:
 
             doc_id, record = normalize_rule(
                 rule_json=rule_json,
-                source_type=source_type,
+                object_type=object_type,
                 doc_prefix=doc_prefix,
             )
 
@@ -199,13 +201,17 @@ def main():
     docs_by_doc_id = load_documents_from_content_roots()
 
     for doc_id, record in docs_by_doc_id.items():
-        current_state[doc_id] = record["version_hash"]
+        current_state[doc_id] = stable_hash(record["content"])
 
     to_upsert = []
 
     for doc_id, record in docs_by_doc_id.items():
-        if previous_state.get(doc_id) != record["version_hash"]:
-            to_upsert.append(record)
+        for doc_id, record in docs_by_doc_id.items():
+            record_hash = stable_hash(record["content"])
+            current_state[doc_id] = record_hash
+
+            if previous_state.get(doc_id) != record_hash:
+                to_upsert.append(record)
 
     removed_doc_ids = sorted(set(previous_state.keys()) - set(current_state.keys()))
 
@@ -238,12 +244,12 @@ def main():
 
     rules_count = sum(
         1 for doc in docs_by_doc_id.values()
-        if doc.get("source_type") == "rule_json"
+        if doc.get("object_type") == "rule_json"
     )
 
     building_blocks_count = sum(
         1 for doc in docs_by_doc_id.values()
-        if doc.get("source_type") == "building_block_json"
+        if doc.get("object_type") == "building_block_json"
     )
 
     print("")
