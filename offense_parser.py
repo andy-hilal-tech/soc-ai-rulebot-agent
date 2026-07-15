@@ -1,19 +1,17 @@
+import json
+
+
 EXPECTED_OFFENSE_FIELDS = [
-    # Core identifiers
     "offense_id",
     "client_id",
     "evidence_mode",
-
-    # Human-readable evidence block / summary fields
     "evidence_summary",
 
-    # Rule / offense metadata
     "rule_id",
     "rule_ids",
     "event_name",
     "event_description",
 
-    # Legacy compatibility fields
     "source_ip",
     "source_port",
     "destination_ip",
@@ -23,6 +21,7 @@ EXPECTED_OFFENSE_FIELDS = [
     "log_source_id",
     "qid",
     "category",
+
     "magnitude",
     "severity",
     "relevance",
@@ -30,7 +29,6 @@ EXPECTED_OFFENSE_FIELDS = [
     "start_time",
     "event_count",
 
-    # New offense-linked evidence fields
     "top_source_ips",
     "top_destination_ips",
     "top_qids",
@@ -41,12 +39,26 @@ EXPECTED_OFFENSE_FIELDS = [
     "combined_distribution",
     "representative_events",
 
-    # Compact summary / analyst input
     "payload_summary",
     "why_false_positive",
     "desired_outcome",
     "analyst_notes",
 ]
+
+
+JSON_OFFENSE_FIELDS = {
+    "rule_ids",
+    "top_source_ips",
+    "top_destination_ips",
+    "top_qids",
+    "top_usernames",
+    "top_log_sources",
+    "top_categories",
+    "qid_logsource_category_distribution",
+    "combined_distribution",
+    "representative_events",
+}
+
 
 REQUIRED_OFFENSE_FIELDS = [
     "rule_id",
@@ -54,25 +66,58 @@ REQUIRED_OFFENSE_FIELDS = [
     "desired_outcome",
 ]
 
+
 def normalize_offense_template_text(text: str) -> str:
     lines = []
+
     for line in text.splitlines():
         stripped = line.strip()
+
         if stripped.startswith("- "):
             stripped = stripped[2:].strip()
+
         lines.append(stripped)
+
     return "\n".join(lines)
+
+
+def try_parse_json_value(key: str, value: str):
+    if key not in JSON_OFFENSE_FIELDS:
+        return value
+
+    if not value:
+        return []
+
+    try:
+        return json.loads(value)
+    except json.JSONDecodeError:
+        return value
 
 
 def parse_offense_template(text: str) -> dict:
     text = normalize_offense_template_text(text)
+
     result = {field: "" for field in EXPECTED_OFFENSE_FIELDS}
 
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
+    current_multiline_key = None
+    multiline_values = []
 
-        if not line:
+    for raw_line in text.splitlines():
+        line = raw_line.rstrip()
+
+        if not line.strip():
             continue
+
+        # Handle indented evidence_summary lines as multiline content.
+        if raw_line.startswith(" ") and current_multiline_key:
+            multiline_values.append(line.strip())
+            continue
+
+        # Commit previous multiline field if needed.
+        if current_multiline_key and multiline_values:
+            result[current_multiline_key] = "\n".join(multiline_values)
+            current_multiline_key = None
+            multiline_values = []
 
         if ":" not in line:
             continue
@@ -81,14 +126,25 @@ def parse_offense_template(text: str) -> dict:
         key = key.strip().lower()
         value = value.strip()
 
-        if key in result:
-            result[key] = value
+        if key not in result:
+            continue
+
+        if key == "evidence_summary" and not value:
+            current_multiline_key = key
+            multiline_values = []
+            continue
+
+        result[key] = try_parse_json_value(key, value)
+
+    # Commit trailing multiline field.
+    if current_multiline_key and multiline_values:
+        result[current_multiline_key] = "\n".join(multiline_values)
 
     return result
 
-def get_missing_required_fields(offense_data: dict) -> list[str]:
-    missing = []
 
+def get_missing_required_fields(offense_data: dict) -> list[str]:
+    
     for field in REQUIRED_OFFENSE_FIELDS:
         if not str(offense_data.get(field, "")).strip():
             missing.append(field)

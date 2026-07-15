@@ -398,12 +398,16 @@ Minimum required fields for analysis:
 """.strip()
 
 
-
 def build_offense_analysis_prompt(
     offense_data: dict,
     rule_text: str,
     retrieved_context: list[str] | None = None
 ) -> str:
+    print("Parsed offense fields:", sorted(offense_data.keys()))
+    print("evidence_mode:", offense_data.get("evidence_mode"))
+    print("top_qids:", offense_data.get("top_qids"))
+    print("combined_distribution:", offense_data.get("combined_distribution"))
+
     context_chunks = retrieved_context or []
     context_text = "\n\n".join(f"- {chunk}" for chunk in context_chunks) if context_chunks else "No supporting context retrieved."
 

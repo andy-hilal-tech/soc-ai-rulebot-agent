@@ -1,7 +1,11 @@
 import json
 import hashlib
+import sys
 from pathlib import Path
 from datetime import datetime, timezone
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(PROJECT_ROOT))
 
 from config.search_config import (
     get_search_client,
@@ -11,33 +15,52 @@ from config.search_config import (
     AZURE_OPENAI_EMBED_DEPLOYMENT,
 )
 
-RULES_ROOT = Path("data/rules")
+
+CONTENT_ROOTS = [
+    {
+        "root": Path("data/rules"),
+        "source_type": "rule_json",
+        "doc_prefix": "",
+    },
+    {
+        "root": Path("data/building_blocks"),
+        "source_type": "building_block_json",
+        "doc_prefix": "bb-",
+    },
+]
+
 STATE_DIR = Path("scripts/state")
 STATE_DIR.mkdir(parents=True, exist_ok=True)
+
 STATE_FILE = STATE_DIR / "rules_index_state.json"
 
 
-def utc_now():
+def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
 def batched(items, size):
     batch = []
+
     for item in items:
         batch.append(item)
+
         if len(batch) >= size:
             yield batch
             batch = []
+
     if batch:
         yield batch
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
     client = get_openai_client()
+
     response = client.embeddings.create(
         model=AZURE_OPENAI_EMBED_DEPLOYMENT,
         input=texts,
     )
+
     return [d.embedding for d in response.data]
 
 
@@ -48,6 +71,7 @@ def stable_hash(text: str) -> str:
 def load_state() -> dict:
     if not STATE_FILE.exists():
         return {}
+
     return json.loads(STATE_FILE.read_text(encoding="utf-8"))
 
 
@@ -56,27 +80,72 @@ def save_state(state: dict):
 
 
 def first_nonempty(data: dict, *keys, default=""):
-    for k in keys:
-        value = data.get(k)
+    for key in keys:
+        value = data.get(key)
+
         if value not in (None, "", []):
             return value
+
     return default
 
 
-def normalize_rule(rule_json: dict) -> tuple[str, dict]:
-    rule_id = str(first_nonempty(rule_json, "id", "rule_id", "_id", default="unknown"))
-    rule_name = str(first_nonempty(rule_json, "name", "rule_name", default=f"rule-{rule_id}"))
-    rule_enabled = bool(first_nonempty(rule_json, "enabled", "rule_enabled", default=False))
-    group_name = str(first_nonempty(rule_json, "group", "group_name", default=""))
-    severity = str(first_nonempty(rule_json, "severity", "magnitude", default=""))
+def normalize_rule(rule_json: dict, source_type: str, doc_prefix: str) -> tuple[str, dict]:
+    raw_id = str(
+        first_nonempty(
+            rule_json,
+            "id",
+            "rule_id",
+            "rule_doc_id",
+            "_id",
+            default="unknown",
+        )
+    )
+
+    doc_id = f"{doc_prefix}{raw_id}"
+
+    rule_name = str(
+        first_nonempty(
+            rule_json,
+            "name",
+            "rule_name",
+            default=f"{source_type}-{raw_id}",
+        )
+    )
+
+    rule_enabled = bool(
+        first_nonempty(
+            rule_json,
+            "enabled",
+            "rule_enabled",
+            default=False,
+        )
+    )
+
+    group_name = str(
+        first_nonempty(
+            rule_json,
+            "group",
+            "group_name",
+            default="",
+        )
+    )
+
+    severity = str(
+        first_nonempty(
+            rule_json,
+            "severity",
+            "magnitude",
+            default="",
+        )
+    )
 
     content = json.dumps(rule_json, indent=2, sort_keys=True)
 
     record = {
-        "rule_doc_id": rule_id,
-        "rule_id": rule_id,
+        "rule_doc_id": doc_id,
+        "rule_id": raw_id,
         "rule_name": rule_name,
-        "source_type": "rule_json",
+        "source_type": source_type,
         "content": content,
         "rule_enabled": rule_enabled,
         "group_name": group_name,
@@ -85,51 +154,102 @@ def normalize_rule(rule_json: dict) -> tuple[str, dict]:
         "last_indexed_utc": utc_now(),
         "version_hash": stable_hash(content),
     }
-    return rule_id, record
+
+    return doc_id, record
+
+
+def load_documents_from_content_roots() -> dict:
+    docs_by_doc_id = {}
+
+    for content_root in CONTENT_ROOTS:
+        root = content_root["root"]
+        source_type = content_root["source_type"]
+        doc_prefix = content_root["doc_prefix"]
+
+        if not root.exists():
+            print(f"Skipping missing content root: {root}")
+            continue
+
+        print(f"Scanning {root} as {source_type}")
+
+        for file_path in root.rglob("*.json"):
+            try:
+                rule_json = json.loads(file_path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                print(f"Skipping unreadable JSON file: {file_path} ({exc})")
+                continue
+
+            doc_id, record = normalize_rule(
+                rule_json=rule_json,
+                source_type=source_type,
+                doc_prefix=doc_prefix,
+            )
+
+            docs_by_doc_id[doc_id] = record
+
+    return docs_by_doc_id
 
 
 def main():
     search_client = get_search_client(RULES_INDEX_NAME)
+
     previous_state = load_state()
     current_state = {}
 
-    docs_by_rule = {}
-    for file_path in RULES_ROOT.rglob("*.json"):
-        try:
-            rule_json = json.loads(file_path.read_text(encoding="utf-8"))
-        except Exception:
-            continue
+    docs_by_doc_id = load_documents_from_content_roots()
 
-        rule_id, record = normalize_rule(rule_json)
-        current_state[rule_id] = record["version_hash"]
-        docs_by_rule[rule_id] = record
+    for doc_id, record in docs_by_doc_id.items():
+        current_state[doc_id] = record["version_hash"]
 
     to_upsert = []
-    for rule_id, record in docs_by_rule.items():
-        if previous_state.get(rule_id) != record["version_hash"]:
+
+    for doc_id, record in docs_by_doc_id.items():
+        if previous_state.get(doc_id) != record["version_hash"]:
             to_upsert.append(record)
 
-    removed_rule_ids = sorted(set(previous_state.keys()) - set(current_state.keys()))
+    removed_doc_ids = sorted(set(previous_state.keys()) - set(current_state.keys()))
+
+    print(f"Documents discovered: {len(docs_by_doc_id)}")
+    print(f"Changed/new documents to upsert: {len(to_upsert)}")
+    print(f"Removed documents to delete: {len(removed_doc_ids)}")
 
     if to_upsert:
         for batch in batched(to_upsert, EMBED_BATCH_SIZE):
-            vectors = embed_texts([d["content"] for d in batch])
-            for d, v in zip(batch, vectors):
-                d["content_vector"] = v
-            search_client.merge_or_upload_documents(documents=batch)
-        print(f"Upserted changed/new rules: {len(to_upsert)}")
-    else:
-        print("No changed/new rules to upsert.")
+            vectors = embed_texts([doc["content"] for doc in batch])
 
-    if removed_rule_ids:
-        delete_payload = [{"rule_doc_id": rid} for rid in removed_rule_ids]
-        search_client.delete_documents(documents=delete_payload)
-        print(f"Deleted removed rules: {len(removed_rule_ids)}")
+            for doc, vector in zip(batch, vectors):
+                doc["content_vector"] = vector
+
+            search_client.merge_or_upload_documents(documents=batch)
+
+        print(f"Upserted changed/new documents: {len(to_upsert)}")
     else:
-        print("No removed rules to delete.")
+        print("No changed/new documents to upsert.")
+
+    if removed_doc_ids:
+        delete_payload = [{"rule_doc_id": doc_id} for doc_id in removed_doc_ids]
+        search_client.delete_documents(documents=delete_payload)
+
+        print(f"Deleted removed documents: {len(removed_doc_ids)}")
+    else:
+        print("No removed documents to delete.")
 
     save_state(current_state)
+
+    rules_count = sum(
+        1 for doc in docs_by_doc_id.values()
+        if doc.get("source_type") == "rule_json"
+    )
+
+    building_blocks_count = sum(
+        1 for doc in docs_by_doc_id.values()
+        if doc.get("source_type") == "building_block_json"
+    )
+
+    print("")
     print("Rules ingestion sync complete.")
+    print(f"Indexed rule documents discovered: {rules_count}")
+    print(f"Indexed building block documents discovered: {building_blocks_count}")
 
 
 if __name__ == "__main__":
