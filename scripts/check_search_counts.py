@@ -22,9 +22,10 @@ def main():
     client = get_search_client(RULES_INDEX_NAME)
 
     total = client.get_document_count()
-    rules = count_filter(client, "source_type eq 'rule_json'")
-    building_blocks = count_filter(client, "source_type eq 'building_block_json'")
+    rules = count_filter(client, "object_type eq 'rule'")
+    building_blocks = count_filter(client, "object_type eq 'building_block'")
 
+    print(f"Index name: {RULES_INDEX_NAME}")
     print(f"Total documents: {total}")
     print(f"Rule documents: {rules}")
     print(f"Building block documents: {building_blocks}")
