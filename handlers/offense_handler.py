@@ -16,6 +16,31 @@ from handlers.case_writer import build_case_record, save_case_record
 from handlers.response_formatters import build_offense_reply
 
 
+def get_candidate_rule_ids(offense_data: dict) -> list[str]:
+    candidates: list[str] = []
+
+    def add(value):
+        if value is None:
+            return
+
+        value = str(value).strip()
+
+        if value and value not in candidates:
+            candidates.append(value)
+
+    # Prefer exported/enriched rule documents resolved by PacketGenerator.
+    for binding in offense_data.get("resolved_rule_bindings") or []:
+        if not isinstance(binding, dict):
+            continue
+
+        add(binding.get("exported_rule_doc_id"))
+
+    # Fallback to legacy QRadar offense rule ID.
+    add(offense_data.get("rule_id"))
+
+    return candidates
+
+
 async def handle_offense_intake():
     return {
         "status": "ok",
@@ -41,25 +66,60 @@ async def handle_offense_analysis(text: str):
         }, 400
 
     rule_id = offense_data.get("rule_id", "").strip()
-    rule = get_rule(rule_id)
 
-    if not rule:
-        return {
-            "status": "error",
-            "route": "offense_analysis",
-            "message": f"Rule {rule_id} not found in local rules database"
-        }, 404
+    candidate_rule_ids = get_candidate_rule_ids(offense_data)
 
-    rule_text = json.dumps(rule, indent=2)
+    rule = None
+    resolved_rule_id = None
+
+    for candidate_rule_id in candidate_rule_ids:
+        candidate_rule = get_rule(candidate_rule_id)
+
+        if candidate_rule:
+            rule = candidate_rule
+            resolved_rule_id = candidate_rule_id
+            break
+
+    if rule:
+        rule_text = json.dumps(
+            {
+                "resolved_rule_id": resolved_rule_id,
+                "original_offense_rule_id": rule_id,
+                "rule": rule,
+                "resolved_rule_bindings": offense_data.get("resolved_rule_bindings", []),
+                "qradar_rule_api_metadata": offense_data.get("qradar_rule_api_metadata", []),
+            },
+            indent=2,
+        )
+    else:
+        rule_text = json.dumps(
+            {
+                "warning": "No exported rule definition was found in the local rules database.",
+                "original_offense_rule_id": rule_id,
+                "candidate_rule_ids": candidate_rule_ids,
+                "resolved_rule_bindings": offense_data.get("resolved_rule_bindings", []),
+                "qradar_rule_api_metadata": offense_data.get("qradar_rule_api_metadata", []),
+                "instruction": (
+                    "Treat QRadar rule API metadata as identity/binding metadata only. "
+                    "Do not provide condition-level tuning unless full exported rule logic is available."
+                ),
+            },
+            indent=2,
+        )
 
     retrieval_query = " ".join([
-        f"rule id {rule_id}",
+        f"offense rule id {rule_id}",
+        f"resolved rule id {resolved_rule_id or ''}",
         offense_data.get("event_name", ""),
         offense_data.get("event_description", ""),
         offense_data.get("why_false_positive", ""),
         offense_data.get("desired_outcome", ""),
         offense_data.get("analyst_notes", ""),
         offense_data.get("payload_summary", ""),
+        json.dumps(offense_data.get("resolved_rule_bindings", [])),
+        json.dumps(offense_data.get("qradar_rule_api_metadata", [])),
+        json.dumps(offense_data.get("top_qids", [])),
+        json.dumps(offense_data.get("combined_distribution", [])),
         rule_text,
     ]).strip()
 
@@ -68,6 +128,7 @@ async def handle_offense_analysis(text: str):
         route="offense_analysis",
         rule_id=rule_id,
         client_id=offense_data.get("client_id", "") or None,
+        offense_data=offense_data,
     )
     context_chunks = [item["text"] for item in retrieved]
     context_sources = [item["source"] for item in retrieved]

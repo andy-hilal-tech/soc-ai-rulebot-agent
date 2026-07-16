@@ -14,12 +14,14 @@ def retrieve_context_with_sources(
     route: str = "reasoning",
     rule_id: str | None = None,
     client_id: str | None = None,
+    offense_data: dict | None = None,
 ) -> list:
     if route == "offense_analysis":
         return retrieve_offense_context(
             query=user_text,
             rule_id=rule_id,
             client_id=client_id,
+            offense_data=offense_data,
             top_k=6,
         )
 
