@@ -98,7 +98,16 @@
       "name": "BB:UBA : VPN Login Successful"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "m",
+        "intervalCount": "60",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Initial Access": [
       {
@@ -182,6 +191,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.473410",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.899968",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

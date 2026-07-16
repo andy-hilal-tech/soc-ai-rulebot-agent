@@ -124,7 +124,16 @@
       "name": "MITRE.LIN.T1016.RULE System Network Configuration Discovery"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ALL",
+        "intervalCount": "30",
+        "intervalType": "s",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Exfiltration": [
       {
@@ -173,6 +182,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.943079",
-  "last_enriched_utc": "2026-06-23T12:40:55.057427"
+  "last_parsed_utc": "2026-06-30T08:59:37.994858",
+  "last_enriched_utc": "2026-06-30T09:40:02.879546Z"
 }

@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-03-17T17:09:53.826Z",
-  "modified": "2026-06-21T10:29:26.491Z",
+  "modified": "2026-07-08T11:36:13.571Z",
   "logic": [
     {
       "test": [
@@ -130,6 +130,6 @@
     }
   ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-30T08:59:39.308930",
-  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
+  "last_parsed_utc": "2026-07-16T07:16:17.406449",
+  "last_enriched_utc": "2026-07-16T07:35:30.052597Z"
 }

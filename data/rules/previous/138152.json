@@ -59,7 +59,16 @@
       "name": "BB:BehaviorDefinition: Communication with a Potential Hostile Host (X-force Categorization)"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "MACHINEID",
+        "intervalType": "m",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Command and Control": [
       {
@@ -130,6 +139,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.766267",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:37.891495",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

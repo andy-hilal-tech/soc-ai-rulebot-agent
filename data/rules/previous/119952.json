@@ -121,8 +121,17 @@
       "name": "BB:CategoryDefinition: Firewall or ACL Accept Event for a FW/Router/Switch Device"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "TARGET",
+        "intervalType": "m",
+        "intervalCount": "15",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:34.058723",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.316192",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

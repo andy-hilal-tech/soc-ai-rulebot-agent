@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-03-12T06:37:05.074Z",
-  "modified": "2026-06-06T16:45:39.759Z",
+  "modified": "2026-06-24T13:06:11.614Z",
   "logic": [
     {
       "test": [
@@ -59,7 +59,7 @@
             "id": "300"
           },
           "text": [
-            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Subject Account Name (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
+            "when at least <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Target Username (custom)</a> in <a href='javascript:editParameter(\"2\", \"5\")' class='dynamic'>10</a> <a href='javascript:editParameter(\"2\", \"6\")' class='dynamic'>minutes</a>"
           ],
           "parameter": [
             {
@@ -74,7 +74,7 @@
             {
               "id": "3",
               "method": "getEventDatabaseFields",
-              "value": "Subject Account Name"
+              "value": "Target Username"
             },
             {
               "id": "4",
@@ -100,7 +100,7 @@
         "flowAnalysisInterval": "0",
         "includeAttackerEventsInterval": "0",
         "forceOffenseCreation": "true",
-        "offenseMapping": "85"
+        "offenseMapping": "63"
       },
       "eventAnnotation": [
         {
@@ -119,8 +119,17 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "SUBJECTUSERNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.412191",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.300509",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

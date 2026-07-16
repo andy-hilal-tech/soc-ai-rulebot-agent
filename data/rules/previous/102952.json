@@ -111,7 +111,16 @@
       "name": "BB:UBA : User Account Deleted"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ALL",
+        "intervalType": "m",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Impact": [
       {
@@ -137,6 +146,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.519584",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.931768",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

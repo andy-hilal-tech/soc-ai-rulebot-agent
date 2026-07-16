@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2025-04-06T15:53:38.893Z",
-  "modified": "2025-08-13T12:49:55.846Z",
+  "modified": "2026-07-09T14:00:16.164Z",
   "logic": [
     {
       "test": [
@@ -29,6 +29,27 @@
             {
               "id": "1",
               "value": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16, 0:0:0:0:0:0:0:1, ::1"
+            }
+          ]
+        },
+        {
+          "_$": {
+            "name": "ArielFilterTest",
+            "uid": "1",
+            "id": "316",
+            "negate": "true"
+          },
+          "text": [
+            "when the event matches <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>Source Asset Name contains any of h360-lp</a>"
+          ],
+          "parameter": [
+            {
+              "id": "1",
+              "value": "sourceAssetNameCONanyh360-lp"
+            },
+            {
+              "id": "2",
+              "value": "events"
             }
           ]
         },
@@ -92,6 +113,6 @@
   "dependencies": [],
   "limiter": null,
   "mitre": null,
-  "last_parsed_utc": "2026-06-30T08:59:39.127943",
-  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
+  "last_parsed_utc": "2026-07-16T07:16:17.095321",
+  "last_enriched_utc": "2026-07-16T07:35:30.052597Z"
 }

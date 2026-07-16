@@ -115,32 +115,30 @@
   ],
   "limiter": null,
   "mitre": {
-    "undefined": [
-      [
-        {
-          "TEC": "None",
-          "STEC": "None",
-          "TAC": "Execution",
-          "MAP_C": "high",
-          "MAP_EN": true,
-          "TEC_ID": "None",
-          "MAP_S": [
-            {
-              "name": "Execution - None",
-              "values": [
-                {
-                  "id": "100459",
-                  "bb": "Destination Vulnerable to Different Exploit than Attempted on Targeted Port",
-                  "uuid": "1d4031ac-df39-4f49-8182-dc9ee1c17add",
-                  "T": "EVENT"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+    "Execution": [
+      {
+        "TEC": "None",
+        "STEC": "None",
+        "TAC": "Execution",
+        "MAP_C": "high",
+        "MAP_EN": true,
+        "TEC_ID": "None",
+        "MAP_S": [
+          {
+            "name": "Execution - None",
+            "values": [
+              {
+                "id": "100459",
+                "bb": "Destination Vulnerable to Different Exploit than Attempted on Targeted Port",
+                "uuid": "1d4031ac-df39-4f49-8182-dc9ee1c17add",
+                "T": "EVENT"
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
-  "last_parsed_utc": "2026-06-30T08:59:36.854415",
-  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
+  "last_parsed_utc": "2026-07-16T07:16:13.094187",
+  "last_enriched_utc": "2026-07-16T07:35:30.035422Z"
 }

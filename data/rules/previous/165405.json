@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2026-02-01T12:51:00.981Z",
-  "modified": "2026-04-24T08:13:11.438Z",
+  "modified": "2026-06-29T12:41:59.363Z",
   "logic": [
     {
       "test": [
@@ -104,7 +104,16 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ALL",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Credential Access": [
       {
@@ -151,6 +160,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:36.359014",
-  "last_enriched_utc": "2026-06-23T12:40:55.062598"
+  "last_parsed_utc": "2026-06-30T08:59:39.254969",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

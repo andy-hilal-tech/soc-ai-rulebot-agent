@@ -163,8 +163,17 @@
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "h",
+        "intervalCount": "12",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.482479",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.372920",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

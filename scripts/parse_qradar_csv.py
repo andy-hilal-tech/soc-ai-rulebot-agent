@@ -21,12 +21,40 @@ BB_PATTERN = "Use-Case-Manager-Building-Blocks-Report"
 # --------------------------
 
 def find_latest_csv(pattern: str):
-    files = list(DOWNLOADS_DIR.glob(f"{pattern}*.csv"))
-    if not files:
+    files = list(DOWNLOADS_DIR.glob("*.csv"))
+
+    print(f"Looking for CSV pattern: {pattern}")
+    print(f"Downloads directory: {DOWNLOADS_DIR}")
+
+    def normalize_name(value: str) -> str:
+        return (
+            value.lower()
+            .replace("-", "")
+            .replace("_", "")
+            .replace(" ", "")
+        )
+
+
+    normalized_pattern = normalize_name(pattern)
+
+    matches = [
+        file_path
+        for file_path in files
+        if normalized_pattern in normalize_name(file_path.name)
+    ]
+
+    if not matches:
+        print("CSV files found in Downloads:")
+        for file_path in sorted(files, key=lambda p: p.stat().st_mtime, reverse=True):
+            print(f" - {file_path.name}")
+
         raise FileNotFoundError(f"No CSV found for pattern: {pattern}")
 
-    latest_file = max(files, key=lambda f: f.stat().st_mtime)
-    return latest_file
+    latest = max(matches, key=lambda p: p.stat().st_mtime)
+
+    print(f"Selected CSV: {latest}")
+
+    return latest
 
 
 def clean_value(val):

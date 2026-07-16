@@ -142,7 +142,16 @@
       "name": "Ransomware: Ryuk IOC in Events"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "MACHINEID",
+        "intervalType": "m",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Execution": [
       {
@@ -189,6 +198,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:34.893614",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.966467",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

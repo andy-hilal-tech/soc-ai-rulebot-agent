@@ -100,7 +100,16 @@
       "name": "BB:CategoryDefinition: Authentication Success"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalCount": "1",
+        "intervalType": "h",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Credential Access": [
       {
@@ -172,6 +181,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.258567",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.713969",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

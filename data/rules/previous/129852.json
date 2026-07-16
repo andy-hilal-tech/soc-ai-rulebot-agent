@@ -104,8 +104,17 @@
       "name": "BB:Threats: X-Force Premium: Internal Host Communication with Cryptocurrency Mining URL for Flows"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:34.532660",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.683443",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

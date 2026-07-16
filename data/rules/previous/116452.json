@@ -102,8 +102,17 @@
       "name": "BB:BehaviorDefinition: Suspicious Virtualization Activities"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ACCESSKEYID",
+        "intervalType": "m",
+        "intervalCount": "15",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:33.980540",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:37.239228",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

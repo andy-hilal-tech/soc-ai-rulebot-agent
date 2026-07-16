@@ -1,0 +1,21 @@
+{
+  "rule_doc_id": "124426",
+  "rule_id": "124426",
+  "uuid": "08ba71eb-1c57-4956-babb-90631433578a",
+  "rule_name": "Potential DoS Attack via Web Server Response Time",
+  "object_type": "rule",
+  "group": "Threats",
+  "rule_category": "Anomaly Detection Rule",
+  "type": "ANOMALY",
+  "origin": "OVERRIDE",
+  "enabled": false,
+  "response": "Dispatch New Event",
+  "created": "2024-07-08T09:39:20.646Z",
+  "modified": "2024-07-08T09:39:20.646Z",
+  "logic": null,
+  "actions": null,
+  "dependencies": [],
+  "limiter": null,
+  "mitre": null,
+  "last_parsed_utc": "2026-06-30T08:59:37.489673"
+}

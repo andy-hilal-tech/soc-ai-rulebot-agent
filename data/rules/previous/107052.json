@@ -174,7 +174,16 @@
       "name": "BB:CategoryDefinition: Authentication Failures"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "BY_USERNAME",
+        "intervalType": "s",
+        "intervalCount": "30",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Credential Access": [
       {
@@ -264,6 +273,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.625038",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:37.026353",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }

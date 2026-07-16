@@ -38,6 +38,9 @@ EXPECTED_OFFENSE_FIELDS = [
     "qid_logsource_category_distribution",
     "combined_distribution",
     "representative_events",
+    "offense_rules_raw",
+    "qradar_rule_api_metadata",
+    "resolved_rule_bindings",
 
     "payload_summary",
     "why_false_positive",
@@ -57,6 +60,9 @@ JSON_OFFENSE_FIELDS = {
     "qid_logsource_category_distribution",
     "combined_distribution",
     "representative_events",
+    "offense_rules_raw",
+    "qradar_rule_api_metadata",
+    "resolved_rule_bindings",
 }
 
 

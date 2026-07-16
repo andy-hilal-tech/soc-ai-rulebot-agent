@@ -63,7 +63,16 @@
       "name": "BB:BehaviorDefinition: C2 Session over ICMP"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Command and Control": [
       {
@@ -124,6 +133,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:35.103543",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:38.140740",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

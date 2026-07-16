@@ -258,6 +258,14 @@ Evidence interpretation rules:
 - If evidence_mode is missing, treat confidence as lower and state that offense-linked evidence mode was not confirmed.
 - If INOFFENSE evidence is absent or empty, do not infer tuning from contextual/sample evidence unless clearly labelled and justified.
 
+Rule binding rules:
+- QRadar offense rule IDs may not directly match exported rule document IDs.
+- If resolved_rule_bindings are present, use them to bind offense_rules_raw or qradar_rule_api_metadata to exported rule definitions.
+- Treat linked_rule_identifier to exported uuid matches as authoritative binding evidence.
+- Use exported/enriched rule JSON when available as the primary rule definition.
+- If only qradar_rule_api_metadata is available, treat it as metadata only. Do not provide condition-level tuning. Lower confidence and request/export the full CRE rule logic.
+- If multiple offense-linked rules exist, identify which exported rule each one resolves to before recommending tuning.
+
 Your goal is to determine:
 1. Whether the offense appears likely benign / suspicious / unclear
 2. Why it may be firing

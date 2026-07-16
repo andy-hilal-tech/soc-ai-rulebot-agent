@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event",
   "created": "2024-10-14T12:07:48.176Z",
-  "modified": "2025-09-22T05:54:28.563Z",
+  "modified": "2026-07-02T12:28:29.528Z",
   "logic": [
     {
       "test": [
@@ -129,12 +129,12 @@
             "negate": "true"
           },
           "text": [
-            "when the source IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>172.26.2.143, 172.26.2.196</a>"
+            "when the source IP is one of the following <a href='javascript:editParameter(\"1\", \"1\")' class='dynamic'>172.26.2.143, 172.26.2.196, 172.29.2.116</a>"
           ],
           "parameter": [
             {
               "id": "1",
-              "value": "172.26.2.143, 172.26.2.196"
+              "value": "172.26.2.143, 172.26.2.196, 172.29.2.116"
             }
           ]
         },
@@ -176,6 +176,6 @@
   ],
   "limiter": null,
   "mitre": null,
-  "last_parsed_utc": "2026-06-30T08:59:39.095544",
-  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
+  "last_parsed_utc": "2026-07-16T07:16:17.039978",
+  "last_enriched_utc": "2026-07-16T07:35:30.081564Z"
 }

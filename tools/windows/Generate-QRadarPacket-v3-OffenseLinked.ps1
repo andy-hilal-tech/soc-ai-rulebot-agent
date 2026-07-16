@@ -18,21 +18,22 @@ Write-Host "DEBUG: Script started" -ForegroundColor Cyan
 # Config
 # ----------------------------
 
+$PROJECT_ROOT = (Resolve-Path (Join-Path -Path $PSScriptRoot -ChildPath "..\..")).Path
+
 $API_VERSION = "16.0"
 
 $Instances = @{
     "BH" = @{
         BaseUrl = "https://192.168.51.122"
         TokenEnvCandidates = @(
-            "QRADAR_TOKEN",
-            "QRADAR_TOKEN_BH",
-            "QRADAR_SEC_TOKEN",
-            "QRADAR_API_TOKEN"
+            "QRADAR_BH_SEC_TOKEN",
+            "QRADAR_TOKEN"
         )
     }
     "KSA" = @{
         BaseUrl = "https://YOUR-KSA-QRADAR-HOST"
         TokenEnvCandidates = @(
+            "QRADAR_KSA_SEC_TOKEN"
             "QRADAR_TOKEN_KSA",
             "QRADAR_TOKEN"
         )
@@ -245,6 +246,29 @@ function Get-TopDistributionFromCombined {
             Sort-Object -Property event_count -Descending |
             Select-Object -First $Limit
     )
+}
+
+function Get-QradarAnalyticsRuleMetadata {
+    param(
+        $BaseUrl,
+        $Token,
+        $RuleId
+    )
+
+    try {
+        $result = Invoke-Qradar `
+            -BaseUrl $BaseUrl `
+            -Token $Token `
+            -Method "GET" `
+            -Path "/api/analytics/rules/$RuleId"
+
+        return $result
+    }
+    catch {
+        Write-Host "WARNING: Could not retrieve QRadar analytics rule metadata for rule ID $RuleId" -ForegroundColor Yellow
+        Write-Host $_.Exception.Message -ForegroundColor Yellow
+        return $null
+    }
 }
 
 function Invoke-Qradar {
@@ -496,6 +520,78 @@ LAST $LOOKBACK_DAYS DAYS
         -MaxWaitSeconds $MAX_WAIT_SECONDS
 
     return Get-EventsArray $result.results
+}
+
+function Resolve-ExportedRuleBinding {
+    param(
+        $LinkedRuleIdentifier,
+        $Identifier,
+        $RuleName
+    )
+
+    $searchValues = @()
+
+    if ($LinkedRuleIdentifier) {
+        $searchValues += [string]$LinkedRuleIdentifier
+    }
+
+    if ($Identifier) {
+        $searchValues += [string]$Identifier
+    }
+
+    $rulesRoot = Join-Path -Path $PROJECT_ROOT -ChildPath "data\rules\current"
+    $buildingBlocksRoot = Join-Path -Path $PROJECT_ROOT -ChildPath "data\building_blocks\current"
+
+    $roots = @(
+        $rulesRoot
+        $buildingBlocksRoot
+    )
+
+    Write-Host "Rule binding search roots:" -ForegroundColor DarkYellow
+    $roots | ForEach-Object { Write-Host " - $_" -ForegroundColor DarkYellow }
+
+    foreach ($root in $roots) {
+        if (-not (Test-Path $root)) {
+            continue
+        }
+
+        $files = Get-ChildItem $root -Recurse -Filter "*.json"
+
+        foreach ($file in $files) {
+            try {
+                $obj = Get-Content $file.FullName -Raw | ConvertFrom-Json
+            }
+            catch {
+                continue
+            }
+
+            foreach ($value in $searchValues) {
+                if ($obj.uuid -eq $value) {
+                    return @{
+                        exported_rule_doc_id = $file.BaseName
+                        exported_rule_name = $obj.rule_name
+                        exported_uuid = $obj.uuid
+                        exported_object_type = $obj.object_type
+                        exported_file_path = $file.FullName
+                        binding_method = "linked_rule_identifier_to_exported_uuid"
+                    }
+                }
+            }
+
+            if ($RuleName -and $obj.rule_name -eq $RuleName) {
+                return @{
+                    exported_rule_doc_id = $file.BaseName
+                    exported_rule_name = $obj.rule_name
+                    exported_uuid = $obj.uuid
+                    exported_object_type = $obj.object_type
+                    exported_file_path = $file.FullName
+                    binding_method = "rule_name_exact_match"
+                }
+            }
+        }
+    }
+
+    return $null
 }
 
 # ----------------------------
@@ -780,6 +876,78 @@ if ($ruleIds.Count -gt 0) {
     $ruleIdLegacy = $ruleIds[0]
 }
 
+$offenseRulesRaw = @()
+$qradarRuleApiMetadata = @()
+$resolvedRuleBindings = @()
+
+if ($offense.rules) {
+    $offenseRulesRaw = @($offense.rules)
+
+    foreach ($offenseRule in $offenseRulesRaw) {
+        $offenseRuleId = $offenseRule.id
+
+        if (-not $offenseRuleId) {
+            continue
+        }
+
+        $metadata = Get-QradarAnalyticsRuleMetadata `
+            -BaseUrl $inst.BaseUrl `
+            -Token $token `
+            -RuleId $offenseRuleId
+
+        if ($metadata) {
+            $qradarRuleApiMetadata += $metadata
+
+            $binding = Resolve-ExportedRuleBinding `
+                -LinkedRuleIdentifier $metadata.linked_rule_identifier `
+                -Identifier $metadata.identifier `
+                -RuleName $metadata.name
+
+            if ($binding) {
+                $resolvedRuleBindings += @{
+                    offense_rule_id = $offenseRuleId
+                    offense_rule_type = $offenseRule.type
+                    qradar_identifier = $metadata.identifier
+                    linked_rule_identifier = $metadata.linked_rule_identifier
+                    qradar_rule_name = $metadata.name
+                    qradar_origin = $metadata.origin
+                    qradar_type = $metadata.type
+                    exported_rule_doc_id = $binding.exported_rule_doc_id
+                    exported_rule_name = $binding.exported_rule_name
+                    exported_uuid = $binding.exported_uuid
+                    exported_object_type = $binding.exported_object_type
+                    exported_file_path = $binding.exported_file_path
+                    binding_method = $binding.binding_method
+                }
+            }
+            else {
+                $resolvedRuleBindings += @{
+                    offense_rule_id = $offenseRuleId
+                    offense_rule_type = $offenseRule.type
+                    qradar_identifier = $metadata.identifier
+                    linked_rule_identifier = $metadata.linked_rule_identifier
+                    qradar_rule_name = $metadata.name
+                    qradar_origin = $metadata.origin
+                    qradar_type = $metadata.type
+                    exported_rule_doc_id = ""
+                    exported_rule_name = ""
+                    exported_uuid = ""
+                    exported_object_type = ""
+                    exported_file_path = ""
+                    binding_method = "metadata_only_no_exported_match"
+                }
+            }
+        }
+        else {
+            $resolvedRuleBindings += @{
+                offense_rule_id = $offenseRuleId
+                offense_rule_type = $offenseRule.type
+                binding_method = "qradar_metadata_lookup_failed"
+            }
+        }
+    }
+}
+
 $eventName = $offense.offense_source
 
 if ([string]::IsNullOrWhiteSpace($eventName)) {
@@ -861,6 +1029,9 @@ $template += "  primary_category: $category`r`n"
 
 $template += "rule_id: $ruleIdLegacy`r`n"
 $template += "rule_ids: $(Compact-Json $ruleIds)`r`n"
+$template += "offense_rules_raw: $(Compact-JsonArray $offenseRulesRaw)`r`n"
+$template += "qradar_rule_api_metadata: $(Compact-JsonArray $qradarRuleApiMetadata)`r`n"
+$template += "resolved_rule_bindings: $(Compact-JsonArray $resolvedRuleBindings)`r`n"
 $template += "event_name: $eventName`r`n"
 $template += "event_description: $eventDescription`r`n"
 

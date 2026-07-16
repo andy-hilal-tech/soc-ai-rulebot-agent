@@ -59,7 +59,16 @@
       "name": "BB:BehaviorDefinition: New Service Creation Using Sc.EXE"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "ATTACKER",
+        "intervalType": "h",
+        "intervalCount": "1",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Persistence": [
       {
@@ -97,6 +106,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:35.136871",
-  "last_enriched_utc": "2026-06-23T12:40:55.073661"
+  "last_parsed_utc": "2026-06-30T08:59:38.166072",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

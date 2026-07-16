@@ -72,7 +72,16 @@
       "name": "BB:CategoryDefinition: High Magnitude Events"
     }
   ],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "TARGET",
+        "intervalCount": "10",
+        "intervalType": "m",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": {
     "Execution": [
       {
@@ -121,6 +130,6 @@
       }
     ]
   },
-  "last_parsed_utc": "2026-06-23T11:24:33.237392",
-  "last_enriched_utc": "2026-06-23T12:40:55.071655"
+  "last_parsed_utc": "2026-06-30T08:59:36.697736",
+  "last_enriched_utc": "2026-06-30T09:40:02.911286Z"
 }

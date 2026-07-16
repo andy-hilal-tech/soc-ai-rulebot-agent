@@ -2,7 +2,7 @@
   "rule_doc_id": "165460",
   "rule_id": "165460",
   "uuid": "580ea0a2-cfda-470b-818e-aed9beb89f75",
-  "rule_name": "MSSP - OS - MS - 24 - M - Windows domain Account ID Created",
+  "rule_name": "MSSP - OS - MS - 24 - M - Windows Domain Account ID Created",
   "object_type": "rule",
   "group": "MSSP - Rules, OS - MS",
   "rule_category": "Custom Rule",
@@ -11,7 +11,7 @@
   "enabled": false,
   "response": "Dispatch New Event, Add to a Reference Set",
   "created": "2026-03-11T16:02:09.692Z",
-  "modified": "2026-06-07T10:56:56.314Z",
+  "modified": "2026-06-25T07:58:41.903Z",
   "logic": [
     {
       "test": [
@@ -56,25 +56,26 @@
           "_$": {
             "name": "PropertyMatch_Test",
             "uid": "2",
-            "id": "321"
+            "id": "321",
+            "negate": "true"
           },
           "text": [
-            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Domain</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>not equals</a> <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Hostname (custom)</a>"
+            "when <a href='javascript:editParameter(\"2\", \"1\")' class='dynamic'>Target UserDomain (custom)</a> <a href='javascript:editParameter(\"2\", \"2\")' class='dynamic'>equals</a> <a href='javascript:editParameter(\"2\", \"3\")' class='dynamic'>Target Username (custom)</a>"
           ],
           "parameter": [
             {
               "id": "1",
               "method": "getEventDatabaseFields",
-              "value": "domainID"
+              "value": "Target UserDomain"
             },
             {
               "id": "2",
-              "value": "notEquals"
+              "value": "equals"
             },
             {
               "id": "3",
               "method": "getEventDatabaseFields",
-              "value": "Hostname"
+              "value": "Target Username"
             }
           ]
         },
@@ -85,7 +86,7 @@
             "id": "300"
           },
           "text": [
-            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Subject Account Name (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>5</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
+            "when at least <a href='javascript:editParameter(\"3\", \"2\")' class='dynamic'>1</a> events are seen with the same <a href='javascript:editParameter(\"3\", \"3\")' class='dynamic'>Target Username (custom)</a> in <a href='javascript:editParameter(\"3\", \"5\")' class='dynamic'>30</a> <a href='javascript:editParameter(\"3\", \"6\")' class='dynamic'>minutes</a>"
           ],
           "parameter": [
             {
@@ -100,7 +101,7 @@
             {
               "id": "3",
               "method": "getEventDatabaseFields",
-              "value": "Subject Account Name"
+              "value": "Target Username"
             },
             {
               "id": "4",
@@ -109,7 +110,7 @@
             },
             {
               "id": "5",
-              "value": "5"
+              "value": "30"
             },
             {
               "id": "6",
@@ -126,27 +127,36 @@
         "flowAnalysisInterval": "0",
         "includeAttackerEventsInterval": "0",
         "forceOffenseCreation": "true",
-        "offenseMapping": "85"
+        "offenseMapping": "93"
       },
       "eventAnnotation": [
         {
           "formatString": [
-            "MSSP - OS - MS - 24 - M - Windows domain Account ID Created"
+            "MSSP - OS - MS - 24 - M - Windows Domain Account ID Created"
           ]
         }
       ],
       "offenseAnnotation": [
         {
           "formatString": [
-            "MSSP - OS - MS - 24 - M - Windows domain Account ID Created"
+            "MSSP - OS - MS - 24 - M - Windows Domain Account ID Created"
           ]
         }
       ]
     }
   ],
   "dependencies": [],
-  "limiter": null,
+  "limiter": [
+    {
+      "_$": {
+        "hostType": "TARGETUSERNAME",
+        "intervalType": "h",
+        "intervalCount": "4",
+        "responseCount": "1"
+      }
+    }
+  ],
   "mitre": null,
-  "last_parsed_utc": "2026-06-23T11:24:36.387393",
-  "last_enriched_utc": "2026-06-23T12:40:55.063632"
+  "last_parsed_utc": "2026-06-30T08:59:39.285118",
+  "last_enriched_utc": "2026-06-30T09:40:02.895450Z"
 }
