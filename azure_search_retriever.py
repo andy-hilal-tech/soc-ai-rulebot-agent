@@ -279,6 +279,7 @@ def retrieve_rule_docs_for_offense_bindings(
     top_k: int = 4,
 ) -> list[dict]:
     results: list[dict] = []
+    exact_results: list[dict] = []
 
     search_client = get_search_client(RULES_INDEX_NAME)
     lookup_terms = extract_rule_lookup_terms_from_offense(offense_data)
@@ -304,13 +305,16 @@ def retrieve_rule_docs_for_offense_bindings(
 
                 if item:
                     item["_combined_score"] = 100
-                    results.append(item)
+                    exact_results.append(item)
 
         except Exception as exc:
             print(
                 f"[retrieve_rule_docs_for_offense_bindings] exact lookup failed for {term}: {exc}",
                 flush=True,
             )
+
+    if exact_results:
+        return dedupe_and_trim(exact_results, top_k=top_k, max_per_source=1)
 
     # 2. Semantic/text fallback for UUIDs and names.
     for term in lookup_terms:
