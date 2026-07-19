@@ -108,7 +108,7 @@ def rerank_combined_results(
     reranked = []
 
     for item in results:
-        score = 0.0
+        score = float(item.get("_combined_score", 0) or 0)
 
         if item.get("reranker_score") is not None:
             score += float(item["reranker_score"]) * 10

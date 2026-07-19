@@ -144,6 +144,7 @@ def _extract_assessment_text(analysis: dict) -> str:
         analysis.get("recommendation_summary"),
         analysis.get("recommendation"),
         analysis.get("reasoning"),
+        analysis.get("raw_output"),
     ]
 
     for item in candidates:

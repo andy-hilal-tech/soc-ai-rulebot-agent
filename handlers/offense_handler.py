@@ -135,9 +135,9 @@ async def handle_offense_analysis(text: str):
         offense_data=offense_data,
     )
     print("candidate_rule_ids:", candidate_rule_ids, flush=True)
-    print("resolved_rule_ids:", resolved_rule_ids, flush=True)
     context_chunks = [item["text"] for item in retrieved]
     context_sources = [item["source"] for item in retrieved]
+    print("resolved_rule_ids:", resolved_rule_ids, flush=True)
     print("context_sources:", context_sources, flush=True)
 
     user_prompt = build_offense_analysis_prompt(
