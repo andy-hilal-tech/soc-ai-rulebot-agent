@@ -125,15 +125,20 @@ async def handle_offense_analysis(text: str):
         rule_text,
     ]).strip()
 
+    primary_resolved_rule_id = resolved_rule_ids[0] if resolved_rule_ids else rule_id
+
     retrieved = retrieve_context_with_sources(
         retrieval_query,
         route="offense_analysis",
-        rule_id=rule_id,
+        rule_id=primary_resolved_rule_id,
         client_id=offense_data.get("client_id", "") or None,
         offense_data=offense_data,
     )
+    print("candidate_rule_ids:", candidate_rule_ids, flush=True)
+    print("resolved_rule_ids:", resolved_rule_ids, flush=True)
     context_chunks = [item["text"] for item in retrieved]
     context_sources = [item["source"] for item in retrieved]
+    print("context_sources:", context_sources, flush=True)
 
     user_prompt = build_offense_analysis_prompt(
         offense_data=offense_data,
