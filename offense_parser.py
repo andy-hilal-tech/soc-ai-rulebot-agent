@@ -149,8 +149,9 @@ def parse_offense_template(text: str) -> dict:
     return result
 
 
-def get_missing_required_fields(offense_data: dict) -> list[str]:
-    
+def get_missing_required_fields(offense_data: dict) -> list:
+    missing = []
+
     for field in REQUIRED_OFFENSE_FIELDS:
         if not str(offense_data.get(field, "")).strip():
             missing.append(field)
