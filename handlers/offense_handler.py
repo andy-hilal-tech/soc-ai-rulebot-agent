@@ -35,7 +35,7 @@ def get_candidate_rule_ids(offense_data: dict) -> list[str]:
 
         add(binding.get("exported_rule_doc_id"))
 
-    # Fallback to legacy QRadar offense rule ID.
+    # Always include the original QRadar offense rule ID as a fallback candidate.
     add(offense_data.get("rule_id"))
 
     return candidates
@@ -69,23 +69,23 @@ async def handle_offense_analysis(text: str):
 
     candidate_rule_ids = get_candidate_rule_ids(offense_data)
 
-    rule = None
-    resolved_rule_id = None
+    resolved_rules = []
+    resolved_rule_ids = []
 
     for candidate_rule_id in candidate_rule_ids:
         candidate_rule = get_rule(candidate_rule_id)
 
         if candidate_rule:
-            rule = candidate_rule
-            resolved_rule_id = candidate_rule_id
-            break
+            resolved_rule_ids.append(candidate_rule_id)
+            resolved_rules.append(candidate_rule)
 
-    if rule:
+    if resolved_rules:
         rule_text = json.dumps(
             {
-                "resolved_rule_id": resolved_rule_id,
                 "original_offense_rule_id": rule_id,
-                "rule": rule,
+                "candidate_rule_ids": candidate_rule_ids,
+                "resolved_rule_ids": resolved_rule_ids,
+                "resolved_rules": resolved_rules,
                 "resolved_rule_bindings": offense_data.get("resolved_rule_bindings", []),
                 "qradar_rule_api_metadata": offense_data.get("qradar_rule_api_metadata", []),
             },
@@ -94,9 +94,11 @@ async def handle_offense_analysis(text: str):
     else:
         rule_text = json.dumps(
             {
-                "warning": "No exported rule definition was found in the local rules database.",
+                "warning": "No resolved local rule definition was found in the local rules database.",
                 "original_offense_rule_id": rule_id,
                 "candidate_rule_ids": candidate_rule_ids,
+                "resolved_rule_ids": resolved_rule_ids,
+                "resolved_rules": resolved_rules,
                 "resolved_rule_bindings": offense_data.get("resolved_rule_bindings", []),
                 "qradar_rule_api_metadata": offense_data.get("qradar_rule_api_metadata", []),
                 "instruction": (
@@ -109,7 +111,7 @@ async def handle_offense_analysis(text: str):
 
     retrieval_query = " ".join([
         f"offense rule id {rule_id}",
-        f"resolved rule id {resolved_rule_id or ''}",
+        f"resolved rule ids {' '.join(resolved_rule_ids)}",
         offense_data.get("event_name", ""),
         offense_data.get("event_description", ""),
         offense_data.get("why_false_positive", ""),

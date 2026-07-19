@@ -75,6 +75,30 @@ def compact_source_label(source: str) -> str:
 
     return source
 
+def _format_resolved_rule_bindings(offense_data):
+    bindings = offense_data.get("resolved_rule_bindings") or []
+
+    if not isinstance(bindings, list):
+        return []
+
+    lines = []
+
+    for binding in bindings:
+        if not isinstance(binding, dict):
+            continue
+
+        doc_id = _safe_string(binding.get("exported_rule_doc_id"))
+        name = _safe_string(binding.get("exported_rule_name")) or _safe_string(binding.get("qradar_rule_name"))
+        offense_rule_id = _safe_string(binding.get("offense_rule_id"))
+        method = _safe_string(binding.get("binding_method"))
+
+        if doc_id and name:
+            lines.append(f"- {doc_id}: {name} (from QRadar offense rule {offense_rule_id}, binding: {method})")
+        elif offense_rule_id and name:
+            lines.append(f"- QRadar offense rule {offense_rule_id}: {name} (metadata only)")
+
+    return lines
+
 
 def build_sources_footer(context_sources: list, max_items: int = 3) -> str:
     if not context_sources:
@@ -219,8 +243,14 @@ def build_offense_reply(
         "Offense Analysis Summary",
         "",
         f"Event: {event_name}",
-        f"Rule ID: {rule_id}",
+        f"QRadar offense rule ID: {rule_id}",
     ]
+
+    resolved_rule_lines = _format_resolved_rule_bindings(offense_data)
+
+    if resolved_rule_lines:
+        lines.append("Resolved rule context:")
+        lines.extend(resolved_rule_lines)
 
 
     if classification:
