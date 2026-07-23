@@ -11,9 +11,11 @@
 # - No contextual logsource/time-window sample is used as primary evidence
 
 $ErrorActionPreference = "Stop"
-
+<#
 Write-Host "DEBUG: Script started" -ForegroundColor Cyan
-
+Write-Host "RUNNING SCRIPT PATH: $PSCommandPath" -ForegroundColor Red
+Write-Host "RUNNING SCRIPT VERSION: V4-STAGED-DEBUG-20260723-01" -ForegroundColor Red
+#>
 # ----------------------------
 # Config
 # ----------------------------
@@ -44,12 +46,91 @@ $LOOKBACK_DAYS = 30
 $MAX_WAIT_SECONDS = 180
 $SAMPLE_EVENT_LIMIT = 5
 $RESULT_LIMIT = 20
+$AQL_TIME_BUFFER_MINUTES = 180  # 3-hour buffer either side of QRadar offense timestamps. Validated against offense 462687: captures full 847 linked events with much faster searches.
 $SKIP_CERT_VALIDATION = $true
 $VERBOSE_SEARCH_LOG = $false
 
 # ----------------------------
 # Helpers
 # ----------------------------
+function Convert-MsEpochToAqlTime {
+    param($Ms)
+
+    if (-not $Ms) {
+        return $null
+    }
+
+    $epoch = [System.DateTimeOffset]::FromUnixTimeMilliseconds([int64]$Ms)
+    return $epoch.UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss")
+}
+
+function Get-OffenseAqlTimeBounds {
+    param(
+        $Offense,
+        [int]$BufferMinutes = 360
+    )
+
+    $startMs = $Offense.start_time
+    if (-not $startMs) {
+        $startMs = $Offense.first_persisted_time
+    }
+
+    $stopMs = $Offense.close_time
+    if (-not $stopMs) {
+        $stopMs = $Offense.last_updated_time
+    }
+    if (-not $stopMs) {
+        $stopMs = $Offense.last_persisted_time
+    }
+
+    if (-not $startMs -or -not $stopMs) {
+        return @{
+            Start = $null
+            Stop = $null
+        }
+    }
+
+    $start = [System.DateTimeOffset]::FromUnixTimeMilliseconds([int64]$startMs).UtcDateTime.AddMinutes(-1 * $BufferMinutes)
+    $stop = [System.DateTimeOffset]::FromUnixTimeMilliseconds([int64]$stopMs).UtcDateTime.AddMinutes($BufferMinutes)
+
+    return @{
+        Start = $start.ToString("yyyy-MM-dd HH:mm:ss")
+        Stop = $stop.ToString("yyyy-MM-dd HH:mm:ss")
+    }
+}
+
+function Get-AqlTimeClause {
+    param(
+        [string]$Start,
+        [string]$Stop
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($Start) -and -not [string]::IsNullOrWhiteSpace($Stop)) {
+        return "START '$Start' STOP '$Stop'"
+    }
+
+    return "LAST $LOOKBACK_DAYS DAYS"
+}
+
+function Get-OffenseLogSourceFilter {
+    param($Offense)
+
+    $ids = @()
+
+    if ($Offense.log_sources) {
+        foreach ($logSource in $Offense.log_sources) {
+            if ($logSource.id) {
+                $ids += [string]$logSource.id
+            }
+        }
+    }
+
+    if ($ids.Count -eq 0) {
+        return ""
+    }
+
+    return " AND logsourceid IN ($($ids -join ','))"
+}
 
 function Read-Choice {
     param(
@@ -489,6 +570,84 @@ function Invoke-OffenseLinkedAql {
     }
 }
 
+function Invoke-StagedAql {
+    param(
+        [string]$BaseUrl,
+        [string]$Token,
+        [string]$Label,
+        [string]$Aql,
+        [int]$Limit = 20,
+        [int]$MaxWaitSeconds = 180
+    )
+
+    Write-Host ""
+    Write-Host "Starting Ariel stage: $Label" -ForegroundColor Cyan
+    Write-Host $Aql -ForegroundColor DarkGray
+
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+
+    try {
+        $result = Invoke-OffenseLinkedAql `
+            -BaseUrl $BaseUrl `
+            -Token $Token `
+            -Aql $Aql `
+            -Limit $Limit `
+            -MaxWaitSeconds $MaxWaitSeconds
+
+        $events = Get-EventsArray $result.results
+
+        $sw.Stop()
+        $duration =[math]::Round($sw.Elapsed.TotalSeconds, 2)
+
+        Write-Host "Completed Ariel stage: $Label ($($events.Count) rows, ${duration}s)" -ForegroundColor Green
+
+        return @{
+            label = $Label
+            status = "completed"
+            duration_seconds = $duration
+            events = @($events)
+            error = $null
+        }
+    }
+    catch {
+        $sw.Stop()
+        $duration = [math]::Round($sw.Elapsed.TotalSeconds, 2)
+
+        Write-Host "Failed Ariel stage: $Label after ${duration}s" -ForegroundColor Yellow
+        Write-Host $_.Exception.Message -ForegroundColor Yellow
+
+        return @{
+            label = $Label
+            status = "failed"
+            duration_seconds = $duration
+            events = @()
+            error = $_.Exception.Message
+        }
+    }
+}
+
+function Get-StageEvents {
+    param($Stage)
+
+    if ($null -eq $Stage) {
+        return @()
+    }
+
+    if ($Stage -is [hashtable] -and $Stage.ContainsKey("events")) {
+        return @($Stage["events"])
+    }
+
+    if ($Stage.PSObject.Properties.Name -contains "events") {
+        return @($Stage.events)
+    }
+
+    if ($Stage.PSObject.Properties.Name -contains "Events") {
+        return @($Stage.Events)
+    }
+
+    return @()
+}
+
 function Invoke-DistributionQuery {
     param(
         [string]$BaseUrl,
@@ -611,6 +770,7 @@ Write-Host "Using QRadar BaseUrl: $($inst.BaseUrl)" -ForegroundColor DarkGreen
 
 $offenseId = Read-Host "Enter Offense ID"
 
+Write-Host "DEEP mode may run expensive multi-field Ariel grouping. Use only when needed." -ForegroundColor Yellow
 $evidenceModeChoice = Read-Choice "Select evidence collection mode:" @("FAST", "DEEP")
 
 Write-Host ""
@@ -624,6 +784,14 @@ $offense = Invoke-Qradar `
     -Token $token `
     -Method "GET" `
     -Path "/api/siem/offenses/$offenseId"
+
+$timeBounds = Get-OffenseAqlTimeBounds -Offense $offense -BufferMinutes $AQL_TIME_BUFFER_MINUTES
+$aqlTimeClause = Get-AqlTimeClause -Start $timeBounds.Start -Stop $timeBounds.Stop
+$extraWhere = Get-OffenseLogSourceFilter -Offense $offense
+
+Write-Host ""
+Write-Host "Using AQL time bounds: $aqlTimeClause" -ForegroundColor DarkGreen
+Write-Host "Using extra WHERE filter: $($extraWhere.Trim())" -ForegroundColor DarkGreen
 
 if ($offense -and $offense.http_response) {
     throw "QRadar offense API error: $(Compact-Json $offense)"
@@ -654,68 +822,238 @@ Write-Host ""
 Write-Host "Running offense-linked Ariel evidence queries..." -ForegroundColor Cyan
 
 # FAST mode core query:
-# One combined distribution query gives us source/destination/QID/logsource/category/username combinations.
-$aqlCombinedDistribution = @"
-SELECT
-    sourceip,
-    destinationip,
-    qid,
-    logsourceid,
-    category,
-    username,
-    COUNT(*) AS event_count
-FROM events
-WHERE INOFFENSE($offenseId)
-GROUP BY sourceip, destinationip, qid, logsourceid, category, username
-LAST $LOOKBACK_DAYS DAYS
-"@
+# Staged queries are light search loads, query gives us source/destination/QID/logsource/category/username combinations.
+$collectionStages = @()
 
-$combinedDistributionResult = Invoke-OffenseLinkedAql `
-    -BaseUrl $inst.BaseUrl `
-    -Token $token `
-    -Aql $aqlCombinedDistribution `
-    -Limit $RESULT_LIMIT `
-    -MaxWaitSeconds $MAX_WAIT_SECONDS
-
-$combinedDistribution = Get-EventsArray $combinedDistributionResult.results
-
-# Always collect a small sample of strict offense-linked events.
-$aqlSampleEvents = @"
-SELECT
-    starttime,
-    qid,
-    username,
-    sourceip,
-    sourceport,
-    destinationip,
-    destinationport,
-    logsourceid,
-    category,
-    eventcount,
-    magnitude
-FROM events
-WHERE INOFFENSE($offenseId)
-LAST $LOOKBACK_DAYS DAYS
-"@
-
-$sampleEventsResult = Invoke-OffenseLinkedAql `
-    -BaseUrl $inst.BaseUrl `
-    -Token $token `
-    -Aql $aqlSampleEvents `
-    -Limit $SAMPLE_EVENT_LIMIT `
-    -MaxWaitSeconds $MAX_WAIT_SECONDS
-
-$sampleEvents = Get-EventsArray $sampleEventsResult.results
-
-# Initialise optional DEEP-mode arrays.
 $topSourceIps = @()
 $topDestinationIps = @()
 $topQids = @()
 $topUsernames = @()
 $topLogSources = @()
 $topCategories = @()
+
+$combinedDistribution = @()
 $qidLogSourceCategory = @()
 
+$aqlTopQids = @"
+SELECT
+    qid,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY qid
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topQidsStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_qids" `
+    -Aql $aqlTopQids `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $topQidsStage
+$topQids = Get-StageEvents -Stage $topQidsStage
+<#
+Write-Host "DEBUG topQidsStage raw: $(Compact-Json $topQidsStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topQids count immediately after assignment: $($topQids.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topQids JSON: $(Compact-JsonArray $topQids)" -ForegroundColor Magenta
+#>
+
+
+$aqlTopSourceIps = @"
+SELECT
+    sourceip,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY sourceip
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topSourceIpsStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_source_ips" `
+    -Aql $aqlTopSourceIps `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $topSourceIpsStage
+$topSourceIps = Get-StageEvents -Stage $topSourceIpsStage
+
+$topSourceIps = Get-StageEvents -Stage $topSourceIpsStage
+<#
+Write-Host "DEBUG topSourceIpsStage raw: $(Compact-Json $topSourceIpsStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topSourceIps count after Get-StageEvents: $($topSourceIps.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topSourceIps JSON: $(Compact-JsonArray $topSourceIps)" -ForegroundColor Magenta
+#>
+$aqlTopDestinationIps = @"
+SELECT
+    destinationip,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY destinationip
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topDestinationIpsStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_destination_ips" `
+    -Aql $aqlTopDestinationIps `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+$collectionStages += $topDestinationIpsStage
+$topDestinationIps = Get-StageEvents -Stage $topDestinationIpsStage
+
+$topDestinationIps = Get-StageEvents -Stage $topDestinationIpsStage
+<#
+Write-Host "DEBUG topDestinationIpsStage raw: $(Compact-Json $topDestinationIpsStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topDestinationIps count after Get-StageEvents: $($topDestinationIps.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topDestinationIps JSON: $(Compact-JsonArray $topDestinationIps)" -ForegroundColor Magenta
+#>
+
+$aqlTopUsernames = @"
+SELECT
+    username,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY username
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topUsernamesStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_usernames" `
+    -Aql $aqlTopUsernames `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $topUsernamesStage
+$topUsernames = Get-StageEvents -Stage $topUsernamesStage
+
+$topUsernames = Get-StageEvents -Stage $topUsernamesStage
+<#
+Write-Host "DEBUG topUsernamesStage raw: $(Compact-Json $topUsernamesStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topUsernames count after Get-StageEvents: $($topUsernames.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topUsernames JSON: $(Compact-JsonArray $topUsernames)" -ForegroundColor Magenta
+#>
+
+$aqlTopLogSources = @"
+SELECT
+    logsourceid,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY logsourceid
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topLogSourcesStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_log_sources" `
+    -Aql $aqlTopLogSources `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $topLogSourcesStage
+$topLogSources = Get-StageEvents -Stage $topLogSourcesStage
+
+$topLogSources = Get-StageEvents -Stage $topLogSourcesStage
+<#
+Write-Host "DEBUG topLogSourcesStage raw: $(Compact-Json $topLogSourcesStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topLogSources count after Get-StageEvents: $($topLogSources.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topLogSources JSON: $(Compact-JsonArray $topLogSources)" -ForegroundColor Magenta
+#>
+
+$aqlTopCategories = @"
+SELECT
+    category,
+    COUNT(*) AS event_count
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+GROUP BY category
+ORDER BY event_count DESC
+$aqlTimeClause
+"@
+
+$topCategoriesStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "top_categories" `
+    -Aql $aqlTopCategories `
+    -Limit $RESULT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $topCategoriesStage
+$topCategories = Get-StageEvents -Stage $topCategoriesStage
+
+$topCategories = Get-StageEvents -Stage $topCategoriesStage
+
+<#
+Write-Host "DEBUG topCategoriesStage raw: $(Compact-Json $topCategoriesStage)" -ForegroundColor Magenta
+Write-Host "DEBUG topCategories count after Get-StageEvents: $($topCategories.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topCategories JSON: $(Compact-JsonArray $topCategories)" -ForegroundColor Magenta
+#>
+
+
+
+# Always collect a small sample of strict offense-linked events.
+$aqlSampleEvents = @"
+SELECT
+starttime,
+qid,
+username,
+sourceip,
+sourceport,
+destinationip,
+destinationport,
+logsourceid,
+category,
+eventcount,
+magnitude
+FROM events
+WHERE INOFFENSE($offenseId)$extraWhere
+$aqlTimeClause
+"@
+
+$sampleEventsStage = Invoke-StagedAql `
+    -BaseUrl $inst.BaseUrl `
+    -Token $token `
+    -Label "representative_events" `
+    -Aql $aqlSampleEvents `
+    -Limit $SAMPLE_EVENT_LIMIT `
+    -MaxWaitSeconds $MAX_WAIT_SECONDS
+
+$collectionStages += $sampleEventsStage
+$sampleEvents = Get-StageEvents -Stage $sampleEventsStage
+
+$sampleEvents = Get-StageEvents -Stage $sampleEventsStage
+
+<#
+Write-Host "DEBUG sampleEventsStage raw: $(Compact-Json $sampleEventsStage)" -ForegroundColor Magenta
+Write-Host "DEBUG sampleEvents count after Get-StageEvents: $($sampleEvents.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG sampleEvents JSON: $(Compact-JsonArray $sampleEvents)" -ForegroundColor Magenta
+
+# DEBUG the above counts for each distribution
+Write-Host "DEBUG topQids count: $($topQids.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topSourceIps count: $($topSourceIps.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topDestinationIps count: $($topDestinationIps.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topLogSources count: $($topLogSources.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG topCategories count: $($topCategories.Count)" -ForegroundColor Magenta
+Write-Host "DEBUG sampleEvents count: $($sampleEvents.Count)" -ForegroundColor Magenta
+#>
 if ($evidenceModeChoice -eq "DEEP") {
     Write-Host ""
     Write-Host "DEEP mode selected. Running additional distribution queries..." -ForegroundColor Yellow
@@ -784,7 +1122,7 @@ LAST $LOOKBACK_DAYS DAYS
 }
 else {
     Write-Host ""
-    Write-Host "FAST mode selected. Deriving top evidence from combined distribution." -ForegroundColor Yellow
+    Write-Host "FAST mode selected. Using bounded staged Ariel distribution queries." -ForegroundColor Yellow
 
     $combinedDistribution = @($combinedDistribution)
 
@@ -830,15 +1168,50 @@ else {
 }
 
 # ----------------------------
+# Finalize staged evidence arrays
+# ----------------------------
+# Important:
+# PowerShell can unwrap single-item arrays or later logic can overwrite variables.
+# Rehydrate the final evidence arrays directly from the stage objects immediately
+# before legacy field derivation and template generation.
+
+$topQids = @(Get-StageEvents -Stage $topQidsStage)
+$topSourceIps = @(Get-StageEvents -Stage $topSourceIpsStage)
+$topDestinationIps = @(Get-StageEvents -Stage $topDestinationIpsStage)
+$topUsernames = @(Get-StageEvents -Stage $topUsernamesStage)
+$topLogSources = @(Get-StageEvents -Stage $topLogSourcesStage)
+$topCategories = @(Get-StageEvents -Stage $topCategoriesStage)
+$sampleEvents = @(Get-StageEvents -Stage $sampleEventsStage)
+<#
+Write-Host ""
+Write-Host "DEBUG finalized staged evidence arrays:" -ForegroundColor Magenta
+Write-Host "topQids count: $($topQids.Count)" -ForegroundColor Magenta
+Write-Host "topSourceIps count: $($topSourceIps.Count)" -ForegroundColor Magenta
+Write-Host "topDestinationIps count: $($topDestinationIps.Count)" -ForegroundColor Magenta
+Write-Host "topUsernames count: $($topUsernames.Count)" -ForegroundColor Magenta
+Write-Host "topLogSources count: $($topLogSources.Count)" -ForegroundColor Magenta
+Write-Host "topCategories count: $($topCategories.Count)" -ForegroundColor Magenta
+Write-Host "sampleEvents count: $($sampleEvents.Count)" -ForegroundColor Magenta
+Write-Host "topQids JSON: $(Compact-JsonArray $topQids)" -ForegroundColor Magenta
+Write-Host "topSourceIps JSON: $(Compact-JsonArray $topSourceIps)" -ForegroundColor Magenta
+
+
+Write-Host ""
+Write-Host "DEBUG before legacy field derivation:" -ForegroundColor Magenta
+Write-Host "topQids count: $($topQids.Count)" -ForegroundColor Magenta
+Write-Host "topSourceIps count: $($topSourceIps.Count)" -ForegroundColor Magenta
+Write-Host "topDestinationIps count: $($topDestinationIps.Count)" -ForegroundColor Magenta
+Write-Host "topUsernames count: $($topUsernames.Count)" -ForegroundColor Magenta
+Write-Host "topLogSources count: $($topLogSources.Count)" -ForegroundColor Magenta
+Write-Host "topCategories count: $($topCategories.Count)" -ForegroundColor Magenta
+Write-Host "sampleEvents count: $($sampleEvents.Count)" -ForegroundColor Magenta
+Write-Host "topQids JSON: $(Compact-JsonArray $topQids)" -ForegroundColor Magenta
+Write-Host "topSourceIps JSON: $(Compact-JsonArray $topSourceIps)" -ForegroundColor Magenta
+#>
+# ----------------------------
 # Derive legacy-compatible fields from dominant offense-linked evidence
 # ----------------------------
 
-$topSourceIps = @($topSourceIps)
-$topDestinationIps = @($topDestinationIps)
-$topQids = @($topQids)
-$topUsernames = @($topUsernames)
-$topLogSources = @($topLogSources)
-$topCategories = @($topCategories)
 
 $primarySourceIp = Get-FirstValue -List $topSourceIps -FieldName "sourceip"
 $primaryDestinationIp = Get-FirstValue -List $topDestinationIps -FieldName "destinationip"
@@ -973,7 +1346,7 @@ if ($firstSample -and $firstSample.starttime) {
 $payloadSummaryParts = @()
 
 $payloadSummaryParts += "EvidenceMode=INOFFENSE_ONLY"
-$payloadSummaryParts += "LookbackWindow=LAST $LOOKBACK_DAYS DAYS"
+$payloadSummaryParts += "LookbackWindow=$aqlTimeClause"
 $payloadSummaryParts += "QRadarStatus=$($offense.status)"
 $payloadSummaryParts += "Magnitude=$($offense.magnitude)"
 $payloadSummaryParts += "Severity=$($offense.severity)"
@@ -990,7 +1363,20 @@ else {
 }
 
 $payloadSummary = ($payloadSummaryParts -join "  ")
-
+# debug
+<#
+Write-Host ""
+Write-Host "DEBUG before template build:" -ForegroundColor Magenta
+Write-Host "topQids count: $($topQids.Count)" -ForegroundColor Magenta
+Write-Host "topSourceIps count: $($topSourceIps.Count)" -ForegroundColor Magenta
+Write-Host "topDestinationIps count: $($topDestinationIps.Count)" -ForegroundColor Magenta
+Write-Host "topUsernames count: $($topUsernames.Count)" -ForegroundColor Magenta
+Write-Host "topLogSources count: $($topLogSources.Count)" -ForegroundColor Magenta
+Write-Host "topCategories count: $($topCategories.Count)" -ForegroundColor Magenta
+Write-Host "sampleEvents count: $($sampleEvents.Count)" -ForegroundColor Magenta
+Write-Host "topQids JSON before template: $(Compact-JsonArray $topQids)" -ForegroundColor Magenta
+Write-Host "topSourceIps JSON before template: $(Compact-JsonArray $topSourceIps)" -ForegroundColor Magenta
+#>
 # ----------------------------
 # Build Rulebot template
 # ----------------------------
@@ -1019,7 +1405,7 @@ $template += "  primary_qid: $primaryQid`r`n"
 $template += "  qid_distribution: $(Compact-JsonArray $topQids)`r`n"
 $template += "  source_distribution: $(Compact-JsonArray $topSourceIps)`r`n"
 $template += "  destination_distribution: $(Compact-JsonArray $topDestinationIps)`r`n"
-$template += "  coverage_note: Primary evidence is offense-linked using INOFFENSE. Distributions are stronger evidence than any single sample event.`r`n"
+$template += "  coverage_note: Primary evidence is offense-linked using INOFFENSE. Top distributions were collected using a bounded offense time window and offense log source filters. Representative events are examples only. Combined distribution is skipped in FAST mode because multi-field grouping can be expensive on QRadar.`r`n"
 $template += "  dominant_log_source: $logSourceId`r`n"
 $template += "  primary_category: $category`r`n"
 
@@ -1071,6 +1457,7 @@ $template += "top_categories: $(Compact-JsonArray $topCategories)`r`n"
 $template += "qid_logsource_category_distribution: $(Compact-JsonArray $qidLogSourceCategory)`r`n"
 $template += "combined_distribution: $(Compact-JsonArray $combinedDistribution)`r`n"
 $template += "representative_events: $(Compact-JsonArray $sampleEvents)`r`n"
+# $template += "collection_stages: $(Compact-JsonArray $collectionStages)`r`n" #add later when Rulebot has this field
 
 # ----------------------------
 # Compact machine-readable context
@@ -1121,7 +1508,7 @@ catch {
 }
 Write-Host ""
 Write-Host "Notes:"
-Write-Host "- Primary evidence is based on WHERE INOFFENSE($offenseId)."
-Write-Host "- No contextual logsource/time-window sample is used as primary evidence."
-Write-Host "- Distributions should be treated as stronger evidence than any single sample event."
-Write-Host "- If INOFFENSE returns no events, do not make tuning recommendations from unrelated contextual evidence."
+Write-Host "- FAST mode uses bounded START/STOP windows derived from QRadar offense metadata."
+Write-Host "- FAST mode applies offense log source filters when available."
+Write-Host "- FAST mode uses staged lightweight Ariel queries."
+Write-Host "- Combined distribution is skipped in FAST mode because multi-field grouping can be expensive on QRadar."
