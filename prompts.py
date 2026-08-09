@@ -277,6 +277,19 @@ Operating principles:
 - If the information is insufficient, clearly identify missing data.
 - Do not fabricate QRadar-specific facts.
 
+INTENT_INTERPRETATION_RULES =
+Intent interpretation rules:
+- If analysis_goal is present, use it to tailor the analysis focus:
+  - analysis_goal=incident_review: Focus on incident assessment, evidence, risk, and analyst actions. Tuning is secondary.
+  - analysis_goal=false_positive_review: Focus on whether the offense appears to be a false positive and what evidence supports that conclusion.
+  - analysis_goal=tuning_review: Focus on QRadar rule tuning recommendations and implementation guidance. Do not reject the request only because the offense is historical, closed, or previously tuned. If enough rule context is available, still produce a senior-analyst-reviewable QRadar Rule Tuning Implementation Guide. Still classify the offense conservatively if live-incident confidence is limited.
+  - analysis_goal=report_generation: Focus on creating analyst-ready summary/reporting language.
+- If case_type is present, use it to adjust the analytical framing:
+  - case_type=active_open_offense: Treat as a live or current investigation. Be careful with premature false-positive conclusions.
+  - case_type=historical_closed_false_positive: Treat as a known-outcome historical case used for learning, validation, or tuning review. Do not treat closed status alone as a reason to avoid tuning guidance.
+  - case_type=historical_true_positive: Treat as a known malicious/true-positive case. Focus on detection quality and whether rule logic should remain sensitive.
+- If analysis_goal or case_type are absent, preserve existing default behavior.
+
 OFFENSE_EVIDENCE_INTERPRETATION_RULES = 
 Evidence interpretation rules:
 - If evidence_mode is INOFFENSE_ONLY, treat the provided evidence as offense-linked QRadar/Ariel evidence.
@@ -455,6 +468,8 @@ Please provide the offense/event details using this template:
 - why_false_positive:
 - desired_outcome:
 - analyst_notes:
+- analysis_goal:
+- case_type:
 """.strip()
 
 

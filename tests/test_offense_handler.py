@@ -142,3 +142,131 @@ def test_handle_offense_analysis_includes_all_candidate_rule_details(monkeypatch
     assert "Analyst approval note" in reply
     assert "Offenses \u2192 Rules" in reply
     assert "senior analyst" in reply
+
+
+def test_parse_offense_template_with_analysis_goal_and_case_type():
+    """New fields analysis_goal and case_type are parsed when present."""
+    from offense_parser import parse_offense_template
+
+    text = """offense_id: 999999
+client_id: default
+evidence_mode: INOFFENSE_ONLY
+rule_id: 100102
+event_name: Test Event
+why_false_positive: Testing new fields
+desired_outcome: Verify parsing
+analyst_notes: Intent clarity test
+analysis_goal: false_positive_review
+case_type: historical_closed_false_positive
+"""
+
+    result = parse_offense_template(text)
+
+    assert result["analysis_goal"] == "false_positive_review"
+    assert result["case_type"] == "historical_closed_false_positive"
+    assert result["rule_id"] == "100102"
+    assert result["why_false_positive"] == "Testing new fields"
+
+
+def test_parse_offense_template_without_analysis_goal_and_case_type():
+    """Existing packets without the new fields still parse correctly (backward compat)."""
+    from offense_parser import parse_offense_template
+
+    text = """offense_id: 462687
+client_id: default
+evidence_mode: INOFFENSE_ONLY
+rule_id: 100102
+event_name: Botnet: Potential Botnet Connection (DNS)
+why_false_positive: Known false positive
+desired_outcome: Tune the rule
+analyst_notes: Already reviewed
+"""
+
+    result = parse_offense_template(text)
+
+    assert result["analysis_goal"] == ""
+    assert result["case_type"] == ""
+    assert result["rule_id"] == "100102"
+    assert result["why_false_positive"] == "Known false positive"
+
+
+def test_handle_offense_analysis_with_analysis_goal_and_case_type(monkeypatch):
+    """When analysis_goal and case_type are present, they appear in the user prompt sent to the LLM."""
+    offense_data = {
+        "rule_id": "100102",
+        "resolved_rule_bindings": [],
+        "qradar_rule_api_metadata": [],
+        "event_name": "Test Event",
+        "event_description": "Test",
+        "why_false_positive": "FP",
+        "desired_outcome": "Tune",
+        "analyst_notes": "Notes",
+        "payload_summary": "Payload",
+        "top_qids": [],
+        "combined_distribution": [],
+        "analysis_goal": "tuning_review",
+        "case_type": "historical_closed_false_positive",
+    }
+
+    captured = {}
+
+    def fake_parse_offense_template(text):
+        return offense_data
+
+    def fake_missing_required_fields(data):
+        return []
+
+    def fake_get_rule(rule_id):
+        return None
+
+    def fake_retrieve_context_with_sources(*args, **kwargs):
+        return []
+
+    def fake_analyze_rule(system_prompt, user_prompt):
+        captured["user_prompt"] = user_prompt
+        return json.dumps({
+            "classification": "likely benign",
+            "reasoning": "Test reasoning",
+            "likely_false_positive": True,
+            "tuning_options": [],
+            "compliance_notes": "Test",
+            "validation_steps": ["Monitor"],
+            "confidence": "medium",
+            "implementation_guide": {
+                "recommended_change": "Test",
+                "qradar_ui_steps": [],
+                "condition_or_test_to_modify": None,
+                "values_to_add_or_exclude": [],
+                "expected_impact": "Test",
+                "risk": "Test",
+                "validation_steps": [],
+                "rollback_steps": [],
+                "analyst_approval_note": "Test"
+            }
+        })
+
+    def fake_build_case_record(**kwargs):
+        return {}
+
+    def fake_save_case_record(case_record):
+        return {"case_uid": "case-456"}
+
+    monkeypatch.setattr(oh, "parse_offense_template", fake_parse_offense_template)
+    monkeypatch.setattr(oh, "get_missing_required_fields", fake_missing_required_fields)
+    monkeypatch.setattr(oh, "get_rule", fake_get_rule)
+    monkeypatch.setattr(oh, "retrieve_context_with_sources", fake_retrieve_context_with_sources)
+    monkeypatch.setattr(oh, "analyze_rule", fake_analyze_rule)
+    monkeypatch.setattr(oh, "build_case_record", fake_build_case_record)
+    monkeypatch.setattr(oh, "save_case_record", fake_save_case_record)
+
+    import asyncio
+
+    response, status = asyncio.run(oh.handle_offense_analysis("test text"))
+
+    assert status == 200
+    assert response["status"] == "success"
+    # The user prompt should contain the new fields
+    assert '"analysis_goal"' in captured["user_prompt"]
+    assert '"case_type"' in captured["user_prompt"]
+    assert 'tuning_review' in captured["user_prompt"]
+    assert 'historical_closed_false_positive' in captured["user_prompt"]

@@ -46,6 +46,9 @@ EXPECTED_OFFENSE_FIELDS = [
     "why_false_positive",
     "desired_outcome",
     "analyst_notes",
+
+    "analysis_goal",
+    "case_type",
 ]
 
 

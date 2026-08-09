@@ -776,6 +776,16 @@ $evidenceModeChoice = Read-Choice "Select evidence collection mode:" @("FAST", "
 Write-Host ""
 Write-Host "Selected evidence mode: $evidenceModeChoice" -ForegroundColor Green
 
+# ----------------------------
+# User Intent Clarity fields
+# ----------------------------
+$analysisGoal = Read-Choice "Select analysis goal:" @("tuning_review", "false_positive_review", "incident_review", "report_generation")
+$caseType = Read-Choice "Select case type:" @("active_open_offense", "historical_closed_false_positive", "historical_true_positive")
+
+Write-Host ""
+Write-Host "Selected analysis_goal: $analysisGoal" -ForegroundColor Green
+Write-Host "Selected case_type: $caseType" -ForegroundColor Green
+
 Write-Host ""
 Write-Host "Pulling QRadar offense metadata..." -ForegroundColor Cyan
 
@@ -1464,6 +1474,13 @@ $template += "representative_events: $(Compact-JsonArray $sampleEvents)`r`n"
 # ----------------------------
 
 $template += "payload_summary: $payloadSummary`r`n"
+
+# ----------------------------
+# User Intent Clarity fields
+# ----------------------------
+
+$template += "analysis_goal: $analysisGoal`r`n"
+$template += "case_type: $caseType`r`n"
 
 # ----------------------------
 # Analyst-fill fields
