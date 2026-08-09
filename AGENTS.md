@@ -53,24 +53,24 @@ Every rule tuning output should eventually include:
 
 ## QRadar Rule Tuning Implementation Guide
 
-When enough information is available, this section should include:
+## Known QRadar Rule Tuning UI Path
 
-- Exact QRadar UI navigation path
-- Rule name
-- Rule test group or condition area to review
-- Suggested condition/test to add or modify
-- Exact values to add, exclude, or tune
-- Whether to use a reference set, building block, event property, rule test, or manual condition
-- Expected impact
-- Risk of false negatives
-- Validation period
-- Rollback steps
+For this SOC environment, QRadar rule tuning is performed through:
 
-If exact QRadar field names, reference sets, building blocks, or test names are not available, Rulebot must say so clearly.
+1. Open QRadar Console.
+2. Select the Offenses tab in the top navigation.
+3. Select Rules in the left-hand Offenses menu.
+4. Search by Rule Name. Do not assume the UI supports searching by Rule ID.
+5. Double-click the matching rule.
+6. The Rule Wizard opens in a separate window.
+7. The top pane lists available rule tests or logical operations.
+8. The centre pane contains the current rule logic.
+9. Existing logic operations in the centre pane can be moved, removed, or edited.
+10. Clickable or underlined values inside the rule logic are adjustable parameters.
+11. The lower pane shows rule group membership and should only be changed if evidence supports it.
+12. Save or finish the wizard and deploy according to the local QRadar change process.
 
-Example wording:
-
-"Exact QRadar property name must be confirmed by a senior analyst before implementation."
+Do not replace this with generic wording such as "Rules tab → Custom Rules" unless verified in the live environment.
 
 ## Implementation Guidance Style
 

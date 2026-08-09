@@ -166,7 +166,30 @@ Use exactly this structure and field names:
     "step 1",
     "step 2"
   ],
-  "confidence": "low | medium | high"
+  "confidence": "low | medium | high",
+  "implementation_guide": {
+    "recommended_change": "string describing the tuning change",
+    "qradar_ui_steps": [
+      "step 1",
+      "step 2"
+    ],
+    "condition_or_test_to_modify": "string or null if unknown",
+    "values_to_add_or_exclude": [
+      "value 1",
+      "value 2"
+    ],
+    "expected_impact": "string",
+    "risk": "string",
+    "validation_steps": [
+      "step 1",
+      "step 2"
+    ],
+    "rollback_steps": [
+      "step 1",
+      "step 2"
+    ],
+    "analyst_approval_note": "string"
+  }
 }
 
 Rules:
@@ -209,6 +232,15 @@ Rules:
 - If top_qids or combined_distribution are present, identify the dominant QID by event_count.
 - If representative_events differ from the dominant distribution, state that representative_events are examples and not the primary basis for tuning.
 - If evidence_mode is INOFFENSE_ONLY, state that the analysis is based on offense-linked evidence.
+- "implementation_guide" must always be an object. It must not be null.
+- If exact implementation details are unavailable, set unavailable string fields to null and unavailable list fields to [].
+- Explain what must be confirmed by a senior analyst in analyst_approval_note.
+- Do not invent exact QRadar field names, event property names, reference set names, building block names, rule test names, group names, or values.
+- Use only values present in the offense, rule definition, exported rule JSON, retrieved context, or analyst-provided evidence.
+- Do not imply Rulebot can directly modify, save, deploy, or change QRadar rules.
+- All tuning guidance must be senior-analyst-reviewable.
+- Every implementation guide must include risk, validation, rollback, and analyst approval guidance.
+- Do not recommend suppressing or excluding alerts without explaining potential false negative risk.
 """.strip()
 
 
@@ -279,6 +311,47 @@ Recommendation safety rules:
 - If suggesting a new building block or reference set concept, clearly say "consider creating or modifying" rather than implying the object already exists.
 - If full rule logic is unavailable for a target, do not provide condition-level tuning. Lower confidence and request/export the full CRE rule logic.
 
+Implementation guide rules:
+- Generate the implementation_guide for every offense analysis response. It must always be an object, never null.
+- If only qradar_rule_api_metadata is available (no exported rule JSON with condition-level detail), set condition_or_test_to_modify to null, set values_to_add_or_exclude to [], and explain in analyst_approval_note that the full rule logic must be exported before condition-level guidance can be provided.
+- Use only values present in the offense, rule definition, exported rule JSON, retrieved context, or analyst-provided evidence.
+- Do not invent exact QRadar field names, event property names, reference set names, building block names, rule test names, group names, or values.
+- If exact implementation details are missing, state clearly what a senior analyst must confirm before implementation.
+- Do not imply Rulebot can directly modify, save, deploy, or change QRadar rules.
+- All tuning guidance must be senior-analyst-reviewable.
+- Every implementation guide must include risk, validation, rollback, and analyst approval guidance.
+- Do not recommend suppressing or excluding alerts without explaining potential false negative risk.
+
+Known QRadar UI path for rule tuning (use as default for qradar_ui_steps):
+1. Open the QRadar Console.
+2. Select the Offenses tab from the top navigation bar.
+3. In the left-hand Offenses menu, select Rules.
+4. Search for the rule by Rule Name. Do not assume there is a searchable Rule ID field in this UI.
+5. Double-click the matching rule.
+6. The Rule Wizard opens in a separate window.
+7. The top pane lists available rule tests or logical operations that can be added.
+8. The centre pane contains the current rule logic.
+9. Existing rule logic operations in the centre pane can be moved up, moved down, removed, or edited.
+10. Adjustable parameters inside the rule logic appear as clickable or underlined values.
+11. Use the lower pane for rule group membership only if group changes are specifically required and supported by the evidence.
+12. Save or finish the wizard and deploy changes according to the local QRadar change process.
+
+When generating qradar_ui_steps, prefer wording like:
+- Open the QRadar Console.
+- Go to Offenses → Rules.
+- Search for the rule by Rule Name: "<rule name>".
+- Double-click the rule to open the Rule Wizard.
+- Review the current rule logic in the centre pane.
+- If the recommended change is approved, add or modify the relevant rule test or logical operation using the top pane and centre rule logic pane.
+- Click the underlined parameter value in the rule logic to adjust the value, if the exact parameter is visible and confirmed.
+- Save or finish the Rule Wizard change.
+- Deploy the change according to the local QRadar change process.
+- Monitor and validate after deployment.
+
+Do not use inaccurate UI wording such as "Rules tab → Custom Rules" unless this exact path is present in the retrieved context. Use "Offenses → Rules" as the default path.
+
+Rule Name is the primary UI lookup value. QRadar rule IDs and exported rule IDs can be mentioned as supporting identifiers, but do not instruct the analyst to search by rule ID unless the evidence confirms that the live UI supports it.
+
 Test packet rule:
 - If why_false_positive or analyst_notes says the case is a functional test, not confirmed by SOC, or not a final production tuning request, classify as inconclusive and do not use high confidence.
 
@@ -298,6 +371,7 @@ Return your answer in structured JSON with these fields:
 - compliance_notes
 - validation_steps
 - confidence
+- implementation_guide
 
 Return ONLY valid JSON. Do NOT include markdown or code blocks.
 """.strip() + "\n\n" + OFFENSE_ANALYSIS_RECOMMENDATION_RULES + "\n\n" + OFFENSE_ANALYSIS_OUTPUT_SCHEMA

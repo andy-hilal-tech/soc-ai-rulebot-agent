@@ -60,16 +60,57 @@ def test_handle_offense_analysis_includes_all_candidate_rule_details(monkeypatch
 
     def fake_analyze_rule(system_prompt, user_prompt):
         captured["user_prompt"] = user_prompt
-        return json.dumps({"summary": "ok"})
+        return json.dumps({
+            "classification": "likely benign",
+            "reasoning": "Test reasoning",
+            "likely_false_positive": True,
+            "tuning_options": [
+                {
+                    "type": "condition narrowing",
+                    "details": "Add a condition to exclude known benign test traffic."
+                }
+            ],
+            "compliance_notes": "Test compliance notes",
+            "validation_steps": [
+                "Monitor offense volume for 7 days."
+            ],
+            "confidence": "medium",
+            "implementation_guide": {
+                "recommended_change": "Add a senior-approved condition to exclude known benign test traffic.",
+                "qradar_ui_steps": [
+                    "Open the QRadar Console.",
+                    "Go to Offenses \u2192 Rules.",
+                    "Search for the rule by Rule Name.",
+                    "Double-click the matching rule to open the Rule Wizard.",
+                    "Review the current rule logic in the centre pane.",
+                    "Confirm the exact clickable parameter with a senior analyst before editing.",
+                    "Save or finish the Rule Wizard change.",
+                    "Deploy the change according to the local QRadar change process."
+                ],
+                "condition_or_test_to_modify": None,
+                "values_to_add_or_exclude": [],
+                "expected_impact": "May reduce false positives once the exact condition and values are confirmed.",
+                "risk": "Overbroad tuning could suppress true positives.",
+                "validation_steps": [
+                    "Monitor offense volume for the affected rule for 7 days.",
+                    "Confirm that similar false positive offenses are reduced.",
+                    "Confirm that true-positive coverage is not weakened."
+                ],
+                "rollback_steps": [
+                    "Open the same rule in the QRadar Rule Wizard.",
+                    "Remove the approved tuning change.",
+                    "Save or finish the wizard.",
+                    "Deploy changes again."
+                ],
+                "analyst_approval_note": "A senior analyst must confirm the exact QRadar condition, clickable parameter, and values before implementation."
+            }
+        })
 
     def fake_build_case_record(**kwargs):
         return {}
 
     def fake_save_case_record(case_record):
         return {"case_uid": "case-123"}
-
-    def fake_build_offense_reply(**kwargs):
-        return "reply"
 
     monkeypatch.setattr(oh, "parse_offense_template", fake_parse_offense_template)
     monkeypatch.setattr(oh, "get_missing_required_fields", fake_missing_required_fields)
@@ -78,7 +119,6 @@ def test_handle_offense_analysis_includes_all_candidate_rule_details(monkeypatch
     monkeypatch.setattr(oh, "analyze_rule", fake_analyze_rule)
     monkeypatch.setattr(oh, "build_case_record", fake_build_case_record)
     monkeypatch.setattr(oh, "save_case_record", fake_save_case_record)
-    monkeypatch.setattr(oh, "build_offense_reply", fake_build_offense_reply)
 
     import asyncio
 
@@ -92,3 +132,13 @@ def test_handle_offense_analysis_includes_all_candidate_rule_details(monkeypatch
     assert 'rule-a' in captured["user_prompt"]
     assert 'rule-b' in captured["user_prompt"]
     assert 'legacy-rule' in captured["user_prompt"]
+
+    reply = response["reply"]
+    assert "QRadar Rule Tuning Implementation Guide" in reply
+    assert "Recommended change" in reply
+    assert "QRadar UI steps" in reply
+    assert "Validation steps" in reply
+    assert "Rollback steps" in reply
+    assert "Analyst approval note" in reply
+    assert "Offenses \u2192 Rules" in reply
+    assert "senior analyst" in reply

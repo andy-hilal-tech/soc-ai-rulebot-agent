@@ -214,6 +214,63 @@ def _format_tuning_options(analysis: dict, max_items: int = 3) -> str:
 
 
 
+def _format_implementation_guide(guide) -> str:
+    if not guide or not isinstance(guide, dict):
+        return ""
+
+    lines = ["", "QRadar Rule Tuning Implementation Guide", ""]
+
+    recommended_change = _safe_string(guide.get("recommended_change"))
+    if recommended_change:
+        lines.append(f"Recommended change: {recommended_change}")
+
+    ui_steps = guide.get("qradar_ui_steps")
+    if isinstance(ui_steps, list) and ui_steps:
+        lines.append("")
+        lines.append("QRadar UI steps:")
+        for step in ui_steps:
+            lines.append(f"- {step}")
+
+    condition = _safe_string(guide.get("condition_or_test_to_modify"))
+    if condition:
+        lines.append(f"Condition/test to modify: {condition}")
+
+    values = guide.get("values_to_add_or_exclude")
+    if isinstance(values, list) and values:
+        lines.append("")
+        lines.append("Values to add/exclude:")
+        for val in values:
+            lines.append(f"- {val}")
+
+    impact = _safe_string(guide.get("expected_impact"))
+    if impact:
+        lines.append(f"Expected impact: {impact}")
+
+    risk = _safe_string(guide.get("risk"))
+    if risk:
+        lines.append(f"Risk: {risk}")
+
+    val_steps = guide.get("validation_steps")
+    if isinstance(val_steps, list) and val_steps:
+        lines.append("")
+        lines.append("Validation steps:")
+        for step in val_steps:
+            lines.append(f"- {step}")
+
+    rollback = guide.get("rollback_steps")
+    if isinstance(rollback, list) and rollback:
+        lines.append("")
+        lines.append("Rollback steps:")
+        for step in rollback:
+            lines.append(f"- {step}")
+
+    approval = _safe_string(guide.get("analyst_approval_note"))
+    if approval:
+        lines.append(f"Analyst approval note: {approval}")
+
+    return "\n".join(lines)
+
+
 def build_offense_reply(
     case_uid: str | None,
     offense_data: dict,
@@ -308,6 +365,10 @@ def build_offense_reply(
             lines.append(f"- {rec}")
     else:
         lines.append("- No concrete tuning recommendation could be generated from the provided context.")
+
+    implementation_guide = _format_implementation_guide(analysis.get("implementation_guide"))
+    if implementation_guide:
+        lines.append(implementation_guide)
 
     if case_warning:
         lines.extend([
