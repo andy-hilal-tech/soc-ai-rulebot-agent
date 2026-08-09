@@ -12,3 +12,5 @@ tools/windows/output/
 # Optional: if previous snapshots should stay local only in production
 # data/rules/previous/
 # data/building_blocks/previous/
+
+debug_packets/*.txt
