@@ -14,3 +14,5 @@ tools/windows/output/
 # data/building_blocks/previous/
 
 debug_packets/*.txt
+/data/qradar_rule_metadata/
+/certs/
