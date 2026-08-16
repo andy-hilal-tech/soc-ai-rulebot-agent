@@ -789,11 +789,74 @@ Write-Host "Selected case_type: $caseType" -ForegroundColor Green
 Write-Host ""
 Write-Host "Pulling QRadar offense metadata..." -ForegroundColor Cyan
 
-$offense = Invoke-Qradar `
+$offenseResponse = Invoke-Qradar `
     -BaseUrl $inst.BaseUrl `
     -Token $token `
     -Method "GET" `
-    -Path "/api/siem/offenses/$offenseId"
+    -Path "/api/siem/offenses?filter=id=$offenseId"
+
+# The filter endpoint always returns an array.
+# Handle: empty array, single result, or multiple results.
+if ($null -eq $offenseResponse) {
+    throw @"
+Offense $offenseId was not found by the QRadar SIEM API.
+
+The filter endpoint /api/siem/offenses?filter=id=$offenseId returned an empty response.
+This offense may not be visible through the QRadar SIEM API.
+
+Known causes:
+- Some BDFC-domain offenses visible in the QRadar Console are not accessible
+  through /api/siem/offenses or Ariel INOFFENSE lookups.
+- The offense may have been deleted or purged.
+
+Recommended actions:
+1. Verify the offense ID in the QRadar Console (Offenses tab).
+2. If the offense is visible in the UI but not through the API, this is a
+   QRadar-side anomaly. Consider IBM support escalation.
+3. If the offense does not exist in the UI either, check the offense ID.
+"@
+}
+
+if ($offenseResponse.PSObject.Properties.Name -contains "http_response") {
+    throw "QRadar offense API error: $(Compact-Json $offenseResponse)"
+}
+
+$offenseList = @($offenseResponse)
+$offenseCount = $offenseList.Count
+
+if ($offenseCount -eq 0) {
+    throw @"
+Offense $offenseId was not visible through the QRadar SIEM API.
+
+The filter endpoint /api/siem/offenses?filter=id=$offenseId returned an empty array [].
+This offense exists in the QRadar Console but is not accessible through the SIEM API.
+
+Known cause:
+- Some BDFC-domain offenses visible in the QRadar Console are not accessible
+  through /api/siem/offenses or Ariel INOFFENSE lookups. This is a QRadar-side
+  anomaly and not a PacketGenerator issue.
+
+Recommended actions:
+1. Verify the offense ID in the QRadar Console (Offenses tab).
+2. If the offense is visible in the UI, this is a QRadar API limitation.
+   Consider IBM support escalation.
+3. If the offense does not exist in the UI, check the offense ID.
+"@
+}
+
+if ($offenseCount -gt 1) {
+    $returnedIds = ($offenseList | ForEach-Object { $_.id }) -join ", "
+    throw @"
+Offense filter lookup for ID $offenseId returned $offenseCount results instead of 1.
+This is unexpected because offense IDs should be unique.
+
+Returned offense IDs: $returnedIds
+
+This may indicate a QRadar API anomaly. Review the returned offenses manually.
+"@
+}
+
+$offense = $offenseList[0]
 
 $timeBounds = Get-OffenseAqlTimeBounds -Offense $offense -BufferMinutes $AQL_TIME_BUFFER_MINUTES
 $aqlTimeClause = Get-AqlTimeClause -Start $timeBounds.Start -Stop $timeBounds.Stop
@@ -802,10 +865,6 @@ $extraWhere = Get-OffenseLogSourceFilter -Offense $offense
 Write-Host ""
 Write-Host "Using AQL time bounds: $aqlTimeClause" -ForegroundColor DarkGreen
 Write-Host "Using extra WHERE filter: $($extraWhere.Trim())" -ForegroundColor DarkGreen
-
-if ($offense -and $offense.http_response) {
-    throw "QRadar offense API error: $(Compact-Json $offense)"
-}
 
 Write-Host "Pulling QRadar offense notes..." -ForegroundColor Cyan
 
