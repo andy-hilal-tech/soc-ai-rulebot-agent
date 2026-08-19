@@ -793,7 +793,7 @@ $offenseResponse = Invoke-Qradar `
     -BaseUrl $inst.BaseUrl `
     -Token $token `
     -Method "GET" `
-    -Path "/api/siem/offenses?filter=id=$offenseId"
+    -Path "/api/siem/offenses/$offenseId"
 
 # The filter endpoint always returns an array.
 # Handle: empty array, single result, or multiple results.
