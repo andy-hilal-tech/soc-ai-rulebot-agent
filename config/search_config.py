@@ -1,7 +1,7 @@
 import os
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
-from azure.search.documents.indexes import SearchIndexClient
+from azure.identity import DefaultAzureCredential
 from openai import AzureOpenAI
 
 
@@ -16,7 +16,21 @@ def _require_env(name: str) -> str:
 # Azure AI Search
 # ----------------------------
 SEARCH_ENDPOINT = _require_env("SEARCH_ENDPOINT")
-SEARCH_ADMIN_KEY = _require_env("SEARCH_ADMIN_KEY")
+
+SEARCH_ADMIN_KEY = os.getenv(
+    "SEARCH_ADMIN_KEY",
+    "",
+).strip()
+
+CANONICAL_RULES_INDEX_NAME = os.getenv(
+    "CANONICAL_RULES_INDEX_NAME",
+    "qradar-rule-corpus-v1",
+).strip()
+
+CANONICAL_SEMANTIC_CONFIG = os.getenv(
+    "CANONICAL_SEMANTIC_CONFIG",
+    "canonical-semantic-config",
+).strip()
 
 # ----------------------------
 # Azure OpenAI embeddings
@@ -43,19 +57,22 @@ CHUNK_OVERLAP = 200
 # Embedding batch size
 EMBED_BATCH_SIZE = 16
 
+def _get_search_credential():
+    if SEARCH_ADMIN_KEY:
+        return AzureKeyCredential(
+            SEARCH_ADMIN_KEY
+        )
 
-def get_search_index_client() -> SearchIndexClient:
-    return SearchIndexClient(
-        endpoint=SEARCH_ENDPOINT,
-        credential=AzureKeyCredential(SEARCH_ADMIN_KEY),
-    )
+    return DefaultAzureCredential()
 
 
-def get_search_client(index_name: str) -> SearchClient:
+def get_search_client(
+    index_name: str,
+) -> SearchClient:
     return SearchClient(
         endpoint=SEARCH_ENDPOINT,
         index_name=index_name,
-        credential=AzureKeyCredential(SEARCH_ADMIN_KEY),
+        credential=_get_search_credential(),
     )
 
 

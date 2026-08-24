@@ -4,6 +4,7 @@ openai
 PyPDF2
 botbuilder-core==4.17.1
 botbuilder-integration-aiohttp==4.17.1
-azure-search-documents
-azure-cosmos
+azure-search-documents==12.0.0
+azure-cosmos==4.16.1
+azure-identity==1.25.3
 pandas
