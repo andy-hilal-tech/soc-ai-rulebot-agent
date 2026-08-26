@@ -38,7 +38,7 @@ from handlers.case_handler import get_case, update_case_status
 # ----------------------------
 # Environment variables
 # ----------------------------
-PORT = int(os.getenv("PORT", "8001"))
+PORT = int(os.getenv("PORT", "8000"))
 
 MICROSOFT_APP_ID = os.getenv("MICROSOFT_APP_ID", "").strip()
 MICROSOFT_APP_PASSWORD = os.getenv("MICROSOFT_APP_PASSWORD", "").strip()
