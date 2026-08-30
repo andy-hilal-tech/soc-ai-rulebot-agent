@@ -17,3 +17,4 @@ debug_packets/*.txt
 /data/qradar_rule_metadata/
 /certs/
 repo_search_results.txt
+graphify-out/

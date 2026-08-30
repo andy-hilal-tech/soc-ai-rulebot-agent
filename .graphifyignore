@@ -1,0 +1,13 @@
+.git/
+.venv/
+__pycache__/
+*.pyc
+graphify-out/
+
+data/rules/
+data/building_blocks/
+
+knowledge/qradar_docs/
+knowledge/internal_notes/
+
+tests/
