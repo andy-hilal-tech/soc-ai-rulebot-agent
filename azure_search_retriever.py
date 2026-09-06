@@ -8,6 +8,7 @@ from config.search_config import (
     ANALYST_MEMORY_INDEX_NAME,
     AZURE_OPENAI_EMBED_DEPLOYMENT,
 )
+import re
 
 
 def embed_query(query: str) -> List[float]:
@@ -49,6 +50,24 @@ def normalize_doc(index_name: str, doc: dict) -> dict | None:
 
     if not text:
         return None
+
+    if index_name == RULES_INDEX_NAME:
+        rule_id = str(doc.get("rule_id", "")).strip()
+        rule_name = str(doc.get("rule_name", "")).strip()
+
+        identity_lines = []
+
+        if rule_id:
+            identity_lines.append(f"Rule ID: {rule_id}")
+
+        if rule_name:
+            identity_lines.append(f"Rule Name: {rule_name}")
+
+        if identity_lines:
+            identity_header = "\n".join(identity_lines)
+
+            if identity_header not in text:
+                text = f"{identity_header}\n\n{text}"
 
     return {
         "source": format_source_label(index_name, doc),
@@ -338,20 +357,93 @@ def retrieve_rule_docs_for_offense_bindings(
     return dedupe_and_trim(results, top_k=top_k, max_per_source=1)
 
 
-def retrieve_reasoning_context(query: str, top_k: int = 5) -> List[Dict]:
+def retrieve_reasoning_context(query: str, top_k: int = 5):
     try:
-        official = hybrid_search_index(OFFICIAL_INDEX_NAME, query, top_k=4)
-        analyst = hybrid_search_index(ANALYST_MEMORY_INDEX_NAME, query, top_k=4)
+        official = hybrid_search_index(
+            OFFICIAL_INDEX_NAME,
+            query,
+            top_k=4,
+        )
+
+        analyst = hybrid_search_index(
+            ANALYST_MEMORY_INDEX_NAME,
+            query,
+            top_k=4,
+        )
+
+        rules = hybrid_search_index(
+            RULES_INDEX_NAME,
+            query,
+            top_k=5,
+        )
+
+        exact_rules = []
+
+        rule_ids = re.findall(
+            r"\b\d{5,}\b",
+            query,
+        )
+
+        if rule_ids:
+            search_client = get_search_client(
+                RULES_INDEX_NAME
+            )
+
+            for rule_id in rule_ids:
+                safe_rule_id = escape_odata_string(
+                    rule_id
+                )
+
+                results = search_client.search(
+                    search_text="*",
+                    filter=(
+                        f"rule_id eq '{safe_rule_id}'"
+                    ),
+                    top=5,
+                )
+
+                for document in results:
+                    item = normalize_doc(
+                        RULES_INDEX_NAME,
+                        dict(document),
+                    )
+
+                    if item is not None:
+                        exact_rules.append(item)
 
         combined = rerank_combined_results(
-            official + analyst,
+            official + analyst + rules,
             query=query,
         )
 
-        return dedupe_and_trim(combined, top_k=top_k, max_per_source=2)
+        exact_sources = {
+            item.get("source")
+            for item in exact_rules
+        }
+
+        remaining = [
+            item
+            for item in combined
+            if item.get("source") not in exact_sources
+        ]
+
+        remaining = dedupe_and_trim(
+            remaining,
+            top_k=max(
+                0,
+                top_k - len(exact_rules),
+            ),
+            max_per_source=2,
+        )
+
+        return exact_rules + remaining
 
     except Exception as e:
-        print(f"[retrieve_reasoning_context] Azure Search retrieval failed: {e}", flush=True)
+        print(
+            "[retrieve_reasoning_context] "
+            f"Azure Search retrieval failed: {e}",
+            flush=True,
+        )
         return []
 
 
