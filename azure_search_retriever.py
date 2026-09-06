@@ -6,8 +6,6 @@ from config.search_config import (
     OFFICIAL_INDEX_NAME,
     RULES_INDEX_NAME,
     ANALYST_MEMORY_INDEX_NAME,
-    CANONICAL_RULES_INDEX_NAME,
-    CANONICAL_SEMANTIC_CONFIG,
     AZURE_OPENAI_EMBED_DEPLOYMENT,
 )
 
@@ -21,188 +19,48 @@ def embed_query(query: str) -> List[float]:
     return response.data[0].embedding
 
 
-def format_source_label(
-    index_name: str,
-    doc: dict,
-) -> str:
+def format_source_label(index_name: str, doc: dict) -> str:
     if index_name == OFFICIAL_INDEX_NAME:
-        return (
-            doc.get("source_path", "")
-            or doc.get("title", "official_doc")
-        )
+        return doc.get("source_path", "") or doc.get("title", "official_doc")
 
-    if index_name in{
-        RULES_INDEX_NAME,
-        CANONICAL_RULES_INDEX_NAME,
-    }:
-        rule_id = (
-            doc.get("primary_qradar_rule_id")
-            or doc.get("rule_id")
-            or ""
-        )
-        title = (
-            doc.get("title")
-            or doc.get("rule_name")
-            or ""
-        )
-
-        canonical_uuid = doc.get("canonical_uuid", "",)
-
-        rule_doc_id = (
-            doc.get("id")
-            or doc.get("rule_doc_id")
-            or ""
-        )
-
-        identity = (
-            canonical_uuid
-            or rule_doc_id
-            or str(rule_id)
-        )
-
-
-        return (
-            f"rule:{rule_id}:"
-            f"{identity}:"
-            f"{title}"
-        )
+    if index_name == RULES_INDEX_NAME:
+        return f"rule:{doc.get('rule_id', '')}:{doc.get('rule_name', '')}"
 
     if index_name == ANALYST_MEMORY_INDEX_NAME:
-        source_type = doc.get(
-            "source_type",
-            "memory",
-        )
-        title = (
-            doc.get("title", "")
-            or doc.get("case_uid", "")
-            or doc.get("note_id", "")
-        )
+        source_type = doc.get("source_type", "memory")
+        title = doc.get("title", "") or doc.get("case_uid", "") or doc.get("note_id", "")
         client_id = doc.get("client_id", "")
-
         if client_id:
-            return (
-                f"{source_type}:"
-                f"{client_id}:"
-                f"{title}"
-            )
-
+            return f"{source_type}:{client_id}:{title}"
         return f"{source_type}:{title}"
 
     return index_name
 
 
-def normalize_doc(
-    index_name: str,
-    doc: dict,
-) -> dict | None:
-    if index_name == CANONICAL_RULES_INDEX_NAME:
-        text = doc.get("rag_text", "")
-
-        if not text:
-            return None
-
-        qradar_rule_ids = (
-            doc.get("qradar_rule_ids")
-            or []
-        )
-
-        primary_rule_id = doc.get(
-            "primary_qradar_rule_id"
-        )
-
-        if primary_rule_id is not None:
-            rule_id = str(primary_rule_id)
-        elif qradar_rule_ids:
-            rule_id = str(qradar_rule_ids[0])
-        else:
-            rule_id = ""
-
-        source_type = (
-            doc.get("document_type")
-            or doc.get("corpus_type")
-            or ""
-        )
-
-        return {
-            "source": format_source_label(
-                index_name,
-                doc,
-            ),
-            "source_type": source_type,
-            "object_type": doc.get(
-                "object_type",
-                "",
-            ),
-            "text": text,
-            "score": doc.get("@search.score"),
-            "reranker_score": doc.get(
-                "@search.reranker_score"
-            ),
-            "rule_doc_id": doc.get("id", ""),
-            "rule_id": rule_id,
-            "rule_name": doc.get("title", ""),
-            "client_id": doc.get(
-                "tenant_id",
-                "",
-            ),
-            "title": doc.get("title", ""),
-            "canonical_uuid": doc.get(
-                "canonical_uuid",
-                "",
-            ),
-            "qradar_rule_ids": qradar_rule_ids,
-            "identifiers": (
-                doc.get("identifiers")
-                or []
-            ),
-            "linked_rule_identifiers": (
-                doc.get(
-                    "linked_rule_identifiers"
-                )
-                or []
-            ),
-            "dependency_count": doc.get(
-                "dependency_count",
-                0,
-            ),
-        }
-
-    text = doc.get("content", "")
+def normalize_doc(index_name: str, doc: dict) -> dict | None:
+    if index_name == OFFICIAL_INDEX_NAME:
+        text = doc.get("content", "")
+    elif index_name == RULES_INDEX_NAME:
+        text = doc.get("content", "")
+    elif index_name == ANALYST_MEMORY_INDEX_NAME:
+        text = doc.get("content", "")
+    else:
+        text = doc.get("content", "")
 
     if not text:
         return None
 
     return {
-        "source": format_source_label(
-            index_name,
-            doc,
-        ),
-        "source_type": doc.get(
-            "source_type",
-            "",
-        ),
-        "object_type": doc.get(
-            "object_type",
-            "",
-        ),
+        "source": format_source_label(index_name, doc),
+        "source_type": doc.get("source_type", ""),
+        "object_type": doc.get("object_type", ""),
         "text": text,
         "score": doc.get("@search.score"),
-        "reranker_score": doc.get(
-            "@search.reranker_score"
-        ),
-        "rule_doc_id": doc.get(
-            "rule_doc_id",
-            "",
-        ),
+        "reranker_score": doc.get("@search.reranker_score"),
+        "rule_doc_id": doc.get("rule_doc_id", ""),
         "rule_id": doc.get("rule_id", ""),
-        "rule_name": doc.get(
-            "rule_name",
-            "",
-        ),
-        "client_id": doc.get(
-            "client_id",
-            "",
-        ),
+        "rule_name": doc.get("rule_name", ""),
+        "client_id": doc.get("client_id", ""),
         "title": doc.get("title", ""),
     }
 
@@ -212,10 +70,8 @@ def hybrid_search_index(
     query: str,
     top_k: int = 5,
     filter_expr: str | None = None,
-) -> List:
-    search_client = get_search_client(
-        index_name
-    )
+) -> List[Dict]:
+    search_client = get_search_client(index_name)
     vector = embed_query(query)
 
     results = search_client.search(
@@ -241,186 +97,6 @@ def hybrid_search_index(
 
     return normalized
 
-def search_canonical_rules(
-    query: str,
-    top_k: int = 5,
-    filter_expr: str | None = None,
-    tenant_id: str = "hilal-internal",
-    object_type: str | None = None,
-) -> List[Dict]:
-    """
-    Search the canonical QRadar rule corpus.
-
-    The caller can provide an additional canonical identity filter through
-    filter_expr. Tenant and restrictions are combined with that
-    filter using OData AND semantics.
-    """
-    search_client = get_search_client(
-        CANONICAL_RULES_INDEX_NAME
-    )
-
-    filters: list[str] = []
-
-    if tenant_id:
-        safe_tenant_id = tenant_id.replace(
-            "'",
-            "''",
-        )
-        filters.append(
-            f"tenant_id eq '{safe_tenant_id}'"
-        )
-
-    if object_type:
-        safe_object_type = object_type.replace(
-            "'",
-            "''",
-        )
-        filters.append(
-            f"object_type eq '{safe_object_type}'"
-        )
-
-    if filter_expr:
-        filters.append(
-            f"({filter_expr})"
-        )
-
-    filter_expression = (
-        " and ".join(filters)
-        if filters
-        else None
-    )
-
-    results = search_client.search(
-        search_text=query,
-        query_type="semantic",
-        semantic_configuration_name=(
-            CANONICAL_SEMANTIC_CONFIG
-        ),
-        filter=filter_expression,
-        top=top_k,
-        select=[
-            "id",
-            "canonical_uuid",
-            "title",
-            "corpus_type",
-            "document_type",
-            "object_type",
-            "tenant_id",
-            "primary_qradar_rule_id",
-            "qradar_rule_ids",
-            "identifiers",
-            "linked_rule_identifiers",
-            "dependency_count",
-            "rag_text",
-        ],
-    )
-
-    normalized: list[dict] = []
-
-    for result in results:
-        item = normalize_doc(
-            CANONICAL_RULES_INDEX_NAME,
-            dict(result),
-        )
-
-        if item is not None:
-            normalized.append(item)
-
-    return normalized
-
-def resolve_canonical_rule(
-    rule_reference: str,
-    tenant_id: str = "hilal-internal",
-) -> list:
-    reference = str(
-        rule_reference or ""
-    ).strip()
-
-    if not reference:
-        return []
-
-    search_client = get_search_client(
-        CANONICAL_RULES_INDEX_NAME
-    )
-
-    filters = []
-
-    if tenant_id:
-        safe_tenant_id = tenant_id.replace(
-            "'",
-            "''",
-        )
-        filters.append(
-            f"tenant_id eq '{safe_tenant_id}'"
-        )
-
-    if reference.isdigit():
-        numeric_id = int(reference)
-
-        filters.append(
-            "("
-            f"primary_qradar_rule_id eq {numeric_id} "
-            "or "
-            "qradar_rule_ids/any("
-            f"rule_id: rule_id eq {numeric_id}"
-            ")"
-            ")"
-        )
-    else:
-        safe_reference = reference.replace(
-            "'",
-            "''",
-        )
-
-        filters.append(
-            "("
-            f"canonical_uuid eq '{safe_reference}' "
-            "or "
-            "identifiers/any("
-            f"identifier: identifier eq '{safe_reference}'"
-            ") "
-            "or "
-            "linked_rule_identifiers/any("
-            f"identifier: identifier eq '{safe_reference}'"
-            ")"
-            ")"
-        )
-
-    filter_expression = " and ".join(filters)
-
-    results = search_client.search(
-        search_text="*",
-        filter=filter_expression,
-        top=10,
-        select=[
-            "id",
-            "canonical_uuid",
-            "title",
-            "corpus_type",
-            "document_type",
-            "object_type",
-            "tenant_id",
-            "primary_qradar_rule_id",
-            "qradar_rule_ids",
-            "identifiers",
-            "linked_rule_identifiers",
-            "dependency_count",
-            "rag_text",
-        ],
-    )
-
-    normalized = []
-
-    for result in results:
-        item = normalize_doc(
-            CANONICAL_RULES_INDEX_NAME,
-            dict(result),
-        )
-
-        if item is not None:
-            normalized.append(item)
-
-    return normalized
 
 def rerank_combined_results(
     results: List[Dict],
@@ -523,57 +199,6 @@ def dedupe_and_trim(
 def escape_odata_string(value: str) -> str:
     return value.replace("'", "''")
 
-def build_canonical_identity_filter(
-    term: str,
-) -> str:
-    """
-    Build an exact canonical identity filter.
-
-    Numeric values are checked against the primary ID and the complete
-    qradar_rule_ids collection.
-
-    String values are checked against document ID, canonical UUID,
-    identifiers, and linked identifiers.
-    """
-    clean_term = str(term).strip()
-    escaped = escape_odata_string(clean_term)
-
-    clauses = [
-        f"id eq '{escaped}'",
-        f"canonical_uuid eq '{escaped}'",
-        (
-            "identifiers/any("
-            f"value: value eq '{escaped}'"
-            ")"
-        ),
-        (
-            "linked_rule_identifiers/any("
-            f"value: value eq '{escaped}'"
-            ")"
-        ),
-    ]
-
-    try:
-        numeric_id = int(clean_term)
-    except (TypeError, ValueError):
-        numeric_id = None
-
-    if numeric_id is not None:
-        clauses.extend(
-            [
-                (
-                    "primary_qradar_rule_id "
-                    f"eq {numeric_id}"
-                ),
-                (
-                    "qradar_rule_ids/any("
-                    f"value: value eq {numeric_id}"
-                    ")"
-                ),
-            ]
-        )
-
-    return " or ".join(clauses)
 
 def extract_rule_lookup_terms_from_offense(offense_data: dict) -> list[str]:
     terms: list[str] = []
@@ -652,92 +277,66 @@ def retrieve_rule_docs_for_offense_bindings(
     offense_data: dict,
     query: str,
     top_k: int = 4,
-    tenant_id: str = "hilal-internal",
 ) -> list[dict]:
     results: list[dict] = []
     exact_results: list[dict] = []
 
-    lookup_terms = extract_rule_lookup_terms_from_offense(
-        offense_data
-    )
+    search_client = get_search_client(RULES_INDEX_NAME)
+    lookup_terms = extract_rule_lookup_terms_from_offense(offense_data)
 
-    # 1. Deterministic exact lookup against every canonical identity.
+    # 1. Exact lookup against rule_doc_id and rule_id.
     for term in lookup_terms:
+        escaped = escape_odata_string(term)
+
+        filter_expr = (
+            f"rule_doc_id eq '{escaped}' "
+            f"or rule_id eq '{escaped}'"
+        )
+
         try:
-            identity_filter = build_canonical_identity_filter(
-                term
+            docs = search_client.search(
+                search_text="*",
+                filter=filter_expr,
+                top=5,
             )
 
-            docs = search_canonical_rules(
-                query="*",
-                top_k=5,
-                filter_expr=identity_filter,
-                tenant_id=tenant_id,
-            )
+            for doc in docs:
+                item = normalize_doc(RULES_INDEX_NAME, doc)
 
-            for item in docs:
-                item["_combined_score"] = 100
-                exact_results.append(item)
+                if item:
+                    item["_combined_score"] = 100
+                    exact_results.append(item)
 
         except Exception as exc:
             print(
-                "[retrieve_rule_docs_for_offense_bindings] "
-                f"exact canonical lookup failed for {term}: "
-                f"{exc}",
+                f"[retrieve_rule_docs_for_offense_bindings] exact lookup failed for {term}: {exc}",
                 flush=True,
             )
 
     if exact_results:
-        return dedupe_and_trim(
-            exact_results,
-            top_k=top_k,
-            max_per_source=1,
-        )
+        return dedupe_and_trim(exact_results, top_k=top_k, max_per_source=1)
 
-    # 2. Semantic fallback for UUIDs, names, and unresolved terms.
+    # 2. Semantic/text fallback for UUIDs and names.
     for term in lookup_terms:
         try:
-            fallback = search_canonical_rules(
-                query=term,
+            fallback = hybrid_search_index(
+                RULES_INDEX_NAME,
+                term,
                 top_k=2,
-                tenant_id=tenant_id,
             )
 
             for item in fallback:
-                item["_combined_score"] = (
-                    item.get("_combined_score", 0)
-                    + 25
-                )
+                item["_combined_score"] = item.get("_combined_score", 0) + 25
                 results.append(item)
 
         except Exception as exc:
             print(
-                "[retrieve_rule_docs_for_offense_bindings] "
-                f"semantic canonical lookup failed for {term}: "
-                f"{exc}",
+                f"[retrieve_rule_docs_for_offense_bindings] semantic lookup failed for {term}: {exc}",
                 flush=True,
             )
 
-    # 3. Final fallback using the main offense query.
-    if not results and query.strip():
-        try:
-            results = search_canonical_rules(
-                query=query,
-                top_k=top_k,
-                tenant_id=tenant_id,
-            )
-        except Exception as exc:
-            print(
-                "[retrieve_rule_docs_for_offense_bindings] "
-                f"main-query fallback failed: {exc}",
-                flush=True,
-            )
+    return dedupe_and_trim(results, top_k=top_k, max_per_source=1)
 
-    return dedupe_and_trim(
-        results,
-        top_k=top_k,
-        max_per_source=1,
-    )
 
 def retrieve_reasoning_context(query: str, top_k: int = 5) -> List[Dict]:
     try:
@@ -787,19 +386,17 @@ def retrieve_offense_context(
                 offense_data=offense_data,
                 query=query,
                 top_k=4,
-                tenant_id="hilal-internal",
             )
 
         if not rule_related and rule_id:
-            identity_filter = build_canonical_identity_filter(
-                str(rule_id)
-            )
+            escaped_rule_id = escape_odata_string(str(rule_id))
+            rule_filter = f"rule_id eq '{escaped_rule_id}'"
 
-            rule_related = search_canonical_rules(
-                query="*",
+            rule_related = hybrid_search_index(
+                RULES_INDEX_NAME,
+                query,
                 top_k=2,
-                filter_expr=identity_filter,
-                tenant_id="hilal-internal",
+                filter_expr=rule_filter,
             )
 
         if not rule_related and offense_data:
