@@ -3,6 +3,8 @@ import os
 import re
 import json
 from aiohttp import web
+import traceback
+import base64
 
 from prompts import (
     RULE_ANALYSIS_SYSTEM_PROMPT,
@@ -45,16 +47,32 @@ MICROSOFT_APP_PASSWORD = os.getenv("MICROSOFT_APP_PASSWORD", "").strip()
 MICROSOFT_APP_TYPE = os.getenv("MICROSOFT_APP_TYPE", "SingleTenant").strip()
 MICROSOFT_APP_TENANT_ID = os.getenv("MICROSOFT_APP_TENANT_ID", "").strip()
 
-BOTFRAMEWORK_CONFIG = {
-    "MicrosoftAppId": MICROSOFT_APP_ID,
-    "MicrosoftAppPassword": MICROSOFT_APP_PASSWORD,
-    "MicrosoftAppType": MICROSOFT_APP_TYPE,
-    "MicrosoftAppTenantId": MICROSOFT_APP_TENANT_ID,
-}
 
-bot_auth = ConfigurationBotFrameworkAuthentication(BOTFRAMEWORK_CONFIG)
+
+class BotFrameworkConfig:
+    APP_ID = MICROSOFT_APP_ID
+    APP_PASSWORD = MICROSOFT_APP_PASSWORD
+    APP_TYPE = MICROSOFT_APP_TYPE
+    APP_TENANTID = MICROSOFT_APP_TENANT_ID
+
+
+BOTFRAMEWORK_CONFIG = BotFrameworkConfig()
+
+print(
+    "[bot_auth_config] "
+    f"app_id={BOTFRAMEWORK_CONFIG.APP_ID} "
+    f"app_type={BOTFRAMEWORK_CONFIG.APP_TYPE} "
+    f"tenant_id={BOTFRAMEWORK_CONFIG.APP_TENANTID} "
+    f"password_present={bool(BOTFRAMEWORK_CONFIG.APP_PASSWORD)} "
+    f"password_length={len(BOTFRAMEWORK_CONFIG.APP_PASSWORD)}",
+    flush=True,
+)
+
+bot_auth = ConfigurationBotFrameworkAuthentication(
+    BOTFRAMEWORK_CONFIG
+)
+
 adapter = CloudAdapter(bot_auth)
-
 
 # ----------------------------
 # Router
@@ -231,33 +249,149 @@ class TeamsRulebot(ActivityHandler):
     async def on_message_activity(self, turn_context: TurnContext):
         text = (turn_context.activity.text or "").strip()
 
-        result, _status = await message_internal(text)
-        reply_text = result.get("reply") or result.get("message") or "No response."
+        print(
+            "[TeamsRulebot] message_received "
+            f"channel_id={turn_context.activity.channel_id} "
+            f"text_length={len(text)}",
+            flush=True,
+        )
 
-        await turn_context.send_activity(MessageFactory.text(reply_text))
+        result, status = await message_internal(text)
+
+        print(
+            "[TeamsRulebot] message_processed "
+            f"status={status} "
+            f"result_status={result.get('status')}",
+            flush=True,
+        )
+
+        reply_text = (
+            result.get("reply")
+            or result.get("message")
+            or "No response."
+        )
+
+        await turn_context.send_activity(
+            MessageFactory.text(reply_text)
+        )
+
+        print(
+            "[TeamsRulebot] reply_sent",
+            flush=True,
+        )
 
 
 bot = TeamsRulebot()
 
 
 async def on_error(context: TurnContext, error: Exception):
-    print(f"[on_turn_error] {error}", flush=True)
+    print(
+        f"[on_turn_error] error_type={type(error).__name__} error={error}",
+        flush=True,
+    )
+    traceback.print_exc()
+
     try:
-        await context.send_activity("The bot encountered an internal error.")
-    except Exception:
-        pass
+        await context.send_activity(
+            "The bot encountered an internal error."
+        )
+    except Exception as reply_error:
+        print(
+            "[on_turn_error] failed_to_send_error_reply "
+            f"error_type={type(reply_error).__name__} "
+            f"error={reply_error}",
+            flush=True,
+        )
 
 
 adapter.on_turn_error = on_error
 
+def get_safe_jwt_claims(auth_header: str) -> dict:
+    if not auth_header.startswith("Bearer "):
+        return {}
+
+    token = auth_header.split(" ", 1)[1].strip()
+    parts = token.split(".")
+
+    if len(parts) != 3:
+        return {
+            "token_format": "invalid"
+        }
+
+    try:
+        payload = parts[1]
+        payload += "=" * (-len(payload) % 4)
+
+        decoded = base64.urlsafe_b64decode(
+            payload.encode("ascii")
+        )
+
+        claims = json.loads(
+            decoded.decode("utf-8")
+        )
+
+        return {
+            "aud": claims.get("aud"),
+            "iss": claims.get("iss"),
+            "tid": claims.get("tid"),
+            "appid": claims.get("appid"),
+            "azp": claims.get("azp"),
+            "ver": claims.get("ver"),
+        }
+
+    except Exception as exc:
+        return {
+            "claim_decode_error": type(exc).__name__
+        }
+
 
 async def teams_messages(request: web.Request) -> web.Response:
-    invoke_response = await adapter.process(request, bot)
+    auth_header = request.headers.get(
+        "Authorization",
+        "",
+    )
 
-    if invoke_response:
-        return invoke_response
+    safe_claims = get_safe_jwt_claims(
+        auth_header
+    )
 
-    return web.Response(status=201)
+    print(
+        "[teams_messages] request_received "
+        f"method={request.method} "
+        f"path={request.path} "
+        f"content_type={request.content_type} "
+        f"has_auth={bool(auth_header)} "
+        f"safe_claims={safe_claims}",
+        flush=True,
+    )
+
+    try:
+        invoke_response = await adapter.process(
+            request,
+            bot,
+        )
+
+        print(
+            "[teams_messages] adapter_processed "
+            f"invoke_response={invoke_response is not None}",
+            flush=True,
+        )
+
+        if invoke_response:
+            return invoke_response
+
+        return web.Response(status=201)
+
+    except Exception as exc:
+        print(
+            "[teams_messages] adapter_failed "
+            f"error_type={type(exc).__name__} "
+            f"status={getattr(exc, 'status', None)} "
+            f"reason={getattr(exc, 'reason', None)} "
+            f"error={exc}",
+            flush=True,
+        )
+        raise
 
 
 # ----------------------------
